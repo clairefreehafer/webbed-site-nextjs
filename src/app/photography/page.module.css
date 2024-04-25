@@ -1,0 +1,15 @@
+.main {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.title {
+  margin: 0 0 2rem;
+  border-bottom: 1px dotted white;
+}
+
+.sectionTitle {
+  margin: 1rem;
+}
