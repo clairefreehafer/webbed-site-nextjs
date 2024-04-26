@@ -1,6 +1,9 @@
 export enum SmugMugKeys {
-  Explore = "S9cNHV"
+  Collections= "hwBrFB",
+  Explore = "S9cNHV",
 }
+
+export type NodeTypes = "Album" | "Folder" | "Page";
 
 export type EndpointType = "album" | "node";
 

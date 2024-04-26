@@ -12,4 +12,12 @@
 
 .sectionTitle {
   margin: 1rem;
+
+  & a {
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;;
+    }
+  }
 }

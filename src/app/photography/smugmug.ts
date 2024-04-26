@@ -1,4 +1,4 @@
-import { EndpointType, SmugMugKeys, Uri } from "./types";
+import { EndpointType, NodeTypes, SmugMugKeys, Uri } from "./types";
 
 const API_HOST = "https://api.smugmug.com";
 const {
@@ -9,27 +9,33 @@ const {
   VERBOSE,
 } = process.env;
 
-function generateApiUrl(key: SmugMugKeys, type: EndpointType, uri?: Uri) {
+function generateApiUrl(type: EndpointType, key: SmugMugKeys, uri?: Uri) {
   if (uri) {
     return `${API_HOST}/api/v2/${type}/${key}!${uri}?APIKey=${SMUGMUG_API_KEY}`;
   }
   return `${API_HOST}/api/v2/${type}/${key}?APIKey=${SMUGMUG_API_KEY}`;
 }
 
-export async function getPages() {
-  const url = generateApiUrl(SmugMugKeys.Explore, "node", "children") + "&Type=Album";
+function apiFactory(type: NodeTypes) {
+  return async function(key: SmugMugKeys) {
+    const url = `${generateApiUrl("node", key, "children")}&Type=${type}`;
+    if (VERBOSE) console.log("FETCHING", url);
 
-  if (VERBOSE) console.log("FETCHING", url);
+    const res = await fetch(url, {
+      headers: {
+        "Accept": "application/json",
+      }
+    });
 
-  const res = await fetch(url, {
-    headers: {
-      "Accept": "application/json",
+    if (!res.ok) {
+      throw new Error("failed to get pages.");
     }
-  });
 
-  if (!res.ok) {
-    throw new Error("failed to get pages.");
+    return res.json();
   }
-
-  return res.json();
 }
+
+const getAlbums = apiFactory("Album");
+const getPages = apiFactory("Page");
+
+export { getAlbums, getPages };

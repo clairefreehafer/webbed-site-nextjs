@@ -1,0 +1,15 @@
+.header {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  margin: 0;
+  border-bottom: 1px dotted white;
+}
+
+.subtitle {
+  margin: 0.5rem 0 0;
+}
