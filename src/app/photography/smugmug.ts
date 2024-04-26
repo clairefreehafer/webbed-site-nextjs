@@ -28,7 +28,7 @@ function apiFactory(type: NodeTypes) {
     });
 
     if (!res.ok) {
-      throw new Error("failed to get pages.");
+      throw new Error(`failed to get pages: ${res.status} ${res.statusText}`);
     }
 
     return res.json();
