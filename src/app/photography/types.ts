@@ -11,7 +11,8 @@ export type EndpointType = "album" | "node";
 export type Uri = "children" | "images";
 
 export type Node = {
+  Uris: Record<string, any>
   NodeID: string;
   Name: string;
-  Type: "Album" | "Folder";
+  Type: NodeTypes;
 }
