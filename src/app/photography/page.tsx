@@ -14,8 +14,8 @@ export default async function Photography() {
         <h2 className={styles.sectionTitle}>recently added</h2>
         <p>(coming soon) photos most recently added to the site.</p>
 
-        <h2 className={styles.sectionTitle}>explore</h2>
-        <p>(coming soon) photos grouped by location, most recent first.</p>
+        <h2 className={styles.sectionTitle}><Link href="/photography/explore">explore</Link></h2>
+        <p>photos grouped by location, most recent first.</p>
 
         <h2 className={styles.sectionTitle}><Link href="/photography/collections">collections</Link></h2>
         <p>photos grouped by concept, subject, etc.</p>
@@ -23,8 +23,8 @@ export default async function Photography() {
         <h2 className={styles.sectionTitle}>curated</h2>
         <p>(coming soon) smaller groups of photos selected to be displayed together.</p>
 
-        <h2 className={styles.sectionTitle}>technical</h2>
-        <p>(coming soon) grouped by camera.</p>
+        <h2 className={styles.sectionTitle}><Link href="/photography/technical">technical</Link></h2>
+        <p>grouped by camera.</p>
 
         <h2 className={styles.sectionTitle}>map</h2>
         <p>(coming soon) view geotagged photos on a map.</p>
