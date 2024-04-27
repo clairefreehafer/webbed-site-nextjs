@@ -21,12 +21,12 @@ model Photo {
 
 model Tag {
   id     Int     @id @default(autoincrement())
-  tag    String 
+  tag    String  @unique
   photos Photo[]
 }
 
 model Album {
   id     Int     @id @default(autoincrement())
-  name   String  @db.VarChar(255)
+  name   String  @db.VarChar(255) @unique
   photos Photo[]
 }
