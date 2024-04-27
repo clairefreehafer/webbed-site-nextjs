@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model Photo {
+  id          Int       @id @default(autoincrement())
+  smugMugKey  String?   @db.VarChar(255) @unique
+  url         String?   @db.VarChar(255) @unique
+  captureDate DateTime? @db.Timestamptz(6)
+  metadata    Json?     @db.JsonB
+  tags        Tag[]
+  album       Album     @relation(fields: albumId, references: [id])
+  albumId     Int
+}
+
+model Tag {
+  id     Int     @id @default(autoincrement())
+  tag    String 
+  photos Photo[]
+}
+
+model Album {
+  id     Int     @id @default(autoincrement())
+  name   String  @db.VarChar(255)
+  photos Photo[]
+}
