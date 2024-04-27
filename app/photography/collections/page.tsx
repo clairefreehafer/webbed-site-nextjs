@@ -1,8 +1,8 @@
-import Nav from "@/app/components/nav";
+import Nav from "../../components/nav";
 import { getPages } from "../smugmug";
 import { Node, SmugMugKeys } from "../types";
-import Header from "@/app/components/header";
-import CoverImage from "@/app/components/cover-image/cover-image";
+import Header from "../../components/header";
+import CoverImage from "../../components/cover-image/cover-image";
 import styles from "./page.module.css";
 
 export default async function Collections() {

@@ -1,7 +1,7 @@
-import Nav from "@/app/components/nav";
+import Nav from "../../components/nav";
 import { getAlbums } from "../smugmug";
 import { Node, SmugMugKeys } from "../types";
-import Header from "@/app/components/header";
+import Header from "../../components/header";
 
 export default async function Explore() {
   const { Response } = await getAlbums(SmugMugKeys.Explore);
