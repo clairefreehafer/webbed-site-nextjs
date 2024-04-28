@@ -1,4 +1,20 @@
-import { getAlbums } from "../actions";
+import { PrismaClient } from "@prisma/client";
+
+async function getAlbums() {
+  try {
+    const prisma = new PrismaClient();
+
+    const albums = await prisma.album.findMany({
+      include: { photos: true },
+      orderBy: { date: { sort: "desc", nulls: "first" } }
+    });
+
+    return albums;
+  } catch (error) {
+    console.error(`👎 ${(error as Error).message}`);
+    return `👎 ${(error as Error).message}`;
+  }
+}
 
 export default async function AdminReadAlbumPage() {
   const albums = await getAlbums();
@@ -11,19 +27,23 @@ export default async function AdminReadAlbumPage() {
         <p>{albums}</p>
       ) : (
         <table>
-          <tr>
-            <th>id</th>
-            <th>name</th>
-            <th>date</th>
-            <th>number of photos</th>
-          </tr>
-          {albums.map((album) => (
-            <tr key={album.id}>
-              <td>{album.id}</td>
-              <td>{album.name}</td>
-              <td>{album.date?.toString()}</td>
-              <td>{album.photos?.length}</td>
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>name</th>
+              <th>date</th>
+              <th>number of photos</th>
             </tr>
+          </thead>
+          {albums.map((album) => (
+            <tbody>
+              <tr key={album.id}>
+                <td>{album.id}</td>
+                <td>{album.name}</td>
+                <td>{album.date?.toString()}</td>
+                <td>{album.photos?.length}</td>
+              </tr>
+            </tbody>
           ))}
         </table>
       )}

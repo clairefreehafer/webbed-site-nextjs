@@ -31,19 +31,3 @@ export async function createAlbum(_prevState: AddAlbumFormState, formData: FormD
     };
   }
 }
-
-export async function getAlbums() {
-  try {
-    const prisma = new PrismaClient();
-
-    const albums = await prisma.album.findMany({
-      include: { photos: true },
-      orderBy: { date: { sort: "desc", nulls: "first" } }
-    });
-
-    return albums;
-  } catch (error) {
-    console.error(`👎 ${(error as Error).message}`);
-    return `👎 ${(error as Error).message}`;
-  }
-}

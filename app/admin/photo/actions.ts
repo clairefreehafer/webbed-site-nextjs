@@ -5,7 +5,7 @@ import { readFile } from "node:fs/promises";
 import { getSmugMugData } from "./smugmug";
 import xml2js from "xml2js";
 import { CreatePhotoFormState } from "./types";
-import { initialState } from "./create/page";
+import { initialState } from "./create/form";
 
 let state = initialState;
 
@@ -14,6 +14,7 @@ export async function createPhoto(_prevState: CreatePhotoFormState, formData: Fo
     const smugMugKey = formData.get("smugMugKey") as string;
     const path = formData.get("path") as string;
     const altText = formData.get("altText") as string;
+    const album = formData.get("album") as string;
 
     const prisma = new PrismaClient();
 
@@ -31,7 +32,7 @@ export async function createPhoto(_prevState: CreatePhotoFormState, formData: Fo
     }
     const url = data.Response.ImageSizeDetails.ImageUrlTemplate;
     
-    const xmp = await readFile(`${process.env.METADATA_LOCATION}${path}.xmp`);
+    const xmp = await readFile(path);
     const parser = new xml2js.Parser();
     const parsedXmp = await parser.parseStringPromise(xmp);
 
@@ -47,8 +48,8 @@ export async function createPhoto(_prevState: CreatePhotoFormState, formData: Fo
     state = {
       smugMugKey,
       url,
-      captureDate: metadata["$"]["exif:DateTimeOriginal"],
-      album: "" as Prisma.AlbumCreateNestedOneWithoutPhotosInput,
+      captureDate: new Date(metadata["$"]["exif:DateTimeOriginal"]),
+      album: { connect: { name: album } },
       metadata: {
         title: metadata["$"]["acdsee:caption"],
         description: metadata["$"]["acdsee:description"],
@@ -60,7 +61,7 @@ export async function createPhoto(_prevState: CreatePhotoFormState, formData: Fo
       }
     }
     
-    // await prisma.photo.create({ data: photo });
+    await prisma.photo.create({ data: state });
 
     return {
       ...state,
