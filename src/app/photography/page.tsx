@@ -1,12 +1,11 @@
 import Link from "next/link";
 import Nav from "../components/nav";
 import styles from "./page.module.css";
-import navLinks from "../config";
 
 export default async function Photography() {
   return (
     <>
-      <Nav navLinks={navLinks} />
+      <Nav />
       <main className={styles.main}>
         <h1 className={styles.title}>photography</h1>
 
@@ -15,7 +14,7 @@ export default async function Photography() {
         <h2 className={styles.sectionTitle}>recently added</h2>
         <p>(coming soon) photos most recently added to the site.</p>
 
-        <h2 className={styles.sectionTitle}><Link href="/photography/explore">explore</Link></h2>
+        <h2 className={styles.sectionTitle}><Link href="/photography/albums">albums</Link></h2>
         <p>photos grouped by location, most recent first.</p>
 
         <h2 className={styles.sectionTitle}><Link href="/photography/collections">collections</Link></h2>

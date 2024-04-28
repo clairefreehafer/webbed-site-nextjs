@@ -16,7 +16,9 @@ async function getAlbumList() {
   }
 }
 
-export default async function AlbumSelect() {
+export default async function AlbumSelect(
+  { defaultValue = null }: { defaultValue?: string | null }
+) {
   const albums = await getAlbumList();
 
   if (typeof albums === "string") {
@@ -27,9 +29,11 @@ export default async function AlbumSelect() {
     <>
       <label>
         select album
-        <select name="album">
+        <select name="album" defaultValue={defaultValue || ""}>
           {albums.map((album) => (
-            <option key={album.name}>{album.name}</option>
+            <option key={album.name}>
+              {album.name}
+            </option>
           ))}
         </select>
       </label>

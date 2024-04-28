@@ -3,9 +3,28 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import styles from "./nav.module.css";
-import { NavLink } from "../config";
+
+export type NavLink = {
+  pathname: string;
+  name: string;
+}
+
+const defaultNavLinks: NavLink[] = [
+  {
+    pathname: "/",
+    name: "home",
+  },
+  {
+    pathname: "/photography",
+    name: "photography",
+  },
+  {
+    pathname: "/animal-crossing",
+    name: "animal crossing",
+  }
+]
  
-export default function Nav({ navLinks }: { navLinks: NavLink[] }) {
+export default function Nav({ navLinks = defaultNavLinks }) {
   const pathname = usePathname();
  
   return (

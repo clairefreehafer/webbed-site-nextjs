@@ -15,8 +15,8 @@ model Photo {
   captureDate DateTime? @db.Timestamptz(6)
   metadata    Json?     @db.JsonB
   tags        Tag[]
-  album       Album     @relation(fields: albumId, references: [id])
-  albumId     Int
+  album       Album?     @relation(fields: albumName, references: [name])
+  albumName   String?
 }
 
 model Tag {

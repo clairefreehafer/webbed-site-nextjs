@@ -1,7 +1,6 @@
 "use client";
 
-import Nav from "../components/nav";
-import { NavLink } from "../config";
+import Nav, { NavLink } from "../components/nav";
 import styles from "./layout.module.css";
 
 const adminLinks: NavLink[] = [
