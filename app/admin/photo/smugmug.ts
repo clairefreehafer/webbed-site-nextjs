@@ -49,11 +49,11 @@ export async function getSmugMugData(key: string) {
     });
 
     if (!res.ok) {
-      throw new Error(`❌ failed to get photo: ${res.status} ${res.statusText}`);
+      throw new Error(`failed to get photo: ${res.status} ${res.statusText}`);
     }
 
     return res.json();
   } catch (error) {
-    console.error(error);
+    return (error as Error).message;
   }
 }

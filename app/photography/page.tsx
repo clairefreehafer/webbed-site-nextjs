@@ -1,11 +1,12 @@
 import Link from "next/link";
 import Nav from "../components/nav";
 import styles from "./page.module.css";
+import navLinks from "../config";
 
 export default async function Photography() {
   return (
     <>
-      <Nav />
+      <Nav navLinks={navLinks} />
       <main className={styles.main}>
         <h1 className={styles.title}>photography</h1>
 
