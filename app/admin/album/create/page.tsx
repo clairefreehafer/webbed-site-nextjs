@@ -1,7 +1,7 @@
 "use client";
 
-import { createAlbum } from "./actions";
-import { AddAlbumFormState } from "./types";
+import { createAlbum } from "../actions";
+import { AddAlbumFormState } from "../types";
 import { useFormState } from "react-dom";
 
 const initialState: AddAlbumFormState = {

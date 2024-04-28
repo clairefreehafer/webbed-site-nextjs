@@ -26,7 +26,8 @@ model Tag {
 }
 
 model Album {
-  id     Int     @id @default(autoincrement())
-  name   String  @db.VarChar(255) @unique
+  id     Int       @id @default(autoincrement())
+  name   String    @db.VarChar(255) @unique
+  date   DateTime? @db.Timestamptz(6)
   photos Photo[]
 }
