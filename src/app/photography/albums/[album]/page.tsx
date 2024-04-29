@@ -13,14 +13,14 @@ export const dynamicParams = false;
 
 async function getAlbumPhotos(albumName: string) {
   const prisma = new PrismaClient();
-  const photos = await prisma.photo.findMany({
-    where: {
-      album
-    }
-  })
+  // const photos = await prisma.photo.findMany({
+  //   where: {
+  //     album
+  //   }
+  // })
 }
 
 export default function Page({ params }: { params: { album: string }[] }) {
-  const getAlbumPhotos = await
+  // const getAlbumPhotos = await
   return JSON.stringify(params);
 }
