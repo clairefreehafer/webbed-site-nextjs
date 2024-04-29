@@ -1,6 +1,17 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "../styles/globals.css";
+
+declare global {
+  namespace PrismaJson {
+    type Metadata = {
+      title?: string;
+      description?: string;
+      path: string;
+      altText?: string;
+    }
+  }
+}
 
 const inter = Inter({ subsets: ["latin"] });
 

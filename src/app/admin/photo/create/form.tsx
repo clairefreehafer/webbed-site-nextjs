@@ -16,7 +16,7 @@ export const initialState: CreatePhotoFormState = {
     connectOrCreate: []
   },
   message: "",
-};;
+};
 
 export default function CreatePhotoForm({ children }: { children: React.ReactNode }) {
   const [state, formAction] = useFormState<CreatePhotoFormState, FormData>(createPhoto, initialState);

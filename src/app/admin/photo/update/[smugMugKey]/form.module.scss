@@ -1,0 +1,21 @@
+@import "@styles/mixins";
+
+.form {
+  @include flex-column-center;
+  width: 100%;
+}
+
+.label {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.manualSection {
+  width: 100%;
+}
+
+.hide {
+  visibility: hidden;
+  height: 0;
+}

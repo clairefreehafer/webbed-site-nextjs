@@ -1,0 +1,11 @@
+@import "@styles/variables";
+
+.header, .main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: $max-site-width;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+}

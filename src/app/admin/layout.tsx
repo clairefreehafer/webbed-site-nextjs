@@ -1,7 +1,7 @@
 "use client";
 
 import Nav, { NavLink } from "../components/nav";
-import styles from "./layout.module.css";
+import styles from "./layout.module.scss";
 
 const adminLinks: NavLink[] = [
   {

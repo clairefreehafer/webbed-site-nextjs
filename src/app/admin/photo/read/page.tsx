@@ -1,4 +1,8 @@
 import { PrismaClient } from "@prisma/client";
+import styles from "./page.module.scss";
+import Link from "next/link";
+
+const { table } = styles;
 
 async function getPhotos() {
   try {
@@ -26,7 +30,7 @@ export default async function AdminPhotoRead() {
       {typeof photos === "string" ? (
         <p>{photos}</p>
       ) : (
-        <table>
+        <table className={table}>
           <thead>
             <tr>
               <th>id</th>
@@ -34,6 +38,7 @@ export default async function AdminPhotoRead() {
               <th>capture date</th>
               <th>album</th>
               <th>tags</th>
+              <th>edit</th>
             </tr>
           </thead>
           <tbody>
@@ -42,8 +47,13 @@ export default async function AdminPhotoRead() {
                 <td>{photo.id}</td>
                 <td>{photo.smugMugKey}</td>
                 <td>{photo.captureDate?.toString()}</td>
-                <td>{photo.album.name}</td>
+                <td>{photo.albumName}</td>
                 <td>{photo.tags?.length}</td>
+                <td>
+                  <Link href={`/admin/photo/update/${photo.smugMugKey}`}>
+                    edit
+                  </Link>
+                </td>
               </tr>
             ))}
           </tbody>
