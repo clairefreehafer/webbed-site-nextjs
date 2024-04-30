@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky"
   },
   "dependencies": {
     "@prisma/client": "^5.13.0",
@@ -25,6 +26,7 @@
     "@types/xml2js": "^0.4.14",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
+    "husky": "^9.0.11",
     "sass": "^1.75.0",
     "typescript": "^5"
   }

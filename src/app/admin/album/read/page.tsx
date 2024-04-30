@@ -36,8 +36,8 @@ export default async function AdminReadAlbumPage() {
             </tr>
           </thead>
           {albums.map((album) => (
-            <tbody>
-              <tr key={album.id}>
+            <tbody key={album.id}>
+              <tr>
                 <td>{album.id}</td>
                 <td>{album.name}</td>
                 <td>{album.date?.toString()}</td>

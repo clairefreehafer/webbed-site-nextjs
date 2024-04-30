@@ -9,6 +9,6 @@ type Props = {
 
 export default function CoverImage({ aspectRatio, src }: Props) {
   return (
-    <img src={src} className={styles.img} style={{ aspectRatio }} />
+    <img src={src} className={styles.img} style={{ aspectRatio }} alt="" />
   )
 }
