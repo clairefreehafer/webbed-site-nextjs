@@ -3,9 +3,9 @@ import { PrismaClient } from "@prisma/client";
 export async function generateStaticParams() {
   const prisma = new PrismaClient();
   const albums = await prisma.album.findMany();
- 
+
   return albums.map((album) => ({
-    album: album.name,
+    album: album.name.replaceAll(" ", "-"),
   }));
 }
 
@@ -22,5 +22,7 @@ async function getAlbumPhotos(albumName: string) {
 
 export default function Page({ params }: { params: { album: string }[] }) {
   // const getAlbumPhotos = await
-  return JSON.stringify(params);
+  return (
+    <>{JSON.stringify(params)}</>
+  );
 }

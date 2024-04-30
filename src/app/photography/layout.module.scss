@@ -1,0 +1,9 @@
+@import "@styles/mixins";
+
+.header {
+  @include flex-column-center;
+}
+
+.main {
+  @include flex-column-center;
+}
