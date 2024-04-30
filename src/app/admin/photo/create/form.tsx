@@ -11,7 +11,9 @@ export const initialState: CreatePhotoFormState = {
   url: "",
   captureDate: "",
   album: "" as Prisma.AlbumCreateNestedOneWithoutPhotosInput,
-  metadata: {},
+  metadata: {
+    path: "",
+  },
   tags: {
     connectOrCreate: []
   },
