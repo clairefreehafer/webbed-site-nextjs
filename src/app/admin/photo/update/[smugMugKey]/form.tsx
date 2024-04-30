@@ -22,7 +22,7 @@ export default function UpdatePhotoForm({
   metadata,
   albumName,
   children,
-}: Photo & { id: number; children: React.ReactNode }) {
+}: Photo & { children: React.ReactNode }) {
   const initialState: UpdatePhotoFormState = {
     id,
     smugMugKey,

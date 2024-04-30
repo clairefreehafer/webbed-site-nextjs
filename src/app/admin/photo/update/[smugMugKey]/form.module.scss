@@ -1,7 +1,7 @@
-@import "@styles/mixins";
+@use "@styles/mixins";
 
 .form {
-  @include flex-column-center;
+  @include mixins.flex-column-center;
   width: 100%;
 }
 

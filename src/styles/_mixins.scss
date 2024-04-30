@@ -4,3 +4,21 @@
   flex-direction: column;
   justify-content: center;
 }
+
+@mixin rainbow-border($border-width: 2px) {
+  background: linear-gradient(
+    135deg,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet
+  );
+  padding: #{$border-width};
+
+  &:first-child {
+    background-color: black;
+  }
+}

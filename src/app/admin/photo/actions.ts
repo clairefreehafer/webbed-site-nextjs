@@ -105,10 +105,8 @@ export async function updatePhoto(prevState: UpdatePhotoFormState, formData: For
     } else {
       data = {
         metadata,
-        // albumName: album
-      }
-
-      
+        albumName: album,
+      };
     }
 
     await prisma.photo.update({

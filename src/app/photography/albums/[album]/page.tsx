@@ -1,7 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 
+const prisma = new PrismaClient();
+
 export async function generateStaticParams() {
-  const prisma = new PrismaClient();
   const albums = await prisma.album.findMany();
 
   return albums.map((album) => ({
@@ -12,17 +13,34 @@ export async function generateStaticParams() {
 export const dynamicParams = false;
 
 async function getAlbumPhotos(albumName: string) {
-  const prisma = new PrismaClient();
-  // const photos = await prisma.photo.findMany({
-  //   where: {
-  //     album
-  //   }
-  // })
+  const photos = await prisma.photo.findMany({
+    where: {
+      albumName,
+    },
+    orderBy: {
+      captureDate: "asc"
+    },
+    select: {
+      id: true,
+      url: true,
+    }
+  });
+
+  return photos;
 }
 
-export default function Page({ params }: { params: { album: string }[] }) {
-  // const getAlbumPhotos = await
+export default async function Page({ params }: { params: { album: string }}) {
+  const albumName = params.album.replaceAll("-", " ");
+  const photos = await getAlbumPhotos(albumName);
+
   return (
-    <>{JSON.stringify(params)}</>
+    <>
+      <h3>{albumName}</h3>
+      {photos.map((photo) => (
+        <div key={photo.id}>
+          <img src={photo.url?.replaceAll("#size#", "L")} />
+        </div>
+      ))}
+    </>
   );
 }
