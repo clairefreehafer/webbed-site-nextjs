@@ -3,7 +3,9 @@ import styles from "./layout.module.scss";
 
 const { header, main } = styles;
 
-export default function PhotographyLayout({ children }: { children: Readonly<React.ReactNode> }) {
+export default function PhotographyLayout({ children }:
+  { children: Readonly<React.ReactNode> }
+) {
   return (
     <>
       <header className={header}>

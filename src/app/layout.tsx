@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../styles/globals.css";
+import RainbowBorder from "./components/rainbow-border/rainbow-border";
 
 declare global {
   namespace PrismaJson {
@@ -26,7 +27,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <RainbowBorder>
+          {children}
+        </RainbowBorder>
+      </body>
     </html>
   );
 }

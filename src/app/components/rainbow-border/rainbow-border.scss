@@ -1,0 +1,7 @@
+$sides: top, right, bottom, left;
+
+@each $side in $sides {
+  .hide-#{$side} {
+    padding-#{$side}: 0;
+  }
+}
