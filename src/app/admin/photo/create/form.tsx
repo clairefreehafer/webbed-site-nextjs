@@ -3,7 +3,7 @@
 import { createPhoto } from "../actions";
 import { CreatePhotoFormState } from "../types";
 import { useFormState } from "react-dom";
-import styles from "./page.module.css";
+import styles from "./form.module.scss";
 import { Prisma } from "@prisma/client";
 
 export const initialState: CreatePhotoFormState = {
