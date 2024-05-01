@@ -1,10 +1,17 @@
 import { CSSProperties } from "react";
-import { CSSProp, css } from "styled-components";
+import { css } from "styled-components";
+import localFont from "next/font/local";
+
+const finkHeavy = localFont({
+  src: [
+    { path: "../../fonts/animal-crossing/fink-heavy.woff2" },
+    { path: "../../fonts/animal-crossing/fink-heavy.woff" }
+  ]
+});
 
 const SVG_HEIGHT = "70px";
 
 const title = css`
-  font-family: "Fink Heavy", "Georgia", sans-serif;
   font-size: 3rem;
   width: 350px;
   height: ${SVG_HEIGHT};
@@ -39,7 +46,7 @@ export default function AnimalCrossingLogo({
   style?: CSSProperties
  }) {
   return (
-    <svg css={title} viewBox="0 0 350 70" style={style}>
+    <svg css={title} viewBox="0 0 350 70" style={style} className={finkHeavy.className}>
       <defs>
         <filter id="emboss">
           <feConvolveMatrix

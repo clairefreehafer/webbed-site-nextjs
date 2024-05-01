@@ -27,7 +27,7 @@ export function rainbowBorder(borderWidth = "2px") {
 const PAPER_RED_LINE = "rgba(255, 0, 0, 0.8)";
 const PAPER_BLUE_LINE = "rgba(0, 255, 255, 0.8)";
 export const PAPER_LINE_HEIGHT = "1.5rem";
-const RED_LINE_PADDING = "2rem";
+const RED_LINE_PADDING = "3rem";
 const PAPER_TOP_PADDING = `calc(2 * ${PAPER_LINE_HEIGHT} + 1px)`;
 
 export function paperBackground() {

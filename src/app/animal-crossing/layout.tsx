@@ -6,6 +6,7 @@ import { flexColumnCenter, fullScreen } from "@styles/layout";
 import { MAX_SITE_WIDTH } from "@styles/variables";
 import { DateRange, GrassShape, getDateRange, grassColors } from "@utils/animal-crossing";
 import styled, { ThemeProvider } from "styled-components";
+import localFont from "next/font/local";
 
 const AnimalCrossingThemeRoot = styled.div<{ $shape: GrassShape, $dateRange: DateRange; }>`
   ${fullScreen};
@@ -24,12 +25,24 @@ const theme = {
   name: "animal-crossing"
 };
 
+const fotSeuratProB = localFont({
+  src: [
+    { path: "../../fonts/animal-crossing/fot-seurat-pro-b.woff2" },
+    { path: "../../fonts/animal-crossing/fot-seurat-pro-b.woff" },
+    { path: "../../fonts/animal-crossing/fot-seurat-pro-b.otf" }
+  ]
+});
+
 export default function AnimalCrossingLayout({ children }: { children: Readonly<React.ReactNode> }) {
   const dateRange = getDateRange();
 
   return (
     <ThemeProvider theme={theme}>
-      <AnimalCrossingThemeRoot $shape={"square"} $dateRange={dateRange}>
+      <AnimalCrossingThemeRoot
+        $shape={"square"}
+        $dateRange={dateRange}
+        className={fotSeuratProB.className}
+      >
         <Header>
           <AnimalCrossingLogo text="claire freehafer" />
           <Navigation />

@@ -10,6 +10,5 @@ export const textBackground = css`
   border-radius: ${UI_BORDER_RADIUS};
   box-shadow: ${UI_BOX_SHADOW};
   color: black;
-  font-family: "FOT Seurat Pro B", Helvetica, Ariel, sans-serif;
   font-weight: 200;
 `;
