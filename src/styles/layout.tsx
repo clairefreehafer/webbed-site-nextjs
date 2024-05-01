@@ -5,9 +5,9 @@ export const fullScreen = css`
   min-width: 100vw;
 `;
 
-export const flexColumnCenter = css`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
+export const flexColumnCenter: React.CSSProperties = {
+  alignItems: "center",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+};

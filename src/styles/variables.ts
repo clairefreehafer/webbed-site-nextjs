@@ -1,0 +1,1 @@
+export const MAX_SITE_WIDTH = "750px";

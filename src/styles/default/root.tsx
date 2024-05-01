@@ -4,7 +4,7 @@ import { rainbowBorder } from "@styles/mixins";
 
 const DefaultTheme = styled.div<{ $borderWidth: string }>`
   ${fullScreen};
-  ${({ $borderWidth }) => rainbowBorder($borderWidth)}
+  ${({ $borderWidth }) => rainbowBorder($borderWidth)};
 `;
 
 export default function DefaultThemeRoot({
@@ -16,7 +16,7 @@ export default function DefaultThemeRoot({
 }) {
   return (
     <DefaultTheme $borderWidth={borderWidth}>
-      <div>
+      <div style={{ padding: "1rem" }}>
         {children}
       </div>
     </DefaultTheme>
