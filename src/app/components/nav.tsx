@@ -2,12 +2,34 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import styles from "./nav.module.css";
+import styled from "styled-components";
 
 export type NavLink = {
   pathname: string;
   name: string;
-}
+};
+
+const Ul = styled.ul`
+  display: flex;
+  justify-content: center;
+`;
+
+const StyledLink = styled(Link)<{ $isActive: boolean }>`
+  display: block;
+  padding: 1rem;
+  
+  ${({ $isActive }) => $isActive && `
+    font-weight: bold;
+    text-decoration: none;
+  `}
+
+  ${({ theme }) => theme.name === "photography" && `
+    &:hover {
+      background-color: yellow;
+      color: black;
+    }
+  `}
+`;
 
 const defaultNavLinks: NavLink[] = [
   {
@@ -24,22 +46,22 @@ const defaultNavLinks: NavLink[] = [
   }
 ]
  
-export default function Nav({ navLinks = defaultNavLinks }) {
+export default function Navigation({ navLinks = defaultNavLinks }) {
   const pathname = usePathname();
  
   return (
-    <nav className={styles.nav}>
-      <ul>
+    <nav>
+      <Ul>
         {navLinks.map((link: NavLink) => (
-          <Link
+          <StyledLink
             key={link.pathname}
-            className={`${styles.link} ${pathname === link.pathname ? styles.active : ""}`}
             href={link.pathname}
+            $isActive={pathname === link.pathname}
           >
             {link.name}
-          </Link>
+          </StyledLink>
         ))}
-      </ul>
+      </Ul>
     </nav>
   );
 }
