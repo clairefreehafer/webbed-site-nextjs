@@ -2,12 +2,23 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { textBackground } from "@styles/animal-crossing/mixins";
 
 export type NavLink = {
   pathname: string;
   name: string;
 };
+
+const Nav = styled.nav`
+  ${({ theme }) => theme.name === "animal-crossing" && css`
+    ${textBackground};
+    height: 4rem;
+    padding: 1rem 2rem;
+    text-align: center;
+    width: 100%;
+  `}
+`;
 
 const Ul = styled.ul`
   display: flex;
@@ -50,7 +61,7 @@ export default function Navigation({ navLinks = defaultNavLinks }) {
   const pathname = usePathname();
  
   return (
-    <nav>
+    <Nav>
       <Ul>
         {navLinks.map((link: NavLink) => (
           <StyledLink
@@ -62,6 +73,6 @@ export default function Navigation({ navLinks = defaultNavLinks }) {
           </StyledLink>
         ))}
       </Ul>
-    </nav>
+    </Nav>
   );
 }
