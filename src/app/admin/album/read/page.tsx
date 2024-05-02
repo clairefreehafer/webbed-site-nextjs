@@ -1,4 +1,6 @@
 import { PrismaClient } from "@prisma/client";
+import { slugName } from "@utils/albums";
+import Link from "next/link";
 
 async function getAlbums() {
   try {
@@ -26,7 +28,7 @@ export default async function AdminReadAlbumPage() {
       {typeof albums === "string" ? (
         <p>{albums}</p>
       ) : (
-        <table>
+        <table css={{ width: "100%" }}>
           <thead>
             <tr>
               <th>id</th>
@@ -34,6 +36,7 @@ export default async function AdminReadAlbumPage() {
               <th>section</th>
               <th>date</th>
               <th>number of photos</th>
+              <th>edit</th>
             </tr>
           </thead>
           {albums.map((album) => (
@@ -44,6 +47,11 @@ export default async function AdminReadAlbumPage() {
                 <td>{album.section}</td>
                 <td>{album.date?.toString()}</td>
                 <td>{album.photos?.length}</td>
+                <td>
+                  <Link href={`/admin/album/update/${slugName(album.name)}`}>
+                    edit
+                  </Link>
+                </td>
               </tr>
             </tbody>
           ))}

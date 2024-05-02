@@ -1,38 +1,23 @@
 "use client";
 
-import { createAlbum } from "../actions";
-import { AddAlbumFormState } from "../types";
-import { useFormState } from "react-dom";
+import AdminForm, { Input, Label } from "@components/admin/form";
+import { AlbumFormState, createAlbum } from "../actions";
+import SectionSelect from "@components/admin/section-select";
+import { AlbumSections } from "@utils/albums";
 
-const initialState: AddAlbumFormState = {
-  name: "",
-  section: "photography",
-};
+const initialState: Partial<AlbumFormState> = {};
 
 export default function AdminAlbum() {
-  const [state, formAction] = useFormState<AddAlbumFormState, FormData>(createAlbum, initialState);
-
   return (
-    <form action={formAction}>
-      <label>
+    <AdminForm action={createAlbum} initialState={initialState}>
+      <Label>
         name
-        <input type="text" name="album" required />
-      </label>
+        <Input type="text" name="album" required />
+      </Label>
 
-      <label>
-        section
-        <select name="section">
-          <option>photography</option>
-          <option value="new horizons">animal crossing &rarr; new horizons</option>
-          <option value="new leaf">animal crossing &rarr; new leaf</option>
-          <option value="tears of the kingdom">zelda &rarr; tears of the kingdom</option>
-          <option value="breath of the wild">zelda &rarr; breath of the wild</option>
-        </select>
-      </label>
-
-      <p>{state?.message}</p>
+      <SectionSelect defaultValue={AlbumSections.Photography} />
 
       <button type="submit">create album</button>
-    </form>
+    </AdminForm>
   )
 }

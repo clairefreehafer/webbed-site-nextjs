@@ -1,9 +1,11 @@
+import Link from "next/link";
+
 export default function AnimalCrossing() {
   return (
     <>
       <h3>browse by game</h3>
       <ul>
-        <li>new horizons</li>
+        <li><Link href="/animal-crossing/new-horizons">new horizons</Link></li>
       </ul>
 
       <h3>browse by character</h3>
