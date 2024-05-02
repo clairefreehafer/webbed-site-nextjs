@@ -3,11 +3,13 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import styled, { css } from "styled-components";
-import { textBackground } from "@styles/animal-crossing/mixins";
+import { textBackground } from "@styles/animal-crossing/theme";
+import { Fragment } from "react";
 
 export type NavLink = {
   pathname: string;
   name: string;
+  image?: string;
 };
 
 const Nav = styled.nav`
@@ -40,6 +42,10 @@ const StyledLink = styled(Link)<{ $isActive: boolean }>`
       color: black;
     }
   `}
+
+${({ theme }) => theme.name === "animal-crossing" && `
+    padding: 0 1rem;
+  `}
 `;
 
 const defaultNavLinks: NavLink[] = [
@@ -64,13 +70,15 @@ export default function Navigation({ navLinks = defaultNavLinks }) {
     <Nav>
       <Ul>
         {navLinks.map((link: NavLink) => (
-          <StyledLink
-            key={link.pathname}
-            href={link.pathname}
-            $isActive={pathname === link.pathname}
-          >
-            {link.name}
-          </StyledLink>
+          <Fragment key={link.pathname}>
+            {link.image && <img src={link.image} alt="" />}
+            <StyledLink
+              href={link.pathname}
+              $isActive={pathname === link.pathname}
+            >
+              {link.name}
+            </StyledLink>
+          </Fragment>
         ))}
       </Ul>
     </Nav>

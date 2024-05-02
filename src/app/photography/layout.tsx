@@ -4,6 +4,7 @@ import Nav from "@app/components/nav";
 import DefaultThemeRoot from "@styles/default/root";
 import { flexColumnCenter } from "@styles/layout";
 import { PAPER_LINE_HEIGHT, paperBackground } from "@styles/mixins";
+import { photographyTheme } from "@styles/photography/theme";
 import { MAX_SITE_WIDTH } from "@styles/variables";
 import { usePathname } from "next/navigation";
 import React, { Fragment } from "react";
@@ -20,10 +21,6 @@ const Main = styled.main`
     margin-bottom: calc(${PAPER_LINE_HEIGHT} + 1px);
   }
 `;
-
-const theme = {
-  name: "photography",
-};
 
 // TODO: refactor
 function generateHeader(pathname: string[]) {
@@ -56,7 +53,7 @@ export default function PhotographyLayout({ children }:
   const pathname = usePathname().split("/");
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={photographyTheme}>
       <DefaultThemeRoot borderWidth="2px">
         <header css={flexColumnCenter}>
           <Nav />

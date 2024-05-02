@@ -1,12 +1,12 @@
+import { animalCrossingTheme } from "@styles/animal-crossing/theme";
+import { photographyTheme } from "@styles/photography/theme";
 import type { CSSProp } from "styled-components";
-// import Theme from './theme';
 
-// type ThemeType = typeof Theme;
+type Themes = typeof animalCrossingTheme | typeof photographyTheme;
 
-// TODO: type this
-// declare module "styled-components" {
-//   export interface DefaultTheme extends ThemeType {}
-// }
+declare module "styled-components" {
+  export interface DefaultTheme extends Themes {}
+}
 
 declare module "react" {
   interface DOMAttributes<T> {

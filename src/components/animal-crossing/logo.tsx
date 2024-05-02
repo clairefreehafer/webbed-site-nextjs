@@ -9,7 +9,7 @@ const finkHeavy = localFont({
   ]
 });
 
-const SVG_HEIGHT = "70px";
+export const SVG_HEIGHT = "70px";
 
 const title = css`
   font-size: 3rem;
