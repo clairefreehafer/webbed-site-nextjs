@@ -31,6 +31,7 @@ export default async function AdminReadAlbumPage() {
             <tr>
               <th>id</th>
               <th>name</th>
+              <th>section</th>
               <th>date</th>
               <th>number of photos</th>
             </tr>
@@ -40,6 +41,7 @@ export default async function AdminReadAlbumPage() {
               <tr>
                 <td>{album.id}</td>
                 <td>{album.name}</td>
+                <td>{album.section}</td>
                 <td>{album.date?.toString()}</td>
                 <td>{album.photos?.length}</td>
               </tr>
