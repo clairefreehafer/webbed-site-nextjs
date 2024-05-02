@@ -74,7 +74,7 @@ export default function Navigation({ navLinks = defaultNavLinks }) {
             {link.image && <img src={link.image} alt="" />}
             <StyledLink
               href={link.pathname}
-              $isActive={pathname === link.pathname}
+              $isActive={pathname.includes(link.name.replaceAll(" ", "-"))}
             >
               {link.name}
             </StyledLink>

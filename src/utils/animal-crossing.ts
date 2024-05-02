@@ -1,6 +1,6 @@
 export type GrassShape = "circle" | "square" | "triangle";
 
-export type DateRange =
+export type GrassDateRange =
   "1210-0224" |
   "0225-0331" |
   "0401-0722" |
@@ -12,7 +12,7 @@ export type DateRange =
   "1113-1128" |
   "1129-1209";
 
-export const grassColors: Record<DateRange, string> = {
+export const GRASS_COLORS: Record<GrassDateRange, string> = {
   "1210-0224": "rgb(189, 215, 238)",
   "0225-0331": "rgb(31, 140, 57)",
   "0401-0722": "rgb(0, 131, 90)",
@@ -25,60 +25,107 @@ export const grassColors: Record<DateRange, string> = {
   "1129-1209": "rgb(99, 81, 82)",
 };
 
-export function getDateRange(date: Date = new Date()) {
+enum AstrologyDateRange {
+  capricorn = "1222-0119",
+  aquarius = "0120-0218",
+  pisces = "0219-0320",
+  aries = "0321-0419",
+  taurus = "0420-0520",
+  gemini = "0521-0621",
+  cancer = "0622-0722",
+  leo = "0723-0822",
+  virgo = "0823-0922",
+  libra = "0923-1023",
+  scorpio = "1024-1122",
+  sagittarius = "1123-1221"
+};
+
+export function getGrassDateRange(date = new Date()): GrassDateRange {
   const month = date.getMonth();
   const day = date.getDate();
 
-  let range: DateRange = "" as DateRange;
-
   switch (month) {
     case 1:
-      range = "1210-0224";
-      break;
+      return "1210-0224";
     case 2:
-      range = day <= 24 ? "1210-0224" : "0225-0331";
-      break;
+      return day <= 24 ? "1210-0224" : "0225-0331";
     case 3:
-      range = "0225-0331";
-      break;
+      return "0225-0331";
     case 4:
     case 5:
     case 6:
-      range = "0401-0722";
-      break;
+      return "0401-0722";
     case 7:
-      range = day <= 22 ? "0401-0722" : "0723-0915";
-      break;
+      return day <= 22 ? "0401-0722" : "0723-0915";
     case 8:
-      range = "0723-0915";
-      break;
+      return "0723-0915";
     case 9:
-      range = day <= 15 ? "0723-0915" : "0916-0930";
-      break;
+      return day <= 15 ? "0723-0915" : "0916-0930";
     case 10:
       if (day <= 15) {
-        range = "1001-1015";
+        return "1001-1015";
       } else if (day <= 29) {
-        range = "1016-1029";
-      } else {
-        range = "1030-1112";
+        return "1016-1029";
       }
-      break;
+      return "1030-1112";
     case 11:
       if (day <= 12) {
-        range = "1030-1112";
+        return "1030-1112";
       } else if (day <= 28) {
-        range = "1113-1128";
-      } else {
-        range = "1129-1209";
+        return "1113-1128";
       }
-      break;
+      return "1129-1209";
     case 12:
-      range = day <= 9 ? "1129-1209" : "1210-0224";
-      break;
+      return day <= 9 ? "1129-1209" : "1210-0224";
     default:
-      console.error("something went weird!");
+      console.error("month value out of bounds for grass date range.");
+      return "" as GrassDateRange;
   }
+}
 
-  return range;
+export function getAstrologyDateRange(date = new Date()): AstrologyDateRange {
+  const month = date.getMonth();
+  const day = date.getDate();
+
+  switch (month) {
+    case 1:
+      return day <= 19 ?
+        AstrologyDateRange.capricorn : AstrologyDateRange.aquarius;
+    case 2:
+      return day <= 18 ?
+        AstrologyDateRange.aquarius : AstrologyDateRange.pisces;
+    case 3:
+      return day <= 20 ?
+        AstrologyDateRange.pisces : AstrologyDateRange.aries;
+    case 4:
+      return day <= 19 ?
+        AstrologyDateRange.aries : AstrologyDateRange.taurus;
+    case 5:
+      return day <= 20 ?
+        AstrologyDateRange.taurus : AstrologyDateRange.gemini;
+    case 6:
+      return day <= 21 ?
+        AstrologyDateRange.gemini : AstrologyDateRange.cancer;
+    case 7:
+      return day <= 22 ?
+        AstrologyDateRange.cancer : AstrologyDateRange.leo;
+    case 8:
+      return day <= 22 ?
+        AstrologyDateRange.leo : AstrologyDateRange.virgo;
+    case 9:
+      return day <= 22 ?
+        AstrologyDateRange.virgo : AstrologyDateRange.libra;
+    case 10:
+      return day <= 23 ?
+        AstrologyDateRange.libra : AstrologyDateRange.scorpio;
+    case 11:
+      return day <= 22 ?
+        AstrologyDateRange.scorpio : AstrologyDateRange.sagittarius;
+    case 12:
+      return day <= 21 ?
+        AstrologyDateRange.sagittarius : AstrologyDateRange.capricorn;
+    default:
+      console.error("month value out of bounds for grass date range.");
+      return "" as AstrologyDateRange;
+  }
 }

@@ -1,13 +1,17 @@
-import { getDateRange } from "@utils/animal-crossing";
+import { getAstrologyDateRange, getGrassDateRange } from "@utils/animal-crossing";
 import { css } from "styled-components";
 
 const UI_BACKGROUND_COLOR = "rgb(248, 245, 223, 0.8)";
 const UI_BORDER_RADIUS = "3rem";
 const UI_BOX_SHADOW = "0 0.75rem 0.5rem -0.5rem rgba(0, 0, 0, 0.5)";
 
+const grassDateRange = getGrassDateRange();
+const astrologyDateRange = getAstrologyDateRange();
+
 export const animalCrossingTheme = {
   name: "animal-crossing",
-  dateRange: getDateRange(),
+  grassDateRange,
+  astrologyDateRange,
   shape: "square",
 };
 
