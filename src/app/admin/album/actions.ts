@@ -62,8 +62,12 @@ export async function updateAlbum(
         throw new Error(`no photos in ${name} to generate date.`);
       }
 
-      data.date = photosInAlbum[0].captureDate;
+      const { captureDate } = photosInAlbum[0];
+
+      console.log(`👉 changing date automatically from ${prevState.date} to ${captureDate}...`);
+      data.date = captureDate;
     } else if (date) {
+      console.log(`👉 changing date manually from ${prevState.date} to ${date}...`);
       data.date = new Date(date);
     }
 

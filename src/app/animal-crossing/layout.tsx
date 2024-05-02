@@ -24,6 +24,7 @@ const Header = styled.header`
 `;
 
 const Main = styled.main`
+  ${flexColumnCenter};
   background-color: #cfbe95;
   background-image: url(${({ theme }) => `/images/animal-crossing/sand/${theme.shape}_${theme.grassDateRange}.png`});
   background-position: center top;
@@ -34,6 +35,7 @@ const Main = styled.main`
   margin: 0 auto 1rem;
   max-width: 50rem;
   padding: 8.5rem 3rem 1rem;
+  text-shadow: white 0 0 5px;
 `;
 
 const fotSeuratProB = localFont({
