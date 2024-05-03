@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import UpdatePhotoForm from "./form";
-import AlbumSelect from "../../../components/album-select";
+import AlbumSelect from "@components/admin/album-select";
 import { sizePhoto } from "@utils/photo";
 
 export default async function Page({ params }: { params: { smugMugKey: string }}) {

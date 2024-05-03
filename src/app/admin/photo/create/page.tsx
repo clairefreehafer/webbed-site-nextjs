@@ -1,4 +1,4 @@
-import AlbumSelect from "../../components/album-select";
+import AlbumSelect from "@components/admin/album-select";
 import CreatePhotoForm from "./form";
 
 export default function CreatePhotoPage() {

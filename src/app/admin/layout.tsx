@@ -1,7 +1,7 @@
 "use client";
 
 import Nav, { NavLink } from "../components/nav";
-import styles from "./layout.module.scss";
+import { flexColumnCenter } from "@styles/layout";
 
 const adminLinks: NavLink[] = [
   {
@@ -20,16 +20,16 @@ const adminLinks: NavLink[] = [
     pathname: "/admin/tag",
     name: "tags"
   },
-]
+];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <header className={styles.header}>
+      <header css={flexColumnCenter}>
         <Nav navLinks={adminLinks} />
         <h1>admin panel</h1>
       </header>
-      <main className={styles.main}>
+      <main css={flexColumnCenter}>
         {children}
       </main>
     </>

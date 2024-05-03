@@ -1,4 +1,4 @@
-import TableRoot from "../components/table-root";
+import TableRoot from "@components/admin/table-root";
 
 export default function AdminAlbumPage() {
   return (
