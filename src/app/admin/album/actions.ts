@@ -47,7 +47,7 @@ export async function updateAlbum(
   const name = formData.get("name") as string;
   const section = formData.get("section") as string;
   const date = formData.get("date") as string;
-  const generateDateAutomatically = Boolean(formData.get("generateDateAutomatically"));
+  const generateDateAutomatically = formData.get("generateDateAutomatically");
 
   let data: Partial<Album> = {};
 

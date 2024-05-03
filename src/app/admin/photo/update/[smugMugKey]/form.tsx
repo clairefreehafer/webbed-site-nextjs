@@ -1,95 +1,114 @@
 "use client";
 
-import { useFormState } from "react-dom";
-import styles from "./form.module.scss";
-import { updatePhoto } from "../../actions";
+import { PhotoFormState, updatePhoto } from "../../actions";
 import { useState } from "react";
 import type { Photo } from "@prisma/client";
-
-const { form, label, manualSection, hide } = styles;
-
-export type UpdatePhotoFormState = Photo & {
-  syncrhonizeWithXmp?: boolean;
-  updateSmugMug?: boolean;
-  message?: string;
-}
+import AdminForm, { HideSection, Input, Label } from "@components/admin/form";
 
 export default function UpdatePhotoForm({
-  id,
-  smugMugKey,
-  url,
-  captureDate,
-  metadata,
-  albumName,
+  photoData,
   children,
-}: Photo & { children: React.ReactNode }) {
-  const initialState: UpdatePhotoFormState = {
+}: { 
+  photoData: Photo,
+  children: React.ReactNode
+}) {
+  const [synchronizeWithXmp, setSynchronizeWithXmp] = useState(true);
+
+  if (!photoData) {
+    return <>❌ missing photo data!</>;
+  }
+
+  const initialState: PhotoFormState = {
+    ...photoData,
+    message: "",
+  };
+
+  const {
+    xmpPath,
     id,
     smugMugKey,
     url,
     captureDate,
-    metadata,
-    updateSmugMug: false,
-    syncrhonizeWithXmp: true,
-    albumName,
-  };
-  const [synchronizeWithXmp, setSynchronizeWithXmp] = useState(true);
-  const [state, formAction] = useFormState<UpdatePhotoFormState, FormData>(updatePhoto, initialState);
+    title,
+    description
+  } = photoData;
 
   return (
-    <form action={formAction} className={form}>
-      <label>
+    <AdminForm action={updatePhoto} initialState={initialState}>
+      <Label>
         synchronize with xmp?
-        <input
+        <Input
           type="checkbox"
           name="synchronizeWithXmp"
           checked={synchronizeWithXmp}
           onChange={(e) => setSynchronizeWithXmp(e.target.checked)}
         />
-      </label>
+      </Label>
 
-      <div className={`${manualSection} ${synchronizeWithXmp ? hide : ""}`}>
-        <label className={label}>
+      <Label>
+        xmp path
+        <Input
+          type="text"
+          name="xmpPath"
+          defaultValue={xmpPath}
+        />
+      </Label>
+
+      <HideSection $when={synchronizeWithXmp}>
+        <Label>
           id
-          <input type="number" name="id" defaultValue={id} readOnly />
-        </label>
+          <Input type="number" name="id" defaultValue={id} readOnly />
+        </Label>
 
-        <label className={label}>
+        <Label>
           smugMugKey
-          <input type="text" name="smugMugKey" defaultValue={smugMugKey as string} readOnly />
-        </label>
+          <Input type="text" name="smugMugKey" defaultValue={smugMugKey as string} readOnly />
+        </Label>
 
-        <label className={label}>
+        <Label>
           url
-          <input type="text" name="url" defaultValue={url as string} readOnly />
-        </label>
+          <Input type="text" name="url" defaultValue={url as string} readOnly />
+        </Label>
 
-        <label className={label}>
+        <Label>
           captureDate
-          <input
+          <Input
             type="datetime-local"
             name="captureDate"
             defaultValue={captureDate?.toISOString().slice(0, -1)}
             readOnly
           />
-        </label>
+        </Label>
+
+        <Label>
+          title
+          <Input type="text" name="title" defaultValue={title as string} />
+        </Label>
+
+        <Label>
+          description
+          <Input as="textarea" name="description" defaultValue={description as string} />
+        </Label>
+
+        <Label>
+          alt text
+          <Input
+            as="textarea"
+            name="altText"
+            defaultValue={photoData.altText as string}
+          />
+        </Label>
 
         {children}
 
-        <label className={label}>
-          metadata
-          <textarea defaultValue={JSON.stringify(metadata)} name="metadata" />
-        </label>
-      </div>
+      </HideSection>
 
-      <label className={label}>
+      <Label>
         update smugmug?
-        <input type="checkbox" name="updateSmugMug" />
-      </label>
-
-      {state?.message && <p>{state.message}</p>}
+        <Input type="checkbox" name="updateSmugMug" />
+      </Label>
 
       <button type="submit">update photo</button>
-    </form>
+    </AdminForm>
   )
 }

@@ -1,55 +1,38 @@
 "use client";
 
-import { createPhoto } from "../actions";
-import { CreatePhotoFormState } from "../types";
-import { useFormState } from "react-dom";
-import styles from "./form.module.scss";
-import { Prisma } from "@prisma/client";
+import { PhotoFormState, createPhoto } from "../actions";
+import AdminForm, { Input, Label } from "@components/admin/form";
 
-export const initialState: CreatePhotoFormState = {
-  smugMugKey: "",
-  url: "",
-  captureDate: "",
-  album: "" as Prisma.AlbumCreateNestedOneWithoutPhotosInput,
-  metadata: {
-    path: "",
-  },
-  tags: {
-    connectOrCreate: []
-  },
-  message: "",
-};
+const initialState: Partial<PhotoFormState> = {};
 
-export default function CreatePhotoForm({ children }: { children: React.ReactNode }) {
-  const [state, formAction] = useFormState<CreatePhotoFormState, FormData>(createPhoto, initialState);
-
+export default function CreatePhotoForm(
+  { children }: { children: React.ReactNode }
+) {
   return (
     <>
       <h3>create</h3>
-      <form action={formAction} className={styles.form}>
-        <label className={styles.label}>
+      <AdminForm action={createPhoto} initialState={initialState}>
+        <Label>
           smug mug key
-          <input type="text" name="smugMugKey" required className={styles.input} />
-        </label>
+          <Input type="text" name="smugMugKey" required />
+        </Label>
 
-        <label className={styles.label}>
-          path
-          <input type="text" name="path" required className={styles.input} />
-        </label>
+        <Label>
+          xmp path
+          <Input type="text" name="xmpPath" required />
+        </Label>
 
         {children}
 
-        <label className={styles.label}>
+        <Label>
           alt text
-          <textarea name="altText" className={styles.input} />
-        </label>
-
-        <p>{state?.message}</p>
+          <Input as="textarea" name="altText" />
+        </Label>
 
         {/* TODO: show table of added data */}
 
         <button type="submit">add photo</button>
-      </form>
+      </AdminForm>
     </>
   )
 }

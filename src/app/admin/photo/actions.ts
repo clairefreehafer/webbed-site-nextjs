@@ -1,19 +1,19 @@
 "use server";
 
-import { Photo, Prisma, PrismaClient } from "@prisma/client";
+import { Photo, PrismaClient } from "@prisma/client";
 import { getSmugMugData } from "./smugmug";
-import { CreatePhotoFormState } from "./types";
-import { initialState } from "./create/form";
-import { UpdatePhotoFormState } from "./update/[smugMugKey]/form";
 import { getMetadataFromXmp } from "@utils/xmp";
 
-let state = initialState;
+export type PhotoFormState = Photo & { message?: string };
+
 const prisma = new PrismaClient();
 
-export async function createPhoto(_prevState: CreatePhotoFormState, formData: FormData) {
+export async function createPhoto(_prevState: Partial<PhotoFormState>, formData: FormData) {
+  let data: Partial<Photo> = {};
+
   try {
     const smugMugKey = formData.get("smugMugKey") as string;
-    const path = formData.get("path") as string;
+    const xmpPath = formData.get("xmpPath") as string;
     const altText = formData.get("altText") as string;
     const album = formData.get("album") as string;
 
@@ -25,88 +25,90 @@ export async function createPhoto(_prevState: CreatePhotoFormState, formData: Fo
       throw new Error(`photo with smugmug key "${smugMugKey}" is already in the database.`);
     }
 
-    const data = await getSmugMugData(smugMugKey);
-    if (typeof data === "string") {
-      throw new Error(data);
+    const smugMugData = await getSmugMugData(smugMugKey);
+    if (typeof smugMugData === "string") {
+      throw new Error(smugMugData);
     }
-    const url = data.Response.ImageSizeDetails.ImageUrlTemplate;
+    const url = smugMugData.Response.ImageSizeDetails.ImageUrlTemplate;
 
-    const metadataFromXmp = await getMetadataFromXmp(path);
+    const metadataFromXmp = await getMetadataFromXmp(xmpPath);
 
     if (typeof metadataFromXmp === "string") {
       throw new Error(metadataFromXmp);
     }
     
-    state = {
+    data = {
       smugMugKey,
       url,
-      album: { connect: { name: album } },
-      captureDate: metadataFromXmp.captureDate,
-      metadata: {
-        ...metadataFromXmp.metadata,
-        altText
-      },
+      albumName: album,
+      altText,
+      ...metadataFromXmp,
     };
 
-    await prisma.photo.create({ data: state });
+    await prisma.photo.create({ data });
 
     return {
-      ...state,
+      ...data,
       message: "👍 photo added:"
     };
   } catch (error) {
-    console.error(`👎 ${(error as Error).message}`);
+    console.error(`👎 ${error}`);
     return {
-      ...state,
+      ...data,
       message: `👎 ${(error as Error).message}`
     };
   }
 }
 
-export async function updatePhoto(prevState: UpdatePhotoFormState, formData: FormData) {
-  let data: Photo | {} = {};
-  // pull up metatadata to view and then update?
-  // synchronize smugmug keywords?
-  console.log(formData)
-  console.log(prevState)
+export async function updatePhoto(
+  prevState: Partial<PhotoFormState>,
+  formData: FormData
+) {
+  let data: Partial<PhotoFormState> = {};
+
   try {
     const synchronizeWithXmps = formData.get("synchronizeWithXmp");
+    const xmpPath = formData.get("xmpPath") as string;
     const smugMugKey = formData.get("smugMugKey") as string;
-    const captureDate = formData.get("captureDate") as string;
     const album = formData.get("album") as string;
-    const metadata: PrismaJson.Metadata = JSON.parse(formData.get("metadata") as string);
-    const { path, altText } = metadata;
+    const title = formData.get("title") as string;
+    const description = formData.get("description") as string;
+    const altText = formData.get("altText") as string;
 
     if (synchronizeWithXmps) {
-      const metadata = formData.get("metadata");
-
-      if (!metadata) {
-        throw new Error("no metadata available for current image.");
+      if (!xmpPath) {
+        throw new Error("no xmpPath set for current image.");
       }
 
-      if (!path) {
-        throw new Error("no path value available in metadata.");
+      if (xmpPath.slice(-3) !== "xmp") {
+        throw new Error(`xmpPath "${xmpPath}" does not point to an xmp file.`);
       }
 
-      const metadataFromXmp = await getMetadataFromXmp(path);
+      const metadataFromXmp = await getMetadataFromXmp(xmpPath);
 
       if (typeof metadataFromXmp === "string") {
         throw new Error(metadataFromXmp);
       }
 
-      data = { 
-        captureDate: metadataFromXmp.captureDate,
-        metadata: {
-          ...metadataFromXmp.metadata,
-          altText,
-        }
-      };
-      
+      data = metadataFromXmp;
     } else {
-      data = {
-        metadata,
-        albumName: album,
-      };
+      if (prevState.title !== title) {
+        console.log(`👉 changing title from "${prevState.title}" to "${title}"...`);
+        data.title = title;
+      }
+      if (prevState.description !== description) {
+        console.log(`👉 changing description from "${prevState.description}" to "${description}"...`);
+        data.title = title;
+      }
+      if (prevState.altText !== altText) {
+        console.log(`👉 changing altText from "${prevState.altText}" to "${altText}"...`);
+        data.title = title;
+      }
+    }
+
+    if (prevState.xmpPath !== xmpPath) {
+      console.log(`👉 changing xmpPath from "${prevState.xmpPath}" to "${xmpPath}"...`);
+      data.xmpPath = xmpPath;
     }
 
     await prisma.photo.update({
@@ -117,13 +119,13 @@ export async function updatePhoto(prevState: UpdatePhotoFormState, formData: For
     return {
       ...data,
       message: "👍 photo updated",
-    } as UpdatePhotoFormState;
+    };
   } catch (error) {
-    console.error(`👎 ${(error as Error).message}`);
+    console.error(`👎 ${error}`);
     return {
       ...data,
       message: `👎 ${(error as Error).message}`
-    } as UpdatePhotoFormState;
+    };
   }
 }
 

@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import UpdatePhotoForm from "./form";
 import AlbumSelect from "../../../components/album-select";
+import { sizePhoto } from "@utils/photo";
 
 export default async function Page({ params }: { params: { smugMugKey: string }}) {
   const prisma = new PrismaClient();
@@ -9,12 +10,15 @@ export default async function Page({ params }: { params: { smugMugKey: string }}
   });
 
   if (!photoData) {
-    return "👎 something went wrong.";
+    return "❌ no photo data available";
   }
 
   return (
-    <UpdatePhotoForm {...photoData}>
-      <AlbumSelect defaultValue={photoData.albumName} />
-    </UpdatePhotoForm>
+    <>
+      <img src={sizePhoto(photoData.url, "S")} alt={photoData.altText || ""} />
+      <UpdatePhotoForm photoData={photoData}>
+        <AlbumSelect defaultValue={photoData.albumName} />
+      </UpdatePhotoForm>
+    </>
   );
 }

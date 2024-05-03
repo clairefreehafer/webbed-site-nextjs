@@ -10,7 +10,7 @@ export async function getMetadataFromXmp(path: string) {
     const metadata = parsedXmp["x:xmpmeta"]["rdf:RDF"][0]["rdf:Description"][0];
 
     const captureDate = new Date(
-      metadata["$"]["exif:DateTimeOriginal"] || metadata["$"]["xmp:CreateDate"]
+      metadata["$"]["exif:DateTimeOriginal"] || metadata["$"]["xmp:CreateDate"] || metadata["$"]["xmp:ModifyDate"]
     );
 
     const tags = metadata["digiKam:TagsList"][0]["rdf:Seq"][0]["rdf:li"].map((tag: string) => {
@@ -22,11 +22,8 @@ export async function getMetadataFromXmp(path: string) {
 
     return {
       captureDate,
-      metadata: {
-        title: metadata["$"]["acdsee:caption"],
-        description: metadata["$"]["acdsee:description"],
-        path
-      },
+      title: metadata["$"]["acdsee:caption"],
+      description: metadata["$"]["acdsee:description"],
       tags: {
         connectOrCreate: tags
       }

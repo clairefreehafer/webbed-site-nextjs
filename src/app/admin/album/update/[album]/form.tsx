@@ -20,7 +20,7 @@ export default function UpdateAlbumForm(
     message: "",
   };
 
-  const {id, name, section, date } = albumData;
+  const { id, name, section, date } = albumData;
 
   return (
     <AdminForm action={updateAlbum} initialState={initialState}>

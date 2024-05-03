@@ -19,6 +19,13 @@ export const Input = styled.input`
   margin: 0.5rem;
 `;
 
+export const HideSection = styled.div<{ $when: boolean }>`
+  ${({ $when }) => $when && `
+    visibility: hidden;
+    height: 0;
+  `}
+`;
+
 type Props<T> = {
   initialState: Awaited<T>;
   action: (state: T, payload: FormData) => T | Promise<T>;
