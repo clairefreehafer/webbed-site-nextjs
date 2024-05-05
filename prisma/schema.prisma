@@ -30,6 +30,7 @@ model Photo {
 model Tag {
   id     Int     @id @default(autoincrement())
   tag    String  @unique
+  parent String? @db.VarChar(255)
   photos Photo[]
 }
 

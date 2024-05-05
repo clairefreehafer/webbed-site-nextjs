@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import styles from "./page.module.scss";
 import Link from "next/link";
+import { Fragment } from "react";
 
 const { table } = styles;
 
@@ -48,7 +49,11 @@ export default async function AdminPhotoRead() {
                 <td>{photo.smugMugKey}</td>
                 <td>{photo.captureDate?.toString()}</td>
                 <td>{photo.albumName}</td>
-                <td>{photo.tags?.length}</td>
+                <td>{photo.tags.map((tag) => (
+                  <Fragment key={tag.tag}>
+                    {tag.tag}{", "}
+                  </Fragment>
+                ))}</td>
                 <td>
                   <Link href={`/admin/photo/update/${photo.smugMugKey}`}>
                     edit

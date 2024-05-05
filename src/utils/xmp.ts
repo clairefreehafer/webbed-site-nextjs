@@ -14,6 +14,17 @@ export async function getMetadataFromXmp(path: string) {
     );
 
     const tags = metadata["digiKam:TagsList"][0]["rdf:Seq"][0]["rdf:li"].map((tag: string) => {
+      if (tag.includes("/")) {
+        const splitTags = tag.split("/");
+
+        return {
+          where: { tag: splitTags[splitTags.length - 1] },
+          create: {
+            tag,
+            parent: splitTags[splitTags.length - 2]
+          }
+        }
+      }
       return {
         where: { tag },
         create: { tag },
