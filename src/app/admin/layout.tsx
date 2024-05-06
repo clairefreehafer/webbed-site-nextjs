@@ -4,6 +4,8 @@ import { usePathname } from "next/navigation";
 import Nav, { NavLink } from "../components/nav";
 import { flexColumnCenter } from "@styles/layout";
 import { Fragment } from "react";
+import styled from "styled-components";
+import { MAX_SITE_WIDTH } from "@styles/variables";
 
 const adminLinks: NavLink[] = [
   {
@@ -23,6 +25,13 @@ const adminLinks: NavLink[] = [
     name: "tags"
   },
 ];
+
+const Main = styled.main`
+  ${flexColumnCenter};
+  margin: 0 auto;
+  max-width: ${MAX_SITE_WIDTH};
+  width: 100%;
+`;
 
 // TODO: refactor
 function generateHeader(pathname: string[]) {
@@ -60,9 +69,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <Nav navLinks={adminLinks} />
         {generateHeader(pathname)}
       </header>
-      <main css={flexColumnCenter}>
+      <Main>
         {children}
-      </main>
+      </Main>
     </>
   )
 }
