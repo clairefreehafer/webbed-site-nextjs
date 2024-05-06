@@ -80,6 +80,11 @@ export default function Navigation({ navLinks = defaultNavLinks }) {
             </StyledLink>
           </Fragment>
         ))}
+        {process.env.NODE_ENV === "development" && (
+          <StyledLink href="/admin" $isActive={pathname.includes("admin")}>
+            admin
+          </StyledLink>
+        )}
       </Ul>
     </Nav>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Nav from "../../app/components/nav";
+import Nav from "@components/nav";
 
 export default function TableRoot() {
   const pathname = usePathname();

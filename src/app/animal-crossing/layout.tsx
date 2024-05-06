@@ -1,6 +1,6 @@
 "use client";
 
-import Navigation from "@app/components/nav";
+import Navigation from "@components/nav";
 import AnimalCrossingLogo, { SVG_HEIGHT } from "@components/animal-crossing/logo";
 import { flexColumnCenter, fullScreen } from "@styles/layout";
 import { MAX_SITE_WIDTH } from "@styles/variables";

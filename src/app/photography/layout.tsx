@@ -1,6 +1,6 @@
 "use client";
 
-import Nav from "@app/components/nav";
+import Nav from "@components/nav";
 import DefaultThemeRoot from "@styles/default/root";
 import { flexColumnCenter } from "@styles/layout";
 import { PAPER_LINE_HEIGHT, paperBackground } from "@styles/mixins";

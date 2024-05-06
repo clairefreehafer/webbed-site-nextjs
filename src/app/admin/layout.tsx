@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Nav, { NavLink } from "../components/nav";
+import Nav, { NavLink } from "@components/nav";
 import { flexColumnCenter } from "@styles/layout";
 import { Fragment } from "react";
 import styled from "styled-components";
