@@ -1,6 +1,7 @@
 "use server";
 
 import { PrismaClient, Tag } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 
 export type TagFormState = Tag & { message?: string };
 
@@ -32,4 +33,16 @@ export async function updateTag(
       message: `👎 ${(error as Error).message}`
     }
   }
+}
+
+export async function deleteTag(formData: FormData) {
+  const tag = formData.get("value") as string;
+  
+  console.log(`👉 deleting tag "${tag}"...`)
+  return await new Promise((resolve) => setTimeout(resolve, 5000));
+  // await prisma.tag.delete({
+  //   where: { tag }
+  // });
+
+  // revalidatePath("/admin/tags");
 }
