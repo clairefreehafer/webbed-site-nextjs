@@ -3,7 +3,7 @@
 import AdminForm, { Input, Label } from "@components/admin/form";
 import { Album } from "@prisma/client";
 import { AlbumSections, displayName } from "@utils/albums";
-import { AlbumFormState, updateAlbum } from "../../../../../actions/album";
+import { AlbumFormState, updateAlbum } from "@actions/album";
 import SectionSelect from "@components/admin/section-select";
 import { useState } from "react";
 
