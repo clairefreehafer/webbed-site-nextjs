@@ -1,6 +1,6 @@
 "use client";
 
-import { PhotoFormState, createPhoto } from "../actions";
+import { PhotoFormState, createPhoto } from "@actions/photo";
 import AdminForm, { Input, Label } from "@components/admin/form";
 
 const initialState: Partial<PhotoFormState> = {};

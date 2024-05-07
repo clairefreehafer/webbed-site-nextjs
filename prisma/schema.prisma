@@ -15,7 +15,7 @@ datasource db {
 
 model Photo {
   id          Int       @id @default(autoincrement())
-  smugMugKey  String?   @db.VarChar(255) @unique
+  smugMugKey  String    @db.VarChar(255) @unique
   url         String?   @db.VarChar(255) @unique
   captureDate DateTime? @db.Timestamp(6)
   title       String?   @db.VarChar(255)

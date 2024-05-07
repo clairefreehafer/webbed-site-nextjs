@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import styles from "./page.module.scss";
 import Link from "next/link";
 import { Fragment } from "react";
-
-const { table } = styles;
+import AdminTable from "@components/admin/table";
+import DeleteButton from "@components/admin/delete-button";
+import { deletePhoto } from "@actions/photo";
 
 async function getPhotos() {
   try {
@@ -26,26 +26,28 @@ export default async function AdminPhotoRead() {
 
   return (
     <>
-      <h3>read</h3>
-
+      <ul>
+        <li>
+          <Link href="/admin/photos/new">add photo</Link>
+        </li>
+      </ul>
       {typeof photos === "string" ? (
         <p>{photos}</p>
       ) : (
-        <table className={table}>
+        <AdminTable>
           <thead>
             <tr>
-              <th>id</th>
               <th>smugmug key</th>
               <th>capture date</th>
               <th>album</th>
               <th>tags</th>
               <th>edit</th>
+              <th>delete</th>
             </tr>
           </thead>
           <tbody>
             {photos.map((photo) => (
               <tr key={photo.id}>
-                <td>{photo.id}</td>
                 <td>{photo.smugMugKey}</td>
                 <td>{photo.captureDate?.toString()}</td>
                 <td>{photo.albumName}</td>
@@ -55,17 +57,20 @@ export default async function AdminPhotoRead() {
                   </Fragment>
                 ))}</td>
                 <td>
-                  <Link href={`/admin/photo/update/${photo.smugMugKey}`}>
+                  <Link href={`/admin/photos/${photo.smugMugKey}`}>
                     edit
                   </Link>
+                </td>
+                <td>
+                  <DeleteButton serverAction={deletePhoto} value={photo.smugMugKey} />
                 </td>
               </tr>
             ))}
           </tbody>
-        </table>
+        </AdminTable>
       )}
 
       {typeof photos !== "string" && <p>total: {photos.length}</p>}
-          </>   
+    </>   
   )
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { PhotoFormState, updatePhoto } from "../../actions";
+import { PhotoFormState, updatePhoto } from "@actions/photo";
 import { useState } from "react";
 import type { Photo } from "@prisma/client";
 import AdminForm, { HideSection, Input, Label } from "@components/admin/form";

@@ -1,7 +1,7 @@
 "use server";
 
 import { Photo, PrismaClient } from "@prisma/client";
-import { getSmugMugData } from "./smugmug";
+import { getSmugMugData } from "@utils/smugmug";
 import { getMetadataFromXmp } from "@utils/xmp";
 
 export type PhotoFormState = Photo & { message?: string };
@@ -9,7 +9,9 @@ export type PhotoFormState = Photo & { message?: string };
 const prisma = new PrismaClient();
 
 export async function createPhoto(_prevState: Partial<PhotoFormState>, formData: FormData) {
-  let data: Partial<Photo> = {};
+  let data: Partial<Photo> & { smugMugKey: string } = {
+    smugMugKey: "",
+  };
 
   try {
     const smugMugKey = formData.get("smugMugKey") as string;

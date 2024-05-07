@@ -7,25 +7,6 @@ import { Fragment } from "react";
 import styled from "styled-components";
 import { MAX_SITE_WIDTH } from "@styles/variables";
 
-const adminLinks: NavLink[] = [
-  {
-    pathname: "/admin",
-    name: "admin home"
-  },
-  {
-    pathname: "/admin/photo",
-    name: "photos"
-  },
-  {
-    pathname: "/admin/album",
-    name: "albums"
-  },
-  {
-    pathname: "/admin/tags",
-    name: "tags"
-  },
-];
-
 const Main = styled.main`
   ${flexColumnCenter};
   margin: 0 auto;
@@ -33,7 +14,7 @@ const Main = styled.main`
   width: 100%;
 `;
 
-// TODO: refactor
+// TODO: refactor and add links
 function generateHeader(pathname: string[]) {
   return pathname.map((slug, idx) => {
     if (idx === 0) {
@@ -66,7 +47,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <>
       <header css={flexColumnCenter}>
-        <Nav navLinks={adminLinks} />
+        <Nav />
         {generateHeader(pathname)}
       </header>
       <Main>

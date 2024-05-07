@@ -1,7 +1,7 @@
 "use client";
 
 import AdminForm, { Input, Label } from "@components/admin/form";
-import { AlbumFormState, createAlbum } from "../actions";
+import { AlbumFormState, createAlbum } from "@actions/album";
 import SectionSelect from "@components/admin/section-select";
 import { AlbumSections } from "@utils/albums";
 

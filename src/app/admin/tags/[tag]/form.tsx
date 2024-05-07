@@ -1,5 +1,5 @@
 import AdminForm, { Input, Label } from "@components/admin/form";
-import { updateTag } from "../actions";
+import { updateTag } from "@actions/tag";
 import { Tag } from "@prisma/client";
 import { ParentTagSelect } from "@components/admin/parent-tag-select";
 
