@@ -1,12 +1,15 @@
 import { PrismaClient } from "@prisma/client";
+import { slugName } from "@utils/albums";
 
 const prisma = new PrismaClient();
 
 export async function generateStaticParams() {
-  const albums = await prisma.album.findMany();
+  const albums = await prisma.album.findMany({
+    where: { section: "photography" }
+  });
 
   return albums.map((album) => ({
-    album: album.name.replaceAll(" ", "-"),
+    album: slugName(album.name),
   }));
 }
 

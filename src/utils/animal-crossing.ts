@@ -1,3 +1,6 @@
+import { PrismaClient } from "@prisma/client";
+import { cache } from "react";
+
 export type GrassShape = "circle" | "square" | "triangle";
 
 export type GrassDateRange =
@@ -40,8 +43,28 @@ enum AstrologyDateRange {
   sagittarius = "1123-1221"
 };
 
+const prisma = new PrismaClient();
+
+export const getAlbumPhotos = cache(async (albumName: string) => {
+  const photos = await prisma.photo.findMany({
+    where: {
+      albumName,
+    },
+    orderBy: {
+      captureDate: "asc"
+    },
+    select: {
+      id: true,
+      url: true,
+      album: true,
+    }
+  });
+
+  return photos;
+});
+
 export function getGrassDateRange(date = new Date()): GrassDateRange {
-  const month = date.getMonth();
+  const month = date.getMonth() + 1;
   const day = date.getDate();
 
   switch (month) {
@@ -84,7 +107,7 @@ export function getGrassDateRange(date = new Date()): GrassDateRange {
 }
 
 export function getAstrologyDateRange(date = new Date()): AstrologyDateRange {
-  const month = date.getMonth();
+  const month = date.getMonth() + 1;
   const day = date.getDate();
 
   switch (month) {

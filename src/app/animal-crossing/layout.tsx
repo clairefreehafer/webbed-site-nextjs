@@ -1,20 +1,12 @@
 "use client";
 
 import Navigation from "@components/nav";
-import AnimalCrossingLogo, { SVG_HEIGHT } from "@components/animal-crossing/logo";
-import { flexColumnCenter, fullScreen } from "@styles/layout";
+import AnimalCrossingLogo from "@components/animal-crossing/logo";
+import { flexColumnCenter } from "@styles/layout";
 import { MAX_SITE_WIDTH } from "@styles/variables";
-import { GrassDateRange, GRASS_COLORS } from "@utils/animal-crossing";
 import styled, { ThemeProvider } from "styled-components";
 import localFont from "next/font/local";
-import { animalCrossingTheme } from "@styles/animal-crossing/theme";
-
-const AnimalCrossingThemeRoot = styled.div`
-  ${fullScreen};
-  background-color: ${({ theme }) => GRASS_COLORS[theme.grassDateRange as GrassDateRange]};
-  background-image: url(${({ theme }) => `/images/animal-crossing/grass/${theme.shape}_${theme.grassDateRange}.png`});
-  background-position: left calc(50% - 128px) top calc(6rem + ${SVG_HEIGHT});
-`;
+import { AnimalCrossingThemeRoot, animalCrossingTheme } from "@styles/animal-crossing/theme";
 
 const Header = styled.header`
   ${flexColumnCenter};

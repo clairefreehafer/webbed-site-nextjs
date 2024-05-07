@@ -44,6 +44,7 @@ export async function createPhoto(_prevState: Partial<PhotoFormState>, formData:
       url,
       albumName: album,
       altText,
+      xmpPath,
       ...metadataFromXmp,
     };
 
