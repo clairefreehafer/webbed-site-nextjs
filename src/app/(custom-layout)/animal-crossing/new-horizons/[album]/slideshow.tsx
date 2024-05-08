@@ -136,7 +136,7 @@ export default function Slideshow({ photos, albumDate, albumName }: Props) {
   return (
     <AnimalCrossingThemeRoot $date={albumDate} $shape="triangle" className={fotSeuratProB.className}>
       <NavBack>
-        <Link href="/animal-crossing/new-horizons">
+        <Link href="/animal-crossing/new-horizons/albums">
           &larr; back
         </Link>
       </NavBack>
