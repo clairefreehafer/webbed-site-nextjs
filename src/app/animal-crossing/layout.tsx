@@ -5,8 +5,8 @@ import AnimalCrossingLogo from "@components/animal-crossing/logo";
 import { flexColumnCenter } from "@styles/layout";
 import { MAX_SITE_WIDTH } from "@styles/variables";
 import styled, { ThemeProvider } from "styled-components";
-import localFont from "next/font/local";
 import { AnimalCrossingThemeRoot, animalCrossingTheme } from "@styles/animal-crossing/theme";
+import { fotSeuratProB } from "@fonts/animal-crossing/fonts";
 
 const Header = styled.header`
   ${flexColumnCenter};
@@ -29,14 +29,6 @@ const Main = styled.main`
   padding: 8.5rem 3rem 1rem;
   text-shadow: rgba(255, 255, 255, 0.9) 0 0 5px;
 `;
-
-const fotSeuratProB = localFont({
-  src: [
-    { path: "../../fonts/animal-crossing/fot-seurat-pro-b.woff2" },
-    { path: "../../fonts/animal-crossing/fot-seurat-pro-b.woff" },
-    { path: "../../fonts/animal-crossing/fot-seurat-pro-b.otf" }
-  ]
-});
 
 export default function AnimalCrossingLayout(
   { children }:

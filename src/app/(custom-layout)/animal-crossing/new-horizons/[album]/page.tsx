@@ -28,6 +28,6 @@ export default async function Page({ params }: { params: { album: string }}) {
   const albumDate = photos[0].album?.date || new Date();
 
   return (
-    <Slideshow photos={photos} albumDate={albumDate} />
+    <Slideshow photos={photos} albumDate={albumDate} albumName={albumName} />
   );
 }
