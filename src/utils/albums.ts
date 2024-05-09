@@ -1,18 +1,11 @@
 export enum AlbumSections {
   Photography = "photography",
-  NewHorizons = "new horizons",
+  NewHorizonsEvents = "new-horizons/events",
+  NewHorizonsResidents = "new-horizons/residents",
   NewLeaf = "new leaf",
   TearsOfTheKingdom = "tears of the kingdom",
   BreathOfTheWild = "breath of the wild"
 };
-
-export const ANIMAL_CROSSING_SECTIONS = [
-  AlbumSections.NewHorizons, AlbumSections.NewLeaf
-];
-
-export const ZELDA_SECTIONS = [
-  AlbumSections.TearsOfTheKingdom, AlbumSections.BreathOfTheWild
-];
 
 export function displayName(album: string) {
   if (album?.includes("-")) {

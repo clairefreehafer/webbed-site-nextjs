@@ -99,9 +99,9 @@ export default function UpdatePhotoForm({
           />
         </Label>
 
-        {children}
-
       </HideSection>
+      
+      {children}
 
       <Label>
         update smugmug?

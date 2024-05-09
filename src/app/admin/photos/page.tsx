@@ -37,6 +37,7 @@ export default async function AdminPhotoRead() {
         <AdminTable>
           <thead>
             <tr>
+              <th>thumbnail</th>
               <th>smugmug key</th>
               <th>capture date</th>
               <th>album</th>
@@ -48,6 +49,7 @@ export default async function AdminPhotoRead() {
           <tbody>
             {photos.map((photo) => (
               <tr key={photo.id}>
+                <td><img src={photo.url?.replaceAll("#size#", "Th")} alt="" /></td>
                 <td>{photo.smugMugKey}</td>
                 <td>{photo.captureDate?.toString()}</td>
                 <td>{photo.albumName}</td>

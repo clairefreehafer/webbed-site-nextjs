@@ -7,18 +7,19 @@ const prisma = new PrismaClient();
 
 export async function generateStaticParams() {
   const albums = await prisma.album.findMany({
-    where: { section: "new horizons" }
+    where: { section: { startsWith: "new-horizons" }}
   });
 
-  return albums.map((album) => ({
-    album: slugName(album.name),
-  }));
+  return albums.map((album) => {
+    const page = [...album.section.split("/"), slugName(album.name)];
+    return { page };
+  });
 }
 
 export const dynamicParams = false;
 
-export default async function Page({ params }: { params: { album: string }}) {
-  const albumName = displayName(params.album);
+export default async function Page({ params }: { params: { page: string[] }}) {
+  const albumName = displayName(params.page[params.page.length - 1]);
   const photos = await getAlbumPhotos(albumName);
 
   if (!photos) {
@@ -28,6 +29,11 @@ export default async function Page({ params }: { params: { album: string }}) {
   const albumDate = photos[0].album?.date || new Date();
 
   return (
-    <Slideshow photos={photos} albumDate={albumDate} albumName={albumName} />
+    <Slideshow
+      photos={photos}
+      albumDate={albumDate}
+      albumName={albumName}
+      albumSection={params.page}
+    />
   );
 }

@@ -87,9 +87,12 @@ type Props = {
   photos: Partial<Photo>[];
   albumDate: Date;
   albumName: string;
+  albumSection: string[];
 };
 
-export default function Slideshow({ photos, albumDate, albumName }: Props) {
+export default function Slideshow(
+  { photos, albumDate, albumName, albumSection }: Props
+) {
   const [currentSlide, setCurrentSlide] = useState(1);
   const slidesRef = useRef<(HTMLElement | null)[]>([]);
   const pathname = usePathname();
@@ -136,7 +139,8 @@ export default function Slideshow({ photos, albumDate, albumName }: Props) {
   return (
     <AnimalCrossingThemeRoot $date={albumDate} $shape="triangle" className={fotSeuratProB.className}>
       <NavBack>
-        <Link href="/animal-crossing/new-horizons/albums">
+        {/* TODO: make applicable for all sections */}
+        <Link href={`/animal-crossing/${albumSection.slice(0, albumSection.length - 1).join("/")}`}>
           &larr; back
         </Link>
       </NavBack>

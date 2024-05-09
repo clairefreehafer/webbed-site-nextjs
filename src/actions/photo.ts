@@ -73,7 +73,7 @@ export async function updatePhoto(
     const synchronizeWithXmps = formData.get("synchronizeWithXmp");
     const xmpPath = formData.get("xmpPath") as string;
     const smugMugKey = formData.get("smugMugKey") as string;
-    const album = formData.get("album") as string;
+    const albumName = formData.get("albumName") as string;
     const title = formData.get("title") as string;
     const description = formData.get("description") as string;
     const altText = formData.get("altText") as string;
@@ -112,6 +112,10 @@ export async function updatePhoto(
     if (prevState.xmpPath !== xmpPath) {
       console.log(`👉 changing xmpPath from "${prevState.xmpPath}" to "${xmpPath}"...`);
       data.xmpPath = xmpPath;
+    }
+
+    if (prevState.albumName !== albumName) {
+      data.albumName = albumName;
     }
 
     await prisma.photo.update({

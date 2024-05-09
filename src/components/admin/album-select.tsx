@@ -29,7 +29,7 @@ export default async function AlbumSelect(
     <>
       <label>
         select album
-        <select name="album" defaultValue={defaultValue || ""}>
+        <select name="albumName" defaultValue={defaultValue || ""}>
           {albums.map((album) => (
             <option key={album.name}>
               {album.name}
