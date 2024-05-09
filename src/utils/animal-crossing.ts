@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { Album, Photo, PrismaClient } from "@prisma/client";
 import { cache } from "react";
 
 export type GrassShape = "circle" | "square" | "triangle";
@@ -45,20 +45,38 @@ enum AstrologyDateRange {
 
 const prisma = new PrismaClient();
 
-export const getAlbumPhotos = cache(async (albumName: string) => {
-  const photos = await prisma.photo.findMany({
-    where: {
-      albumName,
-    },
-    orderBy: {
-      captureDate: "asc"
-    },
-    select: {
-      id: true,
-      url: true,
-      album: true,
-    }
-  });
+// TODO: find a better way to handle this.
+const tagSections = ["residents", "visitors"];
+const tagAlbumNameMapping: Record<string, string> = {
+  "an old friend": "rover"
+};
+
+export const getAlbumPhotos = cache(async (albumName: string, section: string) => {
+  // TODO: type this better
+  let photos: (Partial<Photo> & { album?: Album | null })[] = [];
+
+  if (tagSections.includes(section)) {
+    photos = await prisma.photo.findMany({
+      include: { tags: true, album: true },
+      where: { tags: { some: {
+        tag: tagAlbumNameMapping[albumName] || albumName
+      }}}},
+    );
+  } else {
+    photos = await prisma.photo.findMany({
+      where: {
+        albumName,
+      },
+      orderBy: {
+        captureDate: "asc"
+      },
+      select: {
+        id: true,
+        url: true,
+        album: true,
+      }
+    });
+  }
 
   return photos;
 });

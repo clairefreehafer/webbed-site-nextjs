@@ -20,7 +20,7 @@ export async function getMetadataFromXmp(path: string) {
         return {
           where: { tag: splitTags[splitTags.length - 1] },
           create: {
-            tag,
+            tag: splitTags[splitTags.length - 1],
             parent: splitTags[splitTags.length - 2]
           }
         }
