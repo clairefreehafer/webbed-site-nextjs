@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 export async function generateStaticParams() {
   const albums = await prisma.album.findMany({
-    where: { section: "photography" }
+    where: { section: { has: "photography" } }
   });
 
   return albums.map((album) => ({

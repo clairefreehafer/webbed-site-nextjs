@@ -24,7 +24,7 @@ export async function createAlbum(
 
     await prisma.album.create({ data: {
       name: album,
-      section,
+      section: section.split(","),
     } });
 
     return {
@@ -75,10 +75,10 @@ export async function updateAlbum(
       console.log(`👉 changing name from ${prevState.name} to ${name}...`);
       data.name = name;
     }
-    if (prevState.section !== section) {
-      console.log(`👉 changing section from ${prevState.section} to ${section}...`);
-      data.section = section;
-    }
+    // if (prevState.section !== section) {
+    //   console.log(`👉 changing section from ${prevState.section} to ${section}...`);
+      data.section = section.split(",");
+    // }
 
     await prisma.album.update({
       where: { name },

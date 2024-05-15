@@ -44,7 +44,7 @@ export default async function AdminReadAlbumPage() {
             <tbody key={album.id}>
               <tr>
                 <td>{album.name}</td>
-                <td>{album.section}</td>
+                <td>{album.section.join(" → ")}</td>
                 <td>{album.date?.toString()}</td>
                 <td>{album.photos?.length}</td>
                 <td>

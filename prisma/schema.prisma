@@ -38,6 +38,7 @@ model Album {
   id      Int       @id @default(autoincrement())
   name    String    @db.VarChar(255) @unique
   date    DateTime? @db.Timestamp(6)
-  section String    @db.VarChar(255) @default("photography")
-  photos Photo[]
+  section String[]
+  type    String    @db.VarChar(255) @default("default")
+  photos  Photo[]
 }

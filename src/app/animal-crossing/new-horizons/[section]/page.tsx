@@ -1,22 +1,25 @@
 import { PrismaClient } from "@prisma/client"
 import Link from "next/link";
-import { newHorizonsSections } from "../page";
-import { slugName } from "@utils/albums";
+import { getAlbums, slugName } from "@utils/albums";
 
 const prisma = new PrismaClient();
 
 export async function generateStaticParams() {
-  return newHorizonsSections.map((section) => ({
-    section,
+  const albums = await getAlbums("new-horizons");
+
+  return albums.map((album) => ({
+    section: album.section[album.section.length - 1]
   }));
 }
+
+export const dynamicParams = false;
 
 export default async function Section(
   { params }: { params: { section: string }}
 ) {
   const { section } = params;
   const albums = await prisma.album.findMany({
-    where: { section: `new-horizons/${section}` }
+    where: { section: { has: section }}
   });
 
   return (

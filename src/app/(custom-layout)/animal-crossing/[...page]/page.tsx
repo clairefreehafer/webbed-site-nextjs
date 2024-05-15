@@ -5,31 +5,14 @@ import { getAlbumPhotos } from "@utils/animal-crossing";
 
 const prisma = new PrismaClient();
 
-// TODO: find a better way to handle this
-const tagAlbums = {
-  residents: [],
-  visitors: [
-    "rover",
-    "k.k. slider"
-  ]
-}
-
 export async function generateStaticParams() {
   const albums = await prisma.album.findMany({
-    where: { section: { startsWith: "new-horizons" }}
+    where: { section: { has: "animal-crossing" }}
   });
 
-  const residents = tagAlbums.residents.map((resident) => ({
-    page: ["new-horizions", "residents", resident]
+  return albums.map((album) => ({
+    page: album.section.slice(1).concat([slugName(album.name)])
   }));
-  const visitors = tagAlbums.visitors.map((visitor) => ({
-    page: ["new-horizions", "visitors", visitor]
-  }));
-  const rest = albums.map((album) => ({
-    page: [...album.section.split("/"), slugName(album.name)]
-  }));
-
-  return [...residents, ...visitors, ...rest]
 }
 
 export const dynamicParams = false;

@@ -1,21 +1,24 @@
+import { getSections } from "@utils/albums";
 import Link from "next/link";
 
-// TODO: add to db?
-export const newHorizonsSections = [
-  "residents", "visitors",
-  "events", "dreams",
-  "landscapes", "interiors",
-  "misc", "random",
-  "new", "all"
-];
+// for future reference
+// const newHorizonsSections = [
+//   "residents", "visitors",
+//   "events", "dreams",
+//   "landscapes", "interiors",
+//   "misc", "random",
+//   "new", "all"
+// ];
 
-export default function NewHorizonsPage() {
+export default async function NewHorizonsPage() {
+  const sections = await getSections("new-horizons");
+  
   return (
     <ul className="grid">
-      {newHorizonsSections.map((section) => (
-        <li key={section}>
-          <Link href={`/animal-crossing/new-horizons/${section}`}>
-            {section}
+      {sections.map((section) => (
+        <li key={section[section.length - 1]}>
+          <Link href={`/animal-crossing/new-horizons/${section[section.length - 1]}`}>
+            {section[section.length - 1]}
           </Link>
         </li>
       ))}

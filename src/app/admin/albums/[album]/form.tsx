@@ -2,13 +2,13 @@
 
 import AdminForm, { Input, Label } from "@components/admin/form";
 import { Album } from "@prisma/client";
-import { AlbumSections, displayName } from "@utils/albums";
+import { AlbumTypes, displayName } from "@utils/albums";
 import { AlbumFormState, updateAlbum } from "@actions/album";
 import SectionSelect from "@components/admin/section-select";
 import { useState } from "react";
 
 export default function UpdateAlbumForm(
-  { albumData }: { albumData: Album }) {
+  { albumData, sections }: { albumData: Album, sections: string[][] }) {
   const [autoDateGeneration, setAutoDateGeneration] = useState(true);
 
   if (!albumData) {
@@ -20,7 +20,7 @@ export default function UpdateAlbumForm(
     message: "",
   };
 
-  const { id, name, section, date } = albumData;
+  const { id, name, section, date, type } = albumData;
 
   return (
     <AdminForm action={updateAlbum} initialState={initialState}>
@@ -38,7 +38,16 @@ export default function UpdateAlbumForm(
         />
       </Label>
 
-      <SectionSelect defaultValue={section as AlbumSections} />
+      <SectionSelect defaultValue={section} sections={sections} />
+
+      <Label>
+        type
+        <Input as="select" name="type" defaultValue={type}>
+          {Object.values(AlbumTypes).map((type) => (
+            <option key={type}>{type}</option>
+          ))}
+        </Input>
+      </Label>
 
       <Label>
         date

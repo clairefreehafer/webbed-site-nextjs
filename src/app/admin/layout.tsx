@@ -1,11 +1,12 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Nav, { NavLink } from "@components/nav";
+import Nav from "@components/nav";
 import { flexColumnCenter } from "@styles/layout";
 import { Fragment } from "react";
 import styled from "styled-components";
 import { MAX_SITE_WIDTH } from "@styles/variables";
+import Link from "next/link";
 
 const Main = styled.main`
   ${flexColumnCenter};
@@ -25,7 +26,7 @@ function generateHeader(pathname: string[]) {
         <Fragment key={slug}>
           <p>▽</p>
           <h2 css={{ margin: "0 auto 0.5rem" }}>
-            {slug}
+            <Link href={`/${slug}`}>{slug}</Link>
           </h2>
         </Fragment>
       );
@@ -34,7 +35,9 @@ function generateHeader(pathname: string[]) {
       return (
         <Fragment key={slug}>
           <p css={{ fontSize: "0.75rem" }}>▽</p>
-          <h3 css={{ margin: "0.2rem auto" }}>{slug}</h3>
+          <h3 css={{ margin: "0.2rem auto" }}>
+            <Link href={`/admin/${slug}`}>{slug}</Link>
+          </h3>
         </Fragment>
       )
     }

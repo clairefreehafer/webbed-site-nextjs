@@ -46,7 +46,6 @@ enum AstrologyDateRange {
 const prisma = new PrismaClient();
 
 // TODO: find a better way to handle this.
-const tagSections = ["residents", "visitors"];
 const tagAlbumNameMapping: Record<string, string> = {
   "an old friend": "rover"
 };
@@ -55,7 +54,14 @@ export const getAlbumPhotos = cache(async (albumName: string, section: string) =
   // TODO: type this better
   let photos: (Partial<Photo> & { album?: Album | null })[] = [];
 
-  if (tagSections.includes(section)) {
+  const tags = await prisma.tag.findMany({
+    where: { parent: "animal crossing" },
+    select: { tag: true }
+  });
+
+  const flattenedTags = tags.map((tag) => tag.tag)
+
+  if (flattenedTags.includes(albumName)) {
     photos = await prisma.photo.findMany({
       include: { tags: true, album: true },
       where: { tags: { some: {

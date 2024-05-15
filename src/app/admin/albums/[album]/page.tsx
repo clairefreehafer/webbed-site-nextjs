@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import UpdateAlbumForm from "./form";
-import { displayName } from "@utils/albums";
+import { displayName, getSections } from "@utils/albums";
 
 const prisma = new PrismaClient();
 
@@ -11,11 +11,13 @@ export default async function Page(
     where: { name: displayName(params.album) }
   });
 
+  const sections = await getSections();
+
   if (!albumData) {
     return `❌ cannot find album ${params.album}`;
   }
 
   return (
-    <UpdateAlbumForm albumData={albumData} />
+    <UpdateAlbumForm albumData={albumData} sections={sections} />
   );
 }
