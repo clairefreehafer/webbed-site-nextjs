@@ -75,23 +75,39 @@ export async function updateAlbum(
       console.log(`👉 changing name from ${prevState.name} to ${name}...`);
       data.name = name;
     }
-    // if (prevState.section !== section) {
-    //   console.log(`👉 changing section from ${prevState.section} to ${section}...`);
-      data.section = section.split(",");
-    // }
 
-    await prisma.album.update({
+    const sectionFromDropdowns = [];
+    let currentValue = formData.get("section0") as string;
+    let currentIndex = 0;
+
+    while (currentValue) {
+      sectionFromDropdowns.push(currentValue);
+      currentIndex++;
+      currentValue = formData.get(`section${currentIndex}`) as string;
+    }
+
+    if (prevState.section?.join(",") !== section) {
+      console.log(`👉 changing section from ${prevState.section} to new section ${section}...`);
+      data.section = section.split(",");
+    } else if (sectionFromDropdowns.join(",") !== section) {
+      console.log(`👉 changing section from ${prevState.section} to existing section ${sectionFromDropdowns}...`);
+      data.section = sectionFromDropdowns;
+    }
+
+    const updatedAlbum = await prisma.album.update({
       where: { name },
       data,
     });
 
     return {
-      ...data,
+      ...updatedAlbum,
       message: `👍 ${name} updated successfully`
     }
   } catch (error) {
     console.error(`👎 ${(error as Error).message}`);
     return {
+      ...prevState,
+      ...data,
       message: `👎 ${(error as Error).message}`
     }
   }

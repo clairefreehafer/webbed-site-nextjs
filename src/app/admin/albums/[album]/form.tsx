@@ -61,7 +61,7 @@ export default function UpdateAlbumForm(
 
       <Label>
         generate date automatically?
-        <input
+        <Input
           type="checkbox"
           checked={autoDateGeneration}
           name="generateDateAutomatically"
@@ -69,9 +69,9 @@ export default function UpdateAlbumForm(
         />
       </Label>
 
-      <Label>
+      {/* <Label>
         add photos (by smugmugkey?)
-      </Label>
+      </Label> */}
 
       <button type="submit">update album</button>
     </AdminForm>

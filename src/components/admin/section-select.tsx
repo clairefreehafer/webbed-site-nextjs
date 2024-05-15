@@ -30,14 +30,23 @@ export default function SectionSelect(
 
     while (typeof currentLevel === "object" && Object.keys(currentLevel).length) {
       levels.push(Object.keys(currentLevel));
-      
-      if (!selectRefs.current ||
-          !selectRefs.current.length ||
-          levelIndex > changedLevel
-      ) {
-        currentLevel = currentLevel[Object.keys(currentLevel)[0]]
-      } else {
+
+      // TODO: can we refactor this without losing readability?
+      if (!selectRefs.current || !selectRefs.current.length) {
+        // first render, before refs initialize
+        if (defaultValue[levelIndex]) {
+          // use default values if available
+          currentLevel = currentLevel[defaultValue[levelIndex]];
+        } else {
+          // otherwise fall back to first in each list
+          currentLevel = currentLevel[Object.keys(currentLevel)[0]];
+        }
+      } else if (levelIndex <= changedLevel) {
+        // for the level that changed and above, use the values in the inputs
         currentLevel = currentLevel[selectRefs.current[levelIndex].value];
+      } else {
+        // for everything below the changed level, use defaults.
+        currentLevel = currentLevel[Object.keys(currentLevel)[0]];
       }
       levelIndex++;
     }
@@ -58,9 +67,11 @@ export default function SectionSelect(
         return (
           <select
             key={i}
+            name={`section${i}`}
             onChange={() =>
             handleChange(i)}
             ref={(el) => {el && selectRefs.current.push(el)}}
+            defaultValue={defaultValue[i]}
           >
             {optionsArr.map((option) => (
               <option key={option}>{option}</option>
