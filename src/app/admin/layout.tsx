@@ -7,12 +7,32 @@ import { Fragment } from "react";
 import styled from "styled-components";
 import { MAX_SITE_WIDTH } from "@styles/variables";
 import Link from "next/link";
+import { Press_Start_2P } from "next/font/google";
 
 const Main = styled.main`
   ${flexColumnCenter};
   margin: 0 auto;
   max-width: ${MAX_SITE_WIDTH};
   width: 100%;
+`;
+
+const pressStart = Press_Start_2P({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const Title = styled.div`
+  ${flexColumnCenter};
+  // https://codepen.io/albpara/pen/JjRarO
+  // (another option: https://codepen.io/robdimarzo/pen/eYWmxKr)
+  box-shadow:
+    6px 0 white,
+    -6px 0 white,
+    0 -6px white,
+    0 6px white;
+  padding: 1rem;
+  margin: 1rem;
 `;
 
 // TODO: refactor and add links
@@ -51,7 +71,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <>
       <header css={flexColumnCenter}>
         <Nav />
-        {generateHeader(pathname)}
+        <Title className={pressStart.className}>
+          {generateHeader(pathname)}
+        </Title>
       </header>
       <Main>
         {children}

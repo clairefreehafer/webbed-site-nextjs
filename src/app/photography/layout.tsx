@@ -9,6 +9,13 @@ import { MAX_SITE_WIDTH } from "@styles/variables";
 import { usePathname } from "next/navigation";
 import React, { Fragment } from "react";
 import styled, { ThemeProvider } from "styled-components";
+import { Love_Ya_Like_A_Sister } from "next/font/google";
+
+const loveYaLikeASister = Love_Ya_Like_A_Sister({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 const Main = styled.main`
   ${paperBackground()}
@@ -20,6 +27,16 @@ const Main = styled.main`
   & > p {
     margin-bottom: calc(${PAPER_LINE_HEIGHT} + 1px);
   }
+`;
+
+const Title = styled.div`
+  ${flexColumnCenter};
+  // https://codepen.io/mp/pen/kBEeKw
+  // (another option: https://codepen.io/tmrDevelops/pen/NPXodB)
+  border-width: 3px 4px 3px 5px;
+  border-radius:95% 4% 92% 5%/4% 95% 6% 95%;
+  border: solid white;
+  padding: 1rem;
 `;
 
 // TODO: refactor
@@ -57,7 +74,9 @@ export default function PhotographyLayout({ children }:
       <DefaultThemeRoot borderWidth="2px">
         <header css={flexColumnCenter}>
           <Nav />
-          {generateHeader(pathname)}
+          <Title className={loveYaLikeASister.className}>
+            {generateHeader(pathname)}
+          </Title>
         </header>
         <Main>
           {children}
