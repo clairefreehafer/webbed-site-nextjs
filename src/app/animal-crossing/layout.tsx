@@ -6,7 +6,7 @@ import { flexColumnCenter } from "@styles/layout";
 import { MAX_SITE_WIDTH } from "@styles/variables";
 import styled, { ThemeProvider } from "styled-components";
 import { AnimalCrossingThemeRoot, animalCrossingTheme } from "@styles/animal-crossing/theme";
-import { fotSeuratProB } from "@fonts/animal-crossing/fonts";
+import { fotSeuratProB } from "@fonts/animal-crossing";
 
 const Header = styled.header`
   ${flexColumnCenter};

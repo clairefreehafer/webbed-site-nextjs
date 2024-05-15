@@ -1,6 +1,7 @@
 "use client";
 
 import Nav from "@components/nav";
+import { loveYaLikeASister } from "@fonts";
 import DefaultThemeRoot from "@styles/default/root";
 import { flexColumnCenter } from "@styles/layout";
 import { PAPER_LINE_HEIGHT, paperBackground } from "@styles/mixins";
@@ -9,13 +10,6 @@ import { MAX_SITE_WIDTH } from "@styles/variables";
 import { usePathname } from "next/navigation";
 import React, { Fragment } from "react";
 import styled, { ThemeProvider } from "styled-components";
-import { Love_Ya_Like_A_Sister } from "next/font/google";
-
-const loveYaLikeASister = Love_Ya_Like_A_Sister({
-  weight: "400",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 const Main = styled.main`
   ${paperBackground()}

@@ -1,6 +1,6 @@
 "use client";
 
-import { fotSeuratProB } from "@fonts/animal-crossing/fonts";
+import { fotSeuratProB } from "@fonts/animal-crossing";
 import type { Photo } from "@prisma/client";
 import { AnimalCrossingThemeRoot, textBackground } from "@styles/animal-crossing/theme";
 import { fullScreen } from "@styles/layout";

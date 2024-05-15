@@ -1,13 +1,6 @@
+import { finkHeavy } from "@fonts/animal-crossing";
 import { CSSProperties } from "react";
 import { css } from "styled-components";
-import localFont from "next/font/local";
-
-const finkHeavy = localFont({
-  src: [
-    { path: "../../fonts/animal-crossing/fink-heavy.woff2" },
-    { path: "../../fonts/animal-crossing/fink-heavy.woff" }
-  ]
-});
 
 export const SVG_HEIGHT = "70px";
 
