@@ -24,6 +24,7 @@ const Nav = styled.nav`
 
 const Ul = styled.ul`
   display: flex;
+  list-style: none;
   justify-content: center;
 `;
 
@@ -70,7 +71,7 @@ export default function Navigation({ navLinks = defaultNavLinks }) {
     <Nav>
       <Ul>
         {navLinks.map((link: NavLink) => (
-          <Fragment key={link.pathname}>
+          <li key={link.pathname}>
             {link.image && <img src={link.image} alt="" />}
             <StyledLink
               href={link.pathname}
@@ -78,12 +79,14 @@ export default function Navigation({ navLinks = defaultNavLinks }) {
             >
               {link.name}
             </StyledLink>
-          </Fragment>
+          </li>
         ))}
         {process.env.NODE_ENV === "development" && (
-          <StyledLink href="/admin" $isActive={pathname.includes("admin")}>
-            admin
-          </StyledLink>
+          <li>
+            <StyledLink href="/admin" $isActive={pathname.includes("admin")}>
+              admin
+            </StyledLink>
+          </li>
         )}
       </Ul>
     </Nav>

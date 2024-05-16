@@ -3,11 +3,10 @@
 import { usePathname } from "next/navigation";
 import Nav from "@components/nav";
 import { flexColumnCenter } from "@styles/layout";
-import { Fragment } from "react";
 import styled from "styled-components";
 import { MAX_SITE_WIDTH } from "@styles/variables";
-import Link from "next/link";
 import { pressStart2P } from "@fonts";
+import generateTitle from "@components/title";
 
 const Main = styled.main`
   ${flexColumnCenter};
@@ -27,36 +26,21 @@ const Title = styled.div`
     0 6px white;
   padding: 1rem;
   margin: 1rem;
-`;
 
-// TODO: refactor and add links
-function generateHeader(pathname: string[]) {
-  return pathname.map((slug, idx) => {
-    if (idx === 0) {
-      return <h1 key={slug} css={{ margin: "0.5rem auto" }}>claire freehafer</h1>
-    }
-    if (idx === 1) {
-      return (
-        <Fragment key={slug}>
-          <p>▽</p>
-          <h2 css={{ margin: "0 auto 0.5rem" }}>
-            <Link href={`/${slug}`}>{slug}</Link>
-          </h2>
-        </Fragment>
-      );
-    }
-    if (idx === 2) {
-      return (
-        <Fragment key={slug}>
-          <p css={{ fontSize: "0.75rem" }}>▽</p>
-          <h3 css={{ margin: "0.2rem auto" }}>
-            <Link href={`/admin/${slug}`}>{slug}</Link>
-          </h3>
-        </Fragment>
-      )
-    }
-  });
-}
+  & h1, h2, h3 {
+    margin: 0 auto 0.5rem;
+  }
+
+  & .separator-1 {
+    font-size: 0.75rem;
+    margin: 0.25rem auto;
+  }
+
+  & .separator-2 {
+    font-size: 0.5rem;
+    margin: 0.25rem auto;
+  }
+`;
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname().split("/");
@@ -66,7 +50,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <header css={flexColumnCenter}>
         <Nav />
         <Title className={pressStart2P.className}>
-          {generateHeader(pathname)}
+          {generateTitle(pathname, "▼")}
         </Title>
       </header>
       <Main>

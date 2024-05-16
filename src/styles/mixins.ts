@@ -28,7 +28,7 @@ const PAPER_RED_LINE = "rgba(255, 0, 0, 0.8)";
 const PAPER_BLUE_LINE = "rgba(0, 255, 255, 0.8)";
 export const PAPER_LINE_HEIGHT = "1.5rem";
 const RED_LINE_PADDING = "3rem";
-const PAPER_TOP_PADDING = `calc(2 * ${PAPER_LINE_HEIGHT} + 1px)`;
+const PAPER_TOP_PADDING = `calc(2 * ${PAPER_LINE_HEIGHT} + 5px)`;
 
 export function paperBackground() {
   return css`
@@ -41,8 +41,8 @@ export function paperBackground() {
       ),
       linear-gradient(
         to bottom,
-        white 0 2rem,
-        transparent 2rem
+        white 0 4rem,
+        transparent 4rem
       ),
       repeating-linear-gradient(
         to bottom,
@@ -51,7 +51,7 @@ export function paperBackground() {
         white calc(${PAPER_LINE_HEIGHT} + 1px)
       );
     padding: 
-      ${PAPER_TOP_PADDING}
+      ${PAPER_TOP_PADDING} 
       1rem
       ${PAPER_LINE_HEIGHT}
       calc(${RED_LINE_PADDING} + 0.5rem);
