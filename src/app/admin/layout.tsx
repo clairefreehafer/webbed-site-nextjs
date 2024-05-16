@@ -27,10 +27,11 @@ const Title = styled.div`
   padding: 1rem;
   margin: 1rem;
 
-  & h1, h2, h3 {
+  & h1, h2, h3, h4 {
     margin: 0 auto 0.5rem;
   }
 
+  /* TODO: do this programmatically */
   & .separator-1 {
     font-size: 0.75rem;
     margin: 0.25rem auto;
@@ -38,6 +39,11 @@ const Title = styled.div`
 
   & .separator-2 {
     font-size: 0.5rem;
+    margin: 0.25rem auto;
+  }
+
+  & .separator-3 {
+    font-size: 0.3rem;
     margin: 0.25rem auto;
   }
 `;

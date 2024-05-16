@@ -19,14 +19,15 @@ const Main = styled.main`
   max-width: ${MAX_SITE_WIDTH};
   opacity: 0.85;
 
-  & > h3 {
+  // TODO: do this with classes
+  & h3 {
     font-size: 1.5rem;
     line-height: 1.5rem;
     font-family: var(--font-love-ya-like-a-sister);
     margin-bottom: 2px;
   }
 
-  & > p {
+  & p {
     font-family: var(--font-pangolin);
     font-size: 1.1rem;
     line-height: 1.5rem;

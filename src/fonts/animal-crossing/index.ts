@@ -4,7 +4,7 @@ export const finkHeavy = localFont({
   src: [
     { path: "../../fonts/animal-crossing/fink-heavy.woff2" },
     { path: "../../fonts/animal-crossing/fink-heavy.woff" }
-  ]
+  ],
 });
 
 export const fotSeuratProB = localFont({
@@ -12,5 +12,6 @@ export const fotSeuratProB = localFont({
     { path: "../../fonts/animal-crossing/fot-seurat-pro-b.woff2" },
     { path: "../../fonts/animal-crossing/fot-seurat-pro-b.woff" },
     { path: "../../fonts/animal-crossing/fot-seurat-pro-b.otf" }
-  ]
+  ],
+  fallback: ["Arial", "sans-serif"]
 });

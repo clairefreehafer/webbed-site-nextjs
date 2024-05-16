@@ -13,5 +13,5 @@ type SmugMugPhotoSizes =
   "X5";
 
 export function sizePhoto(url: Photo["url"], size: SmugMugPhotoSizes) {
-  return url?.replaceAll("#size#", size);
+  return url?.replaceAll("#size#", size) || "";
 }
