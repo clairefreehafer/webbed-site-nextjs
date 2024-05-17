@@ -2,8 +2,10 @@
 
 import CoverImage from "@components/cover-image"
 import { Album, Photo } from "@prisma/client"
+import { slugName } from "@utils/albums";
 import { sizePhoto } from "@utils/photo"
 import Link from "next/link"
+import { usePathname } from "next/navigation";
 import styled from "styled-components"
 
 const Ul = styled.ul`
@@ -12,6 +14,10 @@ const Ul = styled.ul`
   grid-template-columns: 1fr 1fr;
   list-style: none;
   text-align: center;
+
+  @media screen and (max-width: 500px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const PolaroidBorder = styled.li`
@@ -33,14 +39,16 @@ const AlbumName = styled.h3`
   margin: 0.5rem auto;
 `;
 
-export default function AlbumGrid(
+export default function PolaroidGrid(
   { albums }: { albums: (Album & { coverPhoto: Photo | null })[] }
 ) {
+  const pathname = usePathname();
+
   return (
     <Ul>
       {albums.map((album) => (
         <PolaroidBorder key={album.id}>
-          <Link href={`/photography/albums/${album.name.replaceAll(" ", "-")}`}>
+          <Link href={`${pathname}/${slugName(album.name)}`}>
             <CoverImage src={sizePhoto(album.coverPhoto?.url || "", "L")} aspectRatio="1 / 1" />
             <ImageShadow />
             <AlbumName>

@@ -32,9 +32,10 @@ export function slugName(album: string) {
 
 const prisma = new PrismaClient();
 
-export const getAlbums = cache(async (section: string) => {
+export const getAlbums = cache(async (section: string[]) => {
   const albums = await prisma.album.findMany({
-    where: { section: { has: section }}
+    where: { section: { hasEvery: section }},
+    include: { coverPhoto: true }
   });
 
   return albums;

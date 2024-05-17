@@ -5,7 +5,7 @@ import { getAlbums, slugName } from "@utils/albums";
 const prisma = new PrismaClient();
 
 export async function generateStaticParams() {
-  const albums = await getAlbums("new-horizons");
+  const albums = await getAlbums(["new-horizons"]);
 
   return albums.map((album) => ({
     section: album.section[album.section.length - 1]

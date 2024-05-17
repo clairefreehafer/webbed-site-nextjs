@@ -1,5 +1,6 @@
 import { deleteAlbum } from "@actions/album";
 import DeleteButton from "@components/admin/delete-button";
+import NumberOfPhotos from "@components/admin/number-of-photos";
 import AdminTable from "@components/admin/table";
 import { PrismaClient } from "@prisma/client";
 import { slugName } from "@utils/albums";
@@ -11,7 +12,6 @@ async function getAlbums() {
     const prisma = new PrismaClient();
 
     const albums = await prisma.album.findMany({
-      where: { type: "default" },
       include: { photos: true, coverPhoto: true },
       orderBy: { date: { sort: "desc", nulls: "first" } }
     });
@@ -57,7 +57,7 @@ export default async function AdminReadAlbumPage() {
                 <td>{album.section.join(" → ")}</td>
                 <td>{album.date?.toString()}</td>
                 <td>{album.type}</td>
-                <td>{album.photos?.length}</td>
+                <NumberOfPhotos album={album} />
                 <td>
                   <Link href={`/admin/albums/${slugName(album.name)}`}>
                     edit

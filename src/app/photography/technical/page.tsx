@@ -1,16 +1,10 @@
-import { getAlbums } from "../smugmug";
-import { Node, SmugMugKeys } from "../types";
+import { getAlbums } from "@utils/albums";
+import AlbumGrid from "@components/photography/polaroid-grid";
 
 export default async function Technical() {
-  const { Response } = await getAlbums(SmugMugKeys.Technical);
+  const albums = await getAlbums(["photography", "technical"])
 
   return (
-    <ul>
-      {Response.Node.map((node: Node) => (
-        <li key={node.NodeID}>
-          <h3>{node.Name}</h3>
-        </li>
-      ))}
-    </ul>
+    <AlbumGrid albums={albums} />
   )
 }
