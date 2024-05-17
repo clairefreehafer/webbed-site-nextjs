@@ -1,14 +1,15 @@
 "use client";
 
 import AdminForm, { Input, Label } from "@components/admin/form";
-import { Album } from "@prisma/client";
+import { Album, Photo } from "@prisma/client";
 import { AlbumTypes, displayName } from "@utils/albums";
 import { AlbumFormState, updateAlbum } from "@actions/album";
 import SectionSelect from "@components/admin/section-select";
 import { useState } from "react";
+import SelectCoverPhoto from "@components/photography/select-cover-photo";
 
 export default function UpdateAlbumForm(
-  { albumData, sections }: { albumData: Album, sections: string[][] }) {
+  { albumData, sections }: { albumData: Album & { photos: Photo[] }, sections: string[][] }) {
   const [autoDateGeneration, setAutoDateGeneration] = useState(true);
 
   if (!albumData) {
@@ -20,7 +21,7 @@ export default function UpdateAlbumForm(
     message: "",
   };
 
-  const { id, name, section, date, type } = albumData;
+  const { id, name, section, date, type, coverKey, photos } = albumData;
 
   return (
     <AdminForm action={updateAlbum} initialState={initialState}>
@@ -68,6 +69,11 @@ export default function UpdateAlbumForm(
           onChange={(e) => setAutoDateGeneration(e.target.checked)}
         />
       </Label>
+
+      <SelectCoverPhoto
+        coverKey={coverKey}
+        albumPhotos={photos}
+      />
 
       {/* <Label>
         add photos (by smugmugkey?)

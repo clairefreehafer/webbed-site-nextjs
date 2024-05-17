@@ -34,14 +34,14 @@ const AlbumName = styled.h3`
 `;
 
 export default function AlbumGrid(
-  { albums }: { albums: (Album & { photos: Photo[] })[] }
+  { albums }: { albums: (Album & { coverPhoto: Photo | null })[] }
 ) {
   return (
     <Ul>
       {albums.map((album) => (
         <PolaroidBorder key={album.id}>
           <Link href={`/photography/albums/${album.name.replaceAll(" ", "-")}`}>
-            <CoverImage src={sizePhoto(album.photos[0].url, "L")} aspectRatio="1 / 1" />
+            <CoverImage src={sizePhoto(album.coverPhoto?.url || "", "L")} aspectRatio="1 / 1" />
             <ImageShadow />
             <AlbumName>
               {album.name}

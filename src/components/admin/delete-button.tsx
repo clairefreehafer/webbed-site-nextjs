@@ -14,7 +14,7 @@ function Button() {
 
 export default function DeleteButton(
   { serverAction, value }:
-  { serverAction: (formData: FormData) => void, value: string }
+  { serverAction: (formData: FormData) => void, value: string | number }
 ) {
   function action(formData: FormData) {
     if (confirm(`are you sure you want to delete "${value}"?`)) {

@@ -1,6 +1,7 @@
 "use server";
 
 import { Album, PrismaClient } from "@prisma/client";
+import { AlbumTypes } from "@utils/albums";
 
 export type AlbumFormState = Album & { message?: string };
 
@@ -12,6 +13,7 @@ export async function createAlbum(
 ) {
   const album = formData.get("album") as string;
   const section = formData.get("section") as string;
+  const type = formData.get("type") as AlbumTypes;
 
   try {
     const existingAlbum = await prisma.album.findUnique({
@@ -22,14 +24,15 @@ export async function createAlbum(
       throw new Error(`an album called "${album}" already exists.`);
     }
 
-    await prisma.album.create({ data: {
+    const createdAlbum = await prisma.album.create({ data: {
       name: album,
       section: section.split(","),
+      type,
     } });
 
     return {
-      name: album,
-      message: `👍 album ${album} added`
+      ...createdAlbum,
+      message: `👍 ${type} album ${album} added in ${section}`
     }
   } catch (error) {
     console.error(`👎 ${(error as Error).message}`);
@@ -48,6 +51,7 @@ export async function updateAlbum(
   const section = formData.get("section") as string;
   const date = formData.get("date") as string;
   const generateDateAutomatically = formData.get("generateDateAutomatically");
+  const coverKey = formData.get("coverKey") as string;
 
   let data: Partial<Album> = {};
 
@@ -94,6 +98,11 @@ export async function updateAlbum(
       data.section = sectionFromDropdowns;
     }
 
+    if (prevState.coverKey !== coverKey) {
+      console.log(`👉 changing coverKey from ${prevState.coverKey} to ${coverKey}...`);
+      data.coverKey = coverKey;
+    }
+
     const updatedAlbum = await prisma.album.update({
       where: { name },
       data,
@@ -108,6 +117,27 @@ export async function updateAlbum(
     return {
       ...prevState,
       ...data,
+      message: `👎 ${(error as Error).message}`
+    }
+  }
+}
+
+export async function deleteAlbum(formData: FormData) {
+  const id = parseInt(formData.get("value") as string);
+  console.log(formData)
+
+  try {
+    const deletedAlbum = await prisma.album.delete({
+      where: { id }
+    });
+
+    return {
+      ...deletedAlbum,
+      message: `👍 album deleted successfully.`
+    }
+  } catch (error) {
+    console.error(`👎 ${error}`);
+    return {
       message: `👎 ${(error as Error).message}`
     }
   }

@@ -23,8 +23,9 @@ model Photo {
   xmpPath     String    @db.VarChar(255) @unique @default("")
   altText     String?   @db.VarChar(255)
   tags        Tag[]
-  album       Album?    @relation(fields: albumName, references: [name])
+  album       Album?    @relation("albumPhotos", fields: albumName, references: [name])
   albumName   String?
+  covers      Album[]   @relation("coverPhoto")
 }
 
 model Tag {
@@ -35,10 +36,12 @@ model Tag {
 }
 
 model Album {
-  id      Int       @id @default(autoincrement())
-  name    String    @db.VarChar(255) @unique
-  date    DateTime? @db.Timestamp(6)
-  section String[]
-  type    String    @db.VarChar(255) @default("default")
-  photos  Photo[]
+  id         Int       @id @default(autoincrement())
+  name       String    @db.VarChar(255) @unique
+  date       DateTime? @db.Timestamp(6)
+  section    String[]
+  type       String    @db.VarChar(255) @default("default")
+  photos     Photo[]   @relation("albumPhotos")
+  coverPhoto Photo?    @relation("coverPhoto", fields: coverKey, references: [smugMugKey])
+  coverKey   String?
 }
