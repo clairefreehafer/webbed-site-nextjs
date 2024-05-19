@@ -1,14 +1,16 @@
 import DeleteButton from "@components/admin/delete-button";
 import AdminTable from "@components/admin/table";
-import { PrismaClient } from "@prisma/client"
 import { slugName } from "@utils/albums";
 import Link from "next/link";
 import { deleteTag } from "@actions/tag";
-
-const prisma = new PrismaClient();
+import { getAllTags } from "@utils/prisma";
 
 export default async function AdminTagPage() {
-  const tags = await prisma.tag.findMany();
+  const tags = await getAllTags();
+
+  if (typeof tags === "string") {
+    return <>❌ problem fetching tags. {tags}</>
+  }
 
   return (
     <>

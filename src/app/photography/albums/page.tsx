@@ -1,18 +1,15 @@
-import { PrismaClient } from "@prisma/client";
-import AlbumGrid from "@components/photography/polaroid-grid";
+import PolaroidGrid from "@components/photography/polaroid-grid";
+import { getAlbumGridData } from "@utils/prisma";
 
 export default async function Explore() {
-  const prisma = new PrismaClient();
   // TODO: sort by date
-  const albums = await prisma.album.findMany({
-    where: {
-      section: { has: "photography" },
-      type: "default"
-    },
-    include: { coverPhoto: true }
-  });
+  const albums = await getAlbumGridData(["photography", "albums"]);
+
+  if (typeof albums === "string") {
+    return <p>👎 {albums}</p>
+  }
 
   return (
-    <AlbumGrid albums={albums} />
+    <PolaroidGrid albums={albums} />
   )
 }

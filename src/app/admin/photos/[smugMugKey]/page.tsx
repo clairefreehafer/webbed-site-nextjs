@@ -1,16 +1,13 @@
-import { PrismaClient } from "@prisma/client";
 import UpdatePhotoForm from "./form";
 import AlbumSelect from "@components/admin/album-select";
 import { sizePhoto } from "@utils/photo";
+import { getPhoto } from "@utils/prisma";
 
 export default async function Page({ params }: { params: { smugMugKey: string }}) {
-  const prisma = new PrismaClient();
-  const photoData = await prisma.photo.findUnique({
-    where: { smugMugKey: params.smugMugKey }
-  });
+  const photoData = await getPhoto(params.smugMugKey);
 
-  if (!photoData) {
-    return "❌ no photo data available";
+  if (!photoData || typeof photoData === "string") {
+    return `❌ no photo data available. ${photoData && photoData}`;
   }
 
   return (

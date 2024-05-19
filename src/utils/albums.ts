@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
 import { cache } from "react";
+import { getSections } from "./prisma";
 
 export enum AlbumTypes {
   Default = "default",
@@ -30,30 +30,13 @@ export function slugName(album: string) {
   return album;
 }
 
-const prisma = new PrismaClient();
-
-export const getAlbums = cache(async (section: string[]) => {
-  const albums = await prisma.album.findMany({
-    where: { section: { hasEvery: section }},
-    include: { coverPhoto: true }
-  });
-
-  return albums;
-});
-
-export const getSections = cache(
+export const getSectionsArr = cache(
   async (section?: string): Promise<string[][]> => {
-    const sections = await prisma.album.findMany({
-      distinct: "section",
-      select: {
-        section: true
-      },
-      ...(section && {
-        where: {
-          section: { has: section }
-        }
-      })
-    });
+    const sections = await getSections(section);
+
+    if (typeof sections === "string") {
+      return [];
+    }
 
     return sections.map((obj) => (
       obj.section

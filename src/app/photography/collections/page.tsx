@@ -1,16 +1,12 @@
-import { PrismaClient } from "@prisma/client";
 import AlbumGrid from "@components/photography/polaroid-grid";
-
-const prisma = new PrismaClient();
+import { getAlbumGridData } from "@utils/prisma";
 
 export default async function Collections() {
-  const albums = await prisma.album.findMany({
-    where: {
-      section: { hasEvery: ["photography", "collections"] },
-      type: "tag"
-    },
-    include: { coverPhoto: true }
-  });
+  const albums = await getAlbumGridData(["photography", "collections"]);
+
+  if (typeof albums === "string") {
+    return <>❌ there was a problem getting the list of collections. {albums}</>
+  }
 
   return (
     <AlbumGrid albums={albums} />

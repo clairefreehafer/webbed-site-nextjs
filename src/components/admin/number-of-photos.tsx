@@ -1,14 +1,13 @@
-import { Album, Photo, PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { Album, Photo } from "@prisma/client";
+import { countPhotos } from "@utils/prisma";
 
 export default async function NumberOfPhotos(
   { album }: { album: Album & { photos: Photo[] }}
 ) {
-  let numberOfPhotos = album.photos?.length || 0;
+  let numberOfPhotos = album.photos?.length || "0";
 
   if (album.type === "tag") {
-    numberOfPhotos = await prisma.photo.count({
+    numberOfPhotos = await countPhotos({
       where: { tags: { some: { tag: album.name }}}
     });
   }

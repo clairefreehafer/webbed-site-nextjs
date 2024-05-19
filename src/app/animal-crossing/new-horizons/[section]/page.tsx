@@ -1,11 +1,13 @@
-import { PrismaClient } from "@prisma/client"
 import Link from "next/link";
-import { getAlbums, slugName } from "@utils/albums";
-
-const prisma = new PrismaClient();
+import { slugName } from "@utils/albums";
+import { getAlbumGridData, getStaticParams } from "@utils/prisma";
 
 export async function generateStaticParams() {
-  const albums = await getAlbums(["new-horizons"]);
+  const albums = await getStaticParams("new-horizons");
+
+  if (typeof albums === "string") {
+    return [];
+  }
 
   return albums.map((album) => ({
     section: album.section[album.section.length - 1]
@@ -18,9 +20,11 @@ export default async function Section(
   { params }: { params: { section: string }}
 ) {
   const { section } = params;
-  const albums = await prisma.album.findMany({
-    where: { section: { has: section }}
-  });
+  const albums = await getAlbumGridData([section]);
+
+  if (typeof albums === "string") {
+    return <>❌ there was a problem fetching the list. {albums}</>
+  }
 
   return (
     <>

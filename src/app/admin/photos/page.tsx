@@ -1,28 +1,12 @@
-import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
 import { Fragment } from "react";
 import AdminTable from "@components/admin/table";
 import DeleteButton from "@components/admin/delete-button";
 import { deletePhoto } from "@actions/photo";
-
-async function getPhotos() {
-  try {
-    const prisma = new PrismaClient();
-
-    const photos = await prisma.photo.findMany({
-      include: { album: true, tags: true },
-      orderBy: { captureDate: { sort: "desc", nulls: "first" } }
-    });
-
-    return photos;
-  } catch (error) {
-    console.error(`👎 ${(error as Error).message}`);
-    return `👎 ${(error as Error).message}`;
-  }
-}
+import { getAdminPhotos } from "@utils/prisma";
 
 export default async function AdminPhotoRead() {
-  const photos = await getPhotos();
+  const photos = await getAdminPhotos();
 
   return (
     <>

@@ -1,7 +1,6 @@
 "use client";
 
 import CoverImage from "@components/cover-image"
-import { Album, Photo } from "@prisma/client"
 import { slugName } from "@utils/albums";
 import { sizePhoto } from "@utils/photo"
 import Link from "next/link"
@@ -39,8 +38,16 @@ const AlbumName = styled.h3`
   margin: 0.5rem auto;
 `;
 
+type PolaroidGridAlbum = {
+  id: number;
+  name: string;
+  coverPhoto: {
+    url: string | null;
+  } | null,
+}
+
 export default function PolaroidGrid(
-  { albums }: { albums: (Album & { coverPhoto: Photo | null })[] }
+  { albums }: { albums: PolaroidGridAlbum[] }
 ) {
   const pathname = usePathname();
 

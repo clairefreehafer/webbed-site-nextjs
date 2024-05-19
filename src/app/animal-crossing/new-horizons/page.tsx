@@ -1,4 +1,4 @@
-import { getSections } from "@utils/albums";
+import { getSectionsArr } from "@utils/albums";
 import Link from "next/link";
 
 // for future reference
@@ -11,7 +11,7 @@ import Link from "next/link";
 // ];
 
 export default async function NewHorizonsPage() {
-  const sections = await getSections("new-horizons");
+  const sections = await getSectionsArr("new-horizons");
   
   return (
     <ul className="grid">

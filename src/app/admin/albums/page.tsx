@@ -2,29 +2,13 @@ import { deleteAlbum } from "@actions/album";
 import DeleteButton from "@components/admin/delete-button";
 import NumberOfPhotos from "@components/admin/number-of-photos";
 import AdminTable from "@components/admin/table";
-import { PrismaClient } from "@prisma/client";
 import { slugName } from "@utils/albums";
 import { sizePhoto } from "@utils/photo";
+import { getAdminAlbums } from "@utils/prisma";
 import Link from "next/link";
 
-async function getAlbums() {
-  try {
-    const prisma = new PrismaClient();
-
-    const albums = await prisma.album.findMany({
-      include: { photos: true, coverPhoto: true },
-      orderBy: { date: { sort: "desc", nulls: "first" } }
-    });
-
-    return albums;
-  } catch (error) {
-    console.error(`👎 ${(error as Error).message}`);
-    return `👎 ${(error as Error).message}`;
-  }
-}
-
 export default async function AdminReadAlbumPage() {
-  const albums = await getAlbums();
+  const albums = await getAdminAlbums();
 
   return (
     <>

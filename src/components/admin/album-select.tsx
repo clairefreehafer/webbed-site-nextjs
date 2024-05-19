@@ -1,25 +1,9 @@
-import { PrismaClient } from "@prisma/client";
-
-async function getAlbumList() {
-  try {
-    const prisma = new PrismaClient();
-
-    const albums = await prisma.album.findMany({
-      orderBy: { date: { sort: "desc", nulls: "first" } },
-      select: { name: true },
-    });
-
-    return albums;
-  } catch (error) {
-    console.error(`👎 ${(error as Error).message}`);
-    return `👎 ${(error as Error).message}`;
-  }
-}
+import { getAlbumOptions } from "@utils/prisma";
 
 export default async function AlbumSelect(
   { defaultValue = null }: { defaultValue?: string | null }
 ) {
-  const albums = await getAlbumList();
+  const albums = await getAlbumOptions();
 
   if (typeof albums === "string") {
     return <p>{albums}</p>;

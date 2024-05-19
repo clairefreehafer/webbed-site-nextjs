@@ -1,22 +1,17 @@
-import { PrismaClient } from "@prisma/client";
 import UpdateAlbumForm from "./form";
-import { displayName, getSections } from "@utils/albums";
-
-const prisma = new PrismaClient();
+import { displayName, getSectionsArr } from "@utils/albums";
+import { getAlbum } from "@utils/prisma";
 
 export default async function Page(
   { params }: { params: { album: string }}
 ) {
-  const albumData = await prisma.album.findUnique({
-    where: { name: displayName(params.album) },
-    include: { coverPhoto: true, photos: true },
-  });
+  const albumData = await getAlbum(displayName(params.album))
 
-  if (!albumData) {
-    return `❌ cannot find album ${params.album}`;
+  if (!albumData || typeof albumData === "string") {
+    return `❌ cannot find album ${params.album}. ${albumData && albumData}`;
   }
 
-  const sections = await getSections();
+  const sections = await getSectionsArr();
 
   return (
     <UpdateAlbumForm albumData={albumData} sections={sections} />
