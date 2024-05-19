@@ -24,6 +24,7 @@ const Title = styled.div`
     -6px 0 white,
     0 -6px white,
     0 6px white;
+  font-family: var(--font-press-start-2p), sans-serif;
   padding: 1rem;
   margin: 1rem;
 
@@ -55,7 +56,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <>
       <header css={flexColumnCenter}>
         <Nav />
-        <Title className={pressStart2P.className}>
+        <Title className={pressStart2P.variable}>
           {generateTitle(pathname, "▼")}
         </Title>
       </header>

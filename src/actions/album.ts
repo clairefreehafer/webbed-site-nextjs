@@ -1,13 +1,14 @@
 "use server";
 
-import { Album, PrismaClient } from "@prisma/client";
+import { Album, Prisma, PrismaClient } from "@prisma/client";
 import { AlbumTypes } from "@utils/albums";
+import { createAlbum, getMostRecentPhotoDate, updateAlbum } from "@utils/prisma";
 
 export type AlbumFormState = Album & { message?: string };
 
 const prisma = new PrismaClient();
 
-export async function createAlbum(
+export async function addAlbum(
   _prevState: Partial<AlbumFormState>,
   formData: FormData
 ) {
@@ -16,34 +17,30 @@ export async function createAlbum(
   const type = formData.get("type") as AlbumTypes;
 
   try {
-    const existingAlbum = await prisma.album.findUnique({
-      where: { name: album }
-    });
-
-    if (existingAlbum) {
-      throw new Error(`an album called "${album}" already exists.`);
-    }
-
-    const createdAlbum = await prisma.album.create({ data: {
+    const createdAlbum = await createAlbum({ data: {
       name: album,
       section: section.split(","),
       type,
-    } });
+    }});
 
     return {
       ...createdAlbum,
       message: `👍 ${type} album ${album} added in ${section}`
     }
   } catch (error) {
-    console.error(`👎 ${(error as Error).message}`);
-    return {
-      name: album,
-      message: `👎 ${(error as Error).message}`
-    };
+    let message = `👎 ${(error as Error).message}`;
+
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === "P2002") {
+        message = `👎 an album called "${album}" already exists.`
+      }
+    }
+
+    return { message };
   }
 }
 
-export async function updateAlbum(
+export async function editAlbum(
   prevState: Partial<AlbumFormState>,
   formData: FormData
 ) {
@@ -57,16 +54,13 @@ export async function updateAlbum(
 
   try {
     if (generateDateAutomatically) {
-      const photosInAlbum = await prisma.photo.findMany({
-        where: { albumName: name },
-        orderBy: { captureDate: { sort: "desc" }}
-      });
+      const mostRecentCaptureDate = await getMostRecentPhotoDate(name);
 
-      if (!photosInAlbum?.length) {
+      if (!mostRecentCaptureDate) {
         throw new Error(`no photos in ${name} to generate date.`);
       }
 
-      const { captureDate } = photosInAlbum[0];
+      const { captureDate } = mostRecentCaptureDate;
 
       console.log(`👉 changing date automatically from ${prevState.date} to ${captureDate}...`);
       data.date = captureDate;
@@ -103,7 +97,7 @@ export async function updateAlbum(
       data.coverKey = coverKey;
     }
 
-    const updatedAlbum = await prisma.album.update({
+    const updatedAlbum = await updateAlbum({
       where: { name },
       data,
     });
@@ -113,10 +107,7 @@ export async function updateAlbum(
       message: `👍 ${name} updated successfully`
     }
   } catch (error) {
-    console.error(`👎 ${(error as Error).message}`);
     return {
-      ...prevState,
-      ...data,
       message: `👎 ${(error as Error).message}`
     }
   }

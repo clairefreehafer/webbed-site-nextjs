@@ -1,7 +1,7 @@
 "use client";
 
 import AdminForm, { Input, Label } from "@components/admin/form";
-import { AlbumFormState, createAlbum } from "@actions/album";
+import { AlbumFormState, addAlbum } from "@actions/album";
 import SectionSelect from "@components/admin/section-select";
 import { AlbumTypes } from "@utils/albums";
 
@@ -12,7 +12,7 @@ export default function NewAlbumForm(
 ) {
 
   return (
-    <AdminForm action={createAlbum} initialState={initialState}>
+    <AdminForm action={addAlbum} initialState={initialState}>
       <Label>
         name
         <Input type="text" name="album" required />

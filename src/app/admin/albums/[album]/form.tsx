@@ -3,32 +3,25 @@
 import AdminForm, { Input, Label } from "@components/admin/form";
 import { Album, Photo } from "@prisma/client";
 import { AlbumTypes, displayName } from "@utils/albums";
-import { AlbumFormState, updateAlbum } from "@actions/album";
+import { AlbumFormState, editAlbum } from "@actions/album";
 import SectionSelect from "@components/admin/section-select";
 import { useState } from "react";
 import SelectCoverPhoto from "@components/photography/select-cover-photo";
 
 export default function UpdateAlbumForm(
-  { albumData, sections }: { albumData: Album & { photos: Photo[] }, sections: string[][] }) {
-  const [autoDateGeneration, setAutoDateGeneration] = useState(true);
-
-  if (!albumData) {
-    return <>❌ missing album data!</>;
-  }
+  { albumData, albumPhotos, sections }: { albumData: Album, albumPhotos: Photo[], sections: string[][] }) {
+  const [autoDateGeneration, setAutoDateGeneration] = useState(!!albumPhotos.length);
 
   const initialState: AlbumFormState = {
     ...albumData,
     message: "",
   };
 
-  const { id, name, section, date, type, coverKey, photos } = albumData;
+  const { id, name, section, date, type, coverKey } = albumData;
 
   return (
-    <AdminForm action={updateAlbum} initialState={initialState}>
-      <Label>
-        id
-        <Input type="number" name="id" defaultValue={id} readOnly />
-      </Label>
+    <AdminForm action={editAlbum} initialState={initialState}>
+      <input type="hidden" name="id" defaultValue={id} readOnly />
 
       <Label>
         name
@@ -72,7 +65,7 @@ export default function UpdateAlbumForm(
 
       <SelectCoverPhoto
         coverKey={coverKey}
-        albumPhotos={photos}
+        albumPhotos={albumPhotos}
       />
 
       {/* <Label>

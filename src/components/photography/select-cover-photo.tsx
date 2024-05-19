@@ -35,17 +35,21 @@ export default function SelectCoverPhoto({
   return (
     <Fieldset>
       <legend>cover photo</legend>
-      {albumPhotos.map((photo) => (
-        <Label key={photo.smugMugKey}>
-          <Radio
-            type="radio"
-            name="coverKey"
-            value={photo.smugMugKey}
-            defaultChecked={coverKey === photo.smugMugKey}
-          />
-          <img src={sizePhoto(photo.url, "Th")} alt="" />
-        </Label>
-      ))}
+      {albumPhotos.length === 0 ? (
+        <>no photos in album</>
+      ) : (
+        albumPhotos.map((photo) => (
+          <Label key={photo.smugMugKey}>
+            <Radio
+              type="radio"
+              name="coverKey"
+              value={photo.smugMugKey}
+              defaultChecked={coverKey === photo.smugMugKey}
+            />
+            <img src={sizePhoto(photo.url, "Th")} alt="" />
+          </Label>
+        ))
+      )}
     </Fieldset>
   )
 }

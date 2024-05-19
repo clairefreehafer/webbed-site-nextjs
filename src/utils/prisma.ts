@@ -11,7 +11,7 @@ function prismaWrapper<Args, Result>(prismaFunction: (args: Args) => Result) {
       return result;
     } catch (error) {
       console.error(`👎 ${error}`);
-      return (error as Error).message;
+      throw error;
     }
   });
 }
@@ -43,11 +43,27 @@ export const getAlbumGridData = cache(async (section: string[]) => (
 ));
 
 export const getAlbum = cache(async (albumName: string) => (
-  prismaWrapper(prisma.album.findUnique)({
+  prismaWrapper(prisma.album.findUniqueOrThrow)({
     where: { name: albumName },
     include: { photos: true, coverPhoto: true }
   })
 ));
+
+export const createAlbum = async (args: Prisma.AlbumCreateArgs) => (
+  prismaWrapper(prisma.album.create)(args)
+);
+
+export const updateAlbum = async (args: Prisma.AlbumUpdateArgs) => (
+  prismaWrapper(prisma.album.update)(args)
+);
+
+export const getMostRecentPhotoDate = async (albumName: string) => (
+  prismaWrapper(prisma.photo.findFirst)({
+    where: { albumName },
+    orderBy: { captureDate: { sort: "desc" }},
+    select: { captureDate: true }
+  })
+);
 
 export const getAlbumOptions = cache(async () => (
   prismaWrapper(prisma.album.findMany)({
@@ -91,12 +107,14 @@ export const getAllTags = cache(async () => (
   prismaWrapper(prisma.tag.findMany)({})
 ));
 
-export const getPhotosWithTag = cache(async (tag: string) => (
-  prismaWrapper(prisma.tag.findUnique)({
+export const getPhotosWithTag = cache(async (tag: string) => {
+  const { photos } = await prismaWrapper(prisma.tag.findUniqueOrThrow)({
     where: { tag },
     include: { photos: true }
   })
-));
+
+  return photos;
+});
 
 export const getTag = cache(async (tag: string) => (
   prismaWrapper(prisma.tag.findUnique)({
