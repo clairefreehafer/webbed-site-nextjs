@@ -13,13 +13,13 @@ export async function updateTag(
 ) {
   let data: Partial<TagFormState> = {};
   try {
-    const tag = formData.get("tag") as string;
+    const name = formData.get("tag") as string;
     const parent = formData.get("parent") as string;
 
-    data = { tag, parent };
+    data = { name, parentName: parent };
 
     await prisma.tag.update({
-      where: { tag },
+      where: { name },
       data
     })
     return {
@@ -36,13 +36,13 @@ export async function updateTag(
 }
 
 export async function deleteTag(formData: FormData) {
-  const tag = formData.get("value") as string;
+  const name = formData.get("value") as string;
   
-  console.log(`👉 deleting tag "${tag}"...`)
-  return await new Promise((resolve) => setTimeout(resolve, 5000));
-  // await prisma.tag.delete({
-  //   where: { tag }
-  // });
+  console.log(`👉 deleting tag "${name}"...`)
+  // return await new Promise((resolve) => setTimeout(resolve, 5000));
+  await prisma.tag.delete({
+    where: { name }
+  });
 
   // revalidatePath("/admin/tags");
 }

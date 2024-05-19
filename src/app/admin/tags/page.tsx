@@ -33,14 +33,14 @@ export default async function AdminTagPage() {
         <tbody>
           {tags.map((tag) => (
             <tr key={tag.id}>
-              <td>{tag.tag}</td>
-              <td>{tag.parent}</td>
+              <td>{tag.name}</td>
+              <td>{tag.parentName}</td>
               <td>x</td>
               <td>
-                <Link href={`/admin/tags/${slugName(tag.tag)}`}>📝</Link>
+                <Link href={`/admin/tags/${slugName(tag.name)}`}>📝</Link>
               </td>
               <td>
-                <DeleteButton serverAction={deleteTag} value={tag.tag} />
+                <DeleteButton serverAction={deleteTag} value={tag.name} />
               </td>
             </tr>
           ))}

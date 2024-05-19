@@ -6,6 +6,7 @@ import { sizePhoto } from "@utils/photo"
 import Link from "next/link"
 import { usePathname } from "next/navigation";
 import styled from "styled-components"
+import albumIcons from "./album-icons.json";
 
 const Ul = styled.ul`
   display: grid;
@@ -46,6 +47,12 @@ type PolaroidGridAlbum = {
   } | null,
 }
 
+// TODO: move to db
+function getLinkIcon(name: string) {
+  const linkIcon = (albumIcons as Record<string, string>)[name];
+  return linkIcon ? `${linkIcon} ` : null;
+}
+
 export default function PolaroidGrid(
   { albums }: { albums: PolaroidGridAlbum[] }
 ) {
@@ -59,6 +66,7 @@ export default function PolaroidGrid(
             <CoverImage src={sizePhoto(album.coverPhoto?.url || "", "L")} aspectRatio="1 / 1" />
             <ImageShadow />
             <AlbumName>
+              {getLinkIcon(album.name)}
               {album.name}
             </AlbumName>
           </Link>

@@ -38,8 +38,8 @@ export default async function AdminPhotoRead() {
                 <td>{photo.captureDate?.toString()}</td>
                 <td>{photo.albumName}</td>
                 <td>{photo.tags.map((tag) => (
-                  <Fragment key={tag.tag}>
-                    {tag.tag}{", "}
+                  <Fragment key={tag.name}>
+                    {tag.name}{", "}
                   </Fragment>
                 ))}</td>
                 <td>

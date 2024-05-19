@@ -12,10 +12,10 @@ export default async function TagForm(
     <AdminForm action={updateTag} initialState={initialState}>
       <Label>
         tag
-        <Input type="text" name="tag" defaultValue={tagData.tag} />
+        <Input type="text" name="tag" defaultValue={tagData.name} />
       </Label>
       
-      <ParentTagSelect defaultValue={tagData.parent as string} />
+      <ParentTagSelect defaultValue={tagData.parentName as string} />
 
       <button type="submit">update tag</button>
     </AdminForm>

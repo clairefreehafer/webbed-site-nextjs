@@ -29,19 +29,44 @@ model Photo {
 }
 
 model Tag {
-  id     Int     @id @default(autoincrement())
-  tag    String  @unique
-  parent String? @db.VarChar(255)
-  photos Photo[]
+  id         Int     @id @default(autoincrement())
+  name       String  @unique
+  parent     Tag?    @relation("tagHierarchy", fields: [parentName], references: [name])
+  parentName String?
+  children   Tag[]   @relation("tagHierarchy")
+  photos     Photo[]
 }
 
 model Album {
+  id              Int       @id @default(autoincrement())
+  name            String    @db.VarChar(255) @unique
+  date            DateTime? @db.Timestamp(6)
+  section         String[]
+  type            String    @db.VarChar(255) @default("default")
+  photos          Photo[]   @relation("albumPhotos")
+  coverPhoto      Photo?    @relation("coverPhoto", fields: coverKey, references: [smugMugKey])
+  coverKey        String?
+  sectionTest     Section?  @relation(fields: sectionTestName, references: name)
+  sectionTestName String?
+  icon            Icon?     @relation(fields: iconId, references: [id])
+  iconId          Int?
+}
+
+model Section {
   id         Int       @id @default(autoincrement())
   name       String    @db.VarChar(255) @unique
-  date       DateTime? @db.Timestamp(6)
-  section    String[]
-  type       String    @db.VarChar(255) @default("default")
-  photos     Photo[]   @relation("albumPhotos")
-  coverPhoto Photo?    @relation("coverPhoto", fields: coverKey, references: [smugMugKey])
-  coverKey   String?
+  parent     Section?  @relation("sectionHierarchy", fields: [parentName], references: [name])
+  parentName String?
+  children   Section[] @relation("sectionHierarchy")
+  albums     Album[]
+  icon       Icon?     @relation(fields: iconId, references: [id])
+  iconId     Int?
+}
+
+model Icon {
+  id        Int       @id @default(autoincrement())
+  imagePath String?   @db.VarChar(255)
+  character String?   @db.VarChar(255)
+  albums    Album[]
+  sections  Section[]
 }

@@ -55,17 +55,17 @@ export const getAlbumPhotos = cache(async (albumName: string, section: string) =
   let photos: (Partial<Photo> & { album?: Album | null })[] = [];
 
   const tags = await prisma.tag.findMany({
-    where: { parent: "animal crossing" },
-    select: { tag: true }
+    where: { parentName: "animal crossing" },
+    select: { name: true }
   });
 
-  const flattenedTags = tags.map((tag) => tag.tag)
+  const flattenedTags = tags.map((tag) => tag.name)
 
   if (flattenedTags.includes(albumName)) {
     photos = await prisma.photo.findMany({
       include: { tags: true, album: true },
       where: { tags: { some: {
-        tag: tagAlbumNameMapping[albumName] || albumName
+        name: tagAlbumNameMapping[albumName] || albumName
       }}}},
     );
   } else {

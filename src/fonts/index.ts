@@ -3,22 +3,25 @@ import { Inter, Love_Ya_Like_A_Sister, Pangolin, Press_Start_2P } from "next/fon
 export const inter = Inter({ subsets: ["latin"] });
 
 export const loveYaLikeASister = Love_Ya_Like_A_Sister({
-  weight: "400",
-  subsets: ["latin"],
   display: "swap",
-  variable: "--font-love-ya-like-a-sister"
+  preload: true,
+  subsets: ["latin"],
+  variable: "--font-love-ya-like-a-sister",
+  weight: "400",
 });
 
 export const pangolin = Pangolin({
-  weight: "400",
-  subsets: ["latin"],
   display: "swap",
+  preload: true,
+  subsets: ["latin"],
   variable: "--font-pangolin",
+  weight: "400",
 })
 
 export const pressStart2P = Press_Start_2P({
-  weight: "400",
-  subsets: ["latin"],
   display: "swap",
-  variable: "--font-press-start-2p"
+  preload: true,
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-press-start-2p",
 });

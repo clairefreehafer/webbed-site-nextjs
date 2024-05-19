@@ -8,7 +8,7 @@ export default async function NumberOfPhotos(
 
   if (album.type === "tag") {
     numberOfPhotos = await countPhotos({
-      where: { tags: { some: { tag: album.name }}}
+      where: { tags: { some: { name: album.name }}}
     });
   }
 
