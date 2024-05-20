@@ -1,30 +1,64 @@
 import { useCallback, useMemo, useRef, useState } from "react";
 import { Input, Label } from "./form";
+import { Section } from "@prisma/client";
+import { flexColumnCenter } from "@styles/layout";
 
-function createNestedObject(base: Record<any, any>, keys: string[]) {
-  for (let i = 0; i < keys.length; i++) {
-    base = base[keys[i]] = base[keys[i]] || {};
-  }
+function generateSectionsHierarchy(sections: (Section & { children: Section[] })[]) {
+  let sectionsHierarchy: Record<string, any> = {};
+
+  sections.forEach((section) => {
+    const { name, parentName, children } = section;
+    if (!parentName) {
+      // top-level sections are returned first
+      if (children.length) {
+        sectionsHierarchy[name] = children.reduce((acc, child) => (
+          { ...acc, [child.name]: {} }
+        ), {});
+      } else {
+        sectionsHierarchy[name] = sectionsHierarchy[name] || {};
+      }
+    } else {
+      if (Object.keys(sectionsHierarchy).includes(parentName)) {
+        if (children.length) {
+          // next are child sections with their own children
+          sectionsHierarchy[parentName][name] = children.reduce((acc, child) => (
+            { ...acc, [child.name]: {} }
+          ), {});
+        } else {
+          // last are the leaves
+          sectionsHierarchy[parentName][name] = sectionsHierarchy[parentName][name] || {}
+        }
+      }
+    }
+  });
+  return sectionsHierarchy;
 };
 
 export default function SectionSelect(
   { defaultValue, sections }:
-  { defaultValue: string[], sections: string[][] }
+  { defaultValue: Section, sections: (Section & { children: Section[] })[] }
 ) {
-  const sectionsHeirarchy = useMemo(() => {
-    const sectionsHeirarchy: any = {};
+  const sectionsHierarchy = useMemo(() => generateSectionsHierarchy(sections), [sections]);
+  const defaultOptions = useMemo(() => {
+    if (defaultValue) {
+      const finalOptions: string[] = [defaultValue.name];
+      let currentValue: string | null | undefined = defaultValue.parentName;
 
-    sections.forEach((sectionArr) => {
-      createNestedObject(sectionsHeirarchy, sectionArr)
-    });
-
-    return sectionsHeirarchy;
-  }, [sections]);
+      while (currentValue) {
+        finalOptions.unshift(currentValue);
+        currentValue = sections.find((section) => section.name === currentValue)?.parentName;
+      }
+  
+      return finalOptions;
+    } else {
+      return [];
+    }
+  }, [defaultValue]);
 
   const selectRefs = useRef<HTMLSelectElement[]>([]);
 
   const generateOptions = useCallback((changedLevel = 0) => {
-    let currentLevel = { ...sectionsHeirarchy };
+    let currentLevel = { ...sectionsHierarchy };
     const levels = [];
     let levelIndex = 0;
 
@@ -34,9 +68,9 @@ export default function SectionSelect(
       // TODO: can we refactor this without losing readability?
       if (!selectRefs.current || !selectRefs.current.length) {
         // first render, before refs initialize
-        if (defaultValue[levelIndex]) {
+        if (defaultOptions[levelIndex]) {
           // use default values if available
-          currentLevel = currentLevel[defaultValue[levelIndex]];
+          currentLevel = currentLevel[defaultOptions[levelIndex]];
         } else {
           // otherwise fall back to first in each list
           currentLevel = currentLevel[Object.keys(currentLevel)[0]];
@@ -52,7 +86,7 @@ export default function SectionSelect(
     }
 
     return levels;
-  }, [sectionsHeirarchy, selectRefs])
+  }, [sectionsHierarchy, selectRefs])
 
   const [currentOptions, setCurrentOptions] = useState(generateOptions());
 
@@ -61,30 +95,30 @@ export default function SectionSelect(
   }
 
   return (
-    <Label>
-      select existing section
-      {currentOptions.map((optionsArr, i) => {
-        return (
-          <select
-            key={i}
-            name={`section${i}`}
-            onChange={() =>
-            handleChange(i)}
-            ref={(el) => {el && selectRefs.current.push(el)}}
-            defaultValue={defaultValue[i]}
-          >
-            {optionsArr.map((option) => (
-              <option key={option}>{option}</option>
-            ))}
-          </select>
-        )
-      })}
-      or add new section (comma separated)
-      <Input
-        type="text"
-        name="section"
-        defaultValue={defaultValue.join((","))}
-      />
-    </Label>
+    <>
+      <Label>
+        section
+      </Label>
+      <div css={flexColumnCenter}>
+        {currentOptions.map((optionsArr, i) => {
+          return (
+            <Input
+              as="select"
+              key={i}
+              name={`section${i}`}
+              onChange={() =>
+              handleChange(i)}
+              ref={(el) => {el && selectRefs.current.push(el)}}
+              defaultValue={defaultOptions[i]}
+            >
+              {optionsArr.map((option) => (
+                <option key={option}>{option}</option>
+              ))}
+            </Input>
+          )
+        })}
+      </div>
+    </>
+    
   )
 }

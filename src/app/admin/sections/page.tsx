@@ -11,7 +11,6 @@ function renderChildren(children: Section[]) {
 
 export default async function Sections() {
   const sections = await getSections();
-  console.log(sections)
 
   return (
     <>

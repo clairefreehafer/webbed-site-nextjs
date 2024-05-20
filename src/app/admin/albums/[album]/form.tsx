@@ -1,15 +1,21 @@
 "use client";
 
 import AdminForm, { Input, Label } from "@components/admin/form";
-import { Album, Photo } from "@prisma/client";
+import { Album, Photo, Section } from "@prisma/client";
 import { AlbumTypes, displayName } from "@utils/albums";
 import { AlbumFormState, editAlbum } from "@actions/album";
 import SectionSelect from "@components/admin/section-select";
 import { useState } from "react";
 import SelectCoverPhoto from "@components/photography/select-cover-photo";
 
+type Props = {
+  albumData: Album & { section: Section | null },
+  albumPhotos: Photo[],
+  sections: (Section & { children: Section[] })[],
+}
+
 export default function UpdateAlbumForm(
-  { albumData, albumPhotos, sections }: { albumData: Album, albumPhotos: Photo[], sections: string[][] }) {
+  { albumData, albumPhotos, sections }: Props) {
   const [autoDateGeneration, setAutoDateGeneration] = useState(!!albumPhotos.length);
 
   const initialState: AlbumFormState = {
@@ -23,45 +29,48 @@ export default function UpdateAlbumForm(
     <AdminForm action={editAlbum} initialState={initialState}>
       <input type="hidden" name="id" defaultValue={id} readOnly />
 
-      <Label>
+      <Label htmlFor="name">
         name
-        <Input
-          type="text"
-          name="name"
-          defaultValue={displayName(name)}
-        />
       </Label>
+      <Input
+        type="text"
+        name="name"
+        id="name"
+        defaultValue={displayName(name)}
+      />
 
       <SectionSelect defaultValue={section} sections={sections} />
 
-      <Label>
+      <Label htmlFor="type">
         type
-        <Input as="select" name="type" defaultValue={type}>
-          {Object.values(AlbumTypes).map((type) => (
-            <option key={type}>{type}</option>
-          ))}
-        </Input>
       </Label>
+      <Input as="select" name="type" id="type" defaultValue={type}>
+        {Object.values(AlbumTypes).map((type) => (
+          <option key={type}>{type}</option>
+        ))}
+      </Input>
 
-      <Label>
+      <Label htmlFor="date">
         date
+      </Label>
+      <div>
         <Input
           type="datetime-local"
           name="date"
           defaultValue={date?.toISOString()}
           readOnly={autoDateGeneration}
         />
-      </Label>
 
-      <Label>
-        generate date automatically?
-        <Input
-          type="checkbox"
-          checked={autoDateGeneration}
-          name="generateDateAutomatically"
-          onChange={(e) => setAutoDateGeneration(e.target.checked)}
-        />
-      </Label>
+        <Label>
+          generate date automatically?
+          <Input
+            type="checkbox"
+            checked={autoDateGeneration}
+            name="generateDateAutomatically"
+            onChange={(e) => setAutoDateGeneration(e.target.checked)}
+          />
+        </Label>
+      </div>
 
       <SelectCoverPhoto
         coverKey={coverKey}
@@ -72,7 +81,7 @@ export default function UpdateAlbumForm(
         add photos (by smugmugkey?)
       </Label> */}
 
-      <button type="submit">update album</button>
+      <button type="submit" css={{ gridColumnStart: "span 2" }}>update album</button>
     </AdminForm>
   )
 }

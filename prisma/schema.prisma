@@ -41,13 +41,12 @@ model Album {
   id              Int       @id @default(autoincrement())
   name            String    @db.VarChar(255) @unique
   date            DateTime? @db.Timestamp(6)
-  section         String[]
   type            String    @db.VarChar(255) @default("default")
   photos          Photo[]   @relation("albumPhotos")
   coverPhoto      Photo?    @relation("coverPhoto", fields: coverKey, references: [smugMugKey])
   coverKey        String?
-  sectionTest     Section?  @relation(fields: sectionTestName, references: name)
-  sectionTestName String?
+  section         Section?  @relation(fields: sectionName, references: name)
+  sectionName     String?
   icon            Icon?     @relation(fields: iconId, references: [id])
   iconId          Int?
 }

@@ -6,8 +6,14 @@ import { useFormState } from "react-dom";
 import styled from "styled-components";
 
 const Form = styled.form`
-  ${flexColumnCenter};
+  display: grid;
+  grid-template-columns: 25% 75%;
+  grid-template-rows: auto;
   width: 100%;
+
+  & > * {
+    padding: 3rem;
+  }
 `;
 
 export const Label = styled.label`
@@ -16,6 +22,7 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
+  font-family: var(--font-pt-mono), monospace;
   margin: 0.5rem;
 `;
 

@@ -1,12 +1,13 @@
 import UpdateAlbumForm from "./form";
-import { displayName, getSectionsArr } from "@utils/albums";
+import { displayName } from "@utils/albums";
 import { getAlbum, getPhotosWithTag } from "@utils/prisma";
+import { getSections } from "@utils/prisma/section";
 
 export default async function Page(
   { params }: { params: { album: string }}
 ) {
   const albumData = await getAlbum(displayName(params.album));
-  const sections = await getSectionsArr();
+  const sections = await getSections();
   let albumPhotos = albumData.photos;
 
   if (albumData.type === "tag") {

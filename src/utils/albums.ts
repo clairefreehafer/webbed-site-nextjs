@@ -1,5 +1,5 @@
 import { cache } from "react";
-import { getSections } from "./prisma";
+import { getSections } from "./prisma/section";
 
 export enum AlbumTypes {
   Default = "default",
@@ -31,15 +31,11 @@ export function slugName(album: string) {
 }
 
 export const getSectionsArr = cache(
-  async (section?: string): Promise<string[][]> => {
-    const sections = await getSections(section);
-
-    if (typeof sections === "string") {
-      return [];
-    }
+  async (section?: string): Promise<string[]> => {
+    const sections = await getSections();
 
     return sections.map((obj) => (
-      obj.section
+      obj.name
     )).filter((item) => !!item.length);
   }
 );

@@ -2,7 +2,7 @@
 
 import Nav from "@components/nav";
 import generateTitle from "@components/title";
-import { loveYaLikeASister, pangolin } from "@fonts";
+import { cutiveMono, loveYaLikeASister, pangolin } from "@fonts";
 import DefaultThemeRoot from "@styles/default/root";
 import { flexColumnCenter } from "@styles/layout";
 import { PAPER_LINE_HEIGHT, paperBackground } from "@styles/mixins";
@@ -54,7 +54,7 @@ export default function PhotographyLayout({ children }:
     <ThemeProvider theme={photographyTheme}>
       <DefaultThemeRoot borderWidth="2px">
         <header css={flexColumnCenter}>
-          <Nav />
+          <Nav className={cutiveMono.className} />
           <Title className={loveYaLikeASister.className}>
             {generateTitle(pathname)}
           </Title>

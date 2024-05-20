@@ -35,7 +35,7 @@ export default async function AdminReadAlbumPage() {
                 <img src={sizePhoto(album.coverPhoto?.url || "", "Th")} alt="" />
               </td>
               <td>{album.name}</td>
-              <td>{album.section.join(" → ")}</td>
+              <td>{album.sectionName}</td>
               <td>{album.date?.toString()}</td>
               <td>{album.type}</td>
               <NumberOfPhotos album={album} />

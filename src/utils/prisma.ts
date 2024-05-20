@@ -47,7 +47,7 @@ export const getAlbumGridData = cache(async (section: string[]) => (
 export const getAlbum = cache(async (albumName: string) => (
   prismaWrapper(prisma.album.findUniqueOrThrow)({
     where: { name: albumName },
-    include: { photos: true, coverPhoto: true }
+    include: { photos: true, coverPhoto: true, section: true }
   })
 ));
 
@@ -110,7 +110,7 @@ export const getAllTags = cache(async () => (
 ));
 
 export const getPhotosWithTag = cache(async (name: string) => {
-  const { photos } = await prismaWrapper(prisma.tag.findUniqueOrThrow)({
+  const { photos } = await prismaWrapper(prisma.tag.findUnique)({
     where: { name },
     include: { photos: true }
   })

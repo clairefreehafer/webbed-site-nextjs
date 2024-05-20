@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import styled, { css } from "styled-components";
+import styled, { css, useTheme } from "styled-components";
 import { textBackground } from "@styles/animal-crossing/theme";
 import { wiggleBox } from "@styles/animations";
 
@@ -99,17 +99,31 @@ const StyledLink = styled(Link)<{ $isActive: boolean }>`
     text-decoration: none;
   `}
 
-${({ theme }) => theme.name === "animal-crossing" && `
-    padding: 0 1rem;
+  ${({ theme }) => theme.name === "animal-crossing" && `
+      padding: 0 1rem;
+    `}
+
+  ${({ theme, $isActive }) => theme.name === "admin" && `
+    color: limegreen;
+
+    ${$isActive && "font-weight: normal;"}
+  `}
+
+  ${({ theme, $isActive }) => theme.name === "photography" && `
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    ${$isActive && "font-weight: normal;"}
   `}
 `;
 
  
-export default function Navigation({ navLinks = defaultNavLinks }) {
+export default function Navigation({ navLinks = defaultNavLinks, className = "" }) {
   const pathname = usePathname();
+  
+  const isActive = (name: string) => pathname.startsWith(`/${name.replaceAll(" ", "-")}`)
  
   return (
-    <Nav>
+    <Nav className={className}>
       <Ul>
         {navLinks.map((link: NavLink) => (
           <Li key={link.pathname}>
@@ -119,8 +133,9 @@ export default function Navigation({ navLinks = defaultNavLinks }) {
             {link.image && <img src={link.image} alt="" />}
             <StyledLink
               href={link.pathname}
-              $isActive={pathname.startsWith(`/${link.name.replaceAll(" ", "-")}`)}
+              $isActive={isActive(link.name)}
             >
+              {link.name === "photography" && isActive("photography") && <>📷&nbsp;</>}
               {link.name}
             </StyledLink>
           </Li>
@@ -130,7 +145,8 @@ export default function Navigation({ navLinks = defaultNavLinks }) {
             <Box1 />
             <Box2 />
             <Box3 />
-            <StyledLink href="/admin" $isActive={pathname.includes("admin")}>
+            <StyledLink href="/admin" $isActive={isActive("admin")}>
+              {isActive("admin") && <>&gt;&nbsp;</>}
               admin
             </StyledLink>
           </Li>

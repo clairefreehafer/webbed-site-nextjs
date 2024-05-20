@@ -8,6 +8,7 @@ import styled from "styled-components";
 const Fieldset = styled.fieldset`
   display: flex;
   width: 100%;
+  grid-column-start: span 2;
 `;
 
 const Radio = styled.input`

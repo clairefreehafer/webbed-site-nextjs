@@ -4,6 +4,6 @@ export default function Error(
   { error }: { error: Error }
 ) {
   return (
-    <>❌ {error.message.toLowerCase()}</>
+    <pre css={{ margin: "1rem" }}>❌ {error.message}</pre>
   );
 }

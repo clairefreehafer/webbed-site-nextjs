@@ -45,12 +45,11 @@ export async function editAlbum(
   formData: FormData
 ) {
   const name = formData.get("name") as string;
-  const section = formData.get("section") as string;
   const date = formData.get("date") as string;
   const generateDateAutomatically = formData.get("generateDateAutomatically");
   const coverKey = formData.get("coverKey") as string;
 
-  let data: Partial<Album> = {};
+  let data: Prisma.AlbumUpdateArgs["data"] = {};
 
   try {
     if (generateDateAutomatically) {
@@ -74,22 +73,19 @@ export async function editAlbum(
       data.name = name;
     }
 
-    const sectionFromDropdowns = [];
+    let sectionName = "";
     let currentValue = formData.get("section0") as string;
     let currentIndex = 0;
 
     while (currentValue) {
-      sectionFromDropdowns.push(currentValue);
+      sectionName = currentValue;
       currentIndex++;
       currentValue = formData.get(`section${currentIndex}`) as string;
     }
 
-    if (prevState.section?.join(",") !== section) {
-      console.log(`👉 changing section from ${prevState.section} to new section ${section}...`);
-      data.section = section.split(",");
-    } else if (sectionFromDropdowns.join(",") !== section) {
-      console.log(`👉 changing section from ${prevState.section} to existing section ${sectionFromDropdowns}...`);
-      data.section = sectionFromDropdowns;
+    if (prevState.sectionName !== sectionName) {
+      console.log(`👉 changing section from "${prevState.sectionName}" to section "${sectionName}"...`);
+      data.section = { connect: { name: sectionName }};
     }
 
     if (prevState.coverKey !== coverKey) {

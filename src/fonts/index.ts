@@ -1,4 +1,12 @@
-import { Inter, Love_Ya_Like_A_Sister, Pangolin, Press_Start_2P } from "next/font/google";
+import { Cutive_Mono, Inter, Love_Ya_Like_A_Sister, PT_Mono, Pangolin, Press_Start_2P } from "next/font/google";
+
+export const cutiveMono = Cutive_Mono({
+  display: "swap",
+  preload: true,
+  subsets: ["latin"],
+  variable: "--font-cutive-mono",
+  weight: "400",
+});
 
 export const inter = Inter({ subsets: ["latin"] });
 
@@ -24,4 +32,12 @@ export const pressStart2P = Press_Start_2P({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-press-start-2p",
+});
+
+export const ptMono = PT_Mono({
+  display: "swap",
+  preload: true,
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-pt-mono",
 });

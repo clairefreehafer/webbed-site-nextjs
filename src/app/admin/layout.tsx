@@ -3,10 +3,11 @@
 import { usePathname } from "next/navigation";
 import Nav from "@components/nav";
 import { flexColumnCenter } from "@styles/layout";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { MAX_SITE_WIDTH } from "@styles/variables";
-import { pressStart2P } from "@fonts";
+import { pressStart2P, ptMono } from "@fonts";
 import generateTitle from "@components/title";
+import { AdminThemeRoot, adminTheme } from "@styles/admin/theme";
 
 const Main = styled.main`
   ${flexColumnCenter};
@@ -53,16 +54,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname().split("/");
 
   return (
-    <>
-      <header css={flexColumnCenter}>
-        <Nav />
-        <Title className={pressStart2P.variable}>
-          {generateTitle(pathname, "▼")}
-        </Title>
-      </header>
-      <Main>
-        {children}
-      </Main>
-    </>
+    <ThemeProvider theme={adminTheme}>
+      <AdminThemeRoot className={ptMono.className}>
+        <header css={flexColumnCenter}>
+          <Nav />
+          <Title className={pressStart2P.variable}>
+            {generateTitle(pathname, "▼")}
+          </Title>
+        </header>
+        <Main>
+          {children}
+        </Main>
+      </AdminThemeRoot>
+    </ThemeProvider>
   )
 }
