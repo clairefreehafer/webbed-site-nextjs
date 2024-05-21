@@ -4,11 +4,13 @@ import AdminForm, { Input, Label } from "@components/admin/form";
 import { AlbumFormState, addAlbum } from "@actions/album";
 import SectionSelect from "@components/admin/section-select";
 import { AlbumTypes } from "@utils/albums";
+import { Prisma } from "@prisma/client";
+import { getSections } from "@utils/prisma/section";
 
 const initialState: Partial<AlbumFormState> = {};
 
 export default function NewAlbumForm(
-  { sections }: { sections: string[][] }
+  { sections }: { sections: Prisma.PromiseReturnType<typeof getSections> }
 ) {
 
   return (
@@ -18,7 +20,7 @@ export default function NewAlbumForm(
         <Input type="text" name="album" required />
       </Label>
 
-      <SectionSelect sections={sections} defaultValue={[]} />
+      <SectionSelect sections={sections} defaultValue={null} />
 
       <Label>
         type

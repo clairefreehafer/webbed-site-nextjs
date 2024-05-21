@@ -1,24 +1,27 @@
-import { displayName, slugName } from "@utils/albums";
+import { displayName } from "@utils/albums";
 import Slideshow from "./slideshow";
 import { getAlbumPhotos } from "@utils/animal-crossing";
 import { getStaticParams } from "@utils/prisma";
+import { getAncestorSections } from "@utils/section";
 
 export async function generateStaticParams() {
   const albums = await getStaticParams("animal-crossing");
 
-  if (typeof albums === "string") {
-    return [];
+  const params = [];
+
+  for (let album of albums) {
+    const sectionArray = await getAncestorSections(album.section);
+    params.push({ section: sectionArray.push(album.name) });
   }
 
-  return albums.map((album) => ({
-    section: album.section.slice(1).concat([slugName(album.name)])
-  }));
+  return params;
 }
 
 export const dynamicParams = false;
 
 export default async function Page({ params }: { params: { section: string[] }}) {
   const albumName = displayName(params.section[params.section.length - 1]);
+  console.log(params.section, albumName)
   const section = params.section[params.section.length - 2];
   const photos = await getAlbumPhotos(albumName, section);
 

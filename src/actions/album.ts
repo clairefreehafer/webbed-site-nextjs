@@ -13,19 +13,28 @@ export async function addAlbum(
   formData: FormData
 ) {
   const album = formData.get("album") as string;
-  const section = formData.get("section") as string;
   const type = formData.get("type") as AlbumTypes;
 
   try {
+    let sectionName = "";
+    let currentValue = formData.get("section0") as string;
+    let currentIndex = 0;
+
+    while (currentValue) {
+      sectionName = currentValue;
+      currentIndex++;
+      currentValue = formData.get(`section${currentIndex}`) as string;
+    }
+
     const createdAlbum = await createAlbum({ data: {
       name: album,
-      section: section.split(","),
+      sectionName,
       type,
     }});
 
     return {
       ...createdAlbum,
-      message: `👍 ${type} album ${album} added in ${section}`
+      message: `👍 ${type} album ${album} added in ${sectionName}`
     }
   } catch (error) {
     let message = `👎 ${(error as Error).message}`;

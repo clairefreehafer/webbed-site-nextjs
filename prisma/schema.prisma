@@ -45,8 +45,8 @@ model Album {
   photos          Photo[]   @relation("albumPhotos")
   coverPhoto      Photo?    @relation("coverPhoto", fields: coverKey, references: [smugMugKey])
   coverKey        String?
-  section         Section?  @relation(fields: sectionName, references: name)
-  sectionName     String?
+  section         Section  @relation(fields: sectionName, references: name)
+  sectionName     String
   icon            Icon?     @relation(fields: iconId, references: [id])
   iconId          Int?
 }

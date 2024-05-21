@@ -29,7 +29,7 @@ function generateSectionsHierarchy(sections: (Section & { children: Section[] })
 
 export default function SectionSelect(
   { defaultValue, sections }:
-  { defaultValue: Section, sections: (Section & { children: Section[] })[] }
+  { defaultValue: Section | null, sections: (Section & { children: Section[] })[] }
 ) {
   const sectionsHierarchy = useMemo(() => generateSectionsHierarchy(sections), [sections]);
   const defaultOptions = useMemo(() => {

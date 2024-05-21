@@ -60,7 +60,7 @@ export const getAlbumGridData = cache(async (section: string) => {
 
   for (let album of albums) {
     const sectionArray = await getAncestorSections(album.section);
-    result.push({...album, sectionArray });
+    result.push({ ...album, sectionArray });
   }
 
   return result;
@@ -93,20 +93,6 @@ export const getAlbumOptions = cache(async () => (
   prismaWrapper(prisma.album.findMany)({
     orderBy: { date: { sort: "desc", nulls: "first" } },
     select: { name: true },
-  })
-));
-
-export const getSections = cache(async (section?: string) => (
-  prismaWrapper(prisma.album.findMany)({
-    distinct: "section",
-    select: {
-      section: true
-    },
-    ...(section && {
-      where: {
-        section: { has: section }
-      }
-    })
   })
 ));
 

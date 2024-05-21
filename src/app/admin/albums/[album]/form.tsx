@@ -1,17 +1,21 @@
 "use client";
 
 import AdminForm, { Input, Label } from "@components/admin/form";
-import { Album, Photo, Section } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { AlbumTypes, displayName } from "@utils/albums";
 import { AlbumFormState, editAlbum } from "@actions/album";
 import SectionSelect from "@components/admin/section-select";
 import { useState } from "react";
 import SelectCoverPhoto from "@components/photography/select-cover-photo";
+import { getSections } from "@utils/prisma/section";
+import { getAlbum, getPhotosWithTag } from "@utils/prisma";
 
 type Props = {
-  albumData: Album & { section: Section | null },
-  albumPhotos: Photo[],
-  sections: (Section & { children: Section[] })[],
+  albumData: Prisma.PromiseReturnType<typeof getAlbum>,
+  albumPhotos: 
+    Prisma.PromiseReturnType<typeof getAlbum>["photos"] |
+    Prisma.PromiseReturnType<typeof getPhotosWithTag>,
+  sections: Prisma.PromiseReturnType<typeof getSections>,
 }
 
 export default function UpdateAlbumForm(
