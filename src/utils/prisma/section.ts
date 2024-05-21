@@ -8,11 +8,18 @@ export const getSections = cache(async () => (
   prismaWrapper(prisma.section.findMany)({
     include: { parent: true, icon: true, children: true, albums: true },
     orderBy: [
-      { children: { _count: "desc" }},
       { parentName: { sort: "desc" }},
+      { children: { _count: "desc" }},
     ]
   })
 ));
+
+export const getChildSections = cache(async (parentName: string) => (
+  prismaWrapper(prisma.section.findMany)({
+    where: { parentName },
+    select: { name: true }
+  })
+))
 
 export const createSection = async (args: Prisma.SectionCreateArgs) => (
   prismaWrapper(prisma.section.create)(args)

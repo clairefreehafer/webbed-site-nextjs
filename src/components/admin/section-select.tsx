@@ -4,33 +4,26 @@ import { Section } from "@prisma/client";
 import { flexColumnCenter } from "@styles/layout";
 
 function generateSectionsHierarchy(sections: (Section & { children: Section[] })[]) {
-  let sectionsHierarchy: Record<string, any> = {};
+  const hashTable = Object.create(null);
 
-  sections.forEach((section) => {
-    const { name, parentName, children } = section;
-    if (!parentName) {
-      // top-level sections are returned first
-      if (children.length) {
-        sectionsHierarchy[name] = children.reduce((acc, child) => (
-          { ...acc, [child.name]: {} }
-        ), {});
-      } else {
-        sectionsHierarchy[name] = sectionsHierarchy[name] || {};
-      }
-    } else {
-      if (Object.keys(sectionsHierarchy).includes(parentName)) {
-        if (children.length) {
-          // next are child sections with their own children
-          sectionsHierarchy[parentName][name] = children.reduce((acc, child) => (
-            { ...acc, [child.name]: {} }
-          ), {});
-        } else {
-          // last are the leaves
-          sectionsHierarchy[parentName][name] = sectionsHierarchy[parentName][name] || {}
-        }
-      }
+  // generate entry for each section in our hash table
+  sections.forEach(aData => hashTable[aData.name] = {});
+
+  const sectionsHierarchy: Record<string, any> = {};
+  sections.forEach(aData => {
+    if (aData.parentName) {
+      // for child sections, update our hash table to include child under its parent and its own children
+      hashTable[aData.parentName] = { ...hashTable[aData.parentName], [aData.name]: hashTable[aData.name] }
+    }
+    else {
+      // for top-level sections, add them to our final object.
+      sectionsHierarchy[aData.name] = {};
     }
   });
+  // populate our final object using the hash table.
+  for (let section in sectionsHierarchy) {
+    sectionsHierarchy[section] = hashTable[section];
+  }
   return sectionsHierarchy;
 };
 

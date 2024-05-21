@@ -1,5 +1,6 @@
 import { Prisma, PrismaClient } from "@prisma/client"
 import { cache } from "react"
+import { getAncestorSections } from "./section";
 
 const prisma = new PrismaClient();
 
@@ -26,23 +27,44 @@ export const getAdminAlbums = cache(async () => (
 
 export const getStaticParams = cache(async (section: string) => (
   prismaWrapper(prisma.album.findMany)({
-    where: { section: { has: section }},
-    select: { name: true, section: true }
-  })
-));
-
-export const getAlbumGridData = cache(async (section: string[]) => (
-  prismaWrapper(prisma.album.findMany)({
-    where: { section: { hasEvery: section }},
+    where: { section: { name: section }},
     select: {
-      id: true,
       name: true,
-      section: true,
-      date: true,
-      coverPhoto: { select: { url: true }}
+      section: {
+        select: {
+          name: true,
+        }
+      }
     }
   })
 ));
+
+export const getAlbumGridData = cache(async (section: string) => {
+  const albums = await prismaWrapper(prisma.album.findMany)({
+    where: { section: { name: section }},
+    select: {
+      id: true,
+      name: true,
+      section: {
+        select: {
+          name: true,
+          parent: true,
+        }
+      },
+      date: true,
+      coverPhoto: { select: { url: true }}
+    }
+  });
+
+  const result = [];
+
+  for (let album of albums) {
+    const sectionArray = await getAncestorSections(album.section);
+    result.push({...album, sectionArray });
+  }
+
+  return result;
+});
 
 export const getAlbum = cache(async (albumName: string) => (
   prismaWrapper(prisma.album.findUniqueOrThrow)({
@@ -110,12 +132,12 @@ export const getAllTags = cache(async () => (
 ));
 
 export const getPhotosWithTag = cache(async (name: string) => {
-  const { photos } = await prismaWrapper(prisma.tag.findUnique)({
+  const result = await prismaWrapper(prisma.tag.findUnique)({
     where: { name },
     include: { photos: true }
   })
 
-  return photos;
+  return result?.photos || [];
 });
 
 export const getTag = cache(async (name: string) => (

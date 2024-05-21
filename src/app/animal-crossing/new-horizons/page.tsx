@@ -1,4 +1,4 @@
-import { getSectionsArr } from "@utils/albums";
+import { getChildSections } from "@utils/prisma/section";
 import Link from "next/link";
 
 // for future reference
@@ -11,14 +11,14 @@ import Link from "next/link";
 // ];
 
 export default async function NewHorizonsPage() {
-  const sections = await getSectionsArr("new-horizons");
+  const sections = await getChildSections("new-horizons");
   
   return (
     <ul className="grid">
       {sections.map((section) => (
-        <li key={section[section.length - 1]}>
-          <Link href={`/animal-crossing/new-horizons/${section[section.length - 1]}`}>
-            {section[section.length - 1]}
+        <li key={section.name}>
+          <Link href={`/animal-crossing/new-horizons/${section.name}`}>
+            {section.name}
           </Link>
         </li>
       ))}

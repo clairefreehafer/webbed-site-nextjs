@@ -5,6 +5,8 @@ import Link from "next/link";
 import iconList from "./icon-list.json";
 import { getAstrologyDateRange } from "@utils/animal-crossing";
 import styled from "styled-components";
+import { Prisma } from "@prisma/client";
+import { getAlbumGridData } from "@utils/prisma";
 
 const Ul = styled.ul`
   list-style: none;
@@ -20,12 +22,7 @@ const PageIcon = styled.img`
 `;
 
 type Props = {
-  albums: {
-    id: number,
-    name: string,
-    date: Date | null,
-    section: string[]
-  }[]
+  albums: Prisma.PromiseReturnType<typeof getAlbumGridData>
 };
 
 // TODO: move to db
@@ -46,7 +43,7 @@ export default function IconList({ albums }: Props) {
       {albums.map((album) => (
         <Li key={album.id}>
           {getLinkIcon(album.name, album.date)}
-          <Link href={`/${album.section.join("/")}/${slugName(album.name)}`}>
+          <Link href={`/${album.sectionArray.join("/")}/${slugName(album.name)}`}>
             {album.name}
           </Link>
         </Li>

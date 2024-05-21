@@ -5,7 +5,7 @@ export async function generateStaticParams() {
   const albums = await getStaticParams("new-horizons");
 
   return albums.map((album) => ({
-    section: album.section[album.section.length - 1]
+    section: album.section?.name
   }));
 }
 
@@ -15,7 +15,7 @@ export default async function Section(
   { params }: { params: { section: string }}
 ) {
   const { section } = params;
-  const albums = await getAlbumGridData([section]);
+  const albums = await getAlbumGridData(section);
 
   return (
     <>
