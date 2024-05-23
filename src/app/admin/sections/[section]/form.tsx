@@ -3,12 +3,18 @@
 import { editSection } from "@actions/section";
 import AdminForm, { Input, Label } from "@components/admin/form";
 import ParentSectionSelect from "@components/admin/parent-section-select";
-import { Section } from "@prisma/client";
+import { Prisma } from "@prisma/client";
+import { getSection, getSections } from "@utils/prisma/section";
+
+type Props = {
+  sectionData: Prisma.PromiseReturnType<typeof getSection>,
+  sections: Prisma.PromiseReturnType<typeof getSections>
+};
 
 export default function UpdateSectionForm(
-  { sectionData, sections }: { sectionData: Section, sections: Section[] }
+  { sectionData, sections }: Props
 ) {
-  const { id, name } = sectionData;
+  const { id, name, parentName } = sectionData;
 
   return (
     <AdminForm action={editSection} initialState={sectionData}>
@@ -20,7 +26,7 @@ export default function UpdateSectionForm(
 
       <ParentSectionSelect
         sections={sections}
-        defaultValue={sectionData.parentName || undefined}
+        defaultValue={parentName || undefined}
       />
 
       <button type="submit">update section</button>

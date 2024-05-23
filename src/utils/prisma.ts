@@ -17,14 +17,6 @@ function prismaWrapper<Args, Result>(prismaFunction: (args: Args) => Result) {
   });
 }
 
-export const getAdminAlbums = cache(async () => (
-  prismaWrapper(prisma.album.findMany)({
-    // TODO: change to select
-    include: { photos: true, coverPhoto: true },
-    orderBy: { date: { sort: "desc", nulls: "first" }},
-  })
-));
-
 export const getStaticParams = cache(async (section: string) => (
   prismaWrapper(prisma.album.findMany)({
     where: { section: { name: section }},
@@ -52,7 +44,13 @@ export const getAlbumGridData = cache(async (section: string) => {
         }
       },
       date: true,
-      coverPhoto: { select: { url: true }}
+      coverPhoto: { select: { url: true }},
+      icon: {
+        select: {
+          imagePath: true,
+          character: true,
+        }
+      }
     }
   });
 

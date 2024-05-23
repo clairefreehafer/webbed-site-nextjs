@@ -57,6 +57,7 @@ export async function editAlbum(
   const date = formData.get("date") as string;
   const generateDateAutomatically = formData.get("generateDateAutomatically");
   const coverKey = formData.get("coverKey") as string;
+  const iconId = parseInt(formData.get("iconId") as string);
 
   let data: Prisma.AlbumUpdateArgs["data"] = {};
 
@@ -100,6 +101,11 @@ export async function editAlbum(
     if (prevState.coverKey !== coverKey) {
       console.log(`👉 changing coverKey from ${prevState.coverKey} to ${coverKey}...`);
       data.coverKey = coverKey;
+    }
+
+    if (prevState.iconId !== iconId) {
+      console.log(`👉 updating icon...`);
+      data.iconId = iconId;
     }
 
     const updatedAlbum = await updateAlbum({

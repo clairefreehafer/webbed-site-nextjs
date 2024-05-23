@@ -2,9 +2,10 @@ import { deleteAlbum } from "@actions/album";
 import DeleteButton from "@components/admin/delete-button";
 import NumberOfPhotos from "@components/admin/number-of-photos";
 import AdminTable from "@components/admin/table";
-import { slugName } from "@utils/albums";
+import Icon from "@components/icon";
+import { AlbumTypes, slugName } from "@utils/albums";
 import { sizePhoto } from "@utils/photo";
-import { getAdminAlbums } from "@utils/prisma";
+import { getAdminAlbums } from "@utils/prisma/album";
 import Link from "next/link";
 
 export default async function AdminReadAlbumPage() {
@@ -19,6 +20,7 @@ export default async function AdminReadAlbumPage() {
         <thead>
           <tr>
             <th>cover photo</th>
+            <th>icon</th>
             <th>name</th>
             <th>section</th>
             <th>date</th>
@@ -34,11 +36,16 @@ export default async function AdminReadAlbumPage() {
               <td>
                 <img src={sizePhoto(album.coverPhoto?.url || "", "Th")} alt="" />
               </td>
+              <td><Icon icon={album.icon} height={3} /></td>
               <td>{album.name}</td>
               <td>{album.sectionName}</td>
               <td>{album.date?.toString()}</td>
               <td>{album.type}</td>
-              <NumberOfPhotos album={album} />
+              <NumberOfPhotos
+                albumName={album.name}
+                albumType={album.type as AlbumTypes}
+                photoCount={album._count.photos}
+              />
               <td>
                 <Link href={`/admin/albums/${slugName(album.name)}`}>
                   edit

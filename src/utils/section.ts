@@ -9,7 +9,7 @@ export const getAncestorSections = cache(async (section: Partial<Section> & { pa
   while (currentSection) {
     result.unshift(currentSection.name);
 
-    if (currentSection?.parent) {
+    if (currentSection.parent) {
       currentSection = currentSection.parent;
     } else if (currentSection.parentName) {
       currentSection = await getSection(currentSection.parentName);

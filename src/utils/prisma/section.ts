@@ -21,16 +21,16 @@ export const getChildSections = cache(async (parentName: string) => (
   })
 ))
 
-export const createSection = async (args: Prisma.SectionCreateArgs) => (
-  prismaWrapper(prisma.section.create)(args)
-);
-
 export const getSection = cache(async (name: string) => (
   prismaWrapper(prisma.section.findUniqueOrThrow)({
     where: { name },
-    include: { parent: true }
+    select: { id: true, name: true, parentName: true }
   })
 ));
+
+export const createSection = async (args: Prisma.SectionCreateArgs) => (
+  prismaWrapper(prisma.section.create)(args)
+);
 
 export const updateSection = async (data: Prisma.SectionUpdateArgs) => (
   prismaWrapper(prisma.section.update)(data)

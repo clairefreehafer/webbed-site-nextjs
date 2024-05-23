@@ -24,6 +24,9 @@ export default function AdminPage() {
         <Link href="/admin/sections">sections</Link>
       </li>
       <li>
+        <Link href="/admin/icons">icons</Link>
+      </li>
+      <li>
         <Link href="/admin/tags">tags</Link>
       </li>
     </Ul>

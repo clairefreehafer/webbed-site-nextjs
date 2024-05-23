@@ -1,0 +1,70 @@
+"use client";
+
+import { Album, Icon as IconType } from "@prisma/client";
+import { getAstrologyDateRange } from "@utils/animal-crossing";
+import styled, { useTheme } from "styled-components";
+
+const Emoji = styled.span<{ $height: number | "inherit" }>`
+  ${({ $height }) => $height === "inherit" ?
+    "font-size: inherit;" :
+    `font-size: ${$height - 1}rem;`}
+`;
+
+const Image = styled.img<{ $height: number | "inherit"; $inline: boolean }>`
+  ${({ $height }) => `height: ${$height}rem;`}
+  ${({ $inline }) => $inline && "margin-right: 0.25rem;"}
+`;
+
+type Props = {
+  icon: Partial<IconType> | null
+  /** rem. height of image, emoji will be -1. */
+  height?: number | "inherit";
+  inline?: boolean;
+  /** for animal crossing links w/o an icon. */
+  date?: Album["date"];
+};
+
+export default function Icon({
+  icon,
+  height = "inherit",
+  inline = false,
+  date
+}: Props) {
+  const theme = useTheme();
+
+  if (!icon) {
+    if (theme.name === "animal-crossing") {
+      console.log("HIII")
+      if (!date) {
+        throw new Error("please pass a date for animal crossing page icons!");
+      }
+      const astrologyDateRange = getAstrologyDateRange(date);
+
+      return (
+        <Image
+          src={`/images/animal-crossing/star-fragments/star-fragment_${astrologyDateRange}.png`}
+          alt=""
+          $height={height}
+          $inline={inline}
+        />
+      );
+    }
+
+    return null;
+  }
+
+  if (icon.imagePath) {
+    return <Image src={icon.imagePath} alt="" $height={height} $inline={inline} />
+  }
+
+  if (icon.character) {
+    return (
+      <Emoji $height={height}>
+        {icon.character}
+        {inline && " "}
+      </Emoji>
+    );
+  }
+
+  return null;
+}

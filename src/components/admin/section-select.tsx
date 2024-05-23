@@ -1,3 +1,5 @@
+"use client";
+
 import { useCallback, useMemo, useRef, useState } from "react";
 import { Input, Label } from "./form";
 import { Section } from "@prisma/client";

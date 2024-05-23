@@ -6,7 +6,9 @@ import { sizePhoto } from "@utils/photo"
 import Link from "next/link"
 import { usePathname } from "next/navigation";
 import styled from "styled-components"
-import albumIcons from "./album-icons.json";
+import Icon from "@components/icon";
+import { Prisma } from "@prisma/client";
+import { getAlbumGridData } from "@utils/prisma";
 
 const Ul = styled.ul`
   display: grid;
@@ -39,22 +41,8 @@ const AlbumName = styled.h3`
   margin: 0.5rem auto;
 `;
 
-type PolaroidGridAlbum = {
-  id: number;
-  name: string;
-  coverPhoto: {
-    url: string | null;
-  } | null,
-}
-
-// TODO: move to db
-function getLinkIcon(name: string) {
-  const linkIcon = (albumIcons as Record<string, string>)[name];
-  return linkIcon ? `${linkIcon} ` : null;
-}
-
 export default function PolaroidGrid(
-  { albums }: { albums: PolaroidGridAlbum[] }
+  { albums }: { albums: Prisma.PromiseReturnType<typeof getAlbumGridData> }
 ) {
   const pathname = usePathname();
 
@@ -66,7 +54,7 @@ export default function PolaroidGrid(
             <CoverImage src={sizePhoto(album.coverPhoto?.url || "", "L")} aspectRatio="1 / 1" />
             <ImageShadow />
             <AlbumName>
-              {getLinkIcon(album.name)}
+              <Icon icon={album.icon} inline />
               {album.name}
             </AlbumName>
           </Link>

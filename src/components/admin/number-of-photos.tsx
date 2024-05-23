@@ -1,14 +1,21 @@
 import { Album, Photo } from "@prisma/client";
+import { AlbumTypes } from "@utils/albums";
 import { countPhotos } from "@utils/prisma";
 
-export default async function NumberOfPhotos(
-  { album }: { album: Album & { photos: Photo[] }}
-) {
-  let numberOfPhotos = album.photos?.length || "0";
+type Props = {
+  albumName: string;
+  albumType: AlbumTypes;
+  photoCount?: number;
+};
 
-  if (album.type === "tag") {
+export default async function NumberOfPhotos(
+  { albumName, albumType, photoCount }: Props
+) {
+  let numberOfPhotos = photoCount;
+
+  if (albumType === "tag") {
     numberOfPhotos = await countPhotos({
-      where: { tags: { some: { name: album.name }}}
+      where: { tags: { some: { name: albumName }}}
     });
   }
 

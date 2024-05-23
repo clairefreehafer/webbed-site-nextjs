@@ -4,10 +4,8 @@ import AdminForm, { Input, Label } from "@components/admin/form";
 import { Prisma } from "@prisma/client";
 import { AlbumTypes, displayName } from "@utils/albums";
 import { AlbumFormState, editAlbum } from "@actions/album";
-import SectionSelect from "@components/admin/section-select";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import SelectCoverPhoto from "@components/photography/select-cover-photo";
-import { getSections } from "@utils/prisma/section";
 import { getAlbum, getPhotosWithTag } from "@utils/prisma";
 
 type Props = {
@@ -15,11 +13,11 @@ type Props = {
   albumPhotos: 
     Prisma.PromiseReturnType<typeof getAlbum>["photos"] |
     Prisma.PromiseReturnType<typeof getPhotosWithTag>,
-  sections: Prisma.PromiseReturnType<typeof getSections>,
+  children: ReactNode,
 }
 
 export default function UpdateAlbumForm(
-  { albumData, albumPhotos, sections }: Props) {
+  { albumData, albumPhotos, children }: Props) {
   const [autoDateGeneration, setAutoDateGeneration] = useState(!!albumPhotos.length);
 
   const initialState: AlbumFormState = {
@@ -27,7 +25,7 @@ export default function UpdateAlbumForm(
     message: "",
   };
 
-  const { id, name, section, date, type, coverKey } = albumData;
+  const { id, name, date, type, coverKey } = albumData;
 
   return (
     <AdminForm action={editAlbum} initialState={initialState}>
@@ -43,7 +41,7 @@ export default function UpdateAlbumForm(
         defaultValue={displayName(name)}
       />
 
-      <SectionSelect defaultValue={section} sections={sections} />
+      {children}
 
       <Label htmlFor="type">
         type
