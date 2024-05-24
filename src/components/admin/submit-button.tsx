@@ -9,6 +9,7 @@ const Button = styled.button`
   font-family: var(--font-pt-mono), monospace;
   font-size: 1.5rem;
   grid-column-start: span 2;
+  padding: 3rem;
   text-transform: uppercase;
 `;
 

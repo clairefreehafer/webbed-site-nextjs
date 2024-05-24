@@ -1,26 +1,25 @@
 "use client";
 
-import { flexColumnCenter } from "@styles/layout";
 import { ReactNode } from "react";
 import { useFormState } from "react-dom";
 import styled from "styled-components";
 
 const Form = styled.form`
   display: grid;
+  grid-gap: 2rem;
   grid-template-columns: 25% 75%;
   grid-template-rows: auto;
+  margin: 2rem;
   width: 100%;
-
-  & > * {
-    padding: 3rem;
-  }
 `;
 
 export const Label = styled.label`
-  ${flexColumnCenter};
+  display: flex;
+  align-items: center;
   font-size: 1.5rem;
   font-weight: bold;
-  margin: 0.5rem;
+  justify-content: flex-end;
+  margin: 3rem 0 3rem;
   text-transform: uppercase;
 `;
 
@@ -29,7 +28,7 @@ export const Input = styled.input`
   border: 0;
   font-family: var(--font-pt-mono), monospace;
   font-size: 1.5rem;
-  margin: 0.5rem;
+  padding: 3rem;
 `;
 
 export const HideSection = styled.div<{ $when: boolean }>`

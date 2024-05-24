@@ -4,8 +4,8 @@ import { slugName } from "@utils/albums";
 import Link from "next/link";
 import styled from "styled-components";
 import { Prisma } from "@prisma/client";
-import { getAlbumGridData } from "@utils/prisma";
 import Icon from "@components/icon";
+import { getPolaroidGridData } from "@utils/prisma/photo";
 
 const Ul = styled.ul`
   list-style: none;
@@ -16,7 +16,7 @@ const Li = styled.li`
 `;
 
 type Props = {
-  albums: Prisma.PromiseReturnType<typeof getAlbumGridData>
+  albums: Prisma.PromiseReturnType<typeof getPolaroidGridData>
 };
 
 export default function IconList({ albums }: Props) {

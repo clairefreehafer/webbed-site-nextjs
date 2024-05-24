@@ -1,29 +1,61 @@
 "use server";
 
-import { PrismaClient, Tag } from "@prisma/client";
+import { Prisma, PrismaClient, Tag } from "@prisma/client";
+import { createTag, updateTag } from "@utils/prisma/tag";
 import { revalidatePath } from "next/cache";
 
-export type TagFormState = Tag & { message?: string };
+export type TagFormState<T> = T & { message?: string };
 
 const prisma = new PrismaClient();
 
-export async function updateTag(
-  prevState: Partial<TagFormState>,
+export async function addTag(
+  _prevState: Partial<Prisma.TagCreateArgs["data"]>,
   formData: FormData
 ) {
-  let data: Partial<TagFormState> = {};
+  const name = formData.get("name") as string;
+  const parentName = formData.get("parentName") as string;
+  let data: Prisma.TagCreateArgs["data"] = { name };
+
   try {
-    const name = formData.get("tag") as string;
-    const parent = formData.get("parent") as string;
+    if (parentName && parentName !== "(none)") {
+      data.parentName = parentName;
+    }
 
-    data = { name, parentName: parent };
+    const createdTag = await createTag(data);
 
-    await prisma.tag.update({
-      where: { name },
-      data
-    })
+    return {
+      ...createdTag,
+      message: "👍 tag created successfully"
+    }
+  } catch (error) {
+    console.error(error);
     return {
       ...data,
+      message: `👎 ${(error as Error).message}`
+    }
+  }
+}
+
+export async function editTag(
+  _prevState: Partial<TagFormState<Prisma.TagUpdateArgs["data"]>>,
+  formData: FormData
+) {
+  const name = formData.get("name") as string;
+  const parentName = formData.get("parentName") as string;
+  let data: TagFormState<Prisma.TagUpdateArgs["data"]> = { name };
+
+  try {
+    if (parentName === name) {
+      throw new Error("a tag cannot be its own parent.")
+    }
+    if (parentName !== "(none)") {
+      data.parentName = parentName;
+    }
+
+    const updatedTag = await updateTag(name, data);
+
+    return {
+      ...updatedTag,
       message: "👍 tag updated"
     }
   } catch (error) {

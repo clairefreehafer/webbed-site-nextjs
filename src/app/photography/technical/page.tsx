@@ -1,10 +1,10 @@
-import AlbumGrid from "@components/photography/polaroid-grid";
-import { getAlbumGridData } from "@utils/prisma";
+import PolaroidGrid from "@components/photography/polaroid-grid";
+import { getPolaroidGridData } from "@utils/prisma/photo";
 
 export default async function Technical() {
-  const albums = await getAlbumGridData("technical");
+  const albums = await getPolaroidGridData("technical");
 
   return (
-    <AlbumGrid albums={albums} />
+    <PolaroidGrid albums={albums} />
   );
 }

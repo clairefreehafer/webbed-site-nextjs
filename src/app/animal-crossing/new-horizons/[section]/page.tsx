@@ -1,5 +1,6 @@
-import { getAlbumGridData, getStaticParams } from "@utils/prisma";
+import { getStaticParams } from "@utils/prisma";
 import IconList from "@components/animal-crossing/icon-list";
+import { getPolaroidGridData } from "@utils/prisma/photo";
 
 export async function generateStaticParams() {
   const albums = await getStaticParams("new-horizons");
@@ -15,7 +16,7 @@ export default async function Section(
   { params }: { params: { section: string }}
 ) {
   const { section } = params;
-  const albums = await getAlbumGridData(section);
+  const albums = await getPolaroidGridData(section);
 
   return (
     <>

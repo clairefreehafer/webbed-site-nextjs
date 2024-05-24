@@ -1,23 +1,29 @@
 import AdminForm, { Input, Label } from "@components/admin/form";
-import { updateTag } from "@actions/tag";
+import { editTag } from "@actions/tag";
 import { Tag } from "@prisma/client";
-import { ParentTagSelect } from "@components/admin/parent-tag-select";
+import { ReactNode } from "react";
+import SubmitButton from "@components/admin/submit-button";
+
+type Props = {
+  tagData: Tag,
+  children: ReactNode
+};
 
 export default async function TagForm(
-  { tagData }: { tagData: Tag }
+  { tagData, children }: Props
 ) {
   const initialState = tagData;
 
   return (
-    <AdminForm action={updateTag} initialState={initialState}>
-      <Label>
-        tag
-        <Input type="text" name="tag" defaultValue={tagData.name} />
+    <AdminForm action={editTag} initialState={initialState}>
+      <Label htmlFor="name">
+        name
       </Label>
+      <Input type="text" name="name" defaultValue={tagData.name} />
       
-      <ParentTagSelect defaultValue={tagData.parentName as string} />
+      {children}
 
-      <button type="submit">update tag</button>
+      <SubmitButton>update tag</SubmitButton>
     </AdminForm>
   );
 }

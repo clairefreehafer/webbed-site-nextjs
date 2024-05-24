@@ -1,6 +1,5 @@
 import { Prisma, PrismaClient } from "@prisma/client"
 import { cache } from "react"
-import { getAncestorSections } from "./section";
 
 const prisma = new PrismaClient();
 
@@ -30,39 +29,6 @@ export const getStaticParams = cache(async (section: string) => (
     }
   })
 ));
-
-export const getAlbumGridData = cache(async (section: string) => {
-  const albums = await prismaWrapper(prisma.album.findMany)({
-    where: { section: { name: section }},
-    select: {
-      id: true,
-      name: true,
-      section: {
-        select: {
-          name: true,
-          parent: true,
-        }
-      },
-      date: true,
-      coverPhoto: { select: { url: true }},
-      icon: {
-        select: {
-          imagePath: true,
-          character: true,
-        }
-      }
-    }
-  });
-
-  const result = [];
-
-  for (let album of albums) {
-    const sectionArray = await getAncestorSections(album.section);
-    result.push({ ...album, sectionArray });
-  }
-
-  return result;
-});
 
 export const getAlbum = cache(async (albumName: string) => (
   prismaWrapper(prisma.album.findUniqueOrThrow)({

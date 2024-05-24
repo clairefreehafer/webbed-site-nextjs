@@ -1,30 +1,29 @@
-import { PrismaClient } from "@prisma/client"
+"use client";
+
+import { Prisma, Tag } from "@prisma/client";
 import { Input, Label } from "./form";
+import { getTagNames } from "@utils/prisma/tag";
 
-const prisma = new PrismaClient();
 
-export async function ParentTagSelect(
-  { defaultValue }: { defaultValue?: string }
+type Props = {
+  defaultValue?: Tag["parentName"],
+  tags: Prisma.PromiseReturnType<typeof getTagNames>
+}
+
+export default function ParentTagSelect(
+  { defaultValue, tags }: Props
 ) {
-  // const parentTags = await prisma.tag.findMany({
-  //   distinct: "parent",
-  //   select: { parent: true }
-  // });
-  // const parents = parentTags
-  //   .filter((tag) => tag.parent)
-  //   .map((tag) => (tag.parent && tag.parent));
-
-  // console.log(parentTags)
-
   return (
-    <Label>
-      parent tag
-      {/* <select name="parent" defaultValue={defaultValue}>
-        {parents.map((parent) => (
-          <option key={parent}>{parent}</option>
+    <>
+      <Label htmlFor="parentName">
+        parent tag
+      </Label>
+      <Input as="select" name="parentName" id="parentName" defaultValue={defaultValue || "(none)"}>
+        <option>(none)</option>
+        {tags.map(({ name }) => (
+          <option key={name}>{name}</option>
         ))}
-      </select>
-      <Input type="text" name="newParent" /> */}
-    </Label>
+      </Input>
+    </>
   )
 }

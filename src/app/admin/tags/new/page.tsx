@@ -1,7 +1,13 @@
-import AdminForm from "@components/admin/form";
+import { getTagNames } from "@utils/prisma/tag";
+import AddTagForm from "./form";
+import ParentTagSelect from "@components/admin/parent-tag-select";
 
-export default function CreateNewTag() {
+export default async function CreateNewTag() {
+  const tags = await getTagNames();
+
   return (
-    <>add tag</>
+    <AddTagForm>
+      <ParentTagSelect tags={tags} />
+    </AddTagForm>
   )
 }

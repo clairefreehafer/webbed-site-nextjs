@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 import styled from "styled-components"
 import Icon from "@components/icon";
 import { Prisma } from "@prisma/client";
-import { getAlbumGridData } from "@utils/prisma";
+import { getPolaroidGridData } from "@utils/prisma/photo";
 
 const Ul = styled.ul`
   display: grid;
@@ -41,8 +41,17 @@ const AlbumName = styled.h3`
   margin: 0.5rem auto;
 `;
 
+function getCoverImageUrl(album: Prisma.PromiseReturnType<typeof getPolaroidGridData>[0]) {
+  if (album.coverPhoto?.url) {
+    return album.coverPhoto?.url;
+  } else if (album.randomCoverPhoto?.url) {
+    return album.randomCoverPhoto?.url;
+  }
+  return "";
+}
+
 export default function PolaroidGrid(
-  { albums }: { albums: Prisma.PromiseReturnType<typeof getAlbumGridData> }
+  { albums }: { albums: Prisma.PromiseReturnType<typeof getPolaroidGridData> }
 ) {
   const pathname = usePathname();
 
@@ -51,7 +60,7 @@ export default function PolaroidGrid(
       {albums.map((album) => (
         <PolaroidBorder key={album.id}>
           <Link href={`${pathname}/${slugName(album.name)}`}>
-            <CoverImage src={sizePhoto(album.coverPhoto?.url || "", "L")} aspectRatio="1 / 1" />
+            <CoverImage src={sizePhoto(getCoverImageUrl(album), "L")} aspectRatio="1 / 1" />
             <ImageShadow />
             <AlbumName>
               <Icon icon={album.icon} inline />
