@@ -7,14 +7,16 @@ export default function ParentSectionSelect(
   { sections, defaultValue }: { sections: Section[], defaultValue?: string }
 ) {
   return (
-    <Label>
-      parent section
-      <Input as="select" name="parent" defaultValue={defaultValue}>
+    <>
+      <Label htmlFor="parent">
+        parent section
+      </Label>
+      <Input as="select" name="parent" id="parent" defaultValue={defaultValue}>
         <option>(none)</option>
         {sections.map((section) => (
           <option key={section.id}>{section.name}</option>
         ))}
       </Input>
-    </Label>
+    </>
   )
 }

@@ -1,30 +1,28 @@
-import { getAlbumOptions } from "@utils/prisma";
+"use client";
 
-export default async function AlbumSelect(
-  { defaultValue = null }: { defaultValue?: string | null }
+import { Album, Photo } from "@prisma/client";
+import { Input, Label } from "./form";
+
+type Props = {
+  defaultValue?: Photo["albumName"],
+  albums: Partial<Album>[]
+};
+
+export default function AlbumSelect(
+  { defaultValue, albums }: Props
 ) {
-  const albums = await getAlbumOptions();
-
-  if (typeof albums === "string") {
-    return <p>{albums}</p>;
-  }
-
   return (
     <>
-      <label>
+      <Label htmlFor="albumName">
         select album
-        <select name="albumName" defaultValue={defaultValue || ""}>
-          {albums.map((album) => (
-            <option key={album.name}>
-              {album.name}
-            </option>
-          ))}
-        </select>
-      </label>
-      <label>
-        or create new album
-        <input type="text" name="newAlbum" />
-      </label>
+      </Label>
+      <Input as="select" name="albumName" id="albumName" defaultValue={defaultValue || ""}>
+        {albums.map((album) => (
+          <option key={album.name}>
+            {album.name}
+          </option>
+        ))}
+      </Input>
     </>
   );
 }

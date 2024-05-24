@@ -18,15 +18,28 @@ const Form = styled.form`
 
 export const Label = styled.label`
   ${flexColumnCenter};
+  font-size: 1.5rem;
+  font-weight: bold;
   margin: 0.5rem;
+  text-transform: uppercase;
 `;
 
 export const Input = styled.input`
+  background-color: #1b1b1b;
+  border: 0;
   font-family: var(--font-pt-mono), monospace;
+  font-size: 1.5rem;
   margin: 0.5rem;
 `;
 
 export const HideSection = styled.div<{ $when: boolean }>`
+  display: grid;
+  grid-template-columns: 25% 75%;
+  grid-template-rows: auto;
+  grid-column-start: span 2;
+  padding: 0;
+  width: 100%;
+
   ${({ $when }) => $when && `
     visibility: hidden;
     height: 0;

@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import { readFile } from "fs/promises";
 import xml2js from "xml2js";
 
@@ -13,31 +14,42 @@ export async function getMetadataFromXmp(path: string) {
       metadata["$"]["exif:DateTimeOriginal"] || metadata["$"]["xmp:CreateDate"] || metadata["$"]["xmp:ModifyDate"]
     );
 
-    const tags = metadata["digiKam:TagsList"][0]["rdf:Seq"][0]["rdf:li"].map((tag: string) => {
+    const tagData: Prisma.TagCreateOrConnectWithoutPhotosInput[] = [];
+
+    metadata["digiKam:TagsList"][0]["rdf:Seq"][0]["rdf:li"].forEach((tag: string) => {
       if (tag.includes("/")) {
         const splitTags = tag.split("/");
-
-        return {
-          where: { tag: splitTags[splitTags.length - 1] },
-          create: {
-            tag: splitTags[splitTags.length - 1],
-            parent: splitTags[splitTags.length - 2]
-          }
-        }
+        // let parentTag = "";
+        
+        splitTags.forEach((splitTag, i) => {
+          // if (i === splitTags.length - 1) {
+            // only connect to leaf tag.
+            tagData.push({
+              where: { name: splitTag },
+              create: {
+                name: splitTag,
+                // TODO: perhaps add this back in somehow, but we don't want photos
+                // tagged with parent tags most of the time.
+                // ...(parentTag && { parentName: parentTag })
+              }
+            });
+            console.log(`👉 adding tag ${splitTag}...`);
+          // }
+          // parentTag = splitTag;
+        })
+      } else {
+        tagData.push({
+          where: { name: tag },
+          create: { name: tag }
+        });
       }
-      return {
-        where: { tag },
-        create: { tag },
-      };
     });
 
     return {
       captureDate,
       title: metadata["$"]["acdsee:caption"],
       description: metadata["$"]["acdsee:description"],
-      tags: {
-        connectOrCreate: tags
-      }
+      tags: { connectOrCreate: tagData }
     }
   } catch (error) {
     return (error as Error).message;

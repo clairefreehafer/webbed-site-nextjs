@@ -3,6 +3,7 @@
 import { addSection } from "@actions/section";
 import AdminForm, { Input, Label } from "@components/admin/form";
 import ParentSectionSelect from "@components/admin/parent-section-select";
+import SubmitButton from "@components/admin/submit-button";
 import { Section } from "@prisma/client";
 
 export default function NewSectionForm(
@@ -10,16 +11,16 @@ export default function NewSectionForm(
 ) {
   return (
     <AdminForm action={addSection} initialState={{}}>
-      <Label>
+      <Label htmlFor="name">
         name
-        <Input type="text" name="name" />
       </Label>
+      <Input type="text" name="name" id="name" required />
 
       <ParentSectionSelect sections={sections} />
 
       {/* icon */}
 
-      <button type="submit">create</button>
+      <SubmitButton>create</SubmitButton>
     </AdminForm>
   )
 }

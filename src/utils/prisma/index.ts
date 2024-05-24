@@ -1,4 +1,6 @@
+import { PrismaClient } from "@prisma/client";
 
+export const prisma = new PrismaClient();
 
 export function prismaWrapper<Args, Result>(prismaFunction: (args: Args) => Result) {
   return (async (args: Args) => {

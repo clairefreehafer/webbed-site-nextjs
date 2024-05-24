@@ -1,15 +1,16 @@
 "use server";
 
-import { Photo, PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
+import { updatePhoto } from "@utils/prisma/photo";
 import { getSmugMugData } from "@utils/smugmug";
 import { getMetadataFromXmp } from "@utils/xmp";
 
-export type PhotoFormState = Photo & { message?: string };
+export type PhotoFormState<T> = T & { message?: string };
 
 const prisma = new PrismaClient();
 
-export async function createPhoto(_prevState: Partial<PhotoFormState>, formData: FormData) {
-  let data: Partial<Photo> & { smugMugKey: string } = {
+export async function createPhoto(_prevState: Partial<PhotoFormState<Prisma.PhotoCreateArgs["data"]>>, formData: FormData) {
+  let data: Prisma.PhotoCreateArgs["data"] = {
     smugMugKey: "",
   };
 
@@ -52,7 +53,7 @@ export async function createPhoto(_prevState: Partial<PhotoFormState>, formData:
 
     return {
       ...data,
-      message: "👍 photo added:"
+      message: "👍 photo added"
     };
   } catch (error) {
     console.error(`👎 ${error}`);
@@ -63,11 +64,11 @@ export async function createPhoto(_prevState: Partial<PhotoFormState>, formData:
   }
 }
 
-export async function updatePhoto(
-  prevState: Partial<PhotoFormState>,
+export async function editPhoto(
+  prevState: PhotoFormState<Prisma.PhotoUpdateArgs["data"]>,
   formData: FormData
 ) {
-  let data: Partial<PhotoFormState> = {};
+  let data: PhotoFormState<Prisma.PhotoUpdateArgs["data"]> = {};
 
   try {
     const synchronizeWithXmps = formData.get("synchronizeWithXmp");
@@ -118,13 +119,10 @@ export async function updatePhoto(
       data.albumName = albumName;
     }
 
-    await prisma.photo.update({
-      where: { smugMugKey },
-      data
-    });
+    const updatedPhoto = await updatePhoto(smugMugKey, data);
 
     return {
-      ...data,
+      ...updatedPhoto,
       message: "👍 photo updated",
     };
   } catch (error) {

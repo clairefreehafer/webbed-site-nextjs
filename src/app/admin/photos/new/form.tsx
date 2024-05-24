@@ -2,8 +2,9 @@
 
 import { PhotoFormState, createPhoto } from "@actions/photo";
 import AdminForm, { Input, Label } from "@components/admin/form";
+import { Prisma } from "@prisma/client";
 
-const initialState: Partial<PhotoFormState> = {};
+const initialState: Partial<PhotoFormState<Prisma.PhotoCreateArgs["data"]>> = {};
 
 export default function CreatePhotoForm(
   { children }: { children: React.ReactNode }

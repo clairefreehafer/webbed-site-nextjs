@@ -2,26 +2,24 @@
 
 import { IconFormState, addIcon } from "@actions/icon";
 import AdminForm, { Input, Label } from "@components/admin/form";
+import SubmitButton from "@components/admin/submit-button";
 
 const initialState: Partial<IconFormState> = {};
 
 export default function CreateIconForm() {
   return (
-    <>
-      <h3>create</h3>
-      <AdminForm action={addIcon} initialState={initialState}>
-        <Label>
-          emoji
-          <Input type="text" name="character" />
-        </Label>
+    <AdminForm action={addIcon} initialState={initialState}>
+      <Label htmlFor="character">
+        emoji
+      </Label>
+      <Input type="text" name="character" id="character" />
 
-        <Label>
-          image path
-          <Input type="text" name="imagePath" />
-        </Label>
+      <Label htmlFor="imagePath">
+        image path
+      </Label>
+      <Input type="text" name="imagePath" id="imagePath" />
 
-        <button type="submit">add icon</button>
-      </AdminForm>
-    </>
+      <SubmitButton>add icon</SubmitButton>
+    </AdminForm>
   )
 }
