@@ -18,13 +18,13 @@ const Cell = styled.div`
 export default function AnimalCrossing() {
   return (
     <Grid>
-      <Cell>
+      <Cell css={{ gridColumnStart: "span 2" }}>
         <h3>browse by game</h3>
         <ul>
           <li><Link href="/animal-crossing/new-horizons">new horizons</Link></li>
         </ul>
       </Cell>
-
+{/* 
       <Cell>
         <h3>browse by character</h3>
       </Cell>
@@ -35,7 +35,7 @@ export default function AnimalCrossing() {
 
       <Cell>
         <h3>recently added</h3>
-      </Cell>
+      </Cell> */}
     </Grid>
   )
 }

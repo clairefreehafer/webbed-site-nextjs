@@ -2,9 +2,10 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import styled, { css, useTheme } from "styled-components";
+import styled, { css } from "styled-components";
 import { textBackground } from "@styles/animal-crossing/theme";
 import { wiggleBox } from "@styles/animations";
+import { ZELDA_LIGHT_BLUE, sheikahUnderline, zeldaTextBackground } from "@styles/zelda/theme";
 
 const WIGGLE_BOX_DURATION_MS = 250; 
 
@@ -22,13 +23,20 @@ const Nav = styled.nav`
     text-align: center;
     width: 100%;
   `}
+  ${({ theme }) => theme.name === "zelda" && css`
+    ${zeldaTextBackground};
+    padding: 0.5rem;
+    text-align: center;
+  `}
 `;
 
 const Ul = styled.ul`
   display: flex;
   list-style: none;
   justify-content: center;
-  margin: 0 auto 1rem;
+  margin: 0 auto;
+
+  ${({ theme }) => theme.name === "photography" && "margin-bottom: 1rem;"}
 `;
 
 const defaultNavLinks: NavLink[] = [
@@ -43,6 +51,10 @@ const defaultNavLinks: NavLink[] = [
   {
     pathname: "/animal-crossing",
     name: "animal crossing",
+  },
+  {
+    pathname: "/zelda",
+    name: "zelda"
   }
 ]
 
@@ -101,7 +113,7 @@ const StyledLink = styled(Link)<{ $isActive: boolean }>`
 
   ${({ theme }) => theme.name === "animal-crossing" && `
       padding: 0 1rem;
-    `}
+  `}
 
   ${({ theme, $isActive }) => theme.name === "admin" && `
     color: limegreen;
@@ -113,6 +125,16 @@ const StyledLink = styled(Link)<{ $isActive: boolean }>`
     font-size: 1.25rem;
     line-height: 1.5rem;
     ${$isActive && "font-weight: normal;"}
+  `}
+
+  ${({ theme }) => theme.name === "zelda" && css`
+    ${sheikahUnderline};
+    margin: 0 1rem;
+    padding: 0.5rem 0;
+
+    &:hover {
+      color: ${ZELDA_LIGHT_BLUE};
+    }
   `}
 `;
 

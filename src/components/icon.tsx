@@ -34,7 +34,6 @@ export default function Icon({
 
   if (!icon) {
     if (theme.name === "animal-crossing") {
-      console.log("HIII")
       if (!date) {
         throw new Error("please pass a date for animal crossing page icons!");
       }
