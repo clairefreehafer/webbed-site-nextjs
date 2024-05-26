@@ -4,12 +4,31 @@ import styled, { css } from "styled-components";
 export const ZELDA_LIGHT_BLUE = "#76b6ff";
 
 export const zeldaTheme = {
-  name: "zelda"
+  name: "zelda",
+  iconHeight: 1.5
 };
 
 export const ZeldaThemeRoot = styled.div`
   ${fullScreen};
   background-image: url("/images/zelda/pad-background.jpg");
+
+  & h3 {
+    color: ${ZELDA_LIGHT_BLUE};
+    font-family: var(--font-hylia-serif), serif;
+    font-size: 2rem;
+    font-weight: normal;
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+  }
+
+  & a:hover {
+    color: ${ZELDA_LIGHT_BLUE};
+  }
+
+  li {
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 // https://codepen.io/sosuke/pen/Pjoqqp

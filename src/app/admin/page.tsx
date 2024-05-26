@@ -15,19 +15,19 @@ export default function AdminPage() {
   return (
     <Ul className={pressStart2P.className}>
       <li>
-        <Link href="/admin/photos">photos</Link>
+        <Link href="/admin/sections">sections</Link>
       </li>
       <li>
         <Link href="/admin/albums">albums</Link>
       </li>
       <li>
-        <Link href="/admin/sections">sections</Link>
-      </li>
-      <li>
-        <Link href="/admin/icons">icons</Link>
+        <Link href="/admin/photos">photos</Link>
       </li>
       <li>
         <Link href="/admin/tags">tags</Link>
+      </li>
+      <li>
+        <Link href="/admin/icons">icons</Link>
       </li>
     </Ul>
   )

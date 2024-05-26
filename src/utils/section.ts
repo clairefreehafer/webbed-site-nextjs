@@ -6,7 +6,7 @@ export const getAncestorSections = cache(async (section: Partial<Section> & { pa
   let currentSection = section;
   const result = [];
 
-  while (currentSection) {
+  while (currentSection?.name) {
     result.unshift(currentSection.name);
 
     if (currentSection.parent) {

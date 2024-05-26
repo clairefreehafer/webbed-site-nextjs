@@ -3,6 +3,7 @@
 import { Album, Prisma, PrismaClient } from "@prisma/client";
 import { AlbumTypes } from "@utils/albums";
 import { createAlbum, getMostRecentPhotoDate, updateAlbum } from "@utils/prisma";
+import { revalidatePath } from "next/cache";
 
 export type AlbumFormState = Album & { message?: string };
 
@@ -112,6 +113,8 @@ export async function editAlbum(
       where: { name },
       data,
     });
+
+    revalidatePath("/admin");
 
     return {
       ...updatedAlbum,

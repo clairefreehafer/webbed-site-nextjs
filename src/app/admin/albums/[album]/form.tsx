@@ -7,6 +7,7 @@ import { AlbumFormState, editAlbum } from "@actions/album";
 import { ReactNode, useState } from "react";
 import SelectCoverPhoto from "@components/photography/select-cover-photo";
 import { getAlbum, getPhotosWithTag } from "@utils/prisma";
+import SubmitButton from "@components/admin/submit-button";
 
 type Props = {
   albumData: Prisma.PromiseReturnType<typeof getAlbum>,
@@ -83,7 +84,7 @@ export default function UpdateAlbumForm(
         add photos (by smugmugkey?)
       </Label> */}
 
-      <button type="submit" css={{ gridColumnStart: "span 2" }}>update album</button>
+      <SubmitButton>update album</SubmitButton>
     </AdminForm>
   )
 }

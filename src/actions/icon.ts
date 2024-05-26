@@ -26,7 +26,7 @@ export async function addIcon(_prevState: Partial<IconFormState>, formData: Form
       if (!imagePath.startsWith("/images/")) {
         throw new Error("`imagePath` must start with `/images/`");
       }
-      if (!imagePath.endsWith(".png")) {
+      if (!imagePath.endsWith(".png") && !imagePath.endsWith(".svg")) {
         throw new Error("`imagePath` does not appear to point to an image.");
       }
       console.log(`👉 creating icon with image ${imagePath}...`);

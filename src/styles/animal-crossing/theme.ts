@@ -15,6 +15,7 @@ export const animalCrossingTheme = {
   grassDateRange,
   astrologyDateRange,
   shape: "square",
+  iconHeight: 2,
 };
 
 export const textBackground = css`

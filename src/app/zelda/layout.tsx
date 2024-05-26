@@ -27,9 +27,10 @@ const Header = styled.header`
 `;
 
 const Title = styled.h1`
-  font-family: var(--font-hylia-serif), sans-serif;
+  font-family: var(--font-hylia-serif), serif;
   font-size: 3rem;
   font-weight: normal;
+  margin: 1rem auto;
   text-transform: capitalize;
 `;
 

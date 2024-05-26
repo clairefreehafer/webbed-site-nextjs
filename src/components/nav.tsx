@@ -127,10 +127,15 @@ const StyledLink = styled(Link)<{ $isActive: boolean }>`
     ${$isActive && "font-weight: normal;"}
   `}
 
-  ${({ theme }) => theme.name === "zelda" && css`
+  ${({ theme, $isActive }) => theme.name === "zelda" && css`
     ${sheikahUnderline};
     margin: 0 1rem;
     padding: 0.5rem 0;
+
+    ${$isActive && `
+      color: ${ZELDA_LIGHT_BLUE};
+      font-weight: normal;
+    `}
 
     &:hover {
       color: ${ZELDA_LIGHT_BLUE};

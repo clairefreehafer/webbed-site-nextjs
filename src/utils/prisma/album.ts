@@ -1,6 +1,6 @@
 import { cache } from "react";
 import { prismaWrapper } from "./index";
-import { PrismaClient } from "@prisma/client";
+import { Album, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -30,3 +30,15 @@ export const getAdminAlbums = cache(async () => (
     orderBy: { date: { sort: "desc", nulls: "first" }},
   })
 ));
+
+export const getAlbumList = cache(async (sectionName: Album["sectionName"]) => (
+  prismaWrapper(prisma.album.findMany)({
+    where: { sectionName },
+    select: {
+      id: true,
+      name: true,
+      sectionName: true,
+      icon: true,
+    }
+  })
+))

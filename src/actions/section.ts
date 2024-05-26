@@ -2,6 +2,7 @@
 
 import { Prisma, Section } from "@prisma/client";
 import { createSection, deleteSection, updateSection } from "@utils/prisma/section";
+import { revalidatePath } from "next/cache";
 
 export type SectionFormState = Section & { message?: string };
 
@@ -19,6 +20,8 @@ export async function addSection(
         ...(parent !== "(none)" && { parent: { connect: { name: parent }}})
       }
     });
+
+    revalidatePath("/admin");
 
     return {
       ...createdSection,

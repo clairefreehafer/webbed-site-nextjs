@@ -17,7 +17,7 @@ const Image = styled.img<{ $height: number | "inherit"; $inline: boolean }>`
 
 type Props = {
   icon: Partial<IconType> | null
-  /** rem. height of image, emoji will be -1. */
+  /** rem. height of image, emoji will be this - 1. */
   height?: number | "inherit";
   inline?: boolean;
   /** for animal crossing links w/o an icon. */
