@@ -36,7 +36,7 @@ export default function AnimalCrossingLayout(
 ) {
   return (
     <ThemeProvider theme={animalCrossingTheme}>
-      <AnimalCrossingThemeRoot className={fotSeuratProB.className}>
+      <AnimalCrossingThemeRoot className={fotSeuratProB.variable}>
         <Header>
           <AnimalCrossingLogo text="claire freehafer" />
           <Navigation />

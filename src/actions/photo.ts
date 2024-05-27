@@ -116,6 +116,7 @@ export async function editPhoto(
     }
 
     if (prevState.albumName !== albumName) {
+      console.log(`👉 moving photo from "${prevState.albumName}" to "${albumName}"...`);
       data.albumName = albumName;
     }
 

@@ -18,7 +18,7 @@ export const animalCrossingTheme = {
   iconHeight: 2,
 };
 
-export const textBackground = css`
+export const animalCrossingTextBackground = css`
   backdrop-filter: blur(3px);
   background-color: ${UI_BACKGROUND_COLOR};
   border-radius: ${UI_BORDER_RADIUS};
@@ -39,4 +39,5 @@ export const AnimalCrossingThemeRoot = styled.div<{ $shape?: string; $date?: Dat
   ${fullScreen};
   ${({ theme, $shape, $date }) => grassBackground($shape || theme.shape, $date || new Date())};
   background-position: left calc(50% - 128px) top calc(6rem + ${SVG_HEIGHT});
+  font-family: var(--font-fot-seurat-pro-b), sans-serif;
 `;

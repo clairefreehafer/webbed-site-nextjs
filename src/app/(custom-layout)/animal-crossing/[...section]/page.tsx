@@ -1,5 +1,5 @@
 import { displayName } from "@utils/albums";
-import Slideshow from "./slideshow";
+import Slideshow from "@components/slideshow";
 import { getAlbumPhotos } from "@utils/animal-crossing";
 import { getStaticParams } from "@utils/prisma";
 import { getAncestorSections } from "@utils/section";
@@ -21,7 +21,6 @@ export const dynamicParams = false;
 
 export default async function Page({ params }: { params: { section: string[] }}) {
   const albumName = displayName(params.section[params.section.length - 1]);
-  console.log(params.section, albumName)
   const section = params.section[params.section.length - 2];
   const photos = await getAlbumPhotos(albumName, section);
 

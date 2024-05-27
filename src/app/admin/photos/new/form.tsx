@@ -2,6 +2,7 @@
 
 import { PhotoFormState, createPhoto } from "@actions/photo";
 import AdminForm, { Input, Label } from "@components/admin/form";
+import SubmitButton from "@components/admin/submit-button";
 import { Prisma } from "@prisma/client";
 
 const initialState: Partial<PhotoFormState<Prisma.PhotoCreateArgs["data"]>> = {};
@@ -10,30 +11,27 @@ export default function CreatePhotoForm(
   { children }: { children: React.ReactNode }
 ) {
   return (
-    <>
-      <h3>create</h3>
-      <AdminForm action={createPhoto} initialState={initialState}>
-        <Label>
-          smug mug key
-          <Input type="text" name="smugMugKey" required />
-        </Label>
+    <AdminForm action={createPhoto} initialState={initialState}>
+      <Label htmlFor="smugMugKey">
+        smug mug key
+      </Label>
+      <Input type="text" name="smugMugKey" id="smugMugKey" required />
 
-        <Label>
-          xmp path
-          <Input type="text" name="xmpPath" required />
-        </Label>
+      <Label htmlFor="xmpPath">
+        xmp path
+      </Label>
+      <Input type="text" name="xmpPath" id="xmpPath" required />
 
-        {children}
+      {children}
 
-        <Label>
-          alt text
-          <Input as="textarea" name="altText" />
-        </Label>
+      <Label htmlFor="altText">
+        alt text
+      </Label>
+      <Input as="textarea" name="altText" id="altText" />
 
-        {/* TODO: show table of added data */}
+      {/* TODO: show table of added data */}
 
-        <button type="submit">add photo</button>
-      </AdminForm>
-    </>
+      <SubmitButton>📸 add photo 📸</SubmitButton>
+    </AdminForm>
   )
 }

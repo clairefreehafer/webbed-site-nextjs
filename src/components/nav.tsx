@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import styled, { css } from "styled-components";
-import { textBackground } from "@styles/animal-crossing/theme";
+import { animalCrossingTextBackground } from "@styles/animal-crossing/theme";
 import { wiggleBox } from "@styles/animations";
 import { ZELDA_LIGHT_BLUE, sheikahUnderline, zeldaTextBackground } from "@styles/zelda/theme";
 
@@ -17,7 +17,7 @@ export type NavLink = {
 
 const Nav = styled.nav`
   ${({ theme }) => theme.name === "animal-crossing" && css`
-    ${textBackground};
+    ${animalCrossingTextBackground};
     height: 4rem;
     padding: 1rem 2rem;
     text-align: center;

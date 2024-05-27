@@ -2,26 +2,32 @@
 
 import { fotSeuratProB } from "@fonts/animal-crossing";
 import type { Photo } from "@prisma/client";
-import { AnimalCrossingThemeRoot, textBackground } from "@styles/animal-crossing/theme";
+import { AnimalCrossingThemeRoot, animalCrossingTextBackground } from "@styles/animal-crossing/theme";
 import { fullScreen } from "@styles/layout";
 import { SLIDESHOW_UI_Z_INDEX } from "@styles/z-index";
+import { ZeldaThemeRoot, zeldaTextBackground } from "@styles/zelda/theme";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import styled, { DefaultTheme, css, useTheme } from "styled-components";
 
 const NavBack = styled.nav`
-  ${textBackground};
   left: 0.5rem;
   padding: 0.5rem 1rem;
   position: absolute;
   text-align: center;
   top: 0.6rem;
   z-index: ${SLIDESHOW_UI_Z_INDEX};
+
+  ${({ theme }) => theme.name === "animal-crossing" && css`
+    ${animalCrossingTextBackground};
+  `}
+  ${({ theme }) => theme.name === "zelda" && css`
+    ${zeldaTextBackground};
+  `}
 `;
 
 const SlideInfo = styled.div`
-  ${textBackground};
   align-items: center;
   display: flex;
   justify-content: center;
@@ -31,7 +37,14 @@ const SlideInfo = styled.div`
   text-align: right;
   top: 0.5rem;
   z-index: ${SLIDESHOW_UI_Z_INDEX};
-`
+
+  ${({ theme }) => theme.name === "animal-crossing" && css`
+    ${animalCrossingTextBackground};
+  `}
+  ${({ theme }) => theme.name === "zelda" && css`
+    ${zeldaTextBackground};
+  `}
+`;
 
 const Main = styled.main`
   ${fullScreen};
@@ -74,13 +87,19 @@ const Photo = styled.img`
 `;
 
 const SlideNavigation = styled.div`
-  ${textBackground};
   bottom: 0.5rem;
   left: 50%;
   padding: 0.5rem 1.5rem;
   position: absolute;
   transform: translateX(-50%);
   z-index: ${SLIDESHOW_UI_Z_INDEX};
+
+  ${({ theme }) => theme.name === "animal-crossing" && css`
+    ${animalCrossingTextBackground};
+  `}
+  ${({ theme }) => theme.name === "zelda" && css`
+    ${zeldaTextBackground};
+  `}
 `;
 
 type Props = {
@@ -96,6 +115,7 @@ export default function Slideshow(
   const [currentSlide, setCurrentSlide] = useState(1);
   const slidesRef = useRef<(HTMLElement | null)[]>([]);
   const pathname = usePathname();
+  const theme = useTheme();
 
   useEffect(() => {
     const { hash } = window?.location;
@@ -136,8 +156,10 @@ export default function Slideshow(
     }
   }, [slidesRef, photos.length]);
 
+  const ThemeRoot = theme.name === "animal-crossing" ? AnimalCrossingThemeRoot : ZeldaThemeRoot;
+
   return (
-    <AnimalCrossingThemeRoot $date={albumDate} $shape="triangle" className={fotSeuratProB.className}>
+    <ThemeRoot $date={albumDate} $shape="triangle" className={fotSeuratProB.variable}>
       <NavBack>
         {/* TODO: make applicable for all sections */}
         <Link href={`/animal-crossing/${albumSection.slice(0, albumSection.length - 1).join("/")}`}>
@@ -191,6 +213,6 @@ export default function Slideshow(
           </Link>
         )}
       </SlideNavigation>
-    </AnimalCrossingThemeRoot>
+    </ThemeRoot>
   );
 }
