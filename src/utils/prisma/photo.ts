@@ -1,7 +1,7 @@
 import { Photo, Prisma, Tag } from "@prisma/client";
 import { prisma, prismaWrapper } from "./index";
 import { cache } from "react";
-import { getAncestorSections } from "@utils/section";
+import { getAncestorSections, getRootSection } from "@utils/section";
 
 export const updatePhoto = (
   smugMugKey: Photo["smugMugKey"],
@@ -67,3 +67,53 @@ export const getPolaroidGridData = cache(async (section: string) => {
 
   return result;
 });
+
+export const getZeldaAdminPhotos = cache(async () => {
+  return prismaWrapper(prisma.photo.findMany)({
+    where: {
+      album: {
+        section: {
+          parentName: "zelda"
+        }
+      }
+    },
+    select: {
+      id: true,
+      albumName: true,
+      url: true,
+      smugMugKey: true,
+      metadata: true
+    }
+  });
+})
+
+/** update photo form */
+export const getAdminPhoto = cache(async (smugMugKey: string) => {
+  const photo = await prismaWrapper(prisma.photo.findUniqueOrThrow)({
+    where: { smugMugKey },
+    select: {
+      smugMugKey: true,
+      xmpPath: true,
+      url: true,
+      captureDate: true,
+      metadata: true,
+      altText: true,
+      albumName: true,
+      album: {
+        select: {
+          section: true
+        }
+      }
+    }
+  })
+
+  let rootSection = null;
+  if (photo.album) {
+    rootSection = await getRootSection(photo.album.section);
+  }
+
+  return {
+    ...photo,
+    rootSection,
+  }
+})

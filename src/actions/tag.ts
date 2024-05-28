@@ -1,8 +1,8 @@
 "use server";
 
+import { UpdateTagFormState } from "@app/admin/tags/[tag]/form";
 import { Prisma, PrismaClient, Tag } from "@prisma/client";
 import { createTag, updateTag } from "@utils/prisma/tag";
-import { revalidatePath } from "next/cache";
 
 export type TagFormState<T> = T & { message?: string };
 
@@ -37,7 +37,7 @@ export async function addTag(
 }
 
 export async function editTag(
-  _prevState: Partial<TagFormState<Prisma.TagUpdateArgs["data"]>>,
+  _prevState: UpdateTagFormState,
   formData: FormData
 ) {
   const name = formData.get("name") as string;
@@ -61,7 +61,6 @@ export async function editTag(
   } catch (error) {
     console.error(error);
     return {
-      ...data,
       message: `👎 ${(error as Error).message}`
     }
   }
@@ -69,7 +68,7 @@ export async function editTag(
 
 export async function deleteTag(formData: FormData) {
   const name = formData.get("value") as string;
-  
+
   console.log(`👉 deleting tag "${name}"...`)
   // return await new Promise((resolve) => setTimeout(resolve, 5000));
   await prisma.tag.delete({

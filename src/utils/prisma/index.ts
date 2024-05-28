@@ -10,6 +10,7 @@ export function prismaWrapper<Args, Result>(prismaFunction: (args: Args) => Resu
       return result;
     } catch (error) {
       console.error(`👎 ${error}`);
+      console.error(` > args = ${JSON.stringify(args)};`)
       throw error;
     }
   });

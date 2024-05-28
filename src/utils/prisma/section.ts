@@ -24,7 +24,17 @@ export const getChildSections = cache(async (parentName: string) => (
 export const getSection = cache(async (name: string) => (
   prismaWrapper(prisma.section.findUniqueOrThrow)({
     where: { name },
-    select: { id: true, name: true, parentName: true }
+    select: {
+      id: true,
+      name: true,
+      parentName: true,
+      parent: {
+        select: {
+          name: true,
+          parentName: true,
+        }
+      }
+    }
   })
 ));
 

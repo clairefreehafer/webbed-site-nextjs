@@ -18,8 +18,8 @@ model Photo {
   smugMugKey  String    @db.VarChar(255) @unique
   url         String?   @db.VarChar(255) @unique
   captureDate DateTime? @db.Timestamp(6)
-  title       String?   @db.VarChar(255)
-  description String?   @db.VarChar(255)
+  /// [Metadata]
+  metadata    Json?
   xmpPath     String    @db.VarChar(255) @unique @default("")
   altText     String?   @db.VarChar(255)
   tags        Tag[]

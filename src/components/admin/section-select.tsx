@@ -29,9 +29,13 @@ function generateSectionsHierarchy(sections: (Section & { children: Section[] })
   return sectionsHierarchy;
 };
 
+type Props = {
+  defaultValue: Section | null,
+  sections: (Section & { children: Section[] })[]
+}
+
 export default function SectionSelect(
-  { defaultValue, sections }:
-  { defaultValue: Section | null, sections: (Section & { children: Section[] })[] }
+  { defaultValue, sections }: Props
 ) {
   const sectionsHierarchy = useMemo(() => generateSectionsHierarchy(sections), [sections]);
   const defaultOptions = useMemo(() => {
@@ -101,8 +105,7 @@ export default function SectionSelect(
               as="select"
               key={i}
               name={`section${i}`}
-              onChange={() =>
-              handleChange(i)}
+              onChange={() => handleChange(i)}
               ref={(el) => {el && selectRefs.current.push(el)}}
               defaultValue={defaultOptions[i]}
             >

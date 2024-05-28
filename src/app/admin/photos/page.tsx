@@ -14,6 +14,9 @@ export default async function AdminPhotoRead() {
         <li>
           <Link href="/admin/photos/new">add photo</Link>
         </li>
+        <li>
+          <Link href="/admin/photos/zelda">zelda</Link>
+        </li>
       </ul>
       {typeof photos === "string" ? (
         <p>{photos}</p>

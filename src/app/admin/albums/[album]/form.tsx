@@ -1,9 +1,9 @@
 "use client";
 
-import AdminForm, { Input, Label } from "@components/admin/form";
+import AdminForm, { FormState, Input, Label } from "@components/admin/form";
 import { Prisma } from "@prisma/client";
 import { AlbumTypes, displayName } from "@utils/albums";
-import { AlbumFormState, editAlbum } from "@actions/album";
+import { editAlbum } from "@actions/album";
 import { ReactNode, useState } from "react";
 import SelectCoverPhoto from "@components/photography/select-cover-photo";
 import { getAlbum, getPhotosWithTag } from "@utils/prisma";
@@ -11,20 +11,21 @@ import SubmitButton from "@components/admin/submit-button";
 
 type Props = {
   albumData: Prisma.PromiseReturnType<typeof getAlbum>,
-  albumPhotos: 
+  albumPhotos:
     Prisma.PromiseReturnType<typeof getAlbum>["photos"] |
     Prisma.PromiseReturnType<typeof getPhotosWithTag>,
   children: ReactNode,
-}
+};
+
+export type UpdateAlbumFormState = FormState<
+  Props["albumPhotos"]
+>;
 
 export default function UpdateAlbumForm(
   { albumData, albumPhotos, children }: Props) {
   const [autoDateGeneration, setAutoDateGeneration] = useState(!!albumPhotos.length);
 
-  const initialState: AlbumFormState = {
-    ...albumData,
-    message: "",
-  };
+  const initialState: UpdateAlbumFormState = {};
 
   const { id, name, date, type, coverKey } = albumData;
 

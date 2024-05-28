@@ -1,5 +1,6 @@
 "use server";
 
+import { UpdatePhotoFormState } from "@app/admin/photos/[smugMugKey]/form";
 import { Prisma, PrismaClient } from "@prisma/client";
 import { updatePhoto } from "@utils/prisma/photo";
 import { getSmugMugData } from "@utils/smugmug";
@@ -39,7 +40,7 @@ export async function createPhoto(_prevState: Partial<PhotoFormState<Prisma.Phot
     if (typeof metadataFromXmp === "string") {
       throw new Error(metadataFromXmp);
     }
-    
+
     data = {
       smugMugKey,
       url,
@@ -65,10 +66,10 @@ export async function createPhoto(_prevState: Partial<PhotoFormState<Prisma.Phot
 }
 
 export async function editPhoto(
-  prevState: PhotoFormState<Prisma.PhotoUpdateArgs["data"]>,
+  prevState: UpdatePhotoFormState,
   formData: FormData
 ) {
-  let data: PhotoFormState<Prisma.PhotoUpdateArgs["data"]> = {};
+  let data: Prisma.PhotoUpdateArgs["data"] = {};
 
   try {
     const synchronizeWithXmps = formData.get("synchronizeWithXmp");
@@ -78,6 +79,11 @@ export async function editPhoto(
     const title = formData.get("title") as string;
     const description = formData.get("description") as string;
     const altText = formData.get("altText") as string;
+
+    if (prevState.albumName !== albumName) {
+      console.log(`👉 moving photo from "${prevState.albumName}" to "${albumName}"...`);
+      data.album = { connect: { name: albumName }};
+    }
 
     if (synchronizeWithXmps) {
       if (!xmpPath) {
@@ -96,28 +102,23 @@ export async function editPhoto(
 
       data = metadataFromXmp;
     } else {
-      if (prevState.title !== title) {
-        console.log(`👉 changing title from "${prevState.title}" to "${title}"...`);
-        data.title = title;
-      }
-      if (prevState.description !== description) {
-        console.log(`👉 changing description from "${prevState.description}" to "${description}"...`);
-        data.title = title;
-      }
-      if (prevState.altText !== altText) {
-        console.log(`👉 changing altText from "${prevState.altText}" to "${altText}"...`);
-        data.title = title;
-      }
+      // if (prevState.title !== title) {
+      //   console.log(`👉 changing title from "${prevState.title}" to "${title}"...`);
+      //   data.title = title;
+      // }
+      // if (prevState.description !== description) {
+      //   console.log(`👉 changing description from "${prevState.description}" to "${description}"...`);
+      //   data.title = title;
+      // }
+      // if (prevState.altText !== altText) {
+      //   console.log(`👉 changing altText from "${prevState.altText}" to "${altText}"...`);
+      //   data.title = title;
+      // }
     }
 
     if (prevState.xmpPath !== xmpPath) {
       console.log(`👉 changing xmpPath from "${prevState.xmpPath}" to "${xmpPath}"...`);
       data.xmpPath = xmpPath;
-    }
-
-    if (prevState.albumName !== albumName) {
-      console.log(`👉 moving photo from "${prevState.albumName}" to "${albumName}"...`);
-      data.albumName = albumName;
     }
 
     const updatedPhoto = await updatePhoto(smugMugKey, data);
@@ -129,7 +130,6 @@ export async function editPhoto(
   } catch (error) {
     console.error(`👎 ${error}`);
     return {
-      ...data,
       message: `👎 ${(error as Error).message}`
     };
   }

@@ -68,7 +68,7 @@ export const getAdminPhotos = cache(async () => (
 ));
 
 export const getPhoto = cache(async (smugMugKey: string) => (
-  prismaWrapper(prisma.photo.findUnique)({
+  prismaWrapper(prisma.photo.findUniqueOrThrow)({
     where: { smugMugKey }
   })
 ));

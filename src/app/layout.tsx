@@ -8,8 +8,11 @@ declare global {
     type Metadata = {
       title?: string;
       description?: string;
-      path: string;
-      altText?: string;
+      /** zelda photos only */
+      compendium?: {
+        number?: number;
+        iconId?: number;
+      };
     }
   }
 }

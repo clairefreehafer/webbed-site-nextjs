@@ -1,13 +1,15 @@
 "use client";
 
+import { flexColumnCenter } from "@styles/layout";
 import { ReactNode } from "react";
 import { useFormState } from "react-dom";
 import styled from "styled-components";
 
 const Form = styled.form`
+  align-items: center;
   display: grid;
   grid-gap: 2rem;
-  grid-template-columns: 25% 75%;
+  grid-template-columns: 25% 1fr;
   grid-template-rows: auto;
   margin: 2rem;
   width: 100%;
@@ -20,6 +22,7 @@ export const Label = styled.label`
   font-weight: bold;
   justify-content: flex-end;
   margin: 3rem 0 3rem;
+  text-align: right;
   text-transform: uppercase;
 `;
 
@@ -29,14 +32,15 @@ export const Input = styled.input`
   font-family: var(--font-pt-mono), monospace;
   font-size: 1.5rem;
   padding: 3rem;
+
+  &[type="checkbox"] {
+    height: 3rem;
+  }
 `;
 
-export const HideSection = styled.div<{ $when: boolean }>`
-  display: grid;
-  grid-template-columns: 25% 75%;
-  grid-template-rows: auto;
+export const HideSection = styled(Form)<{ $when: boolean }>`
   grid-column-start: span 2;
-  padding: 0;
+  margin: 0;
   width: 100%;
 
   ${({ $when }) => $when && `
@@ -45,9 +49,17 @@ export const HideSection = styled.div<{ $when: boolean }>`
   `}
 `;
 
+export const SecitonHeader = styled.p`
+  ${flexColumnCenter};
+  grid-column-start: span 2;
+  font-size: 2em;
+`;
+
+export type FormState<T> = Partial<T & { message?: string }>;
+
 type Props<T> = {
   initialState: Awaited<T>;
-  action: (state: T, payload: FormData) => T | Promise<T>;
+  action: (state: Awaited<T>, payload: FormData) => T | Promise<T>;
   children: Readonly<ReactNode>;
 };
 

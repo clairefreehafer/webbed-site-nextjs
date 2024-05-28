@@ -47,8 +47,10 @@ export async function getMetadataFromXmp(path: string) {
 
     return {
       captureDate,
-      title: metadata["$"]["acdsee:caption"],
-      description: metadata["$"]["acdsee:description"],
+      metadata: {
+        title: metadata["$"]["acdsee:caption"],
+        description: metadata["$"]["acdsee:description"],
+      },
       tags: { connectOrCreate: tagData }
     }
   } catch (error) {

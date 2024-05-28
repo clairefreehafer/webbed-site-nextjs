@@ -1,5 +1,7 @@
 "use server";
 
+import { UpdateSectionFormState } from "@app/admin/sections/[section]/form";
+import { NewSectionFormState } from "@app/admin/sections/new/form";
 import { Prisma, Section } from "@prisma/client";
 import { createSection, deleteSection, updateSection } from "@utils/prisma/section";
 import { revalidatePath } from "next/cache";
@@ -7,7 +9,7 @@ import { revalidatePath } from "next/cache";
 export type SectionFormState = Section & { message?: string };
 
 export async function addSection(
-  _prevState: Partial<SectionFormState>,
+  _prevState: NewSectionFormState,
   formData: FormData
 ) {
   const name = formData.get("name") as string;
@@ -40,7 +42,7 @@ export async function addSection(
   }
 }
 
-export async function editSection(prevState: Partial<SectionFormState>, formData: FormData) {
+export async function editSection(prevState: UpdateSectionFormState, formData: FormData) {
   const id = parseInt(formData.get("id") as string);
   const name = formData.get("name") as string;
   const parent = formData.get("parent") as string;
@@ -62,7 +64,7 @@ export async function editSection(prevState: Partial<SectionFormState>, formData
       } else {
         console.log(`👉 updating parent from ${prevState.parentName} to ${parent}...`)
       }
-    } 
+    }
 
     const updatedSection = await updateSection({
       where: { id },
