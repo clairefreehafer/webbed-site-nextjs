@@ -4,14 +4,16 @@ import { Album, Icon } from "@prisma/client";
 import { getAstrologyDateRange } from "@utils/animal-crossing";
 import styled, { useTheme } from "styled-components";
 
-const Emoji = styled.span<{ $height: number | "inherit" }>`
+const Emoji = styled.p<{ $height: number | "inherit"; $inline: boolean }>`
   ${({ $height }) => $height === "inherit" ?
     "font-size: inherit;" :
     `font-size: ${$height - 1}rem;`}
+
+  ${({ $inline }) => !$inline && "width: 100%;"}
 `;
 
 const Image = styled.img<{ $height: number | "inherit"; $inline: boolean }>`
-  ${({ $height }) => `height: ${$height}rem;`}
+  ${({ $height }) => `height: ${$height}rem; max-width: ${$height}rem;`}
   ${({ $inline }) => $inline && "margin-right: 0.25rem;"}
 `;
 

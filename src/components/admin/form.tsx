@@ -32,6 +32,7 @@ export const Input = styled.input`
   font-family: var(--font-pt-mono), monospace;
   font-size: 1.5rem;
   padding: 3rem 1rem;
+  width: 100%;
 
   &[type="checkbox"] {
     height: 3rem;
@@ -43,14 +44,53 @@ export const Textarea = styled(Input).attrs({ as: "textarea" })`
   padding: 1rem;
 `;
 
+export const Fieldset = styled.fieldset`
+  background-color: #1b1b1b;
+  border: none;
+  display: flex;
+  grid-column-start: span 2;
+  padding: 1rem;
+  width: 100%;
+`;
+
+export const FieldsetGrid = styled.div`
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fill, 3rem);
+  grid-template-rows: 3rem;
+  width: 100%;
+`;
+
+export const Legend = styled.legend`
+  font-size: 1.5rem;
+  padding: 1rem;
+  text-transform: uppercase;
+`;
+
+export const ImageRadio = styled.input`
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+
+  & + img {
+    cursor: pointer;
+  }
+
+  &:checked + * {
+    outline: 3px dashed white;
+  }
+`;
+
 export const HideSection = styled(Form)<{ $when: boolean }>`
   grid-column-start: span 2;
   margin: 0;
   width: 100%;
 
   ${({ $when }) => $when && `
-    visibility: hidden;
     height: 0;
+    overflow: hidden;
+    visibility: hidden;
   `}
 `;
 

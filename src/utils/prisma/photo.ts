@@ -122,6 +122,7 @@ export const getAdminPhoto = cache(async (smugMugKey: string) => {
       metadata: true,
       altText: true,
       albumName: true,
+      iconId: true,
       album: {
         select: {
           section: true

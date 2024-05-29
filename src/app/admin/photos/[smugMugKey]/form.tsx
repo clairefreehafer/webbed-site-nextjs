@@ -42,10 +42,13 @@ export default function UpdatePhotoForm(
     smugMugKey,
     captureDate,
     metadata,
+    iconId,
   } = photoData;
 
   const initialState: UpdatePhotoFormState = {
-    ...photoData
+    ...photoData,
+    ...photoData.metadata,
+    rootSection,
   };
 
   return (
@@ -123,9 +126,14 @@ export default function UpdatePhotoForm(
       <HideSection as="div" $when={rootSection !== "zelda"}>
         <SecitonHeader>~~~ ZELDA ~~~</SecitonHeader>
 
-        <IconSelect icons={icons} />
+        <IconSelect icons={icons} defaultValue={iconId} />
 
-        <Input type="number" name="compendiumNumber" id="compendiumNumber" />
+        <Input
+          type="number"
+          name="compendiumNumber"
+          id="compendiumNumber"
+          defaultValue={metadata?.compendiumNumber}
+        />
         <Label htmlFor="compendiumNumber" css={{ justifyContent: "flex-start" }}>
           compendium number
         </Label>

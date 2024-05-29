@@ -1,62 +1,34 @@
 "use client";
 
-import { Album, Icon, Photo } from "@prisma/client";
-import styled from "styled-components";
-import { Label } from "./form";
-import DisplayIcon, { DisplayIconType } from "@components/icon";
+import { Album, Photo, Prisma } from "@prisma/client";
+import { Fieldset, FieldsetGrid, ImageRadio, Label, Legend } from "./form";
+import DisplayIcon from "@components/icon";
+import { getIcons } from "@utils/prisma/icon";
 
-const Fieldset = styled.fieldset`
-  background-color: #1b1b1b;
-  border: none;
-  display: flex;
-  width: 100%;
-  grid-column-start: span 2;
-  padding: 1rem;
-`;
-
-const Legend = styled.legend`
-  font-size: 1.5rem;
-  padding: 1rem;
-  text-transform: uppercase;
-`;
-
-const Radio = styled.input`
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-
-  & + img {
-    cursor: pointer;
-  }
-
-  &:checked + * {
-    outline: 3px dashed white;
-  }
-`;
-
-type Props = {
+export type IconSelectProps = {
   defaultValue?: Album["iconId"] | Photo["iconId"],
-  icons: Icon[]
+  icons: Prisma.PromiseReturnType<typeof getIcons>,
 };
 
 export default function IconSelect(
-  { defaultValue, icons }: Props
+  { defaultValue, icons }: IconSelectProps
 ) {
   return (
     <Fieldset>
       <Legend>icon</Legend>
-      {icons.map((icon) => (
-        <Label key={icon.id}>
-          <Radio
-            type="radio"
-            name="iconId"
-            value={icon.id}
-            defaultChecked={icon.id === defaultValue}
-          />
-          <DisplayIcon icon={icon} />
-        </Label>
-      ))}
+      <FieldsetGrid>
+        {icons.map((icon) => (
+          <Label key={icon.id} css={{ margin: 0, justifyContent: "center", textAlign: "center" }}>
+            <ImageRadio
+              type="radio"
+              name="iconId"
+              value={icon.id}
+              defaultChecked={icon.id === defaultValue}
+            />
+            <DisplayIcon icon={icon} height={3} />
+          </Label>
+        ))}
+      </FieldsetGrid>
     </Fieldset>
   )
 }

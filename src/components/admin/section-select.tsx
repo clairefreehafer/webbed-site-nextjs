@@ -1,14 +1,16 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState } from "react";
+import { ChangeEvent, ChangeEventHandler, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Input, Label } from "./form";
-import { Prisma, Section } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { flexColumnCenter } from "@styles/layout";
 import { getSectionsForHierarchy } from "@utils/prisma/section";
+import { getAlbumData } from "@utils/prisma/album";
 
 export type SectionSelectProps = {
-  defaultValue: Section | null,
+  defaultValue?: Prisma.PromiseReturnType<typeof getAlbumData>["section"],
   sections: Prisma.PromiseReturnType<typeof getSectionsForHierarchy>;
+  onChange?: (section: string) => void;
 };
 
 function generateSectionsHierarchy(sections: SectionSelectProps["sections"]) {
@@ -36,7 +38,7 @@ function generateSectionsHierarchy(sections: SectionSelectProps["sections"]) {
 };
 
 export default function SectionSelect(
-  { defaultValue, sections }: SectionSelectProps
+  { defaultValue, sections, onChange }: SectionSelectProps
 ) {
   const sectionsHierarchy = useMemo(() => generateSectionsHierarchy(sections), [sections]);
   const defaultOptions = useMemo(() => {
@@ -88,10 +90,14 @@ export default function SectionSelect(
     return levels;
   }, [sectionsHierarchy, selectRefs])
 
-  const [currentOptions, setCurrentOptions] = useState(generateOptions());
+  const [currentOptions, setCurrentOptions] = useState(generateOptions);
 
-  function handleChange(level: number) {
+  function handleChange(e: ChangeEvent<HTMLSelectElement>, level: number) {
     setCurrentOptions(generateOptions(level));
+
+    if (level === 0) {
+      onChange?.(e.target.value)
+    }
   }
 
   return (
@@ -106,9 +112,10 @@ export default function SectionSelect(
               as="select"
               key={i}
               name={`section${i}`}
-              onChange={() => handleChange(i)}
+              onChange={(e) => handleChange(e, i)}
               ref={(el) => {el && selectRefs.current.push(el)}}
               defaultValue={defaultOptions[i]}
+              css={{ marginBottom: "1rem", width: "100%", padding: "1rem" }}
             >
               {optionsArr.map((option) => (
                 <option key={option}>{option}</option>

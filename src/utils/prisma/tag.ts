@@ -20,7 +20,23 @@ export const getAdminTags = cache(async () => (
       }
     }
   })
-))
+));
+
+export const getPhotosWithTag = cache(async (name: string) => {
+  const result = await prismaWrapper(prisma.tag.findUnique)({
+    where: { name },
+    select: {
+      photos: {
+        select: {
+          smugMugKey: true,
+          url: true,
+        }
+      }
+    }
+  })
+
+  return result?.photos || [];
+});
 
 export const getTagNames = cache(async () => (
   prismaWrapper(prisma.tag.findMany)({

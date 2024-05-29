@@ -1,53 +1,36 @@
 "use client";
 
-import { Label } from "@components/admin/form";
-import { Photo } from "@prisma/client";
+import { Fieldset, ImageRadio, Label, Legend } from "@components/admin/form";
+import { Album, Prisma } from "@prisma/client";
 import { sizePhoto } from "@utils/photo";
-import styled from "styled-components";
+import { getAlbumData } from "@utils/prisma/album";
+import { getPhotosWithTag } from "@utils/prisma/tag";
 
-const Fieldset = styled.fieldset`
-  display: flex;
-  width: 100%;
-  grid-column-start: span 2;
-`;
+export type SelectCoverPhotoProps = {
+  coverKey: Album["coverKey"],
+  albumPhotos:
+    Prisma.PromiseReturnType<typeof getAlbumData>["photos"] |
+    Prisma.PromiseReturnType<typeof getPhotosWithTag>
+};
 
-const Radio = styled.input`
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-
-  & + img {
-    cursor: pointer;
-  }
-
-  &:checked + img {
-    outline: 3px dashed white;
-  }
-`;
-
-export default function SelectCoverPhoto({
-  coverKey,
-  albumPhotos
-}: {
-  coverKey: string | null,
-  albumPhotos: Photo[]
-}) {
+export default function SelectCoverPhoto(
+  { coverKey, albumPhotos }: SelectCoverPhotoProps
+) {
   return (
     <Fieldset>
-      <legend>cover photo</legend>
+      <Legend>cover photo</Legend>
       {albumPhotos.length === 0 ? (
         <>no photos in album</>
       ) : (
-        albumPhotos.map((photo) => (
-          <Label key={photo.smugMugKey}>
-            <Radio
+        albumPhotos.map(({ smugMugKey, url }) => (
+          <Label key={smugMugKey}>
+            <ImageRadio
               type="radio"
               name="coverKey"
-              value={photo.smugMugKey}
-              defaultChecked={coverKey === photo.smugMugKey}
+              value={smugMugKey}
+              defaultChecked={coverKey === smugMugKey}
             />
-            <img src={sizePhoto(photo.url, "Th")} alt="" />
+            <img src={sizePhoto(url, "Th")} alt="" />
           </Label>
         ))
       )}

@@ -5,14 +5,14 @@ import { Input, Label } from "./form";
 import { ChangeEvent } from "react";
 import { getAlbumNames } from "@utils/prisma";
 
-type Props = {
+export type AlbumSelectProps = {
   defaultValue?: Photo["albumName"],
   albums: Prisma.PromiseReturnType<typeof getAlbumNames>,
   onChange?: (e: ChangeEvent<HTMLSelectElement>) => void
 };
 
 export default function AlbumSelect(
-  { defaultValue, albums, onChange }: Props
+  { defaultValue, albums, onChange }: AlbumSelectProps
 ) {
   return (
     <>

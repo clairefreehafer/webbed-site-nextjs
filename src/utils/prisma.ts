@@ -16,20 +16,6 @@ function prismaWrapper<Args, Result>(prismaFunction: (args: Args) => Result) {
   });
 }
 
-export const getStaticParams = cache(async (section: string) => (
-  prismaWrapper(prisma.album.findMany)({
-    where: { section: { name: section }},
-    select: {
-      name: true,
-      section: {
-        select: {
-          name: true,
-        }
-      }
-    }
-  })
-));
-
 export const getAlbum = cache(async (albumName: string) => (
   prismaWrapper(prisma.album.findUniqueOrThrow)({
     where: { name: albumName },
