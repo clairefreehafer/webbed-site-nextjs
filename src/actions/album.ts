@@ -1,5 +1,6 @@
 "use server";
 
+import { UpdateAlbumFormState } from "@app/admin/albums/[album]/form";
 import { Album, Prisma, PrismaClient } from "@prisma/client";
 import { AlbumTypes } from "@utils/albums";
 import { createAlbum, getMostRecentPhotoDate, updateAlbum } from "@utils/prisma";
@@ -51,7 +52,7 @@ export async function addAlbum(
 }
 
 export async function editAlbum(
-  prevState: Partial<AlbumFormState>,
+  prevState: UpdateAlbumFormState,
   formData: FormData
 ) {
   const name = formData.get("name") as string;
