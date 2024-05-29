@@ -1,10 +1,13 @@
 "use client";
 
-import { IconFormState, addIcon } from "@actions/icon";
-import AdminForm, { Input, Label } from "@components/admin/form";
+import { addIcon } from "@actions/icon";
+import AdminForm, { FormState, Input, Label } from "@components/admin/form";
 import SubmitButton from "@components/admin/submit-button";
+import { Icon } from "@prisma/client";
 
-const initialState: Partial<IconFormState> = {};
+export type NewIconState = FormState<Pick<Icon, "character" | "imagePath">>;
+
+const initialState: NewIconState = {};
 
 export default function CreateIconForm() {
   return (

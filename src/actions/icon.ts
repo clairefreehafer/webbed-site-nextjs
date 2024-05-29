@@ -1,11 +1,10 @@
 "use server";
 
-import { Icon, Prisma } from "@prisma/client";
+import { NewIconState } from "@app/admin/icons/new/form";
+import { Prisma } from "@prisma/client";
 import { createIcon } from "@utils/prisma/icon";
 
-export type IconFormState = Icon & { message?: string };
-
-export async function addIcon(_prevState: Partial<IconFormState>, formData: FormData) {
+export async function addIcon(_prevState: NewIconState, formData: FormData) {
   const character = formData.get("character") as string;
   const imagePath = formData.get("imagePath") as string;
 
