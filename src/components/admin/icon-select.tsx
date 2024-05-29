@@ -1,13 +1,23 @@
 "use client";
 
-import { Icon } from "@prisma/client";
+import { Album, Icon, Photo } from "@prisma/client";
 import styled from "styled-components";
 import { Label } from "./form";
+import DisplayIcon, { DisplayIconType } from "@components/icon";
 
 const Fieldset = styled.fieldset`
+  background-color: #1b1b1b;
+  border: none;
   display: flex;
   width: 100%;
   grid-column-start: span 2;
+  padding: 1rem;
+`;
+
+const Legend = styled.legend`
+  font-size: 1.5rem;
+  padding: 1rem;
+  text-transform: uppercase;
 `;
 
 const Radio = styled.input`
@@ -25,31 +35,26 @@ const Radio = styled.input`
   }
 `;
 
-const Character = styled.span`
-  font-size: 2rem;
-  padding: 0.5rem;
-`;
+type Props = {
+  defaultValue?: Album["iconId"] | Photo["iconId"],
+  icons: Icon[]
+};
 
 export default function IconSelect(
-  { defaultValue, icons }:
-  { defaultValue?: Icon["id"] | null, icons: Icon[] }
+  { defaultValue, icons }: Props
 ) {
   return (
     <Fieldset>
-      <legend>icon</legend>
-      {icons.map(({ id, imagePath, character }) => (
-        <Label key={id}>
+      <Legend>icon</Legend>
+      {icons.map((icon) => (
+        <Label key={icon.id}>
           <Radio
             type="radio"
             name="iconId"
-            value={id}
-            defaultChecked={id === defaultValue}
+            value={icon.id}
+            defaultChecked={icon.id === defaultValue}
           />
-          {imagePath ? (
-            <img src={imagePath} alt="" />
-          ) : (
-            <Character>{character}</Character>
-          )}
+          <DisplayIcon icon={icon} />
         </Label>
       ))}
     </Fieldset>

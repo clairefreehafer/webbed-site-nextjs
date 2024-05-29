@@ -13,6 +13,29 @@ export const updatePhoto = (
   })
 );
 
+/** zelda slideshow page */
+export const getAlbumPhotos = cache(async (albumName: Photo["albumName"]) => (
+  prismaWrapper(prisma.photo.findMany)({
+    where: { albumName },
+    select: {
+      id: true,
+      url: true,
+      altText: true,
+      metadata: true,
+      album: {
+        select: {
+          date: true,
+        }
+      },
+      icon: {
+        select: {
+          imagePath: true
+        }
+      }
+    }
+  })
+))
+
 const getRandomTaggedPhoto = cache(async (tag: Tag["name"]) => {
   const photos = await prismaWrapper(prisma.photo.findMany)({
     where: { tags: { some: { name: tag } }},

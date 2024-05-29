@@ -9,10 +9,7 @@ declare global {
       title?: string;
       description?: string;
       /** zelda photos only */
-      compendium?: {
-        number?: number;
-        iconId?: number;
-      };
+      compendiumNumber?: number;
     }
   }
 }

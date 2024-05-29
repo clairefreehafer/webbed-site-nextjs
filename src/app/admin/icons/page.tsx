@@ -1,10 +1,10 @@
 import AdminTable from "@components/admin/table";
 import Icon from "@components/icon";
-import { getIcons } from "@utils/prisma/icon"
+import { getIconsWithAlbums } from "@utils/prisma/icon"
 import Link from "next/link";
 
 export default async function Icons() {
-  const icons = await getIcons();
+  const icons = await getIconsWithAlbums();
 
   return (
     <>

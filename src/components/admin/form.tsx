@@ -31,11 +31,16 @@ export const Input = styled.input`
   border: 0;
   font-family: var(--font-pt-mono), monospace;
   font-size: 1.5rem;
-  padding: 3rem;
+  padding: 3rem 1rem;
 
   &[type="checkbox"] {
     height: 3rem;
   }
+`;
+
+export const Textarea = styled(Input).attrs({ as: "textarea" })`
+  min-height: 9rem;
+  padding: 1rem;
 `;
 
 export const HideSection = styled(Form)<{ $when: boolean }>`

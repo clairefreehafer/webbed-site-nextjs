@@ -1,6 +1,6 @@
 "use client";
 
-import { Album, Icon as IconType } from "@prisma/client";
+import { Album, Icon } from "@prisma/client";
 import { getAstrologyDateRange } from "@utils/animal-crossing";
 import styled, { useTheme } from "styled-components";
 
@@ -15,8 +15,10 @@ const Image = styled.img<{ $height: number | "inherit"; $inline: boolean }>`
   ${({ $inline }) => $inline && "margin-right: 0.25rem;"}
 `;
 
-type Props = {
-  icon: Partial<IconType> | null
+export type DisplayIconType = Pick<Icon, "imagePath" | "character">;
+
+type DisplayIconProps = {
+  icon: DisplayIconType | null;
   /** rem. height of image, emoji will be this - 1. */
   height?: number | "inherit";
   inline?: boolean;
@@ -24,12 +26,12 @@ type Props = {
   date?: Album["date"];
 };
 
-export default function Icon({
+export default function DisplayIcon({
   icon,
   height = "inherit",
   inline = false,
   date
-}: Props) {
+}: DisplayIconProps) {
   const theme = useTheme();
 
   if (!icon) {

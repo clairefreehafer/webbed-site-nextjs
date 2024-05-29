@@ -2,28 +2,31 @@
 
 import { editPhoto } from "@actions/photo";
 import { ChangeEvent, useState } from "react";
-import type { Prisma } from "@prisma/client";
-import AdminForm, { FormState, HideSection, Input, Label, SecitonHeader } from "@components/admin/form";
+import type { Icon, Prisma } from "@prisma/client";
+import AdminForm, { FormState, HideSection, Input, Label, SecitonHeader, Textarea } from "@components/admin/form";
 import SubmitButton from "@components/admin/submit-button";
 import { getAdminPhoto } from "@utils/prisma/photo";
 import AlbumSelect from "@components/admin/album-select";
 import { getAlbumOptions } from "@utils/prisma";
+import IconSelect from "@components/admin/icon-select";
+import { getIcons } from "@utils/prisma/icon";
 
 export type UpdatePhotoFormState = FormState<
   Prisma.PromiseReturnType<typeof getAdminPhoto> &
   PrismaJson.Metadata & {
     synchronizeWithXmp?: boolean;
-    rootSection?: string;
+    rootSection?: string | null;
   }
 >;
 
 type Props = {
   photoData: Prisma.PromiseReturnType<typeof getAdminPhoto>,
-  albums: Prisma.PromiseReturnType<typeof getAlbumOptions>
+  albums: Prisma.PromiseReturnType<typeof getAlbumOptions>,
+  icons: Icon[];
 };
 
 export default function UpdatePhotoForm(
-  { photoData, albums }: Props
+  { photoData, albums, icons }: Props
 ) {
   const [synchronizeWithXmp, setSynchronizeWithXmp] = useState(true);
   const [rootSection, setRootSection] = useState(photoData.rootSection);
@@ -43,7 +46,9 @@ export default function UpdatePhotoForm(
     metadata,
   } = photoData;
 
-  const initialState: UpdatePhotoFormState = {};
+  const initialState: UpdatePhotoFormState = {
+    ...photoData
+  };
 
   return (
     <AdminForm action={editPhoto} initialState={initialState}>
@@ -56,6 +61,15 @@ export default function UpdatePhotoForm(
         onChange={handleAlbumChange}
       />
 
+      <Label htmlFor="altText">
+        alt text
+      </Label>
+      <Textarea
+        name="altText"
+        id="altText"
+        defaultValue={photoData.altText as string}
+      />
+
       <Label htmlFor="xmpPath">
         xmp path
       </Label>
@@ -64,16 +78,6 @@ export default function UpdatePhotoForm(
         name="xmpPath"
         id="xmpPath"
         defaultValue={xmpPath}
-      />
-
-      <Label htmlFor="altText">
-        alt text
-      </Label>
-      <Input
-        as="textarea"
-        name="altText"
-        id="altText"
-        defaultValue={photoData.altText as string}
       />
 
       <Input
@@ -98,7 +102,11 @@ export default function UpdatePhotoForm(
         <Label htmlFor="description">
           description
         </Label>
-        <Input as="textarea" name="description" id="description" defaultValue={metadata?.description as string} />
+        <Textarea
+          name="description"
+          id="description"
+          defaultValue={metadata?.description as string}
+        />
 
         <HideSection as="div" $when={rootSection === "zelda"}>
           <Label htmlFor="captureDate">
@@ -117,10 +125,7 @@ export default function UpdatePhotoForm(
       <HideSection as="div" $when={rootSection !== "zelda"}>
         <SecitonHeader>~~~ ZELDA ~~~</SecitonHeader>
 
-        <Label htmlFor="compendiumIconId">
-          icon
-        </Label>
-        <div></div>
+        <IconSelect icons={icons} />
 
         <Input type="number" name="compendiumNumber" id="compendiumNumber" />
         <Label htmlFor="compendiumNumber" css={{ justifyContent: "flex-start" }}>
