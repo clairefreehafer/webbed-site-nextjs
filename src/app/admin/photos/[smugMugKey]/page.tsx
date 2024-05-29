@@ -1,12 +1,12 @@
 import UpdatePhotoForm from "./form";
 import { sizePhoto } from "@utils/photo";
-import { getAlbumOptions } from "@utils/prisma";
+import { getAlbumNames } from "@utils/prisma";
 import { getIcons } from "@utils/prisma/icon";
 import { getAdminPhoto } from "@utils/prisma/photo";
 
 export default async function Page({ params }: { params: { smugMugKey: string }}) {
   const photoData = await getAdminPhoto(params.smugMugKey);
-  const albums = await getAlbumOptions();
+  const albums = await getAlbumNames();
   const icons = await getIcons();
 
   return (

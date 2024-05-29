@@ -1,8 +1,24 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { cache } from "react";
-import { prismaWrapper } from "./index";
+import { prisma, prismaWrapper } from "./index";
 
-const prisma = new PrismaClient();
+export const getParentSections = cache(async () => (
+  prismaWrapper(prisma.section.findMany)({
+    select: {
+      id: true,
+      name: true,
+    }
+  })
+));
+
+export const getSectionsForHierarchy = cache(async () => (
+  prismaWrapper(prisma.section.findMany)({
+    select: {
+      name: true,
+      parentName: true,
+    }
+  })
+))
 
 export const getSections = cache(async () => (
   prismaWrapper(prisma.section.findMany)({

@@ -1,9 +1,9 @@
 import AlbumSelect from "@components/admin/album-select";
 import CreatePhotoForm from "./form";
-import { getAlbumOptions } from "@utils/prisma";
+import { getAlbumNames } from "@utils/prisma";
 
 export default async function CreatePhotoPage() {
-  const albums = await getAlbumOptions();
+  const albums = await getAlbumNames();
 
   return (
     <CreatePhotoForm>

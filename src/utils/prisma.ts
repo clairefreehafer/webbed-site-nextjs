@@ -53,10 +53,10 @@ export const getMostRecentPhotoDate = async (albumName: string) => (
   })
 );
 
-export const getAlbumOptions = cache(async () => (
+export const getAlbumNames = cache(async () => (
   prismaWrapper(prisma.album.findMany)({
-    orderBy: { date: { sort: "desc", nulls: "first" } },
     select: { name: true },
+    orderBy: { name: "asc" }
   })
 ));
 

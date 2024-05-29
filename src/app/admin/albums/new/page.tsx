@@ -1,8 +1,8 @@
 import NewAlbumForm from "./form";
-import { getSections } from "@utils/prisma/section";
+import { getSectionsForHierarchy } from "@utils/prisma/section";
 
 export default async function AdminAlbum() {
-  const sections = await getSections();
+  const sections = await getSectionsForHierarchy();
 
   return (
     <NewAlbumForm sections={sections} />

@@ -1,12 +1,13 @@
 "use client";
 
-import { Album, Photo } from "@prisma/client";
+import { Photo, Prisma } from "@prisma/client";
 import { Input, Label } from "./form";
 import { ChangeEvent } from "react";
+import { getAlbumNames } from "@utils/prisma";
 
 type Props = {
   defaultValue?: Photo["albumName"],
-  albums: Partial<Album>[],
+  albums: Prisma.PromiseReturnType<typeof getAlbumNames>,
   onChange?: (e: ChangeEvent<HTMLSelectElement>) => void
 };
 

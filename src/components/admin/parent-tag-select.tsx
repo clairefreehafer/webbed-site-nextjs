@@ -4,14 +4,13 @@ import { Prisma, Tag } from "@prisma/client";
 import { Input, Label } from "./form";
 import { getTagNames } from "@utils/prisma/tag";
 
-
-type Props = {
+type ParentTagSelectProps = {
   defaultValue?: Tag["parentName"],
   tags: Prisma.PromiseReturnType<typeof getTagNames>
-}
+};
 
 export default function ParentTagSelect(
-  { defaultValue, tags }: Props
+  { defaultValue, tags }: ParentTagSelectProps
 ) {
   return (
     <>

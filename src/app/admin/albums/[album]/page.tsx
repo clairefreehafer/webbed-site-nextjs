@@ -2,7 +2,7 @@ import SectionSelect from "@components/admin/section-select";
 import UpdateAlbumForm from "./form";
 import { displayName } from "@utils/albums";
 import { getAlbum, getPhotosWithTag } from "@utils/prisma";
-import { getSections } from "@utils/prisma/section";
+import { getSectionsForHierarchy } from "@utils/prisma/section";
 import IconSelect from "@components/admin/icon-select";
 import { getIcons } from "@utils/prisma/icon";
 
@@ -10,7 +10,7 @@ export default async function Page(
   { params }: { params: { album: string }}
 ) {
   const albumData = await getAlbum(displayName(params.album));
-  const sections = await getSections();
+  const sections = await getSectionsForHierarchy();
   const icons = await getIcons();
   let albumPhotos = albumData.photos;
 

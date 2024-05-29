@@ -2,10 +2,16 @@
 
 import { useCallback, useMemo, useRef, useState } from "react";
 import { Input, Label } from "./form";
-import { Section } from "@prisma/client";
+import { Prisma, Section } from "@prisma/client";
 import { flexColumnCenter } from "@styles/layout";
+import { getSectionsForHierarchy } from "@utils/prisma/section";
 
-function generateSectionsHierarchy(sections: (Section & { children: Section[] })[]) {
+export type SectionSelectProps = {
+  defaultValue: Section | null,
+  sections: Prisma.PromiseReturnType<typeof getSectionsForHierarchy>;
+};
+
+function generateSectionsHierarchy(sections: SectionSelectProps["sections"]) {
   const hashTable = Object.create(null);
 
   // generate entry for each section in our hash table
@@ -29,13 +35,8 @@ function generateSectionsHierarchy(sections: (Section & { children: Section[] })
   return sectionsHierarchy;
 };
 
-type Props = {
-  defaultValue: Section | null,
-  sections: (Section & { children: Section[] })[]
-}
-
 export default function SectionSelect(
-  { defaultValue, sections }: Props
+  { defaultValue, sections }: SectionSelectProps
 ) {
   const sectionsHierarchy = useMemo(() => generateSectionsHierarchy(sections), [sections]);
   const defaultOptions = useMemo(() => {
@@ -47,7 +48,7 @@ export default function SectionSelect(
         finalOptions.unshift(currentValue);
         currentValue = sections.find((section) => section.name === currentValue)?.parentName;
       }
-  
+
       return finalOptions;
     } else {
       return [];
@@ -117,6 +118,6 @@ export default function SectionSelect(
         })}
       </div>
     </>
-    
+
   )
 }

@@ -2,16 +2,14 @@
 
 import AdminForm, { Input, Label } from "@components/admin/form";
 import { AlbumFormState, addAlbum } from "@actions/album";
-import SectionSelect from "@components/admin/section-select";
+import SectionSelect, { SectionSelectProps } from "@components/admin/section-select";
 import { AlbumTypes } from "@utils/albums";
-import { Prisma } from "@prisma/client";
-import { getSections } from "@utils/prisma/section";
 import SubmitButton from "@components/admin/submit-button";
 
 const initialState: Partial<AlbumFormState> = {};
 
 export default function NewAlbumForm(
-  { sections }: { sections: Prisma.PromiseReturnType<typeof getSections> }
+  { sections }: { sections: SectionSelectProps["sections"] }
 ) {
 
   return (

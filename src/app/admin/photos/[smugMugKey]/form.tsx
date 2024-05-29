@@ -2,14 +2,12 @@
 
 import { editPhoto } from "@actions/photo";
 import { ChangeEvent, useState } from "react";
-import type { Icon, Prisma } from "@prisma/client";
+import { Icon, Prisma } from "@prisma/client";
 import AdminForm, { FormState, HideSection, Input, Label, SecitonHeader, Textarea } from "@components/admin/form";
 import SubmitButton from "@components/admin/submit-button";
 import { getAdminPhoto } from "@utils/prisma/photo";
-import AlbumSelect from "@components/admin/album-select";
-import { getAlbumOptions } from "@utils/prisma";
+import AlbumSelect, { AlbumSelectProps } from "@components/admin/album-select";
 import IconSelect from "@components/admin/icon-select";
-import { getIcons } from "@utils/prisma/icon";
 
 export type UpdatePhotoFormState = FormState<
   Prisma.PromiseReturnType<typeof getAdminPhoto> &
@@ -21,7 +19,7 @@ export type UpdatePhotoFormState = FormState<
 
 type Props = {
   photoData: Prisma.PromiseReturnType<typeof getAdminPhoto>,
-  albums: Prisma.PromiseReturnType<typeof getAlbumOptions>,
+  albums: AlbumSelectProps["albums"],
   icons: Icon[];
 };
 

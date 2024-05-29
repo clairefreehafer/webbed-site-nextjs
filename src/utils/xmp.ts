@@ -4,6 +4,7 @@ import xml2js from "xml2js";
 
 export async function getMetadataFromXmp(path: string) {
   try {
+    // TODO: error handling if drive isn't connected
     const xmp = await readFile(path);
     const parser = new xml2js.Parser();
     const parsedXmp = await parser.parseStringPromise(xmp);
@@ -20,7 +21,7 @@ export async function getMetadataFromXmp(path: string) {
       if (tag.includes("/")) {
         const splitTags = tag.split("/");
         // let parentTag = "";
-        
+
         splitTags.forEach((splitTag, i) => {
           // if (i === splitTags.length - 1) {
             // only connect to leaf tag.
@@ -56,5 +57,5 @@ export async function getMetadataFromXmp(path: string) {
   } catch (error) {
     return (error as Error).message;
   }
-  
+
 }

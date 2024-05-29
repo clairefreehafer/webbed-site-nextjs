@@ -2,13 +2,13 @@
 
 import { editSection } from "@actions/section";
 import AdminForm, { FormState, Input, Label } from "@components/admin/form";
-import ParentSectionSelect from "@components/admin/parent-section-select";
+import ParentSectionSelect, { ParentSectionSelectProps } from "@components/admin/parent-section-select";
 import { Prisma } from "@prisma/client";
-import { getSection, getSections } from "@utils/prisma/section";
+import { getSection } from "@utils/prisma/section";
 
 type Props = {
   sectionData: Prisma.PromiseReturnType<typeof getSection>,
-  sections: Prisma.PromiseReturnType<typeof getSections>
+  sections: ParentSectionSelectProps["sections"]
 };
 
 export type UpdateSectionFormState = FormState<Props["sectionData"]>
