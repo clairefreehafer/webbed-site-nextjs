@@ -1,6 +1,7 @@
 "use server";
 
 import { UpdateAlbumFormState } from "@app/admin/albums/[album]/form";
+import { NewAlbumFormState } from "@app/admin/albums/new/form";
 import { Album, Prisma, PrismaClient } from "@prisma/client";
 import { AlbumTypes } from "@utils/albums";
 import { createAlbum, getMostRecentPhotoDate, updateAlbum } from "@utils/prisma";
@@ -11,10 +12,10 @@ export type AlbumFormState = Album & { message?: string };
 const prisma = new PrismaClient();
 
 export async function addAlbum(
-  _prevState: Partial<AlbumFormState>,
+  _prevState: NewAlbumFormState,
   formData: FormData
 ) {
-  const album = formData.get("album") as string;
+  const name = formData.get("name") as string;
   const type = formData.get("type") as AlbumTypes;
 
   try {
@@ -29,21 +30,21 @@ export async function addAlbum(
     }
 
     const createdAlbum = await createAlbum({ data: {
-      name: album,
+      name,
       sectionName,
       type,
     }});
 
     return {
       ...createdAlbum,
-      message: `👍 ${type} album ${album} added in ${sectionName}`
+      message: `👍 ${type} album ${name} added in ${sectionName}`
     }
   } catch (error) {
     let message = `👎 ${(error as Error).message}`;
 
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === "P2002") {
-        message = `👎 an album called "${album}" already exists.`
+        message = `👎 an album called "${name}" already exists.`
       }
     }
 

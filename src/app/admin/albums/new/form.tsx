@@ -1,25 +1,27 @@
 "use client";
 
-import AdminForm, { Input, Label } from "@components/admin/form";
+import AdminForm, { FormState, Input, Label } from "@components/admin/form";
 import { AlbumFormState, addAlbum } from "@actions/album";
 import SectionSelect, { SectionSelectProps } from "@components/admin/section-select";
 import { AlbumTypes } from "@utils/albums";
 import SubmitButton from "@components/admin/submit-button";
+import { Album } from "@prisma/client";
 
-const initialState: Partial<AlbumFormState> = {};
+export type NewAlbumFormState = FormState<Pick<Album, "name" | "type">>;
+
+const initialState: NewAlbumFormState = {};
 
 export default function NewAlbumForm(
   { sections }: { sections: SectionSelectProps["sections"] }
 ) {
-
   return (
     <AdminForm action={addAlbum} initialState={initialState}>
-      <Label htmlFor="album">
-        name:
+      <Label htmlFor="name">
+        name
       </Label>
-      <Input type="text" name="album" id="album" required />
+      <Input type="text" name="name" id="name" required />
 
-      <SectionSelect sections={sections} defaultValue={null} />
+      <SectionSelect sections={sections} />
 
       <Label htmlFor="type">
         type
