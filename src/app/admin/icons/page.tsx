@@ -1,7 +1,16 @@
-import AdminTable from "@components/admin/table";
+import AdminTable, { AdminTableConfig } from "@components/admin/table";
+import DisplayIcon from "@components/icon";
 import Icon from "@components/icon";
-import { getIconsWithAlbums } from "@utils/prisma/icon"
+import { Prisma } from "@prisma/client";
+import { getIconsWithAlbums } from "@utils/prisma/icon";
 import Link from "next/link";
+
+const tableConfig: AdminTableConfig<
+  Prisma.PromiseReturnType<typeof getIconsWithAlbums>[0]
+> = {
+  image: (icon) => <DisplayIcon icon={icon} />,
+  "album(s)": ({ albums }) => albums.map(({ name }) => `${name}, `),
+};
 
 export default async function Icons() {
   const icons = await getIconsWithAlbums();
@@ -11,26 +20,7 @@ export default async function Icons() {
       <p>
         <Link href="/admin/icons/new">add icon</Link>
       </p>
-      <AdminTable>
-        <thead>
-          <tr>
-            <th>image</th>
-            <th>album(s)</th>
-          </tr>
-        </thead>
-        <tbody>
-          {icons.map((icon) => (
-            <tr key={icon.id}>
-              <td>
-                <Icon icon={icon} height={3} />
-              </td>
-              <td>
-                {icon.albums.map(({ name }) => `${name}, `)}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </AdminTable>
+      <AdminTable data={icons} config={tableConfig} />
     </>
-  )
+  );
 }

@@ -1,9 +1,20 @@
 import DeleteButton from "@components/admin/delete-button";
-import AdminTable from "@components/admin/table";
+import AdminTable, { AdminTableConfig } from "@components/admin/table";
 import { slugName } from "@utils/albums";
 import Link from "next/link";
 import { deleteTag } from "@actions/tag";
 import { getAdminTags } from "@utils/prisma/tag";
+import { Prisma } from "@prisma/client";
+
+const tableConfig: AdminTableConfig<
+  Prisma.PromiseReturnType<typeof getAdminTags>[0]
+> = {
+  parent: "parentName",
+  tag: "name",
+  "number of photos": ({ _count }) => _count.photos,
+  edit: ({ name }) => <Link href={`/admin/tags/${slugName(name)}`}>📝</Link>,
+  delete: ({ name }) => <DeleteButton serverAction={deleteTag} value={name} />,
+};
 
 export default async function AdminTagPage() {
   const tags = await getAdminTags();
@@ -13,33 +24,8 @@ export default async function AdminTagPage() {
       <p>
         <Link href="/admin/tags/new">add tag</Link>
       </p>
-      
-      <AdminTable>
-        <thead>
-          <tr>
-            <th>parent</th>
-            <th>tag</th>
-            <th>number of photos</th>
-            <th>edit</th>
-            <th>delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tags.map((tag) => (
-            <tr key={tag.id}>
-              <td>{tag.parentName}</td>
-              <td>{tag.name}</td>
-              <td>{tag._count.photos}</td>
-              <td>
-                <Link href={`/admin/tags/${slugName(tag.name)}`}>📝</Link>
-              </td>
-              <td>
-                <DeleteButton serverAction={deleteTag} value={tag.name} />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </AdminTable>
+
+      <AdminTable data={tags} config={tableConfig} />
     </>
   );
 }

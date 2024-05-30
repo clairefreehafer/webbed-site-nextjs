@@ -5,16 +5,33 @@ import { getAncestorSections, getRootSection } from "@utils/section";
 
 export const updatePhoto = (
   smugMugKey: Photo["smugMugKey"],
-  data: Prisma.PhotoUpdateArgs["data"]
-) => (
+  data: Prisma.PhotoUpdateArgs["data"],
+) =>
   prismaWrapper(prisma.photo.update)({
     where: { smugMugKey },
-    data
-  })
+    data,
+  });
+
+export const getAdminPhotos = cache(async () =>
+  prismaWrapper(prisma.photo.findMany)({
+    select: {
+      id: true,
+      url: true,
+      altText: true,
+      smugMugKey: true,
+      captureDate: true,
+      albumName: true,
+      tags: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  }),
 );
 
 /** zelda slideshow page */
-export const getAlbumPhotos = cache(async (albumName: Photo["albumName"]) => (
+export const getAlbumPhotos = cache(async (albumName: Photo["albumName"]) =>
   prismaWrapper(prisma.photo.findMany)({
     where: { albumName },
     select: {
@@ -25,30 +42,30 @@ export const getAlbumPhotos = cache(async (albumName: Photo["albumName"]) => (
       album: {
         select: {
           date: true,
-        }
+        },
       },
       icon: {
         select: {
-          imagePath: true
-        }
-      }
-    }
-  })
-))
+          imagePath: true,
+        },
+      },
+    },
+  }),
+);
 
 const getRandomTaggedPhoto = cache(async (tag: Tag["name"]) => {
   const photos = await prismaWrapper(prisma.photo.findMany)({
-    where: { tags: { some: { name: tag } }},
-    select: { url: true }
+    where: { tags: { some: { name: tag } } },
+    select: { url: true },
   });
 
   const randomIndex = Math.floor(Math.random() * (photos.length - 1));
-  return photos[randomIndex]
+  return photos[randomIndex];
 });
 
 export const getPolaroidGridData = cache(async (section: string) => {
   const albums = await prismaWrapper(prisma.album.findMany)({
-    where: { section: { name: section }},
+    where: { section: { name: section } },
     select: {
       id: true,
       name: true,
@@ -56,30 +73,32 @@ export const getPolaroidGridData = cache(async (section: string) => {
         select: {
           name: true,
           parent: true,
-        }
+        },
       },
       date: true,
-      coverPhoto: { select: { url: true }},
+      coverPhoto: { select: { url: true } },
       type: true,
       icon: {
         select: {
           imagePath: true,
           character: true,
-        }
+        },
       },
       photos: {
         select: {
           url: true,
-        }
-      }
-    }
+        },
+      },
+    },
   });
 
   const result = [];
 
   for (let album of albums) {
     const sectionArray = await getAncestorSections(album.section);
-    let randomCoverPhoto: Partial<Prisma.PromiseReturnType<typeof getRandomTaggedPhoto>> = {};
+    let randomCoverPhoto: Partial<
+      Prisma.PromiseReturnType<typeof getRandomTaggedPhoto>
+    > = {};
 
     if (!album.coverPhoto && album.type === "tag") {
       randomCoverPhoto = await getRandomTaggedPhoto(album.name);
@@ -96,19 +115,19 @@ export const getZeldaAdminPhotos = cache(async () => {
     where: {
       album: {
         section: {
-          parentName: "zelda"
-        }
-      }
+          parentName: "zelda",
+        },
+      },
     },
     select: {
       id: true,
       albumName: true,
       url: true,
       smugMugKey: true,
-      metadata: true
-    }
+      metadata: true,
+    },
   });
-})
+});
 
 /** update photo form */
 export const getAdminPhoto = cache(async (smugMugKey: string) => {
@@ -125,11 +144,11 @@ export const getAdminPhoto = cache(async (smugMugKey: string) => {
       iconId: true,
       album: {
         select: {
-          section: true
-        }
-      }
-    }
-  })
+          section: true,
+        },
+      },
+    },
+  });
 
   let rootSection = null;
   if (photo.album) {
@@ -139,5 +158,5 @@ export const getAdminPhoto = cache(async (smugMugKey: string) => {
   return {
     ...photo,
     rootSection,
-  }
-})
+  };
+});
