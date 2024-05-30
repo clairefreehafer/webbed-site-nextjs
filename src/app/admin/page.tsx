@@ -1,19 +1,11 @@
-"use client";
-
 import { pressStart2P } from "@fonts";
 import Link from "next/link";
-import styled from "styled-components";
-
-const Ul = styled.ul`
-  display: flex;
-  justify-content: space-around;
-  margin: 3rem auto;
-  width: 100%;
-`;
 
 export default function AdminPage() {
   return (
-    <Ul className={pressStart2P.className}>
+    <ul
+      className={`${pressStart2P.className} mx-auto my-12 flex w-full justify-around`}
+    >
       <li>
         <Link href="/admin/sections">sections</Link>
       </li>
@@ -29,6 +21,6 @@ export default function AdminPage() {
       <li>
         <Link href="/admin/icons">icons</Link>
       </li>
-    </Ul>
-  )
+    </ul>
+  );
 }
