@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { inter } from "@fonts";
-import "@styles/globals.scss";
-import StyledComponentsRegistry from "@styles/registry";
+import "@styles/globals.css";
 
 declare global {
   namespace PrismaJson {
@@ -10,7 +9,7 @@ declare global {
       description?: string;
       /** zelda photos only */
       compendiumNumber?: number;
-    }
+    };
   }
 }
 
@@ -26,9 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <StyledComponentsRegistry>
-          {children}
-        </StyledComponentsRegistry>
+        {children}
       </body>
     </html>
   );

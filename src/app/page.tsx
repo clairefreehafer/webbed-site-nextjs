@@ -1,36 +1,22 @@
-"use client";
-
 import Nav from "@components/nav";
-import DefaultThemeRoot from "@styles/default/root";
-import { flexColumnCenter } from "@styles/layout";
-import styled, { ThemeProvider, css } from "styled-components";
-
-const Main = styled.main`
-  ${flexColumnCenter};
-`;
-
-const spacer = css`
-  margin-top: 2rem;
-`;
-
-const theme = {
-  name: "default"
-};
 
 export default function Home() {
   return (
-    <ThemeProvider theme={theme}>
-      <DefaultThemeRoot>
+    <div className="bg-rainbow min-h-screen min-w-full p-[2px]">
+      <div className="min-h-[calc(100vh-2*2px)] min-w-[calc(100vw-2*2px)] bg-black">
         <Nav />
-        <Main>
+        <main className="flex flex-col items-center justify-center">
           <h1>claire freehafer</h1>
-          <p css={spacer}>
-            please click around the site, but be warned it is an active work in progress. :)
+          <p className="mt-0">
+            please click around the site, but be warned it is an active work in
+            progress. :)
           </p>
           <p>
-            <a href="https://github.com/clairefreehafer/webbed-site-nextjs">view on github</a>
+            <a href="https://github.com/clairefreehafer/webbed-site-nextjs">
+              view on github
+            </a>
           </p>
-          <p css={spacer}>find me elsewhere:</p>
+          <p className="mt-0">find me elsewhere:</p>
           <ul>
             <li>
               💻 <a href="https://github.com/clairefreehafer">github</a>
@@ -42,8 +28,8 @@ export default function Home() {
               📚 <a href="https://bookwyrm.social.user/loam">bookwyrm</a>
             </li>
           </ul>
-        </Main>
-      </DefaultThemeRoot>
-    </ThemeProvider>
+        </main>
+      </div>
+    </div>
   );
 }
