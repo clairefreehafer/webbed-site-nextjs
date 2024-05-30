@@ -9,7 +9,8 @@ import { ZeldaThemeRoot, zeldaTextBackground } from "@styles/zelda/theme";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import styled, { DefaultTheme, css, useTheme } from "styled-components";
+import styled, { css, useTheme } from "styled-components";
+import ZeldaSlideInfo from "./zelda/slideshow";
 
 const NavBack = styled.nav`
   left: 0.5rem;
@@ -27,7 +28,7 @@ const NavBack = styled.nav`
   `}
 `;
 
-const SlideInfo = styled.div`
+const DefaultSlideInfo = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
@@ -112,7 +113,8 @@ type Props = {
 export default function Slideshow(
   { photos, albumDate, albumName, albumSection }: Props
 ) {
-  const [currentSlide, setCurrentSlide] = useState(1);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(1);
+  const [currentSlideData, setCurrentSlideData] = useState(photos[0]);
   const slidesRef = useRef<(HTMLElement | null)[]>([]);
   const pathname = usePathname();
   const theme = useTheme();
@@ -120,7 +122,7 @@ export default function Slideshow(
   useEffect(() => {
     const { hash } = window?.location;
     if (hash) {
-      setCurrentSlide(Number(hash[hash.length - 1]));
+      setCurrentSlideIndex(Number(hash[hash.length - 1]));
     }
   }, []);
 
@@ -130,7 +132,8 @@ export default function Slideshow(
         const slideNumber = Number(
           entry.target.id[entry.target.id.length - 1]
         );
-        setCurrentSlide(slideNumber);
+        setCurrentSlideIndex(slideNumber);
+        setCurrentSlideData(photos[slideNumber - 1]);
       }
     })
   };
@@ -157,6 +160,7 @@ export default function Slideshow(
   }, [slidesRef, photos.length]);
 
   const ThemeRoot = theme.name === "animal-crossing" ? AnimalCrossingThemeRoot : ZeldaThemeRoot;
+  const SlideInfo = theme.name === "zelda" ? ZeldaSlideInfo : DefaultSlideInfo
 
   return (
     <ThemeRoot $date={albumDate} $shape="triangle" className={fotSeuratProB.variable}>
@@ -167,7 +171,7 @@ export default function Slideshow(
         </Link>
       </NavBack>
 
-      <SlideInfo>
+      <SlideInfo slideData={currentSlideData}>
         {albumName}
       </SlideInfo>
 
@@ -193,21 +197,21 @@ export default function Slideshow(
       </Main>
 
       <SlideNavigation>
-        {currentSlide > 1 && (
+        {currentSlideIndex > 1 && (
           <Link
-            href={`${pathname}/#slide-${currentSlide - 1}`}
-            onClick={() => setCurrentSlide(currentSlide - 1)}
+            href={`${pathname}/#slide-${currentSlideIndex - 1}`}
+            onClick={() => setCurrentSlideIndex(currentSlideIndex - 1)}
           >
             &larr;
           </Link>
         )}
         &nbsp;
-        {currentSlide} / {photos.length}
+        {currentSlideIndex} / {photos.length}
         &nbsp;
-        {currentSlide < photos.length && (
+        {currentSlideIndex < photos.length && (
           <Link
-            href={`${pathname}/#slide-${currentSlide + 1}`}
-            onClick={() => setCurrentSlide(currentSlide + 1)}
+            href={`${pathname}/#slide-${currentSlideIndex + 1}`}
+            onClick={() => setCurrentSlideIndex(currentSlideIndex + 1)}
           >
             &rarr;
           </Link>

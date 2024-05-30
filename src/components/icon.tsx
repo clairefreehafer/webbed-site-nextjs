@@ -62,7 +62,7 @@ export default function DisplayIcon({
 
   if (icon.character) {
     return (
-      <Emoji $height={height}>
+      <Emoji $height={height} $inline={inline}>
         {icon.character}
         {inline && " "}
       </Emoji>

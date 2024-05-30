@@ -1,8 +1,8 @@
 import { displayName } from "@utils/albums";
 import Slideshow from "@components/slideshow";
 import { getAlbumPhotos } from "@utils/animal-crossing";
-import { getStaticParams } from "@utils/prisma";
 import { getAncestorSections } from "@utils/section";
+import { getStaticParams } from "@utils/prisma/album";
 
 export async function generateStaticParams() {
   const albums = await getStaticParams("animal-crossing");
@@ -10,7 +10,7 @@ export async function generateStaticParams() {
   const params = [];
 
   for (let album of albums) {
-    const sectionArray = await getAncestorSections(album.section);
+    const sectionArray = await getAncestorSections(album.sectionName);
     params.push({ section: sectionArray.push(album.name) });
   }
 
