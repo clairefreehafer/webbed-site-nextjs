@@ -29,6 +29,9 @@ module.exports = {
         wiggle2: "14px 92px 15px 95px / 95px 16px 95px 14px",
         wiggle3: "255px 15px 225px 15px/15px 225px 15px 255px",
       },
+      borderWidth: {
+        1: "1px",
+      },
       boxShadow: {
         animalCrossing: {
           ui: "0 0.75rem 0.5rem -0.5rem rgba(0, 0, 0, 0.5)",

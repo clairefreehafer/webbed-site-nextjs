@@ -2,9 +2,19 @@
 const nextConfig = {
   compiler: {
     styledComponents: {
-      displayName: false
+      displayName: false,
     },
-  }
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "photos.smugmug.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

@@ -3,7 +3,7 @@ import { prisma, prismaWrapper } from "./index";
 import { Album } from "@prisma/client";
 import { getRootSection } from "@utils/section";
 
-export const getAdminAlbums = cache(async () => (
+export const getAdminAlbums = cache(async () =>
   prismaWrapper(prisma.album.findMany)({
     select: {
       id: true,
@@ -13,22 +13,23 @@ export const getAdminAlbums = cache(async () => (
       type: true,
       coverPhoto: {
         select: {
-          url: true
-        }
+          url: true,
+          altText: true,
+        },
       },
       icon: {
         select: {
           character: true,
           imagePath: true,
-        }
+        },
       },
       _count: {
-        select: { photos: true }
-      }
+        select: { photos: true },
+      },
     },
-    orderBy: { date: { sort: "desc", nulls: "first" }},
-  })
-));
+    orderBy: { date: { sort: "desc", nulls: "first" } },
+  }),
+);
 
 export const getAlbumData = cache(async (name: Album["name"]) => {
   const album = await prismaWrapper(prisma.album.findUniqueOrThrow)({
@@ -44,26 +45,26 @@ export const getAlbumData = cache(async (name: Album["name"]) => {
         select: {
           name: true,
           parentName: true,
-        }
+        },
       },
       photos: {
         select: {
           smugMugKey: true,
           url: true,
-        }
-      }
-    }
+        },
+      },
+    },
   });
 
   const rootSection = await getRootSection(album.section);
 
   return {
     ...album,
-    rootSection
+    rootSection,
   };
-})
+});
 
-export const getAlbumList = cache(async (sectionName: Album["sectionName"]) => (
+export const getAlbumList = cache(async (sectionName: Album["sectionName"]) =>
   prismaWrapper(prisma.album.findMany)({
     where: { sectionName },
     select: {
@@ -71,11 +72,11 @@ export const getAlbumList = cache(async (sectionName: Album["sectionName"]) => (
       name: true,
       sectionName: true,
       icon: true,
-    }
-  })
-));
+    },
+  }),
+);
 
-export const getPhotographyAlbumPhotos = cache(async (name: Album["name"]) => (
+export const getPhotographyAlbumPhotos = cache(async (name: Album["name"]) =>
   prismaWrapper(prisma.album.findUniqueOrThrow)({
     where: { name },
     select: {
@@ -83,27 +84,27 @@ export const getPhotographyAlbumPhotos = cache(async (name: Album["name"]) => (
       photos: {
         select: {
           id: true,
-          url: true
-        }
-      }
-    }
-  })
-))
+          url: true,
+        },
+      },
+    },
+  }),
+);
 
 export const getAlbumSection = cache(async (name: Album["name"]) => {
   const { sectionName } = await prismaWrapper(prisma.album.findUniqueOrThrow)({
     where: { name },
-    select: { sectionName: true }
+    select: { sectionName: true },
   });
   return sectionName;
 });
 
-export const getStaticParams = cache(async (sectionName: string) => (
+export const getStaticParams = cache(async (sectionName: string) =>
   prismaWrapper(prisma.album.findMany)({
     where: { sectionName },
     select: {
       name: true,
       sectionName: true,
-    }
-  })
-));
+    },
+  }),
+);

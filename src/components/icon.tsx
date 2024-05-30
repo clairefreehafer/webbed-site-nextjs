@@ -1,13 +1,15 @@
 "use client";
 
 import { Album, Icon } from "@prisma/client";
+import { Theme } from "@styles/theme";
 import { getAstrologyDateRange } from "@utils/animal-crossing";
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 
 const Emoji = styled.p<{ $height: number | "inherit"; $inline: boolean }>`
-  ${({ $height }) => $height === "inherit" ?
-    "font-size: inherit;" :
-    `font-size: ${$height - 1}rem;`}
+  ${({ $height }) =>
+    $height === "inherit"
+      ? "font-size: inherit;"
+      : `font-size: ${$height - 1}rem;`}
 
   ${({ $inline }) => !$inline && "width: 100%;"}
 `;
@@ -26,18 +28,18 @@ type DisplayIconProps = {
   inline?: boolean;
   /** for animal crossing links w/o an icon. */
   date?: Album["date"];
+  theme?: Theme;
 };
 
 export default function DisplayIcon({
   icon,
   height = "inherit",
   inline = false,
-  date
+  date,
+  theme = "default",
 }: DisplayIconProps) {
-  const theme = useTheme();
-
   if (!icon) {
-    if (theme.name === "animal-crossing") {
+    if (theme === "animalCrossing") {
       if (!date) {
         throw new Error("please pass a date for animal crossing page icons!");
       }
@@ -57,7 +59,9 @@ export default function DisplayIcon({
   }
 
   if (icon.imagePath) {
-    return <Image src={icon.imagePath} alt="" $height={height} $inline={inline} />
+    return (
+      <Image src={icon.imagePath} alt="" $height={height} $inline={inline} />
+    );
   }
 
   if (icon.character) {
