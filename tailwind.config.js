@@ -1,4 +1,4 @@
-/** @type {import('tailwindcss').Config} */
+/** @type {import("tailwindcss").Config} */
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
@@ -57,11 +57,17 @@ module.exports = {
           textShadow: "rgba(0, 0, 0, 0.75)",
         },
       },
+      gridTemplateColumns: {
+        "admin-form": "25% 1fr",
+      },
       keyframes: {
         "wiggle-box": {
           "0%, 66%": { opacity: 0 },
           "67%, 100%": { opacity: 1 },
         },
+      },
+      padding: {
+        input: "1rem",
       },
     },
   },

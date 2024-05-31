@@ -1,33 +1,52 @@
 "use client";
 
-import AdminForm, { FormState, HideSection, Input, Label, SecitonHeader } from "@components/admin/form";
 import { Album, Prisma } from "@prisma/client";
 import { AlbumTypes, displayName } from "@utils/albums";
 import { editAlbum } from "@actions/album";
-import { useState } from "react";
-import SelectCoverPhoto, { SelectCoverPhotoProps } from "@components/photography/select-cover-photo";
-import SubmitButton from "@components/admin/submit-button";
-import SectionSelect, { SectionSelectProps } from "@components/admin/section-select";
-import IconSelect, { IconSelectProps } from "@components/admin/icon-select";
+import { ChangeEvent, useState } from "react";
+import SelectCoverPhoto, {
+  SelectCoverPhotoProps,
+} from "@components/photography/select-cover-photo";
+import SubmitButton from "@components/admin/form/submit-button";
+import SectionSelect, {
+  SectionSelectProps,
+} from "@components/admin/form/section-select";
+import IconSelect, {
+  IconSelectProps,
+} from "@components/admin/form/icon-select";
 import { getAlbumData } from "@utils/prisma/album";
+import AdminForm, { FormState } from "@components/admin/form/index";
+import TextInput from "@components/admin/form/text-input";
+import Select from "@components/admin/form/select";
+import HideSection from "@components/admin/form/hide-section";
+import DateInput from "@components/admin/form/date-input";
+import CheckboxInput from "@components/admin/form/checkbox-input";
+import SectionHeader from "@components/admin/form/section-header";
+import NumberInput from "@components/admin/form/number-input";
 
 type Props = {
-  albumData: Prisma.PromiseReturnType<typeof getAlbumData>,
-  albumPhotos: SelectCoverPhotoProps["albumPhotos"],
-  sections: SectionSelectProps["sections"],
-  icons: IconSelectProps["icons"]
+  albumData: Prisma.PromiseReturnType<typeof getAlbumData>;
+  albumPhotos: SelectCoverPhotoProps["albumPhotos"];
+  sections: SectionSelectProps["sections"];
+  icons: IconSelectProps["icons"];
 };
 
 export type UpdateAlbumFormState = FormState<
-  Omit<Props["albumData"], "section" | "photos"> & {
-    sectionName: Album["sectionName"]
+  Omit<Props["albumData"], "section" | "photos" | "date"> & {
+    sectionName: Album["sectionName"];
+    date?: string;
   }
 >;
 
-export default function UpdateAlbumForm(
-  { albumData, albumPhotos, sections, icons }: Props
-) {
-  const [autoDateGeneration, setAutoDateGeneration] = useState(!!albumPhotos.length);
+export default function UpdateAlbumForm({
+  albumData,
+  albumPhotos,
+  sections,
+  icons,
+}: Props) {
+  const [generateDateAutomatically, setGenerateDateAutomatically] = useState(
+    !!albumPhotos.length,
+  );
   const [rootSection, setRootSection] = useState(albumData.rootSection);
 
   const { id, name, date, type, coverKey, section, iconId } = albumData;
@@ -37,8 +56,8 @@ export default function UpdateAlbumForm(
     name,
     type,
     iconId,
-    date,
     coverKey,
+    date: date?.toISOString().slice(0, 19),
     sectionName: section.name,
   };
 
@@ -46,15 +65,7 @@ export default function UpdateAlbumForm(
     <AdminForm action={editAlbum} initialState={initialState}>
       <input type="hidden" name="id" defaultValue={id} readOnly />
 
-      <Label htmlFor="name">
-        name
-      </Label>
-      <Input
-        type="text"
-        name="name"
-        id="name"
-        defaultValue={displayName(name)}
-      />
+      <TextInput label="name" name="name" defaultValue={initialState.name} />
 
       <SectionSelect
         sections={sections}
@@ -62,57 +73,46 @@ export default function UpdateAlbumForm(
         onChange={setRootSection}
       />
 
-      <Label htmlFor="type">
-        type
-      </Label>
-      <Input as="select" name="type" id="type" defaultValue={type}>
-        {Object.values(AlbumTypes).map((type) => (
-          <option key={type}>{type}</option>
-        ))}
-      </Input>
-
-      <HideSection as="div" $when={rootSection === "zelda"}>
-        <Label htmlFor="date">
-          date
-        </Label>
-        <Input
-          type="datetime-local"
-          name="date"
-          value={date?.toISOString().slice(0, 19)}
-          readOnly={autoDateGeneration}
-        />
-
-        <Input
-          type="checkbox"
-          checked={autoDateGeneration}
-          name="generateDateAutomatically"
-          id="generateDateAutomatically"
-          onChange={(e) => setAutoDateGeneration(e.target.checked)}
-        />
-        <Label
-          htmlFor="generateDateAutomatically"
-          css={{ justifyContent: "flex-start", margin: "1rem" }}
-        >
-          generate date automatically?
-        </Label>
-      </HideSection>
-
-      <SelectCoverPhoto
-        coverKey={coverKey}
-        albumPhotos={albumPhotos}
+      <Select
+        label="type"
+        name="type"
+        options={Object.values(AlbumTypes)}
+        defaultValue={initialState.type}
       />
 
-      <HideSection as="div" $when={rootSection !== "zelda"}>
-        <SecitonHeader>~~~ ZELDA ~~~</SecitonHeader>
+      <HideSection when={rootSection === "zelda"}>
+        <DateInput
+          label="date"
+          name="date"
+          defaultValue={initialState.date}
+          readOnly={generateDateAutomatically}
+        />
 
-        <IconSelect icons={icons} defaultValue={iconId} />
+        <CheckboxInput
+          label="generate date automatically?"
+          name="generateDateAutomatically"
+          checked={generateDateAutomatically}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setGenerateDateAutomatically(e.target.checked)
+          }
+        />
       </HideSection>
 
-      {/* <Label>
-        add photos (by smugmugkey?)
-      </Label> */}
+      <HideSection when={rootSection !== "photography"}>
+        <SectionHeader>~~~ photography ~~~</SectionHeader>
+
+        <SelectCoverPhoto coverKey={coverKey} albumPhotos={albumPhotos} />
+      </HideSection>
+
+      <HideSection when={rootSection !== "zelda"}>
+        <SectionHeader>~~~ zelda ~~~</SectionHeader>
+
+        <IconSelect icons={icons} defaultValue={iconId} />
+
+        <NumberInput label="compendium number" name="compendiumNumber" />
+      </HideSection>
 
       <SubmitButton>update album</SubmitButton>
     </AdminForm>
-  )
+  );
 }
