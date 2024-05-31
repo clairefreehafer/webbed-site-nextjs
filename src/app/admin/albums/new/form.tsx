@@ -1,38 +1,35 @@
 "use client";
 
-import AdminForm, { FormState, Input, Label } from "@components/admin/form";
-import { AlbumFormState, addAlbum } from "@actions/album";
-import SectionSelect, { SectionSelectProps } from "@components/admin/section-select";
+import { addAlbum } from "@actions/album";
+import SectionSelect, {
+  SectionSelectProps,
+} from "@components/admin/form/section-select";
 import { AlbumTypes } from "@utils/albums";
-import SubmitButton from "@components/admin/submit-button";
+import SubmitButton from "@components/admin/form/submit-button";
 import { Album } from "@prisma/client";
+import AdminForm from "@components/admin/form/index";
+import { FormState } from "@components/admin/form";
+import TextInput from "@components/admin/form/text-input";
+import Select from "@components/admin/form/select";
 
 export type NewAlbumFormState = FormState<Pick<Album, "name" | "type">>;
 
 const initialState: NewAlbumFormState = {};
 
-export default function NewAlbumForm(
-  { sections }: { sections: SectionSelectProps["sections"] }
-) {
+export default function NewAlbumForm({
+  sections,
+}: {
+  sections: SectionSelectProps["sections"];
+}) {
   return (
     <AdminForm action={addAlbum} initialState={initialState}>
-      <Label htmlFor="name">
-        name
-      </Label>
-      <Input type="text" name="name" id="name" required />
+      <TextInput name="name" label="name" required />
 
       <SectionSelect sections={sections} />
 
-      <Label htmlFor="type">
-        type
-      </Label>
-      <Input as="select" name="type" id="type">
-        {Object.values(AlbumTypes).map((type) => (
-          <option key={type}>{type}</option>
-        ))}
-      </Input>
+      <Select label="type" name="type" options={Object.values(AlbumTypes)} />
 
       <SubmitButton>create album</SubmitButton>
     </AdminForm>
-  )
+  );
 }
