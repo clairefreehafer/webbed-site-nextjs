@@ -3,29 +3,36 @@
 import { editPhoto } from "@actions/photo";
 import { ChangeEvent, useState } from "react";
 import { Icon, Prisma } from "@prisma/client";
-import AdminForm, { FormState, HideSection, Input, Label, SecitonHeader, Textarea } from "@components/admin/form";
-import SubmitButton from "@components/admin/submit-button";
+
+import SubmitButton from "@components/admin/form/submit-button";
 import { getAdminPhoto } from "@utils/prisma/photo";
-import AlbumSelect, { AlbumSelectProps } from "@components/admin/album-select";
-import IconSelect from "@components/admin/icon-select";
+import IconSelect from "@components/admin/form/icon-select";
+import AdminForm, { FormState } from "@components/admin/form/index";
+import TextInput from "@components/admin/form/text-input";
+import CheckboxInput from "@components/admin/form/checkbox-input";
+import HideSection from "@components/admin/form/hide-section";
+import { SecitonHeader } from "@components/admin/form";
+import DateInput from "@components/admin/form/date-input";
+import NumberInput from "@components/admin/form/number-input";
+import Textarea from "@components/admin/form/textarea";
+import Select from "@components/admin/form/select";
+import { getAlbumNames } from "@utils/prisma";
 
 export type UpdatePhotoFormState = FormState<
   Prisma.PromiseReturnType<typeof getAdminPhoto> &
-  PrismaJson.Metadata & {
-    synchronizeWithXmp?: boolean;
-    rootSection?: string | null;
-  }
+    PrismaJson.Metadata & {
+      synchronizeWithXmp?: boolean;
+      rootSection?: string | null;
+    }
 >;
 
 type Props = {
-  photoData: Prisma.PromiseReturnType<typeof getAdminPhoto>,
-  albums: AlbumSelectProps["albums"],
+  photoData: Prisma.PromiseReturnType<typeof getAdminPhoto>;
+  albums: Prisma.PromiseReturnType<typeof getAlbumNames>;
   icons: Icon[];
 };
 
-export default function UpdatePhotoForm(
-  { photoData, albums, icons }: Props
-) {
+export default function UpdatePhotoForm({ photoData, albums, icons }: Props) {
   const [synchronizeWithXmp, setSynchronizeWithXmp] = useState(true);
   const [rootSection, setRootSection] = useState(photoData.rootSection);
 
@@ -36,14 +43,7 @@ export default function UpdatePhotoForm(
     setRootSection(resultJson.rootSection);
   }
 
-  const {
-    albumName,
-    xmpPath,
-    smugMugKey,
-    captureDate,
-    metadata,
-    iconId,
-  } = photoData;
+  const { xmpPath, smugMugKey, captureDate, metadata, iconId } = photoData;
 
   const initialState: UpdatePhotoFormState = {
     ...photoData,
@@ -56,95 +56,61 @@ export default function UpdatePhotoForm(
       <input type="hidden" name="smugMugKey" value={smugMugKey} />
       <input type="hidden" name="rootSection" value={rootSection || ""} />
 
-      <AlbumSelect
-        albums={albums}
-        defaultValue={albumName}
+      <Select
+        label="album"
+        name="albumName"
+        options={albums.map(({ name }) => name)}
+        defaultValue={initialState.albumName || ""}
         onChange={handleAlbumChange}
       />
 
-      <Label htmlFor="altText">
-        alt text
-      </Label>
-      <Textarea
-        name="altText"
-        id="altText"
-        defaultValue={photoData.altText as string}
-      />
+      <Textarea label="alt text" name="altText" />
 
-      <Label htmlFor="xmpPath">
-        xmp path
-      </Label>
-      <Input
-        type="text"
-        name="xmpPath"
-        id="xmpPath"
-        defaultValue={xmpPath}
-      />
+      <TextInput label="xmp path" name="xmpPath" defaultValue={xmpPath} />
 
-      <Input
-        type="checkbox"
-        name="synchronizeWithXmp"
-        id="synchronizeWithXmp"
+      <CheckboxInput
+        label="synchronize with xmp?"
+        name="synchornizeWithXmp"
         checked={synchronizeWithXmp}
-        onChange={(e) => setSynchronizeWithXmp(e.target.checked)}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setSynchronizeWithXmp(e.target.checked)
+        }
       />
-      <Label htmlFor="synchronizeWithXmp" css={{ justifyContent: "flex-start" }}>
-        synchronize with xmp?
-      </Label>
 
-      <HideSection as="div" $when={synchronizeWithXmp}>
+      <HideSection when={synchronizeWithXmp}>
         <SecitonHeader>~~~ XMP ~~~</SecitonHeader>
 
-        <Label htmlFor="title">
-          title
-        </Label>
-        <Input type="text" name="title" id="title" defaultValue={metadata?.title as string} />
+        <TextInput label="title" name="title" defaultValue={metadata?.title} />
 
-        <Label htmlFor="description">
-          description
-        </Label>
         <Textarea
+          label="description"
           name="description"
-          id="description"
-          defaultValue={metadata?.description as string}
+          defaultValue={metadata?.description}
         />
 
-        <HideSection as="div" $when={rootSection === "zelda"}>
-          <Label htmlFor="captureDate">
-            capture date
-          </Label>
-          <Input
-            type="datetime-local"
+        <HideSection when={rootSection === "zelda"}>
+          <DateInput
+            label="capture date"
             name="captureDate"
-            id="captureDate"
             defaultValue={captureDate?.toISOString().slice(0, -1)}
             readOnly
           />
         </HideSection>
       </HideSection>
 
-      <HideSection as="div" $when={rootSection !== "zelda"}>
+      <HideSection when={rootSection !== "zelda"}>
         <SecitonHeader>~~~ ZELDA ~~~</SecitonHeader>
 
         <IconSelect icons={icons} defaultValue={iconId} />
 
-        <Input
-          type="number"
+        <NumberInput
+          label="compendium number"
           name="compendiumNumber"
-          id="compendiumNumber"
           defaultValue={metadata?.compendiumNumber}
         />
-        <Label htmlFor="compendiumNumber" css={{ justifyContent: "flex-start" }}>
-          compendium number
-        </Label>
       </HideSection>
-
-      {/* <Label htmlFor="updateSmugMug">
-        update smugmug?
-      </Label>
-      <Input type="checkbox" name="updateSmugMug" id="updateSmugMug" /> */}
 
       <SubmitButton>✍️ update photo ✍️</SubmitButton>
     </AdminForm>
-  )
+  );
 }

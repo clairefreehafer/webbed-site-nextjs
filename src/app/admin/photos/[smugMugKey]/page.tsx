@@ -4,7 +4,11 @@ import { getAlbumNames } from "@utils/prisma";
 import { getIcons } from "@utils/prisma/icon";
 import { getAdminPhoto } from "@utils/prisma/photo";
 
-export default async function Page({ params }: { params: { smugMugKey: string }}) {
+export default async function Page({
+  params,
+}: {
+  params: { smugMugKey: string };
+}) {
   const photoData = await getAdminPhoto(params.smugMugKey);
   const albums = await getAlbumNames();
   const icons = await getIcons();
