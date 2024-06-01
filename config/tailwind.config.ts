@@ -1,5 +1,7 @@
-/** @type {import("tailwindcss").Config} */
-module.exports = {
+import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
+
+export default {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
@@ -20,6 +22,7 @@ module.exports = {
             ${theme("colors.indigo")},
             ${theme("colors.violet")}
           )`,
+        zelda: "url('/images/zelda/pad-background.jpg')",
       }),
       borderRadius: {
         animalCrossing: {
@@ -52,6 +55,18 @@ module.exports = {
         animalCrossing: {
           uiBackground: "rgb(248, 245, 223, 0.8)",
         },
+        "grass-color": {
+          "1210-0224": "rgb(189, 215, 238)",
+          "0225-0331": "rgb(31, 140, 57)",
+          "0401-0722": "rgb(0, 131, 90)",
+          "0723-0915": "rgb(19, 115, 82)",
+          "0916-0930": "rgb(73, 123, 49)",
+          "1001-1015": "rgb(132, 123, 58)",
+          "1016-1029": "rgb(148, 99, 99)",
+          "1030-1112": "rgb(148, 90, 98)",
+          "1113-1128": "rgb(132, 90, 82)",
+          "1129-1209": "rgb(99, 81, 82)",
+        },
 
         zelda: {
           textShadow: "rgba(0, 0, 0, 0.75)",
@@ -60,16 +75,33 @@ module.exports = {
       gridTemplateColumns: {
         "admin-form": "25% 1fr",
       },
+      hueRotate: {},
+      invert: {
+        // zelda white to blue
+        19: "19%",
+      },
       keyframes: {
         "wiggle-box": {
-          "0%, 66%": { opacity: 0 },
-          "67%, 100%": { opacity: 1 },
+          "0%, 66%": { opacity: "0" },
+          "67%, 100%": { opacity: "1" },
         },
       },
       padding: {
         input: "1rem",
       },
+      saturate: {
+        // zelda white to blue
+        1368: "1368%",
+      },
+      sepia: {
+        // zelda white to blue
+        88: "88%",
+      },
     },
   },
-  plugins: [],
-};
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      addUtilities({});
+    }),
+  ],
+} satisfies Config;
