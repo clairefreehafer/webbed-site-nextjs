@@ -1,123 +1,24 @@
 "use client";
 
-import { fotSeuratProB } from "@fonts/animal-crossing";
 import type { Photo } from "@prisma/client";
-import { AnimalCrossingThemeRoot, animalCrossingTextBackground } from "@styles/animal-crossing/theme";
-import { fullScreen } from "@styles/layout";
-import { SLIDESHOW_UI_Z_INDEX } from "@styles/z-index";
-import { ZeldaThemeRoot, zeldaTextBackground } from "@styles/zelda/theme";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import styled, { css, useTheme } from "styled-components";
 import ZeldaSlideInfo from "./zelda/slideshow";
-
-const NavBack = styled.nav`
-  left: 0.5rem;
-  padding: 0.5rem 1rem;
-  position: absolute;
-  text-align: center;
-  top: 0.6rem;
-  z-index: ${SLIDESHOW_UI_Z_INDEX};
-
-  ${({ theme }) => theme.name === "animal-crossing" && css`
-    ${animalCrossingTextBackground};
-  `}
-  ${({ theme }) => theme.name === "zelda" && css`
-    ${zeldaTextBackground};
-  `}
-`;
-
-const DefaultSlideInfo = styled.div`
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-  position: absolute;
-  right: 0.5rem;
-  text-align: right;
-  top: 0.5rem;
-  z-index: ${SLIDESHOW_UI_Z_INDEX};
-
-  ${({ theme }) => theme.name === "animal-crossing" && css`
-    ${animalCrossingTextBackground};
-  `}
-  ${({ theme }) => theme.name === "zelda" && css`
-    ${zeldaTextBackground};
-  `}
-`;
-
-const Main = styled.main`
-  ${fullScreen};
-  position: relative;
-`;
-
-const SlideshowWrapper = styled.ol`
-  display: grid;
-  grid-auto-columns: 100vw;
-  grid-auto-flow: column;
-  grid-template-columns: repeat(auto-fill, 100vw);
-  height: 100vh;
-  overflow-x: scroll;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-`;
-
-const Slide = styled.li`
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  max-height: 100vh;
-  max-width: 100vw;
-  /* padding: BORDER_WIDTH; */
-  position: relative;
-`;
-
-const SlideSnapper = styled.div`
-  height: 100%;
-  left: 0;
-  position: absolute;
-  scroll-snap-align: center;
-  top: 0;
-  width: 100%;
-  z-index: -1;
-`;
-
-const Photo = styled.img`
-  box-shadow: 0 0 1.5rem 0.1rem rgba(0, 0, 0, 0.3);
-`;
-
-const SlideNavigation = styled.div`
-  bottom: 0.5rem;
-  left: 50%;
-  padding: 0.5rem 1.5rem;
-  position: absolute;
-  transform: translateX(-50%);
-  z-index: ${SLIDESHOW_UI_Z_INDEX};
-
-  ${({ theme }) => theme.name === "animal-crossing" && css`
-    ${animalCrossingTextBackground};
-  `}
-  ${({ theme }) => theme.name === "zelda" && css`
-    ${zeldaTextBackground};
-  `}
-`;
+import { Theme } from "@styles/theme";
 
 type Props = {
   photos: Partial<Photo>[];
-  albumDate: Date;
   albumName: string;
   albumSection: string[];
+  theme: Theme;
 };
 
-export default function Slideshow(
-  { photos, albumDate, albumName, albumSection }: Props
-) {
+export default function Slideshow({ photos, albumName, albumSection }: Props) {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(1);
   const [currentSlideData, setCurrentSlideData] = useState(photos[0]);
   const slidesRef = useRef<(HTMLElement | null)[]>([]);
   const pathname = usePathname();
-  const theme = useTheme();
 
   useEffect(() => {
     const { hash } = window?.location;
@@ -129,14 +30,12 @@ export default function Slideshow(
   function intersectionObserverCallback(entries: IntersectionObserverEntry[]) {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        const slideNumber = Number(
-          entry.target.id[entry.target.id.length - 1]
-        );
+        const slideNumber = Number(entry.target.id[entry.target.id.length - 1]);
         setCurrentSlideIndex(slideNumber);
         setCurrentSlideData(photos[slideNumber - 1]);
       }
-    })
-  };
+    });
+  }
 
   useEffect(() => {
     const observer = new IntersectionObserver(intersectionObserverCallback, {
@@ -156,47 +55,43 @@ export default function Slideshow(
       for (let slide of slidesRefCurrent) {
         if (slide) observer.unobserve(slide);
       }
-    }
+    };
   }, [slidesRef, photos.length]);
 
-  const ThemeRoot = theme.name === "animal-crossing" ? AnimalCrossingThemeRoot : ZeldaThemeRoot;
-  const SlideInfo = theme.name === "zelda" ? ZeldaSlideInfo : DefaultSlideInfo
-
   return (
-    <ThemeRoot $date={albumDate} $shape="triangle" className={fotSeuratProB.variable}>
-      <NavBack>
-        {/* TODO: make applicable for all sections */}
-        <Link href={`/animal-crossing/${albumSection.slice(0, albumSection.length - 1).join("/")}`}>
-          &larr; back
-        </Link>
-      </NavBack>
+    <>
+      <nav className="ac-text-bg z-index-slideshow-ui absolute left-4 top-4 px-4 py-2">
+        &larr; back
+      </nav>
 
-      <SlideInfo slideData={currentSlideData}>
+      <div className="ac-text-bg z-index-slideshow-ui absolute right-4 top-4 px-4 py-2">
         {albumName}
-      </SlideInfo>
+      </div>
 
-      <Main>
-        <SlideshowWrapper>
+      <main className="h-screen w-screen">
+        <ol className="grid h-screen snap-x snap-mandatory auto-cols-[100vw] grid-flow-col grid-cols-[repeat(auto-fill,_100vw)] overflow-x-scroll scroll-smooth">
           {photos.map((photo, idx) => (
-            <Slide
+            <div
+              className="max-w-screen relative flex max-h-screen items-center justify-center"
               key={photo.id}
               id={`slide-${idx + 1}`}
             >
-              <SlideSnapper />
-              <Photo
+              <div className="absolute left-0 top-0 -z-10 h-full w-full snap-center" />
+              <img
                 src={photo.url?.replaceAll("#size#", "L")}
                 alt={photo.altText || ""}
                 id={`photo-${idx + 1}`}
                 ref={(node) => {
                   slidesRef.current.push(node);
                 }}
+                className="shadow-[0_0_1.5rem_0.1rem_rgba(0,0,0,0.3)]"
               />
-            </Slide>
+            </div>
           ))}
-        </SlideshowWrapper>
-      </Main>
+        </ol>
+      </main>
 
-      <SlideNavigation>
+      <div className="ac-text-bg absolute bottom-4 right-1/2 translate-x-2/4 px-4 py-2">
         {currentSlideIndex > 1 && (
           <Link
             href={`${pathname}/#slide-${currentSlideIndex - 1}`}
@@ -216,7 +111,7 @@ export default function Slideshow(
             &rarr;
           </Link>
         )}
-      </SlideNavigation>
-    </ThemeRoot>
+      </div>
+    </>
   );
 }

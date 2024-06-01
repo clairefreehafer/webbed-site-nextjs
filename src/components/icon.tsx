@@ -3,21 +3,7 @@
 import { Album, Icon } from "@prisma/client";
 import { Theme } from "@styles/theme";
 import { getAstrologyDateRange } from "@utils/animal-crossing";
-import styled from "styled-components";
-
-const Emoji = styled.p<{ $height: number | "inherit"; $inline: boolean }>`
-  ${({ $height }) =>
-    $height === "inherit"
-      ? "font-size: inherit;"
-      : `font-size: ${$height - 1}rem;`}
-
-  ${({ $inline }) => !$inline && "width: 100%;"}
-`;
-
-const Image = styled.img<{ $height: number | "inherit"; $inline: boolean }>`
-  ${({ $height }) => `height: ${$height}rem; max-width: ${$height}rem;`}
-  ${({ $inline }) => $inline && "margin-right: 0.25rem;"}
-`;
+import Image from "next/image";
 
 export type DisplayIconType = Pick<Icon, "imagePath" | "character">;
 
@@ -29,6 +15,7 @@ type DisplayIconProps = {
   /** for animal crossing links w/o an icon. */
   date?: Album["date"];
   theme?: Theme;
+  className?: string;
 };
 
 export default function DisplayIcon({
@@ -37,6 +24,7 @@ export default function DisplayIcon({
   inline = false,
   date,
   theme = "default",
+  className = "",
 }: DisplayIconProps) {
   if (!icon) {
     if (theme === "animalCrossing") {
@@ -46,11 +34,10 @@ export default function DisplayIcon({
       const astrologyDateRange = getAstrologyDateRange(date);
 
       return (
-        <Image
+        <img
           src={`/images/animal-crossing/star-fragments/star-fragment_${astrologyDateRange}.png`}
           alt=""
-          $height={height}
-          $inline={inline}
+          className={className}
         />
       );
     }
@@ -59,17 +46,15 @@ export default function DisplayIcon({
   }
 
   if (icon.imagePath) {
-    return (
-      <Image src={icon.imagePath} alt="" $height={height} $inline={inline} />
-    );
+    return <img src={icon.imagePath} alt="" className={className} />;
   }
 
   if (icon.character) {
     return (
-      <Emoji $height={height} $inline={inline}>
+      <p className="text-[3rem]">
         {icon.character}
         {inline && " "}
-      </Emoji>
+      </p>
     );
   }
 

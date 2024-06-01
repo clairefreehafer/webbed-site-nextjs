@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Theme } from "@styles/theme";
 import WiggleBox from "./photography/wiggle-box";
+import { ReactNode } from "react";
 
 export type NavLink = {
   pathname: string;
@@ -39,7 +40,7 @@ type Props = {
 const navStyles: Record<Theme, string> = {
   default: "",
   notebook: "",
-  animalCrossing: "ac-text-bg h-12",
+  animalCrossing: "flex items-middle ac-text-bg h-16 px-4",
   zelda: "zelda-text-bg",
   admin: "",
 };
@@ -47,10 +48,14 @@ const navStyles: Record<Theme, string> = {
 const linkStyles: Record<Theme, string> = {
   default: "",
   notebook: "text-xl",
-  animalCrossing: "px-4",
+  animalCrossing: "",
   zelda: "sheikah-underline mx-4 mt-2 p-0",
   admin: "text-limegreen",
 };
+
+const Li = ({ children }: { children: ReactNode }) => (
+  <li className="group relative flex items-center">{children}</li>
+);
 
 export default function Navigation({
   navLinks = defaultNavLinks,
@@ -66,7 +71,7 @@ export default function Navigation({
     <nav className={`${navStyles[theme]} ${className}`}>
       <ul className="flex list-none justify-center">
         {navLinks.map((link: NavLink) => (
-          <li key={link.pathname} className="group relative">
+          <Li key={link.pathname}>
             <WiggleBox theme={theme} />
             {link.image && <img src={link.image} alt="" />}
             <Link
@@ -78,10 +83,10 @@ export default function Navigation({
               )}
               {link.name}
             </Link>
-          </li>
+          </Li>
         ))}
         {process.env.NODE_ENV === "development" && (
-          <li className="group relative">
+          <Li>
             <WiggleBox theme={theme} />
             <Link
               href="/admin"
@@ -90,7 +95,7 @@ export default function Navigation({
               {isActive("admin") && <>&gt;&nbsp;</>}
               admin
             </Link>
-          </li>
+          </Li>
         )}
       </ul>
     </nav>

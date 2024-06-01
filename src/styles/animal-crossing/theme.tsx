@@ -26,7 +26,7 @@ export const animalCrossingTheme = {
 };
 
 type Props = {
-  shape?: GrassShape;
+  shape: GrassShape;
   date?: Date;
   children: ReactNode;
 };

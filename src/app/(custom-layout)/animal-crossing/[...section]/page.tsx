@@ -3,6 +3,8 @@ import Slideshow from "@components/slideshow";
 import { getAlbumPhotos } from "@utils/animal-crossing";
 import { getAncestorSections } from "@utils/section";
 import { getStaticParams } from "@utils/prisma/album";
+import AnimalCrossingThemeRoot from "@styles/animal-crossing/theme";
+import "@styles/animal-crossing/theme.css";
 
 export async function generateStaticParams() {
   const albums = await getStaticParams("animal-crossing");
@@ -19,7 +21,11 @@ export async function generateStaticParams() {
 
 export const dynamicParams = false;
 
-export default async function Page({ params }: { params: { section: string[] }}) {
+export default async function Page({
+  params,
+}: {
+  params: { section: string[] };
+}) {
   const albumName = displayName(params.section[params.section.length - 1]);
   const section = params.section[params.section.length - 2];
   const photos = await getAlbumPhotos(albumName, section);
@@ -31,11 +37,13 @@ export default async function Page({ params }: { params: { section: string[] }})
   const albumDate = photos[0].album?.date || new Date();
 
   return (
-    <Slideshow
-      photos={photos}
-      albumDate={albumDate}
-      albumName={albumName}
-      albumSection={params.section}
-    />
+    <AnimalCrossingThemeRoot shape="triangle" date={albumDate}>
+      <Slideshow
+        photos={photos}
+        albumName={albumName}
+        albumSection={params.section}
+        theme="animalCrossing"
+      />
+    </AnimalCrossingThemeRoot>
   );
 }
