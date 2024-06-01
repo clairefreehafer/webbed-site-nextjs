@@ -1,10 +1,6 @@
-import { getParentSections } from "@utils/prisma/section";
 import NewSectionForm from "./form";
+import ParentSectionSelect from "@components/admin/form/parent-section-select";
 
 export default async function AdminAlbum() {
-  const sections = await getParentSections();
-
-  return (
-    <NewSectionForm sections={sections} />
-  );
+  return <NewSectionForm parentSectionSelect={<ParentSectionSelect />} />;
 }
