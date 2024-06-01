@@ -1,30 +1,35 @@
-import AdminForm, { FormState, Input, Label } from "@components/admin/form";
+import AdminForm, { FormState } from "@components/admin/form/index";
 import { editTag } from "@actions/tag";
-import { Prisma, Tag } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { ReactNode } from "react";
-import SubmitButton from "@components/admin/submit-button";
-import { getTag } from "@utils/prisma";
+import SubmitButton from "@components/admin/form/submit-button";
+import { getTag } from "@utils/prisma/tag";
+import TextInput from "@components/admin/form/text-input";
 
 type Props = {
-  tagData: Tag,
-  children: ReactNode
+  tagData: Prisma.PromiseReturnType<typeof getTag>;
+  parentTagSelect: ReactNode;
 };
 
-export type UpdateTagFormState = FormState<Prisma.PromiseReturnType<typeof getTag>>;
+export type UpdateTagFormState = FormState<
+  Prisma.PromiseReturnType<typeof getTag>
+>;
 
-export default async function TagForm(
-  { tagData, children }: Props
-) {
+export default async function TagForm({ tagData, parentTagSelect }: Props) {
   const initialState = tagData as UpdateTagFormState;
 
   return (
     <AdminForm action={editTag} initialState={initialState}>
-      <Label htmlFor="name">
-        name
-      </Label>
-      <Input type="text" name="name" defaultValue={tagData.name} />
+      <input type="hidden" name="id" value={initialState.id} />
 
-      {children}
+      <TextInput
+        label="name"
+        name="name"
+        defaultValue={initialState.name}
+        required
+      />
+
+      {parentTagSelect}
 
       <SubmitButton>update tag</SubmitButton>
     </AdminForm>
