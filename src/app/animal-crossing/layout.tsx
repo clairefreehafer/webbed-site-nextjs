@@ -18,7 +18,7 @@ export default function AnimalCrossingLayout({
         <Nav theme="animalCrossing" />
       </header>
       <main
-        className="bg-sand mx-auto mb-4 flex max-w-[750px] rounded-3xl bg-top bg-repeat-x px-4 pb-4 pt-36 shadow-[0_1rem_0.5rem_-0.5rem_rgba(0,0,0,0.5)]"
+        className="bg-sand mx-auto mb-4 max-w-[750px] rounded-3xl bg-top bg-repeat-x px-4 pb-4 pt-36 shadow-[0_1rem_0.5rem_-0.5rem_rgba(0,0,0,0.5)]"
         style={{
           backgroundImage: `url(/images/animal-crossing/sand/square_${grassDateRange}.png)`,
         }}
