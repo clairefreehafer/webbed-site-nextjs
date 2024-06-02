@@ -7,6 +7,14 @@ import { useEffect, useRef, useState } from "react";
 import ZeldaSlideInfo from "./zelda/slideshow";
 import { Theme } from "@styles/theme";
 
+const uiStyles: Record<Theme, string> = {
+  default: "",
+  animalCrossing: "ac-text-bg px-4 py-2",
+  notebook: "",
+  zelda: "zelda-text-bg py-4 px-8",
+  admin: "",
+};
+
 type Props = {
   photos: Partial<Photo>[];
   albumName: string;
@@ -14,7 +22,12 @@ type Props = {
   theme: Theme;
 };
 
-export default function Slideshow({ photos, albumName, albumSection }: Props) {
+export default function Slideshow({
+  photos,
+  albumName,
+  albumSection,
+  theme,
+}: Props) {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(1);
   const [currentSlideData, setCurrentSlideData] = useState(photos[0]);
   const slidesRef = useRef<(HTMLElement | null)[]>([]);
@@ -58,13 +71,21 @@ export default function Slideshow({ photos, albumName, albumSection }: Props) {
     };
   }, [slidesRef, photos.length]);
 
+  const pathnameArr = pathname.split("/");
+  pathnameArr.pop();
+  const backHref = pathnameArr.join("/");
+
   return (
     <>
-      <nav className="ac-text-bg z-index-slideshow-ui absolute left-4 top-4 px-4 py-2">
-        &larr; back
+      <nav
+        className={`${uiStyles[theme]} z-slideshow-ui absolute left-4 top-4`}
+      >
+        <Link href={backHref}>&larr; back</Link>
       </nav>
 
-      <div className="ac-text-bg z-index-slideshow-ui absolute right-4 top-4 px-4 py-2">
+      <div
+        className={`${uiStyles[theme]} z-slideshow-ui absolute right-4 top-4`}
+      >
         {albumName}
       </div>
 
@@ -91,7 +112,9 @@ export default function Slideshow({ photos, albumName, albumSection }: Props) {
         </ol>
       </main>
 
-      <div className="ac-text-bg absolute bottom-4 right-1/2 translate-x-2/4 px-4 py-2">
+      <div
+        className={`${uiStyles[theme]} absolute bottom-4 right-1/2 translate-x-2/4`}
+      >
         {currentSlideIndex > 1 && (
           <Link
             href={`${pathname}/#slide-${currentSlideIndex - 1}`}

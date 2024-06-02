@@ -11,12 +11,12 @@ import AdminForm, { FormState } from "@components/admin/form/index";
 import TextInput from "@components/admin/form/text-input";
 import CheckboxInput from "@components/admin/form/checkbox-input";
 import HideSection from "@components/admin/form/hide-section";
-import { SecitonHeader } from "@components/admin/form";
 import DateInput from "@components/admin/form/date-input";
 import NumberInput from "@components/admin/form/number-input";
 import Textarea from "@components/admin/form/textarea";
 import Select from "@components/admin/form/select";
 import { getAlbumNames } from "@utils/prisma";
+import SectionHeader from "@components/admin/form/section-header";
 
 export type UpdatePhotoFormState = FormState<
   Prisma.PromiseReturnType<typeof getAdminPhoto> &
@@ -78,7 +78,7 @@ export default function UpdatePhotoForm({ photoData, albums, icons }: Props) {
       />
 
       <HideSection when={synchronizeWithXmp}>
-        <SecitonHeader>~~~ XMP ~~~</SecitonHeader>
+        <SectionHeader>~~~ XMP ~~~</SectionHeader>
 
         <TextInput label="title" name="title" defaultValue={metadata?.title} />
 
@@ -99,7 +99,7 @@ export default function UpdatePhotoForm({ photoData, albums, icons }: Props) {
       </HideSection>
 
       <HideSection when={rootSection !== "zelda"}>
-        <SecitonHeader>~~~ ZELDA ~~~</SecitonHeader>
+        <SectionHeader>~~~ ZELDA ~~~</SectionHeader>
 
         <IconSelect icons={icons} defaultValue={iconId} />
 

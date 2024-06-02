@@ -8,7 +8,7 @@ import { AlbumTypes } from "@utils/albums";
 import SubmitButton from "@components/admin/form/submit-button";
 import { Album } from "@prisma/client";
 import AdminForm from "@components/admin/form/index";
-import { FormState } from "@components/admin/form";
+import { FormState } from "@components/admin/form/index";
 import TextInput from "@components/admin/form/text-input";
 import Select from "@components/admin/form/select";
 

@@ -3,7 +3,7 @@ import { getRootSection } from "@utils/section";
 
 export async function GET(
   _request: Request,
-  { params }: { params: { albumName: string } }
+  { params }: { params: { albumName: string } },
 ) {
   const { albumName } = params;
 
@@ -17,12 +17,14 @@ export async function GET(
       throw new Error(`could not find root section for album "${albumName}".`);
     }
 
-    console.log(`👍 found \`rootSection: "${rootSection}"\` for album "${albumName}".`);
+    console.log(
+      `👍 found \`rootSection: "${rootSection}"\` for album "${albumName}".`,
+    );
 
     return Response.json({ rootSection });
   } catch (error) {
     console.error(`❌ ${error}`);
     console.error(` > albumName = "${albumName}";`);
-    return new Response(error as string, { status: 404 })
+    return new Response(error as string, { status: 404 });
   }
 }

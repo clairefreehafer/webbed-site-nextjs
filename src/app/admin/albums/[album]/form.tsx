@@ -98,16 +98,16 @@ export default function UpdateAlbumForm({
         />
       </HideSection>
 
+      <IconSelect icons={icons} defaultValue={iconId} />
+
       <HideSection when={rootSection !== "photography"}>
         <SectionHeader>~~~ photography ~~~</SectionHeader>
 
-        <SelectCoverPhoto coverKey={coverKey} albumPhotos={albumPhotos} />
+        <SelectCoverPhoto defaultValue={coverKey} albumPhotos={albumPhotos} />
       </HideSection>
 
       <HideSection when={rootSection !== "zelda"}>
         <SectionHeader>~~~ zelda ~~~</SectionHeader>
-
-        <IconSelect icons={icons} defaultValue={iconId} />
 
         <NumberInput label="compendium number" name="compendiumNumber" />
       </HideSection>
