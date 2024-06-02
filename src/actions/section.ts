@@ -3,14 +3,18 @@
 import { UpdateSectionFormState } from "@app/admin/sections/[section]/form";
 import { NewSectionFormState } from "@app/admin/sections/new/form";
 import { Prisma, Section } from "@prisma/client";
-import { createSection, deleteSection, updateSection } from "@utils/prisma/section";
+import {
+  createSection,
+  deleteSection,
+  updateSection,
+} from "@utils/prisma/section";
 import { revalidatePath } from "next/cache";
 
 export type SectionFormState = Section & { message?: string };
 
 export async function addSection(
   _prevState: NewSectionFormState,
-  formData: FormData
+  formData: FormData,
 ) {
   const name = formData.get("name") as string;
   const parent = formData.get("parent") as string;
@@ -19,22 +23,22 @@ export async function addSection(
     const createdSection = await createSection({
       data: {
         name,
-        ...(parent !== "(none)" && { parent: { connect: { name: parent }}})
-      }
+        ...(parent !== "(none)" && { parent: { connect: { name: parent } } }),
+      },
     });
 
     revalidatePath("/admin");
 
     return {
       ...createdSection,
-      message: `👍 section "${name}" created.`
-    }
+      message: `👍 section "${name}" created.`,
+    };
   } catch (error) {
     let message = `👎 ${(error as Error).message}`;
 
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === "P2002") {
-        message = `👎 a section called "${name}" already exists.`
+        message = `👎 a section called "${name}" already exists.`;
       }
     }
 
@@ -42,7 +46,10 @@ export async function addSection(
   }
 }
 
-export async function editSection(prevState: UpdateSectionFormState, formData: FormData) {
+export async function editSection(
+  prevState: UpdateSectionFormState,
+  formData: FormData,
+) {
   const id = parseInt(formData.get("id") as string);
   const name = formData.get("name") as string;
   const parent = formData.get("parent") as string;
@@ -51,31 +58,37 @@ export async function editSection(prevState: UpdateSectionFormState, formData: F
     let data: Prisma.SectionUpdateArgs["data"] = {};
 
     if (prevState.name !== name) {
-      console.log(`👉 changing section name from ${prevState.name} to ${prevState.name}...`);
+      console.log(
+        `👉 changing section name from ${prevState.name} to ${prevState.name}...`,
+      );
       data.name = name;
     }
 
     if (prevState.parentName !== parent) {
       if (parent === "(none)") {
-        console.log(`👉 removing ${name} as child of ${prevState.parentName}...`);
+        console.log(
+          `👉 removing ${name} as child of ${prevState.parentName}...`,
+        );
         data.parent = { disconnect: true };
       } else if (parent === name) {
         throw new Error("a section cannot be its own parent");
       } else {
-        console.log(`👉 updating parent from ${prevState.parentName} to ${parent}...`)
+        console.log(
+          `👉 updating parent from ${prevState.parentName} to ${parent}...`,
+        );
       }
     }
 
     const updatedSection = await updateSection({
       where: { id },
-      data
+      data,
     });
 
     return {
       ...prevState,
       ...updatedSection,
-      message: `👍 section "${name}" updated.`
-    }
+      message: `👍 section "${name}" updated.`,
+    };
   } catch (error) {
     return { message: `👎 ${(error as Error).message}` };
   }
@@ -89,12 +102,12 @@ export async function removeSection(formData: FormData) {
 
     return {
       ...deletedSection,
-      message: `👍 album deleted successfully.`
-    }
+      message: `👍 album deleted successfully.`,
+    };
   } catch (error) {
     console.error(`👎 ${error}`);
     return {
-      message: `👎 ${(error as Error).message}`
-    }
+      message: `👎 ${(error as Error).message}`,
+    };
   }
 }

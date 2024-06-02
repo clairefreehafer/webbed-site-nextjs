@@ -36,7 +36,7 @@ export async function addIcon(_prevState: NewIconState, formData: FormData) {
 
     return {
       ...createdIcon,
-      message: `👍 icon created successfully`
+      message: `👍 icon created successfully`,
     };
   } catch (error) {
     return { message: `👎 ${(error as Error).message}` };

@@ -1,11 +1,8 @@
 const API_HOST = "https://api.smugmug.com";
-const {
-  SMUGMUG_API_KEY,
-  VERBOSE,
-} = process.env;
+const { SMUGMUG_API_KEY, VERBOSE } = process.env;
 
 export enum SmugMugKeys {
-  Collections= "hwBrFB",
+  Collections = "hwBrFB",
   Explore = "S9cNHV",
   Technical = "Ss3x4J",
 }
@@ -17,13 +14,17 @@ export type SmugMugEndpointType = "image";
 export type SmugMugUri = "sizedetails";
 
 export type Node = {
-  Uris: Record<string, any>
+  Uris: Record<string, any>;
   NodeID: string;
   Name: string;
   Type: SmugMugNodeTypes;
-}
+};
 
-function generateApiUrl(type: SmugMugEndpointType, key: SmugMugKeys | string, uri?: SmugMugUri) {
+function generateApiUrl(
+  type: SmugMugEndpointType,
+  key: SmugMugKeys | string,
+  uri?: SmugMugUri,
+) {
   if (uri) {
     return `${API_HOST}/api/v2/${type}/${key}!${uri}?`;
   }
@@ -33,7 +34,7 @@ function generateApiUrl(type: SmugMugEndpointType, key: SmugMugKeys | string, ur
 export async function getSmugMugData(key: string) {
   try {
     const url = generateApiUrl("image", key, "sizedetails");
-  
+
     const params = new URLSearchParams({
       APIKey: SMUGMUG_API_KEY as string,
       _filter: "ImageUrlTemplate",
@@ -41,11 +42,11 @@ export async function getSmugMugData(key: string) {
     });
 
     if (VERBOSE) console.log("🌐 fetching:", url + params);
-  
+
     const res = await fetch(url + params, {
       headers: {
-        "Accept": "application/json",
-      }
+        Accept: "application/json",
+      },
     });
 
     if (!res.ok) {
