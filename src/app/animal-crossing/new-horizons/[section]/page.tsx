@@ -1,4 +1,4 @@
-import IconList from "@components/animal-crossing/icon-list";
+import IconList from "@components/icon-list";
 import { getStaticParams } from "@utils/prisma/album";
 import { getPolaroidGridData } from "@utils/prisma/photo";
 
@@ -23,7 +23,7 @@ export default async function Section({
   return (
     <div className="flex flex-col items-center">
       <h4>{section}</h4>
-      <IconList albums={albums} />
+      <IconList albums={albums} theme="animalCrossing" />
     </div>
   );
 }

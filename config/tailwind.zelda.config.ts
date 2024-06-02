@@ -9,6 +9,7 @@ export default {
         zelda: "url('/images/zelda/pad-background.jpg')",
       }),
       colors: {
+        "light-blue": "#76b6ff",
         zelda: {
           textShadow: "rgba(0, 0, 0, 0.75)",
         },

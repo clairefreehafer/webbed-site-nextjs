@@ -5,7 +5,7 @@ export const ZELDA_LIGHT_BLUE = "#76b6ff";
 
 export const zeldaTheme = {
   name: "zelda",
-  iconHeight: 1.5
+  iconHeight: 1.5,
 };
 
 export const ZeldaThemeRoot = styled.div`
@@ -34,13 +34,8 @@ export const ZeldaThemeRoot = styled.div`
 // https://codepen.io/sosuke/pen/Pjoqqp
 // for #00d7ff
 export const whiteToBlue = css`
-  filter: invert(100%)
-          invert(19%)
-          sepia(88%)
-          saturate(1368%)
-          hue-rotate(179deg)
-          brightness(95%)
-          contrast(101%);
+  filter: invert(100%) invert(19%) sepia(88%) saturate(1368%) hue-rotate(179deg)
+    brightness(95%) contrast(101%);
 `;
 
 export const sheikahUnderline = css`
@@ -62,10 +57,14 @@ export const zeldaTextBackground = css`
   border-radius: 0.5rem;
   border: 1px solid #141e5495;
   text-shadow:
-   calc(-1 * ${TEXT_SHADOW_OFFSET}) calc(-1 * ${TEXT_SHADOW_OFFSET}) ${TEXT_SHADOW_BLUR_RADIUS} ${TEXT_SHADOW_COLOR},
-    ${TEXT_SHADOW_OFFSET} calc(-1 * ${TEXT_SHADOW_OFFSET}) ${TEXT_SHADOW_BLUR_RADIUS} ${TEXT_SHADOW_COLOR},
-    calc(-1 *${TEXT_SHADOW_OFFSET}) ${TEXT_SHADOW_OFFSET} ${TEXT_SHADOW_BLUR_RADIUS} ${TEXT_SHADOW_COLOR},
-     ${TEXT_SHADOW_OFFSET} ${TEXT_SHADOW_OFFSET} ${TEXT_SHADOW_BLUR_RADIUS} ${TEXT_SHADOW_COLOR};
+    calc(-1 * ${TEXT_SHADOW_OFFSET}) calc(-1 * ${TEXT_SHADOW_OFFSET})
+      ${TEXT_SHADOW_BLUR_RADIUS} ${TEXT_SHADOW_COLOR},
+    ${TEXT_SHADOW_OFFSET} calc(-1 * ${TEXT_SHADOW_OFFSET})
+      ${TEXT_SHADOW_BLUR_RADIUS} ${TEXT_SHADOW_COLOR},
+    calc(-1 * ${TEXT_SHADOW_OFFSET}) ${TEXT_SHADOW_OFFSET}
+      ${TEXT_SHADOW_BLUR_RADIUS} ${TEXT_SHADOW_COLOR},
+    ${TEXT_SHADOW_OFFSET} ${TEXT_SHADOW_OFFSET} ${TEXT_SHADOW_BLUR_RADIUS}
+      ${TEXT_SHADOW_COLOR};
 `;
 
 export const pageBorder = css`

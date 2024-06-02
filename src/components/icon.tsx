@@ -7,24 +7,25 @@ import Image from "next/image";
 
 export type DisplayIconType = Pick<Icon, "imagePath" | "character">;
 
+const imageStyles: Record<Theme, string> = {
+  default: "",
+  notebook: "",
+  animalCrossing: "max-h-12 max-w-12 object-contain",
+  zelda: "max-h-6 max-w-6 mr-2",
+  admin: "",
+};
+
 type DisplayIconProps = {
   icon: DisplayIconType | null;
-  /** rem. height of image, emoji will be this - 1. */
-  height?: number | "inherit";
-  inline?: boolean;
   /** for animal crossing links w/o an icon. */
   date?: Album["date"];
   theme?: Theme;
-  className?: string;
 };
 
 export default function DisplayIcon({
   icon,
-  height = "inherit",
-  inline = false,
   date,
   theme = "default",
-  className = "",
 }: DisplayIconProps) {
   if (!icon) {
     if (theme === "animalCrossing") {
@@ -37,7 +38,7 @@ export default function DisplayIcon({
         <img
           src={`/images/animal-crossing/star-fragments/star-fragment_${astrologyDateRange}.png`}
           alt=""
-          className={className}
+          className={imageStyles[theme]}
         />
       );
     }
@@ -46,16 +47,11 @@ export default function DisplayIcon({
   }
 
   if (icon.imagePath) {
-    return <img src={icon.imagePath} alt="" className={className} />;
+    return <img src={icon.imagePath} alt="" className={imageStyles[theme]} />;
   }
 
   if (icon.character) {
-    return (
-      <p className="text-[3rem]">
-        {icon.character}
-        {inline && " "}
-      </p>
-    );
+    return <p className="text-[3rem]">{icon.character}</p>;
   }
 
   return null;

@@ -1,13 +1,13 @@
-"use client";
-
 import { slugName } from "@utils/albums";
 import Link from "next/link";
 import { Prisma } from "@prisma/client";
 import Icon from "@components/icon";
 import { getPolaroidGridData } from "@utils/prisma/photo";
+import { Theme } from "@styles/theme";
 
 type Props = {
   albums: Prisma.PromiseReturnType<typeof getPolaroidGridData>;
+  theme: Theme;
 };
 
 function generateUrl({
@@ -25,21 +25,12 @@ function generateUrl({
   );
 }
 
-export default function IconList({ albums }: Props) {
-  const iconHeight = 0;
-
+export default function IconList({ albums, theme }: Props) {
   return (
-    <ul className="list-none">
+    <ul className={`list-none ${theme === "zelda" && "mb-8"}`}>
       {albums.map((album) => (
         <li className="flex max-h-12 items-center" key={album.id}>
-          <Icon
-            icon={album.icon}
-            height={iconHeight}
-            inline
-            date={album.date}
-            theme="animalCrossing"
-            className="max-h-12 max-w-12 object-contain"
-          />
+          <Icon icon={album.icon} date={album.date} theme={theme} />
           <Link href={generateUrl(album)}>{album.name}</Link>
         </li>
       ))}

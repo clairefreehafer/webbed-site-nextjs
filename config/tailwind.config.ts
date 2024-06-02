@@ -25,9 +25,6 @@ export default {
         zelda: "url('/images/zelda/pad-background.jpg')",
       }),
       borderRadius: {
-        animalCrossing: {
-          ui: "3rem",
-        },
         wiggle1: "95px 14px 92px 15px / 14px 95px 16px 95px",
         wiggle2: "14px 92px 15px 95px / 95px 16px 95px 14px",
         wiggle3: "255px 15px 225px 15px/15px 225px 15px 255px",
@@ -36,9 +33,6 @@ export default {
         1: "1px",
       },
       boxShadow: {
-        animalCrossing: {
-          ui: "0 0.75rem 0.5rem -0.5rem rgba(0, 0, 0, 0.5)",
-        },
         "8-bit-white": "6px 0 white, -6px 0 white, 0 -6px white, 0 6px white",
       },
       colors: {
@@ -51,34 +45,9 @@ export default {
         violet: "violet",
 
         limegreen: "limegreen",
-
-        animalCrossing: {
-          uiBackground: "rgb(248, 245, 223, 0.8)",
-        },
-        "grass-color": {
-          "1210-0224": "rgb(189, 215, 238)",
-          "0225-0331": "rgb(31, 140, 57)",
-          "0401-0722": "rgb(0, 131, 90)",
-          "0723-0915": "rgb(19, 115, 82)",
-          "0916-0930": "rgb(73, 123, 49)",
-          "1001-1015": "rgb(132, 123, 58)",
-          "1016-1029": "rgb(148, 99, 99)",
-          "1030-1112": "rgb(148, 90, 98)",
-          "1113-1128": "rgb(132, 90, 82)",
-          "1129-1209": "rgb(99, 81, 82)",
-        },
-
-        zelda: {
-          textShadow: "rgba(0, 0, 0, 0.75)",
-        },
       },
       gridTemplateColumns: {
         "admin-form": "25% 1fr",
-      },
-      hueRotate: {},
-      invert: {
-        // zelda white to blue
-        19: "19%",
       },
       keyframes: {
         "wiggle-box": {
@@ -89,13 +58,15 @@ export default {
       padding: {
         input: "1rem",
       },
-      saturate: {
-        // zelda white to blue
-        1368: "1368%",
+      spacing: {
+        "site-width": "750px",
       },
-      sepia: {
-        // zelda white to blue
-        88: "88%",
+      zIndex: {
+        "slideshow-ui": "2",
+        "slideshow-inset-shadow": "1",
+        "slideshow-photo": "0",
+        "slideshow-border-texture": "-1",
+        "slideshow-border": "-2",
       },
     },
   },

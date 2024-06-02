@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Theme } from "@styles/theme";
 import WiggleBox from "./photography/wiggle-box";
-import { ReactNode } from "react";
+import { slugName } from "@utils/albums";
 
 export type NavLink = {
   pathname: string;
@@ -31,6 +31,11 @@ const defaultNavLinks: NavLink[] = [
   },
 ];
 
+const adminLink: NavLink = {
+  pathname: "/admin",
+  name: "admin",
+};
+
 type Props = {
   navLinks?: typeof defaultNavLinks;
   theme?: Theme;
@@ -41,20 +46,39 @@ const navStyles: Record<Theme, string> = {
   default: "",
   notebook: "",
   animalCrossing: "flex items-middle ac-text-bg h-16 px-4",
-  zelda: "zelda-text-bg",
+  zelda: "zelda-text-bg pt-2 pb-6",
   admin: "",
 };
 
-const linkStyles: Record<Theme, string> = {
-  default: "",
-  notebook: "text-xl",
-  animalCrossing: "",
-  zelda: "sheikah-underline mx-4 mt-2 p-0",
-  admin: "text-limegreen",
+const linkStyles: Record<Theme, (isActive?: boolean) => string> = {
+  default: () => "p-4",
+  notebook: () => "text-xl p-4",
+  animalCrossing: () => "",
+  zelda: (isActive) =>
+    `sheikah-underline mx-6 mt-2 hover:text-light-blue ${isActive && "text-light-blue"}`,
+  admin: () => "text-limegreen p-4",
 };
 
-const Li = ({ children }: { children: ReactNode }) => (
-  <li className="group relative flex items-center">{children}</li>
+const LinkItem = ({
+  link,
+  theme,
+  isActive,
+}: {
+  link: NavLink;
+  theme: Theme;
+  isActive: boolean;
+}) => (
+  <li className="group relative flex items-center">
+    <WiggleBox theme={theme} />
+    {link.image && <img src={link.image} alt="" />}
+    <Link
+      href={link.pathname}
+      className={`relative z-10 block ${linkStyles[theme](isActive)}`}
+    >
+      {link.name === "photography" && isActive && <>📷&nbsp;</>}
+      {link.name}
+    </Link>
+  </li>
 );
 
 export default function Navigation({
@@ -64,38 +88,25 @@ export default function Navigation({
 }: Props) {
   const pathname = usePathname();
 
-  const isActive = (name: string) =>
-    pathname.startsWith(`/${name.replaceAll(" ", "-")}`);
+  const isActive = (name: string) => pathname.startsWith(`/${slugName(name)}`);
 
   return (
     <nav className={`${navStyles[theme]} ${className}`}>
       <ul className="flex list-none justify-center">
         {navLinks.map((link: NavLink) => (
-          <Li key={link.pathname}>
-            <WiggleBox theme={theme} />
-            {link.image && <img src={link.image} alt="" />}
-            <Link
-              href={link.pathname}
-              className={`relative z-10 block p-4 ${linkStyles[theme]}`}
-            >
-              {link.name === "photography" && isActive("photography") && (
-                <>📷&nbsp;</>
-              )}
-              {link.name}
-            </Link>
-          </Li>
+          <LinkItem
+            theme={theme}
+            link={link}
+            key={link.pathname}
+            isActive={isActive(link.name)}
+          />
         ))}
         {process.env.NODE_ENV === "development" && (
-          <Li>
-            <WiggleBox theme={theme} />
-            <Link
-              href="/admin"
-              className={`relative z-10 block p-4 ${linkStyles[theme]}`}
-            >
-              {isActive("admin") && <>&gt;&nbsp;</>}
-              admin
-            </Link>
-          </Li>
+          <LinkItem
+            theme={theme}
+            link={adminLink}
+            isActive={isActive("admin")}
+          />
         )}
       </ul>
     </nav>

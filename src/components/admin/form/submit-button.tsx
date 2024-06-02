@@ -18,7 +18,9 @@ export default function SubmitButton({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <Button type="submit" disabled={pending}>{children}</Button>
+      <Button type="submit" disabled={pending}>
+        {children}
+      </Button>
       <p>{data?.get("message") as string}</p>
     </>
   );
