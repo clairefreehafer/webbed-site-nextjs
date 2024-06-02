@@ -22,7 +22,11 @@ export default function AdminPage() {
           <span className={idx === selected ? "opacity-1" : "opacity-0"}>
             ▶&nbsp;
           </span>
-          <Link href={`/admin/${link}`} onMouseOver={() => handleHover(idx)}>
+          <Link
+            href={`/admin/${link}`}
+            onMouseOver={() => handleHover(idx)}
+            className={`underline ${idx === selected && "no-underline"}`}
+          >
             {link}
           </Link>
         </li>

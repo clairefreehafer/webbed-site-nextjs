@@ -1,10 +1,12 @@
 import type { Config } from "tailwindcss";
-import plugin from "tailwindcss/plugin";
+import defaultPlugin from "../plugins/default";
 
 export default {
   content: [
     "./src/**/animal-crossing/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/nav.tsx",
+    "./src/components/icon-list.tsx",
+    "./src/components/slideshow.tsx",
   ],
   theme: {
     extend: {
@@ -46,5 +48,5 @@ export default {
       },
     },
   },
-  plugins: [plugin(function ({ addUtilities }) {})],
+  plugins: [defaultPlugin],
 } satisfies Config;

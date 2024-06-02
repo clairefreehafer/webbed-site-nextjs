@@ -14,6 +14,18 @@ const P = ({ children }: { children: ReactNode }) => (
   </p>
 );
 
+const StyledLink = ({
+  href,
+  children,
+}: {
+  href: string;
+  children: ReactNode;
+}) => (
+  <Link href={href} className="underline hover:no-underline">
+    {children}
+  </Link>
+);
+
 export default async function Photography() {
   return (
     <>
@@ -21,12 +33,12 @@ export default async function Photography() {
       <P>(coming soon) photos most recently added to the site.</P>
 
       <H3>
-        <Link href="/photography/albums">albums</Link>
+        <StyledLink href="/photography/albums">albums</StyledLink>
       </H3>
       <P>photos grouped by location, most recent first.</P>
 
       <H3>
-        <Link href="/photography/collections">collections</Link>
+        <StyledLink href="/photography/collections">collections</StyledLink>
       </H3>
       <P>photos grouped by concept, subject, etc.</P>
 
@@ -37,7 +49,7 @@ export default async function Photography() {
       </P>
 
       <H3>
-        <Link href="/photography/technical">technical</Link>
+        <StyledLink href="/photography/technical">technical</StyledLink>
       </H3>
       <P>grouped by camera.</P>
 

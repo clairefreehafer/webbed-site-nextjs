@@ -15,6 +15,14 @@ const imageStyles: Record<Theme, string> = {
   admin: "",
 };
 
+const emojiStyles: Record<Theme, string> = {
+  default: "",
+  notebook: "mr-2 text-2xl",
+  animalCrossing: "",
+  zelda: "",
+  admin: "",
+};
+
 type DisplayIconProps = {
   icon: DisplayIconType | null;
   /** for animal crossing links w/o an icon. */
@@ -51,7 +59,7 @@ export default function DisplayIcon({
   }
 
   if (icon.character) {
-    return <p className="text-[3rem]">{icon.character}</p>;
+    return <p className={emojiStyles[theme]}>{icon.character}</p>;
   }
 
   return null;

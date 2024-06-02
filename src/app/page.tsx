@@ -1,8 +1,9 @@
 import Nav from "@components/nav";
+import "@styles/default/theme.css";
 
 export default function Home() {
   return (
-    <div className="bg-rainbow min-h-screen min-w-full p-[2px]">
+    <div className="bg-rainbow min-h-screen min-w-full p-[2px] text-white">
       <div className="min-h-[calc(100vh-2*2px)] min-w-[calc(100vw-2*2px)] bg-black">
         <Nav />
         <main className="flex flex-col items-center justify-center">

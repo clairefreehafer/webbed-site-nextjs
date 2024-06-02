@@ -5,12 +5,15 @@ import Nav from "@components/nav";
 import { pressStart2P, ptMono } from "@fonts";
 import Title from "@components/title";
 import { ReactNode } from "react";
+import "@styles/admin/theme.css";
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname().split("/");
 
   return (
-    <div className={ptMono.className}>
+    <div
+      className={`${ptMono.className} min-w-screen min-h-screen bg-black text-white`}
+    >
       <header className="flex flex-col items-center justify-center">
         <Nav theme="admin" />
         <div
@@ -19,7 +22,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           <Title pathname={pathname} separator="▼" />
         </div>
       </header>
-      <main className="mx-auto flex max-w-[750px] flex-col items-center justify-center">
+      <main className="max-w-site-width mx-auto flex flex-col items-center justify-center">
         {children}
       </main>
     </div>

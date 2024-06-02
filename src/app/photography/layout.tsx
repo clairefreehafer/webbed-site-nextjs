@@ -16,7 +16,7 @@ export default function PhotographyLayout({
   const pathname = usePathname().split("/");
 
   return (
-    <div className="p-4">
+    <div className="min-w-screen min-h-screen bg-black p-4 text-white">
       <header css={flexColumnCenter}>
         <Nav className={cutiveMono.className} theme="notebook" />
         {/* https://codepen.io/mp/pen/kBEeKw

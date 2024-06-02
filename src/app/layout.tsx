@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { inter } from "@fonts";
-import "@styles/globals.css";
 
 declare global {
   namespace PrismaJson {
@@ -23,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" style={{ overscrollBehaviorY: "none" }}>
       <body className={inter.className}>{children}</body>
     </html>
   );

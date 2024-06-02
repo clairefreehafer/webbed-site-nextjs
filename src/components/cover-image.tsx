@@ -3,9 +3,9 @@
 import styled from "styled-components";
 
 type Props = {
-  aspectRatio: "1 / 1" | "4 / 3"
+  aspectRatio: "1 / 1" | "4 / 3";
   src: string;
-}
+};
 
 const Image = styled.img`
   object-fit: cover;
@@ -14,11 +14,5 @@ const Image = styled.img`
 `;
 
 export default function CoverImage({ aspectRatio, src }: Props) {
-  return (
-    <Image
-      src={src}
-      css={{ aspectRatio }}
-      alt=""
-    />
-  )
+  return <Image src={src} css={{ aspectRatio }} alt="" />;
 }

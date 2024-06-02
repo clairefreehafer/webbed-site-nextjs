@@ -31,7 +31,12 @@ export default function IconList({ albums, theme }: Props) {
       {albums.map((album) => (
         <li className="flex max-h-12 items-center" key={album.id}>
           <Icon icon={album.icon} date={album.date} theme={theme} />
-          <Link href={generateUrl(album)}>{album.name}</Link>
+          <Link
+            href={generateUrl(album)}
+            className="underline hover:no-underline"
+          >
+            {album.name}
+          </Link>
         </li>
       ))}
     </ul>

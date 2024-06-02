@@ -53,7 +53,7 @@ const navStyles: Record<Theme, string> = {
 const linkStyles: Record<Theme, (isActive?: boolean) => string> = {
   default: () => "p-4",
   notebook: () => "text-xl p-4",
-  animalCrossing: () => "",
+  animalCrossing: () => "px-4",
   zelda: (isActive) =>
     `sheikah-underline mx-6 mt-2 hover:text-light-blue ${isActive && "text-light-blue"}`,
   admin: () => "text-limegreen p-4",
@@ -73,7 +73,7 @@ const LinkItem = ({
     {link.image && <img src={link.image} alt="" />}
     <Link
       href={link.pathname}
-      className={`relative z-10 block ${linkStyles[theme](isActive)}`}
+      className={`relative z-10 block underline hover:no-underline ${linkStyles[theme](isActive)} ${isActive && "no-underline"}`}
     >
       {link.name === "photography" && isActive && <>📷&nbsp;</>}
       {link.name}
