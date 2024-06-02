@@ -4,8 +4,8 @@ import type { Photo } from "@prisma/client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import ZeldaSlideInfo from "./zelda/slideshow";
 import { Theme } from "@styles/theme";
+import SlideInfo from "./slide-info";
 
 const uiStyles: Record<Theme, string> = {
   default: "",
@@ -71,9 +71,13 @@ export default function Slideshow({
     };
   }, [slidesRef, photos.length]);
 
-  const pathnameArr = pathname.split("/");
-  pathnameArr.pop();
-  const backHref = pathnameArr.join("/");
+  let backHref = "/zelda";
+
+  if (theme !== "zelda") {
+    const pathnameArr = pathname.split("/");
+    pathnameArr.pop();
+    backHref = pathnameArr.join("/");
+  }
 
   return (
     <>
@@ -83,11 +87,11 @@ export default function Slideshow({
         <Link href={backHref}>&larr; back</Link>
       </nav>
 
-      <div
-        className={`${uiStyles[theme]} z-slideshow-ui absolute right-4 top-4`}
-      >
-        {albumName}
-      </div>
+      <SlideInfo
+        theme={theme}
+        className={uiStyles[theme]}
+        slideData={{ albumName, ...currentSlideData }}
+      />
 
       <main className="h-screen w-screen">
         <ol className="grid h-screen snap-x snap-mandatory auto-cols-[100vw] grid-flow-col grid-cols-[repeat(auto-fill,_100vw)] overflow-x-scroll scroll-smooth">

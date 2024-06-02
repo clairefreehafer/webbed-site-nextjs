@@ -1,4 +1,4 @@
-@config "../../../config/tailwind.zelda.config.ts"
+@config "../../../config/tailwind.zelda.config.ts";
 
 @tailwind base;
 @tailwind components;

@@ -33,7 +33,7 @@ export default async function Page({
   }
 
   return (
-    <div className="bg-zelda h-screen w-screen">
+    <div className="bg-zelda h-screen w-screen text-white">
       <Slideshow
         photos={photos}
         albumName={albumName}

@@ -1,10 +1,13 @@
 import type { Config } from "tailwindcss";
-import plugin from "tailwindcss/plugin";
+import defaultPlugin from "../plugins/default";
 
 export default {
   content: [
     "./src/**/zelda/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/nav.tsx",
+    "./src/components/icon-list.tsx",
+    "./src/components/icon.tsx",
+    "./src/components/slideshow/*.{js,ts,jsx,tsx,mdx}*",
   ],
   theme: {
     extend: {
@@ -41,9 +44,5 @@ export default {
       },
     },
   },
-  plugins: [
-    plugin(function ({ addUtilities }) {
-      addUtilities({});
-    }),
-  ],
+  plugins: [defaultPlugin],
 } satisfies Config;

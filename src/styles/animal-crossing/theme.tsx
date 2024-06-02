@@ -52,7 +52,7 @@ export default function AnimalCrossingThemeRoot({
   const grassDateRange = getGrassDateRange(date);
   return (
     <div
-      className={`${backgroundColor[grassDateRange]} ${fotSeuratProB.className} h-screen w-screen bg-[left_calc(50%-128px)_top_calc(6rem+70px)] text-black`}
+      className={`${backgroundColor[grassDateRange]} ${fotSeuratProB.className} min-w-screen h-full min-h-screen bg-[left_calc(50%-128px)_top_calc(7rem+70px)] py-4 text-black`}
       style={{
         backgroundImage: `url(/images/animal-crossing/grass/${shape}_${grassDateRange}.png)`,
       }}

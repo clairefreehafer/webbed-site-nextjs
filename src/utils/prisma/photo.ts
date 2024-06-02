@@ -125,6 +125,13 @@ export const getZeldaAdminPhotos = cache(async () => {
       url: true,
       smugMugKey: true,
       metadata: true,
+      altText: true,
+      icon: {
+        select: {
+          imagePath: true,
+          character: true,
+        },
+      },
     },
   });
 });
