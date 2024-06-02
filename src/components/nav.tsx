@@ -76,6 +76,7 @@ const LinkItem = ({
       className={`relative z-10 block underline hover:no-underline ${linkStyles[theme](isActive)} ${isActive && "no-underline"}`}
     >
       {link.name === "photography" && isActive && <>📷&nbsp;</>}
+      {link.name === "admin" && isActive && "> "}
       {link.name}
     </Link>
   </li>
