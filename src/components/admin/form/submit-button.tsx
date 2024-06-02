@@ -2,25 +2,19 @@
 
 import { ReactNode } from "react";
 import { useFormStatus } from "react-dom";
-import styled from "styled-components";
-
-const Button = styled.button`
-  border: 5px outset;
-  font-family: var(--font-pt-mono), monospace;
-  font-size: 1.5rem;
-  grid-column-start: span 2;
-  padding: 3rem;
-  text-transform: uppercase;
-`;
 
 export default function SubmitButton({ children }: { children: ReactNode }) {
   const { pending, data } = useFormStatus();
 
   return (
     <>
-      <Button type="submit" disabled={pending}>
+      <button
+        type="submit"
+        disabled={pending}
+        className="border-outset col-start-[span_2] w-full border-8 bg-neutral-800 p-12 uppercase text-white"
+      >
         {children}
-      </Button>
+      </button>
       <p>{data?.get("message") as string}</p>
     </>
   );

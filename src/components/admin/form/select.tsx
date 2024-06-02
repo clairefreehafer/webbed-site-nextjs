@@ -23,7 +23,7 @@ export default function Select({
         id={name}
         name={name}
         defaultValue={defaultValue}
-        className="p-input"
+        className="p-input bg-neutral-800 text-white"
         onChange={onChange}
       >
         {options.map((option) => (

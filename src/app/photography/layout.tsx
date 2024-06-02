@@ -3,7 +3,6 @@
 import Nav from "@components/nav";
 import Title from "@components/title";
 import { cutiveMono, loveYaLikeASister, pangolin } from "@fonts";
-import { flexColumnCenter } from "@styles/layout";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 import "@styles/notebook/theme.css";
@@ -17,7 +16,7 @@ export default function PhotographyLayout({
 
   return (
     <div className="min-w-screen min-h-screen bg-black p-4 text-white">
-      <header css={flexColumnCenter}>
+      <header className="flex flex-col items-center">
         <Nav className={cutiveMono.className} theme="notebook" />
         {/* https://codepen.io/mp/pen/kBEeKw
         (another option: https://codepen.io/tmrDevelops/pen/NPXodB) */}

@@ -21,7 +21,7 @@ export default function TextInput({
         name={name}
         id={name}
         defaultValue={defaultValue}
-        className="p-input"
+        className="p-input bg-neutral-800 text-white"
         required={required}
       />
     </>

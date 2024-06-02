@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import defaultPlugin from "../plugins/default";
+import plugin from "tailwindcss/plugin";
 
 export default {
   content: [
@@ -9,6 +10,9 @@ export default {
   ],
   theme: {
     extend: {
+      borderStyle: {
+        outset: "outset",
+      },
       borderWidth: {
         1: "1px",
       },
@@ -26,5 +30,14 @@ export default {
       },
     },
   },
-  plugins: [defaultPlugin],
+  plugins: [
+    defaultPlugin,
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        ".border-outset": {
+          borderStyle: "outset",
+        },
+      });
+    }),
+  ],
 } satisfies Config;
