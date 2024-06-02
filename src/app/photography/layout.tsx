@@ -1,68 +1,38 @@
 "use client";
 
 import Nav from "@components/nav";
-import generateTitle from "@components/title";
+import Title from "@components/title";
 import { cutiveMono, loveYaLikeASister, pangolin } from "@fonts";
-import DefaultThemeRoot from "@styles/default/root";
 import { flexColumnCenter } from "@styles/layout";
-import { PAPER_LINE_HEIGHT, paperBackground } from "@styles/mixins";
-import { photographyTheme } from "@styles/photography/theme";
-import { MAX_SITE_WIDTH } from "@styles/variables";
 import { usePathname } from "next/navigation";
-import React, { Fragment } from "react";
-import styled, { ThemeProvider } from "styled-components";
+import { ReactNode } from "react";
+import "@styles/notebook/theme.css";
 
-const Main = styled.main`
-  ${paperBackground()}
-  border-radius: 1rem;
-  margin: 2rem auto;
-  max-width: ${MAX_SITE_WIDTH};
-  opacity: 0.85;
-
-  // TODO: do this with classes
-  & h3 {
-    font-size: 1.5rem;
-    line-height: 1.5rem;
-    font-family: var(--font-love-ya-like-a-sister);
-    margin-bottom: 2px;
-  }
-
-  & p {
-    font-family: var(--font-pangolin);
-    font-size: 1.1rem;
-    line-height: 1.5rem;
-    margin-bottom: calc(${PAPER_LINE_HEIGHT} + 1px);
-  }
-`;
-
-const Title = styled.div`
-  ${flexColumnCenter};
-  // https://codepen.io/mp/pen/kBEeKw
-  // (another option: https://codepen.io/tmrDevelops/pen/NPXodB)
-  border-width: 3px 4px 3px 5px;
-  border-radius:95% 4% 92% 5%/4% 95% 6% 95%;
-  border: solid white;
-  padding: 1rem;
-`;
-
-export default function PhotographyLayout({ children }:
-  { children: Readonly<React.ReactNode> }
-) {
+export default function PhotographyLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const pathname = usePathname().split("/");
 
   return (
-    <ThemeProvider theme={photographyTheme}>
-      <DefaultThemeRoot borderWidth="2px">
-        <header css={flexColumnCenter}>
-          <Nav className={cutiveMono.className} />
-          <Title className={loveYaLikeASister.className}>
-            {generateTitle(pathname)}
-          </Title>
-        </header>
-        <Main className={`${loveYaLikeASister.variable} ${pangolin.variable}`}>
-          {children}
-        </Main>
-      </DefaultThemeRoot>
-    </ThemeProvider>
-  )
+    <div className="p-4">
+      <header css={flexColumnCenter}>
+        <Nav className={cutiveMono.className} theme="notebook" />
+        {/* https://codepen.io/mp/pen/kBEeKw
+        (another option: https://codepen.io/tmrDevelops/pen/NPXodB) */}
+        <div
+          className={`${loveYaLikeASister.className} my-4 flex flex-col items-center rounded-[95%_4%_92%_5%/4%_95%_6%_95%] border-white p-4 text-3xl`}
+          style={{ borderWidth: "3px 4px 3px 5px" }}
+        >
+          <Title pathname={pathname} />
+        </div>
+      </header>
+      <main
+        className={`${loveYaLikeASister.variable} ${pangolin.variable} paper-bg max-w-site-width mx-auto my-8 rounded-3xl opacity-85`}
+      >
+        {children}
+      </main>
+    </div>
+  );
 }

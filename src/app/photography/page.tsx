@@ -1,28 +1,51 @@
+import { loveYaLikeASister, pangolin } from "@fonts";
 import Link from "next/link";
+import { ReactNode } from "react";
+
+const H3 = ({ children }: { children: ReactNode }) => (
+  <h3 className={`${loveYaLikeASister.className} leading-paper text-2xl`}>
+    {children}
+  </h3>
+);
+
+const P = ({ children }: { children: ReactNode }) => (
+  <p className={`${pangolin.className} leading-paper mb-line-spacing text-xl`}>
+    {children}
+  </p>
+);
 
 export default async function Photography() {
   return (
     <>
-      <h3>recently added</h3>
-      <p>(coming soon) photos most recently added to the site.</p>
+      <H3>recently added</H3>
+      <P>(coming soon) photos most recently added to the site.</P>
 
-      <h3><Link href="/photography/albums">albums</Link></h3>
-      <p>photos grouped by location, most recent first.</p>
+      <H3>
+        <Link href="/photography/albums">albums</Link>
+      </H3>
+      <P>photos grouped by location, most recent first.</P>
 
-      <h3><Link href="/photography/collections">collections</Link></h3>
-      <p>photos grouped by concept, subject, etc.</p>
+      <H3>
+        <Link href="/photography/collections">collections</Link>
+      </H3>
+      <P>photos grouped by concept, subject, etc.</P>
 
-      <h3>curated</h3>
-      <p>(coming soon) smaller groups of photos selected to be displayed together.</p>
+      <H3>curated</H3>
+      <P>
+        (coming soon) smaller groups of photos selected to be displayed
+        together.
+      </P>
 
-      <h3><Link href="/photography/technical">technical</Link></h3>
-      <p>grouped by camera.</p>
+      <H3>
+        <Link href="/photography/technical">technical</Link>
+      </H3>
+      <P>grouped by camera.</P>
 
-      <h3>map</h3>
-      <p>(coming soon) view geotagged photos on a map.</p>
+      <H3>map</H3>
+      <P>(coming soon) view geotagged photos on a map.</P>
 
-      <h3>random</h3>
-      <p>(coming soon) show a random photo</p>
+      <H3>random</H3>
+      <P>(coming soon) show a random photo</P>
     </>
   );
 }
