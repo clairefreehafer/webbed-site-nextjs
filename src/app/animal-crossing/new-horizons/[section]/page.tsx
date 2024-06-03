@@ -1,27 +1,29 @@
-import { getStaticParams } from "@utils/prisma";
-import IconList from "@components/animal-crossing/icon-list";
+import IconList from "@components/icon-list";
+import { getStaticParams } from "@utils/prisma/album";
 import { getPolaroidGridData } from "@utils/prisma/photo";
 
 export async function generateStaticParams() {
   const albums = await getStaticParams("new-horizons");
 
   return albums.map((album) => ({
-    section: album.section?.name
+    section: album.sectionName,
   }));
 }
 
 export const dynamicParams = false;
 
-export default async function Section(
-  { params }: { params: { section: string }}
-) {
+export default async function Section({
+  params,
+}: {
+  params: { section: string };
+}) {
   const { section } = params;
   const albums = await getPolaroidGridData(section);
 
   return (
-    <>
+    <div className="flex flex-col items-center">
       <h4>{section}</h4>
-      <IconList albums={albums} />
-    </>
-  )
+      <IconList albums={albums} theme="animalCrossing" />
+    </div>
+  );
 }

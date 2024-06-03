@@ -1,38 +1,35 @@
 "use client";
 
-import AdminForm, { Input, Label } from "@components/admin/form";
-import { AlbumFormState, addAlbum } from "@actions/album";
-import SectionSelect from "@components/admin/section-select";
+import { addAlbum } from "@actions/album";
+import SectionSelect, {
+  SectionSelectProps,
+} from "@components/admin/form/section-select";
 import { AlbumTypes } from "@utils/albums";
-import { Prisma } from "@prisma/client";
-import { getSections } from "@utils/prisma/section";
-import SubmitButton from "@components/admin/submit-button";
+import SubmitButton from "@components/admin/form/submit-button";
+import { Album } from "@prisma/client";
+import AdminForm from "@components/admin/form/index";
+import { FormState } from "@components/admin/form/index";
+import TextInput from "@components/admin/form/text-input";
+import Select from "@components/admin/form/select";
 
-const initialState: Partial<AlbumFormState> = {};
+export type NewAlbumFormState = FormState<Pick<Album, "name" | "type">>;
 
-export default function NewAlbumForm(
-  { sections }: { sections: Prisma.PromiseReturnType<typeof getSections> }
-) {
+const initialState: NewAlbumFormState = {};
 
+export default function NewAlbumForm({
+  sections,
+}: {
+  sections: SectionSelectProps["sections"];
+}) {
   return (
     <AdminForm action={addAlbum} initialState={initialState}>
-      <Label htmlFor="album">
-        name:
-      </Label>
-      <Input type="text" name="album" id="album" required />
+      <TextInput name="name" label="name" required />
 
-      <SectionSelect sections={sections} defaultValue={null} />
+      <SectionSelect sections={sections} />
 
-      <Label htmlFor="type">
-        type
-      </Label>
-      <Input as="select" name="type" id="type">
-        {Object.values(AlbumTypes).map((type) => (
-          <option key={type}>{type}</option>
-        ))}
-      </Input>
+      <Select label="type" name="type" options={Object.values(AlbumTypes)} />
 
       <SubmitButton>create album</SubmitButton>
     </AdminForm>
-  )
+  );
 }

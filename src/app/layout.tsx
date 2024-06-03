@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { inter } from "@fonts";
-import "@styles/globals.scss";
-import StyledComponentsRegistry from "@styles/registry";
 
 declare global {
   namespace PrismaJson {
@@ -9,11 +7,8 @@ declare global {
       title?: string;
       description?: string;
       /** zelda photos only */
-      compendium?: {
-        number?: number;
-        iconId?: number;
-      };
-    }
+      compendiumNumber?: number;
+    };
   }
 }
 
@@ -27,12 +22,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <StyledComponentsRegistry>
-          {children}
-        </StyledComponentsRegistry>
-      </body>
+    <html lang="en" style={{ overscrollBehaviorY: "none" }}>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }

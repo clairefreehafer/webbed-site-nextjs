@@ -2,33 +2,35 @@
 
 import { pressStart2P } from "@fonts";
 import Link from "next/link";
-import styled from "styled-components";
+import { useState } from "react";
 
-const Ul = styled.ul`
-  display: flex;
-  justify-content: space-around;
-  margin: 3rem auto;
-  width: 100%;
-`;
+const links = ["sections", "albums", "photos", "tags", "icons"];
 
 export default function AdminPage() {
+  const [selected, setSelected] = useState<number>();
+
+  function handleHover(index: number) {
+    setSelected(index);
+  }
+
   return (
-    <Ul className={pressStart2P.className}>
-      <li>
-        <Link href="/admin/sections">sections</Link>
-      </li>
-      <li>
-        <Link href="/admin/albums">albums</Link>
-      </li>
-      <li>
-        <Link href="/admin/photos">photos</Link>
-      </li>
-      <li>
-        <Link href="/admin/tags">tags</Link>
-      </li>
-      <li>
-        <Link href="/admin/icons">icons</Link>
-      </li>
-    </Ul>
-  )
+    <ul
+      className={`${pressStart2P.className} mx-auto my-12 flex w-full justify-around`}
+    >
+      {links.map((link, idx) => (
+        <li key={link}>
+          <span className={idx === selected ? "opacity-1" : "opacity-0"}>
+            ▶&nbsp;
+          </span>
+          <Link
+            href={`/admin/${link}`}
+            onMouseOver={() => handleHover(idx)}
+            className={`underline ${idx === selected && "no-underline"}`}
+          >
+            {link}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
 }

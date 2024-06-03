@@ -2,7 +2,9 @@ import { cache } from "react";
 import { getSection } from "./prisma/section";
 import { Prisma } from "@prisma/client";
 
-type SectionType = string | Partial<Prisma.PromiseReturnType<typeof getSection>>;
+type SectionType =
+  | string
+  | Partial<Prisma.PromiseReturnType<typeof getSection>>;
 
 export const getAncestorSections = cache(async (section: SectionType) => {
   let currentSection = section;
@@ -35,7 +37,7 @@ export const getRootSection = cache(async (section: SectionType) => {
   }
 
   while (currentSection?.name) {
-    result = (currentSection.name);
+    result = currentSection.name;
 
     if (currentSection.parent) {
       currentSection = currentSection.parent;
@@ -46,4 +48,4 @@ export const getRootSection = cache(async (section: SectionType) => {
     }
   }
   return result;
-})
+});

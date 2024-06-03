@@ -26,6 +26,8 @@ model Photo {
   album       Album?    @relation("albumPhotos", fields: albumName, references: [name])
   albumName   String?
   covers      Album[]   @relation("coverPhoto")
+  icon        Icon?     @relation(fields: iconId, references: [id])
+  iconId      Int?
 }
 
 model Tag {
@@ -68,4 +70,5 @@ model Icon {
   character String?   @db.VarChar(255)
   albums    Album[]
   sections  Section[]
+  photos    Photo[]
 }

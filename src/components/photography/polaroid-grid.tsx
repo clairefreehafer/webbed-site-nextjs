@@ -1,47 +1,18 @@
 "use client";
 
-import CoverImage from "@components/cover-image"
+import CoverImage from "@components/cover-image";
 import { slugName } from "@utils/albums";
-import { sizePhoto } from "@utils/photo"
-import Link from "next/link"
+import { sizePhoto } from "@utils/photo";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
-import styled from "styled-components"
 import Icon from "@components/icon";
 import { Prisma } from "@prisma/client";
 import { getPolaroidGridData } from "@utils/prisma/photo";
+import { loveYaLikeASister } from "@fonts";
 
-const Ul = styled.ul`
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 1fr 1fr;
-  list-style: none;
-  text-align: center;
-
-  @media screen and (max-width: 500px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const PolaroidBorder = styled.li`
-  background-color: white;
-  box-shadow: 0 0 1rem 0.1rem rgba(0, 0, 0, 0.3);
-  padding: 1rem;
-  position: relative;
-`;
-
-const ImageShadow = styled.div`
-  aspect-ratio: 1 / 1;
-  box-shadow: inset 0 0 0.25rem 0.1rem rgba(0, 0, 0, 0.3);
-  position: absolute;
-  top: 1rem;
-  width: calc(100% - 2rem);
-`;
-
-const AlbumName = styled.h3`
-  margin: 0.5rem auto;
-`;
-
-function getCoverImageUrl(album: Prisma.PromiseReturnType<typeof getPolaroidGridData>[0]) {
+function getCoverImageUrl(
+  album: Prisma.PromiseReturnType<typeof getPolaroidGridData>[0],
+) {
   if (album.coverPhoto?.url) {
     return album.coverPhoto?.url;
   } else if (album.randomCoverPhoto?.url) {
@@ -50,25 +21,38 @@ function getCoverImageUrl(album: Prisma.PromiseReturnType<typeof getPolaroidGrid
   return "";
 }
 
-export default function PolaroidGrid(
-  { albums }: { albums: Prisma.PromiseReturnType<typeof getPolaroidGridData> }
-) {
+export default function PolaroidGrid({
+  albums,
+}: {
+  albums: Prisma.PromiseReturnType<typeof getPolaroidGridData>;
+}) {
   const pathname = usePathname();
 
   return (
-    <Ul>
+    <ul className="grid list-none grid-cols-1 gap-4 text-center sm:grid-cols-2">
       {albums.map((album) => (
-        <PolaroidBorder key={album.id}>
-          <Link href={`${pathname}/${slugName(album.name)}`}>
-            <CoverImage src={sizePhoto(getCoverImageUrl(album), "L")} aspectRatio="1 / 1" />
-            <ImageShadow />
-            <AlbumName>
-              <Icon icon={album.icon} inline />
+        <li
+          className="relative bg-white p-4 shadow-[0_0_1rem_0.1rem_rgba(0,0,0,0.3)]"
+          key={album.id}
+        >
+          <Link
+            href={`${pathname}/${slugName(album.name)}`}
+            className="flex flex-col justify-between"
+          >
+            <CoverImage
+              src={sizePhoto(getCoverImageUrl(album), "L")}
+              aspectRatio="1 / 1"
+            />
+            <div className="absolute top-4 aspect-square w-[calc(100%-2rem)] shadow-[inset_0_0_0.25rem_0.1rem_rgba(0,0,0,0.3)]" />
+            <h3
+              className={`${loveYaLikeASister.className} mx-auto mt-2 flex items-center text-xl`}
+            >
+              <Icon icon={album.icon} theme="notebook" />
               {album.name}
-            </AlbumName>
+            </h3>
           </Link>
-        </PolaroidBorder>
+        </li>
       ))}
-    </Ul>
-  )
+    </ul>
+  );
 }

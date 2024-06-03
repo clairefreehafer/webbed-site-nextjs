@@ -1,56 +1,41 @@
 "use client";
 
-import { Label } from "@components/admin/form";
-import { Photo } from "@prisma/client";
+import RadioFieldset, {
+  RadioInput,
+} from "@components/admin/form/radio-fieldset";
+// import { Fieldset, ImageRadio, Legend } from "@components/admin/form";
+import { Album, Prisma } from "@prisma/client";
 import { sizePhoto } from "@utils/photo";
-import styled from "styled-components";
+import { getAlbumData } from "@utils/prisma/album";
+import { getPhotosWithTag } from "@utils/prisma/tag";
 
-const Fieldset = styled.fieldset`
-  display: flex;
-  width: 100%;
-  grid-column-start: span 2;
-`;
-
-const Radio = styled.input`
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-
-  & + img {
-    cursor: pointer;
-  }
-
-  &:checked + img {
-    outline: 3px dashed white;
-  }
-`;
+export type SelectCoverPhotoProps = {
+  defaultValue: Album["coverKey"];
+  albumPhotos:
+    | Prisma.PromiseReturnType<typeof getAlbumData>["photos"]
+    | Prisma.PromiseReturnType<typeof getPhotosWithTag>;
+};
 
 export default function SelectCoverPhoto({
-  coverKey,
-  albumPhotos
-}: {
-  coverKey: string | null,
-  albumPhotos: Photo[]
-}) {
+  defaultValue,
+  albumPhotos,
+}: SelectCoverPhotoProps) {
   return (
-    <Fieldset>
-      <legend>cover photo</legend>
+    <RadioFieldset legend="cover photo">
       {albumPhotos.length === 0 ? (
         <>no photos in album</>
       ) : (
-        albumPhotos.map((photo) => (
-          <Label key={photo.smugMugKey}>
-            <Radio
-              type="radio"
-              name="coverKey"
-              value={photo.smugMugKey}
-              defaultChecked={coverKey === photo.smugMugKey}
-            />
-            <img src={sizePhoto(photo.url, "Th")} alt="" />
-          </Label>
+        albumPhotos.map(({ smugMugKey, url }) => (
+          <RadioInput
+            name="coverKey"
+            value={smugMugKey}
+            defaultChecked={defaultValue === smugMugKey}
+            key={smugMugKey}
+          >
+            <img src={sizePhoto(url, "Th")} alt="" />
+          </RadioInput>
         ))
       )}
-    </Fieldset>
-  )
+    </RadioFieldset>
+  );
 }

@@ -1,10 +1,10 @@
-import { Prisma, PrismaClient } from "@prisma/client"
-import { cache } from "react"
+import { Prisma, PrismaClient } from "@prisma/client";
+import { cache } from "react";
 
 const prisma = new PrismaClient();
 
 function prismaWrapper<Args, Result>(prismaFunction: (args: Args) => Result) {
-  return (async (args: Args) => {
+  return async (args: Args) => {
     try {
       const result = await prismaFunction(args);
 
@@ -13,85 +13,68 @@ function prismaWrapper<Args, Result>(prismaFunction: (args: Args) => Result) {
       console.error(`👎 ${error}`);
       throw error;
     }
-  });
+  };
 }
 
-export const getStaticParams = cache(async (section: string) => (
-  prismaWrapper(prisma.album.findMany)({
-    where: { section: { name: section }},
-    select: {
-      name: true,
-      section: {
-        select: {
-          name: true,
-        }
-      }
-    }
-  })
-));
-
-export const getAlbum = cache(async (albumName: string) => (
+export const getAlbum = cache(async (albumName: string) =>
   prismaWrapper(prisma.album.findUniqueOrThrow)({
     where: { name: albumName },
-    include: { photos: true, coverPhoto: true, section: true }
-  })
-));
-
-export const createAlbum = async (args: Prisma.AlbumCreateArgs) => (
-  prismaWrapper(prisma.album.create)(args)
+    include: { photos: true, coverPhoto: true, section: true },
+  }),
 );
 
-export const updateAlbum = async (args: Prisma.AlbumUpdateArgs) => (
-  prismaWrapper(prisma.album.update)(args)
-);
+export const createAlbum = async (args: Prisma.AlbumCreateArgs) =>
+  prismaWrapper(prisma.album.create)(args);
 
-export const getMostRecentPhotoDate = async (albumName: string) => (
+export const updateAlbum = async (args: Prisma.AlbumUpdateArgs) =>
+  prismaWrapper(prisma.album.update)(args);
+
+export const getMostRecentPhotoDate = async (albumName: string) =>
   prismaWrapper(prisma.photo.findFirst)({
     where: { albumName },
-    orderBy: { captureDate: { sort: "desc" }},
-    select: { captureDate: true }
-  })
+    orderBy: { captureDate: { sort: "desc" } },
+    select: { captureDate: true },
+  });
+
+export const getAlbumNames = cache(async () =>
+  prismaWrapper(prisma.album.findMany)({
+    select: { name: true },
+    orderBy: { name: "asc" },
+  }),
 );
 
-export const getAlbumOptions = cache(async () => (
-  prismaWrapper(prisma.album.findMany)({
-    orderBy: { date: { sort: "desc", nulls: "first" } },
-    select: { name: true },
-  })
-));
-
-export const getAdminPhotos = cache(async () => (
+export const getAdminPhotos = cache(async () =>
   prismaWrapper(prisma.photo.findMany)({
     include: { album: true, tags: true },
-    orderBy: { captureDate: { sort: "desc", nulls: "first" } }
-  })
-));
+    orderBy: { captureDate: { sort: "desc", nulls: "first" } },
+  }),
+);
 
-export const getPhoto = cache(async (smugMugKey: string) => (
+export const getPhoto = cache(async (smugMugKey: string) =>
   prismaWrapper(prisma.photo.findUniqueOrThrow)({
-    where: { smugMugKey }
-  })
-));
+    where: { smugMugKey },
+  }),
+);
 
-export const countPhotos = cache(async (args: Prisma.PhotoCountArgs) => (
-  prismaWrapper(prisma.photo.count)(args)
-));
+export const countPhotos = cache(async (args: Prisma.PhotoCountArgs) =>
+  prismaWrapper(prisma.photo.count)(args),
+);
 
-export const getAllTags = cache(async () => (
-  prismaWrapper(prisma.tag.findMany)({})
-));
+export const getAllTags = cache(async () =>
+  prismaWrapper(prisma.tag.findMany)({}),
+);
 
 export const getPhotosWithTag = cache(async (name: string) => {
   const result = await prismaWrapper(prisma.tag.findUnique)({
     where: { name },
-    include: { photos: true }
-  })
+    include: { photos: true },
+  });
 
   return result?.photos || [];
 });
 
-export const getTag = cache(async (name: string) => (
+export const getTag = cache(async (name: string) =>
   prismaWrapper(prisma.tag.findUnique)({
-    where: { name }
-  })
-));
+    where: { name },
+  }),
+);

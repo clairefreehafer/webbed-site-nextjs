@@ -1,0 +1,16 @@
+@config "../../../config/tailwind.animal-crossing.config.ts";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .ac-text-bg {
+    backdrop-filter: blur(3px);
+    background-color: theme("colors.animalCrossing.uiBackground");
+    border-radius: theme("borderRadius.ui");
+    box-shadow: theme("boxShadow.ui");
+    color: black;
+    font-weight: 200;
+  }
+}

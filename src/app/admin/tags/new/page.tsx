@@ -1,13 +1,20 @@
-import { getTagNames } from "@utils/prisma/tag";
-import AddTagForm from "./form";
-import ParentTagSelect from "@components/admin/parent-tag-select";
+import { TagFormState, addTag } from "@actions/tag";
+import AdminForm from "@components/admin/form/index";
+import ParentTagSelect from "@components/admin/form/parent-tag-select";
+import SubmitButton from "@components/admin/form/submit-button";
+import TextInput from "@components/admin/form/text-input";
+import { Prisma } from "@prisma/client";
 
-export default async function CreateNewTag() {
-  const tags = await getTagNames();
+const initialState: Partial<TagFormState<Prisma.TagCreateArgs["data"]>> = {};
 
+export default function AddTagForm() {
   return (
-    <AddTagForm>
-      <ParentTagSelect tags={tags} />
-    </AddTagForm>
-  )
+    <AdminForm action={addTag} initialState={initialState}>
+      <TextInput label="name" name="name" required />
+
+      <ParentTagSelect />
+
+      <SubmitButton>create tag</SubmitButton>
+    </AdminForm>
+  );
 }

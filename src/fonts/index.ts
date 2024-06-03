@@ -1,4 +1,11 @@
-import { Cutive_Mono, Inter, Love_Ya_Like_A_Sister, PT_Mono, Pangolin, Press_Start_2P } from "next/font/google";
+import {
+  Cutive_Mono,
+  Inter,
+  Love_Ya_Like_A_Sister,
+  PT_Mono,
+  Pangolin,
+  Press_Start_2P,
+} from "next/font/google";
 
 export const cutiveMono = Cutive_Mono({
   display: "swap",
@@ -24,7 +31,7 @@ export const pangolin = Pangolin({
   subsets: ["latin"],
   variable: "--font-pangolin",
   weight: "400",
-})
+});
 
 export const pressStart2P = Press_Start_2P({
   display: "swap",

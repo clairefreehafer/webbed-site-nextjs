@@ -1,91 +1,118 @@
 "use client";
 
-import AdminForm, { FormState, Input, Label } from "@components/admin/form";
-import { Prisma } from "@prisma/client";
-import { AlbumTypes, displayName } from "@utils/albums";
+import { Album, Prisma } from "@prisma/client";
+import { AlbumTypes } from "@utils/albums";
 import { editAlbum } from "@actions/album";
-import { ReactNode, useState } from "react";
-import SelectCoverPhoto from "@components/photography/select-cover-photo";
-import { getAlbum, getPhotosWithTag } from "@utils/prisma";
-import SubmitButton from "@components/admin/submit-button";
+import { ChangeEvent, useState } from "react";
+import SelectCoverPhoto, {
+  SelectCoverPhotoProps,
+} from "@components/photography/select-cover-photo";
+import SubmitButton from "@components/admin/form/submit-button";
+import SectionSelect, {
+  SectionSelectProps,
+} from "@components/admin/form/section-select";
+import IconSelect, {
+  IconSelectProps,
+} from "@components/admin/form/icon-select";
+import { getAlbumData } from "@utils/prisma/album";
+import AdminForm, { FormState } from "@components/admin/form/index";
+import TextInput from "@components/admin/form/text-input";
+import Select from "@components/admin/form/select";
+import HideSection from "@components/admin/form/hide-section";
+import DateInput from "@components/admin/form/date-input";
+import CheckboxInput from "@components/admin/form/checkbox-input";
+import SectionHeader from "@components/admin/form/section-header";
+import NumberInput from "@components/admin/form/number-input";
 
 type Props = {
-  albumData: Prisma.PromiseReturnType<typeof getAlbum>,
-  albumPhotos:
-    Prisma.PromiseReturnType<typeof getAlbum>["photos"] |
-    Prisma.PromiseReturnType<typeof getPhotosWithTag>,
-  children: ReactNode,
+  albumData: Prisma.PromiseReturnType<typeof getAlbumData>;
+  albumPhotos: SelectCoverPhotoProps["albumPhotos"];
+  sections: SectionSelectProps["sections"];
+  icons: IconSelectProps["icons"];
 };
 
 export type UpdateAlbumFormState = FormState<
-  Props["albumPhotos"]
+  Omit<Props["albumData"], "section" | "photos" | "date"> & {
+    sectionName: Album["sectionName"];
+    date?: string;
+  }
 >;
 
-export default function UpdateAlbumForm(
-  { albumData, albumPhotos, children }: Props) {
-  const [autoDateGeneration, setAutoDateGeneration] = useState(!!albumPhotos.length);
+export default function UpdateAlbumForm({
+  albumData,
+  albumPhotos,
+  sections,
+  icons,
+}: Props) {
+  const [generateDateAutomatically, setGenerateDateAutomatically] = useState(
+    !!albumPhotos.length,
+  );
+  const [rootSection, setRootSection] = useState(albumData.rootSection);
 
-  const initialState: UpdateAlbumFormState = {};
+  const { id, name, date, type, coverKey, section, iconId } = albumData;
 
-  const { id, name, date, type, coverKey } = albumData;
+  const initialState: UpdateAlbumFormState = {
+    id,
+    name,
+    type,
+    iconId,
+    coverKey,
+    date: date?.toISOString().slice(0, 19),
+    sectionName: section.name,
+  };
 
   return (
     <AdminForm action={editAlbum} initialState={initialState}>
       <input type="hidden" name="id" defaultValue={id} readOnly />
 
-      <Label htmlFor="name">
-        name
-      </Label>
-      <Input
-        type="text"
-        name="name"
-        id="name"
-        defaultValue={displayName(name)}
+      <TextInput label="name" name="name" defaultValue={initialState.name} />
+
+      <SectionSelect
+        sections={sections}
+        defaultValue={section}
+        onChange={setRootSection}
       />
 
-      {children}
+      <Select
+        label="type"
+        name="type"
+        options={Object.values(AlbumTypes)}
+        defaultValue={initialState.type}
+      />
 
-      <Label htmlFor="type">
-        type
-      </Label>
-      <Input as="select" name="type" id="type" defaultValue={type}>
-        {Object.values(AlbumTypes).map((type) => (
-          <option key={type}>{type}</option>
-        ))}
-      </Input>
-
-      <Label htmlFor="date">
-        date
-      </Label>
-      <div>
-        <Input
-          type="datetime-local"
+      <HideSection when={rootSection === "zelda"}>
+        <DateInput
+          label="date"
           name="date"
-          defaultValue={date?.toISOString()}
-          readOnly={autoDateGeneration}
+          defaultValue={initialState.date}
+          readOnly={generateDateAutomatically}
         />
 
-        <Label>
-          generate date automatically?
-          <Input
-            type="checkbox"
-            checked={autoDateGeneration}
-            name="generateDateAutomatically"
-            onChange={(e) => setAutoDateGeneration(e.target.checked)}
-          />
-        </Label>
-      </div>
+        <CheckboxInput
+          label="generate date automatically?"
+          name="generateDateAutomatically"
+          checked={generateDateAutomatically}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setGenerateDateAutomatically(e.target.checked)
+          }
+        />
+      </HideSection>
 
-      <SelectCoverPhoto
-        coverKey={coverKey}
-        albumPhotos={albumPhotos}
-      />
+      <IconSelect icons={icons} defaultValue={iconId} />
 
-      {/* <Label>
-        add photos (by smugmugkey?)
-      </Label> */}
+      <HideSection when={rootSection !== "photography"}>
+        <SectionHeader>~~~ photography ~~~</SectionHeader>
+
+        <SelectCoverPhoto defaultValue={coverKey} albumPhotos={albumPhotos} />
+      </HideSection>
+
+      <HideSection when={rootSection !== "zelda"}>
+        <SectionHeader>~~~ zelda ~~~</SectionHeader>
+
+        <NumberInput label="compendium number" name="compendiumNumber" />
+      </HideSection>
 
       <SubmitButton>update album</SubmitButton>
     </AdminForm>
-  )
+  );
 }

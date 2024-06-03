@@ -1,8 +1,35 @@
 import Link from "next/link";
-import AdminTable from "@components/admin/table";
+import AdminTable, { AdminTableConfig } from "@components/admin/table";
 import DeleteButton from "@components/admin/delete-button";
 import { deletePhoto } from "@actions/photo";
 import { getZeldaAdminPhotos } from "@utils/prisma/photo";
+import { Prisma } from "@prisma/client";
+import Image from "next/image";
+import { sizePhoto } from "@utils/photo";
+import DisplayIcon from "@components/icon";
+
+const tableConfig: AdminTableConfig<
+  Prisma.PromiseReturnType<typeof getZeldaAdminPhotos>[0]
+> = {
+  thumbnail: ({ url, altText }) => (
+    <Image
+      src={sizePhoto(url || "", "Th")}
+      alt={altText || ""}
+      width={150}
+      height={150}
+    />
+  ),
+  icon: ({ icon }) => <DisplayIcon icon={icon} />,
+  "compendium number": ({ metadata }) => metadata?.compendiumNumber,
+  album: "albumName",
+  title: ({ metadata }) => metadata?.title,
+  edit: ({ smugMugKey }) => (
+    <Link href={`/admin/photos/${smugMugKey}`}>edit</Link>
+  ),
+  delete: ({ smugMugKey }) => (
+    <DeleteButton serverAction={deletePhoto} value={smugMugKey} />
+  ),
+};
 
 export default async function AdminPhotoRead() {
   const photos = await getZeldaAdminPhotos();
@@ -14,36 +41,9 @@ export default async function AdminPhotoRead() {
           <Link href="/admin/photos/new">add photo</Link>
         </li>
       </ul>
-      <AdminTable>
-        <thead>
-          <tr>
-            <th>thumbnail</th>
-            <th>album</th>
-            <th>title</th>
-            <th>edit</th>
-            <th>delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {photos.map((photo) => (
-            <tr key={photo.id}>
-              <td><img src={photo.url?.replaceAll("#size#", "Th")} alt="" /></td>
-              <td>{photo.albumName}</td>
-              <td>{photo.metadata?.title}</td>
-              <td>
-                <Link href={`/admin/photos/${photo.smugMugKey}`}>
-                  edit
-                </Link>
-              </td>
-              <td>
-                <DeleteButton serverAction={deletePhoto} value={photo.smugMugKey} />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </AdminTable>
+      <AdminTable data={photos} config={tableConfig} />
 
       <p>total: {photos.length}</p>
     </>
-  )
+  );
 }

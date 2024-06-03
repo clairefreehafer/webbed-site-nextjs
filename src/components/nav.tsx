@@ -2,42 +2,15 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import styled, { css } from "styled-components";
-import { animalCrossingTextBackground } from "@styles/animal-crossing/theme";
-import { wiggleBox } from "@styles/animations";
-import { ZELDA_LIGHT_BLUE, sheikahUnderline, zeldaTextBackground } from "@styles/zelda/theme";
-
-const WIGGLE_BOX_DURATION_MS = 250; 
+import { Theme } from "@styles/theme";
+import WiggleBox from "./photography/wiggle-box";
+import { slugName } from "@utils/albums";
 
 export type NavLink = {
   pathname: string;
   name: string;
   image?: string;
 };
-
-const Nav = styled.nav`
-  ${({ theme }) => theme.name === "animal-crossing" && css`
-    ${animalCrossingTextBackground};
-    height: 4rem;
-    padding: 1rem 2rem;
-    text-align: center;
-    width: 100%;
-  `}
-  ${({ theme }) => theme.name === "zelda" && css`
-    ${zeldaTextBackground};
-    padding: 0.5rem;
-    text-align: center;
-  `}
-`;
-
-const Ul = styled.ul`
-  display: flex;
-  list-style: none;
-  justify-content: center;
-  margin: 0 auto;
-
-  ${({ theme }) => theme.name === "photography" && "margin-bottom: 1rem;"}
-`;
 
 const defaultNavLinks: NavLink[] = [
   {
@@ -54,131 +27,89 @@ const defaultNavLinks: NavLink[] = [
   },
   {
     pathname: "/zelda",
-    name: "zelda"
-  }
-]
+    name: "zelda",
+  },
+];
 
-const WiggleBox = styled.div`
-  border-width: 3px 4px 3px 5px;
-  border: solid white;
-  height: 100%;
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
+const adminLink: NavLink = {
+  pathname: "/admin",
+  name: "admin",
+};
 
-  ${({ theme }) => theme.name !== "photography" && "display: none;"}
-`;
+type Props = {
+  navLinks?: typeof defaultNavLinks;
+  theme?: Theme;
+  className?: string;
+};
 
-const Box1 = styled(WiggleBox)`
-  border-radius: 95px 14px 92px 15px / 14px 95px 16px 95px;
-`;
+const navStyles: Record<Theme, string> = {
+  default: "",
+  notebook: "",
+  animalCrossing: "flex items-middle ac-text-bg h-16 px-4",
+  zelda: "zelda-text-bg pt-2 pb-6",
+  admin: "",
+};
 
-const Box2 = styled(WiggleBox)`
-  border-radius: 14px 92px 15px 95px / 95px 16px 95px 14px;
-`;
+const linkStyles: Record<Theme, (isActive?: boolean) => string> = {
+  default: () => "p-4",
+  notebook: () => "text-xl p-4",
+  animalCrossing: () => "px-4",
+  zelda: (isActive) =>
+    `sheikah-underline mx-6 mt-2 hover:text-light-blue ${isActive && "text-light-blue"}`,
+  admin: () => "text-limegreen p-4",
+};
 
-const Box3 = styled(WiggleBox)`
-  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-`;
- 
-const Li = styled.li`
-  position: relative;
+const LinkItem = ({
+  link,
+  theme,
+  isActive,
+}: {
+  link: NavLink;
+  theme: Theme;
+  isActive: boolean;
+}) => (
+  <li className="group relative flex items-center">
+    <WiggleBox theme={theme} />
+    {link.image && <img src={link.image} alt="" />}
+    <Link
+      href={link.pathname}
+      className={`relative z-10 block underline hover:no-underline ${linkStyles[theme](isActive)} ${isActive && "no-underline"}`}
+    >
+      {link.name === "photography" && isActive && <>📷&nbsp;</>}
+      {link.name === "admin" && isActive && "> "}
+      {link.name}
+    </Link>
+  </li>
+);
 
-  &:hover > ${Box1} {
-    animation: ${WIGGLE_BOX_DURATION_MS}ms infinite ${wiggleBox};
-  }
-
-  &:hover > ${Box2} {
-    animation: ${WIGGLE_BOX_DURATION_MS}ms infinite ${wiggleBox};
-    animation-delay: ${WIGGLE_BOX_DURATION_MS / 3}ms;
-  }
-
-  &:hover > ${Box3} {
-    animation: ${WIGGLE_BOX_DURATION_MS}ms infinite ${wiggleBox};
-    animation-delay: ${2 * (WIGGLE_BOX_DURATION_MS / 3)}ms;
-  }
-`;
-
-const StyledLink = styled(Link)<{ $isActive: boolean }>`
-  display: block;
-  padding: 1rem;
-  position: relative;
-  z-index: 2;
-  
-  ${({ $isActive }) => $isActive && `
-    font-weight: bold;
-    text-decoration: none;
-  `}
-
-  ${({ theme }) => theme.name === "animal-crossing" && `
-      padding: 0 1rem;
-  `}
-
-  ${({ theme, $isActive }) => theme.name === "admin" && `
-    color: limegreen;
-
-    ${$isActive && "font-weight: normal;"}
-  `}
-
-  ${({ theme, $isActive }) => theme.name === "photography" && `
-    font-size: 1.25rem;
-    line-height: 1.5rem;
-    ${$isActive && "font-weight: normal;"}
-  `}
-
-  ${({ theme, $isActive }) => theme.name === "zelda" && css`
-    ${sheikahUnderline};
-    margin: 0 1rem;
-    padding: 0.5rem 0;
-
-    ${$isActive && `
-      color: ${ZELDA_LIGHT_BLUE};
-      font-weight: normal;
-    `}
-
-    &:hover {
-      color: ${ZELDA_LIGHT_BLUE};
-    }
-  `}
-`;
-
- 
-export default function Navigation({ navLinks = defaultNavLinks, className = "" }) {
+export default function Navigation({
+  navLinks = defaultNavLinks,
+  theme = "default",
+  className = "",
+}: Props) {
   const pathname = usePathname();
-  
-  const isActive = (name: string) => pathname.startsWith(`/${name.replaceAll(" ", "-")}`)
- 
+
+  const isActive = (name: string) => pathname.startsWith(`/${slugName(name)}`);
+
   return (
-    <Nav className={className}>
-      <Ul>
+    <nav className={`${navStyles[theme]} ${className}`}>
+      <ul className="flex list-none justify-center">
         {navLinks.map((link: NavLink) => (
-          <Li key={link.pathname}>
-            <Box1 />
-            <Box2 />
-            <Box3 />
-            {link.image && <img src={link.image} alt="" />}
-            <StyledLink
-              href={link.pathname}
-              $isActive={isActive(link.name)}
-            >
-              {link.name === "photography" && isActive("photography") && <>📷&nbsp;</>}
-              {link.name}
-            </StyledLink>
-          </Li>
+          <LinkItem
+            theme={theme}
+            link={link}
+            key={link.pathname}
+            isActive={isActive(link.name)}
+          />
         ))}
         {process.env.NODE_ENV === "development" && (
-          <Li>
-            <Box1 />
-            <Box2 />
-            <Box3 />
-            <StyledLink href="/admin" $isActive={isActive("admin")}>
-              {isActive("admin") && <>&gt;&nbsp;</>}
-              admin
-            </StyledLink>
-          </Li>
+          <LinkItem
+            theme={theme}
+            link={adminLink}
+            isActive={isActive("admin")}
+          />
         )}
-      </Ul>
-    </Nav>
+      </ul>
+    </nav>
   );
 }

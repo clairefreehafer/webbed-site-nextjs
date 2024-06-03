@@ -3,7 +3,7 @@ import { getSections } from "./prisma/section";
 
 export enum AlbumTypes {
   Default = "default",
-  Tag = "tag"
+  Tag = "tag",
 }
 
 export enum AlbumSections {
@@ -13,8 +13,8 @@ export enum AlbumSections {
   NewHorizonsVisitors = "new-horizons/visitors",
   NewLeaf = "new leaf",
   TearsOfTheKingdom = "tears of the kingdom",
-  BreathOfTheWild = "breath of the wild"
-};
+  BreathOfTheWild = "breath of the wild",
+}
 
 export function displayName(album: string) {
   if (album?.includes("-")) {
@@ -34,8 +34,6 @@ export const getSectionsArr = cache(
   async (section?: string): Promise<string[]> => {
     const sections = await getSections();
 
-    return sections.map((obj) => (
-      obj.name
-    )).filter((item) => !!item.length);
-  }
+    return sections.map((obj) => obj.name).filter((item) => !!item.length);
+  },
 );

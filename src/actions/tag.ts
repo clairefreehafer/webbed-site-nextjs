@@ -10,7 +10,7 @@ const prisma = new PrismaClient();
 
 export async function addTag(
   _prevState: Partial<Prisma.TagCreateArgs["data"]>,
-  formData: FormData
+  formData: FormData,
 ) {
   const name = formData.get("name") as string;
   const parentName = formData.get("parentName") as string;
@@ -25,20 +25,20 @@ export async function addTag(
 
     return {
       ...createdTag,
-      message: "👍 tag created successfully"
-    }
+      message: "👍 tag created successfully",
+    };
   } catch (error) {
     console.error(error);
     return {
       ...data,
-      message: `👎 ${(error as Error).message}`
-    }
+      message: `👎 ${(error as Error).message}`,
+    };
   }
 }
 
 export async function editTag(
   _prevState: UpdateTagFormState,
-  formData: FormData
+  formData: FormData,
 ) {
   const name = formData.get("name") as string;
   const parentName = formData.get("parentName") as string;
@@ -46,7 +46,7 @@ export async function editTag(
 
   try {
     if (parentName === name) {
-      throw new Error("a tag cannot be its own parent.")
+      throw new Error("a tag cannot be its own parent.");
     }
     if (parentName !== "(none)") {
       data.parentName = parentName;
@@ -56,23 +56,23 @@ export async function editTag(
 
     return {
       ...updatedTag,
-      message: "👍 tag updated"
-    }
+      message: "👍 tag updated",
+    };
   } catch (error) {
     console.error(error);
     return {
-      message: `👎 ${(error as Error).message}`
-    }
+      message: `👎 ${(error as Error).message}`,
+    };
   }
 }
 
 export async function deleteTag(formData: FormData) {
   const name = formData.get("value") as string;
 
-  console.log(`👉 deleting tag "${name}"...`)
+  console.log(`👉 deleting tag "${name}"...`);
   // return await new Promise((resolve) => setTimeout(resolve, 5000));
   await prisma.tag.delete({
-    where: { name }
+    where: { name },
   });
 
   // revalidatePath("/admin/tags");

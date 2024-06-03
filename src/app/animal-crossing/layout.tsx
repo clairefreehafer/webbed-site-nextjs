@@ -1,50 +1,30 @@
-"use client";
-
-import Navigation from "@components/nav";
+import Nav from "@components/nav";
 import AnimalCrossingLogo from "@components/animal-crossing/logo";
-import { flexColumnCenter } from "@styles/layout";
-import { MAX_SITE_WIDTH } from "@styles/variables";
-import styled, { ThemeProvider } from "styled-components";
-import { AnimalCrossingThemeRoot, animalCrossingTheme } from "@styles/animal-crossing/theme";
-import { fotSeuratProB } from "@fonts/animal-crossing";
+import AnimalCrossingThemeRoot from "@styles/animal-crossing/theme";
+import "@styles/animal-crossing/theme.css";
+import { getGrassDateRange } from "@utils/animal-crossing";
 
-const Header = styled.header`
-  ${flexColumnCenter};
-  margin: 0 auto;
-  max-width: ${MAX_SITE_WIDTH};
-  padding: 1rem;
-`;
+export default function AnimalCrossingLayout({
+  children,
+}: {
+  children: Readonly<React.ReactNode>;
+}) {
+  const grassDateRange = getGrassDateRange();
 
-const Main = styled.main`
-  ${flexColumnCenter};
-  background-color: #cfbe95;
-  background-image: url(${({ theme }) => `/images/animal-crossing/sand/${theme.shape}_${theme.grassDateRange}.png`});
-  background-position: center top;
-  background-repeat: repeat-x;
-  border-radius: 20px;
-  box-shadow: 0 1rem 0.5rem -0.5rem rgba(0, 0, 0, 0.5);
-  color: black;
-  margin: 0 auto 1rem;
-  max-width: 50rem;
-  padding: 8.5rem 3rem 1rem;
-  text-shadow: rgba(255, 255, 255, 0.9) 0 0 5px;
-`;
-
-export default function AnimalCrossingLayout(
-  { children }:
-  { children: Readonly<React.ReactNode> }
-) {
   return (
-    <ThemeProvider theme={animalCrossingTheme}>
-      <AnimalCrossingThemeRoot className={fotSeuratProB.variable}>
-        <Header>
-          <AnimalCrossingLogo text="claire freehafer" />
-          <Navigation />
-        </Header>
-        <Main>
-          {children}
-        </Main>
-      </AnimalCrossingThemeRoot>
-    </ThemeProvider>
-  )
+    <AnimalCrossingThemeRoot shape="square">
+      <header className="max-w-site-width mx-auto flex flex-col items-center justify-center p-4">
+        <AnimalCrossingLogo text="claire freehafer" />
+        <Nav theme="animalCrossing" />
+      </header>
+      <main
+        className="bg-sand max-w-site-width mx-auto mb-4 rounded-3xl bg-top bg-repeat-x px-4 pb-4 pt-36 shadow-[0_1rem_0.5rem_-0.5rem_rgba(0,0,0,0.5)]"
+        style={{
+          backgroundImage: `url(/images/animal-crossing/sand/square_${grassDateRange}.png)`,
+        }}
+      >
+        {children}
+      </main>
+    </AnimalCrossingThemeRoot>
+  );
 }

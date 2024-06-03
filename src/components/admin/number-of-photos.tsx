@@ -8,20 +8,18 @@ type Props = {
   photoCount?: number;
 };
 
-export default async function NumberOfPhotos(
-  { albumName, albumType, photoCount }: Props
-) {
+export default async function NumberOfPhotos({
+  albumName,
+  albumType,
+  photoCount,
+}: Props) {
   let numberOfPhotos = photoCount;
 
   if (albumType === "tag") {
     numberOfPhotos = await countPhotos({
-      where: { tags: { some: { name: albumName }}}
+      where: { tags: { some: { name: albumName } } },
     });
   }
 
-  return (
-    <td>
-      {numberOfPhotos}
-    </td>
-  )
+  return <td>{numberOfPhotos}</td>;
 }

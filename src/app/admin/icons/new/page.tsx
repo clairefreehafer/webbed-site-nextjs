@@ -1,7 +1,21 @@
-import CreateIconForm from "./form";
+import { addIcon } from "@actions/icon";
+import AdminForm, { FormState } from "@components/admin/form/index";
+import SubmitButton from "@components/admin/form/submit-button";
+import TextInput from "@components/admin/form/text-input";
+import { Icon } from "@prisma/client";
 
-export default function CreateIcon() {
+export type NewIconState = FormState<Pick<Icon, "character" | "imagePath">>;
+
+const initialState: NewIconState = {};
+
+export default function CreateIconForm() {
   return (
-    <CreateIconForm />
-  )
+    <AdminForm action={addIcon} initialState={initialState}>
+      <TextInput label="emoji" name="character" />
+
+      <TextInput label="image path" name="imagePath" />
+
+      <SubmitButton>add icon</SubmitButton>
+    </AdminForm>
+  );
 }

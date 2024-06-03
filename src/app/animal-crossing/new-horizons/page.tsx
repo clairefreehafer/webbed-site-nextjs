@@ -12,16 +12,19 @@ import Link from "next/link";
 
 export default async function NewHorizonsPage() {
   const sections = await getChildSections("new-horizons");
-  
+
   return (
-    <ul className="grid">
-      {sections.map((section) => (
-        <li key={section.name}>
-          <Link href={`/animal-crossing/new-horizons/${section.name}`}>
-            {section.name}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  )
+    <div className="flex flex-col items-center">
+      <h3>new horizons</h3>
+      <ul>
+        {sections.map((section) => (
+          <li key={section.name}>
+            <Link href={`/animal-crossing/new-horizons/${section.name}`}>
+              {section.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }

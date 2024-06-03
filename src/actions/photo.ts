@@ -10,7 +10,10 @@ export type PhotoFormState<T> = T & { message?: string };
 
 const prisma = new PrismaClient();
 
-export async function createPhoto(_prevState: Partial<PhotoFormState<Prisma.PhotoCreateArgs["data"]>>, formData: FormData) {
+export async function createPhoto(
+  _prevState: Partial<PhotoFormState<Prisma.PhotoCreateArgs["data"]>>,
+  formData: FormData,
+) {
   let data: Prisma.PhotoCreateArgs["data"] = {
     smugMugKey: "",
   };
@@ -22,11 +25,13 @@ export async function createPhoto(_prevState: Partial<PhotoFormState<Prisma.Phot
     const album = formData.get("album") as string;
 
     const existingPhoto = await prisma.photo.findUnique({
-      where: { smugMugKey }
+      where: { smugMugKey },
     });
 
     if (existingPhoto) {
-      throw new Error(`photo with smugmug key "${smugMugKey}" is already in the database.`);
+      throw new Error(
+        `photo with smugmug key "${smugMugKey}" is already in the database.`,
+      );
     }
 
     const smugMugData = await getSmugMugData(smugMugKey);
@@ -54,37 +59,42 @@ export async function createPhoto(_prevState: Partial<PhotoFormState<Prisma.Phot
 
     return {
       ...data,
-      message: "👍 photo added"
+      message: "👍 photo added",
     };
   } catch (error) {
     console.error(`👎 ${error}`);
     return {
       ...data,
-      message: `👎 ${(error as Error).message}`
+      message: `👎 ${(error as Error).message}`,
     };
   }
 }
 
 export async function editPhoto(
   prevState: UpdatePhotoFormState,
-  formData: FormData
+  formData: FormData,
 ) {
   let data: Prisma.PhotoUpdateArgs["data"] = {};
 
   try {
-    const synchronizeWithXmps = formData.get("synchronizeWithXmp");
-    const xmpPath = formData.get("xmpPath") as string;
-    const smugMugKey = formData.get("smugMugKey") as string;
     const albumName = formData.get("albumName") as string;
-    const title = formData.get("title") as string;
-    const description = formData.get("description") as string;
-    const altText = formData.get("altText") as string;
-
     if (prevState.albumName !== albumName) {
-      console.log(`👉 moving photo from "${prevState.albumName}" to "${albumName}"...`);
-      data.album = { connect: { name: albumName }};
+      console.log(
+        `👉 moving photo from "${prevState.albumName}" to "${albumName}"...`,
+      );
+      data.album = { connect: { name: albumName } };
     }
 
+    const xmpPath = formData.get("xmpPath") as string;
+    if (prevState.xmpPath !== xmpPath) {
+      console.log(
+        `👉 changing xmpPath from "${prevState.xmpPath}" to "${xmpPath}"...`,
+      );
+      data.xmpPath = xmpPath;
+    }
+
+    const rootSection = formData.get("rootSection") as string;
+    const synchronizeWithXmps = formData.get("synchronizeWithXmp");
     if (synchronizeWithXmps) {
       if (!xmpPath) {
         throw new Error("no xmpPath set for current image.");
@@ -102,25 +112,55 @@ export async function editPhoto(
 
       data = metadataFromXmp;
     } else {
-      // if (prevState.title !== title) {
-      //   console.log(`👉 changing title from "${prevState.title}" to "${title}"...`);
-      //   data.title = title;
-      // }
-      // if (prevState.description !== description) {
-      //   console.log(`👉 changing description from "${prevState.description}" to "${description}"...`);
-      //   data.title = title;
-      // }
-      // if (prevState.altText !== altText) {
-      //   console.log(`👉 changing altText from "${prevState.altText}" to "${altText}"...`);
-      //   data.title = title;
-      // }
+      data.metadata = prevState.metadata || {};
+
+      const title = formData.get("title") as string;
+      if (prevState.title !== title) {
+        console.log(
+          `👉 changing title from "${prevState.title}" to "${title}"...`,
+        );
+        data.metadata.title = title;
+      }
+
+      const description = formData.get("description") as string;
+      if (prevState.description !== description) {
+        console.log(
+          `👉 changing description from "${prevState.description}" to "${description}"...`,
+        );
+        data.metadata.description = title;
+      }
+
+      const compendiumNumber = parseInt(
+        formData.get("compendiumNumber") as string,
+      );
+      if (
+        rootSection === "zelda" &&
+        prevState.compendiumNumber !== compendiumNumber
+      ) {
+        console.log(
+          `👉 changing compendium number from "${prevState.compendiumNumber}" to "${compendiumNumber}"...`,
+        );
+        data.metadata.compendiumNumber = compendiumNumber;
+      }
     }
 
-    if (prevState.xmpPath !== xmpPath) {
-      console.log(`👉 changing xmpPath from "${prevState.xmpPath}" to "${xmpPath}"...`);
-      data.xmpPath = xmpPath;
+    const altText = formData.get("altText") as string;
+    if (prevState.altText !== altText) {
+      console.log(
+        `👉 changing altText from "${prevState.altText}" to "${altText}"...`,
+      );
+      data.altText = altText;
     }
 
+    const iconId = parseInt(formData.get("iconId") as string);
+    if (rootSection === "zelda" && prevState.iconId !== iconId) {
+      console.log(
+        `👉 changing compendium iconId from "${prevState.iconId}" to "${iconId}"...`,
+      );
+      data.icon = { connect: { id: iconId } };
+    }
+
+    const smugMugKey = formData.get("smugMugKey") as string;
     const updatedPhoto = await updatePhoto(smugMugKey, data);
 
     return {
@@ -130,11 +170,9 @@ export async function editPhoto(
   } catch (error) {
     console.error(`👎 ${error}`);
     return {
-      message: `👎 ${(error as Error).message}`
+      message: `👎 ${(error as Error).message}`,
     };
   }
 }
 
-export async function deletePhoto() {
-
-}
+export async function deletePhoto() {}

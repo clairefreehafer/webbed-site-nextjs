@@ -1,50 +1,52 @@
 "use client";
 
-import { Album, Icon as IconType } from "@prisma/client";
+import { Album, Icon } from "@prisma/client";
+import { Theme } from "@styles/theme";
 import { getAstrologyDateRange } from "@utils/animal-crossing";
-import styled, { useTheme } from "styled-components";
+import Image from "next/image";
 
-const Emoji = styled.span<{ $height: number | "inherit" }>`
-  ${({ $height }) => $height === "inherit" ?
-    "font-size: inherit;" :
-    `font-size: ${$height - 1}rem;`}
-`;
+export type DisplayIconType = Pick<Icon, "imagePath" | "character">;
 
-const Image = styled.img<{ $height: number | "inherit"; $inline: boolean }>`
-  ${({ $height }) => `height: ${$height}rem;`}
-  ${({ $inline }) => $inline && "margin-right: 0.25rem;"}
-`;
-
-type Props = {
-  icon: Partial<IconType> | null
-  /** rem. height of image, emoji will be this - 1. */
-  height?: number | "inherit";
-  inline?: boolean;
-  /** for animal crossing links w/o an icon. */
-  date?: Album["date"];
+const imageStyles: Record<Theme, string> = {
+  default: "",
+  notebook: "",
+  animalCrossing: "max-h-12 max-w-12 object-contain",
+  zelda: "max-h-6 max-w-6 mr-2",
+  admin: "",
 };
 
-export default function Icon({
-  icon,
-  height = "inherit",
-  inline = false,
-  date
-}: Props) {
-  const theme = useTheme();
+const emojiStyles: Record<Theme, string> = {
+  default: "",
+  notebook: "mr-2 text-2xl",
+  animalCrossing: "",
+  zelda: "",
+  admin: "",
+};
 
+type DisplayIconProps = {
+  icon: DisplayIconType | null;
+  /** for animal crossing links w/o an icon. */
+  date?: Album["date"];
+  theme?: Theme;
+};
+
+export default function DisplayIcon({
+  icon,
+  date,
+  theme = "default",
+}: DisplayIconProps) {
   if (!icon) {
-    if (theme.name === "animal-crossing") {
+    if (theme === "animalCrossing") {
       if (!date) {
         throw new Error("please pass a date for animal crossing page icons!");
       }
       const astrologyDateRange = getAstrologyDateRange(date);
 
       return (
-        <Image
+        <img
           src={`/images/animal-crossing/star-fragments/star-fragment_${astrologyDateRange}.png`}
           alt=""
-          $height={height}
-          $inline={inline}
+          className={imageStyles[theme]}
         />
       );
     }
@@ -53,16 +55,11 @@ export default function Icon({
   }
 
   if (icon.imagePath) {
-    return <Image src={icon.imagePath} alt="" $height={height} $inline={inline} />
+    return <img src={icon.imagePath} alt="" className={imageStyles[theme]} />;
   }
 
   if (icon.character) {
-    return (
-      <Emoji $height={height}>
-        {icon.character}
-        {inline && " "}
-      </Emoji>
-    );
+    return <p className={emojiStyles[theme]}>{icon.character}</p>;
   }
 
   return null;
