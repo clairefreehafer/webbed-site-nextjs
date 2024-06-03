@@ -1,6 +1,6 @@
 "use server";
 
-import { NewIconState } from "@app/admin/icons/new/form";
+import { NewIconState } from "@app/admin/icons/new/page";
 import { Prisma } from "@prisma/client";
 import { createIcon } from "@utils/prisma/icon";
 

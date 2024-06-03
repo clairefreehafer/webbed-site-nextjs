@@ -1,11 +1,12 @@
 "use client";
 
-import type { Photo } from "@prisma/client";
+import type { Prisma } from "@prisma/client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Theme } from "@styles/theme";
 import SlideInfo from "./slide-info";
+import { getAlbumPhotos } from "@utils/prisma/photo";
 
 const uiStyles: Record<Theme, string> = {
   default: "",
@@ -16,7 +17,7 @@ const uiStyles: Record<Theme, string> = {
 };
 
 type Props = {
-  photos: Partial<Photo>[];
+  photos: Prisma.PromiseReturnType<typeof getAlbumPhotos>;
   albumName: string;
   albumSection: string[];
   theme: Theme;
@@ -69,7 +70,7 @@ export default function Slideshow({
         if (slide) observer.unobserve(slide);
       }
     };
-  }, [slidesRef, photos.length]);
+  }, [slidesRef, photos.length, intersectionObserverCallback]);
 
   let backHref = "/zelda";
 

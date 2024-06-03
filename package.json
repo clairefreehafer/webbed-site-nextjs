@@ -17,7 +17,6 @@
     "prisma-json-types-generator": "^3.0.4",
     "react": "^18",
     "react-dom": "^18",
-    "styled-components": "^6.1.8",
     "xml2js": "^0.6.2"
   },
   "devDependencies": {

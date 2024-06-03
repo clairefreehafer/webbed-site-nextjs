@@ -5,7 +5,7 @@ import { getAlbumPhotos } from "@utils/prisma/photo";
 
 type Props = {
   slideData: Prisma.PromiseReturnType<typeof getAlbumPhotos>[0] & {
-    albumName: string;
+    albumName: string | null;
   };
   theme: Theme;
   className: string;
@@ -13,8 +13,6 @@ type Props = {
 
 export default function SlideInfo({ slideData, theme, className }: Props) {
   const { metadata, icon, albumName } = slideData;
-
-  console.log(slideData);
 
   return (
     <div className={`${className} z-slideshow-ui absolute right-4 top-4`}>

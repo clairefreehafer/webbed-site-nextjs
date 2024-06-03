@@ -1,30 +1,28 @@
-import { ChangeEventHandler } from "react";
+import { ChangeEventHandler, ForwardedRef, forwardRef } from "react";
 import Label from "./label";
 
 type Props = {
-  label: string;
+  label?: string;
   name: string;
   options: string[];
   defaultValue?: string;
   onChange?: ChangeEventHandler<HTMLSelectElement>;
 };
 
-export default function Select({
-  label,
-  name,
-  options,
-  defaultValue,
-  onChange,
-}: Props) {
+const Select = forwardRef<HTMLSelectElement, Props>(function Select(
+  { label, name, options, defaultValue, onChange },
+  ref,
+) {
   return (
     <>
-      <Label htmlFor={name}>{label}</Label>
+      {label && <Label htmlFor={name}>{label}</Label>}
       <select
         id={name}
         name={name}
         defaultValue={defaultValue}
-        className="p-input bg-neutral-800 text-white"
+        className="p-input mb-4 bg-neutral-800 text-white last-of-type:mb-0"
         onChange={onChange}
+        ref={ref}
       >
         {options.map((option) => (
           <option key={option}>{option}</option>
@@ -32,4 +30,6 @@ export default function Select({
       </select>
     </>
   );
-}
+});
+
+export default Select;

@@ -43,55 +43,53 @@ enum AstrologyDateRange {
   sagittarius = "1123-1221",
 }
 
-const prisma = new PrismaClient();
-
 // TODO: find a better way to handle this.
-const tagAlbumNameMapping: Record<string, string> = {
-  "an old friend": "rover",
-};
+// const tagAlbumNameMapping: Record<string, string> = {
+//   "an old friend": "rover",
+// };
 
-export const getAlbumPhotos = cache(
-  async (albumName: string, section: string) => {
-    // TODO: type this better
-    let photos: (Partial<Photo> & { album?: Album | null })[] = [];
+// export const getAlbumPhotos = cache(
+//   async (albumName: string, section: string) => {
+//     // TODO: type this better
+//     let photos: (Partial<Photo> & { album?: Album | null })[] = [];
 
-    const tags = await prisma.tag.findMany({
-      where: { parentName: "animal crossing" },
-      select: { name: true },
-    });
+//     const tags = await prisma.tag.findMany({
+//       where: { parentName: "animal crossing" },
+//       select: { name: true },
+//     });
 
-    const flattenedTags = tags.map((tag) => tag.name);
+//     const flattenedTags = tags.map((tag) => tag.name);
 
-    if (flattenedTags.includes(albumName)) {
-      photos = await prisma.photo.findMany({
-        include: { tags: true, album: true },
-        where: {
-          tags: {
-            some: {
-              name: tagAlbumNameMapping[albumName] || albumName,
-            },
-          },
-        },
-      });
-    } else {
-      photos = await prisma.photo.findMany({
-        where: {
-          albumName,
-        },
-        orderBy: {
-          captureDate: "asc",
-        },
-        select: {
-          id: true,
-          url: true,
-          album: true,
-        },
-      });
-    }
+//     if (flattenedTags.includes(albumName)) {
+//       photos = await prisma.photo.findMany({
+//         include: { tags: true, album: true },
+//         where: {
+//           tags: {
+//             some: {
+//               name: tagAlbumNameMapping[albumName] || albumName,
+//             },
+//           },
+//         },
+//       });
+//     } else {
+//       photos = await prisma.photo.findMany({
+//         where: {
+//           albumName,
+//         },
+//         orderBy: {
+//           captureDate: "asc",
+//         },
+//         select: {
+//           id: true,
+//           url: true,
+//           album: true,
+//         },
+//       });
+//     }
 
-    return photos;
-  },
-);
+//     return photos;
+//   },
+// );
 
 export function getGrassDateRange(date = new Date()): GrassDateRange {
   const month = date.getMonth() + 1;

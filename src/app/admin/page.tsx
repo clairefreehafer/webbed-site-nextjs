@@ -18,7 +18,7 @@ export default function AdminPage() {
       className={`${pressStart2P.className} mx-auto my-12 flex w-full justify-around`}
     >
       {links.map((link, idx) => (
-        <li>
+        <li key={link}>
           <span className={idx === selected ? "opacity-1" : "opacity-0"}>
             ▶&nbsp;
           </span>

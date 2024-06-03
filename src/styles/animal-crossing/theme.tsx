@@ -1,29 +1,10 @@
-import { SVG_HEIGHT } from "@components/animal-crossing/logo";
-import { fullScreen } from "@styles/layout";
 import {
-  GRASS_COLORS,
   GrassDateRange,
   GrassShape,
-  getAstrologyDateRange,
   getGrassDateRange,
 } from "@utils/animal-crossing";
 import { ReactNode } from "react";
 import { fotSeuratProB } from "@fonts/animal-crossing";
-
-const UI_BACKGROUND_COLOR = "rgb(248, 245, 223, 0.8)";
-const UI_BORDER_RADIUS = "3rem";
-const UI_BOX_SHADOW = "0 0.75rem 0.5rem -0.5rem rgba(0, 0, 0, 0.5)";
-
-const grassDateRange = getGrassDateRange();
-const astrologyDateRange = getAstrologyDateRange();
-
-export const animalCrossingTheme = {
-  name: "animal-crossing",
-  grassDateRange,
-  astrologyDateRange,
-  shape: "square",
-  iconHeight: 2,
-};
 
 type Props = {
   shape: GrassShape;

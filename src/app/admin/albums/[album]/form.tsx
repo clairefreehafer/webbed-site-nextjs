@@ -1,7 +1,7 @@
 "use client";
 
 import { Album, Prisma } from "@prisma/client";
-import { AlbumTypes, displayName } from "@utils/albums";
+import { AlbumTypes } from "@utils/albums";
 import { editAlbum } from "@actions/album";
 import { ChangeEvent, useState } from "react";
 import SelectCoverPhoto, {

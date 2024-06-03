@@ -30,6 +30,7 @@ export default function SelectCoverPhoto({
             name="coverKey"
             value={smugMugKey}
             defaultChecked={defaultValue === smugMugKey}
+            key={smugMugKey}
           >
             <img src={sizePhoto(url, "Th")} alt="" />
           </RadioInput>

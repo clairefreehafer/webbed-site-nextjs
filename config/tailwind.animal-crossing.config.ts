@@ -6,7 +6,7 @@ export default {
     "./src/**/animal-crossing/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/nav.tsx",
     "./src/components/icon-list.tsx",
-    "./src/components/slideshow.tsx",
+    "./src/components/slideshow/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {

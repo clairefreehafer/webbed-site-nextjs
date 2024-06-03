@@ -2,10 +2,10 @@
 
 import { ChangeEvent, useCallback, useMemo, useRef, useState } from "react";
 import { Prisma } from "@prisma/client";
-import { flexColumnCenter } from "@styles/layout";
 import { getSectionsForHierarchy } from "@utils/prisma/section";
 import { getAlbumData } from "@utils/prisma/album";
 import Label from "./label";
+import Select from "./select";
 
 export type SectionSelectProps = {
   defaultValue?: Prisma.PromiseReturnType<typeof getAlbumData>["section"];
@@ -13,6 +13,7 @@ export type SectionSelectProps = {
   onChange?: (section: string) => void;
 };
 
+// TODO: FIX
 function generateSectionsHierarchy(sections: SectionSelectProps["sections"]) {
   const hashTable = Object.create(null);
 
@@ -36,6 +37,7 @@ function generateSectionsHierarchy(sections: SectionSelectProps["sections"]) {
   for (let section in sectionsHierarchy) {
     sectionsHierarchy[section] = hashTable[section];
   }
+
   return sectionsHierarchy;
 }
 
@@ -64,7 +66,7 @@ export default function SectionSelect({
     } else {
       return [];
     }
-  }, [defaultValue]);
+  }, [defaultValue, sections]);
 
   const selectRefs = useRef<HTMLSelectElement[]>([]);
 
@@ -102,7 +104,7 @@ export default function SectionSelect({
 
       return levels;
     },
-    [sectionsHierarchy, selectRefs],
+    [sectionsHierarchy, selectRefs, defaultOptions],
   );
 
   const [currentOptions, setCurrentOptions] = useState(generateOptions);
@@ -118,24 +120,19 @@ export default function SectionSelect({
   return (
     <>
       <Label htmlFor="section0">section</Label>
-      <div css={flexColumnCenter}>
+      <div className="flex flex-col align-middle">
         {currentOptions.map((optionsArr, i) => {
           return (
-            <select
+            <Select
               key={i}
               name={`section${i}`}
-              id={`section${i}`}
               onChange={(e) => handleChange(e, i)}
               ref={(el) => {
                 el && selectRefs.current.push(el);
               }}
               defaultValue={defaultOptions[i]}
-              css={{ marginBottom: "1rem", width: "100%", padding: "1rem" }}
-            >
-              {optionsArr.map((option) => (
-                <option key={option}>{option}</option>
-              ))}
-            </select>
+              options={optionsArr}
+            />
           );
         })}
       </div>
