@@ -3,7 +3,6 @@
 import { Album, Icon } from "@prisma/client";
 import { Theme } from "@styles/theme";
 import { getAstrologyDateRange } from "@utils/animal-crossing";
-import Image from "next/image";
 
 export type DisplayIconType = Pick<Icon, "imagePath" | "character">;
 

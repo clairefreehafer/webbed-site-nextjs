@@ -3,13 +3,13 @@ import Link from "next/link";
 import { ReactNode } from "react";
 
 const H3 = ({ children }: { children: ReactNode }) => (
-  <h3 className={`${loveYaLikeASister.className} leading-paper text-2xl`}>
+  <h3 className={`${loveYaLikeASister.className} text-2xl/paper`}>
     {children}
   </h3>
 );
 
 const P = ({ children }: { children: ReactNode }) => (
-  <p className={`${pangolin.className} leading-paper mb-line-spacing text-xl`}>
+  <p className={`${pangolin.className} mb-line-spacing text-xl/paper`}>
     {children}
   </p>
 );
