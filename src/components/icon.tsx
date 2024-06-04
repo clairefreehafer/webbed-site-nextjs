@@ -29,6 +29,7 @@ type DisplayIconProps = {
   theme?: Theme;
 };
 
+// TODO: add hover title
 export default function DisplayIcon({
   icon,
   date,

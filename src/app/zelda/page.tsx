@@ -1,7 +1,6 @@
 import IconList from "@components/icon-list";
 import Separator from "@components/zelda/separator";
 import { hyliaSerif } from "@fonts/zelda";
-import { getPolaroidGridData } from "@utils/prisma/photo";
 import { ReactNode } from "react";
 
 const Game = ({ children }: { children: ReactNode }) => (
@@ -11,14 +10,12 @@ const Game = ({ children }: { children: ReactNode }) => (
 );
 
 export default async function ZeldaPage() {
-  const totkAlbums = await getPolaroidGridData("tears of the kingdom");
-
   return (
     <div className="flex flex-col items-center">
       <Separator number={1} />
 
       <Game>tears of the kingdom</Game>
-      <IconList albums={totkAlbums} theme="zelda" />
+      <IconList section="tears of the kingdom" theme="zelda" />
 
       <Separator number={2} />
 

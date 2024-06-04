@@ -49,3 +49,17 @@ export const getRootSection = cache(async (section: SectionType) => {
   }
   return result;
 });
+
+export const getRootSectionRecursive = cache(async (section: SectionType) => {
+  if (typeof section === "string") {
+    section = await getSection(section);
+  }
+
+  if (section.parent) {
+    getRootSectionRecursive(section.parent);
+  } else if (section.parentName) {
+    getRootSectionRecursive(section.parentName);
+  } else {
+    return section.name;
+  }
+});

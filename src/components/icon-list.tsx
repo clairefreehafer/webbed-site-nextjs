@@ -1,12 +1,11 @@
 import { slugName } from "@utils/albums";
 import Link from "next/link";
-import { Prisma } from "@prisma/client";
 import Icon from "@components/icon";
-import { getPolaroidGridData } from "@utils/prisma/photo";
 import { Theme } from "@styles/theme";
+import { getIconListAlbums } from "@utils/prisma/album";
 
 type Props = {
-  albums: Prisma.PromiseReturnType<typeof getPolaroidGridData>;
+  section: string;
   theme: Theme;
 };
 
@@ -25,7 +24,9 @@ function generateUrl({
   );
 }
 
-export default function IconList({ albums, theme }: Props) {
+export default async function IconList({ section, theme }: Props) {
+  const albums = await getIconListAlbums(section);
+
   return (
     <ul className={`list-none ${theme === "zelda" && "mb-8"}`}>
       {albums.map((album) => (
