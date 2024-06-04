@@ -9,9 +9,7 @@ export default {
   theme: {
     extend: {
       animation: {
-        "wiggle-box-1": "wiggle-box 250ms infinite",
-        "wiggle-box-2": "250ms wiggle-box calc(250ms / 3) infinite",
-        "wiggle-box-3": "250ms wiggle-box calc(2 * (250ms / 3)) infinite",
+        "wiggle-box": "250ms wiggle-box infinite",
       },
       borderRadius: {
         wiggle1: "95px 14px 92px 15px / 14px 95px 16px 95px",
