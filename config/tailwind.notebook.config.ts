@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import defaultPlugin from "../plugins/default";
+import plugin from "tailwindcss/plugin";
 
 export default {
   content: [
@@ -14,7 +15,7 @@ export default {
       borderRadius: {
         wiggle1: "95px 14px 92px 15px / 14px 95px 16px 95px",
         wiggle2: "14px 92px 15px 95px / 95px 16px 95px 14px",
-        wiggle3: "255px 15px 225px 15px/15px 225px 15px 255px",
+        wiggle3: "255px 15px 225px 15px / 15px 225px 15px 255px",
       },
       colors: {
         "blue-line": "rgba(0, 255, 255, 0.8)",
@@ -37,5 +38,17 @@ export default {
       }),
     },
   },
-  plugins: [defaultPlugin],
+  plugins: [
+    defaultPlugin,
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        ".delay-wiggle-box-2": {
+          animationDelay: "calc(250ms / 3)",
+        },
+        ".delay-wiggle-box-3": {
+          animationDelay: "calc(2 * (250ms / 3))",
+        },
+      });
+    }),
+  ],
 } satisfies Config;
