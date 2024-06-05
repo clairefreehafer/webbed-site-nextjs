@@ -65,6 +65,53 @@ export const getSection = cache(async (name: string) =>
   }),
 );
 
+export const getAllDescendants = cache(async (sectionName: string) => {
+  const sections = await prismaWrapper(prisma.section.findMany)({
+    select: {
+      name: true,
+      parentName: true,
+    },
+  });
+
+  let descendants: string[] = [];
+
+  function getDescendants(sectionName: string) {
+    let isParent = false;
+
+    // check if section is anyone's parent
+    for (let i = 0; i < sections.length; i++) {
+      if (sections[i].parentName === sectionName) {
+        isParent = true;
+        break;
+      }
+    }
+
+    // if the section is not a parent, return
+    if (!isParent) {
+      return;
+    } else {
+      // find the child sections
+      const intermediateSections = sections
+        .map(({ parentName, name }) => {
+          if (parentName === sectionName) {
+            return name;
+          }
+        })
+        .filter((el) => !!el) as string[];
+
+      descendants = [...descendants, ...intermediateSections];
+
+      intermediateSections.forEach((item) => getDescendants(item));
+    }
+
+    descendants = Array.from(new Set(descendants));
+  }
+
+  getDescendants(sectionName);
+
+  return descendants;
+});
+
 export const createSection = async (args: Prisma.SectionCreateArgs) =>
   prismaWrapper(prisma.section.create)(args);
 

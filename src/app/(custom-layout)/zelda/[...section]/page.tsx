@@ -1,18 +1,23 @@
-import { displayName } from "@utils/albums";
+import { displayName, slugName } from "@utils/albums";
 import Slideshow from "@components/slideshow/index";
 import { getAncestorSections } from "@utils/section";
 import { getAlbumPhotos } from "@utils/prisma/photo";
-import { getStaticParams } from "@utils/prisma/album";
+import { getAlbumsInSections } from "@utils/prisma/album";
 import "@styles/zelda/theme.css";
+import { getAllDescendants } from "@utils/prisma/section";
 
 export async function generateStaticParams() {
-  const albums = await getStaticParams("zelda");
+  // TODO: extract
+  const descendantSections = await getAllDescendants("zelda");
+  const albums = await getAlbumsInSections(descendantSections);
 
   const params = [];
 
   for (let album of albums) {
     const sectionArray = await getAncestorSections(album.sectionName);
-    params.push({ section: sectionArray.push(album.name) });
+    sectionArray.shift();
+    sectionArray.push(slugName(album.name));
+    params.push({ section: sectionArray });
   }
 
   return params;

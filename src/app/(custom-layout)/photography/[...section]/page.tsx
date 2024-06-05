@@ -1,18 +1,23 @@
-import { displayName } from "@utils/albums";
+import { displayName, slugName } from "@utils/albums";
 import { getPhotosWithTag } from "@utils/prisma";
 import {
+  getAlbumsInSections,
   getPhotographyAlbumPhotos,
-  getStaticParams,
 } from "@utils/prisma/album";
+import { getAllDescendants } from "@utils/prisma/section";
 import { getAncestorSections } from "@utils/section";
 
 export async function generateStaticParams() {
-  const albums = await getStaticParams("photography");
+  // TODO: extract
+  const descendantSections = await getAllDescendants("photography");
+  const albums = await getAlbumsInSections(descendantSections);
 
   const params = [];
 
   for (let album of albums) {
     const sectionArray = await getAncestorSections(album.sectionName);
+    sectionArray.shift();
+    sectionArray.push(slugName(album.name));
     params.push({ section: sectionArray });
   }
 

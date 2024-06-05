@@ -1,6 +1,7 @@
 import { cache } from "react";
 import { getSection } from "./prisma/section";
 import { Prisma } from "@prisma/client";
+import { slugName } from "./albums";
 
 type SectionType =
   | string
@@ -15,7 +16,7 @@ export const getAncestorSections = cache(async (section: SectionType) => {
   }
 
   while (currentSection?.name) {
-    result.unshift(currentSection.name);
+    result.unshift(slugName(currentSection.name));
 
     if (currentSection.parent) {
       currentSection = currentSection.parent;

@@ -1,19 +1,24 @@
-import { displayName } from "@utils/albums";
+import { displayName, slugName } from "@utils/albums";
 import Slideshow from "@components/slideshow/index";
 import { getAncestorSections } from "@utils/section";
-import { getStaticParams } from "@utils/prisma/album";
+import { getAlbumsInSections } from "@utils/prisma/album";
 import AnimalCrossingThemeRoot from "@styles/animal-crossing/theme";
 import "@styles/animal-crossing/theme.css";
 import { getAlbumPhotos } from "@utils/prisma/photo";
+import { getAllDescendants } from "@utils/prisma/section";
 
 export async function generateStaticParams() {
-  const albums = await getStaticParams("animal-crossing");
+  // TODO: extract
+  const descendantSections = await getAllDescendants("animal-crossing");
+  const albums = await getAlbumsInSections(descendantSections);
 
   const params = [];
 
   for (let album of albums) {
     const sectionArray = await getAncestorSections(album.sectionName);
-    params.push({ section: sectionArray.push(album.name) });
+    sectionArray.shift();
+    sectionArray.push(slugName(album.name));
+    params.push({ section: sectionArray });
   }
 
   return params;
@@ -27,7 +32,6 @@ export default async function Page({
   params: { section: string[] };
 }) {
   const albumName = displayName(params.section[params.section.length - 1]);
-  // const section = params.section[params.section.length - 2];
   const photos = await getAlbumPhotos(albumName);
 
   if (!photos.length) {

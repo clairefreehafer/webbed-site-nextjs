@@ -99,16 +99,6 @@ export const getAlbumSection = cache(async (name: Album["name"]) => {
   return sectionName;
 });
 
-export const getStaticParams = cache(async (sectionName: string) =>
-  prismaWrapper(prisma.album.findMany)({
-    where: { sectionName },
-    select: {
-      name: true,
-      sectionName: true,
-    },
-  }),
-);
-
 export const getIconListAlbums = cache(async (sectionName: string) => {
   const albums = await prismaWrapper(prisma.album.findMany)({
     where: { sectionName },
@@ -141,3 +131,11 @@ export const getIconListAlbums = cache(async (sectionName: string) => {
 
   return result;
 });
+
+export const getAlbumsInSections = cache(async (sections: string[]) =>
+  prismaWrapper(prisma.album.findMany)({
+    where: {
+      sectionName: { in: sections },
+    },
+  }),
+);
