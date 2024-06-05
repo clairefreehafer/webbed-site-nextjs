@@ -24,6 +24,14 @@ function generateUrl({
   );
 }
 
+const linkThemes: Record<Theme, string> = {
+  default: "",
+  notebook: "",
+  animalCrossing: "text-brown hover:drop-shadow-text hover:text-black",
+  admin: "",
+  zelda: "",
+};
+
 export default async function IconList({ section, theme }: Props) {
   const albums = await getIconListAlbums(section);
 
@@ -34,7 +42,7 @@ export default async function IconList({ section, theme }: Props) {
           <Icon icon={album.icon} date={album.date} theme={theme} />
           <Link
             href={generateUrl(album)}
-            className="underline hover:no-underline"
+            className={`${linkThemes[theme]} underline hover:no-underline`}
           >
             {album.name}
           </Link>

@@ -32,6 +32,7 @@ export default {
         animalCrossing: {
           uiBackground: "rgb(248, 245, 223, 0.8)",
         },
+        brown: "rgb(85, 69, 64)",
         "grass-color": {
           "1210-0224": "rgb(189, 215, 238)",
           "0225-0331": "rgb(31, 140, 57)",
@@ -46,6 +47,9 @@ export default {
         },
         sand: "#cfbe95",
       },
+      dropShadow: ({ theme }) => ({
+        text: `0 1px 5px ${theme("colors.brown")}`,
+      }),
     },
   },
   plugins: [defaultPlugin],

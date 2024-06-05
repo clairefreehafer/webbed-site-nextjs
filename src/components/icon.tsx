@@ -9,7 +9,7 @@ export type DisplayIconType = Pick<Icon, "imagePath" | "character">;
 const imageStyles: Record<Theme, string> = {
   default: "",
   notebook: "",
-  animalCrossing: "max-h-12 max-w-12 object-contain",
+  animalCrossing: "max-h-12 max-w-12 object-contain drop-shadow-text",
   zelda: "max-h-6 max-w-6 mr-2",
   admin: "",
 };
