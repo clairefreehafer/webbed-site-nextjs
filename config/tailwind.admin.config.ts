@@ -7,6 +7,7 @@ export default {
     "./**/admin/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/nav.tsx",
     "./src/components/title.tsx",
+    "./src/components/icon.tsx",
   ],
   theme: {
     extend: {

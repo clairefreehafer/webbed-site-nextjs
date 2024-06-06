@@ -20,10 +20,20 @@ export const getIconsWithAlbums = cache(async () =>
       id: true,
       imagePath: true,
       character: true,
+      text: true,
       albums: { select: { name: true } },
     },
   }),
 );
 
+export const getIconData = cache(async (id: number) =>
+  prismaWrapper(prisma.icon.findUniqueOrThrow)({
+    where: { id },
+  }),
+);
+
 export const createIcon = (data: Prisma.IconCreateArgs) =>
   prismaWrapper(prisma.icon.create)(data);
+
+export const updateIcon = (data: Prisma.IconUpdateArgs) =>
+  prismaWrapper(prisma.icon.update)(data);

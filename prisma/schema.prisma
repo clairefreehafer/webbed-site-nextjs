@@ -68,6 +68,7 @@ model Icon {
   id        Int       @id @default(autoincrement())
   imagePath String?   @db.VarChar(255)
   character String?   @db.VarChar(255)
+  text      String?   @db.VarChar
   albums    Album[]
   sections  Section[]
   photos    Photo[]

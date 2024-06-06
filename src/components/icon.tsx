@@ -11,7 +11,7 @@ const imageStyles: Record<Theme, string> = {
   notebook: "",
   animalCrossing: "max-h-12 max-w-12 object-contain drop-shadow-text",
   zelda: "max-h-6 max-w-6 mr-2",
-  admin: "",
+  admin: "max-h-12 max-w-12 mx-auto",
 };
 
 const emojiStyles: Record<Theme, string> = {
@@ -19,7 +19,7 @@ const emojiStyles: Record<Theme, string> = {
   notebook: "mr-2 text-2xl",
   animalCrossing: "",
   zelda: "",
-  admin: "",
+  admin: "text-4xl",
 };
 
 type DisplayIconProps = {

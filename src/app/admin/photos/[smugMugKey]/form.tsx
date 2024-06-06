@@ -17,6 +17,7 @@ import Textarea from "@components/admin/form/textarea";
 import Select from "@components/admin/form/select";
 import { getAlbumNames } from "@utils/prisma";
 import SectionHeader from "@components/admin/form/section-header";
+import { getIcons } from "@utils/prisma/icon";
 
 export type UpdatePhotoFormState = FormState<
   Prisma.PromiseReturnType<typeof getAdminPhoto> &
@@ -29,7 +30,7 @@ export type UpdatePhotoFormState = FormState<
 type Props = {
   photoData: Prisma.PromiseReturnType<typeof getAdminPhoto>;
   albums: Prisma.PromiseReturnType<typeof getAlbumNames>;
-  icons: Icon[];
+  icons: Prisma.PromiseReturnType<typeof getIcons>;
 };
 
 export default function UpdatePhotoForm({ photoData, albums, icons }: Props) {
