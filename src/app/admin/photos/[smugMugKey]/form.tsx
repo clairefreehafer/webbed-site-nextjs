@@ -2,7 +2,7 @@
 
 import { editPhoto } from "@actions/photo";
 import { ChangeEvent, useState } from "react";
-import { Icon, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 
 import SubmitButton from "@components/admin/form/submit-button";
 import { getAdminPhoto } from "@utils/prisma/photo";

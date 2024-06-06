@@ -4,7 +4,7 @@ import { Album, Icon } from "@prisma/client";
 import { Theme } from "@styles/theme";
 import { getAstrologyDateRange } from "@utils/animal-crossing";
 
-export type DisplayIconType = Pick<Icon, "imagePath" | "character">;
+export type DisplayIconType = Pick<Icon, "imagePath" | "character" | "text">;
 
 const imageStyles: Record<Theme, string> = {
   default: "",
@@ -40,13 +40,14 @@ export default function DisplayIcon({
       if (!date) {
         throw new Error("please pass a date for animal crossing page icons!");
       }
-      const astrologyDateRange = getAstrologyDateRange(date);
+      const { name, dateRange } = getAstrologyDateRange(date);
 
       return (
         <img
-          src={`/images/animal-crossing/star-fragments/star-fragment_${astrologyDateRange}.png`}
+          src={`/images/animal-crossing/star-fragments/star-fragment_${dateRange}.png`}
           alt=""
           className={imageStyles[theme]}
+          title={`${name} star fragment`}
         />
       );
     }
@@ -55,7 +56,14 @@ export default function DisplayIcon({
   }
 
   if (icon.imagePath) {
-    return <img src={icon.imagePath} alt="" className={imageStyles[theme]} />;
+    return (
+      <img
+        src={icon.imagePath}
+        alt=""
+        className={imageStyles[theme]}
+        title={icon.text || undefined}
+      />
+    );
   }
 
   if (icon.character) {

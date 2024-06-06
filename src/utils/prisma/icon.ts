@@ -10,6 +10,7 @@ export const getIcons = cache(async () =>
       id: true,
       imagePath: true,
       character: true,
+      text: true,
     },
   }),
 );

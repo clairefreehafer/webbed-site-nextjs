@@ -21,6 +21,7 @@ export const getAdminAlbums = cache(async () =>
         select: {
           character: true,
           imagePath: true,
+          text: true,
         },
       },
       _count: {
@@ -110,6 +111,7 @@ export const getIconListAlbums = cache(async (sectionName: string) => {
         select: {
           imagePath: true,
           character: true,
+          text: true,
         },
       },
       section: {

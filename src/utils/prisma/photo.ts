@@ -82,6 +82,7 @@ export const getPolaroidGridData = cache(async (section: string) => {
         select: {
           imagePath: true,
           character: true,
+          text: true,
         },
       },
       photos: {
@@ -130,6 +131,7 @@ export const getZeldaAdminPhotos = cache(async () => {
         select: {
           imagePath: true,
           character: true,
+          text: true,
         },
       },
     },

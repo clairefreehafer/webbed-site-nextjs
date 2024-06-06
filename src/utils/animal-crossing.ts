@@ -28,20 +28,20 @@ export const GRASS_COLORS: Record<GrassDateRange, string> = {
   "1129-1209": "rgb(99, 81, 82)",
 };
 
-enum AstrologyDateRange {
-  capricorn = "1222-0119",
-  aquarius = "0120-0218",
-  pisces = "0219-0320",
-  aries = "0321-0419",
-  taurus = "0420-0520",
-  gemini = "0521-0621",
-  cancer = "0622-0722",
-  leo = "0723-0822",
-  virgo = "0823-0922",
-  libra = "0923-1023",
-  scorpio = "1024-1122",
-  sagittarius = "1123-1221",
-}
+const astrologyDateRanges = {
+  capricorn: "1222-0119",
+  aquarius: "0120-0218",
+  pisces: "0219-0320",
+  aries: "0321-0419",
+  taurus: "0420-0520",
+  gemini: "0521-0621",
+  cancer: "0622-0722",
+  leo: "0723-0822",
+  virgo: "0823-0922",
+  libra: "0923-1023",
+  scorpio: "1024-1122",
+  sagittarius: "1123-1221",
+};
 
 // TODO: find a better way to handle this.
 // const tagAlbumNameMapping: Record<string, string> = {
@@ -134,45 +134,55 @@ export function getGrassDateRange(date = new Date()): GrassDateRange {
   }
 }
 
-export function getAstrologyDateRange(date = new Date()): AstrologyDateRange {
+export function getAstrologyDateRange(date = new Date()) {
   const month = date.getMonth() + 1;
   const day = date.getDate();
 
+  let key: keyof typeof astrologyDateRanges;
+
   switch (month) {
     case 1:
-      return day <= 19
-        ? AstrologyDateRange.capricorn
-        : AstrologyDateRange.aquarius;
+      key = day <= 19 ? "capricorn" : "aquarius";
+      break;
     case 2:
-      return day <= 18
-        ? AstrologyDateRange.aquarius
-        : AstrologyDateRange.pisces;
+      key = day <= 18 ? "aquarius" : "pisces";
+      break;
     case 3:
-      return day <= 20 ? AstrologyDateRange.pisces : AstrologyDateRange.aries;
+      key = day <= 20 ? "pisces" : "aries";
+      break;
     case 4:
-      return day <= 19 ? AstrologyDateRange.aries : AstrologyDateRange.taurus;
+      key = day <= 19 ? "aries" : "taurus";
+      break;
     case 5:
-      return day <= 20 ? AstrologyDateRange.taurus : AstrologyDateRange.gemini;
+      key = day <= 20 ? "taurus" : "gemini";
+      break;
     case 6:
-      return day <= 21 ? AstrologyDateRange.gemini : AstrologyDateRange.cancer;
+      key = day <= 21 ? "gemini" : "cancer";
+      break;
     case 7:
-      return day <= 22 ? AstrologyDateRange.cancer : AstrologyDateRange.leo;
+      key = day <= 22 ? "cancer" : "leo";
+      break;
     case 8:
-      return day <= 22 ? AstrologyDateRange.leo : AstrologyDateRange.virgo;
+      key = day <= 22 ? "leo" : "virgo";
+      break;
     case 9:
-      return day <= 22 ? AstrologyDateRange.virgo : AstrologyDateRange.libra;
+      key = day <= 22 ? "virgo" : "libra";
+      break;
     case 10:
-      return day <= 23 ? AstrologyDateRange.libra : AstrologyDateRange.scorpio;
+      key = day <= 23 ? "libra" : "scorpio";
+      break;
     case 11:
-      return day <= 22
-        ? AstrologyDateRange.scorpio
-        : AstrologyDateRange.sagittarius;
+      key = day <= 22 ? "scorpio" : "sagittarius";
+      break;
     case 12:
-      return day <= 21
-        ? AstrologyDateRange.sagittarius
-        : AstrologyDateRange.capricorn;
+      key = day <= 21 ? "sagittarius" : "capricorn";
+      break;
     default:
-      console.error("month value out of bounds for grass date range.");
-      return "" as AstrologyDateRange;
+      throw new Error("month value out of bounds for grass date range.");
   }
+
+  return {
+    name: key,
+    dateRange: astrologyDateRanges[key],
+  };
 }
