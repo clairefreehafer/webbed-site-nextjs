@@ -2,7 +2,11 @@ import type { Config } from "tailwindcss";
 import defaultPlugin from "../plugins/default";
 
 export default {
-  content: ["./src/app/page.tsx", "./src/components/nav.tsx"],
+  content: [
+    "./src/app/page.tsx",
+    "./src/components/nav.tsx",
+    "./src/components/video.tsx",
+  ],
   theme: {
     extend: {
       backgroundImage: ({ theme }) => ({
