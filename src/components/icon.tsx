@@ -1,24 +1,19 @@
 "use client";
 
 import { Album, Icon } from "@prisma/client";
-import { Theme } from "@styles/theme";
+import { Theme, ThemeStyles } from "@styles/theme";
 import { getAstrologyDateRange } from "@utils/animal-crossing";
 
 export type DisplayIconType = Pick<Icon, "imagePath" | "character" | "text">;
 
-const imageStyles: Record<Theme, string> = {
-  default: "",
-  notebook: "",
+const imageStyles: ThemeStyles = {
   animalCrossing: "max-h-12 max-w-12 object-contain drop-shadow-text",
   zelda: "max-h-6 max-w-6 mr-2",
   admin: "max-h-12 max-w-12 mx-auto",
 };
 
-const emojiStyles: Record<Theme, string> = {
-  default: "",
+const emojiStyles: ThemeStyles = {
   notebook: "mr-2 text-2xl",
-  animalCrossing: "",
-  zelda: "",
   admin: "text-4xl",
 };
 

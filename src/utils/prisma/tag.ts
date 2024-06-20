@@ -30,6 +30,7 @@ export const getPhotosWithTag = cache(async (name: string) => {
         select: {
           smugMugKey: true,
           url: true,
+          altText: true,
         },
       },
     },

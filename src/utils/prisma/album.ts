@@ -84,8 +84,8 @@ export const getPhotographyAlbumPhotos = cache(async (name: Album["name"]) =>
       type: true,
       photos: {
         select: {
-          id: true,
           url: true,
+          altText: true,
         },
       },
     },

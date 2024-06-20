@@ -4,6 +4,7 @@ import { getSections } from "./prisma/section";
 export enum AlbumTypes {
   Default = "default",
   Tag = "tag",
+  Smugmug = "smugmug",
 }
 
 export enum AlbumSections {

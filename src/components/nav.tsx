@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Theme } from "@styles/theme";
+import { Theme, ThemeStyles } from "@styles/theme";
 import WiggleBox from "./photography/wiggle-box";
 import { slugName } from "@utils/albums";
 
@@ -42,7 +42,7 @@ type Props = {
   className?: string;
 };
 
-const navStyles: Record<Theme, string> = {
+const navStyles: ThemeStyles = {
   default: "",
   notebook: "",
   animalCrossing: "flex items-middle ac-text-bg h-16 px-4",
@@ -50,7 +50,7 @@ const navStyles: Record<Theme, string> = {
   admin: "",
 };
 
-const linkStyles: Record<Theme, (isActive?: boolean) => string> = {
+const linkStyles: ThemeStyles<(isActive?: boolean) => string> = {
   default: () => "p-4",
   notebook: () => "text-xl p-4",
   animalCrossing: () => "px-4",
@@ -73,7 +73,7 @@ const LinkItem = ({
     {link.image && <img src={link.image} alt="" />}
     <Link
       href={link.pathname}
-      className={`relative z-10 block underline hover:no-underline ${linkStyles[theme](isActive)} ${isActive && "no-underline"}`}
+      className={`relative z-10 block underline hover:no-underline ${linkStyles[theme]?.(isActive)} ${isActive && "no-underline"}`}
     >
       {link.name === "photography" && isActive && <>📷&nbsp;</>}
       {link.name === "admin" && isActive && "> "}

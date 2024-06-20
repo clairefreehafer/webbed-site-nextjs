@@ -113,16 +113,16 @@ export async function editAlbum(
       data.section = { connect: { name: sectionName } };
     }
 
-    if (prevState.coverKey !== coverKey) {
+    if (coverKey && prevState.coverKey !== coverKey) {
       console.log(
         `👉 changing coverKey from ${prevState.coverKey} to ${coverKey}...`,
       );
-      data.coverKey = coverKey;
+      data.coverPhoto = { connect: { smugMugKey: coverKey } };
     }
 
     if (prevState.iconId !== iconId) {
       console.log(`👉 updating icon...`);
-      data.iconId = iconId;
+      data.icon = { connect: { id: iconId } };
     }
 
     const updatedAlbum = await updateAlbum({

@@ -6,7 +6,9 @@ import { getAlbumData } from "@utils/prisma/album";
 import { getPhotosWithTag } from "@utils/prisma/tag";
 
 export default async function Page({ params }: { params: { album: string } }) {
-  const albumData = await getAlbumData(displayName(params.album));
+  const albumData = await getAlbumData(
+    displayName(decodeURIComponent(params.album)),
+  );
   const sections = await getSectionsForHierarchy();
   const icons = await getIcons();
   let albumPhotos = albumData.photos;

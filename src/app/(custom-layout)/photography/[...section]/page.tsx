@@ -1,4 +1,5 @@
-import { displayName, slugName } from "@utils/albums";
+import Slideshow from "@components/photography/slideshow";
+import { AlbumTypes, displayName, slugName } from "@utils/albums";
 import { getPhotosWithTag } from "@utils/prisma";
 import {
   getAlbumsInSections,
@@ -6,6 +7,8 @@ import {
 } from "@utils/prisma/album";
 import { getAllDescendants } from "@utils/prisma/section";
 import { getAncestorSections } from "@utils/section";
+import "@styles/photography/theme.css";
+import { getSmugmugPhotos } from "@utils/smugmug";
 
 export async function generateStaticParams() {
   // TODO: extract
@@ -31,23 +34,18 @@ export default async function Page({
 }: {
   params: { section: string[] };
 }) {
-  const albumName = displayName(params.section[params.section.length - 1]);
+  const albumName = displayName(
+    decodeURIComponent(params.section[params.section.length - 1]),
+  );
   const album = await getPhotographyAlbumPhotos(albumName);
 
   let photos = album.photos;
 
-  if (album.type === "tag") {
+  if (album.type === AlbumTypes.Tag) {
     photos = await getPhotosWithTag(albumName);
+  } else if (album.type === AlbumTypes.Smugmug) {
+    photos = await getSmugmugPhotos(albumName);
   }
 
-  return (
-    <>
-      <h3>{albumName}</h3>
-      {photos.map((photo) => (
-        <div key={photo.id}>
-          <img src={photo.url?.replaceAll("#size#", "L")} />
-        </div>
-      ))}
-    </>
-  );
+  return <Slideshow photos={photos} />;
 }

@@ -67,7 +67,14 @@ export const getAllTags = cache(async () =>
 export const getPhotosWithTag = cache(async (name: string) => {
   const result = await prismaWrapper(prisma.tag.findUnique)({
     where: { name },
-    include: { photos: true },
+    select: {
+      photos: {
+        select: {
+          url: true,
+          altText: true,
+        },
+      },
+    },
   });
 
   return result?.photos || [];

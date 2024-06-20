@@ -1,7 +1,7 @@
 import { slugName } from "@utils/albums";
 import Link from "next/link";
 import Icon from "@components/icon";
-import { Theme } from "@styles/theme";
+import { Theme, ThemeStyles } from "@styles/theme";
 import { getIconListAlbums } from "@utils/prisma/album";
 
 type Props = {
@@ -24,12 +24,8 @@ function generateUrl({
   );
 }
 
-const linkThemes: Record<Theme, string> = {
-  default: "",
-  notebook: "",
+const linkThemes: ThemeStyles = {
   animalCrossing: "text-brown hover:drop-shadow-text hover:text-black",
-  admin: "",
-  zelda: "",
 };
 
 export default async function IconList({ section, theme }: Props) {

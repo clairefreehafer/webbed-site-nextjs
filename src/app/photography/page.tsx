@@ -26,7 +26,7 @@ const StyledLink = ({
   </Link>
 );
 
-export default async function Photography() {
+export default function Photography() {
   return (
     <>
       <H3>recently added</H3>

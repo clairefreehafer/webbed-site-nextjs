@@ -27,9 +27,7 @@ export default function PhotographyLayout({
           <Title pathname={pathname} />
         </div>
       </header>
-      <main
-        className={`${loveYaLikeASister.variable} ${pangolin.variable} paper-bg max-w-site-width mx-auto my-8 rounded-3xl opacity-85`}
-      >
+      <main className="paper-bg max-w-site-width mx-auto my-8 rounded-3xl opacity-85">
         {children}
       </main>
     </div>

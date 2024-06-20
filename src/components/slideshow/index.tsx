@@ -4,11 +4,11 @@ import type { Prisma } from "@prisma/client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Theme } from "@styles/theme";
+import { Theme, ThemeStyles } from "@styles/theme";
 import SlideInfo from "./slide-info";
 import { getAlbumPhotos } from "@utils/prisma/photo";
 
-const uiStyles: Record<Theme, string> = {
+const uiStyles: ThemeStyles = {
   default: "",
   animalCrossing: "ac-text-bg px-4 py-2",
   notebook: "",
@@ -90,7 +90,7 @@ export default function Slideshow({
 
       <SlideInfo
         theme={theme}
-        className={uiStyles[theme]}
+        className={uiStyles[theme] || ""}
         slideData={{ albumName, ...currentSlideData }}
       />
 
