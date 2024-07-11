@@ -7,12 +7,16 @@ import Title from "@components/title";
 import { ReactNode } from "react";
 import "@styles/admin/theme.css";
 
+// https://css-tricks.com/old-timey-terminal-styling/
+const afterStyles =
+  "after:absolute after:left-0 after:top-0 after:h-full after:min-h-screen after:w-screen after:bg-scan-lines after:pointer-events-none";
+
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname().split("/");
 
   return (
     <div
-      className={`${ptMono.className} min-w-screen min-h-screen bg-black text-white`}
+      className={`${ptMono.className} ${afterStyles} min-w-screen text-shadow relative min-h-screen bg-black text-white`}
     >
       <header className="flex flex-col items-center justify-center">
         <Nav theme="admin" />

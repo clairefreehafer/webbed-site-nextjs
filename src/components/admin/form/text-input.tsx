@@ -1,3 +1,4 @@
+import { inputStyles } from "./index";
 import Label from "./label";
 
 type Props = {
@@ -21,7 +22,7 @@ export default function TextInput({
         name={name}
         id={name}
         defaultValue={defaultValue}
-        className="p-input bg-neutral-800 text-white"
+        className="bg-input-bg text-shadow shadow-input p-input mb-4 rounded-sm text-white last-of-type:mb-0"
         required={required}
       />
     </>

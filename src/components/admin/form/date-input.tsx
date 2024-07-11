@@ -1,3 +1,4 @@
+import { inputStyles } from ".";
 import Label from "./label";
 
 type Props = {
@@ -22,7 +23,7 @@ export default function DateInput({
         id={name}
         value={defaultValue}
         readOnly={readOnly}
-        className="p-input bg-neutral-800 text-white"
+        className={`${inputStyles} p-input`}
       />
     </>
   );

@@ -1,3 +1,4 @@
+import { inputStyles } from ".";
 import Label from "./label";
 
 type Props = {
@@ -14,7 +15,7 @@ export default function Textarea({ name, label, defaultValue }: Props) {
         name={name}
         id={name}
         defaultValue={defaultValue}
-        className="p-input bg-neutral-800 text-white"
+        className={`${inputStyles} p-2 text-lg`}
       />
     </>
   );

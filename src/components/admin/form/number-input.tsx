@@ -14,7 +14,7 @@ export default function NumberInput({ label, name, defaultValue }: Props) {
           type="number"
           name={name}
           id={name}
-          className="p-input w-full bg-neutral-800 text-center text-white"
+          className="p-input bg-input-bg text-shadow shadow-input w-full rounded-sm text-white"
           defaultValue={defaultValue}
         />
       </div>

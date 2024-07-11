@@ -39,7 +39,7 @@ export default function RadioFieldset({
   children,
 }: RadioFieldsetProps) {
   return (
-    <fieldset className="col-start-[span_2] flex w-full bg-[#1b1b1b] p-8">
+    <fieldset className="bg-input-bg shadow-input p-input col-start-[span_2] mb-4 flex w-full rounded-sm text-white">
       <legend className="uppercase">{legend}</legend>
 
       <div className="grid w-full grid-cols-[repeat(auto-fill,_5rem)] grid-rows-[5rem]">
