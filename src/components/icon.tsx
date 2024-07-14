@@ -62,7 +62,11 @@ export default function DisplayIcon({
   }
 
   if (icon.character) {
-    return <p className={emojiStyles[theme]}>{icon.character}</p>;
+    return (
+      <p className={`${emojiStyles[theme]} [text-shadow:none]`}>
+        {icon.character}
+      </p>
+    );
   }
 
   return null;

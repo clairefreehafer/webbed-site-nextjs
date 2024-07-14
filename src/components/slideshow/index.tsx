@@ -19,7 +19,7 @@ const uiStyles: ThemeStyles = {
 type Props = {
   photos: Prisma.PromiseReturnType<typeof getAlbumPhotos>;
   albumName: string;
-  albumSection: string[];
+  albumSection: string;
   theme: Theme;
 };
 
@@ -72,20 +72,12 @@ export default function Slideshow({
     };
   }, [slidesRef, photos.length, intersectionObserverCallback]);
 
-  let backHref = "/zelda";
-
-  if (theme !== "zelda") {
-    const pathnameArr = pathname.split("/");
-    pathnameArr.pop();
-    backHref = pathnameArr.join("/");
-  }
-
   return (
     <>
       <nav
         className={`${uiStyles[theme]} z-slideshow-ui absolute left-4 top-4`}
       >
-        <Link href={backHref}>&larr; back</Link>
+        <Link href={`/${albumSection}`}>&larr; back</Link>
       </nav>
 
       <SlideInfo

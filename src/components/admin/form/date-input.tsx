@@ -23,7 +23,7 @@ export default function DateInput({
         id={name}
         value={defaultValue}
         readOnly={readOnly}
-        className={`${inputStyles} p-input`}
+        className={`${inputStyles} p-input read-only:bg-white read-only:text-black`}
       />
     </>
   );

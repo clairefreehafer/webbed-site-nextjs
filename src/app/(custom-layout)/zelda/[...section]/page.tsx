@@ -42,7 +42,7 @@ export default async function Page({
       <Slideshow
         photos={photos}
         albumName={albumName}
-        albumSection={params.section}
+        albumSection="zelda"
         theme="zelda"
       />
     </div>

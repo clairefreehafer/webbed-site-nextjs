@@ -45,7 +45,7 @@ export default async function Page({
       <Slideshow
         photos={photos}
         albumName={albumName}
-        albumSection={params.section}
+        albumSection="animal-crossing"
         theme="animalCrossing"
       />
     </AnimalCrossingThemeRoot>
