@@ -1,4 +1,4 @@
-import Navigation from "@components/nav";
+import Navigation from "@components/Nav";
 import { hyliaSerif } from "@fonts/zelda";
 import { ReactNode } from "react";
 import "@styles/zelda/theme.css";

@@ -1,9 +1,9 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Nav from "@components/nav";
+import Nav from "@components/Nav";
 import { pressStart2P, ptMono } from "@fonts";
-import Title from "@components/title";
+import Title from "@components/Title";
 import { ReactNode } from "react";
 import "@styles/admin/theme.css";
 

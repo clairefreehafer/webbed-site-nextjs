@@ -6,7 +6,7 @@ import { getZeldaAdminPhotos } from "@utils/prisma/photo";
 import { Prisma } from "@prisma/client";
 import Image from "next/image";
 import { sizePhoto } from "@utils/photo";
-import DisplayIcon from "@components/icon";
+import DisplayIcon from "@components/Icon";
 
 const tableConfig: AdminTableConfig<
   Prisma.PromiseReturnType<typeof getZeldaAdminPhotos>[0]

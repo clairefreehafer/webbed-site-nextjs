@@ -1,7 +1,7 @@
 "use client";
 
 import { Album, Photo, Prisma } from "@prisma/client";
-import DisplayIcon from "@components/icon";
+import DisplayIcon from "@components/Icon";
 import { getIcons } from "@utils/prisma/icon";
 import RadioFieldset, { RadioInput } from "./radio-fieldset";
 

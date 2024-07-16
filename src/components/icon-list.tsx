@@ -1,6 +1,6 @@
 import { slugName } from "@utils/albums";
 import Link from "next/link";
-import Icon from "@components/icon";
+import Icon from "@components/Icon";
 import { Theme, ThemeStyles } from "@styles/theme";
 import { getIconListAlbums } from "@utils/prisma/album";
 

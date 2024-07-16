@@ -1,8 +1,8 @@
 "use client";
 
-import Nav from "@components/nav";
-import Title from "@components/title";
-import { cutiveMono, loveYaLikeASister, pangolin } from "@fonts";
+import Nav from "@components/Nav";
+import Title from "@components/Title";
+import { cutiveMono, loveYaLikeASister } from "@fonts";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 import "@styles/notebook/theme.css";

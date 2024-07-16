@@ -1,7 +1,7 @@
 import { deleteAlbum } from "@actions/album";
 import DeleteButton from "@components/admin/delete-button";
 import AdminTable, { AdminTableConfig } from "@components/admin/table";
-import DisplayIcon from "@components/icon";
+import DisplayIcon from "@components/Icon";
 import { Prisma } from "@prisma/client";
 import { slugName } from "@utils/albums";
 import { sizePhoto } from "@utils/photo";

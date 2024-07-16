@@ -1,4 +1,4 @@
-import Nav from "@components/nav";
+import Nav from "@components/Nav";
 import "@styles/default/theme.css";
 
 export default function Home() {

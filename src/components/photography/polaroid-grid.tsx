@@ -1,11 +1,11 @@
 "use client";
 
-import CoverImage from "@components/cover-image";
+import CoverImage from "@components/CoverImage";
 import { slugName } from "@utils/albums";
 import { sizePhoto } from "@utils/photo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Icon from "@components/icon";
+import Icon from "@components/Icon";
 import { Prisma } from "@prisma/client";
 import { getPolaroidGridData } from "@utils/prisma/photo";
 import { loveYaLikeASister } from "@fonts";
