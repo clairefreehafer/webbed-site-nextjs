@@ -1,5 +1,5 @@
 import AdminTable, { AdminTableConfig } from "@components/admin/table";
-import DisplayIcon from "@components/icon";
+import DisplayIcon from "@components/Icon";
 import { Prisma } from "@prisma/client";
 import { getIconsWithAlbums } from "@utils/prisma/icon";
 import Link from "next/link";

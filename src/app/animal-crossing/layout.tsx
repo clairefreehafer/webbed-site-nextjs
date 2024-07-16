@@ -1,4 +1,4 @@
-import Nav from "@components/nav";
+import Nav from "@components/Nav";
 import AnimalCrossingLogo from "@components/animal-crossing/logo";
 import AnimalCrossingThemeRoot from "@styles/animal-crossing/theme";
 import "@styles/animal-crossing/theme.css";

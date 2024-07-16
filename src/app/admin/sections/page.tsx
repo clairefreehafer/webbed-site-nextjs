@@ -1,7 +1,7 @@
 import { removeSection } from "@actions/section";
 import DeleteButton from "@components/admin/delete-button";
 import AdminTable, { AdminTableConfig } from "@components/admin/table";
-import DisplayIcon from "@components/icon";
+import DisplayIcon from "@components/Icon";
 import { Prisma } from "@prisma/client";
 import { getSections } from "@utils/prisma/section";
 import Link from "next/link";
