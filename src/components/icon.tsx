@@ -47,7 +47,8 @@ export default function DisplayIcon({
       );
     }
 
-    throw new Error("missing icon data.");
+    // TODO: change this to throw an error perhaps
+    return null;
   }
 
   if (icon.imagePath) {

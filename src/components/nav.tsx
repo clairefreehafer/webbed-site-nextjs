@@ -29,6 +29,10 @@ const defaultNavLinks: NavLink[] = [
     pathname: "/zelda",
     name: "zelda",
   },
+  {
+    pathname: process.env.STORYBOOK_URL || "",
+    name: "storybook",
+  },
 ];
 
 const adminLink: NavLink = {
@@ -67,20 +71,26 @@ const LinkItem = ({
   link: NavLink;
   theme: Theme;
   isActive: boolean;
-}) => (
-  <li className="group relative flex items-center">
-    <WiggleBox theme={theme} />
-    {link.image && <img src={link.image} alt="" />}
-    <Link
-      href={link.pathname}
-      className={`relative z-10 block underline hover:no-underline ${linkStyles[theme]?.(isActive)} ${isActive && "no-underline"}`}
-    >
-      {link.name === "photography" && isActive && <>📷&nbsp;</>}
-      {link.name === "admin" && isActive && "> "}
-      {link.name}
-    </Link>
-  </li>
-);
+}) => {
+  const linkClassName = `relative z-10 block underline hover:no-underline ${linkStyles[theme]?.(isActive)} ${isActive && "no-underline"}`;
+  return (
+    <li className="group relative flex items-center">
+      <WiggleBox theme={theme} />
+      {link.image && <img src={link.image} alt="" />}
+      {link.name === "storybook" ? (
+        <a href={link.pathname} target="_blank" className={linkClassName}>
+          {link.name}
+        </a>
+      ) : (
+        <Link href={link.pathname} className={linkClassName}>
+          {link.name === "photography" && isActive && <>📷&nbsp;</>}
+          {link.name === "admin" && isActive && "> "}
+          {link.name}
+        </Link>
+      )}
+    </li>
+  );
+};
 
 export default function Navigation({
   navLinks = defaultNavLinks,
