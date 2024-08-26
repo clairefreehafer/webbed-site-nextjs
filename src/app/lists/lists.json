@@ -1,6 +1,18 @@
 [
   {
+    "title": "cameras",
+    "description": "cameras i own.",
+    "items": [
+      {
+        "make": "canon",
+        "model": "rebel xs",
+        "medium": "digital"
+      }
+    ]
+  },
+  {
     "title": "games to photograph",
+    "description": "games i'd like to go back and photograph one day.",
     "tags": ["video games"],
     "items": [
       {
