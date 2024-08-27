@@ -20,5 +20,9 @@ const config: StorybookConfig = {
       to: "src/fonts/animal-crossing",
     },
   ],
+  core: {
+    enableCrashReports: false,
+    disableTelemetry: true,
+  },
 };
 export default config;
