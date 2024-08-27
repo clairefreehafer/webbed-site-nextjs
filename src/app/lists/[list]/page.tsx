@@ -1,6 +1,6 @@
 import { displayName } from "@utils/albums";
 import lists from "../lists.json";
-import { ListObject } from "@utils/types/lists";
+import { ListObject } from "@utils/lists/types";
 import ListContainer from "@components/lists/ListContainer";
 
 export function generateStaticParams() {

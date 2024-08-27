@@ -4,6 +4,7 @@ import { hyliaSerif } from "@fonts/zelda";
 import { getIconListAlbums } from "@utils/prisma/album";
 import { ReactNode } from "react";
 
+// TODO: extract to text component?
 const Game = ({ children }: { children: ReactNode }) => (
   <h3 className={`${hyliaSerif.className} mb-4 mt-8 text-3xl capitalize`}>
     {children}

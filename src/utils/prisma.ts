@@ -16,13 +16,6 @@ function prismaWrapper<Args, Result>(prismaFunction: (args: Args) => Result) {
   };
 }
 
-export const getAlbum = cache(async (albumName: string) =>
-  prismaWrapper(prisma.album.findUniqueOrThrow)({
-    where: { name: albumName },
-    include: { photos: true, coverPhoto: true, section: true },
-  }),
-);
-
 export const createAlbum = async (args: Prisma.AlbumCreateArgs) =>
   prismaWrapper(prisma.album.create)(args);
 

@@ -1,4 +1,4 @@
-import { CameraListObject } from "@utils/types/lists";
+import { CameraListObject } from "@utils/lists/types";
 
 export default function CameraListItem({
   make,
