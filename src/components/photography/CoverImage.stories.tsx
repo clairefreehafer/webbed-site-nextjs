@@ -4,6 +4,7 @@ import CoverImage from "./CoverImage";
 
 const meta: Meta<typeof CoverImage> = {
   component: CoverImage,
+  title: "photography/CoverImage",
 };
 
 export default meta;

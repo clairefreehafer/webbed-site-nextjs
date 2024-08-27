@@ -4,6 +4,7 @@ import Title from "./Title";
 
 const meta: Meta<typeof Title> = {
   component: Title,
+  title: "Title",
 };
 
 export default meta;

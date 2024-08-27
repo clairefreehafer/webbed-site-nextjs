@@ -3,6 +3,7 @@ import CameraListItemComponent from "./CameraListItem";
 
 const meta: Meta<typeof CameraListItemComponent> = {
   component: CameraListItemComponent,
+  title: "lists/CameraListItem",
 };
 
 export default meta;

@@ -4,6 +4,7 @@ import Nav from "./Nav";
 
 const meta: Meta<typeof Nav> = {
   component: Nav,
+  title: "Nav",
   parameters: {
     nextjs: {
       appDirectory: true,

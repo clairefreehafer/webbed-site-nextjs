@@ -1,6 +1,6 @@
 "use client";
 
-import CoverImage from "@components/CoverImage";
+import CoverImage from "@components/photography/CoverImage";
 import { slugName } from "@utils/albums";
 import { sizePhoto } from "@utils/photo";
 import Link from "next/link";

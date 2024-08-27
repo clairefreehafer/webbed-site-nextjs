@@ -3,6 +3,7 @@ import ListContainerComponent from "./ListContainer";
 
 const meta: Meta<typeof ListContainerComponent> = {
   component: ListContainerComponent,
+  title: "lists/ListContainer",
 };
 
 export default meta;

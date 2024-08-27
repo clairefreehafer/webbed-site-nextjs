@@ -3,6 +3,7 @@ import VideoGameListItemComponent from "./VideoGameListItem";
 
 const meta: Meta<typeof VideoGameListItemComponent> = {
   component: VideoGameListItemComponent,
+  title: "Lists/VideoGameListItem",
 };
 
 export default meta;
