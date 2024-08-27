@@ -1,7 +1,8 @@
 import { Photo, Prisma, Tag } from "@prisma/client";
 import { prisma, prismaWrapper } from "./index";
 import { cache } from "react";
-import { getAncestorSections, getRootSection } from "@utils/section";
+import { getRootSection } from "@utils/section";
+import { PolaroidGridAlbum } from "@components/photography/PolaroidGrid";
 
 export const updatePhoto = (
   smugMugKey: Photo["smugMugKey"],
@@ -63,53 +64,59 @@ const getRandomTaggedPhoto = cache(async (tag: Tag["name"]) => {
   return photos[randomIndex];
 });
 
-export const getPolaroidGridData = cache(async (section: string) => {
-  const albums = await prismaWrapper(prisma.album.findMany)({
-    where: { section: { name: section } },
-    select: {
-      id: true,
-      name: true,
-      section: {
-        select: {
-          name: true,
-          parent: true,
+export const getPolaroidGridData = cache(
+  async (section: string): Promise<PolaroidGridAlbum[]> => {
+    const albums = await prismaWrapper(prisma.album.findMany)({
+      where: { section: { name: section } },
+      select: {
+        id: true,
+        name: true,
+        section: {
+          select: {
+            name: true,
+            parent: true,
+          },
+        },
+        date: true,
+        coverPhoto: { select: { url: true } },
+        type: true,
+        icon: {
+          select: {
+            imagePath: true,
+            character: true,
+            text: true,
+          },
+        },
+        photos: {
+          select: {
+            url: true,
+          },
         },
       },
-      date: true,
-      coverPhoto: { select: { url: true } },
-      type: true,
-      icon: {
-        select: {
-          imagePath: true,
-          character: true,
-          text: true,
-        },
-      },
-      photos: {
-        select: {
-          url: true,
-        },
-      },
-    },
-  });
+    });
 
-  const result = [];
+    const result: PolaroidGridAlbum[] = [];
 
-  for (let album of albums) {
-    const sectionArray = await getAncestorSections(album.section);
-    let randomCoverPhoto: Partial<
-      Prisma.PromiseReturnType<typeof getRandomTaggedPhoto>
-    > = {};
+    for (let album of albums) {
+      let randomCoverPhoto: Partial<
+        Prisma.PromiseReturnType<typeof getRandomTaggedPhoto>
+      > = {};
 
-    if (!album.coverPhoto && album.type === "tag") {
-      randomCoverPhoto = await getRandomTaggedPhoto(album.name);
+      if (!album.coverPhoto && album.type === "tag") {
+        randomCoverPhoto = await getRandomTaggedPhoto(album.name);
+      }
+
+      result.push({
+        id: album.id,
+        name: album.name,
+        icon: album.icon,
+        randomCoverPhoto,
+      });
     }
 
-    result.push({ ...album, sectionArray, randomCoverPhoto });
-  }
-
-  return result;
-});
+    return result;
+  },
+);
 
 export const getZeldaAdminPhotos = cache(async () => {
   return prismaWrapper(prisma.photo.findMany)({

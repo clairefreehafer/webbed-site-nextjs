@@ -5,14 +5,19 @@ import { slugName } from "@utils/albums";
 import { sizePhoto } from "@utils/photo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Icon from "@components/Icon";
-import { Prisma } from "@prisma/client";
-import { getPolaroidGridData } from "@utils/prisma/photo";
+import Icon, { DisplayIconType } from "@components/Icon";
 import { loveYaLikeASister } from "@fonts";
 
-function getCoverImageUrl(
-  album: Prisma.PromiseReturnType<typeof getPolaroidGridData>[0],
-) {
+/** album values needed for the PolaroidGrid component. */
+export type PolaroidGridAlbum = {
+  id: number;
+  name: string;
+  coverPhoto?: { url?: string };
+  randomCoverPhoto: { url?: string | null };
+  icon: DisplayIconType | null;
+};
+
+function getCoverImageUrl(album: PolaroidGridAlbum) {
   if (album.coverPhoto?.url) {
     return album.coverPhoto?.url;
   } else if (album.randomCoverPhoto?.url) {
@@ -24,9 +29,11 @@ function getCoverImageUrl(
 export default function PolaroidGrid({
   albums,
 }: {
-  albums: Prisma.PromiseReturnType<typeof getPolaroidGridData>;
+  albums: PolaroidGridAlbum[];
 }) {
   const pathname = usePathname();
+
+  if (!albums) return <>❌ no album data.</>;
 
   return (
     <ul className="grid list-none grid-cols-1 gap-4 text-center sm:grid-cols-2">

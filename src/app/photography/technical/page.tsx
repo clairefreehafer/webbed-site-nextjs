@@ -1,4 +1,4 @@
-import PolaroidGrid from "@components/photography/polaroid-grid";
+import PolaroidGrid from "@components/photography/PolaroidGrid";
 import { getPolaroidGridData } from "@utils/prisma/photo";
 
 export default async function Technical() {
