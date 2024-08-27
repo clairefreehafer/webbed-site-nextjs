@@ -1,5 +1,5 @@
 import IconList from "@components/IconList";
-import Separator from "@components/zelda/separator";
+import Separator from "@components/zelda/Separator";
 import { hyliaSerif } from "@fonts/zelda";
 import { getIconListAlbums } from "@utils/prisma/album";
 import { ReactNode } from "react";

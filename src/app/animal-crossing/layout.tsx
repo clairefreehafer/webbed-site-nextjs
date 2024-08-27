@@ -1,5 +1,5 @@
 import Nav from "@components/Nav";
-import AnimalCrossingLogo from "@components/animal-crossing/logo";
+import AnimalCrossingLogo from "@components/animal-crossing/Logo";
 import AnimalCrossingThemeRoot from "@styles/animal-crossing/theme";
 import "@styles/animal-crossing/theme.css";
 import { getGrassDateRange } from "@utils/animal-crossing";

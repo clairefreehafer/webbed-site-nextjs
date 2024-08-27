@@ -1,16 +1,25 @@
 import { Meta, StoryObj } from "@storybook/react";
-import ListContainerComponent from "./ListContainer";
+import ListContainer from "./ListContainer";
 
-const meta: Meta<typeof ListContainerComponent> = {
-  component: ListContainerComponent,
+const meta: Meta<typeof ListContainer> = {
+  component: ListContainer,
   title: "lists/ListContainer",
 };
 
 export default meta;
 
-type Story = StoryObj<typeof ListContainerComponent>;
+type Story = StoryObj<typeof ListContainer>;
 
-export const ListContainer: Story = {
+export const CameraListItem: Story = {
+  args: {
+    title: "list title",
+    description: "list description",
+    items: [{ make: "canon", model: "rebel xs", medium: "digital" }],
+    tags: ["list tag"],
+  },
+};
+
+export const VideoGameListItem: Story = {
   args: {
     title: "list title",
     description: "list description",
