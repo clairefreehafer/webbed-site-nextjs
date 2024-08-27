@@ -12,7 +12,7 @@ import { loveYaLikeASister } from "@fonts";
 export type PolaroidGridAlbum = {
   id: number;
   name: string;
-  coverPhoto?: { url?: string };
+  coverPhoto: { url: string | null } | null;
   randomCoverPhoto: { url?: string | null };
   icon: DisplayIconType | null;
 };

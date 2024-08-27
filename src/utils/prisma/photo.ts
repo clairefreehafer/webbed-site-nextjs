@@ -110,6 +110,7 @@ export const getPolaroidGridData = cache(
         id: album.id,
         name: album.name,
         icon: album.icon,
+        coverPhoto: album.coverPhoto,
         randomCoverPhoto,
       });
     }

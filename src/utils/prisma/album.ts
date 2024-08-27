@@ -2,6 +2,7 @@ import { cache } from "react";
 import { prisma, prismaWrapper } from "./index";
 import { Album } from "@prisma/client";
 import { getAncestorSections, getRootSection } from "@utils/section";
+import { IconListAlbum } from "@components/IconList";
 
 export const getAdminAlbums = cache(async () =>
   prismaWrapper(prisma.album.findMany)({
@@ -100,39 +101,47 @@ export const getAlbumSection = cache(async (name: Album["name"]) => {
   return sectionName;
 });
 
-export const getIconListAlbums = cache(async (sectionName: string) => {
-  const albums = await prismaWrapper(prisma.album.findMany)({
-    where: { sectionName },
-    select: {
-      id: true,
-      date: true,
-      name: true,
-      icon: {
-        select: {
-          imagePath: true,
-          character: true,
-          text: true,
+export const getIconListAlbums = cache(
+  async (sectionName: string): Promise<IconListAlbum[]> => {
+    const albums = await prismaWrapper(prisma.album.findMany)({
+      where: { sectionName },
+      select: {
+        id: true,
+        date: true,
+        name: true,
+        icon: {
+          select: {
+            imagePath: true,
+            character: true,
+            text: true,
+          },
+        },
+        section: {
+          select: {
+            name: true,
+            parentName: true,
+          },
         },
       },
-      section: {
-        select: {
-          name: true,
-          parentName: true,
-        },
-      },
-    },
-  });
+    });
 
-  const result = [];
+    const result: IconListAlbum[] = [];
 
-  for (let album of albums) {
-    const sectionArray = await getAncestorSections(album.section);
+    for (let album of albums) {
+      const sectionArray = await getAncestorSections(album.section);
 
-    result.push({ sectionArray, ...album });
-  }
+      result.push({
+        id: album.id,
+        icon: album.icon,
+        date: album.date,
+        name: album.name,
+        sectionArray,
+      });
+    }
 
-  return result;
-});
+    return result;
+  },
+);
 
 export const getAlbumsInSections = cache(async (sections: string[]) =>
   prismaWrapper(prisma.album.findMany)({

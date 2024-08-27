@@ -1,6 +1,7 @@
-import IconList from "@components/icon-list";
+import IconList from "@components/IconList";
 import Separator from "@components/zelda/separator";
 import { hyliaSerif } from "@fonts/zelda";
+import { getIconListAlbums } from "@utils/prisma/album";
 import { ReactNode } from "react";
 
 const Game = ({ children }: { children: ReactNode }) => (
@@ -10,12 +11,14 @@ const Game = ({ children }: { children: ReactNode }) => (
 );
 
 export default async function ZeldaPage() {
+  const albums = await getIconListAlbums("tears of the kingdom");
+
   return (
     <div className="flex flex-col items-center">
       <Separator number={1} />
 
       <Game>tears of the kingdom</Game>
-      <IconList section="tears of the kingdom" theme="zelda" />
+      <IconList albums={albums} theme="zelda" />
 
       <Separator number={2} />
 

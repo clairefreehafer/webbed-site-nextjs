@@ -1,11 +1,18 @@
 import { slugName } from "@utils/albums";
 import Link from "next/link";
-import Icon from "@components/Icon";
+import Icon, { DisplayIconType } from "@components/Icon";
 import { Theme, ThemeStyles } from "@styles/theme";
-import { getIconListAlbums } from "@utils/prisma/album";
+
+export type IconListAlbum = {
+  id: number;
+  icon: DisplayIconType | null;
+  date: Date | null;
+  name: string;
+  sectionArray: string[];
+};
 
 type Props = {
-  section: string;
+  albums: IconListAlbum[];
   theme: Theme;
 };
 
@@ -28,8 +35,8 @@ const linkThemes: ThemeStyles = {
   animalCrossing: "text-brown hover:drop-shadow-text hover:text-black",
 };
 
-export default async function IconList({ section, theme }: Props) {
-  const albums = await getIconListAlbums(section);
+export default function IconList({ albums, theme }: Props) {
+  if (!albums) return <>❌ no album data.</>;
 
   return (
     <ul className={`list-none ${theme === "zelda" && "mb-8"}`}>

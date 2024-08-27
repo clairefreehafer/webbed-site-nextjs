@@ -1,4 +1,5 @@
-import IconList from "@components/icon-list";
+import IconList from "@components/IconList";
+import { getIconListAlbums } from "@utils/prisma/album";
 
 // for future reference
 const newHorizonsSections = [
@@ -10,13 +11,15 @@ const newHorizonsSections = [
   // "new", "all"
 ];
 
-function Section({ section }: { section: string }) {
+async function Section({ section }: { section: string }) {
+  const albums = await getIconListAlbums(section);
+
   return (
     <div>
       <h4 className="drop-shadow-text border-brown my-4 border-b-4 border-dashed pb-2 text-center text-xl">
         {section}
       </h4>
-      <IconList section={section} theme="animalCrossing" />
+      <IconList albums={albums} theme="animalCrossing" />
     </div>
   );
 }
