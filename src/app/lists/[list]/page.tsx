@@ -1,28 +1,12 @@
 import { displayName } from "@utils/albums";
 import lists from "../lists.json";
-import {
-  CameraListObject,
-  ListObject,
-  VideoGameListObject,
-} from "@utils/types/lists";
-import { Fragment, ReactNode } from "react";
-import VideoGameListItem from "@components/lists/VideoGameListItem";
-import CameraListItem from "@components/lists/CameraListItem";
+import { ListObject } from "@utils/types/lists";
+import ListContainer from "@components/lists/ListContainer";
 
 export function generateStaticParams() {
   return lists.map((listItem) => ({
     list: listItem.title,
   }));
-}
-
-function renderListItem(listItem: CameraListObject | VideoGameListObject) {
-  if ("title" in listItem) {
-    return <VideoGameListItem {...listItem} />;
-  }
-  if ("medium" in listItem) {
-    return <CameraListItem {...listItem} />;
-  }
-  return null;
 }
 
 // TODO: add way to separate sections, i.e. for digital and film cameras?
@@ -38,11 +22,7 @@ export default function Page({ params }: { params: { list: string } }) {
     <>
       <h2>{list.title}</h2>
       <p>{list.description}</p>
-      <ul>
-        {list.items.map((listItem, idx) => (
-          <Fragment key={idx}>{renderListItem(listItem)}</Fragment>
-        ))}
-      </ul>
+      <ListContainer {...list} />
       <h3>list tags:</h3>
       <p>{list.tags?.map((tag, idx) => <span key={idx}>{tag}</span>)}</p>
     </>

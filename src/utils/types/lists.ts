@@ -1,10 +1,3 @@
-export type ListObject = {
-  title: string;
-  description: string;
-  tags?: string[];
-  items: CameraListObject[] | VideoGameListObject[];
-};
-
 export type CameraListObject = {
   make: string;
   model: string;
@@ -13,4 +6,13 @@ export type CameraListObject = {
 
 export type VideoGameListObject = {
   title: string;
+};
+
+export type ListItems = CameraListObject | VideoGameListObject;
+
+export type ListObject = {
+  title: string;
+  description: string;
+  tags?: string[];
+  items: ListItems[];
 };
