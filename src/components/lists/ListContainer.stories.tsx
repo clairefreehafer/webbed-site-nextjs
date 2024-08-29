@@ -10,6 +10,14 @@ export default meta;
 
 type Story = StoryObj<typeof ListContainer>;
 
+export const CombinedList: Story = {
+  args: {},
+};
+
+export const BookListItem: Story = {
+  args: {},
+};
+
 export const CameraListItem: Story = {
   args: {
     title: "list title",
@@ -26,4 +34,8 @@ export const VideoGameListItem: Story = {
     items: [{ title: "item 1" }],
     tags: ["list tag"],
   },
+};
+
+export const WebsiteListItem: Story = {
+  args: {},
 };
