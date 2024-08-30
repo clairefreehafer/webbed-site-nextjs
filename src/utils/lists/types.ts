@@ -11,6 +11,12 @@ export type CameraListObject = {
   medium: "digital" | "35mm";
 };
 
+export type MusicListObject = {
+  title: string;
+  artist: string;
+  album: string;
+};
+
 export type VideoGameListObject = {
   title: string;
 };

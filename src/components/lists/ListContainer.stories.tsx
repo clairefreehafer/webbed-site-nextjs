@@ -27,6 +27,10 @@ export const CameraListItem: Story = {
   },
 };
 
+export const MusicListItem: Story = {
+  args: {},
+};
+
 export const VideoGameListItem: Story = {
   args: {
     title: "list title",
