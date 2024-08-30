@@ -1,3 +1,5 @@
+import { Photo } from "@prisma/client";
+
 const API_HOST = "https://api.smugmug.com";
 const { SMUGMUG_API_KEY } = process.env;
 
@@ -20,11 +22,27 @@ export type Node = {
   Type: SmugMugNodeTypes;
 };
 
+export type SmugMugPhotoSizes =
+  | "Ti"
+  | "Th"
+  | "S"
+  | "M"
+  | "L"
+  | "XL"
+  | "X2"
+  | "X3"
+  | "X4"
+  | "X5";
+
 // "smugmug" album types are meant to be temporary before
 // images are moved to our own db, so fine to hardcode
 const albumKeys: Record<string, string> = {
   "black & white": "7F9B5g",
 };
+
+export function sizePhoto(url: Photo["url"], size: SmugMugPhotoSizes) {
+  return url?.replaceAll("#size#", size) || "";
+}
 
 function generateApiUrl(
   type: SmugMugEndpointType,

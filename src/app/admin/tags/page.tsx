@@ -1,6 +1,6 @@
 import DeleteButton from "@components/admin/delete-button";
 import AdminTable, { AdminTableConfig } from "@components/admin/table";
-import { slugName } from "@utils/albums";
+import { slugName } from "@utils/album";
 import Link from "next/link";
 import { deleteTag } from "@actions/tag";
 import { getAdminTags } from "@utils/prisma/tag";

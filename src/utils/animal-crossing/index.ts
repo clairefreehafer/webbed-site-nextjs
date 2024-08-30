@@ -1,4 +1,4 @@
-import { GrassDateRange, astrologyDateRanges } from "./animal-crossing/types";
+import { GrassDateRange, astrologyDateRanges } from "./types";
 
 // TODO: find a better way to handle this.
 // const tagAlbumNameMapping: Record<string, string> = {

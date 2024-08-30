@@ -28,6 +28,8 @@ export default function ListContainer({
 }: Props) {
   if (!items) return <>🪹 no items.</>;
 
+  // TODO: add sort (here or api?)
+
   return (
     <ul>
       {items.map((listItem, idx) => (

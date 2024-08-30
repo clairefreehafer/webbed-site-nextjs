@@ -1,5 +1,4 @@
-import { Album, Photo } from "@prisma/client";
-import { AlbumTypes } from "@utils/albums";
+import { AlbumTypes } from "@utils/album";
 import { countPhotos } from "@utils/prisma";
 
 type Props = {

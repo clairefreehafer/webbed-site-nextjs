@@ -1,5 +1,5 @@
 import UpdateAlbumForm from "./form";
-import { displayName } from "@utils/albums";
+import { displayName } from "@utils/album";
 import { getSectionsForHierarchy } from "@utils/prisma/section";
 import { getIcons } from "@utils/prisma/icon";
 import { getAlbumData } from "@utils/prisma/album";

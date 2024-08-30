@@ -4,7 +4,7 @@ import { addAlbum } from "@actions/album";
 import SectionSelect, {
   SectionSelectProps,
 } from "@components/admin/form/section-select";
-import { AlbumTypes } from "@utils/albums";
+import { AlbumTypes } from "@utils/album";
 import SubmitButton from "@components/admin/form/submit-button";
 import { Album } from "@prisma/client";
 import AdminForm from "@components/admin/form/index";

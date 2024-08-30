@@ -16,12 +16,6 @@ function prismaWrapper<Args, Result>(prismaFunction: (args: Args) => Result) {
   };
 }
 
-export const createAlbum = async (args: Prisma.AlbumCreateArgs) =>
-  prismaWrapper(prisma.album.create)(args);
-
-export const updateAlbum = async (args: Prisma.AlbumUpdateArgs) =>
-  prismaWrapper(prisma.album.update)(args);
-
 export const getMostRecentPhotoDate = async (albumName: string) =>
   prismaWrapper(prisma.photo.findFirst)({
     where: { albumName },

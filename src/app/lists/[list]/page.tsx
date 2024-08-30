@@ -1,4 +1,4 @@
-import { displayName } from "@utils/albums";
+import { displayName } from "@utils/album";
 import lists from "../lists.json";
 import { ListObject } from "@utils/lists/types";
 import ListContainer from "@components/lists/ListContainer";

@@ -1,7 +1,7 @@
 import Link from "next/link";
 // TODO: add to db
 import lists from "./lists.json";
-import { slugName } from "@utils/albums";
+import { slugName } from "@utils/album";
 
 export default function Page() {
   return (

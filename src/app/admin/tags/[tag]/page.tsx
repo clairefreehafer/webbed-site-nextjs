@@ -1,6 +1,6 @@
 import ParentTagSelect from "@components/admin/form/parent-tag-select";
 import TagForm from "./form";
-import { displayName } from "@utils/albums";
+import { displayName } from "@utils/album";
 import { getTag } from "@utils/prisma/tag";
 
 export default async function Tag({ params }: { params: { tag: string } }) {

@@ -1,7 +1,7 @@
 import { cache } from "react";
 import { getSection } from "./prisma/section";
 import { Prisma } from "@prisma/client";
-import { slugName } from "./albums";
+import { slugName } from "./album";
 
 type SectionType =
   | string

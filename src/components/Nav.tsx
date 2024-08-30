@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Theme, ThemeStyles } from "@styles/theme";
 import WiggleBox from "./photography/wiggle-box";
-import { slugName } from "@utils/albums";
+import { slugName } from "@utils/album";
 
 export type NavLink = {
   pathname: string;

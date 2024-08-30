@@ -4,7 +4,7 @@ import DeleteButton from "@components/admin/delete-button";
 import { deletePhoto } from "@actions/photo";
 import { Prisma } from "@prisma/client";
 import Image from "next/image";
-import { sizePhoto } from "@utils/photo";
+import { sizePhoto } from "@utils/smugmug";
 import { getAdminPhotos } from "@utils/prisma/photo";
 
 const tableConfig: AdminTableConfig<

@@ -3,12 +3,6 @@ import { ReactNode } from "react";
 import { fotSeuratProB } from "@fonts/animal-crossing";
 import { GrassDateRange, GrassShape } from "@utils/animal-crossing/types";
 
-type Props = {
-  shape: GrassShape;
-  date?: Date;
-  children: ReactNode;
-};
-
 // keepin around for reference & in case we ever move away from tailwind.
 // export const GRASS_COLORS: Record<GrassDateRange, string> = {
 //   "1210-0224": "rgb(189, 215, 238)",
@@ -34,6 +28,12 @@ const backgroundColor: Record<GrassDateRange, string> = {
   "1030-1112": "bg-grass-color-1030-1112",
   "1113-1128": "bg-grass-color-1113-1128",
   "1129-1209": "bg-grass-color-1129-1209",
+};
+
+type Props = {
+  shape: GrassShape;
+  date?: Date;
+  children: ReactNode;
 };
 
 export default function AnimalCrossingThemeRoot({

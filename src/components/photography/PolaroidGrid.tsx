@@ -1,8 +1,8 @@
 "use client";
 
 import CoverImage from "@components/photography/CoverImage";
-import { slugName } from "@utils/albums";
-import { sizePhoto } from "@utils/photo";
+import { slugName } from "@utils/album";
+import { sizePhoto } from "@utils/smugmug";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Icon, { DisplayIconType } from "@components/Icon";

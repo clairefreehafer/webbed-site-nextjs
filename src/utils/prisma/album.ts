@@ -1,6 +1,6 @@
 import { cache } from "react";
 import { prisma, prismaWrapper } from "./index";
-import { Album } from "@prisma/client";
+import { Album, Prisma } from "@prisma/client";
 import { getAncestorSections, getRootSection } from "@utils/section";
 import { IconListAlbum } from "@components/IconList";
 
@@ -150,3 +150,9 @@ export const getAlbumsInSections = cache(async (sections: string[]) =>
     },
   }),
 );
+
+export const createAlbum = async (args: Prisma.AlbumCreateArgs) =>
+  prismaWrapper(prisma.album.create)(args);
+
+export const updateAlbum = async (args: Prisma.AlbumUpdateArgs) =>
+  prismaWrapper(prisma.album.update)(args);

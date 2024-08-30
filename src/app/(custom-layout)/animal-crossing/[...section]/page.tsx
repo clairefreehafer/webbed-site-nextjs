@@ -1,4 +1,4 @@
-import { displayName, slugName } from "@utils/albums";
+import { displayName, slugName } from "@utils/album";
 import Slideshow from "@components/slideshow/index";
 import { getAncestorSections } from "@utils/section";
 import { getAlbumsInSections } from "@utils/prisma/album";

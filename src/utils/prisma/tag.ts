@@ -1,7 +1,7 @@
 import { Prisma, Tag } from "@prisma/client";
 import { prisma, prismaWrapper } from "./index";
 import { cache } from "react";
-import { displayName } from "@utils/albums";
+import { displayName } from "@utils/album";
 
 export const createTag = async (data: Prisma.TagCreateArgs["data"]) =>
   prismaWrapper(prisma.tag.create)({ data });

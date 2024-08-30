@@ -5,7 +5,7 @@ import { deletePhoto } from "@actions/photo";
 import { getZeldaAdminPhotos } from "@utils/prisma/photo";
 import { Prisma } from "@prisma/client";
 import Image from "next/image";
-import { sizePhoto } from "@utils/photo";
+import { sizePhoto } from "@utils/smugmug";
 import DisplayIcon from "@components/Icon";
 
 const tableConfig: AdminTableConfig<

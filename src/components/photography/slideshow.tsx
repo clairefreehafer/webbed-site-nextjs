@@ -1,7 +1,7 @@
 "use client";
 
 import { Prisma } from "@prisma/client";
-import { sizePhoto } from "@utils/photo";
+import { sizePhoto } from "@utils/smugmug";
 import { getPhotographyAlbumPhotos } from "@utils/prisma/album";
 import { getPhotosWithTag } from "@utils/prisma/tag";
 import { getSmugmugPhotos } from "@utils/smugmug";

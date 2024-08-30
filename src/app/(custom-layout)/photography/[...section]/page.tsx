@@ -1,5 +1,5 @@
 import Slideshow from "@components/photography/slideshow";
-import { AlbumTypes, displayName, slugName } from "@utils/albums";
+import { AlbumTypes, displayName, slugName } from "@utils/album";
 import { getPhotosWithTag } from "@utils/prisma";
 import {
   getAlbumsInSections,

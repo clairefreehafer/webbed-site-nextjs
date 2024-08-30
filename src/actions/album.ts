@@ -3,12 +3,9 @@
 import { UpdateAlbumFormState } from "@app/admin/albums/[album]/form";
 import { NewAlbumFormState } from "@app/admin/albums/new/form";
 import { Album, Prisma, PrismaClient } from "@prisma/client";
-import { AlbumTypes } from "@utils/albums";
-import {
-  createAlbum,
-  getMostRecentPhotoDate,
-  updateAlbum,
-} from "@utils/prisma";
+import { AlbumTypes } from "@utils/album";
+import { getMostRecentPhotoDate } from "@utils/prisma";
+import { createAlbum, updateAlbum } from "@utils/prisma/album";
 import { revalidatePath } from "next/cache";
 
 export type AlbumFormState = Album & { message?: string };
