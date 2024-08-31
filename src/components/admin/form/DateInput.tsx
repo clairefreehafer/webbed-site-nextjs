@@ -1,18 +1,17 @@
 import { inputStyles } from ".";
 import Label from "./label";
 
-type Props = {
+type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   label: string;
   name: string;
   defaultValue?: string;
-  readOnly?: boolean;
 };
 
 export default function DateInput({
   label,
   name,
   defaultValue,
-  readOnly,
+  ...inputProps
 }: Props) {
   return (
     <>
@@ -22,8 +21,8 @@ export default function DateInput({
         name={name}
         id={name}
         value={defaultValue}
-        readOnly={readOnly}
         className={`${inputStyles} p-input read-only:bg-white read-only:text-black`}
+        {...inputProps}
       />
     </>
   );

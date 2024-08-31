@@ -6,12 +6,12 @@ import { Prisma } from "@prisma/client";
 
 import SubmitButton from "@components/admin/form/submit-button";
 import { getAdminPhoto } from "@utils/prisma/photo";
-import IconSelect from "@components/admin/form/icon-select";
+import IconSelect from "@components/admin/form/IconSelect";
 import AdminForm, { FormState } from "@components/admin/form/index";
 import TextInput from "@components/admin/form/text-input";
-import CheckboxInput from "@components/admin/form/checkbox-input";
-import HideSection from "@components/admin/form/hide-section";
-import DateInput from "@components/admin/form/date-input";
+import CheckboxInput from "@components/admin/form/CheckboxInput";
+import HideSection from "@components/admin/form/HideSection";
+import DateInput from "@components/admin/form/DateInput";
 import NumberInput from "@components/admin/form/number-input";
 import Textarea from "@components/admin/form/textarea";
 import Select from "@components/admin/form/select";

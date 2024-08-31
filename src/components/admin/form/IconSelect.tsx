@@ -13,16 +13,20 @@ export type IconSelectProps = {
 export default function IconSelect({ defaultValue, icons }: IconSelectProps) {
   return (
     <RadioFieldset legend="icon">
-      {icons.map((icon) => (
-        <RadioInput
-          name="iconId"
-          value={`${icon.id}`}
-          defaultChecked={defaultValue === icon.id}
-          key={icon.id}
-        >
-          <DisplayIcon icon={icon} theme="admin" />
-        </RadioInput>
-      ))}
+      {icons?.length > 0 ? (
+        icons.map((icon) => (
+          <RadioInput
+            name="iconId"
+            value={`${icon.id}`}
+            defaultChecked={defaultValue === icon.id}
+            key={icon.id}
+          >
+            <DisplayIcon icon={icon} theme="admin" />
+          </RadioInput>
+        ))
+      ) : (
+        <pre>❌ no icons to choose from.</pre>
+      )}
       {/* TODO: add none option */}
     </RadioFieldset>
   );

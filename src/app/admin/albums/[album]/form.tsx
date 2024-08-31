@@ -11,16 +11,14 @@ import SubmitButton from "@components/admin/form/submit-button";
 import SectionSelect, {
   SectionSelectProps,
 } from "@components/admin/form/section-select";
-import IconSelect, {
-  IconSelectProps,
-} from "@components/admin/form/icon-select";
+import IconSelect, { IconSelectProps } from "@components/admin/form/IconSelect";
 import { getAlbumData } from "@utils/prisma/album";
 import AdminForm, { FormState } from "@components/admin/form/index";
 import TextInput from "@components/admin/form/text-input";
 import Select from "@components/admin/form/select";
-import HideSection from "@components/admin/form/hide-section";
-import DateInput from "@components/admin/form/date-input";
-import CheckboxInput from "@components/admin/form/checkbox-input";
+import HideSection from "@components/admin/form/HideSection";
+import DateInput from "@components/admin/form/DateInput";
+import CheckboxInput from "@components/admin/form/CheckboxInput";
 import SectionHeader from "@components/admin/form/section-header";
 import NumberInput from "@components/admin/form/number-input";
 
