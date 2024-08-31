@@ -7,7 +7,7 @@ import SubmitButton from "@components/admin/form/submit-button";
 import TextInput from "@components/admin/form/text-input";
 import Textarea from "@components/admin/form/textarea";
 import { Prisma } from "@prisma/client";
-import { getAlbumNames } from "@utils/prisma";
+import { getAlbumNames } from "@utils/prisma/album";
 
 const initialState: Partial<PhotoFormState<Prisma.PhotoCreateArgs["data"]>> =
   {};

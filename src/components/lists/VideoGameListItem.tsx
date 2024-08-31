@@ -1,4 +1,4 @@
-import { VideoGameListObject } from "@utils/lists/types";
+import { VideoGameListObject } from "@utils/lists";
 
 export default function VideoGameListItem({ title }: VideoGameListObject) {
   // TODO: include backlogged link

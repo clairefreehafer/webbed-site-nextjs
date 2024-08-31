@@ -1,6 +1,6 @@
 import UpdatePhotoForm from "./form";
 import { sizePhoto } from "@utils/smugmug";
-import { getAlbumNames } from "@utils/prisma";
+import { getAlbumNames } from "@utils/prisma/album";
 import { getIcons } from "@utils/prisma/icon";
 import { getAdminPhoto } from "@utils/prisma/photo";
 

@@ -151,6 +151,13 @@ export const getAlbumsInSections = cache(async (sections: string[]) =>
   }),
 );
 
+export const getAlbumNames = cache(async () =>
+  prismaWrapper(prisma.album.findMany)({
+    select: { name: true },
+    orderBy: { name: "asc" },
+  }),
+);
+
 export const createAlbum = async (args: Prisma.AlbumCreateArgs) =>
   prismaWrapper(prisma.album.create)(args);
 

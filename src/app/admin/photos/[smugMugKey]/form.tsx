@@ -15,7 +15,7 @@ import DateInput from "@components/admin/form/date-input";
 import NumberInput from "@components/admin/form/number-input";
 import Textarea from "@components/admin/form/textarea";
 import Select from "@components/admin/form/select";
-import { getAlbumNames } from "@utils/prisma";
+import { getAlbumNames } from "@utils/prisma/album";
 import SectionHeader from "@components/admin/form/section-header";
 import { getIcons } from "@utils/prisma/icon";
 

@@ -1,5 +1,5 @@
 import { AlbumTypes } from "@utils/album";
-import { countPhotos } from "@utils/prisma";
+import { countPhotos } from "@utils/prisma/photo";
 
 type Props = {
   albumName: string;

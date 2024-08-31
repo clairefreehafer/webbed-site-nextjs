@@ -1,5 +1,5 @@
 import CreatePhotoForm from "./form";
-import { getAlbumNames } from "@utils/prisma";
+import { getAlbumNames } from "@utils/prisma/album";
 
 export default async function CreatePhotoPage() {
   const albums = await getAlbumNames();

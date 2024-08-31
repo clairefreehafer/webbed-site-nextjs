@@ -177,3 +177,14 @@ export const getAdminPhoto = cache(async (smugMugKey: string) => {
     rootSection,
   };
 });
+
+export const getMostRecentPhotoDate = async (albumName: string) =>
+  prismaWrapper(prisma.photo.findFirst)({
+    where: { albumName },
+    orderBy: { captureDate: { sort: "desc" } },
+    select: { captureDate: true },
+  });
+
+export const countPhotos = cache(async (args: Prisma.PhotoCountArgs) =>
+  prismaWrapper(prisma.photo.count)(args),
+);
