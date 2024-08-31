@@ -31,6 +31,10 @@ export const MusicListItem: Story = {
   args: {},
 };
 
+export const PodcastListItem: Story = {
+  args: {},
+};
+
 export const VideoGameListItem: Story = {
   args: {
     title: "list title",

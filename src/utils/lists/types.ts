@@ -17,6 +17,12 @@ export type MusicListObject = {
   album: string;
 };
 
+export type PodcastListObject = {
+  podcastTitle: string;
+  episodeTitle?: string;
+  date?: string;
+};
+
 export type VideoGameListObject = {
   title: string;
 };
