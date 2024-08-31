@@ -6,6 +6,14 @@ import "@styles/zelda/theme.css";
 
 const preview: Preview = {
   parameters: {
+    backgrounds: {
+      values: [
+        {
+          name: "admin",
+          value: "black",
+        },
+      ],
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,

@@ -5,6 +5,11 @@ import DateInput from "./DateInput";
 const meta: Meta<typeof DateInput> = {
   component: DateInput,
   title: "admin/Date",
+  parameters: {
+    backgrounds: {
+      default: "admin",
+    },
+  },
 };
 
 export default meta;

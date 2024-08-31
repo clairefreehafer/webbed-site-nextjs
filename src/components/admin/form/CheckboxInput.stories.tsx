@@ -5,6 +5,11 @@ import CheckboxInput from "./CheckboxInput";
 const meta: Meta<typeof CheckboxInput> = {
   component: CheckboxInput,
   title: "admin/Checkbox",
+  parameters: {
+    backgrounds: {
+      default: "admin",
+    },
+  },
 };
 
 export default meta;
