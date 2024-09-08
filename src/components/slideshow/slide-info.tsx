@@ -1,6 +1,6 @@
 import { hyliaSerif } from "@fonts/zelda";
 import { Prisma } from "@prisma/client";
-import { Theme } from "@styles/theme";
+import { Theme } from "@themes";
 import { getAlbumPhotos } from "@utils/prisma/photo";
 
 type Props = {

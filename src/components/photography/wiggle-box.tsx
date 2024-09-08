@@ -1,4 +1,4 @@
-import { Theme } from "@styles/theme";
+import { Theme } from "@themes";
 
 const wiggleBox = "absolute border-white opacity-0 top-0 h-full w-full";
 const box1 =

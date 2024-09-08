@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Theme, ThemeStyles } from "@styles/theme";
+import { Theme, ThemeStyles } from "@themes";
 import WiggleBox from "./photography/wiggle-box";
 import { slugName } from "@utils/album";
 

@@ -4,7 +4,7 @@ import type { Prisma } from "@prisma/client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Theme, ThemeStyles } from "@styles/theme";
+import { Theme, ThemeStyles } from "@themes";
 import SlideInfo from "./slide-info";
 import { getAlbumPhotos } from "@utils/prisma/photo";
 

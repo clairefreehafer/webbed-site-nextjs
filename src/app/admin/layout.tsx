@@ -5,7 +5,7 @@ import Nav from "@components/Nav";
 import { pressStart2P, ptMono } from "@fonts";
 import Title from "@components/Title";
 import { ReactNode } from "react";
-import "@styles/admin/theme.css";
+import "@themes/admin.css";
 
 // https://css-tricks.com/old-timey-terminal-styling/
 const afterStyles =

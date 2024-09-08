@@ -1,7 +1,7 @@
 import { slugName } from "@utils/album";
 import Link from "next/link";
 import Icon, { DisplayIconType } from "@components/Icon";
-import { Theme, ThemeStyles } from "@styles/theme";
+import { Theme, ThemeStyles } from "@themes";
 
 export type IconListAlbum = {
   id: number;

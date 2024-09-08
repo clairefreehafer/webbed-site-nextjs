@@ -1,7 +1,7 @@
 "use client";
 
 import { Album, Icon } from "@prisma/client";
-import { Theme, ThemeStyles } from "@styles/theme";
+import { Theme, ThemeStyles } from "@themes";
 import { getAstrologyDateRange } from "@utils/animal-crossing";
 
 export type DisplayIconType = Pick<Icon, "imagePath" | "character" | "text">;
