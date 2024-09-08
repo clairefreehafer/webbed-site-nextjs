@@ -1,15 +1,19 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ElementType, Fragment } from "react";
 
 type Props = {
-  pathname: string[];
   separator?: string;
 };
 
 const separatorStyles = ["", "text-xs", "text-[0.5rem]", "text-[0.3rem]"];
 
-export default function Title({ pathname, separator = "▽" }: Props) {
+export default function Title({ separator = "▽" }: Props) {
   let TitleTag: ElementType = "h1";
+
+  const pathname = usePathname().split("/");
 
   return pathname.map((slug, idx) => {
     if (idx === 0) {

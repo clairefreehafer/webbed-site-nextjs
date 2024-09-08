@@ -10,7 +10,6 @@ export default defineConfig({
   // Files to exclude
   exclude: [],
 
-  // default theme
   theme: {
     tokens: {
       gradients: {
@@ -20,14 +19,40 @@ export default defineConfig({
         },
       },
     },
+
+    keyframes: {
+      wiggleBox: {
+        "0%, 66%": { opacity: "0" },
+        "67%, 100%": { opacity: "1" },
+      },
+    },
   },
 
   themes: {
     admin: {},
     animalCrossing: {},
     book: {},
-    notebook: {},
-    zelda: {},
+    notebook: {
+      tokens: {
+        animations: {
+          wiggleBox: { value: "250ms wiggleBox infinite" },
+        },
+        durations: {
+          wiggleBox: { value: "250ms" },
+        },
+      },
+    },
+    zelda: {
+      tokens: {
+        colors: {
+          lightBlue: { value: "#76b6ff" },
+          textShadow: { value: "rgba(0, 0, 0, 0.75)" },
+        },
+      },
+    },
+  },
+  staticCss: {
+    themes: ["admin", "notebook", "zelda"],
   },
 
   // The output directory for your css system

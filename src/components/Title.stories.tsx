@@ -12,25 +12,17 @@ export default meta;
 type Story = StoryObj<typeof Title>;
 
 export const Home: Story = {
-  args: {
-    pathname: [""],
-  },
+  args: {},
 };
 
-export const SeciondLevel: Story = {
-  args: {
-    pathname: ["", "admin"],
-  },
-};
+// export const SeciondLevel: Story = {
+//   args: {},
+// };
 
-export const ThirdLevel: Story = {
-  args: {
-    pathname: ["", "admin", "photos"],
-  },
-};
+// export const ThirdLevel: Story = {
+//   args: {},
+// };
 
-export const FourthLevel: Story = {
-  args: {
-    pathname: ["", "admin", "photos", "smugMugKey"],
-  },
-};
+// export const FourthLevel: Story = {
+//   args: {},
+// };

@@ -1,23 +1,48 @@
-import { Theme } from "@themes";
+import { cva } from "@panda/css";
+import { ThemeName } from "@panda/themes";
 
-const wiggleBox = "absolute border-white opacity-0 top-0 h-full w-full";
-const box1 =
-  "border-t-4 border-r-[3px] border-b-[5px] border-l-[3px] rounded-wiggle1 group-hover:animate-wiggle-box";
-const box2 =
-  "border-r-[3px] border-b-[5px] border-l-[3px] border-t-4 rounded-wiggle2 group-hover:animate-wiggle-box group-hover:delay-wiggle-box-2";
-const box3 =
-  "border-b-[5px] border-l-[3px] border-t-4 border-r-[3px] rounded-wiggle3 group-hover:animate-wiggle-box group-hover:delay-wiggle-box-3";
+const wiggleBox = cva({
+  base: {
+    borderColor: "white",
+    borderWidth: "4px 3px 5px 3px",
+    height: "100%",
+    opacity: 0,
+    position: "absolute",
+    top: 0,
+    width: "100%",
+    _groupHover: {
+      animation: "wiggleBox",
+    },
+  },
+  variants: {
+    number: {
+      "1": {
+        borderRadius: "95px 14px 92px 15px / 14px 95px 16px 95px",
+      },
+      "2": {
+        borderRadius: "14px 92px 15px 95px / 95px 16px 95px 14px",
+        _groupHover: { animationDelay: "calc(token(durations.wiggleBox) / 3)" },
+      },
+      "3": {
+        borderRadius: "255px 15px 225px 15px / 15px 225px 15px 255px",
+        _groupHover: {
+          animationDelay: "calc(2 * token(durations.wiggleBox) / 3)",
+        },
+      },
+    },
+  },
+});
 
-export default function WiggleBox({ theme }: { theme: Theme }) {
+export default function WiggleBox({ theme }: { theme?: ThemeName }) {
   if (theme !== "notebook") {
     return null;
   }
 
   return (
     <>
-      <div className={`${wiggleBox} ${box1}`} />
-      <div className={`${wiggleBox} ${box2}`} />
-      <div className={`${wiggleBox} ${box3}`} />
+      <div className={wiggleBox({ number: "1" })} />
+      <div className={wiggleBox({ number: "2" })} />
+      <div className={wiggleBox({ number: "3" })} />
     </>
   );
 }
