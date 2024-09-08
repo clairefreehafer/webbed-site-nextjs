@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import PolaroidGrid from "./PolaroidGrid";
+import PolaroidGridComponent from "./PolaroidGrid";
 
-const meta: Meta<typeof PolaroidGrid> = {
-  component: PolaroidGrid,
+const meta: Meta<typeof PolaroidGridComponent> = {
+  component: PolaroidGridComponent,
   title: "photography/PolaroidGrid",
 };
 
 export default meta;
 
-type Story = StoryObj<typeof PolaroidGrid>;
+type Story = StoryObj<typeof PolaroidGridComponent>;
 
-export const Photography: Story = {
+export const PolaroidGrid: Story = {
   args: {
     // TODO: create reusable data for stories
     albums: [
