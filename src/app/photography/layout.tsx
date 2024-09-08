@@ -5,6 +5,29 @@ import Title from "@components/Title";
 import { fullScreen } from "@utils/layout";
 import { css } from "@panda/css";
 import SiteContainer from "@components/layout/SiteContainer";
+import { paperBackground } from "@themes/notebook";
+
+// https://codepen.io/mp/pen/kBEeKw
+// (another option: https://codepen.io/tmrDevelops/pen/NPXodB)
+const titleWrapper = css({
+  alignItems: "center",
+  borderColor: "white",
+  borderRadius: "95% 4% 92% 5% / 4% 95% 6% 95%",
+  borderWidth: "3px 4px 3px 5px",
+  display: "flex",
+  flexDirection: "column",
+  fontSize: "1.75rem",
+  my: "1rem",
+  p: "1rem",
+});
+
+const main = css({
+  ...paperBackground,
+  borderRadius: "3rem",
+  lineHeight: "calc({lineHeights.paper} + 1px)",
+  opacity: 0.85,
+  width: "100%",
+});
 
 export default function PhotographyLayout({
   children,
@@ -26,18 +49,12 @@ export default function PhotographyLayout({
           })}
         >
           <Nav fontClassName={cutiveMono.className} theme="notebook" />
-          {/* https://codepen.io/mp/pen/kBEeKw
-          (another option: https://codepen.io/tmrDevelops/pen/NPXodB) */}
-          <div
-            className={`${loveYaLikeASister.className} my-4 flex flex-col items-center rounded-[95%_4%_92%_5%/4%_95%_6%_95%] border-white p-4 text-3xl`}
-            style={{ borderWidth: "3px 4px 3px 5px" }}
-          >
+
+          <div className={`${loveYaLikeASister.className} ${titleWrapper}`}>
             <Title />
           </div>
         </header>
-        <main className="paper-bg max-w-site-width mx-auto my-8 rounded-3xl opacity-85">
-          {children}
-        </main>
+        <main className={main}>{children}</main>
       </SiteContainer>
     </div>
   );

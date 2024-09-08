@@ -9,7 +9,9 @@ const siteContainer = css({
   alignItems: "center",
   display: "flex",
   flexDir: "column",
-  margin: "auto",
+  gap: "1rem",
+  margin: "0 auto",
+  p: "1rem",
 });
 
 /** Component for limiting the site conents to a specific max width,

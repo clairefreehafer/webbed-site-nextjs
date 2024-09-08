@@ -1,18 +1,17 @@
 import { loveYaLikeASister, pangolin } from "@fonts";
+import { css } from "@panda/css";
 import Link from "next/link";
 import { ReactNode } from "react";
 
-const H3 = ({ children }: { children: ReactNode }) => (
-  <h3 className={`${loveYaLikeASister.className} text-2xl/paper`}>
-    {children}
-  </h3>
-);
+// TODO: extract to components
+const title = css({
+  fontSize: "1.5rem",
+});
 
-const P = ({ children }: { children: ReactNode }) => (
-  <p className={`${pangolin.className} mb-line-spacing text-xl/paper`}>
-    {children}
-  </p>
-);
+const text = css({
+  fontSize: "1.25rem",
+  marginBottom: "paperLineSpacing",
+});
 
 const StyledLink = ({
   href,
@@ -29,35 +28,47 @@ const StyledLink = ({
 export default function Photography() {
   return (
     <>
-      <H3>recently added</H3>
-      <P>(coming soon) photos most recently added to the site.</P>
+      <h3 className={`${loveYaLikeASister.className} ${title}`}>
+        recently added
+      </h3>
+      <p className={`${pangolin.className} ${text}`}>
+        (coming soon) photos most recently added to the site.
+      </p>
 
-      <H3>
+      <h3 className={`${loveYaLikeASister.className} ${title}`}>
         <StyledLink href="/photography/albums">albums</StyledLink>
-      </H3>
-      <P>photos grouped by location, most recent first.</P>
+      </h3>
+      <p className={`${pangolin.className} ${text}`}>
+        photos grouped by location, most recent first.
+      </p>
 
-      <H3>
+      <h3 className={`${loveYaLikeASister.className} ${title}`}>
         <StyledLink href="/photography/collections">collections</StyledLink>
-      </H3>
-      <P>photos grouped by concept, subject, etc.</P>
+      </h3>
+      <p className={`${pangolin.className} ${text}`}>
+        photos grouped by concept, subject, etc.
+      </p>
 
-      <H3>curated</H3>
-      <P>
+      <h3 className={`${loveYaLikeASister.className} ${title}`}>curated</h3>
+      <p className={`${pangolin.className} ${text}`}>
         (coming soon) smaller groups of photos selected to be displayed
         together.
-      </P>
+      </p>
 
-      <H3>
+      <h3 className={`${loveYaLikeASister.className} ${title}`}>
         <StyledLink href="/photography/technical">technical</StyledLink>
-      </H3>
-      <P>grouped by camera.</P>
+      </h3>
+      <p className={`${pangolin.className} ${text}`}>grouped by camera.</p>
 
-      <H3>map</H3>
-      <P>(coming soon) view geotagged photos on a map.</P>
+      <h3 className={`${loveYaLikeASister.className} ${title}`}>map</h3>
+      <p className={`${pangolin.className} ${text}`}>
+        (coming soon) view geotagged photos on a map.
+      </p>
 
-      <H3>random</H3>
-      <P>(coming soon) show a random photo</P>
+      <h3 className={`${loveYaLikeASister.className} ${title}`}>random</h3>
+      <p className={`${pangolin.className} ${text}`}>
+        (coming soon) show a random photo
+      </p>
     </>
   );
 }

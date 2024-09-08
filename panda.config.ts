@@ -37,8 +37,20 @@ export default defineConfig({
         animations: {
           wiggleBox: { value: "250ms wiggleBox infinite" },
         },
+        colors: {
+          blueLine: { value: "rgba(0, 255, 255, 0.8)" },
+          redLine: { value: "rgba(255, 0, 0, 0.8)" },
+        },
         durations: {
           wiggleBox: { value: "250ms" },
+        },
+        lineHeights: {
+          paper: { value: "1.5rem" },
+        },
+        spacing: {
+          paperLineSpacing: { value: "calc({lineHeights.paper} + 1px)" },
+          paperTopPadding: { value: "calc(2 * {lineHeights.paper})" },
+          redLinePadding: { value: "3rem" },
         },
       },
     },
