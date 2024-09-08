@@ -1,8 +1,5 @@
 import type { Preview } from "@storybook/react";
-import "@styles/default/theme.css";
-import "@styles/animal-crossing/theme.css";
-import "@themes/admin.css";
-import "@styles/zelda/theme.css";
+import "@themes/index.css";
 
 const preview: Preview = {
   parameters: {
