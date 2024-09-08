@@ -6,7 +6,7 @@ import { fillParent, fullScreen } from "@utils/layout";
 
 export default function Home() {
   return (
-    <div className={fullScreen}>
+    <div className={css(fullScreen)}>
       <RainbowBorder borderWidth={2}>
         <div
           className={css(fillParent, {

@@ -5,7 +5,7 @@ export const fillParent = css.raw({
   width: "100%",
 });
 
-export const fullScreen = css({
+export const fullScreen = css.raw({
   display: "flex",
   minHeight: "100vh",
   "& > *": {

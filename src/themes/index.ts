@@ -3,7 +3,6 @@ export type Theme =
   | "animalCrossing"
   | "book"
   | "default"
-  // TODO: rename to "journal"?
   | "notebook"
   | "photography"
   | "zelda";

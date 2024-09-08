@@ -10,7 +10,11 @@ type Props = {
 
 export default function ZeldaLayout({ children }: Props) {
   return (
-    <div className="bg-zelda h-screen w-screen p-4 text-white">
+    // TODO: extracxt to ZeldaThemeRoot
+    <div
+      data-panda-theme="zelda"
+      className="bg-zelda h-screen w-screen p-4 text-white"
+    >
       <PageBorder />
       <header className="max-w-site-width mx-auto flex flex-col items-center justify-center">
         <Navigation theme="zelda" />
