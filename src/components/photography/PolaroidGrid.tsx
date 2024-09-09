@@ -7,6 +7,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Icon, { DisplayIconType } from "@components/Icon";
 import { loveYaLikeASister } from "@fonts";
+import { css } from "@panda/css";
 
 /** album values needed for the PolaroidGrid component. */
 export type PolaroidGridAlbum = {
@@ -26,6 +27,35 @@ function getCoverImageUrl(album: PolaroidGridAlbum) {
   return "";
 }
 
+const grid = css({
+  display: "grid",
+  gap: "1rem",
+  gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+  listStyleType: "none",
+});
+
+const listItem = css({
+  bg: "white",
+  boxShadow: "0 0 1rem 0.1rem rgba(0,0,0,0.3)",
+  position: "relative",
+  p: "1rem",
+});
+
+const insetShadow = css({
+  aspectRatio: "1/1",
+  boxShadow: "inset 0 0 0.25rem 0.1rem rgba(0,0,0,0.3)",
+  position: "absolute",
+  top: "1rem",
+  width: "calc(100% - 2rem)",
+});
+
+const text = css({
+  display: "flex",
+  fontSize: "1.25rem",
+  justifyContent: "center",
+  marginTop: "1rem",
+});
+
 export default function PolaroidGrid({
   albums,
 }: {
@@ -36,24 +66,16 @@ export default function PolaroidGrid({
   if (!albums) return <>❌ no album data.</>;
 
   return (
-    <ul className="grid list-none grid-cols-1 gap-4 text-center sm:grid-cols-2">
+    <ul className={grid}>
       {albums.map((album) => (
-        <li
-          className="relative bg-white p-4 shadow-[0_0_1rem_0.1rem_rgba(0,0,0,0.3)]"
-          key={album.id}
-        >
-          <Link
-            href={`${pathname}/${slugName(album.name)}`}
-            className="flex flex-col justify-between"
-          >
+        <li className={listItem} key={album.id}>
+          <Link href={`${pathname}/${slugName(album.name)}`}>
             <CoverImage
               src={sizePhoto(getCoverImageUrl(album), "L")}
               aspectRatio="1 / 1"
             />
-            <div className="absolute top-4 aspect-square w-[calc(100%-2rem)] shadow-[inset_0_0_0.25rem_0.1rem_rgba(0,0,0,0.3)]" />
-            <h3
-              className={`${loveYaLikeASister.className} mx-auto mt-2 flex items-center text-xl`}
-            >
+            <div className={insetShadow} />
+            <h3 className={`${loveYaLikeASister.className} ${text}`}>
               <Icon icon={album.icon} theme="notebook" />
               {album.name}
             </h3>
