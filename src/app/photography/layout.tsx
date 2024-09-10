@@ -42,7 +42,7 @@ export default function PhotographyLayout({
     >
       <SiteContainer>
         <Header>
-          <Nav fontClassName={cutiveMono.className} theme="notebook" />
+          <Nav fontClassName={cutiveMono.className} />
 
           <div className={`${loveYaLikeASister.className} ${titleWrapper}`}>
             <Title />

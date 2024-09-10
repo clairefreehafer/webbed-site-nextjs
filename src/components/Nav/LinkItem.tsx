@@ -3,11 +3,6 @@ import { css, cva } from "@panda/css";
 import { sheikahUnderline } from "@themes/zelda";
 import Link from "next/link";
 import { NavLink } from "./config";
-import { ThemeName } from "@panda/themes";
-
-const linkStyles = {
-  admin: () => "text-limegreen p-4",
-};
 
 const listItem = cva({
   base: {
@@ -20,10 +15,10 @@ const listItem = cva({
   },
   variants: {
     theme: {
-      admin: {},
+      admin: {
+        color: "limegreen",
+      },
       animalCrossing: {},
-      book: {},
-      notebook: {},
       zelda: {
         ...sheikahUnderline,
         textDecoration: "none",
@@ -56,27 +51,27 @@ const linkStyle = css({
   zIndex: 10,
 });
 
+export type LinkItemProps = {
+  link: NavLink;
+  theme?: (typeof listItem.variantMap.theme)[number];
+  isActive: boolean;
+  // visible: boolean;
+};
+
 export default function LinkItem({
   link,
   theme,
   isActive,
   // visible,
-}: {
-  link: NavLink;
-  theme?: ThemeName;
-  isActive: boolean;
-  // visible: boolean;
-}) {
-  const linkClassName = ""; //`relative z-10 block underline hover:no-underline ${linkStyles[theme]?.(isActive)} ${isActive && "no-underline"}`;
+}: LinkItemProps) {
   return (
     <li
       className={`${listItem({ theme, state: isActive ? "active" : undefined })} group`}
     >
-      {/* // <li className="group relative flex items-center"> */}
       <WiggleBox theme={theme} />
       {link.image && <img src={link.image} alt="" />}
       {link.name === "storybook" ? (
-        <a href={link.pathname} target="_blank" className={linkClassName}>
+        <a href={link.pathname} target="_blank">
           {link.name}
         </a>
       ) : (

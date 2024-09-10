@@ -5,8 +5,7 @@ import { acnhTextBackground } from "@themes/animalCrossing";
 import { zeldaTextBackground } from "@themes/zelda";
 import { NavLink, defaultNavLinks } from "./config";
 import { usePathname } from "next/navigation";
-import { ThemeName } from "@panda/themes";
-import LinkItem from "./LinkItem";
+import LinkItem, { LinkItemProps } from "./LinkItem";
 import { slugName } from "@utils/album";
 
 const nav = cva({
@@ -22,8 +21,6 @@ const nav = cva({
         height: "4rem",
         p: "0 1.5rem",
       },
-      book: {},
-      notebook: {},
       zelda: {
         ...zeldaTextBackground,
         p: "0.5rem 0 1.5rem",
@@ -39,9 +36,13 @@ const list = css({
   width: "100%",
 });
 
+type AvailableThemes =
+  | LinkItemProps["theme"]
+  | (typeof nav.variantMap.theme)[number];
+
 type Props = {
   navLinks?: typeof defaultNavLinks;
-  theme?: ThemeName;
+  theme?: AvailableThemes;
   fontClassName?: string;
 };
 

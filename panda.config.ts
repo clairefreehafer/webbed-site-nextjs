@@ -40,7 +40,21 @@ export default defineConfig({
   },
 
   themes: {
-    admin: {},
+    admin: {
+      tokens: {
+        gradients: {
+          scanLines: {
+            value:
+              "repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15) 1px, transparent 1px, transparent 2px)",
+          },
+        },
+        shadows: {
+          "8BitWhite": {
+            value: "6px 0 white, -6px 0 white, 0 -6px white, 0 6px white",
+          },
+        },
+      },
+    },
     animalCrossing: {
       tokens: {
         colors: {

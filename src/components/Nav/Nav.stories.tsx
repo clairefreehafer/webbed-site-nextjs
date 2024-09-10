@@ -24,9 +24,7 @@ export const Default: Story = {
 };
 
 export const Photography: Story = {
-  args: {
-    theme: "notebook",
-  },
+  args: {},
   parameters: {
     nextjs: {
       navigation: {
