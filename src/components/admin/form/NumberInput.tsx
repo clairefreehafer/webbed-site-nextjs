@@ -1,4 +1,11 @@
-import Label from "./label";
+import { input } from "@themes/admin";
+import Label from "./Label";
+import { css } from "@panda/css";
+
+const container = css({
+  borderRight: "2px solid white",
+  pr: "2rem",
+});
 
 type Props = {
   label: string;
@@ -9,12 +16,12 @@ type Props = {
 export default function NumberInput({ label, name, defaultValue }: Props) {
   return (
     <>
-      <div className="border-r-2 border-white pr-4">
+      <div className={container}>
         <input
           type="number"
           name={name}
           id={name}
-          className="p-input bg-input-bg text-shadow shadow-input w-full rounded-sm text-white"
+          className={input({ type: "number" })}
           defaultValue={defaultValue}
         />
       </div>

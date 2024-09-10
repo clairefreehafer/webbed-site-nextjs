@@ -42,10 +42,16 @@ export default defineConfig({
   themes: {
     admin: {
       tokens: {
+        colors: {
+          terminalGreen: { value: "rgba(0, 150, 0, 0.5)" },
+        },
         gradients: {
           scanLines: {
             value:
               "repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15) 1px, transparent 1px, transparent 2px)",
+          },
+          radial: {
+            value: "radial-gradient(rgba(255, 255, 255, 0.2), black 120%)",
           },
         },
         shadows: {

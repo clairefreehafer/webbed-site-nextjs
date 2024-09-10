@@ -3,14 +3,14 @@
 import { addAlbum } from "@actions/album";
 import SectionSelect, {
   SectionSelectProps,
-} from "@components/admin/form/section-select";
+} from "@components/admin/form/SectionSelect";
 import { AlbumTypes } from "@utils/album";
-import SubmitButton from "@components/admin/form/submit-button";
+import SubmitButton from "@components/admin/form/SubmitButton";
 import { Album } from "@prisma/client";
 import AdminForm from "@components/admin/form/index";
 import { FormState } from "@components/admin/form/index";
-import TextInput from "@components/admin/form/text-input";
-import Select from "@components/admin/form/select";
+import TextInput from "@components/admin/form/TextInput";
+import Select from "@components/admin/form/Select";
 
 export type NewAlbumFormState = FormState<Pick<Album, "name" | "type">>;
 

@@ -1,6 +1,6 @@
 import { ChangeEventHandler, ForwardedRef, forwardRef } from "react";
-import Label from "./label";
-import { inputStyles } from "./index";
+import Label from "./Label";
+import { input } from "@themes/admin";
 
 type Props = {
   label?: string;
@@ -14,7 +14,6 @@ const Select = forwardRef<HTMLSelectElement, Props>(function Select(
   { label, name, options, defaultValue, onChange },
   ref,
 ) {
-  console.log(inputStyles);
   return (
     <>
       {label && <Label htmlFor={name}>{label}</Label>}
@@ -22,7 +21,7 @@ const Select = forwardRef<HTMLSelectElement, Props>(function Select(
         id={name}
         name={name}
         defaultValue={defaultValue}
-        className="bg-input-bg text-shadow shadow-input p-input mb-4 rounded-sm text-white last-of-type:mb-0"
+        className={input({ type: "select" })}
         onChange={onChange}
         ref={ref}
       >

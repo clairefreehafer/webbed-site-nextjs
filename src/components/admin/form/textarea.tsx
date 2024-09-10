@@ -1,5 +1,5 @@
-import { inputStyles } from ".";
-import Label from "./label";
+import { input } from "@themes/admin";
+import Label from "./Label";
 
 type Props = {
   name: string;
@@ -15,7 +15,7 @@ export default function Textarea({ name, label, defaultValue }: Props) {
         name={name}
         id={name}
         defaultValue={defaultValue}
-        className={`${inputStyles} p-2 text-lg`}
+        className={input({ type: "textarea" })}
       />
     </>
   );

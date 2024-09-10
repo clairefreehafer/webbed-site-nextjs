@@ -1,6 +1,6 @@
 import { Section } from "@prisma/client";
 import { getParentSectionOptions } from "@utils/prisma/section";
-import Select from "./select";
+import Select from "./Select";
 
 export type ParentSectionSelectProps = {
   defaultValue?: Section["parentName"];

@@ -1,5 +1,5 @@
-import { inputStyles } from "./index";
-import Label from "./label";
+import Label from "./Label";
+import { input } from "@themes/admin";
 
 type Props = {
   label: string;
@@ -22,7 +22,7 @@ export default function TextInput({
         name={name}
         id={name}
         defaultValue={defaultValue}
-        className="bg-input-bg text-shadow shadow-input p-input mb-4 rounded-sm text-white last-of-type:mb-0"
+        className={input({ type: "text" })}
         required={required}
       />
     </>

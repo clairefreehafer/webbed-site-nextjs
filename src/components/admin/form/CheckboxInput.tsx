@@ -1,4 +1,13 @@
-import Label from "./label";
+import { css } from "@panda/css";
+import Label from "./Label";
+
+const container = css({
+  alignItems: "center",
+  display: "flex",
+  borderRight: "2px solid white",
+  justifyContent: "flex-end",
+  pr: "2rem",
+});
 
 type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   label: string;
@@ -8,12 +17,12 @@ type Props = React.InputHTMLAttributes<HTMLInputElement> & {
 export default function CheckboxInput({ label, name, ...inputProps }: Props) {
   return (
     <>
-      <div className="flex justify-end border-r-2 border-white p-4 text-right">
+      <div className={container}>
         <input
           type="checkbox"
           name={name}
           id={name}
-          className="h-8 w-8"
+          className={css({ height: "2rem", width: "2rem" })}
           {...inputProps}
         />
       </div>

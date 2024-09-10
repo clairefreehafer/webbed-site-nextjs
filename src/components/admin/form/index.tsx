@@ -1,5 +1,6 @@
 "use client";
 
+import { css } from "@panda/css";
 import { ReactNode } from "react";
 import { useFormState } from "react-dom";
 
@@ -11,11 +12,17 @@ type Props<T> = {
   children: ReactNode;
 };
 
-export const inputStyles =
-  "bg-input-bg mb-4 text-white last-of-type:mb-0 text-shadow shadow-input rounded-sm";
-
-export const formGridClassNames =
-  "align-center grid-cols-admin-form grid w-full gap-8";
+const form = css({
+  alignItems: "center",
+  bg: "{gradients.radial}",
+  boxShadow: "8BitWhite",
+  display: "grid",
+  fontSize: "1.5rem",
+  gap: "2rem",
+  gridTemplateColumns: "25% 1fr",
+  my: "2rem",
+  p: "2rem",
+});
 
 export default function AdminForm<T extends { message?: string }>({
   action,
@@ -25,10 +32,7 @@ export default function AdminForm<T extends { message?: string }>({
   const [state, formAction] = useFormState<T, FormData>(action, initialState);
 
   return (
-    <form
-      action={formAction}
-      className={`${formGridClassNames} shadow-8-bit-white bg-radial-gradient m-8 p-8 text-2xl`}
-    >
+    <form action={formAction} className={form}>
       {children}
       {state?.message && <p>{state.message}</p>}
     </form>

@@ -1,4 +1,29 @@
+import { cva } from "@panda/css";
 import { ReactNode } from "react";
+
+const label = cva({
+  base: {
+    alignItems: "center",
+    borderColor: "white",
+    display: "flex",
+    height: "100%",
+    textTransform: "uppercase",
+  },
+  variants: {
+    align: {
+      left: {
+        justifyContent: "flex-start",
+        textAlign: "left",
+      },
+      right: {
+        justifyContent: "flex-end",
+        borderRightWidth: "2px",
+        pr: "2rem",
+        textAlign: "right",
+      },
+    },
+  },
+});
 
 type Props = {
   htmlFor: string;
@@ -8,10 +33,7 @@ type Props = {
 
 export default function Label({ htmlFor, children, align = "right" }: Props) {
   return (
-    <label
-      htmlFor={htmlFor}
-      className={`flex items-center border-white uppercase ${align === "right" ? "justify-end border-r-2 pr-4 text-right" : "justify-start border-0"}`}
-    >
+    <label htmlFor={htmlFor} className={label({ align })}>
       {children}
     </label>
   );

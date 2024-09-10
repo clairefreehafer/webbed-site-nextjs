@@ -4,8 +4,16 @@ import { ChangeEvent, useCallback, useMemo, useRef, useState } from "react";
 import { Prisma } from "@prisma/client";
 import { getSectionsForHierarchy } from "@utils/prisma/section";
 import { getAlbumData } from "@utils/prisma/album";
-import Label from "./label";
-import Select from "./select";
+import Label from "./Label";
+import Select from "./Select";
+import { css } from "@panda/css";
+
+const container = css({
+  alignItems: "middle",
+  display: "flex",
+  flexDir: "column",
+  gap: "1rem",
+});
 
 export type SectionSelectProps = {
   defaultValue?: Prisma.PromiseReturnType<typeof getAlbumData>["section"];
@@ -120,7 +128,7 @@ export default function SectionSelect({
   return (
     <>
       <Label htmlFor="section0">section</Label>
-      <div className="flex flex-col align-middle">
+      <div className={container}>
         {currentOptions.map((optionsArr, i) => {
           return (
             <Select

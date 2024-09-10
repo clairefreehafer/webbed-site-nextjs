@@ -3,7 +3,7 @@
 import { Album, Photo, Prisma } from "@prisma/client";
 import DisplayIcon from "@components/Icon";
 import { getIcons } from "@utils/prisma/icon";
-import RadioFieldset, { RadioInput } from "./radio-fieldset";
+import RadioFieldset, { RadioInput } from "./RadioFieldset";
 
 export type IconSelectProps = {
   defaultValue?: Album["iconId"] | Photo["iconId"];

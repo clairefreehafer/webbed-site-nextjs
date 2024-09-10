@@ -1,9 +1,6 @@
-"use client";
-
 import RadioFieldset, {
   RadioInput,
-} from "@components/admin/form/radio-fieldset";
-// import { Fieldset, ImageRadio, Legend } from "@components/admin/form";
+} from "@components/admin/form/RadioFieldset";
 import { Album, Prisma } from "@prisma/client";
 import { sizePhoto } from "@utils/smugmug";
 import { getAlbumData } from "@utils/prisma/album";

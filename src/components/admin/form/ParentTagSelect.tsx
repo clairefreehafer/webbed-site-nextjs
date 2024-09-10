@@ -1,6 +1,6 @@
 import { Tag } from "@prisma/client";
 import { getParentTagOptions } from "@utils/prisma/tag";
-import Select from "./select";
+import Select from "./Select";
 
 type ParentTagSelectProps = {
   defaultValue?: Tag["parentName"];

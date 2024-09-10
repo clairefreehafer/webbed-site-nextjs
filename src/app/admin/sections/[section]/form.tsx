@@ -2,8 +2,8 @@
 
 import { editSection } from "@actions/section";
 import AdminForm, { FormState } from "@components/admin/form/index";
-import SubmitButton from "@components/admin/form/submit-button";
-import TextInput from "@components/admin/form/text-input";
+import SubmitButton from "@components/admin/form/SubmitButton";
+import TextInput from "@components/admin/form/TextInput";
 import { Prisma } from "@prisma/client";
 import { getSection } from "@utils/prisma/section";
 import { ReactNode } from "react";

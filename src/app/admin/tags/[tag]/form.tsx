@@ -2,9 +2,9 @@ import AdminForm, { FormState } from "@components/admin/form/index";
 import { editTag } from "@actions/tag";
 import { Prisma } from "@prisma/client";
 import { ReactNode } from "react";
-import SubmitButton from "@components/admin/form/submit-button";
+import SubmitButton from "@components/admin/form/SubmitButton";
 import { getTag } from "@utils/prisma/tag";
-import TextInput from "@components/admin/form/text-input";
+import TextInput from "@components/admin/form/TextInput";
 
 type Props = {
   tagData: Prisma.PromiseReturnType<typeof getTag>;

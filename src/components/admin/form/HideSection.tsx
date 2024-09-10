@@ -1,19 +1,30 @@
 import { ReactNode } from "react";
-import { formGridClassNames } from "./index";
+import { cva } from "@panda/css";
+
+const hideSection = cva({
+  base: {
+    gridColumn: "span 2",
+    display: "grid",
+    gap: "2rem",
+    gridTemplateColumns: "25% 1fr",
+    width: "100%",
+  },
+  variants: {
+    when: {
+      true: {
+        height: 0,
+        overflow: "hidden",
+        visibility: "hidden",
+      },
+    },
+  },
+});
 
 type Props = {
   when: boolean;
   children: ReactNode;
 };
 
-const hiddenClassNames = "h-0 overflow-hidden visibility-hidden";
-
 export default function HideSection({ when, children }: Props) {
-  return (
-    <div
-      className={`${formGridClassNames} col-start-[span_2] w-full ${when && hiddenClassNames}`}
-    >
-      {children}
-    </div>
-  );
+  return <div className={hideSection({ when })}>{children}</div>;
 }

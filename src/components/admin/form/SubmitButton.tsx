@@ -1,18 +1,26 @@
 "use client";
 
+import { css } from "@panda/css";
 import { ReactNode } from "react";
 import { useFormStatus } from "react-dom";
+
+const button = css({
+  bg: "black",
+  borderStyle: "outset",
+  borderWidth: "8px",
+  color: "white",
+  gridColumn: "span 2",
+  p: "3rem",
+  textTransform: "uppercase",
+  width: "100%",
+});
 
 export default function SubmitButton({ children }: { children: ReactNode }) {
   const { pending, data } = useFormStatus();
 
   return (
     <>
-      <button
-        type="submit"
-        disabled={pending}
-        className="border-outset col-start-[span_2] w-full border-8 bg-neutral-800 p-12 uppercase text-white"
-      >
+      <button type="submit" disabled={pending} className={button}>
         {children}
       </button>
       <p>{data?.get("message") as string}</p>
