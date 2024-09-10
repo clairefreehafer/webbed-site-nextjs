@@ -76,7 +76,7 @@ export default function PolaroidGrid({
             />
             <div className={insetShadow} />
             <h3 className={`${loveYaLikeASister.className} ${text}`}>
-              <Icon icon={album.icon} theme="notebook" />
+              <Icon icon={album.icon} theme="notebook" display="inline" />
               {album.name}
             </h3>
           </Link>

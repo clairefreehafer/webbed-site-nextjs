@@ -10,7 +10,7 @@ const tableConfig: AdminTableConfig<
   Prisma.PromiseReturnType<typeof getSections>[0]
 > = {
   parent: "parentName",
-  icon: ({ icon }) => <DisplayIcon icon={icon} />,
+  icon: ({ icon }) => <DisplayIcon icon={icon} display="solo" />,
   name: "name",
   children: ({ children }) => children.map((child) => child.name).join(", "),
   "number of albums": ({ albums }) => albums.length,

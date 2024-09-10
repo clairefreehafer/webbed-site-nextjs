@@ -26,11 +26,36 @@ export default defineConfig({
         "67%, 100%": { opacity: "1" },
       },
     },
+
+    recipes: {},
   },
 
   themes: {
     admin: {},
-    animalCrossing: {},
+    animalCrossing: {
+      tokens: {
+        colors: {
+          uiBackground: { value: "rgb(248, 245, 223, 0.8)" },
+          brown: { value: "rgb(85, 69, 64)" },
+          grass: {
+            "1210-0224": { value: "rgb(189, 215, 238)" },
+            "0225-0331": { value: "rgb(31, 140, 57)" },
+            "0401-0722": { value: "rgb(0, 131, 90)" },
+            "0723-0915": { value: "rgb(19, 115, 82)" },
+            "0916-0930": { value: "rgb(73, 123, 49)" },
+            "1001-1015": { value: "rgb(132, 123, 58)" },
+            "1016-1029": { value: "rgb(148, 99, 99)" },
+            "1030-1112": { value: "rgb(148, 90, 98)" },
+            "1113-1128": { value: "rgb(132, 90, 82)" },
+            "1129-1209": { value: "rgb(99, 81, 82)" },
+          },
+          sand: { value: "#cfbe95" },
+        },
+        shadows: {
+          text: { value: "0 1px 5px {colors.brown}" },
+        },
+      },
+    },
     book: {},
     notebook: {
       tokens: {
@@ -64,7 +89,7 @@ export default defineConfig({
     },
   },
   staticCss: {
-    themes: ["admin", "notebook", "zelda"],
+    themes: ["admin", "animalCrossing", "notebook", "zelda"],
   },
 
   // The output directory for your css system
@@ -72,4 +97,6 @@ export default defineConfig({
 
   // remove the default design tokens
   presets: [],
+
+  importMap: "@panda",
 });

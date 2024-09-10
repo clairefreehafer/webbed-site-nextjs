@@ -21,7 +21,7 @@ export default function IconSelect({ defaultValue, icons }: IconSelectProps) {
             defaultChecked={defaultValue === icon.id}
             key={icon.id}
           >
-            <DisplayIcon icon={icon} theme="admin" />
+            <DisplayIcon icon={icon} theme="admin" display="solo" />
           </RadioInput>
         ))
       ) : (

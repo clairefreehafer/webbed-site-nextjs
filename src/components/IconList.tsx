@@ -1,7 +1,7 @@
 import { slugName } from "@utils/album";
 import Link from "next/link";
 import Icon, { DisplayIconType } from "@components/Icon";
-import { Theme, ThemeStyles } from "@themes";
+import { css, cva } from "@panda/css";
 
 export type IconListAlbum = {
   id: number;
@@ -9,11 +9,6 @@ export type IconListAlbum = {
   date: Date | null;
   name: string;
   sectionArray: string[];
-};
-
-type Props = {
-  albums: IconListAlbum[];
-  theme: Theme;
 };
 
 function generateUrl({
@@ -31,22 +26,55 @@ function generateUrl({
   );
 }
 
-const linkThemes: ThemeStyles = {
-  animalCrossing: "text-brown hover:drop-shadow-text hover:text-black",
+const list = css({
+  listStyleType: "none",
+});
+
+const listItem = css({
+  alignItems: "center",
+  display: "flex",
+});
+
+const link = cva({
+  base: {
+    textDecoration: "underline",
+    _hover: {
+      textDecoration: "none",
+    },
+  },
+  variants: {
+    theme: {
+      animalCrossing: {
+        color: "brown",
+        _hover: {
+          color: "black",
+          textShadow: "text",
+        },
+      },
+      zelda: {},
+    },
+  },
+});
+
+type Props = {
+  albums: IconListAlbum[];
+  theme?: (typeof link.variantMap.theme)[0];
 };
 
 export default function IconList({ albums, theme }: Props) {
   if (!albums) return <>❌ no album data.</>;
 
   return (
-    <ul className={`list-none ${theme === "zelda" && "mb-8"}`}>
+    <ul className={list}>
       {albums.map((album) => (
-        <li className="flex max-h-12 items-center" key={album.id}>
-          <Icon icon={album.icon} date={album.date} theme={theme} />
-          <Link
-            href={generateUrl(album)}
-            className={`${linkThemes[theme]} underline hover:no-underline`}
-          >
+        <li className={listItem} key={album.id}>
+          <Icon
+            icon={album.icon}
+            date={album.date}
+            theme={theme}
+            display="inline"
+          />
+          <Link href={generateUrl(album)} className={link({ theme })}>
             {album.name}
           </Link>
         </li>

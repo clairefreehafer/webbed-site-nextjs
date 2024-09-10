@@ -19,7 +19,7 @@ const tableConfig: AdminTableConfig<
       height={150}
     />
   ),
-  icon: ({ icon }) => <DisplayIcon icon={icon} />,
+  icon: ({ icon }) => <DisplayIcon icon={icon} display="solo" />,
   "compendium number": ({ metadata }) => metadata?.compendiumNumber,
   album: "albumName",
   title: ({ metadata }) => metadata?.title,
