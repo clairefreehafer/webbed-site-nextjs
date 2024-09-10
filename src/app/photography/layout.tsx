@@ -6,6 +6,7 @@ import { fullScreen } from "@utils/layout";
 import { css } from "@panda/css";
 import SiteContainer from "@components/layout/SiteContainer";
 import { paperBackground } from "@themes/notebook";
+import Header from "@components/Header";
 
 // https://codepen.io/mp/pen/kBEeKw
 // (another option: https://codepen.io/tmrDevelops/pen/NPXodB)
@@ -40,20 +41,13 @@ export default function PhotographyLayout({
       className={css(fullScreen, { bg: "black", color: "white" })}
     >
       <SiteContainer>
-        <header
-          className={css({
-            alignItems: "center",
-            display: "flex",
-            flexDirection: "column",
-            gap: "1rem",
-          })}
-        >
+        <Header>
           <Nav fontClassName={cutiveMono.className} theme="notebook" />
 
           <div className={`${loveYaLikeASister.className} ${titleWrapper}`}>
             <Title />
           </div>
-        </header>
+        </Header>
         <main className={main}>{children}</main>
       </SiteContainer>
     </div>

@@ -1,3 +1,4 @@
+import Header from "@components/Header";
 import Nav from "@components/Nav";
 import AnimalCrossingLogo from "@components/animal-crossing/Logo";
 import SiteContainer from "@components/layout/SiteContainer";
@@ -6,12 +7,6 @@ import AnimalCrossingThemeRoot from "@styles/animal-crossing/theme";
 import { getGrassDateRange } from "@utils/animal-crossing";
 import { sand } from "@utils/animal-crossing/recipes";
 import { GrassDateRange, GrassShape } from "@utils/animal-crossing/types";
-
-const header = css({
-  alignItems: "center",
-  display: "flex",
-  flexDir: "column",
-});
 
 const main = (grassShape: GrassShape, grassDateRange: GrassDateRange) =>
   cx(
@@ -36,10 +31,10 @@ export default function AnimalCrossingLayout({
   return (
     <AnimalCrossingThemeRoot shape="square">
       <SiteContainer>
-        <header className={header}>
+        <Header>
           <AnimalCrossingLogo text="claire freehafer" />
           <Nav theme="animalCrossing" />
-        </header>
+        </Header>
         <main className={main("square", grassDateRange)}>{children}</main>
       </SiteContainer>
     </AnimalCrossingThemeRoot>

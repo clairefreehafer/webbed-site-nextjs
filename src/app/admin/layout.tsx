@@ -5,6 +5,7 @@ import Title from "@components/Title";
 import { ReactNode } from "react";
 import "@themes/admin.css";
 import { css } from "@panda/css";
+import Header from "@components/Header";
 
 // https://css-tricks.com/old-timey-terminal-styling/
 const afterStyles =
@@ -15,22 +16,14 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     <div
       className={`${ptMono.className} ${afterStyles} min-w-screen text-shadow relative min-h-screen bg-black text-white`}
     >
-      <header
-        className={css({
-          alignItems: "center",
-          display: "flex",
-          flexDirection: "column",
-          gap: "1rem",
-          my: "1rem",
-        })}
-      >
+      <Header>
         <Nav theme="admin" />
         <div
           className={`${pressStart2P.className} shadow-8-bit-white m-4 flex flex-col items-center justify-center p-4`}
         >
           <Title separator="▼" />
         </div>
-      </header>
+      </Header>
       <main className="max-w-site-width mx-auto flex flex-col items-center justify-center">
         {children}
       </main>

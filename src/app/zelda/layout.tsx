@@ -4,6 +4,22 @@ import { ReactNode } from "react";
 import PageBorder from "@components/zelda/PageBorder";
 import ZeldaThemeRoot from "@styles/zelda/theme";
 import SiteContainer from "@components/layout/SiteContainer";
+import Header from "@components/Header";
+import { css, cx } from "@panda/css";
+import { zeldaTextBackground } from "@themes/zelda";
+
+const title = cx(
+  hyliaSerif.className,
+  css({
+    color: "lightBlue",
+    fontSize: "3rem",
+    textTransform: "capitalize",
+  }),
+);
+
+const main = css({
+  ...zeldaTextBackground,
+});
 
 type Props = {
   children: ReactNode;
@@ -11,22 +27,15 @@ type Props = {
 
 export default function ZeldaLayout({ children }: Props) {
   return (
-    // TODO: extracxt to ZeldaThemeRoot
     <ZeldaThemeRoot>
       <div>
         <PageBorder position="top" />
         <SiteContainer>
-          <header className="max-w-site-width mx-auto flex flex-col items-center justify-center">
+          <Header>
             <Navigation theme="zelda" />
-            <h1
-              className={`${hyliaSerif.className} text-light-blue my-8 text-5xl capitalize`}
-            >
-              claire freehafer
-            </h1>
-          </header>
-          <main className="zelda-text-bg max-w-site-width mx-auto">
-            {children}
-          </main>
+            <h1 className={title}>claire freehafer</h1>
+          </Header>
+          <main className={main}>{children}</main>
         </SiteContainer>
       </div>
       <PageBorder position="bottom" />
