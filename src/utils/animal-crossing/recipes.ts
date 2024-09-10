@@ -284,8 +284,6 @@ export const grass = cva({
   ],
 });
 
-generateVariants("sand");
-
 export const sand = cva({
   base: {
     bgColor: "sand",

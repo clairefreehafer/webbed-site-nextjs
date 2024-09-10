@@ -3,7 +3,6 @@ import Slideshow from "@components/slideshow/index";
 import { getAncestorSections } from "@utils/section";
 import { getAlbumsInSections } from "@utils/prisma/album";
 import AnimalCrossingThemeRoot from "@styles/animal-crossing/theme";
-import "@styles/animal-crossing/theme.css";
 import { getAlbumPhotos } from "@utils/prisma/photo";
 import { getAllDescendants } from "@utils/prisma/section";
 
