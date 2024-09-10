@@ -23,3 +23,9 @@ export const sheikahUnderline = css.raw({
   paddingBottom: "0.5rem",
   textDecoration: "none",
 });
+
+// https://codepen.io/sosuke/pen/Pjoqqp for #00d7ff
+export const whiteToBlue = css.raw({
+  filter:
+    "invert(100%) invert(19%) sepia(88%) saturate(1368%) hue-rotate(179deg) brightness(95%) contrast(101%);",
+});

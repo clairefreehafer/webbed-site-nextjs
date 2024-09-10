@@ -1,22 +1,42 @@
+import { cva } from "@panda/css";
+import { whiteToBlue } from "@themes/zelda";
+
+const pageBorder = cva({
+  base: {
+    ...whiteToBlue,
+    left: "0",
+    position: "absolute",
+    width: "100%",
+  },
+  variants: {
+    position: {
+      top: {
+        top: 0,
+        transform: "rotate(180deg)",
+      },
+      bottom: {
+        bottom: 0,
+      },
+    },
+  },
+});
+
 type Props = {
-  rotate?: boolean;
+  position: (typeof pageBorder.variantMap.position)[number];
 };
 
-export default function PageBorder({ rotate }: Props) {
-  const borderStyles = "white-to-blue absolute left-0 w-full";
-  const rotateStyles = rotate ? "bottom-0" : "top-0 rotate-180";
-
+export default function PageBorder({ position }: Props) {
   return (
     <>
       <img
         src="/images/zelda/pad-frame_glow.png"
         alt=""
-        className={`${borderStyles} ${rotateStyles} opacity-50`}
+        className={pageBorder({ position })}
       />
       <img
         src="/images/zelda/pad-frame.png"
         alt=""
-        className={`${borderStyles} ${rotateStyles}`}
+        className={pageBorder({ position })}
       />
     </>
   );

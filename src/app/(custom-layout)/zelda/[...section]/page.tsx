@@ -4,6 +4,7 @@ import { getAncestorSections } from "@utils/section";
 import { getAlbumPhotos } from "@utils/prisma/photo";
 import { getAlbumsInSections } from "@utils/prisma/album";
 import { getAllDescendants } from "@utils/prisma/section";
+import ZeldaThemeRoot from "@styles/zelda/theme";
 
 export async function generateStaticParams() {
   // TODO: extract
@@ -37,14 +38,13 @@ export default async function Page({
   }
 
   return (
-    // TODO: extracxt to ZeldaThemeRoot
-    <div className="bg-zelda h-screen w-screen text-white">
+    <ZeldaThemeRoot>
       <Slideshow
         photos={photos}
         albumName={albumName}
         albumSection="zelda"
         theme="zelda"
       />
-    </div>
+    </ZeldaThemeRoot>
   );
 }
