@@ -8,14 +8,13 @@ type Props = {
     albumName: string | null;
   };
   theme: Theme;
-  className: string;
 };
 
-export default function SlideInfo({ slideData, theme, className }: Props) {
+export default function SlideInfo({ slideData, theme }: Props) {
   const { metadata, icon, albumName } = slideData;
 
   return (
-    <div className={`${className} z-slideshow-ui absolute right-4 top-4`}>
+    <>
       {theme === "zelda" ? (
         <>
           {metadata?.title}
@@ -27,6 +26,6 @@ export default function SlideInfo({ slideData, theme, className }: Props) {
       ) : (
         albumName
       )}
-    </div>
+    </>
   );
 }

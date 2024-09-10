@@ -1,5 +1,4 @@
 import type { Config } from "tailwindcss";
-import defaultPlugin from "../plugins/default";
 
 export default {
   content: [
@@ -32,5 +31,4 @@ export default {
       },
     },
   },
-  plugins: [defaultPlugin],
 } satisfies Config;

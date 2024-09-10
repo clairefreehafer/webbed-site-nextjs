@@ -3,7 +3,6 @@ import Slideshow from "@components/slideshow/index";
 import { getAncestorSections } from "@utils/section";
 import { getAlbumPhotos } from "@utils/prisma/photo";
 import { getAlbumsInSections } from "@utils/prisma/album";
-import "@styles/zelda/theme.css";
 import { getAllDescendants } from "@utils/prisma/section";
 
 export async function generateStaticParams() {

@@ -1,7 +1,6 @@
 import Navigation from "@components/Nav";
 import { hyliaSerif } from "@fonts/zelda";
 import { ReactNode } from "react";
-import "@styles/zelda/theme.css";
 import PageBorder from "@components/zelda/PageBorder";
 
 type Props = {

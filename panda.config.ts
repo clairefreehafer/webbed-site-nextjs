@@ -18,6 +18,15 @@ export default defineConfig({
             "linear-gradient(135deg, red, orange, yellow, green, blue, indigo, violet)",
         },
       },
+      zIndex: {
+        slideshow: {
+          ui: { value: 2 },
+          insetShadow: { value: 1 },
+          photo: { value: 0 },
+          borderTexture: { value: -1 },
+          border: { value: -2 },
+        },
+      },
     },
 
     keyframes: {
