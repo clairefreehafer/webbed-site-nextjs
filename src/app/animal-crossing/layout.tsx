@@ -1,9 +1,30 @@
 import Nav from "@components/Nav";
 import AnimalCrossingLogo from "@components/animal-crossing/Logo";
 import SiteContainer from "@components/layout/SiteContainer";
+import { css, cx } from "@panda/css";
 import AnimalCrossingThemeRoot from "@styles/animal-crossing/theme";
-// import "@styles/animal-crossing/theme.css";
 import { getGrassDateRange } from "@utils/animal-crossing";
+import { sand } from "@utils/animal-crossing/recipes";
+import { GrassDateRange, GrassShape } from "@utils/animal-crossing/types";
+
+const header = css({
+  alignItems: "center",
+  display: "flex",
+  flexDir: "column",
+});
+
+const main = (grassShape: GrassShape, grassDateRange: GrassDateRange) =>
+  cx(
+    sand({ grassShape, grassDateRange }),
+    css({
+      bgPosition: "top",
+      bgRepeat: "repeat-x",
+      borderRadius: "1.5rem",
+      boxShadow: "0 1rem 0.5rem -0.5rem rgba(0, 0, 0, 0.5)",
+      p: "9rem 1rem 1rem",
+      width: "100%",
+    }),
+  );
 
 export default function AnimalCrossingLayout({
   children,
@@ -15,18 +36,11 @@ export default function AnimalCrossingLayout({
   return (
     <AnimalCrossingThemeRoot shape="square">
       <SiteContainer>
-        <header className="max-w-site-width mx-auto flex flex-col items-center justify-center p-4">
+        <header className={header}>
           <AnimalCrossingLogo text="claire freehafer" />
           <Nav theme="animalCrossing" />
         </header>
-        <main
-          className="bg-sand max-w-site-width mx-auto mb-4 rounded-3xl bg-top bg-repeat-x px-4 pb-4 pt-36 shadow-[0_1rem_0.5rem_-0.5rem_rgba(0,0,0,0.5)]"
-          style={{
-            backgroundImage: `url(/images/animal-crossing/sand/square_${grassDateRange}.png)`,
-          }}
-        >
-          {children}
-        </main>
+        <main className={main("square", grassDateRange)}>{children}</main>
       </SiteContainer>
     </AnimalCrossingThemeRoot>
   );

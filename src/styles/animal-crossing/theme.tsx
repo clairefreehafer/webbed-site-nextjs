@@ -4,11 +4,11 @@ import { fotSeuratProB } from "@fonts/animal-crossing";
 import { GrassDateRange, GrassShape } from "@utils/animal-crossing/types";
 import { css, cx } from "@panda/css";
 import { fullScreen } from "@utils/layout";
-import { animalCrossingGrassRecipe } from "@utils/animal-crossing/recipes";
+import { grass } from "@utils/animal-crossing/recipes";
 
 const themeRoot = (grassShape: GrassShape, grassDateRange: GrassDateRange) =>
   cx(
-    animalCrossingGrassRecipe({ grassShape, grassDateRange }),
+    grass({ grassShape, grassDateRange }),
     css(fullScreen),
     css({}),
     fotSeuratProB.className,

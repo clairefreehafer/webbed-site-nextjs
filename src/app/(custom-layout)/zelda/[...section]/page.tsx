@@ -38,6 +38,7 @@ export default async function Page({
   }
 
   return (
+    // TODO: extracxt to ZeldaThemeRoot
     <div className="bg-zelda h-screen w-screen text-white">
       <Slideshow
         photos={photos}

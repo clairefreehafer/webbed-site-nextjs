@@ -1,3 +1,5 @@
+import { RecipeVariantRecord, SystemStyleObject } from "@panda/types";
+
 export type Theme =
   | "admin"
   | "animalCrossing"
@@ -8,3 +10,7 @@ export type Theme =
   | "zelda";
 
 export type ThemeStyles<T = string> = Partial<Record<Theme, T>>;
+
+export interface ThemeVariants extends RecipeVariantRecord {
+  theme: Partial<Record<Theme, SystemStyleObject>>;
+}
