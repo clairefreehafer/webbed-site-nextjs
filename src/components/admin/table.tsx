@@ -1,4 +1,26 @@
+import { css } from "@panda/css";
 import { ReactNode } from "react";
+
+const table = css({
+  borderCollapse: "collapse",
+});
+
+const thead = css({
+  borderBottom: "4px dotted white",
+});
+
+const th = css({
+  p: "0.5rem",
+});
+
+const tr = css({
+  borderBottom: "1px dotted white",
+});
+
+const td = css({
+  p: "0.5rem",
+  textAlign: "center",
+});
 
 export type AdminTableConfig<T> = Record<
   string,
@@ -30,11 +52,11 @@ export default function AdminTable<T extends Data>({ data, config }: Props<T>) {
   }
 
   return (
-    <table className="mx-auto my-8 w-full border-collapse">
-      <thead className="border-b-4 border-dotted border-b-white">
+    <table className={table}>
+      <thead className={thead}>
         <tr>
           {Object.keys(config).map((key) => (
-            <th key={key} className="p-2">
+            <th key={key} className={th}>
               {key}
             </th>
           ))}
@@ -42,9 +64,9 @@ export default function AdminTable<T extends Data>({ data, config }: Props<T>) {
       </thead>
       <tbody>
         {data.map((item) => (
-          <tr key={item.id} className="border-b-1 border-dotted border-b-white">
+          <tr key={item.id} className={tr}>
             {Object.keys(config).map((key) => (
-              <td key={key} className="p-2 text-center">
+              <td key={key} className={td}>
                 {renderCell(config[key], item)}
               </td>
             ))}
