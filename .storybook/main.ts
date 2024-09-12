@@ -1,4 +1,5 @@
 import type { StorybookConfig } from "@storybook/nextjs";
+import path from "path";
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
@@ -24,5 +25,15 @@ const config: StorybookConfig = {
     enableCrashReports: false,
     disableTelemetry: true,
   },
+  webpackFinal: async (config: any) => ({
+    ...config,
+    resolve: {
+      ...config.resolve,
+      alias: {
+        ...config.resolve.alias,
+        "@panda": path.resolve(__dirname, "..", "styled-system"),
+      },
+    },
+  }),
 };
 export default config;

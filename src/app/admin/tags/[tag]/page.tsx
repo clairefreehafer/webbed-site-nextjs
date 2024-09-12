@@ -1,4 +1,4 @@
-import ParentTagSelect from "@components/admin/form/parent-tag-select";
+import ParentTagSelect from "@components/admin/form/ParentTagSelect";
 import TagForm from "./form";
 import { displayName } from "@utils/album";
 import { getTag } from "@utils/prisma/tag";

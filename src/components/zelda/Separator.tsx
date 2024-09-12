@@ -1,3 +1,6 @@
+import { css } from "@panda/css";
+import { whiteToBlue } from "@themes/zelda";
+
 type Props = {
   number: 1 | 2 | 3;
 };
@@ -7,7 +10,7 @@ export default function Separator({ number }: Props) {
     <img
       src={`/images/zelda/pad-line_${number}.png`}
       alt=""
-      className="white-to-blue"
+      className={css(whiteToBlue)}
     />
   );
 }

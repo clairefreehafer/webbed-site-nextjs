@@ -1,5 +1,5 @@
 import DeleteButton from "@components/admin/delete-button";
-import AdminTable, { AdminTableConfig } from "@components/admin/table";
+import AdminTable, { AdminTableConfig } from "@components/admin/Table";
 import { slugName } from "@utils/album";
 import Link from "next/link";
 import { deleteTag } from "@actions/tag";

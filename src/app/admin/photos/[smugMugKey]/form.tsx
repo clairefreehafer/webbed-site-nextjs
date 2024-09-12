@@ -4,19 +4,19 @@ import { editPhoto } from "@actions/photo";
 import { ChangeEvent, useState } from "react";
 import { Prisma } from "@prisma/client";
 
-import SubmitButton from "@components/admin/form/submit-button";
+import SubmitButton from "@components/admin/form/SubmitButton";
 import { getAdminPhoto } from "@utils/prisma/photo";
 import IconSelect from "@components/admin/form/IconSelect";
 import AdminForm, { FormState } from "@components/admin/form/index";
-import TextInput from "@components/admin/form/text-input";
+import TextInput from "@components/admin/form/TextInput";
 import CheckboxInput from "@components/admin/form/CheckboxInput";
 import HideSection from "@components/admin/form/HideSection";
 import DateInput from "@components/admin/form/DateInput";
-import NumberInput from "@components/admin/form/number-input";
-import Textarea from "@components/admin/form/textarea";
-import Select from "@components/admin/form/select";
+import NumberInput from "@components/admin/form/NumberInput";
+import Textarea from "@components/admin/form/Textarea";
+import Select from "@components/admin/form/Select";
 import { getAlbumNames } from "@utils/prisma/album";
-import SectionHeader from "@components/admin/form/section-header";
+import SectionHeader from "@components/admin/form/FormSectionHeader";
 import { getIcons } from "@utils/prisma/icon";
 
 export type UpdatePhotoFormState = FormState<

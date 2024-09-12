@@ -1,4 +1,4 @@
-import AdminTable, { AdminTableConfig } from "@components/admin/table";
+import AdminTable, { AdminTableConfig } from "@components/admin/Table";
 import DisplayIcon from "@components/Icon";
 import { Prisma } from "@prisma/client";
 import { getIconsWithAlbums } from "@utils/prisma/icon";
@@ -7,7 +7,7 @@ import Link from "next/link";
 const tableConfig: AdminTableConfig<
   Prisma.PromiseReturnType<typeof getIconsWithAlbums>[0]
 > = {
-  image: (icon) => <DisplayIcon icon={icon} theme="admin" />,
+  image: (icon) => <DisplayIcon icon={icon} theme="admin" display="solo" />,
   text: "text",
   "album(s)": ({ albums }) => albums.map(({ name }) => `${name}, `),
   edit: ({ id }) => <Link href={`/admin/icons/${id}`}>edit</Link>,

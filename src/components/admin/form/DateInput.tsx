@@ -1,5 +1,5 @@
-import { inputStyles } from ".";
-import Label from "./label";
+import { input } from "@themes/admin";
+import Label from "./Label";
 
 type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   label: string;
@@ -21,7 +21,7 @@ export default function DateInput({
         name={name}
         id={name}
         value={defaultValue}
-        className={`${inputStyles} p-input read-only:bg-white read-only:text-black`}
+        className={input({ type: "date" })}
         {...inputProps}
       />
     </>

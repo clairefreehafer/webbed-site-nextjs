@@ -4,23 +4,93 @@ import type { Prisma } from "@prisma/client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Theme, ThemeStyles } from "@themes";
-import SlideInfo from "./slide-info";
+import SlideInfo from "./SlideInfo";
 import { getAlbumPhotos } from "@utils/prisma/photo";
+import { css, cva, cx } from "@panda/css";
+import { acnhTextBackground } from "@themes/animalCrossing";
+import { fillParent } from "@utils/layout";
+import { zeldaTextBackground } from "@themes/zelda";
 
-const uiStyles: ThemeStyles = {
-  default: "",
-  animalCrossing: "ac-text-bg px-4 py-2",
-  notebook: "",
-  zelda: "zelda-text-bg py-4 px-8",
-  admin: "",
-};
+const ui = cva({
+  base: {
+    position: "absolute",
+    zIndex: "slideshow.ui",
+  },
+  variants: {
+    theme: {
+      animalCrossing: {
+        ...acnhTextBackground,
+        px: "1rem",
+        py: "0.5rem",
+      },
+      zelda: {
+        ...zeldaTextBackground,
+        px: "2rem",
+        py: "1rem",
+      },
+    },
+    component: {
+      nav: {
+        top: "1rem",
+        left: "1rem",
+      },
+      info: {
+        right: "1rem",
+        top: "1rem",
+      },
+      slideChange: {
+        bottom: "1rem",
+        right: "50%",
+        transform: "translateX(50%)",
+      },
+    },
+  },
+  compoundVariants: [
+    {
+      theme: "animalCrossing",
+      component: "nav",
+      css: {},
+    },
+  ],
+});
+
+const slides = cx(
+  css(fillParent),
+  css({
+    display: "grid",
+    gridAutoColumns: "100vw",
+    gridAutoFlow: "column",
+    gridTemplateColumns: "repeat(auto-fill, 100vw)",
+    overflowX: "scroll",
+    scrollBehavior: "smooth",
+    scrollSnapType: "x mandatory",
+  }),
+);
+
+const slide = css({
+  alignItems: "center",
+  display: "flex",
+  justifyContent: "center",
+  listStyleType: "none",
+  position: "relative",
+});
+
+// "absolute left-0 top-0 -z-10 h-full w-full snap-center"
+const snapPoint = cx(
+  css(fillParent),
+  css({
+    position: "absolute",
+    left: 0,
+    scrollSnapAlign: "center",
+    top: 0,
+  }),
+);
 
 type Props = {
   photos: Prisma.PromiseReturnType<typeof getAlbumPhotos>;
   albumName: string;
   albumSection: string;
-  theme: Theme;
+  theme: (typeof ui.variantMap.theme)[number];
 };
 
 export default function Slideshow({
@@ -73,28 +143,23 @@ export default function Slideshow({
   }, [slidesRef, photos.length, intersectionObserverCallback]);
 
   return (
-    <>
-      <nav
-        className={`${uiStyles[theme]} z-slideshow-ui absolute left-4 top-4`}
-      >
+    <div>
+      <nav className={ui({ theme, component: "nav" })}>
         <Link href={`/${albumSection}`}>&larr; back</Link>
       </nav>
 
-      <SlideInfo
-        theme={theme}
-        className={uiStyles[theme] || ""}
-        slideData={{ albumName, ...currentSlideData }}
-      />
+      <div className={ui({ theme, component: "info" })}>
+        <SlideInfo
+          theme={theme}
+          slideData={{ albumName, ...currentSlideData }}
+        />
+      </div>
 
-      <main className="h-screen w-screen">
-        <ol className="grid h-screen snap-x snap-mandatory auto-cols-[100vw] grid-flow-col grid-cols-[repeat(auto-fill,_100vw)] overflow-x-scroll scroll-smooth">
+      <main className={css(fillParent)}>
+        <ol className={slides}>
           {photos.map((photo, idx) => (
-            <div
-              className="max-w-screen relative flex max-h-screen items-center justify-center"
-              key={photo.id}
-              id={`slide-${idx + 1}`}
-            >
-              <div className="absolute left-0 top-0 -z-10 h-full w-full snap-center" />
+            <li className={slide} key={photo.id} id={`slide-${idx + 1}`}>
+              <div className={snapPoint} />
               <img
                 src={photo.url?.replaceAll("#size#", "L")}
                 alt={photo.altText || ""}
@@ -102,16 +167,16 @@ export default function Slideshow({
                 ref={(node) => {
                   slidesRef.current.push(node);
                 }}
-                className="shadow-[0_0_1.5rem_0.1rem_rgba(0,0,0,0.3)]"
+                className={css({
+                  boxShadow: "0 0 1.5rem 0.1rem rgba(0, 0, 0, 0.3)",
+                })}
               />
-            </div>
+            </li>
           ))}
         </ol>
       </main>
 
-      <div
-        className={`${uiStyles[theme]} absolute bottom-4 right-1/2 translate-x-2/4`}
-      >
+      <div className={ui({ theme, component: "slideChange" })}>
         {currentSlideIndex > 1 && (
           <Link
             href={`${pathname}/#slide-${currentSlideIndex - 1}`}
@@ -132,6 +197,6 @@ export default function Slideshow({
           </Link>
         )}
       </div>
-    </>
+    </div>
   );
 }

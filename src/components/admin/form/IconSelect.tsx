@@ -3,7 +3,7 @@
 import { Album, Photo, Prisma } from "@prisma/client";
 import DisplayIcon from "@components/Icon";
 import { getIcons } from "@utils/prisma/icon";
-import RadioFieldset, { RadioInput } from "./radio-fieldset";
+import RadioFieldset, { RadioInput } from "./RadioFieldset";
 
 export type IconSelectProps = {
   defaultValue?: Album["iconId"] | Photo["iconId"];
@@ -21,7 +21,7 @@ export default function IconSelect({ defaultValue, icons }: IconSelectProps) {
             defaultChecked={defaultValue === icon.id}
             key={icon.id}
           >
-            <DisplayIcon icon={icon} theme="admin" />
+            <DisplayIcon icon={icon} theme="admin" display="solo" />
           </RadioInput>
         ))
       ) : (

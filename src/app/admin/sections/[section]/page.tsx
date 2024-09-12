@@ -1,6 +1,6 @@
 import { getSection } from "@utils/prisma/section";
 import UpdateSectionForm from "./form";
-import ParentSectionSelect from "@components/admin/form/parent-section-select";
+import ParentSectionSelect from "@components/admin/form/ParentSectionSelect";
 
 export default async function Page({
   params,

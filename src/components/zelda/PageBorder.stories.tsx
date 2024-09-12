@@ -10,8 +10,10 @@ export default meta;
 
 type Story = StoryObj<typeof PageBorder>;
 
-export const Top: Story = {};
+export const Top: Story = {
+  args: { position: "top" },
+};
 
 export const Bottom: Story = {
-  args: { rotate: true },
+  args: { position: "bottom" },
 };

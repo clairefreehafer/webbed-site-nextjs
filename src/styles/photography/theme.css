@@ -1,5 +1,0 @@
-@config "../../../config/tailwind.photography.config.ts";
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;

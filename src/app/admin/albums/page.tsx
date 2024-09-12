@@ -1,6 +1,6 @@
 import { deleteAlbum } from "@actions/album";
 import DeleteButton from "@components/admin/delete-button";
-import AdminTable, { AdminTableConfig } from "@components/admin/table";
+import AdminTable, { AdminTableConfig } from "@components/admin/Table";
 import DisplayIcon from "@components/Icon";
 import { Prisma } from "@prisma/client";
 import { slugName } from "@utils/album";
@@ -21,7 +21,7 @@ const tableConfig: AdminTableConfig<
         height={150}
       />
     ),
-  icon: ({ icon }) => <DisplayIcon icon={icon} theme="admin" />,
+  icon: ({ icon }) => <DisplayIcon icon={icon} theme="admin" display="solo" />,
   name: "name",
   section: "sectionName",
   date: ({ date }) => date?.toString(),

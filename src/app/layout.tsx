@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { inter } from "@fonts";
+import "@themes/index.css";
 
 declare global {
   namespace PrismaJson {
@@ -23,6 +24,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" style={{ overscrollBehaviorY: "none" }}>
+      <link
+        rel="alternate"
+        type="application/rss+xml"
+        title="RSS feed"
+        href="rss.xml"
+      />
       <body className={inter.className}>{children}</body>
     </html>
   );

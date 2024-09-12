@@ -1,7 +1,40 @@
 import { finkHeavy } from "@fonts/animal-crossing";
+import { css, cx } from "@panda/css";
 import { CSSProperties } from "react";
 
 export const SVG_HEIGHT = "70px";
+
+const svg = cx(
+  finkHeavy.className,
+  css({
+    fill: "rgba(231, 197, 73, 1)",
+    fontSize: "3rem",
+    height: SVG_HEIGHT,
+    width: "350px",
+  }),
+);
+
+const textStyle = css({
+  fill: "rgba(231, 197, 73, 1)",
+  paintOrder: "stroke",
+  stroke: "rgba(145, 107, 51, 1)",
+  strokeLinejoin: "round",
+  strokeWidth: "15px",
+});
+
+const textShadow = css({
+  fill: "black",
+  filter: "url(#shadow)",
+  paintOrder: "stroke",
+  stroke: "black",
+  strokeLinejoin: "round",
+  strokeWidth: "15px",
+});
+
+const textEmboss = css({
+  fill: "rgba(231, 197, 73, 0.5)",
+  filter: "url(#emboss)",
+});
 
 export default function AnimalCrossingLogo({
   text,
@@ -11,11 +44,7 @@ export default function AnimalCrossingLogo({
   style?: CSSProperties;
 }) {
   return (
-    <svg
-      viewBox="0 0 350 70"
-      style={style}
-      className={`${finkHeavy.className} h-[70px] w-[350px] fill-[rgba(231,197,73,1)] text-5xl`}
-    >
+    <svg viewBox="0 0 350 70" style={style} className={svg}>
       <defs>
         <filter id="emboss">
           <feConvolveMatrix
@@ -32,37 +61,13 @@ export default function AnimalCrossingLogo({
           />
         </filter>
       </defs>
-      <text
-        className="fill-[rgba(231,197,73,1)] stroke-[rgba(145,107,51,1)] stroke-[15px]"
-        style={{
-          strokeLinejoin: "round",
-          paintOrder: "stroke",
-        }}
-        x="16"
-        y="45"
-      >
+      <text className={textStyle} x="16" y="45">
         {text}
       </text>
-      <text
-        aria-hidden
-        className="fill-black stroke-black stroke-[15px]"
-        style={{
-          filter: "url(#shadow)",
-          strokeLinejoin: "round",
-          paintOrder: "stroke",
-        }}
-        x="16"
-        y="45"
-      >
+      <text aria-hidden className={textShadow} x="16" y="45">
         {text}
       </text>
-      <text
-        aria-hidden
-        className="fill-rgba(231,197,73,0.5)"
-        style={{ filter: "url(#emboss)" }}
-        x="16"
-        y="45"
-      >
+      <text aria-hidden className={textEmboss} x="16" y="45">
         {text}
       </text>
     </svg>

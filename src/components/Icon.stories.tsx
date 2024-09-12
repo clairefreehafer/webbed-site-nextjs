@@ -21,7 +21,7 @@ export const StarFragment: Story = {
 export const Character: Story = {
   args: {
     icon: { character: "💩", imagePath: null, text: null },
-    theme: "photography",
+    theme: "notebook",
   },
 };
 

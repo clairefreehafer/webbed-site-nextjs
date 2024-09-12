@@ -2,10 +2,10 @@
 
 import { PhotoFormState, createPhoto } from "@actions/photo";
 import AdminForm from "@components/admin/form/index";
-import Select from "@components/admin/form/select";
-import SubmitButton from "@components/admin/form/submit-button";
-import TextInput from "@components/admin/form/text-input";
-import Textarea from "@components/admin/form/textarea";
+import Select from "@components/admin/form/Select";
+import SubmitButton from "@components/admin/form/SubmitButton";
+import TextInput from "@components/admin/form/TextInput";
+import Textarea from "@components/admin/form/Textarea";
 import { Prisma } from "@prisma/client";
 import { getAlbumNames } from "@utils/prisma/album";
 
