@@ -2,7 +2,7 @@ import { displayName, slugName } from "@utils/album";
 import Slideshow from "@components/slideshow/index";
 import { getAncestorSections } from "@utils/section";
 import { getAlbumsInSections } from "@utils/prisma/album";
-import AnimalCrossingThemeRoot from "@styles/animal-crossing/theme";
+import ThemeRoot from "@components/animal-crossing/ThemeRoot";
 import { getAlbumPhotos } from "@utils/prisma/photo";
 import { getAllDescendants } from "@utils/prisma/section";
 
@@ -40,13 +40,13 @@ export default async function Page({
   const albumDate = photos[0].album?.date || new Date();
 
   return (
-    <AnimalCrossingThemeRoot shape="triangle" date={albumDate}>
+    <ThemeRoot shape="triangle" date={albumDate}>
       <Slideshow
         photos={photos}
         albumName={albumName}
         albumSection="animal-crossing"
         theme="animalCrossing"
       />
-    </AnimalCrossingThemeRoot>
+    </ThemeRoot>
   );
 }

@@ -1,6 +1,6 @@
 import { ChangeEventHandler, ForwardedRef, forwardRef } from "react";
 import Label from "./Label";
-import { input } from "@themes/admin";
+import { input } from "@styles/admin";
 
 type Props = {
   label?: string;
@@ -12,7 +12,7 @@ type Props = {
 
 const Select = forwardRef<HTMLSelectElement, Props>(function Select(
   { label, name, options, defaultValue, onChange },
-  ref,
+  ref
 ) {
   return (
     <>

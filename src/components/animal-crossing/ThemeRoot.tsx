@@ -11,7 +11,7 @@ const themeRoot = (grassShape: GrassShape, grassDateRange: GrassDateRange) =>
     grass({ grassShape, grassDateRange }),
     css(fullScreen),
     css({}),
-    fotSeuratProB.className,
+    fotSeuratProB.className
   );
 
 type Props = {

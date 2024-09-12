@@ -5,7 +5,7 @@ import Title from "@components/Title";
 import { ReactNode } from "react";
 import { css, cx } from "@panda/css";
 import Header from "@components/Header";
-import { scanLines } from "@themes/admin";
+import { scanLines } from "@styles/admin";
 import { fullScreen } from "@utils/layout";
 import SiteContainer from "@components/layout/SiteContainer";
 
@@ -16,7 +16,7 @@ const themeRoot = cx(
   css({
     bg: "black",
     color: "white",
-  }),
+  })
 );
 
 const titleContainer = cx(
@@ -27,7 +27,7 @@ const titleContainer = cx(
     display: "flex",
     flexDir: "column",
     p: "1rem",
-  }),
+  })
 );
 
 export default function AdminLayout({ children }: { children: ReactNode }) {

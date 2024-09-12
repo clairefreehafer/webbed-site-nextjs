@@ -7,7 +7,7 @@ const themeRoot = cx(
     bgImage: "url('/images/zelda/pad-background.jpg')",
     color: "white",
     width: "100%",
-  }),
+  })
 );
 
 export default function ZeldaThemeRoot({

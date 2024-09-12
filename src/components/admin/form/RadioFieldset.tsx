@@ -1,5 +1,5 @@
 import { css, cx } from "@panda/css";
-import { input } from "@themes/admin";
+import { input } from "@styles/admin";
 import { ReactNode } from "react";
 
 const radio = cx(
@@ -9,7 +9,7 @@ const radio = cx(
     height: 0,
     opacity: 0,
     width: 0,
-  }),
+  })
 );
 
 const option = css({

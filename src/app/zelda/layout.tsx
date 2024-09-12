@@ -2,11 +2,11 @@ import Navigation from "@components/Nav";
 import { hyliaSerif } from "@fonts/zelda";
 import { ReactNode } from "react";
 import PageBorder from "@components/zelda/PageBorder";
-import ZeldaThemeRoot from "@styles/zelda/theme";
+import ThemeRoot from "@components/zelda/ThemeRoot";
 import SiteContainer from "@components/layout/SiteContainer";
 import Header from "@components/Header";
 import { css, cx } from "@panda/css";
-import { zeldaTextBackground } from "@themes/zelda";
+import { zeldaTextBackground } from "@styles/zelda";
 
 const title = cx(
   hyliaSerif.className,
@@ -14,7 +14,7 @@ const title = cx(
     color: "lightBlue",
     fontSize: "3rem",
     textTransform: "capitalize",
-  }),
+  })
 );
 
 const main = css({
@@ -27,7 +27,7 @@ type Props = {
 
 export default function ZeldaLayout({ children }: Props) {
   return (
-    <ZeldaThemeRoot>
+    <ThemeRoot>
       <PageBorder position="top" />
       <SiteContainer>
         <Header>
@@ -37,6 +37,6 @@ export default function ZeldaLayout({ children }: Props) {
         <main className={main}>{children}</main>
       </SiteContainer>
       <PageBorder position="bottom" />
-    </ZeldaThemeRoot>
+    </ThemeRoot>
   );
 }

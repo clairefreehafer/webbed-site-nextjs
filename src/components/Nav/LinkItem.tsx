@@ -1,6 +1,6 @@
 import WiggleBox from "@components/photography/WiggleBox";
 import { css, cva } from "@panda/css";
-import { sheikahUnderline } from "@themes/zelda";
+import { sheikahUnderline } from "@styles/zelda";
 import Link from "next/link";
 import { NavLink } from "./config";
 

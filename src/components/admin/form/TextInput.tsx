@@ -1,5 +1,5 @@
 import Label from "./Label";
-import { input } from "@themes/admin";
+import { input } from "@styles/admin";
 
 type Props = {
   label: string;

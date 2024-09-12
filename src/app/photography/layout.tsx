@@ -5,7 +5,7 @@ import Title from "@components/Title";
 import { fullScreen } from "@utils/layout";
 import { css } from "@panda/css";
 import SiteContainer from "@components/layout/SiteContainer";
-import { paperBackground } from "@themes/notebook";
+import { paperBackground } from "@styles/notebook";
 import Header from "@components/Header";
 
 // https://codepen.io/mp/pen/kBEeKw

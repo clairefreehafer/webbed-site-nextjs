@@ -26,6 +26,7 @@ export type GrassDateRange =
   | "1113-1128"
   | "1129-1209";
 
+// TODO: enum?
 export const astrologyDateRanges = {
   capricorn: "1222-0119",
   aquarius: "0120-0218",

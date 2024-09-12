@@ -1,8 +1,8 @@
 "use client";
 
 import { css, cva } from "@panda/css";
-import { acnhTextBackground } from "@themes/animalCrossing";
-import { zeldaTextBackground } from "@themes/zelda";
+import { acnhTextBackground } from "@styles/animalCrossing";
+import { zeldaTextBackground } from "@styles/zelda";
 import { NavLink, defaultNavLinks } from "./config";
 import { usePathname } from "next/navigation";
 import LinkItem, { LinkItemProps } from "./LinkItem";

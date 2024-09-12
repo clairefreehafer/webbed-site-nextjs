@@ -3,7 +3,7 @@ import Nav from "@components/Nav";
 import AnimalCrossingLogo from "@components/animal-crossing/Logo";
 import SiteContainer from "@components/layout/SiteContainer";
 import { css, cx } from "@panda/css";
-import AnimalCrossingThemeRoot from "@styles/animal-crossing/theme";
+import ThemeRoot from "@components/animal-crossing/ThemeRoot";
 import { getGrassDateRange } from "@utils/animal-crossing";
 import { sand } from "@utils/animal-crossing/recipes";
 import { GrassDateRange, GrassShape } from "@utils/animal-crossing/types";
@@ -18,7 +18,7 @@ const main = (grassShape: GrassShape, grassDateRange: GrassDateRange) =>
       boxShadow: "0 1rem 0.5rem -0.5rem rgba(0, 0, 0, 0.5)",
       p: "9rem 1rem 1rem",
       width: "100%",
-    }),
+    })
   );
 
 export default function AnimalCrossingLayout({
@@ -29,7 +29,7 @@ export default function AnimalCrossingLayout({
   const grassDateRange = getGrassDateRange();
 
   return (
-    <AnimalCrossingThemeRoot shape="square">
+    <ThemeRoot shape="square">
       <SiteContainer>
         <Header>
           <AnimalCrossingLogo text="claire freehafer" />
@@ -37,6 +37,6 @@ export default function AnimalCrossingLayout({
         </Header>
         <main className={main("square", grassDateRange)}>{children}</main>
       </SiteContainer>
-    </AnimalCrossingThemeRoot>
+    </ThemeRoot>
   );
 }

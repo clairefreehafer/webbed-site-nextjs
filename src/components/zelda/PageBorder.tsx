@@ -1,5 +1,5 @@
 import { cva } from "@panda/css";
-import { whiteToBlue } from "@themes/zelda";
+import { whiteToBlue } from "@styles/zelda";
 
 const pageBorder = cva({
   base: {

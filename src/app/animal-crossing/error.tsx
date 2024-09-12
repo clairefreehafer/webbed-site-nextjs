@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Resetti from "../../../public/images/animal-crossing/error-screen-resetti.png";
 import { css, cx } from "@panda/css";
-import { acnhTextBackground } from "@themes/animalCrossing";
+import { acnhTextBackground } from "@styles/animalCrossing";
 
 const container = css({
   alignItems: "center",
@@ -16,7 +16,7 @@ const pre = cx(
   css({
     margin: "1rem",
     padding: "1rem 2rem",
-  }),
+  })
 );
 
 export default function Error({ error }: { error: Error }) {

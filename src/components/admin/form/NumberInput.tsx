@@ -1,4 +1,4 @@
-import { input } from "@themes/admin";
+import { input } from "@styles/admin";
 import Label from "./Label";
 import { css } from "@panda/css";
 

@@ -7,9 +7,9 @@ import { useEffect, useRef, useState } from "react";
 import SlideInfo from "./SlideInfo";
 import { getAlbumPhotos } from "@utils/prisma/photo";
 import { css, cva, cx } from "@panda/css";
-import { acnhTextBackground } from "@themes/animalCrossing";
+import { acnhTextBackground } from "@styles/animalCrossing";
 import { fillParent } from "@utils/layout";
-import { zeldaTextBackground } from "@themes/zelda";
+import { zeldaTextBackground } from "@styles/zelda";
 
 const ui = cva({
   base: {
@@ -64,7 +64,7 @@ const slides = cx(
     overflowX: "scroll",
     scrollBehavior: "smooth",
     scrollSnapType: "x mandatory",
-  }),
+  })
 );
 
 const slide = css({
@@ -83,7 +83,7 @@ const snapPoint = cx(
     left: 0,
     scrollSnapAlign: "center",
     top: 0,
-  }),
+  })
 );
 
 type Props = {

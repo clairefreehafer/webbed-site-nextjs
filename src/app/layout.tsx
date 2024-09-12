@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { inter } from "@fonts";
-import "@themes/index.css";
+import "@styles/index.css";
 
 declare global {
   namespace PrismaJson {

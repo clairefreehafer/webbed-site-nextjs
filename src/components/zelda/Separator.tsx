@@ -1,5 +1,5 @@
 import { css } from "@panda/css";
-import { whiteToBlue } from "@themes/zelda";
+import { whiteToBlue } from "@styles/zelda";
 
 type Props = {
   number: 1 | 2 | 3;
