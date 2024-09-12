@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { cutiveMono, loveYaLikeASister } from "@fonts";
 import Nav from "@components/Nav";
 import Title from "@components/Title";
 import { fullScreen } from "@styles/layout";
@@ -17,6 +16,7 @@ const titleWrapper = css({
   borderWidth: "3px 4px 3px 5px",
   display: "flex",
   flexDirection: "column",
+  fontFamily: "loveYaLikeASister",
   fontSize: "1.75rem",
   my: "1rem",
   p: "1rem",
@@ -42,9 +42,9 @@ export default function PhotographyLayout({
     >
       <SiteContainer>
         <Header>
-          <Nav fontClassName={cutiveMono.className} />
+          <Nav theme="notebook" />
 
-          <div className={`${loveYaLikeASister.className} ${titleWrapper}`}>
+          <div className={titleWrapper}>
             <Title />
           </div>
         </Header>

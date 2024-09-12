@@ -7,6 +7,7 @@ import {
   Press_Start_2P,
 } from "next/font/google";
 
+/** typewriter */
 export const cutiveMono = Cutive_Mono({
   display: "swap",
   preload: true,
@@ -17,6 +18,7 @@ export const cutiveMono = Cutive_Mono({
 
 export const inter = Inter({ subsets: ["latin"] });
 
+/** serif handwriting */
 export const loveYaLikeASister = Love_Ya_Like_A_Sister({
   display: "swap",
   preload: true,
@@ -25,6 +27,7 @@ export const loveYaLikeASister = Love_Ya_Like_A_Sister({
   weight: "400",
 });
 
+/** sans-serif handwriting */
 export const pangolin = Pangolin({
   display: "swap",
   preload: true,
@@ -33,6 +36,7 @@ export const pangolin = Pangolin({
   weight: "400",
 });
 
+/** 8-bit */
 export const pressStart2P = Press_Start_2P({
   display: "swap",
   preload: true,
@@ -41,6 +45,7 @@ export const pressStart2P = Press_Start_2P({
   variable: "--font-press-start-2p",
 });
 
+/** terminal */
 export const ptMono = PT_Mono({
   display: "swap",
   preload: true,

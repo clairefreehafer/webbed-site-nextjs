@@ -45,6 +45,16 @@ export default defineConfig({
         colors: {
           terminalGreen: { value: "rgba(0, 150, 0, 0.5)" },
         },
+        fonts: {
+          pressStart2P: {
+            value: "var(--font-press-start-2p), serif",
+            description: "8-bit",
+          },
+          ptMono: {
+            value: "var(--font-pt-mono), courier new, monospace",
+            description: "terminal",
+          },
+        },
         gradients: {
           scanLines: {
             value:
@@ -94,6 +104,20 @@ export default defineConfig({
         colors: {
           blueLine: { value: "rgba(0, 255, 255, 0.8)" },
           redLine: { value: "rgba(255, 0, 0, 0.8)" },
+        },
+        fonts: {
+          cutiveMono: {
+            value: "var(--font-cutive-mono), courier new, monospase",
+            description: "typewriter",
+          },
+          loveYaLikeASister: {
+            value: "var(--font-love-ya-like-a-sister), times new roman, serif",
+            description: "serif handwriting",
+          },
+          pangolin: {
+            value: "var(--font-pangolin), helvetica, sans-serif",
+            description: "sans-serif handwriting",
+          },
         },
         durations: {
           wiggleBox: { value: "250ms" },

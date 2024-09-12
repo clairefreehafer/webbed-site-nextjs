@@ -1,22 +1,18 @@
 "use client";
 
-import { pressStart2P } from "@fonts";
 import { css, cx } from "@panda/css";
 import Link from "next/link";
 import { useState } from "react";
 
 const links = ["sections", "albums", "photos", "tags", "icons"] as const;
 
-// `${pressStart2P.className} mx-auto my-12 flex w-full justify-around`
-const linkList = cx(
-  pressStart2P.className,
-  css({
-    display: "flex",
-    justifyContent: "space-around",
-    my: "3rem",
-    width: "100%",
-  }),
-);
+const linkList = css({
+  display: "flex",
+  fontFamily: "pressStart2P",
+  justifyContent: "space-around",
+  my: "3rem",
+  width: "100%",
+});
 
 const hoverStyles = css({
   opacity: 1,

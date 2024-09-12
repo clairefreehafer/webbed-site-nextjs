@@ -6,7 +6,6 @@ import { sizePhoto } from "@utils/smugmug";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Icon, { DisplayIconType } from "@components/Icon";
-import { loveYaLikeASister } from "@fonts";
 import { css } from "@panda/css";
 
 /** album values needed for the PolaroidGrid component. */
@@ -51,6 +50,7 @@ const insetShadow = css({
 
 const text = css({
   display: "flex",
+  fontFamily: "loveYaLikeASister",
   fontSize: "1.25rem",
   justifyContent: "center",
   marginTop: "1rem",
@@ -75,7 +75,7 @@ export default function PolaroidGrid({
               aspectRatio="1 / 1"
             />
             <div className={insetShadow} />
-            <h3 className={`${loveYaLikeASister.className} ${text}`}>
+            <h3 className={text}>
               <Icon icon={album.icon} theme="notebook" display="inline" />
               {album.name}
             </h3>

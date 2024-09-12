@@ -10,25 +10,23 @@ import { fullScreen } from "@styles/layout";
 import SiteContainer from "@components/layout/SiteContainer";
 
 const themeRoot = cx(
-  ptMono.className,
   css(fullScreen),
   css(scanLines),
   css({
     bg: "black",
     color: "white",
+    fontFamily: "ptMono",
   })
 );
 
-const titleContainer = cx(
-  pressStart2P.className,
-  css({
-    alignItems: "center",
-    boxShadow: "8BitWhite",
-    display: "flex",
-    flexDir: "column",
-    p: "1rem",
-  })
-);
+const titleContainer = css({
+  alignItems: "center",
+  boxShadow: "8BitWhite",
+  display: "flex",
+  flexDir: "column",
+  fontFamily: "pressStart2P",
+  p: "1rem",
+});
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   return (

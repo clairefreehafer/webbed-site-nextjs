@@ -19,6 +19,7 @@ const listItem = cva({
         color: "limegreen",
       },
       animalCrossing: {},
+      notebook: {},
       zelda: {
         ...sheikahUnderline,
         textDecoration: "none",

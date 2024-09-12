@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
-import { inter } from "@fonts";
+import {
+  cutiveMono,
+  inter,
+  loveYaLikeASister,
+  pangolin,
+  pressStart2P,
+  ptMono,
+} from "@fonts";
 import "@styles/index.css";
 
 declare global {
@@ -17,13 +24,21 @@ export const metadata: Metadata = {
   title: "claire freehafer",
 };
 
+const fonts = `
+  ${cutiveMono.variable}
+  ${loveYaLikeASister.variable}
+  ${pangolin.variable}
+  ${pressStart2P.variable}
+  ${ptMono.variable}
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" style={{ overscrollBehaviorY: "none" }}>
+    <html lang="en" className={fonts}>
       <link
         rel="alternate"
         type="application/rss+xml"

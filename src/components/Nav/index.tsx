@@ -21,6 +21,9 @@ const nav = cva({
         height: "4rem",
         p: "0 1.5rem",
       },
+      notebook: {
+        fontFamily: "cutiveMono",
+      },
       zelda: {
         ...zeldaTextBackground,
         p: "0.5rem 0 1.5rem",
@@ -56,7 +59,7 @@ export default function Navigation({
   const isActive = (name: string) => pathname.startsWith(`/${slugName(name)}`);
 
   return (
-    <nav className={`${nav({ theme })} ${fontClassName}`}>
+    <nav className={nav({ theme })}>
       <ul className={list}>
         {navLinks.map((link: NavLink) => (
           <LinkItem
