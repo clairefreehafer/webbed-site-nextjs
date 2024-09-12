@@ -1,5 +1,5 @@
 import { css, cx } from "@panda/css";
-import { fullScreen } from "@utils/layout";
+import { fullScreen } from "@styles/layout";
 
 const themeRoot = cx(
   css(fullScreen),

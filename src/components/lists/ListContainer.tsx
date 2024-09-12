@@ -1,4 +1,4 @@
-import { ListItems, ListObject } from "@utils/lists";
+import { ListItems, ListObject } from "types/lists";
 import CameraListItem from "./CameraListItem";
 import VideoGameListItem from "./VideoGameListItem";
 import { Fragment } from "react";

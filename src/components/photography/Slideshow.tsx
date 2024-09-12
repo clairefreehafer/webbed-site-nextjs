@@ -7,7 +7,7 @@ import { getPhotosWithTag } from "@utils/prisma/tag";
 import { getSmugmugPhotos } from "@utils/smugmug";
 import { useEffect, useState } from "react";
 import { css, cva, cx } from "@panda/css";
-import { fullScreen } from "@utils/layout";
+import { fullScreen } from "@styles/layout";
 
 const FADE_DELAY = 500;
 
@@ -18,7 +18,7 @@ const main = cx(
     display: "flex",
     justifyContent: "center",
     p: "1rem",
-  }),
+  })
 );
 
 // {`${animateOut && "animate-fade-out-500"} ${animateIn && "animate-fade-in-500"} animation-fill-mode:forwards]`}

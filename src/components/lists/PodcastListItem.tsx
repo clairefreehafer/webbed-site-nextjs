@@ -1,4 +1,4 @@
-import { PodcastListObject } from "@utils/lists";
+import { PodcastListObject } from "types/lists";
 
 export default function VideoGameListItem({ episodeTitle }: PodcastListObject) {
   // TODO: include openlibrary link

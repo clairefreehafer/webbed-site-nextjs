@@ -1,6 +1,6 @@
 import { displayName } from "@utils/album";
 import lists from "../lists.json";
-import { ListObject } from "@utils/lists";
+import { ListObject } from "types/lists";
 import ListContainer from "@components/lists/ListContainer";
 
 export function generateStaticParams() {
@@ -13,7 +13,7 @@ export function generateStaticParams() {
 // or maybe could just make them two separate lists 🤔
 export default function Page({ params }: { params: { list: string } }) {
   const list: ListObject = lists.find(
-    (listItem) => listItem.title === displayName(params.list),
+    (listItem) => listItem.title === displayName(params.list)
   ) as ListObject;
 
   if (!list) return <>list not found!</>;

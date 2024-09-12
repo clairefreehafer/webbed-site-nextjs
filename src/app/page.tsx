@@ -2,7 +2,7 @@ import Nav from "@components/Nav";
 import RainbowBorder from "@components/RainbowBorder";
 import SiteContainer from "@components/layout/SiteContainer";
 import { css } from "@panda/css";
-import { fillParent, fullScreen } from "@utils/layout";
+import { fillParent, fullScreen } from "@styles/layout";
 
 const rainbowBorder = css({
   width: "100%",

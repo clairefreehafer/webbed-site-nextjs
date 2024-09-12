@@ -1,4 +1,4 @@
-import { MusicListObject } from "@utils/lists";
+import { MusicListObject } from "types/lists";
 
 export default function VideoGameListItem({ title }: MusicListObject) {
   // TODO: include openlibrary link

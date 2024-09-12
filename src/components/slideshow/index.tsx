@@ -8,7 +8,7 @@ import SlideInfo from "./SlideInfo";
 import { getAlbumPhotos } from "@utils/prisma/photo";
 import { css, cva, cx } from "@panda/css";
 import { acnhTextBackground } from "@styles/animalCrossing";
-import { fillParent } from "@utils/layout";
+import { fillParent } from "@styles/layout";
 import { zeldaTextBackground } from "@styles/zelda";
 
 const ui = cva({

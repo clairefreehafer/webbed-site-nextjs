@@ -1,6 +1,6 @@
 import { cva } from "@panda/css";
 import { Album, Icon } from "@prisma/client";
-import { getAstrologyDateRange } from "@utils/animal-crossing";
+import { getAstrologyDateRange } from "@utils/animalCrossing";
 
 export type DisplayIconType = Pick<Icon, "imagePath" | "character" | "text">;
 

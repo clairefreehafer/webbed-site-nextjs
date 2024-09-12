@@ -1,4 +1,4 @@
-import { BookListObject } from "@utils/lists";
+import { BookListObject } from "types/lists";
 
 export default function VideoGameListItem({ title }: BookListObject) {
   // TODO: include openlibrary link

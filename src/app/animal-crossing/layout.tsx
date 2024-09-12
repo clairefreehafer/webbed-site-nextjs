@@ -4,9 +4,9 @@ import AnimalCrossingLogo from "@components/animal-crossing/Logo";
 import SiteContainer from "@components/layout/SiteContainer";
 import { css, cx } from "@panda/css";
 import ThemeRoot from "@components/animal-crossing/ThemeRoot";
-import { getGrassDateRange } from "@utils/animal-crossing";
-import { sand } from "@utils/animal-crossing/recipes";
-import { GrassDateRange, GrassShape } from "@utils/animal-crossing/types";
+import { getGrassDateRange } from "@utils/animalCrossing";
+import { sand } from "@styles/animalCrossing";
+import { GrassDateRange, GrassShape } from "types/animalCrossing";
 
 const main = (grassShape: GrassShape, grassDateRange: GrassDateRange) =>
   cx(

@@ -1,10 +1,10 @@
-import { getGrassDateRange } from "@utils/animal-crossing";
+import { getGrassDateRange } from "@utils/animalCrossing";
 import { ReactNode } from "react";
 import { fotSeuratProB } from "@fonts/animal-crossing";
-import { GrassDateRange, GrassShape } from "@utils/animal-crossing/types";
+import { GrassDateRange, GrassShape } from "types/animalCrossing";
 import { css, cx } from "@panda/css";
-import { fullScreen } from "@utils/layout";
-import { grass } from "@utils/animal-crossing/recipes";
+import { fullScreen } from "@styles/layout";
+import { grass } from "@styles/animalCrossing";
 
 const themeRoot = (grassShape: GrassShape, grassDateRange: GrassDateRange) =>
   cx(

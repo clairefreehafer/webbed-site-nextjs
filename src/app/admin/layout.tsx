@@ -6,7 +6,7 @@ import { ReactNode } from "react";
 import { css, cx } from "@panda/css";
 import Header from "@components/Header";
 import { scanLines } from "@styles/admin";
-import { fullScreen } from "@utils/layout";
+import { fullScreen } from "@styles/layout";
 import SiteContainer from "@components/layout/SiteContainer";
 
 const themeRoot = cx(

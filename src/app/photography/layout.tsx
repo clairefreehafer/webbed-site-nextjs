@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { cutiveMono, loveYaLikeASister } from "@fonts";
 import Nav from "@components/Nav";
 import Title from "@components/Title";
-import { fullScreen } from "@utils/layout";
+import { fullScreen } from "@styles/layout";
 import { css } from "@panda/css";
 import SiteContainer from "@components/layout/SiteContainer";
 import { paperBackground } from "@styles/notebook";
