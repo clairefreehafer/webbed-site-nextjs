@@ -6,8 +6,46 @@ import { getPhotographyAlbumPhotos } from "@utils/prisma/album";
 import { getPhotosWithTag } from "@utils/prisma/tag";
 import { getSmugmugPhotos } from "@utils/smugmug";
 import { useEffect, useState } from "react";
+import { css, cva, cx } from "@panda/css";
+import { fullScreen } from "@utils/layout";
 
 const FADE_DELAY = 500;
+
+const main = cx(
+  css(fullScreen),
+  css({
+    alignItems: "center",
+    display: "flex",
+    justifyContent: "center",
+    p: "1rem",
+  }),
+);
+
+// {`${animateOut && "animate-fade-out-500"} ${animateIn && "animate-fade-in-500"} animation-fill-mode:forwards]`}
+const image = css({
+  maxHeight: "100%",
+  maxWidth: "100%",
+  objectFit: "contain",
+});
+
+const slideNav = cva({
+  base: {
+    position: "fixed",
+    top: "50%",
+    transform: "translateY(-50%)",
+    width: "auto",
+  },
+  variants: {
+    direction: {
+      backwards: {
+        left: 0,
+      },
+      forwards: {
+        right: 0,
+      },
+    },
+  },
+});
 
 type Props = {
   photos:
@@ -38,10 +76,10 @@ export default function Slideshow({ photos }: Props) {
     return () => clearTimeout(timeout);
   }, [photos, currentPhotoIndex]);
 
-  function handleArrowClick(direction: "back" | "forward") {
+  function handleArrowClick(direction: "backwards" | "forward") {
     setAnimateOut(true);
 
-    if (direction === "back") {
+    if (direction === "backwards") {
       setTimeout(() => setCurrentPhotoIndex(currentPhotoIndex - 1), FADE_DELAY);
     } else {
       setTimeout(() => setCurrentPhotoIndex(currentPhotoIndex + 1), FADE_DELAY);
@@ -49,17 +87,17 @@ export default function Slideshow({ photos }: Props) {
   }
 
   return (
-    <main className="flex h-screen w-screen justify-center p-4 align-middle">
+    <main className={main}>
       <img
         src={sizePhoto(currentPhoto?.url, "XL")}
         alt={currentPhoto?.altText || ""}
-        className={`${animateOut && "animate-fade-out-500"} ${animateIn && "animate-fade-in-500"} max-w-full object-contain [animation-fill-mode:forwards]`}
+        className={image}
       />
       {currentPhotoIndex > 0 && (
         <button
           type="button"
-          onClick={() => handleArrowClick("back")}
-          className="fixed left-0 top-1/2 translate-y-[-50%] text-5xl"
+          onClick={() => handleArrowClick("backwards")}
+          className={slideNav({ direction: "backwards" })}
         >
           &larr;
         </button>
@@ -68,7 +106,7 @@ export default function Slideshow({ photos }: Props) {
         <button
           type="button"
           onClick={() => handleArrowClick("forward")}
-          className="fixed right-0 top-1/2 translate-y-[-50%] text-5xl"
+          className={slideNav({ direction: "forwards" })}
         >
           &rarr;
         </button>

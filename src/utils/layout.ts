@@ -8,7 +8,4 @@ export const fillParent = css.raw({
 export const fullScreen = css.raw({
   display: "flex",
   minHeight: "100vh",
-  "& > *": {
-    width: "100%",
-  },
 });

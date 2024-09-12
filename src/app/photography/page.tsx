@@ -13,18 +13,6 @@ const text = css({
   marginBottom: "paperLineSpacing",
 });
 
-const StyledLink = ({
-  href,
-  children,
-}: {
-  href: string;
-  children: ReactNode;
-}) => (
-  <Link href={href} className="underline hover:no-underline">
-    {children}
-  </Link>
-);
-
 export default function Photography() {
   return (
     <>
@@ -36,14 +24,14 @@ export default function Photography() {
       </p>
 
       <h3 className={`${loveYaLikeASister.className} ${title}`}>
-        <StyledLink href="/photography/albums">albums</StyledLink>
+        <Link href="/photography/albums">albums</Link>
       </h3>
       <p className={`${pangolin.className} ${text}`}>
         photos grouped by location, most recent first.
       </p>
 
       <h3 className={`${loveYaLikeASister.className} ${title}`}>
-        <StyledLink href="/photography/collections">collections</StyledLink>
+        <Link href="/photography/collections">collections</Link>
       </h3>
       <p className={`${pangolin.className} ${text}`}>
         photos grouped by concept, subject, etc.
@@ -56,7 +44,7 @@ export default function Photography() {
       </p>
 
       <h3 className={`${loveYaLikeASister.className} ${title}`}>
-        <StyledLink href="/photography/technical">technical</StyledLink>
+        <Link href="/photography/technical">technical</Link>
       </h3>
       <p className={`${pangolin.className} ${text}`}>grouped by camera.</p>
 

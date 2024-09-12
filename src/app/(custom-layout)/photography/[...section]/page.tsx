@@ -1,4 +1,4 @@
-import Slideshow from "@components/photography/slideshow";
+import Slideshow from "@components/photography/Slideshow";
 import { AlbumTypes, displayName, slugName } from "@utils/album";
 import { getPhotosWithTag } from "@utils/prisma/tag";
 import {
@@ -7,7 +7,6 @@ import {
 } from "@utils/prisma/album";
 import { getAllDescendants } from "@utils/prisma/section";
 import { getAncestorSections } from "@utils/section";
-import "@styles/photography/theme.css";
 import { getSmugmugPhotos } from "@utils/smugmug";
 
 export async function generateStaticParams() {

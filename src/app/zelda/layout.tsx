@@ -28,16 +28,14 @@ type Props = {
 export default function ZeldaLayout({ children }: Props) {
   return (
     <ZeldaThemeRoot>
-      <div>
-        <PageBorder position="top" />
-        <SiteContainer>
-          <Header>
-            <Navigation theme="zelda" />
-            <h1 className={title}>claire freehafer</h1>
-          </Header>
-          <main className={main}>{children}</main>
-        </SiteContainer>
-      </div>
+      <PageBorder position="top" />
+      <SiteContainer>
+        <Header>
+          <Navigation theme="zelda" />
+          <h1 className={title}>claire freehafer</h1>
+        </Header>
+        <main className={main}>{children}</main>
+      </SiteContainer>
       <PageBorder position="bottom" />
     </ZeldaThemeRoot>
   );

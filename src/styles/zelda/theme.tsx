@@ -6,6 +6,7 @@ const themeRoot = cx(
   css({
     bgImage: "url('/images/zelda/pad-background.jpg')",
     color: "white",
+    width: "100%",
   }),
 );
 

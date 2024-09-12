@@ -4,10 +4,14 @@ import SiteContainer from "@components/layout/SiteContainer";
 import { css } from "@panda/css";
 import { fillParent, fullScreen } from "@utils/layout";
 
+const rainbowBorder = css({
+  width: "100%",
+});
+
 export default function Home() {
   return (
     <div className={css(fullScreen)}>
-      <RainbowBorder borderWidth={2}>
+      <RainbowBorder borderWidth={2} className={rainbowBorder}>
         <div
           className={css(fillParent, {
             backgroundColor: "black",

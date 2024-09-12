@@ -38,7 +38,7 @@ export default async function ZeldaPage() {
       <Separator number={2} />
 
       <Game>breath of the wild</Game>
-      <p className="mb-8">coming eventually</p>
+      <p>coming eventually</p>
 
       <Separator number={3} />
     </div>
