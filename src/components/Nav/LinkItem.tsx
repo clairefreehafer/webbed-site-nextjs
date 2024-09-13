@@ -1,5 +1,5 @@
 import WiggleBox from "@components/photography/WiggleBox";
-import { css, cva } from "@panda/css";
+import { RecipeVariant, css, cva } from "@panda/css";
 import { sheikahUnderline } from "@styles/zelda";
 import Link from "next/link";
 import { NavLink } from "./config";
@@ -54,7 +54,7 @@ const linkStyle = css({
 
 export type LinkItemProps = {
   link: NavLink;
-  theme?: (typeof listItem.variantMap.theme)[number];
+  theme?: RecipeVariant<typeof listItem>["theme"];
   isActive: boolean;
   // visible: boolean;
 };

@@ -1,6 +1,6 @@
 import { ChangeEventHandler, ForwardedRef, forwardRef } from "react";
 import Label from "./Label";
-import { input } from "@styles/admin";
+import { adminInput } from "@panda/recipes";
 
 type Props = {
   label?: string;
@@ -21,7 +21,7 @@ const Select = forwardRef<HTMLSelectElement, Props>(function Select(
         id={name}
         name={name}
         defaultValue={defaultValue}
-        className={input({ type: "select" })}
+        className={adminInput({ type: "select" })}
         onChange={onChange}
         ref={ref}
       >

@@ -1,5 +1,5 @@
-import { input } from "@styles/admin";
 import Label from "./Label";
+import { adminInput } from "@panda/recipes";
 
 type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   label: string;
@@ -21,7 +21,7 @@ export default function DateInput({
         name={name}
         id={name}
         value={defaultValue}
-        className={input({ type: "date" })}
+        className={adminInput({ type: "date" })}
         {...inputProps}
       />
     </>

@@ -3,18 +3,12 @@ import {
   GRASS_SHAPES,
   GrassDateRange,
 } from "types/animalCrossing";
-import { css, cva } from "@panda/css";
+import { cva } from "@panda/css";
 import {
   RecipeConfig,
   RecipeDefinition,
   RecipeVariantRecord,
 } from "@panda/types";
-
-export const acnhTextBackground = css.raw({
-  backgroundColor: "rgb(248, 245, 223, 0.8)",
-  borderRadius: "3rem",
-  boxShadow: "0 0.75rem 0.5rem -0.5rem rgba(0, 0, 0, 0.5)",
-});
 
 // this cannot be a config recipe because we are dynamically choosing a variant using
 // JS variables, so we need all of the utility classes to be generated.

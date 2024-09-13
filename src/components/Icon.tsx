@@ -1,4 +1,4 @@
-import { cva } from "@panda/css";
+import { RecipeVariant, cva } from "@panda/css";
 import { Album, Icon } from "@prisma/client";
 import { getAstrologyDateRange } from "@utils/animalCrossing";
 
@@ -50,8 +50,8 @@ export type DisplayIconProps = {
   date?: Album["date"];
   display: "inline" | "solo";
   theme?:
-    | (typeof imageIcon.variantMap.theme)[number]
-    | (typeof emojiIcon.variantMap.theme)[number];
+    | RecipeVariant<typeof imageIcon>["theme"]
+    | RecipeVariant<typeof emojiIcon>["theme"];
 };
 
 // TODO: add hover title

@@ -1,5 +1,5 @@
 import { css, cx } from "@panda/css";
-import { input } from "@styles/admin";
+import { adminInput } from "@panda/recipes";
 import { ReactNode } from "react";
 
 const radio = cx(
@@ -66,7 +66,7 @@ export default function RadioFieldset({
   children,
 }: RadioFieldsetProps) {
   return (
-    <fieldset className={input({ type: "radioFieldset" })}>
+    <fieldset className={adminInput({ type: "radioFieldset" })}>
       <legend className={css({ textTransform: "uppercase" })}>{legend}</legend>
 
       <div className={options}>{children}</div>

@@ -1,5 +1,5 @@
+import { adminInput } from "@panda/recipes";
 import Label from "./Label";
-import { input } from "@styles/admin";
 
 type Props = {
   label: string;
@@ -22,7 +22,7 @@ export default function TextInput({
         name={name}
         id={name}
         defaultValue={defaultValue}
-        className={input({ type: "text" })}
+        className={adminInput({ type: "text" })}
         required={required}
       />
     </>

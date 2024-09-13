@@ -1,6 +1,6 @@
-import { input } from "@styles/admin";
 import Label from "./Label";
 import { css } from "@panda/css";
+import { adminInput } from "@panda/recipes";
 
 const container = css({
   borderRight: "2px solid white",
@@ -21,7 +21,7 @@ export default function NumberInput({ label, name, defaultValue }: Props) {
           type="number"
           name={name}
           id={name}
-          className={input({ type: "number" })}
+          className={adminInput({ type: "number" })}
           defaultValue={defaultValue}
         />
       </div>

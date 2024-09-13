@@ -1,5 +1,5 @@
-import { input } from "@styles/admin";
 import Label from "./Label";
+import { adminInput } from "@panda/recipes";
 
 type Props = {
   name: string;
@@ -15,7 +15,7 @@ export default function Textarea({ name, label, defaultValue }: Props) {
         name={name}
         id={name}
         defaultValue={defaultValue}
-        className={input({ type: "textarea" })}
+        className={adminInput({ type: "textarea" })}
       />
     </>
   );

@@ -1,21 +1,7 @@
-import { css, cva } from "@panda/css";
+import { defineRecipe } from "@pandacss/dev";
 
-// https://css-tricks.com/old-timey-terminal-styling/
-export const scanLines = css.raw({
-  _after: {
-    bg: "{gradients.scanLines}",
-    content: '""',
-    height: "100vh",
-    left: 0,
-    pointerEvents: "none",
-    position: "absolute",
-    top: 0,
-    width: "100vw",
-  },
-});
-
-// TODO: make config recipe?
-export const input = cva({
+export const adminInputRecipe = defineRecipe({
+  className: "admin-input",
   base: {
     bg: "black",
     borderRadius: "0.25rem",

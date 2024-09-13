@@ -1,7 +1,6 @@
 "use client";
 
-import { css, cva } from "@panda/css";
-import { acnhTextBackground } from "@styles/animalCrossing";
+import { RecipeVariant, css, cva } from "@panda/css";
 import { zeldaTextBackground } from "@styles/zelda";
 import { NavLink, defaultNavLinks } from "./config";
 import { usePathname } from "next/navigation";
@@ -16,7 +15,7 @@ const nav = cva({
     theme: {
       admin: {},
       animalCrossing: {
-        ...acnhTextBackground,
+        layerStyle: "acnhTextBackground",
         alignItems: "center",
         height: "4rem",
         p: "0 1.5rem",
@@ -41,18 +40,16 @@ const list = css({
 
 type AvailableThemes =
   | LinkItemProps["theme"]
-  | (typeof nav.variantMap.theme)[number];
+  | RecipeVariant<typeof nav>["theme"];
 
 type Props = {
   navLinks?: typeof defaultNavLinks;
   theme?: AvailableThemes;
-  fontClassName?: string;
 };
 
 export default function Navigation({
   navLinks = defaultNavLinks,
   theme,
-  fontClassName = "",
 }: Props) {
   const pathname = usePathname();
 

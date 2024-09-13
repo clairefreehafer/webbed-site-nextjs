@@ -1,7 +1,7 @@
 import { slugName } from "@utils/album";
 import Link from "next/link";
 import Icon, { DisplayIconType } from "@components/Icon";
-import { css, cva } from "@panda/css";
+import { RecipeVariant, css, cva } from "@panda/css";
 
 export type IconListAlbum = {
   id: number;
@@ -21,7 +21,7 @@ function generateUrl({
   return (
     sectionArray.reduce(
       (string: string, section: string) => `${string}${slugName(section)}/`,
-      "/",
+      "/"
     ) + slugName(name)
   );
 }
@@ -58,7 +58,7 @@ const link = cva({
 
 type Props = {
   albums: IconListAlbum[];
-  theme?: (typeof link.variantMap.theme)[0];
+  theme?: RecipeVariant<typeof link>["theme"];
 };
 
 export default function IconList({ albums, theme }: Props) {

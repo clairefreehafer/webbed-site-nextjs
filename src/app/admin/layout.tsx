@@ -1,18 +1,15 @@
-import { usePathname } from "next/navigation";
 import Nav from "@components/Nav";
-import { pressStart2P, ptMono } from "@fonts";
 import Title from "@components/Title";
 import { ReactNode } from "react";
 import { css, cx } from "@panda/css";
 import Header from "@components/Header";
-import { scanLines } from "@styles/admin";
 import { fullScreen } from "@styles/layout";
 import SiteContainer from "@components/layout/SiteContainer";
+import { scanLines } from "@panda/patterns";
 
 const themeRoot = cx(
   css(fullScreen),
-  css(scanLines),
-  css({
+  scanLines({
     bg: "black",
     color: "white",
     fontFamily: "ptMono",

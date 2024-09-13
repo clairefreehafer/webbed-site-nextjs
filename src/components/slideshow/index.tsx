@@ -6,8 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import SlideInfo from "./SlideInfo";
 import { getAlbumPhotos } from "@utils/prisma/photo";
-import { css, cva, cx } from "@panda/css";
-import { acnhTextBackground } from "@styles/animalCrossing";
+import { RecipeVariant, css, cva, cx } from "@panda/css";
 import { fillParent } from "@styles/layout";
 import { zeldaTextBackground } from "@styles/zelda";
 
@@ -19,7 +18,7 @@ const ui = cva({
   variants: {
     theme: {
       animalCrossing: {
-        ...acnhTextBackground,
+        layerStyle: "acnhTextBackground",
         px: "1rem",
         py: "0.5rem",
       },
@@ -90,7 +89,7 @@ type Props = {
   photos: Prisma.PromiseReturnType<typeof getAlbumPhotos>;
   albumName: string;
   albumSection: string;
-  theme: (typeof ui.variantMap.theme)[number];
+  theme: RecipeVariant<typeof ui>["theme"];
 };
 
 export default function Slideshow({
