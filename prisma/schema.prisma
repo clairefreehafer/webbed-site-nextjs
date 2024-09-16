@@ -73,3 +73,41 @@ model Icon {
   sections  Section[]
   photos    Photo[]
 }
+
+model List {
+  id            Int        @id @default(autoincrement())
+  name          String     @db.VarChar(255) @unique
+  items         ListItem[]
+  sortBy        String?    @db.VarChar(255)
+  sortDirection String?    @db.VarChar(255)
+}
+
+model ListItem {
+  id    Int    @id @default(autoincrement())
+  data  Json
+  lists List[]
+}
+
+model Recipe {
+  id           Int          @id @default(autoincrement())
+  title        String       @db.VarChar(255)
+  ingredients  Ingredient[]
+  instructions String[]
+  url          String?      @db.VarChar
+}
+
+model Ingredient {
+  id       Int      @id @default(autoincrement())
+  quantity Int
+  unit     String
+  recipes  Recipe[]
+  food     Food     @relation("ingredients", fields: [foodId], references: [id])
+  foodId   Int
+}
+
+model Food {
+  id          Int          @id @default(autoincrement())
+  name        String
+  category    String?
+  ingredients Ingredient[] @relation("ingredients")
+}
