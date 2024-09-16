@@ -6,6 +6,8 @@ import {
   pangolin,
   pressStart2P,
   ptMono,
+  redactedScript,
+  ribeye,
 } from "@fonts";
 import "@styles/index.css";
 
@@ -30,6 +32,8 @@ const fonts = `
   ${pangolin.variable}
   ${pressStart2P.variable}
   ${ptMono.variable}
+  ${redactedScript.variable}
+  ${ribeye.variable}
 `;
 
 export default function RootLayout({

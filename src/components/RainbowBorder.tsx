@@ -10,6 +10,7 @@ type Props = {
   className?: string;
 };
 
+// TODO: use border-image!!!!!
 export default function RainbowBorder({
   borderWidth,
   children,

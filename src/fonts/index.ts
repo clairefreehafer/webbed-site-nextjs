@@ -5,6 +5,9 @@ import {
   PT_Mono,
   Pangolin,
   Press_Start_2P,
+  Redacted_Script,
+  Ribeye_Marrow,
+  Silkscreen,
 } from "next/font/google";
 
 /** typewriter */
@@ -53,3 +56,30 @@ export const ptMono = PT_Mono({
   weight: "400",
   variable: "--font-pt-mono",
 });
+
+/** text background/underline */
+export const redactedScript = Redacted_Script({
+  display: "swap",
+  preload: true,
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
+  variable: "--font-redacted-script",
+});
+
+/** bubbly serif */
+export const ribeye = Ribeye_Marrow({
+  display: "swap",
+  preload: true,
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-ribeye-marrow",
+});
+
+/** uppercase pixel */
+// export const silkscreen = Silkscreen({
+//   display: "swap",
+//   preload: true,
+//   subsets: ["latin"],
+//   weight: "400",
+//   variable: "--font-silkscreen",
+// })
