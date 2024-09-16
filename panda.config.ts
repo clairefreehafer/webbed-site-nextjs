@@ -1,5 +1,5 @@
 import { defineConfig } from "@pandacss/dev";
-import { scanLines } from "@styles/config/patterns";
+import patterns from "@styles/config/patterns";
 import { acnhTextBackground } from "@styles/config/layerStyles";
 import { adminInputRecipe } from "@styles/config/recipes";
 import {
@@ -54,9 +54,7 @@ export default defineConfig({
     themes: ["admin", "animalCrossing", "notebook", "zelda"],
   },
 
-  patterns: {
-    scanLines,
-  },
+  patterns,
 
   // The output directory for your css system
   outdir: "styled-system",
@@ -65,4 +63,5 @@ export default defineConfig({
   presets: [],
 
   importMap: "@panda",
+  jsxFramework: "react",
 });

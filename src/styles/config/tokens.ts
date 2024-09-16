@@ -2,6 +2,44 @@ import { defineTokens } from "@pandacss/dev";
 
 export const baseTokens = defineTokens({
   gradients: {
+    jaggedBorder: {
+      whiteBottom: {
+        value: `
+        linear-gradient(
+          45deg,
+          #FFFFFF 33.333%,
+          transparent 33.333%,
+          transparent 66.667%,
+          #FFFFFF 66.667%
+        ),
+          linear-gradient(
+            -45deg,
+            #FFFFFF 33.333%,
+            transparent 33.333%,
+            transparent 66.667%,
+            #FFFFFF 66.667%
+          )
+        `,
+      },
+      whiteTop: {
+        value: `
+          linear-gradient(
+            45deg,
+            transparent 33.333%,
+            #FFFFFF 33.333%,
+            #FFFFFF 66.667%,
+            transparent 66.667%
+          ),
+          linear-gradient(
+            -45deg,
+            transparent 33.333%,
+            #FFFFFF 33.333%,
+            #FFFFFF 66.667%,
+            transparent 66.667%
+          )
+        `,
+      },
+    },
     rainbow: {
       value:
         "linear-gradient(135deg, red, orange, yellow, green, blue, indigo, violet)",
