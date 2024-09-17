@@ -32,17 +32,18 @@ const Span = styled("span", {
 const highlight = css({
   fontFamily: "var(--font-redacted-script)",
   fontWeight: "700",
-  fontSize: "4rem",
+  fontSize: "4.5rem",
+  clipPath: "rect(auto 0 auto 0)",
   color: "yellow",
   left: 0,
   position: "absolute",
   overflow: "hidden",
-  textIndent: "10px",
-  width: "0%",
+  textAlign: "center",
+  transition: "clip-path 500ms",
   whiteSpace: "nowrap",
+  width: "100%",
   _groupHover: {
-    animation: "writeIn 250ms linear",
-    animationFillMode: "forwards",
+    clipPath: "rect(auto auto auto auto)",
   },
 });
 

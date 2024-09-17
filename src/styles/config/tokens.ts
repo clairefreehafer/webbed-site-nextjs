@@ -1,6 +1,13 @@
 import { defineTokens } from "@pandacss/dev";
 
 export const baseTokens = defineTokens({
+  colors: {
+    analglyph: {
+      black: { value: "#22313F" },
+      blue: { value: "#00FFFF" },
+      red: { value: "#F22613" },
+    },
+  },
   gradients: {
     jaggedBorder: {
       whiteBottom: {

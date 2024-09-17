@@ -39,8 +39,8 @@ const linksConfig = [
 export default function HomeNav() {
   return (
     <div className={grid}>
-      {linksConfig.map(
-        (link) => !link.hide && <ScribbleButton key={link.href} {...link} />
+      {linksConfig.map((link) =>
+        !link.hide ? <ScribbleButton key={link.href} {...link} /> : null
       )}
     </div>
   );

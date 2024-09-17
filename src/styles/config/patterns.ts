@@ -1,5 +1,21 @@
 import { definePattern } from "@pandacss/dev";
 
+const analglyphText = definePattern({
+  properties: {
+    shadowOffset: { type: "string" },
+  },
+  transform(props) {
+    const { shadowOffset } = props;
+
+    return {
+      color: "{colors.analglyph.black}",
+      position: "relative",
+      textShadow: `-${shadowOffset} 0 0 {colors.analglyph.red}, ${shadowOffset} 0 0 {colors.analglyph.blue}`,
+      ...props,
+    };
+  },
+});
+
 const jaggedBorder = definePattern({
   description: "https://codepen.io/HollowMan/pen/wvyymz",
   properties: {
@@ -26,6 +42,7 @@ const jaggedBorder = definePattern({
               backgroundSize: `${jagSize}px ${jagSize * 2}px`,
               content: '""',
               height: jagSize / 2,
+              left: 0,
               position: "absolute",
               top: -(jagSize / 2),
               width: "100%",
@@ -38,6 +55,7 @@ const jaggedBorder = definePattern({
               backgroundSize: `${jagSize}px ${jagSize * 2}px`,
               content: '""',
               height: jagSize,
+              left: 0,
               position: "absolute",
               bottom: -(jagSize / 2),
               width: "100%",
@@ -68,6 +86,7 @@ const scanLines = definePattern({
 });
 
 const patterns = {
+  analglyphText,
   jaggedBorder,
   scanLines,
 };
