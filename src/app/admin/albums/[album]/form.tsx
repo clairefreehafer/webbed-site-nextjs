@@ -13,7 +13,7 @@ import SectionSelect, {
 } from "@components/admin/form/SectionSelect";
 import IconSelect, { IconSelectProps } from "@components/admin/form/IconSelect";
 import { getAlbumData } from "@utils/prisma/album";
-import AdminForm, { FormState } from "@components/admin/form/index";
+import AdminForm, { AdminFormState } from "@components/admin/form/index";
 import TextInput from "@components/admin/form/TextInput";
 import Select from "@components/admin/form/Select";
 import HideSection from "@components/admin/form/HideSection";
@@ -29,7 +29,7 @@ type Props = {
   icons: IconSelectProps["icons"];
 };
 
-export type UpdateAlbumFormState = FormState<
+export type UpdateAlbumFormState = AdminFormState<
   Omit<Props["albumData"], "section" | "photos" | "date"> & {
     sectionName: Album["sectionName"];
     date?: string;
@@ -43,7 +43,7 @@ export default function UpdateAlbumForm({
   icons,
 }: Props) {
   const [generateDateAutomatically, setGenerateDateAutomatically] = useState(
-    !!albumPhotos.length,
+    !!albumPhotos.length
   );
   const [rootSection, setRootSection] = useState(albumData.rootSection);
 

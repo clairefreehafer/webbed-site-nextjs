@@ -4,7 +4,7 @@ import { css } from "@panda/css";
 import { ReactNode } from "react";
 import { useFormState } from "react-dom";
 
-export type FormState<T> = Partial<T & { message?: string }>;
+export type AdminFormState<T> = Partial<T> & { message?: string };
 
 type Props<T> = {
   initialState: Awaited<T>;

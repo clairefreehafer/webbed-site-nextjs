@@ -5,7 +5,7 @@ import { adminInput } from "@panda/recipes";
 type Props = {
   label?: string;
   name: string;
-  options: string[];
+  options: string[] | readonly string[];
   defaultValue?: string;
   onChange?: ChangeEventHandler<HTMLSelectElement>;
 };

@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 
 const table = css({
   borderCollapse: "collapse",
+  width: "100%",
 });
 
 const thead = css({
@@ -40,7 +41,7 @@ type Props<T> = {
 export default function AdminTable<T extends Data>({ data, config }: Props<T>) {
   function renderCell(
     cellConfig: Props<T>["config"][0],
-    item: Props<T>["data"][0],
+    item: Props<T>["data"][0]
   ) {
     if (typeof cellConfig === "function") {
       return cellConfig(item);
@@ -49,6 +50,10 @@ export default function AdminTable<T extends Data>({ data, config }: Props<T>) {
       return item[cellConfig];
     }
     return null;
+  }
+
+  if (!data || data.length === 0) {
+    return <>❌ no data to display.</>;
   }
 
   return (

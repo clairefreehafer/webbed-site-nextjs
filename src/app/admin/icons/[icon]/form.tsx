@@ -1,12 +1,12 @@
 import { editIcon } from "@actions/icon";
-import AdminForm, { FormState } from "@components/admin/form";
+import AdminForm, { AdminFormState } from "@components/admin/form";
 import SubmitButton from "@components/admin/form/SubmitButton";
 import TextInput from "@components/admin/form/TextInput";
 import Textarea from "@components/admin/form/Textarea";
 import { Prisma } from "@prisma/client";
 import { getIconData } from "@utils/prisma/icon";
 
-export type UpdateIconFormState = FormState<
+export type UpdateIconFormState = AdminFormState<
   Prisma.PromiseReturnType<typeof getIconData>
 >;
 

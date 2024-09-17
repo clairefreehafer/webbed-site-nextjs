@@ -1,4 +1,4 @@
-import AdminForm, { FormState } from "@components/admin/form/index";
+import AdminForm, { AdminFormState } from "@components/admin/form/index";
 import { editTag } from "@actions/tag";
 import { Prisma } from "@prisma/client";
 import { ReactNode } from "react";
@@ -11,7 +11,7 @@ type Props = {
   parentTagSelect: ReactNode;
 };
 
-export type UpdateTagFormState = FormState<
+export type UpdateTagFormState = AdminFormState<
   Prisma.PromiseReturnType<typeof getTag>
 >;
 

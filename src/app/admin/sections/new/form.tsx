@@ -1,13 +1,15 @@
 "use client";
 
 import { addSection } from "@actions/section";
-import AdminForm, { FormState } from "@components/admin/form/index";
+import AdminForm, { AdminFormState } from "@components/admin/form/index";
 import SubmitButton from "@components/admin/form/SubmitButton";
 import TextInput from "@components/admin/form/TextInput";
 import { Prisma } from "@prisma/client";
 import { ReactNode } from "react";
 
-export type NewSectionFormState = FormState<Prisma.SectionCreateArgs["data"]>;
+export type NewSectionFormState = AdminFormState<
+  Prisma.SectionCreateArgs["data"]
+>;
 
 type Props = {
   parentSectionSelect: ReactNode;

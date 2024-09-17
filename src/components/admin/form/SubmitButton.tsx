@@ -15,6 +15,11 @@ const button = css({
   width: "100%",
 });
 
+const message = css({
+  gridColumn: "span 2",
+  width: "100%",
+});
+
 export default function SubmitButton({ children }: { children: ReactNode }) {
   const { pending, data } = useFormStatus();
 
@@ -23,7 +28,9 @@ export default function SubmitButton({ children }: { children: ReactNode }) {
       <button type="submit" disabled={pending} className={button}>
         {children}
       </button>
-      <p>{data?.get("message") as string}</p>
+      {data?.get("message") && (
+        <p className={message}>{data?.get("message") as string}</p>
+      )}
     </>
   );
 }

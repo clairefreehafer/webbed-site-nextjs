@@ -1,19 +1,15 @@
 import { adminInput } from "@panda/recipes";
 import Label from "./Label";
 
-type Props = {
+type Props = Omit<
+  React.ComponentProps<"input">,
+  "name" | "type" | "id" | "className"
+> & {
   label: string;
   name: string;
-  defaultValue?: string;
-  required?: boolean;
 };
 
-export default function TextInput({
-  label,
-  name,
-  defaultValue,
-  required = false,
-}: Props) {
+export default function TextInput({ label, name, ...inputProps }: Props) {
   return (
     <>
       <Label htmlFor={name}>{label}</Label>
@@ -21,9 +17,8 @@ export default function TextInput({
         type="text"
         name={name}
         id={name}
-        defaultValue={defaultValue}
         className={adminInput({ type: "text" })}
-        required={required}
+        {...inputProps}
       />
     </>
   );

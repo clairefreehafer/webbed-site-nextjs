@@ -1,7 +1,7 @@
 "use client";
 
 import { editSection } from "@actions/section";
-import AdminForm, { FormState } from "@components/admin/form/index";
+import AdminForm, { AdminFormState } from "@components/admin/form/index";
 import SubmitButton from "@components/admin/form/SubmitButton";
 import TextInput from "@components/admin/form/TextInput";
 import { Prisma } from "@prisma/client";
@@ -13,7 +13,7 @@ type Props = {
   parentSectionSelect: ReactNode;
 };
 
-export type UpdateSectionFormState = FormState<Props["sectionData"]>;
+export type UpdateSectionFormState = AdminFormState<Props["sectionData"]>;
 
 export default function UpdateSectionForm({
   sectionData,

@@ -1,21 +1,18 @@
 "use server";
 
 import { UpdateAlbumFormState } from "@app/admin/albums/[album]/form";
-import { NewAlbumFormState } from "@app/admin/albums/new/form";
 import { Album, Prisma, PrismaClient } from "@prisma/client";
 import { AlbumTypes } from "@utils/album";
 import { getMostRecentPhotoDate } from "@utils/prisma/photo";
 import { createAlbum, updateAlbum } from "@utils/prisma/album";
 import { revalidatePath } from "next/cache";
+import { AdminFormState } from "@components/admin/form";
 
-export type AlbumFormState = Album & { message?: string };
+export type AlbumFormState = AdminFormState<Album>;
 
 const prisma = new PrismaClient();
 
-export async function addAlbum(
-  _prevState: NewAlbumFormState,
-  formData: FormData,
-) {
+export async function addAlbum(_prevState: AlbumFormState, formData: FormData) {
   const name = formData.get("name") as string;
   const type = formData.get("type") as AlbumTypes;
 
@@ -57,7 +54,7 @@ export async function addAlbum(
 
 export async function editAlbum(
   prevState: UpdateAlbumFormState,
-  formData: FormData,
+  formData: FormData
 ) {
   const name = formData.get("name") as string;
   const date = formData.get("date") as string;
@@ -78,12 +75,12 @@ export async function editAlbum(
       const { captureDate } = mostRecentCaptureDate;
 
       console.log(
-        `👉 changing date automatically from ${prevState.date} to ${captureDate}...`,
+        `👉 changing date automatically from ${prevState.date} to ${captureDate}...`
       );
       data.date = captureDate;
     } else if (date) {
       console.log(
-        `👉 changing date manually from ${prevState.date} to ${date}...`,
+        `👉 changing date manually from ${prevState.date} to ${date}...`
       );
       data.date = new Date(date);
     }
@@ -105,14 +102,14 @@ export async function editAlbum(
 
     if (prevState.sectionName !== sectionName) {
       console.log(
-        `👉 changing section from "${prevState.sectionName}" to section "${sectionName}"...`,
+        `👉 changing section from "${prevState.sectionName}" to section "${sectionName}"...`
       );
       data.section = { connect: { name: sectionName } };
     }
 
     if (coverKey && prevState.coverKey !== coverKey) {
       console.log(
-        `👉 changing coverKey from ${prevState.coverKey} to ${coverKey}...`,
+        `👉 changing coverKey from ${prevState.coverKey} to ${coverKey}...`
       );
       data.coverPhoto = { connect: { smugMugKey: coverKey } };
     }

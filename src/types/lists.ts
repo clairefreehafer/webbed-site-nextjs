@@ -1,3 +1,8 @@
+export const sortDirection = ["ascending", "descending"] as const;
+export type SortDirection = (typeof sortDirection)[number];
+
+export const sortBy = ["name"] as const;
+
 export type BookListObject = {
   title: string;
   author: string;

@@ -1,10 +1,12 @@
 import { addIcon } from "@actions/icon";
-import AdminForm, { FormState } from "@components/admin/form/index";
+import AdminForm, { AdminFormState } from "@components/admin/form/index";
 import SubmitButton from "@components/admin/form/SubmitButton";
 import TextInput from "@components/admin/form/TextInput";
 import { Icon } from "@prisma/client";
 
-export type NewIconState = FormState<Pick<Icon, "character" | "imagePath">>;
+export type NewIconState = AdminFormState<
+  Pick<Icon, "character" | "imagePath">
+>;
 
 const initialState: NewIconState = {};
 

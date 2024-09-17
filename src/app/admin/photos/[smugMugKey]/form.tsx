@@ -7,7 +7,7 @@ import { Prisma } from "@prisma/client";
 import SubmitButton from "@components/admin/form/SubmitButton";
 import { getAdminPhoto } from "@utils/prisma/photo";
 import IconSelect from "@components/admin/form/IconSelect";
-import AdminForm, { FormState } from "@components/admin/form/index";
+import AdminForm, { AdminFormState } from "@components/admin/form/index";
 import TextInput from "@components/admin/form/TextInput";
 import CheckboxInput from "@components/admin/form/CheckboxInput";
 import HideSection from "@components/admin/form/HideSection";
@@ -19,7 +19,7 @@ import { getAlbumNames } from "@utils/prisma/album";
 import SectionHeader from "@components/admin/form/FormSectionHeader";
 import { getIcons } from "@utils/prisma/icon";
 
-export type UpdatePhotoFormState = FormState<
+export type UpdatePhotoFormState = AdminFormState<
   Prisma.PromiseReturnType<typeof getAdminPhoto> &
     PrismaJson.Metadata & {
       synchronizeWithXmp?: boolean;
