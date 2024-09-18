@@ -85,10 +85,35 @@ const scanLines = definePattern({
   },
 });
 
+const siteContainer = definePattern({
+  description:
+    "for limiting the site conents to a specific max width, and centering on larger screens.",
+  properties: {
+    maxWidth: { type: "property", value: "maxWidth" },
+  },
+  defaultValues: {
+    // TODO: token
+    maxWidth: 750,
+  },
+  transform(props) {
+    return {
+      alignItems: "center",
+      display: "flex",
+      flexDir: "column",
+      gap: "1rem",
+      margin: "0 auto",
+      p: "1rem",
+      width: "100%",
+      ...props,
+    };
+  },
+});
+
 const patterns = {
   analglyphText,
   jaggedBorder,
   scanLines,
+  siteContainer,
 };
 
 export default patterns;

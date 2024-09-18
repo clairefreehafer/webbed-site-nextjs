@@ -1,6 +1,6 @@
 import { defineConfig } from "@pandacss/dev";
 import patterns from "@styles/config/patterns";
-import { acnhTextBackground } from "@styles/config/layerStyles";
+import layerStyles from "@styles/config/layerStyles";
 import { adminInputRecipe } from "@styles/config/recipes";
 import {
   adminTokens,
@@ -25,10 +25,7 @@ export default defineConfig({
     tokens: baseTokens,
 
     keyframes,
-
-    layerStyles: {
-      acnhTextBackground,
-    },
+    layerStyles,
 
     recipes: {
       adminInput: adminInputRecipe,

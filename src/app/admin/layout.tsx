@@ -4,8 +4,8 @@ import { ReactNode } from "react";
 import { css, cx } from "@panda/css";
 import Header from "@components/Header";
 import { fullScreen } from "@styles/layout";
-import SiteContainer from "@components/layout/SiteContainer";
 import { scanLines } from "@panda/patterns";
+import { SiteContainer } from "@panda/jsx";
 
 const themeRoot = cx(
   css(fullScreen),

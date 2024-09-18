@@ -1,12 +1,12 @@
 import Header from "@components/Header";
 import Nav from "@components/Nav";
 import AnimalCrossingLogo from "@components/animal-crossing/Logo";
-import SiteContainer from "@components/layout/SiteContainer";
 import { css, cx } from "@panda/css";
 import ThemeRoot from "@components/animal-crossing/ThemeRoot";
 import { getGrassDateRange } from "@utils/animalCrossing";
 import { sand } from "@styles/animalCrossing";
 import { GrassDateRange, GrassShape } from "types/animalCrossing";
+import { SiteContainer } from "@panda/jsx";
 
 const main = (grassShape: GrassShape, grassDateRange: GrassDateRange) =>
   cx(

@@ -1,6 +1,6 @@
 import { defineLayerStyles } from "@pandacss/dev";
 
-export const acnhTextBackground = defineLayerStyles({
+const layerStyles = defineLayerStyles({
   acnhTextBackground: {
     description: "ACNH-style dialogue bubble background",
     value: {
@@ -10,3 +10,5 @@ export const acnhTextBackground = defineLayerStyles({
     },
   },
 });
+
+export default layerStyles;
