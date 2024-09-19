@@ -2,7 +2,7 @@
 
 import { AdminFormState } from "@components/admin/form";
 import { List, Prisma } from "@prisma/client";
-import { createList, updateList } from "@utils/prisma/lists";
+import { createList, updateList } from "@utils/prisma/list";
 import { revalidatePath } from "next/cache";
 
 export type ListFormState = AdminFormState<List>;

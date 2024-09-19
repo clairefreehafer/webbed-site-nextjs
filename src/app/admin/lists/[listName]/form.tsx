@@ -4,7 +4,7 @@ import SubmitButton from "@components/admin/form/SubmitButton";
 import TextInput from "@components/admin/form/TextInput";
 import Textarea from "@components/admin/form/Textarea";
 import { Prisma } from "@prisma/client";
-import { getList } from "@utils/prisma/lists";
+import { getList } from "@utils/prisma/list";
 
 type Props = {
   listData: Prisma.PromiseReturnType<typeof getList>;

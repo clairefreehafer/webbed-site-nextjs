@@ -25,8 +25,35 @@
     <content:encoded><![CDATA[
 
     ]]></content:encoded> -->
+    <title>my first rost</title>
+    <link>https://clairefreehafer.vercel.app</link>
+    <guid>Thu, 19 Sep 2024 00:13:52 +0000</guid>
+    <pubDate>Thu, 19 Sep 2024 00:13:52 +0000</pubDate>
+    <description>my first rost! a link to another post</description>
+    <category>books</category>
+    <content:encoded>
+      <p>
+        hello anyone or no one who has subscribed to my RSS feed so far!
+        weird not knowing for certain or not if i am screaming into the void,
+        but also a little exhilerating.
+      </p>
+      <p>
+        anyway, my first real rost, or RSS-only post, here is i guess technically barely
+        even a post. but more of a post than me only putting "testing" in the content.
+      </p>
+      <p>
+        it's <a href="https://www.pillowfort.social/posts/5318943">a link to my new pillowfort account</a>!
+        specifcally a "www wednesday" post, which is something the "bookworm" community there does:
+        a post about what you've recently finished reading, what you're currently reading,
+        and what you're about to read.
+      </p>
+      <p>
+        so go check it out! or don't! and follow me there if you're so inclined. or don't! i'll never know.
+      </p>
+    </content:encoded>
+
     <title>test post</title>
-    <link>https://clairefreehafer.vercel.appl</link>
+    <link>https://clairefreehafer.vercel.app</link>
     <guid>Tue, 10 Sep 2024 15:43:31 +0000</guid>
     <pubDate>Tue, 10 Sep 2024 15:43:31 +0000</pubDate>
     <description>test description</description>

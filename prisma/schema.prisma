@@ -3,7 +3,7 @@ generator client {
 }
 
 generator json {
-  provider = "prisma-json-types-generator"
+  provider  = "prisma-json-types-generator"
   namespace = "PrismaJson"
 }
 
@@ -15,12 +15,12 @@ datasource db {
 
 model Photo {
   id          Int       @id @default(autoincrement())
-  smugMugKey  String    @db.VarChar(255) @unique
-  url         String?   @db.VarChar(255) @unique
+  smugMugKey  String    @unique @db.VarChar(255)
+  url         String?   @unique @db.VarChar(255)
   captureDate DateTime? @db.Timestamp(6)
   /// [Metadata]
   metadata    Json?
-  xmpPath     String    @db.VarChar(255) @unique @default("")
+  xmpPath     String    @unique @default("") @db.VarChar(255)
   altText     String?   @db.VarChar(255)
   tags        Tag[]
   album       Album?    @relation("albumPhotos", fields: albumName, references: [name])
@@ -40,22 +40,22 @@ model Tag {
 }
 
 model Album {
-  id              Int       @id @default(autoincrement())
-  name            String    @db.VarChar(255) @unique
-  date            DateTime? @db.Timestamp(6)
-  type            String    @db.VarChar(255) @default("default")
-  photos          Photo[]   @relation("albumPhotos")
-  coverPhoto      Photo?    @relation("coverPhoto", fields: coverKey, references: [smugMugKey])
-  coverKey        String?
-  section         Section  @relation(fields: sectionName, references: name)
-  sectionName     String
-  icon            Icon?     @relation(fields: iconId, references: [id])
-  iconId          Int?
+  id          Int       @id @default(autoincrement())
+  name        String    @unique @db.VarChar(255)
+  date        DateTime? @db.Timestamp(6)
+  type        String    @default("default") @db.VarChar(255)
+  photos      Photo[]   @relation("albumPhotos")
+  coverPhoto  Photo?    @relation("coverPhoto", fields: coverKey, references: [smugMugKey])
+  coverKey    String?
+  section     Section   @relation(fields: sectionName, references: name)
+  sectionName String
+  icon        Icon?     @relation(fields: iconId, references: [id])
+  iconId      Int?
 }
 
 model Section {
   id         Int       @id @default(autoincrement())
-  name       String    @db.VarChar(255) @unique
+  name       String    @unique @db.VarChar(255)
   parent     Section?  @relation("sectionHierarchy", fields: [parentName], references: [name])
   parentName String?
   children   Section[] @relation("sectionHierarchy")
@@ -76,7 +76,7 @@ model Icon {
 
 model List {
   id            Int        @id @default(autoincrement())
-  name          String     @db.VarChar(255) @unique
+  name          String     @unique @db.VarChar(255)
   description   String?    @db.VarChar
   items         ListItem[]
   sortBy        String?    @db.VarChar(255)
@@ -85,6 +85,7 @@ model List {
 
 model ListItem {
   id    Int    @id @default(autoincrement())
+  type  String @db.VarChar(255)
   data  Json
   lists List[]
 }

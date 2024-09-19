@@ -1,5 +1,5 @@
 import { displayName } from "@utils/album";
-import { getList } from "@utils/prisma/lists";
+import { getList } from "@utils/prisma/list";
 import UpdateListForm from "./form";
 
 export default async function Page({
