@@ -86,6 +86,7 @@ model List {
 model ListItem {
   id    Int    @id @default(autoincrement())
   type  String @db.VarChar(255)
+  /// [ListItemData]
   data  Json
   lists List[]
 }

@@ -27,9 +27,26 @@ export const getAdminLists = cache(async (): Promise<AdminTableListItem> => {
   });
 });
 
+export const getLists = cache(async () =>
+  prismaWrapper(prisma.list.findMany)({
+    select: {
+      id: true,
+      name: true,
+      description: true,
+      items: true,
+    },
+  })
+);
+
 export const getList = cache(async (name: List["name"]) => {
   return prismaWrapper(prisma.list.findUniqueOrThrow)({
     where: { name },
+    select: {
+      id: true,
+      name: true,
+      description: true,
+      items: true,
+    },
   });
 });
 

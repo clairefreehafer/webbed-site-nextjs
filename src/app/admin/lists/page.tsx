@@ -1,5 +1,5 @@
 import AdminTable, { AdminTableConfig } from "@components/admin/Table";
-import { getAdminLists } from "@utils/prisma/lists";
+import { getAdminLists } from "@utils/prisma/list";
 import Link from "next/link";
 
 export type AdminTableListItem = {

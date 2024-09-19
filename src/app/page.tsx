@@ -1,10 +1,9 @@
 import HomeNav from "@components/Nav/HomeNav";
-import RainbowBorder from "@components/RainbowBorder";
+import RainbowBorder from "@components/home/RainbowBorder";
 import HomeHeading from "@components/home/Heading";
-import SiteContainer from "@components/layout/SiteContainer";
 import { css } from "@panda/css";
-import { analglyphText, jaggedBorder } from "@panda/patterns";
 import { fillParent, fullScreen } from "@styles/layout";
+import { SiteContainer } from "@panda/jsx";
 
 const rainbowBorder = css({
   width: "100%",

@@ -1,32 +1,33 @@
-import { ListItems, ListObject } from "types/lists";
+import { CameraListObject, VideoGameListObject } from "types/lists";
 import CameraListItem from "./CameraListItem";
 import VideoGameListItem from "./VideoGameListItem";
 import { Fragment } from "react";
+import { ListItem, Prisma } from "@prisma/client";
+import { getList } from "@utils/prisma/list";
 
-function renderListItem(listItem: ListItems) {
-  if ("title" in listItem) {
-    return <VideoGameListItem {...listItem} />;
+function renderListItem(listItem: ListItem) {
+  if (listItem.type === "video game") {
+    return <VideoGameListItem {...(listItem.data as VideoGameListObject)} />;
   }
-  if ("medium" in listItem) {
-    return <CameraListItem {...listItem} />;
+  if (listItem.type === "camera") {
+    return <CameraListItem {...(listItem.data as CameraListObject)} />;
   }
   return null;
 }
 
-type Props = ListObject & {
+type Props = Prisma.PromiseReturnType<typeof getList> & {
   type?: "ordered" | "unordered";
 };
 
 // TODO: do we want this to /just/ be the list, or also the list metadata?
 // (i.e. title, description, tags)
 export default function ListContainer({
-  title,
+  name,
   description,
   items,
-  tags,
   type,
 }: Props) {
-  if (!items) return <>🪹 no items.</>;
+  if (!items) return <>❌ list is empty.</>;
 
   // TODO: add sort (here or api?)
 

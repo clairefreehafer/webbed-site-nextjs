@@ -43,9 +43,23 @@ export type ListItems =
   | VideoGameListObject
   | WebsiteListObject;
 
+export type ListItemType =
+  | "book"
+  | "camera"
+  | "music"
+  | "podcast"
+  | "video game"
+  | "website";
+
 export type ListObject = {
-  title: string;
+  name: string;
   description: string;
   tags?: string[];
   items: ListItems[];
 };
+
+declare global {
+  namespace PrismaJson {
+    type ListItemData = ListItems;
+  }
+}

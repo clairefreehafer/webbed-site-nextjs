@@ -1,19 +1,24 @@
-import Link from "next/link";
-// TODO: add to db
-import lists from "./lists.json";
 import { slugName } from "@utils/album";
+import { css } from "@panda/css";
+import StyledLink from "@components/Link";
+import { getLists } from "@utils/prisma/list";
 
-export default function Page() {
+export default async function Page() {
+  const lists = await getLists();
+
   return (
     <>
-      <h1>lists</h1>
       <p>i like to make lists. :)</p>
-      <ul>
+      <ul
+        className={css({
+          listStyle: "disc inside",
+        })}
+      >
         {lists.map((listItem, idx) => (
           <li key={idx}>
-            <Link href={`/lists/${slugName(listItem.title)}`}>
-              {listItem.title}
-            </Link>
+            <StyledLink href={`/lists/${slugName(listItem.name)}`}>
+              {listItem.name}
+            </StyledLink>
           </li>
         ))}
       </ul>
