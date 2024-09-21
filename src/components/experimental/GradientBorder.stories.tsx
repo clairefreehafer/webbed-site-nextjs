@@ -17,3 +17,14 @@ export const Regular: Story = {
     children: "HELLO GRADIENT :)",
   },
 };
+
+export const Noisy: Story = {
+  args: {
+    backgroundColor: "blue",
+    borderSize: "10rem",
+    contrast: 170,
+    brightness: 1000,
+    noisy: true,
+    children: "HELLO NOISY GRADIENT :)",
+  },
+};
