@@ -38,7 +38,7 @@ function generateStyleObject(
 ): CSSProperties {
   return {
     background: `${gradients(backgroundColor)[piece]}${noisy ? `, url("data:image/svg+xml,${encodeNoiseSVG()}")` : ""}`,
-    filter: `contrast(${contrast}%) brightness(${brightness}%)`,
+    filter: noisy ? `contrast(${contrast}%) brightness(${brightness}%)` : "",
   };
 }
 
