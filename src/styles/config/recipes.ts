@@ -1,6 +1,6 @@
 import { defineRecipe } from "@pandacss/dev";
 
-export const adminInputRecipe = defineRecipe({
+export const adminInput = defineRecipe({
   className: "admin-input",
   base: {
     bg: "black",
@@ -32,3 +32,9 @@ export const adminInputRecipe = defineRecipe({
     },
   },
 });
+
+const recipes = {
+  adminInput,
+};
+
+export default recipes;

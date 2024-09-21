@@ -3,9 +3,9 @@ import Nav from "@components/Nav";
 import Title from "@components/Title";
 import { fullScreen } from "@styles/layout";
 import { css } from "@panda/css";
-import SiteContainer from "@components/layout/SiteContainer";
 import { paperBackground } from "@styles/notebook";
 import Header from "@components/Header";
+import { SiteContainer } from "@panda/jsx";
 
 // https://codepen.io/mp/pen/kBEeKw
 // (another option: https://codepen.io/tmrDevelops/pen/NPXodB)
@@ -45,7 +45,7 @@ export default function PhotographyLayout({
           <Nav theme="notebook" />
 
           <div className={titleWrapper}>
-            <Title />
+            <Title theme="notebook" />
           </div>
         </Header>
         <main className={main}>{children}</main>

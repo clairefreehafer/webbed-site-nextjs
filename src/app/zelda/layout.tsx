@@ -3,7 +3,7 @@ import { hyliaSerif } from "@fonts/zelda";
 import { ReactNode } from "react";
 import PageBorder from "@components/zelda/PageBorder";
 import ThemeRoot from "@components/zelda/ThemeRoot";
-import SiteContainer from "@components/layout/SiteContainer";
+import { SiteContainer } from "@panda/jsx";
 import Header from "@components/Header";
 import { css, cx } from "@panda/css";
 import { zeldaTextBackground } from "@styles/zelda";

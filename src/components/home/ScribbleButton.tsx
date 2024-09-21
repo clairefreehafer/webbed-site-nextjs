@@ -5,7 +5,7 @@ import Link from "next/link";
 const button = cx(
   "group",
   css({
-    aspectRatio: "3/1",
+    aspectRatio: "88/31",
     border: "5px outset black",
     display: "flex",
     flexDir: "column",

@@ -20,10 +20,9 @@ export const BookListItem: Story = {
 
 export const CameraListItem: Story = {
   args: {
-    title: "list title",
+    name: "list title",
     description: "list description",
-    items: [{ make: "canon", model: "rebel xs", medium: "digital" }],
-    tags: ["list tag"],
+    items: [],
   },
 };
 
@@ -37,10 +36,9 @@ export const PodcastListItem: Story = {
 
 export const VideoGameListItem: Story = {
   args: {
-    title: "list title",
+    name: "list title",
     description: "list description",
-    items: [{ title: "item 1" }],
-    tags: ["list tag"],
+    items: [],
   },
 };
 

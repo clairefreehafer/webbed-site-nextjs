@@ -1,4 +1,4 @@
-import ScribbleButton from "@components/ScribbleButton";
+import ScribbleButton from "@components/home/ScribbleButton";
 import { css } from "@panda/css";
 
 const grid = css({
@@ -8,6 +8,7 @@ const grid = css({
   width: "100%",
 });
 
+// TODO: try to consolidate with regular Nav
 const linksConfig = [
   {
     text: "photography",
@@ -24,9 +25,24 @@ const linksConfig = [
     href: "/zelda",
   },
   {
+    text: "lists",
+    href: "/lists",
+  },
+  {
+    text: "recipes",
+    scribbleText: "rcps",
+    href: "/recipes",
+  },
+  {
+    text: "blog",
+    href: "https://clairefreehafer.bearblog.dev",
+  },
+  {
     text: "storybook",
     scribbleText: "srybk",
     href: process.env.STORYBOOK_URL || "",
+    hide: !process.env.STORYBOOK_URL,
+    target: "_blank",
   },
   {
     text: "admin",

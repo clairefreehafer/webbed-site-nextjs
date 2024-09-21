@@ -32,7 +32,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         <Header>
           <Nav theme="admin" />
           <div className={titleContainer}>
-            <Title separator="▼" />
+            <Title theme="admin" />
           </div>
         </Header>
         <main className={css({ width: "100%" })}>{children}</main>

@@ -1,7 +1,7 @@
 import { defineConfig } from "@pandacss/dev";
 import patterns from "@styles/config/patterns";
 import layerStyles from "@styles/config/layerStyles";
-import { adminInputRecipe } from "@styles/config/recipes";
+import recipes from "@styles/config/recipes";
 import {
   adminTokens,
   animalCrossingTokens,
@@ -27,9 +27,7 @@ export default defineConfig({
     keyframes,
     layerStyles,
 
-    recipes: {
-      adminInput: adminInputRecipe,
-    },
+    recipes,
   },
 
   themes: {

@@ -14,7 +14,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       margin="1rem auto"
     >
       <Navigation />
-      <Title />
+      <Title theme="book" />
       <main
         className={css({
           padding: "3rem",
