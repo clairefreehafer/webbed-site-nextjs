@@ -1,21 +1,39 @@
-import { cva } from "@panda/css";
+import { RecipeVariantProps, cva } from "@panda/css";
 import Link, { LinkProps } from "next/link";
 
 const link = cva({
   base: {
     textDecoration: "underline",
     _hover: { textDecoration: "none" },
-    _visited: { textDecorationColor: "white" },
+  },
+  variants: {
+    theme: {
+      book: {
+        textDecorationColor: "blue",
+        _visited: {
+          textDecorationColor: "purple",
+        },
+      },
+    },
   },
 });
 
-type Props = LinkProps & {
-  children: React.ReactNode;
-};
+type Props = LinkProps &
+  RecipeVariantProps<typeof link> &
+  React.ComponentProps<"a"> & {
+    children: React.ReactNode;
+  };
 
-export default function StyledLink({ href, children }: Props) {
+export default function StyledLink({ href, children, theme, ...props }: Props) {
+  if (typeof href === "string" && href.startsWith("http")) {
+    return (
+      <a href={href} className={link({ theme })} {...props}>
+        {children}
+      </a>
+    );
+  }
   return (
-    <Link href={href} className={link()}>
+    <Link href={href} className={link({ theme })} {...props}>
       {children}
     </Link>
   );
