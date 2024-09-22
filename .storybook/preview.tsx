@@ -28,6 +28,14 @@ const preview: Preview = {
           name: "admin",
           value: "black",
         },
+        {
+          name: "notebook",
+          value: "black",
+        },
+        {
+          name: "book",
+          value: "moccasin",
+        },
       ],
     },
     controls: {
@@ -43,8 +51,8 @@ const preview: Preview = {
     },
   },
   decorators: [
-    (Story) => (
-      <div className={fonts}>
+    (Story, { args }) => (
+      <div className={fonts} data-panda-theme={args.theme}>
         <Story />
       </div>
     ),

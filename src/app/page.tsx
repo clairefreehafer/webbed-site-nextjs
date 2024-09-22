@@ -4,6 +4,7 @@ import HomeHeading from "@components/home/Heading";
 import { css } from "@panda/css";
 import { fillParent, fullScreen } from "@styles/layout";
 import { SiteContainer } from "@panda/jsx";
+import StyledLink from "@components/Link";
 
 const rainbowBorder = css({
   width: "100%",
@@ -43,9 +44,12 @@ export default function Home() {
                 (and not yet optimized for mobile devices!)
               </p>
               <p>
-                <a href="https://github.com/clairefreehafer/webbed-site-nextjs">
+                <StyledLink
+                  href="https://github.com/clairefreehafer/webbed-site-nextjs"
+                  target="_blank"
+                >
                   view on github
-                </a>
+                </StyledLink>
               </p>
               <HomeHeading element="h2">navigation</HomeHeading>
               <HomeNav />
@@ -62,19 +66,19 @@ export default function Home() {
                   <ul>
                     <li>
                       💻{" "}
-                      <a
+                      <StyledLink
                         href="https://github.com/clairefreehafer"
                         target="_blank"
                       >
                         github
-                      </a>
+                      </StyledLink>
                     </li>
                   </ul>
                   <li>
                     👔{" "}
-                    <a href="https://linkedin.com/in/clairefreehafer">
+                    <StyledLink href="https://linkedin.com/in/clairefreehafer">
                       linkedin
-                    </a>
+                    </StyledLink>
                   </li>
                 </div>
                 <div>

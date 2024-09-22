@@ -7,21 +7,6 @@ import { paperBackground } from "@styles/notebook";
 import Header from "@components/Header";
 import { SiteContainer } from "@panda/jsx";
 
-// https://codepen.io/mp/pen/kBEeKw
-// (another option: https://codepen.io/tmrDevelops/pen/NPXodB)
-const titleWrapper = css({
-  alignItems: "center",
-  borderColor: "white",
-  borderRadius: "95% 4% 92% 5% / 4% 95% 6% 95%",
-  borderWidth: "3px 4px 3px 5px",
-  display: "flex",
-  flexDirection: "column",
-  fontFamily: "loveYaLikeASister",
-  fontSize: "1.75rem",
-  my: "1rem",
-  p: "1rem",
-});
-
 const main = css({
   ...paperBackground,
   borderRadius: "3rem",
@@ -43,10 +28,7 @@ export default function PhotographyLayout({
       <SiteContainer>
         <Header>
           <Nav theme="notebook" />
-
-          <div className={titleWrapper}>
-            <Title theme="notebook" />
-          </div>
+          <Title theme="notebook" />
         </Header>
         <main className={main}>{children}</main>
       </SiteContainer>

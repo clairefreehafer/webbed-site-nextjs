@@ -16,24 +16,13 @@ const themeRoot = cx(
   })
 );
 
-const titleContainer = css({
-  alignItems: "center",
-  boxShadow: "8BitWhite",
-  display: "flex",
-  flexDir: "column",
-  fontFamily: "pressStart2P",
-  p: "1rem",
-});
-
 export default function AdminLayout({ children }: { children: ReactNode }) {
   return (
     <div className={themeRoot} data-panda-theme="admin">
       <SiteContainer>
         <Header>
           <Nav theme="admin" />
-          <div className={titleContainer}>
-            <Title theme="admin" />
-          </div>
+          <Title theme="admin" />
         </Header>
         <main className={css({ width: "100%" })}>{children}</main>
       </SiteContainer>

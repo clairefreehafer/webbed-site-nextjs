@@ -1,19 +1,48 @@
 "use client";
 
-import { RecipeVariant, css, cva } from "@panda/css";
+import { RecipeVariant, cva } from "@panda/css";
 import { displayName } from "@utils/album";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ElementType } from "react";
 
-const container = css({
-  display: "flex",
-  flexDir: "column",
-  alignItems: "center",
+const container = cva({
+  base: {
+    display: "flex",
+    flexDir: "column",
+    alignItems: "center",
+  },
+  variants: {
+    theme: {
+      admin: {
+        boxShadow: "8BitWhite",
+        color: "white",
+        fontFamily: "pressStart2P",
+        p: "1rem",
+      },
+      book: {
+        fontFamily: "times new roman",
+      },
+      notebook: {
+        // https://codepen.io/mp/pen/kBEeKw
+        // (another option: https://codepen.io/tmrDevelops/pen/NPXodB)
+        borderColor: "white",
+        borderRadius: "95% 4% 92% 5% / 4% 95% 6% 95%",
+        borderWidth: "3px 4px 3px 5px",
+        color: "white",
+        my: "1rem",
+        p: "1rem",
+        width: "auto",
+      },
+    },
+  },
 });
 
 const title = cva({
   base: {
+    display: "flex",
+    flexDir: "column",
+    alignItems: "center",
     _before: {
       lineHeight: "1.25rem",
     },
@@ -54,6 +83,35 @@ const title = cva({
       },
     },
   },
+  compoundVariants: [
+    {
+      theme: "admin",
+      component: "h2",
+      css: {
+        _before: {
+          fontSize: "1rem",
+        },
+      },
+    },
+    {
+      theme: "admin",
+      component: "h3",
+      css: {
+        _before: {
+          fontSize: "0.75rem",
+        },
+      },
+    },
+    {
+      theme: "admin",
+      component: "h4",
+      css: {
+        _before: {
+          fontSize: "0.5rem",
+        },
+      },
+    },
+  ],
 });
 
 type TitleRecipe = RecipeVariant<typeof title>;
@@ -67,7 +125,7 @@ export default function Title({ theme }: Props) {
   const pathname = usePathname().split("/");
 
   return (
-    <div className={container}>
+    <div className={container({ theme })}>
       {pathname.map((slug, idx) => {
         if (idx === 0) {
           return (
@@ -86,10 +144,10 @@ export default function Title({ theme }: Props) {
           return (
             <TitleTag
               key={slug}
-              className={`
-                ${container}
-                ${title({ component: TitleTag as TitleRecipe["component"], theme })}
-              `}
+              className={title({
+                component: TitleTag as TitleRecipe["component"],
+                theme,
+              })}
             >
               <Link href={`/${pathname.slice(1, idx + 1).join("/")}`}>
                 {displayName(slug)}
