@@ -35,6 +35,7 @@ function generateStyleObject(
     noisy = false,
     contrast,
     brightness,
+    invert,
     ...props
   }: Partial<Props>
 ): CSSProperties {
@@ -48,6 +49,7 @@ function generateStyleObject(
     }
     return {
       backgroundColor: gradientColor,
+      filter: invert ? "invert(100%)" : "",
     };
   }
   return {
@@ -90,6 +92,8 @@ type Props = NoiseSVGProps & {
   backgroundColor?: CSSProperties["color"];
   contrast?: number;
   brightness?: number;
+  // TODO: number
+  invert?: boolean;
 };
 
 export default function GradientBorder({
@@ -106,8 +110,15 @@ export default function GradientBorder({
     [borderSize]
   );
 
+  const background: CSSProperties = {
+    backgroundColor,
+  };
+
   return (
-    <div className={isolate}>
+    <div
+      className={isolate}
+      style={props.invert ? { filter: "invert(100%)" } : {}}
+    >
       <div className={grid} style={gridContainer}>
         <div
           className={corner}

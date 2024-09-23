@@ -22,8 +22,8 @@ export const Regular: Story = {
 
 export const Noisy: Story = {
   args: {
-    gradientColor: "rebeccapurple",
-    backgroundColor: "moccasin",
+    gradientColor: "black",
+    backgroundColor: "white",
     borderSize: "10rem",
     noisy: true,
     contrast: 170,
@@ -31,6 +31,7 @@ export const Noisy: Story = {
     baseFrequency: 0.65,
     numOctaves: 3,
     size: 250,
-    children: "HELLO NOISY GRADIENT :)",
+    invert: true,
+    children: <p style={{ color: "white" }}>HELLO NOISY GRADIENT :)</p>,
   },
 };
