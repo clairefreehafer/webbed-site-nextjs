@@ -1,7 +1,7 @@
 import { slugName } from "@utils/album";
-import Link from "next/link";
 import Icon, { DisplayIconType } from "@components/Icon";
 import { RecipeVariant, css, cva } from "@panda/css";
+import StyledLink from "./Link";
 
 export type IconListAlbum = {
   id: number;
@@ -74,9 +74,7 @@ export default function IconList({ albums, theme }: Props) {
             theme={theme}
             display="inline"
           />
-          <Link href={generateUrl(album)} className={link({ theme })}>
-            {album.name}
-          </Link>
+          <StyledLink href={generateUrl(album)}>{album.name}</StyledLink>
         </li>
       ))}
     </ul>

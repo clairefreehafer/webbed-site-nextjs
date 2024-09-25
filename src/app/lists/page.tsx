@@ -16,7 +16,7 @@ export default async function Page() {
       >
         {lists.map((listItem, idx) => (
           <li key={idx}>
-            <StyledLink href={`/lists/${slugName(listItem.name)}`} theme="book">
+            <StyledLink href={`/lists/${slugName(listItem.name)}`}>
               {listItem.name}
             </StyledLink>
           </li>

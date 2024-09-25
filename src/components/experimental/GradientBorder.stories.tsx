@@ -4,6 +4,14 @@ import GradientBorder from "./GradientBorder";
 const meta: Meta<typeof GradientBorder> = {
   component: GradientBorder,
   title: "experimental/GradientBorder",
+  argTypes: {
+    gradientColor: {
+      control: { type: "color" },
+    },
+    backgroundColor: {
+      control: { type: "color" },
+    },
+  },
 };
 
 export default meta;
@@ -32,6 +40,6 @@ export const Noisy: Story = {
     numOctaves: 3,
     size: 250,
     invert: true,
-    children: <p style={{ color: "white" }}>HELLO NOISY GRADIENT :)</p>,
+    children: <p>HELLO NOISY GRADIENT :)</p>,
   },
 };

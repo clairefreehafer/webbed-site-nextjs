@@ -1,7 +1,6 @@
-import { pangolin } from "@fonts";
+import StyledLink from "@components/Link";
 import { css } from "@panda/css";
 import Link from "next/link";
-import { ReactNode } from "react";
 
 // TODO: extract to components
 const title = css({
@@ -18,6 +17,26 @@ const text = css({
 export default function Photography() {
   return (
     <>
+      <h3 className={title}>
+        this section is still majorly 🚧 under construction 🚧
+      </h3>
+      <p className={text}>
+        if you would like to view my photography, please check out the following
+        links:
+      </p>
+      <p className={text}>
+        —{" "}
+        <StyledLink href="https://clairefreehafer.smugmug.com">
+          smugmug
+        </StyledLink>
+        <br />—{" "}
+        <StyledLink href="https://refrakt.app/claire">refrakt</StyledLink>
+        <br />—{" "}
+        <StyledLink href="https://flickr.com/photos/clairefreehafer/">
+          flickr
+        </StyledLink>
+      </p>
+
       <h3 className={title}>recently added</h3>
       <p className={text}>
         (coming soon) photos most recently added to the site.

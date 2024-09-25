@@ -6,6 +6,7 @@ import {
   adminTokens,
   animalCrossingTokens,
   baseTokens,
+  homeTokens,
   notebookTokens,
   zeldaTokens,
 } from "@styles/config/tokens";
@@ -38,6 +39,9 @@ export default defineConfig({
       tokens: animalCrossingTokens,
     },
     book: {},
+    home: {
+      tokens: homeTokens,
+    },
     notebook: {
       tokens: notebookTokens,
     },
@@ -46,7 +50,7 @@ export default defineConfig({
     },
   },
   staticCss: {
-    themes: ["admin", "animalCrossing", "notebook", "zelda"],
+    themes: ["admin", "animalCrossing", "book", "home", "notebook", "zelda"],
   },
 
   patterns,

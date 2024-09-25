@@ -5,6 +5,7 @@ const grid = css({
   display: "grid",
   gap: "1rem",
   gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+  maxWidth: 750,
   width: "100%",
 });
 
@@ -55,8 +56,8 @@ const linksConfig = [
 export default function HomeNav() {
   return (
     <div className={grid}>
-      {linksConfig.map((link) =>
-        !link.hide ? <ScribbleButton key={link.href} {...link} /> : null
+      {linksConfig.map(({ hide, ...rest }) =>
+        !hide ? <ScribbleButton key={rest.href} {...rest} /> : null
       )}
     </div>
   );

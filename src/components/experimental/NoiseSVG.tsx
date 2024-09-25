@@ -1,5 +1,6 @@
 import { SVGAttributes } from "react";
-import * as ReactDOMServer from "react-dom/server";
+// https://github.com/vercel/next.js/discussions/69244
+const ReactDOMServer = require("react-dom/server");
 
 // for using in CSS
 // { backgroundImage: `url("data:image/svg+xml,${svgString}")` }

@@ -116,6 +116,14 @@ export const animalCrossingTokens = defineTokens({
   },
 });
 
+export const homeTokens = defineTokens({
+  fonts: {
+    redactedScript: {
+      value: "var(--font-redacted-script)",
+    },
+  },
+});
+
 export const notebookTokens = defineTokens({
   animations: {
     wiggleBox: { value: "250ms wiggleBox infinite" },

@@ -33,11 +33,11 @@ function generateStyleObject(
   {
     gradientColor,
     noisy = false,
-    contrast,
-    brightness,
+    contrast = 170,
+    brightness = 1000,
     invert,
     ...props
-  }: Partial<Props>
+  }: Partial<GradientBorderProps>
 ): CSSProperties {
   if (piece === "content") {
     if (noisy) {
@@ -82,7 +82,7 @@ const blendMultiply = css({
   width: "100%",
 });
 
-type Props = NoiseSVGProps & {
+export type GradientBorderProps = NoiseSVGProps & {
   borderSize: string;
   children: ReactNode;
 
@@ -99,9 +99,8 @@ type Props = NoiseSVGProps & {
 export default function GradientBorder({
   borderSize,
   children,
-  backgroundColor = "transparent",
   ...props
-}: Props) {
+}: GradientBorderProps) {
   const gridContainer: CSSProperties = useMemo(
     () => ({
       gridTemplateColumns: `${borderSize} calc(100% - 2 * ${borderSize}) ${borderSize}`,
@@ -110,9 +109,10 @@ export default function GradientBorder({
     [borderSize]
   );
 
-  const background: CSSProperties = {
-    backgroundColor,
-  };
+  // un-invert the contents if the outside is inverted.
+  const invertStyles: string = css({
+    "& > *": { filter: props.invert ? "invert(100%)" : "" },
+  });
 
   return (
     <div
@@ -131,7 +131,12 @@ export default function GradientBorder({
         ></div>
 
         <div style={generateStyleObject("leftEdge", props)}></div>
-        <div style={generateStyleObject("content", props)}>{children}</div>
+        <div
+          className={invertStyles}
+          style={generateStyleObject("content", props)}
+        >
+          {children}
+        </div>
         <div style={generateStyleObject("rightEdge", props)}></div>
 
         <div
@@ -145,9 +150,9 @@ export default function GradientBorder({
         ></div>
       </div>
       {/* TODO: test other blend modes + putting this above the gradient */}
-      {props.noisy && (
+      {/* {props.noisy && (
         <div className={blendMultiply} style={{ backgroundColor }}></div>
-      )}
+      )} */}
     </div>
   );
 }
