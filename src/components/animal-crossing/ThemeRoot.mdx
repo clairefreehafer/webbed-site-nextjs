@@ -1,0 +1,17 @@
+import { Meta, Canvas, Controls } from "@storybook/blocks";
+import * as ThemeRootStories from "./ThemeRoot.stories";
+
+<Meta name="description" of={ThemeRootStories} />
+
+# animal crossing theme root
+
+this component sets the background for the
+[animal crossing section](https://clairefreehafer.vercel.app/animal-crossing)
+of my site based on the a given date and provided grass shape.
+
+the grass pattern images are from the
+[animal crossing HD texture pack](https://forums.dolphin-emu.org/Thread-animal-crossing-hd-texture-pack-version-19-august-9th-2024).
+
+<Controls />
+
+<Canvas of={ThemeRootStories.NowSquare} />

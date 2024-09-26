@@ -40,18 +40,21 @@ export default function Home() {
               marginBottom: "5rem",
             })}
           >
-            <p>
+            <p
+              className={css({
+                textAlign: "center",
+                maxWidth: 500,
+                marginBottom: "1rem",
+              })}
+            >
               please click around the site, but be warned it is an active work
-              in progress. :)
-              <br />
-              (and not yet optimized for mobile devices!)
-            </p>
-            <p>
+              in progress (and not yet optimized for mobile devices!). you can
+              also{" "}
               <StyledLink
                 href="https://github.com/clairefreehafer/webbed-site-nextjs"
                 target="_blank"
               >
-                view on github
+                view the source code on github
               </StyledLink>
             </p>
 

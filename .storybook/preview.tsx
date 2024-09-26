@@ -47,6 +47,7 @@ const preview: Preview = {
     options: {
       storySort: {
         method: "alphabetical",
+        includeNames: true,
       },
     },
   },
