@@ -9,6 +9,7 @@ import {
   ribeye,
 } from "@fonts";
 import "@styles/index.css";
+import { scanLines } from "@panda/patterns";
 
 const fonts = `
   ${cutiveMono.variable}
@@ -27,6 +28,10 @@ const preview: Preview = {
         {
           name: "admin",
           value: "black",
+        },
+        {
+          name: "animal crossing",
+          value: "#cfbe95",
         },
         {
           name: "notebook",
@@ -52,6 +57,18 @@ const preview: Preview = {
     },
   },
   decorators: [
+    // add theme roots
+    (Story, { parameters }) => {
+      const theme = parameters.backgrounds.default;
+      return (
+        <div
+          className={theme === "admin" && scanLines()}
+          data-panda-theme={parameters.backgrounds.default}
+        >
+          <Story />
+        </div>
+      );
+    },
     (Story, { args }) => (
       <div className={fonts} data-panda-theme={args.theme}>
         <Story />

@@ -11,6 +11,7 @@ import {
   zeldaTokens,
 } from "@styles/config/tokens";
 import { keyframes } from "@styles/config/keyframes";
+import slotRecipes from "@styles/config/slotRecipes";
 
 export default defineConfig({
   // Whether to use css reset
@@ -29,6 +30,7 @@ export default defineConfig({
     layerStyles,
 
     recipes,
+    slotRecipes,
   },
 
   themes: {
@@ -51,6 +53,8 @@ export default defineConfig({
   },
   staticCss: {
     themes: ["admin", "animalCrossing", "book", "home", "notebook", "zelda"],
+    // for storybook
+    recipes: "*",
   },
 
   patterns,
