@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { cva } from "@panda/css";
+import { cva, cx } from "@panda/css";
 
 const hideSection = cva({
   base: {
@@ -23,8 +23,9 @@ const hideSection = cva({
 type Props = {
   when: boolean;
   children: ReactNode;
+  className?: string;
 };
 
-export default function HideSection({ when, children }: Props) {
-  return <div className={hideSection({ when })}>{children}</div>;
+export default function HideSection({ when, className = "", children }: Props) {
+  return <div className={cx(hideSection({ when }), className)}>{children}</div>;
 }

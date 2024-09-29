@@ -6,30 +6,33 @@ export const sortBy = ["name"] as const;
 export type BookListObject = {
   title: string;
   author: string;
-  publishedYear: number;
-  openLibraryId: number;
+  year: number;
+  openLibraryId: string;
 };
 
+export const cameraMediums = ["digital", "35mm"] as const;
 export type CameraListObject = {
   make: string;
   model: string;
-  medium: "digital" | "35mm";
+  medium: (typeof cameraMediums)[number];
 };
 
 export type MusicListObject = {
-  title: string;
+  song: string;
   artist: string;
   album: string;
 };
 
 export type PodcastListObject = {
-  podcastTitle: string;
-  episodeTitle?: string;
+  podcast: string;
+  episode?: string;
   date?: string;
 };
 
 export type VideoGameListObject = {
   title: string;
+  year: number;
+  // console(s)?
 };
 
 export type WebsiteListObject = {
@@ -40,16 +43,20 @@ export type WebsiteListObject = {
 export type ListItems =
   | BookListObject
   | CameraListObject
+  | MusicListObject
+  | PodcastListObject
   | VideoGameListObject
   | WebsiteListObject;
 
-export type ListItemType =
-  | "book"
-  | "camera"
-  | "music"
-  | "podcast"
-  | "video game"
-  | "website";
+export const listItemTypes = [
+  "book",
+  "camera",
+  "music",
+  "podcast",
+  "video game",
+  "website",
+] as const;
+export type ListItemType = (typeof listItemTypes)[number];
 
 export type ListObject = {
   name: string;

@@ -11,16 +11,26 @@ export default meta;
 
 type Story = StoryObj<typeof StyledLink>;
 
+export const Admin: Story = {
+  args: {
+    href: "/",
+    children: "link",
+  },
+  parameters: {
+    backgrounds: {
+      default: "admin",
+    },
+  },
+};
+
 export const AnimalCrossing: Story = {
   args: {
     href: "/",
     children: "link",
   },
-  decorators: [
-    (Story) => (
-      <div style={{ width: 400 }}>
-        <Story />
-      </div>
-    ),
-  ],
+  parameters: {
+    backgrounds: {
+      default: "animalCrossing",
+    },
+  },
 };

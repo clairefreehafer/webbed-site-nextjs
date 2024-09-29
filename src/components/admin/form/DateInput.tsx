@@ -5,19 +5,21 @@ type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   label: string;
   name: string;
   defaultValue?: string;
+  dateOnly?: boolean;
 };
 
 export default function DateInput({
   label,
   name,
   defaultValue,
+  dateOnly = false,
   ...inputProps
 }: Props) {
   return (
     <>
       <Label htmlFor={name}>{label}</Label>
       <input
-        type="datetime-local"
+        type={dateOnly ? "date" : "datetime-local"}
         name={name}
         id={name}
         value={defaultValue}

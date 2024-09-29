@@ -1,48 +1,8 @@
 "use client";
-import { cva } from "@panda/css";
+import { cx } from "@panda/css";
+import { linkSlotRecipe } from "@panda/recipes";
 import { useTheme } from "@utils/styling";
 import Link, { LinkProps } from "next/link";
-
-const link = cva({
-  base: {
-    textDecoration: "underline",
-    _hover: { textDecoration: "none" },
-  },
-  variants: {
-    theme: {
-      admin: {},
-      animalCrossing: {
-        // TODO: pick better colors, maybe grass colors?
-        color: "brown",
-        textDecorationStyle: "wavy",
-        textDecorationThickness: "1.75px",
-        textDecorationColor: "black",
-        textShadow: "text",
-        _hover: {
-          color: "black",
-          textShadow: "text",
-        },
-      },
-      book: {
-        textDecorationColor: "blue",
-        _visited: {
-          textDecorationColor: "purple",
-        },
-      },
-      home: {
-        _hover: {
-          backgroundColor: "yellow",
-          color: "black",
-        },
-      },
-      notebook: {
-        textDecorationStyle: "wavy",
-        textDecorationThickness: "1.25px",
-      },
-      zelda: {},
-    },
-  },
-});
 
 type Props = LinkProps &
   React.ComponentProps<"a"> & {
@@ -51,16 +11,19 @@ type Props = LinkProps &
 
 export default function StyledLink({ href, children, ...props }: Props) {
   const theme = useTheme();
+  const { link, prefix } = linkSlotRecipe({ theme });
 
   if (typeof href === "string" && href.startsWith("http")) {
     return (
-      <a href={href} className={link({ theme })} {...props}>
+      <a href={href} className={cx(link, "group")} {...props}>
+        <span className={prefix}>▶&nbsp;</span>
         {children}
       </a>
     );
   }
   return (
-    <Link href={href} className={link({ theme })} {...props}>
+    <Link href={href} className={cx(link, "group")} {...props}>
+      <span className={prefix}>▶&nbsp;</span>
       {children}
     </Link>
   );

@@ -8,11 +8,19 @@ import { scanLines } from "@panda/patterns";
 import { SiteContainer } from "@panda/jsx";
 
 const themeRoot = cx(
-  css(fullScreen),
+  css({
+    ...fullScreen,
+    position: "relative",
+  }),
   scanLines({
     bg: "black",
     color: "white",
     fontFamily: "ptMono",
+    _after: {
+      height: "100%",
+      minHeight: "100vh",
+      width: "100vw",
+    },
   })
 );
 

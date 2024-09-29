@@ -8,7 +8,7 @@ export default function NewBookForm() {
       <SectionHeader>~~~ 📖 ~~~</SectionHeader>
       <TextInput label="title" name="title" />
       <TextInput label="author" name="author" />
-      <NumberInput label="published year" name="publishedYear" />
+      <NumberInput label="published year" name="year" />
       <TextInput label="open library ID" name="openLibraryId" />
     </>
   );

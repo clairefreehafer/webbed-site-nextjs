@@ -24,6 +24,12 @@ const form = css({
   p: "2rem",
 });
 
+const message = css({
+  gridColumn: "span 2",
+  textAlign: "center",
+  width: "100%",
+});
+
 export default function AdminForm<T extends { message?: string }>({
   action,
   initialState,
@@ -34,7 +40,7 @@ export default function AdminForm<T extends { message?: string }>({
   return (
     <form action={formAction} className={form}>
       {children}
-      {state?.message && <p>{state.message}</p>}
+      {state?.message && <p className={message}>{state.message}</p>}
     </form>
   );
 }

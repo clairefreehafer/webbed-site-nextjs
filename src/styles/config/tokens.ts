@@ -95,7 +95,7 @@ export const adminTokens = defineTokens({
 
 export const animalCrossingTokens = defineTokens({
   colors: {
-    uiBackground: { value: "rgb(248, 245, 223, 0.8)" },
+    uiBackground: { value: "rgba(248, 245, 223, 0.8)" },
     brown: { value: "rgb(85, 69, 64)" },
     grass: {
       "1210-0224": { value: "rgb(189, 215, 238)" },

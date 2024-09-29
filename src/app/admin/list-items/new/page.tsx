@@ -51,7 +51,7 @@ export default function Page() {
         </HideSection>
       ))}
 
-      <SubmitButton>create list</SubmitButton>
+      <SubmitButton>create list item</SubmitButton>
     </AdminForm>
   );
 }
