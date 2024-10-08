@@ -1,6 +1,6 @@
 import { MusicListObject } from "types/lists";
 
-export default function VideoGameListItem({ title }: MusicListObject) {
+export default function MusicListItem({ song }: MusicListObject) {
   // TODO: include openlibrary link
-  return <li key={title}>{title}</li>;
+  return <li key={song}>{song}</li>;
 }

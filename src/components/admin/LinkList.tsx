@@ -20,7 +20,7 @@ const span = css({
 });
 
 type Props = {
-  links: string[];
+  links: string[] | readonly string[];
 };
 
 export default function AdminLinkList({ links }: Props) {

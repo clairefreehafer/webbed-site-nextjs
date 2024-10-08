@@ -2,7 +2,8 @@
 
 import { AdminFormState } from "@components/admin/form";
 import { ListItem } from "@prisma/client";
-import { createListItem } from "@utils/prisma/listItem";
+import { createListItem, updateListItem } from "@utils/prisma/listItem";
+import { revalidatePath } from "next/cache";
 import {
   BookListObject,
   CameraListObject,
@@ -13,10 +14,12 @@ import {
   WebsiteListObject,
 } from "types/lists";
 
-export type ListItemFormState = AdminFormState<ListItem>;
+export type ListItemFormState<T> = AdminFormState<
+  T & Pick<ListItem, "id" | "type">
+>;
 
-export async function addListItem(
-  _prevState: ListItemFormState,
+export async function addListItem<T>(
+  _prevState: ListItemFormState<T>,
   formData: FormData
 ) {
   const type = formData.get("type") as ListItemType;
@@ -127,5 +130,50 @@ export async function addListItem(
     };
   } catch (error) {
     return { ...data, message: `👎 ${(error as Error).message}` };
+  }
+}
+
+export type WebsiteListItemFormState = AdminFormState<
+  WebsiteListObject & { id: number }
+>;
+// TODO: consolidate later when we feel good about typescript skills
+export async function editWebsiteListItem(
+  prevState: WebsiteListItemFormState,
+  formData: FormData
+) {
+  const id = parseInt(formData.get("id") as string);
+  const type = formData.get("type") as ListItemType;
+  const url = formData.get("url") as string;
+  const title = formData.get("title") as string;
+
+  const data: WebsiteListObject = {
+    url,
+    title,
+  };
+
+  try {
+    if (prevState.title !== title) {
+      console.log(`👉 updating website title to ${title}...`);
+      data.title = title;
+    }
+    if (prevState.url !== url) {
+      console.log(`👉 updating website url to ${url}...`);
+      data.url = url;
+    }
+
+    const updatedListItem = await updateListItem({
+      where: { id },
+      data: { data: data as WebsiteListObject },
+    });
+
+    revalidatePath("/admin");
+
+    return {
+      id,
+      ...(updatedListItem.data as WebsiteListObject),
+      message: "👍 website updated successfully.",
+    };
+  } catch (error) {
+    return { ...prevState, message: `👎 ${(error as Error).message}` };
   }
 }

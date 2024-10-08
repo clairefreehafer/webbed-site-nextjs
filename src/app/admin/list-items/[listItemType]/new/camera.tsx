@@ -3,7 +3,7 @@ import Select from "@components/admin/form/Select";
 import TextInput from "@components/admin/form/TextInput";
 import { cameraMediums } from "types/lists";
 
-export default function NewCameraForm() {
+export default function CameraForm() {
   return (
     <>
       <SectionHeader>~~~ 📸 ~~~</SectionHeader>

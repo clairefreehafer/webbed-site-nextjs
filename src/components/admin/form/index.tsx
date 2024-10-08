@@ -40,6 +40,7 @@ export default function AdminForm<T extends { message?: string }>({
   return (
     <form action={formAction} className={form}>
       {children}
+      {/* TODO: add submit button? */}
       {state?.message && <p className={message}>{state.message}</p>}
     </form>
   );

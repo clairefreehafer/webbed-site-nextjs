@@ -1,4 +1,6 @@
+import StyledLink from "@components/Link";
 import AdminTable, { AdminTableConfig } from "@components/admin/Table";
+import { css } from "@panda/css";
 import { getAdminLists } from "@utils/prisma/list";
 import Link from "next/link";
 
@@ -23,8 +25,12 @@ export default async function Page() {
 
   return (
     <>
-      <p>
-        <Link href="/admin/lists/new">+ create list</Link>
+      <p
+        className={css({
+          textAlign: "center",
+        })}
+      >
+        <StyledLink href="/admin/lists/new">+ create list +</StyledLink>
       </p>
       <AdminTable data={lists} config={tableConfig} />
     </>

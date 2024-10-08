@@ -1,12 +1,13 @@
 import SectionHeader from "@components/admin/form/FormSectionHeader";
 import TextInput from "@components/admin/form/TextInput";
 
-export default function NewWebsiteForm() {
+export default function MusicForm() {
   return (
     <>
-      <SectionHeader>~~~ 💻 ~~~</SectionHeader>
+      <SectionHeader>~~~ 🎶 ~~~</SectionHeader>
       <TextInput label="title" name="title" />
-      <TextInput label="url" name="url" />
+      <TextInput label="artist" name="artist" />
+      <TextInput label="album" name="album" />
     </>
   );
 }
