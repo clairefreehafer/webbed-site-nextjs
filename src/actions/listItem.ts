@@ -1,7 +1,7 @@
 "use server";
 
 import { AdminFormState } from "@components/admin/form";
-import { ListItem } from "@prisma/client";
+import { ListItem, Prisma } from "@prisma/client";
 import { createListItem, updateListItem } from "@utils/prisma/listItem";
 import { revalidatePath } from "next/cache";
 import {
@@ -134,7 +134,7 @@ export async function addListItem<T>(
 }
 
 export type WebsiteListItemFormState = AdminFormState<
-  WebsiteListObject & { id: number }
+  WebsiteListObject & { id: number; lists: string[] }
 >;
 // TODO: consolidate later when we feel good about typescript skills
 export async function editWebsiteListItem(
@@ -142,13 +142,17 @@ export async function editWebsiteListItem(
   formData: FormData
 ) {
   const id = parseInt(formData.get("id") as string);
-  const type = formData.get("type") as ListItemType;
   const url = formData.get("url") as string;
   const title = formData.get("title") as string;
+  const list = formData.get("list") as string;
 
   const data: WebsiteListObject = {
     url,
     title,
+  };
+
+  const updatedData: Prisma.ListItemUpdateArgs["data"] = {
+    data,
   };
 
   try {
@@ -160,10 +164,13 @@ export async function editWebsiteListItem(
       console.log(`👉 updating website url to ${url}...`);
       data.url = url;
     }
+    if (!prevState.lists?.includes(list)) {
+      updatedData.lists = { connect: { name: list } };
+    }
 
     const updatedListItem = await updateListItem({
       where: { id },
-      data: { data: data as WebsiteListObject },
+      data: updatedData,
     });
 
     revalidatePath("/admin");

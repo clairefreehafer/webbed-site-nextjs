@@ -35,6 +35,7 @@ const tableConfig: Record<
         {(listItem as WebsiteListObject).title}
       </StyledLink>
     ),
+    lists: "lists",
     edit: ({ id }) => <Link href={`/admin/list-items/website/${id}`}>✍️</Link>,
   },
 };
@@ -49,7 +50,9 @@ export default async function Page({
   return (
     <>
       <p>
-        <StyledLink href="/admin/list-items/new">+ add list item</StyledLink>
+        <StyledLink href={`/admin/list-items/${listItemType}/new`}>
+          + add list item
+        </StyledLink>
       </p>
       <AdminTable data={listItems} config={tableConfig[listItemType]} />
     </>

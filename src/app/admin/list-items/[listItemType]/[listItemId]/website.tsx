@@ -5,13 +5,13 @@ import {
 import AdminForm from "@components/admin/form";
 import SubmitButton from "@components/admin/form/SubmitButton";
 import TextInput from "@components/admin/form/TextInput";
-import { WebsiteListObject } from "types/lists";
 
-export default function EditWebsiteForm({
-  id,
-  title,
-  url,
-}: WebsiteListItemFormState) {
+type Props = WebsiteListItemFormState & {
+  listSelect: React.ReactNode;
+  lists: string[];
+};
+
+export default function EditWebsiteForm({ id, title, url, listSelect }: Props) {
   const initialState: WebsiteListItemFormState = { id, title, url };
 
   return (
@@ -21,6 +21,8 @@ export default function EditWebsiteForm({
 
       <TextInput label="title" name="title" defaultValue={title} />
       <TextInput label="url" name="url" defaultValue={url} />
+
+      {listSelect}
 
       <SubmitButton>update website</SubmitButton>
     </AdminForm>

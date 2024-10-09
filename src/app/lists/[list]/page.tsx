@@ -15,11 +15,5 @@ export default async function Page({ params }: { params: { list: string } }) {
 
   if (!list) return <>list not found!</>;
 
-  return (
-    <>
-      <h2>{list.name}</h2>
-      <p>{list.description}</p>
-      <ListContainer {...list} />
-    </>
-  );
+  return <ListContainer {...list} />;
 }
