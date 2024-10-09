@@ -1,4 +1,5 @@
 import {
+  Caveat,
   Cutive_Mono,
   Inter,
   Love_Ya_Like_A_Sister,
@@ -9,6 +10,14 @@ import {
   Ribeye_Marrow,
   Silkscreen,
 } from "next/font/google";
+
+export const caveat = Caveat({
+  display: "swap",
+  preload: true,
+  subsets: ["latin"],
+  variable: "--font-caveat",
+  weight: ["400", "500", "600", "700"],
+});
 
 /** typewriter */
 export const cutiveMono = Cutive_Mono({

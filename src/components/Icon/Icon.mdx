@@ -1,0 +1,40 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as IconStories from "./Icon.stories";
+
+<Meta title="Icon/→ docs" />
+
+# `Icon` component
+
+a component for rendering various types of icons i use around the site.
+
+different icon types are stored within the database in the following model:
+
+```typescript
+/** text/emoji icon */
+character?: string;
+/** image icon */
+imagePath?: string;
+/** title text for image icons */
+text?: string;
+```
+
+## character icons
+
+character icons are an emoji or other text glyph.
+
+<Canvas of={IconStories.Character} />
+
+## image icons
+
+image icons are just that—they exist as an image. they typically include `title` text
+that provides more information about the icon on hover.
+
+<Canvas of={IconStories.Image} />
+
+## star fragment icons
+
+star fragment icons are a specific sub-type of image icons, specifcally for the
+animal crossing section of the site. the type of star fragment used corresponds to a
+provided date.
+
+<Canvas of={IconStories.StarFragment} />

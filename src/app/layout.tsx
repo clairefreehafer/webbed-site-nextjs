@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import {
+  caveat,
   cutiveMono,
   inter,
   loveYaLikeASister,
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
 };
 
 const fonts = `
+  ${caveat.variable}
   ${cutiveMono.variable}
   ${loveYaLikeASister.variable}
   ${pangolin.variable}

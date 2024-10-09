@@ -17,7 +17,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <Title theme="book" />
       <main
         className={css({
-          padding: "3rem",
+          padding: "0 3rem 3rem",
           width: "100%",
         })}
       >

@@ -118,6 +118,9 @@ export const animalCrossingTokens = defineTokens({
 
 export const homeTokens = defineTokens({
   fonts: {
+    caveat: {
+      value: "var(--font-caveat)",
+    },
     redactedScript: {
       value: "var(--font-redacted-script)",
     },

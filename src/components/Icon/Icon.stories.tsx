@@ -16,6 +16,11 @@ export const StarFragment: Story = {
     date: new Date(),
     theme: "animalCrossing",
   },
+  parameters: {
+    backgrounds: {
+      default: "animal crossing",
+    },
+  },
 };
 
 export const Character: Story = {

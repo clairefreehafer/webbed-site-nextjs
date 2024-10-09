@@ -9,18 +9,36 @@ export const getListItemsByType = cache(async (type: ListItemType) => {
     select: {
       id: true,
       data: true,
+      lists: {
+        select: {
+          name: true,
+        },
+      },
     },
   });
 
-  return listItems.map(({ id, data }) => ({ id, ...data }));
+  return listItems.map(({ id, data, lists }) => {
+    const listsArr = lists.map((list) => list.name);
+    return { id, lists: listsArr, ...data };
+  });
 });
 
 export const getListItem = cache(async (listItemId: number) => {
   const listItem = await prismaWrapper(prisma.listItem.findUniqueOrThrow)({
     where: { id: listItemId },
+    select: {
+      id: true,
+      data: true,
+      type: true,
+      lists: {
+        select: { name: true },
+      },
+    },
   });
 
-  return { id: listItem.id, ...listItem.data };
+  const lists = listItem.lists.map((list) => list.name);
+
+  return { id: listItem.id, lists, ...listItem.data };
 });
 
 export const createListItem = async (args: Prisma.ListItemCreateArgs) =>

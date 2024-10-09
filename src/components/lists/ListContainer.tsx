@@ -1,16 +1,11 @@
-import { CameraListObject, VideoGameListObject } from "types/lists";
-import CameraListItem from "./CameraListItem";
-import VideoGameListItem from "./VideoGameListItem";
-import { Fragment } from "react";
 import { ListItem, Prisma } from "@prisma/client";
 import { getList } from "@utils/prisma/list";
+import WebsiteListItem from "./WebsiteListItem";
+import { WebsiteListObject } from "types/lists";
 
-function renderListItem(listItem: ListItem) {
-  if (listItem.type === "video game") {
-    return <VideoGameListItem {...(listItem.data as VideoGameListObject)} />;
-  }
-  if (listItem.type === "camera") {
-    return <CameraListItem {...(listItem.data as CameraListObject)} />;
+function renderListItem({ type, id, data }: ListItem) {
+  if (type === "website") {
+    return <WebsiteListItem {...(data as WebsiteListObject)} />;
   }
   return null;
 }
@@ -27,15 +22,16 @@ export default function ListContainer({
   items,
   type,
 }: Props) {
-  if (!items) return <>❌ list is empty.</>;
-
-  // TODO: add sort (here or api?)
+  if (!items || items.length === 0) return <>❌ list is empty.</>;
 
   return (
-    <ul>
-      {items.map((listItem, idx) => (
-        <Fragment key={idx}>{renderListItem(listItem)}</Fragment>
-      ))}
-    </ul>
+    <>
+      <p>{description}</p>
+      <ul>
+        {items.map((listItem, idx) => (
+          <li key={idx}>{renderListItem(listItem)}</li>
+        ))}
+      </ul>
+    </>
   );
 }

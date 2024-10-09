@@ -6,7 +6,7 @@ const button = cx(
   "group",
   css({
     aspectRatio: "88/31",
-    border: "5px outset black",
+    // border: "5px outset black",
     display: "flex",
     flexDir: "column",
     justifyContent: "center",
@@ -14,16 +14,17 @@ const button = cx(
     padding: "0.5rem 1rem",
     overflow: "hidden",
     _hover: {
-      borderStyle: "inset",
+      // borderStyle: "inset",
       cursor: "pointer",
     },
   })
 );
 
-// TODO: pick fun font
 const Span = styled("span", {
   base: {
     fontWeight: "bold",
+    fontFamily: "caveat",
+    fontSize: "2rem",
     mixBlendMode: "difference",
     textAlign: "center",
   },
