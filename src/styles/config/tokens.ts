@@ -111,6 +111,9 @@ export const animalCrossingTokens = defineTokens({
     },
     sand: { value: "#cfbe95" },
   },
+  fonts: {
+    fotSeuratProB: { value: "var(--font-fot-seurat-pro-b), sans-serif" },
+  },
   shadows: {
     text: { value: "0 1px 5px {colors.brown}" },
   },

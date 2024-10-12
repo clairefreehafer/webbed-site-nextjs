@@ -7,11 +7,13 @@ export const SVG_HEIGHT = "70px";
 const svg = cx(
   finkHeavy.className,
   css({
+    alignSelf: "center",
     fill: "rgba(231, 197, 73, 1)",
     fontSize: "3rem",
+    gridArea: "logo",
     height: SVG_HEIGHT,
     width: "350px",
-  }),
+  })
 );
 
 const textStyle = css({

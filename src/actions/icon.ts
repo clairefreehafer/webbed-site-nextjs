@@ -36,6 +36,8 @@ export async function addIcon(_prevState: NewIconState, formData: FormData) {
 
     const createdIcon = await createIcon({ data });
 
+    revalidatePath("/admin");
+
     return {
       ...createdIcon,
       message: `👍 icon created successfully`,
@@ -47,7 +49,7 @@ export async function addIcon(_prevState: NewIconState, formData: FormData) {
 
 export async function editIcon(
   prevState: UpdateIconFormState,
-  formData: FormData,
+  formData: FormData
 ) {
   try {
     let data: Prisma.IconUpdateArgs["data"] = {};
@@ -57,13 +59,13 @@ export async function editIcon(
 
     if (prevState.character !== character) {
       console.log(
-        `👉 changing character from ${prevState.character} to ${character}...`,
+        `👉 changing character from ${prevState.character} to ${character}...`
       );
       data.character = character;
     }
     if (prevState.imagePath !== imagePath) {
       console.log(
-        `👉 changing imagePath from ${prevState.imagePath} to ${imagePath}...`,
+        `👉 changing imagePath from ${prevState.imagePath} to ${imagePath}...`
       );
       data.imagePath = imagePath;
     }

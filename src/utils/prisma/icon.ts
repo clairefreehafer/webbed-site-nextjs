@@ -12,7 +12,7 @@ export const getIcons = cache(async () =>
       character: true,
       text: true,
     },
-  }),
+  })
 );
 
 export const getIconsWithAlbums = cache(async () =>
@@ -24,13 +24,17 @@ export const getIconsWithAlbums = cache(async () =>
       text: true,
       albums: { select: { name: true } },
     },
-  }),
+  })
 );
 
 export const getIconData = cache(async (id: number) =>
   prismaWrapper(prisma.icon.findUniqueOrThrow)({
     where: { id },
-  }),
+  })
+);
+
+export const findManyIcons = cache((args: Prisma.IconFindManyArgs) =>
+  prismaWrapper(prisma.icon.findMany)(args)
 );
 
 export const createIcon = (data: Prisma.IconCreateArgs) =>

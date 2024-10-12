@@ -1,6 +1,8 @@
-import { RecipeVariant, cva } from "@panda/css";
+"use client";
+import { cva } from "@panda/css";
 import { Album, Icon } from "@prisma/client";
 import { getAstrologyDateRange } from "@utils/animalCrossing";
+import { useTheme } from "@utils/styling";
 
 export type DisplayIconType = Pick<Icon, "imagePath" | "character" | "text">;
 
@@ -49,22 +51,16 @@ export type DisplayIconProps = {
   /** for animal crossing links w/o an icon. */
   date?: Album["date"];
   display: "inline" | "solo";
-  theme?:
-    | RecipeVariant<typeof imageIcon>["theme"]
-    | RecipeVariant<typeof emojiIcon>["theme"];
 };
 
 // TODO: add hover title
-export default function DisplayIcon({
-  icon,
-  date,
-  theme,
-  display,
-}: DisplayIconProps) {
+export default function DisplayIcon({ icon, date, display }: DisplayIconProps) {
+  const theme = useTheme();
+
   if (!icon) {
     if (theme === "animalCrossing") {
       if (!date) {
-        throw new Error("please pass a date for animal crossing page icons!");
+        return null;
       }
       const { name, dateRange } = getAstrologyDateRange(date);
 
@@ -78,7 +74,6 @@ export default function DisplayIcon({
       );
     }
 
-    // TODO: change this to throw an error perhaps
     return null;
   }
 

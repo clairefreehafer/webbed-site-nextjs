@@ -8,11 +8,13 @@ import {
   redactedScript,
   ribeye,
 } from "@fonts";
+import { fotSeuratProB } from "@fonts/animal-crossing";
 import "@styles/index.css";
 import { scanLines } from "@panda/patterns";
 
 const fonts = `
   ${cutiveMono.variable}
+  ${fotSeuratProB.variable}
   ${loveYaLikeASister.variable}
   ${pangolin.variable}
   ${pressStart2P.variable}
