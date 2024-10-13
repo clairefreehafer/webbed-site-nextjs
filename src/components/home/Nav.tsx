@@ -41,8 +41,7 @@ const linksConfig = [
   {
     text: "storybook",
     scribbleText: "srybk",
-    href: process.env.STORYBOOK_URL || "",
-    hide: !process.env.STORYBOOK_URL,
+    href: process.env.NEXT_PUBLIC_STORYBOOK_URL || "",
     target: "_blank",
   },
   {

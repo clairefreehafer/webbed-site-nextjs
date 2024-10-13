@@ -40,6 +40,7 @@ const highlight = css({
   position: "absolute",
   overflow: "hidden",
   textAlign: "center",
+  textShadow: "1px 1px 1px yellow, -1px -1px 2px yellow",
   transition: "clip-path 500ms",
   whiteSpace: "nowrap",
   width: "100%",

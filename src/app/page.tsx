@@ -1,4 +1,4 @@
-import HomeNav from "@components/Nav/HomeNav";
+import HomeNav from "@components/home/Nav";
 import RainbowBorder from "@components/home/RainbowBorder";
 import HomeHeading from "@components/home/Heading";
 import { css } from "@panda/css";
@@ -7,11 +7,6 @@ import StyledLink from "@components/Link";
 
 const rainbowBorder = css({
   width: "100%",
-});
-
-const h3 = css({
-  fontFamily: "var(--font-ribeye-marrow)",
-  fontSize: "2rem",
 });
 
 export default function Home() {
