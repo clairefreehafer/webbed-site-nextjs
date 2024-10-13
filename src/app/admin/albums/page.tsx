@@ -21,7 +21,7 @@ const tableConfig: AdminTableConfig<
         height={150}
       />
     ),
-  icon: ({ icon }) => <DisplayIcon icon={icon} theme="admin" display="solo" />,
+  icon: ({ icon }) => <DisplayIcon icon={icon} display="solo" />,
   name: "name",
   section: "sectionName",
   date: ({ date }) => date?.toString(),

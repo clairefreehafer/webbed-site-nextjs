@@ -1,8 +1,9 @@
 import WiggleBox from "@components/photography/WiggleBox";
-import { RecipeVariant, css, cva } from "@panda/css";
+import { css, cva } from "@panda/css";
 import { sheikahUnderline } from "@styles/zelda";
 import Link from "next/link";
 import { NavLink } from "./config";
+import { ThemeName } from "@panda/themes";
 
 const listItem = cva({
   base: {
@@ -19,6 +20,8 @@ const listItem = cva({
         color: "limegreen",
       },
       animalCrossing: {},
+      book: {},
+      home: {},
       notebook: {},
       zelda: {
         ...sheikahUnderline,
@@ -54,23 +57,17 @@ const linkStyle = css({
 
 export type LinkItemProps = {
   link: NavLink;
-  theme?: RecipeVariant<typeof listItem>["theme"];
+  theme?: ThemeName;
   isActive: boolean;
   // visible: boolean;
 };
 
-export default function LinkItem({
-  link,
-  theme,
-  isActive,
-  // visible,
-}: LinkItemProps) {
+export default function LinkItem({ link, theme, isActive }: LinkItemProps) {
   return (
     <li
       className={`${listItem({ theme, state: isActive ? "active" : undefined })} group`}
     >
       <WiggleBox theme={theme} />
-      {link.image && <img src={link.image} alt="" />}
       {link.name === "storybook" ? (
         <a href={link.pathname} target="_blank">
           {link.name}

@@ -12,9 +12,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       boxShadow="0 0 1rem 0.5rem lightgrey"
       fontFamily="Times New Roman, serif"
       margin="1rem auto"
+      data-panda-theme="book"
     >
       <Navigation />
-      <Title theme="book" />
+      <Title />
       <main
         className={css({
           padding: "0 3rem 3rem",

@@ -33,7 +33,7 @@ export const getIconData = cache(async (id: number) =>
   })
 );
 
-export const findManyIcons = cache((args: Prisma.IconFindManyArgs) =>
+export const findManyIcons = cache(async (args: Prisma.IconFindManyArgs) =>
   prismaWrapper(prisma.icon.findMany)(args)
 );
 

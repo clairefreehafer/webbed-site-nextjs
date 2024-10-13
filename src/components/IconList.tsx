@@ -68,12 +68,7 @@ export default function IconList({ albums, theme }: Props) {
     <ul className={list}>
       {albums.map((album) => (
         <li className={listItem} key={album.id}>
-          <Icon
-            icon={album.icon}
-            date={album.date}
-            theme={theme}
-            display="inline"
-          />
+          <Icon icon={album.icon} date={album.date} display="inline" />
           <StyledLink href={generateUrl(album)}>{album.name}</StyledLink>
         </li>
       ))}

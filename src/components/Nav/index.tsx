@@ -1,11 +1,12 @@
 "use client";
 
-import { RecipeVariant, css, cva } from "@panda/css";
+import { css, cva } from "@panda/css";
 import { zeldaTextBackground } from "@styles/zelda";
 import { NavLink, defaultNavLinks } from "./config";
 import { usePathname } from "next/navigation";
-import LinkItem, { LinkItemProps } from "./LinkItem";
+import LinkItem from "./LinkItem";
 import { slugName } from "@utils/album";
+import { useTheme } from "@utils/styling";
 
 const nav = cva({
   base: {
@@ -20,6 +21,8 @@ const nav = cva({
         height: "4rem",
         p: "0 1.5rem",
       },
+      book: {},
+      home: {},
       notebook: {
         fontFamily: "cutiveMono",
       },
@@ -38,20 +41,13 @@ const list = css({
   width: "100%",
 });
 
-type AvailableThemes =
-  | LinkItemProps["theme"]
-  | RecipeVariant<typeof nav>["theme"];
-
 type Props = {
   navLinks?: typeof defaultNavLinks;
-  theme?: AvailableThemes;
 };
 
-export default function Navigation({
-  navLinks = defaultNavLinks,
-  theme,
-}: Props) {
+export default function Navigation({ navLinks = defaultNavLinks }: Props) {
   const pathname = usePathname();
+  const theme = useTheme();
 
   const isActive = (name: string) => pathname.startsWith(`/${slugName(name)}`);
 

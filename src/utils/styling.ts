@@ -1,6 +1,8 @@
 import { ThemeName } from "@panda/themes";
 import { useEffect, useState } from "react";
 
+// TODO: maybe accept an arg with available themes in each component to make
+// typing less annoying
 export function useTheme(): ThemeName | undefined {
   const [theme, setTheme] = useState<ThemeName>();
 

@@ -35,9 +35,6 @@ export const Photography: Story = {
 };
 
 export const AnimalCrossing: Story = {
-  args: {
-    theme: "animalCrossing",
-  },
   parameters: {
     nextjs: {
       navigation: {
@@ -48,9 +45,6 @@ export const AnimalCrossing: Story = {
 };
 
 export const Zelda: Story = {
-  args: {
-    theme: "zelda",
-  },
   parameters: {
     nextjs: {
       navigation: {
@@ -61,9 +55,6 @@ export const Zelda: Story = {
 };
 
 export const Admin: Story = {
-  args: {
-    theme: "admin",
-  },
   parameters: {
     nextjs: {
       navigation: {

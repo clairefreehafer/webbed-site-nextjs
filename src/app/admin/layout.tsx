@@ -29,8 +29,8 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     <div className={themeRoot} data-panda-theme="admin">
       <SiteContainer>
         <Header>
-          <Nav theme="admin" />
-          <Title theme="admin" />
+          <Nav />
+          <Title />
         </Header>
         <main className={css({ width: "100%" })}>{children}</main>
       </SiteContainer>

@@ -14,7 +14,6 @@ type Story = StoryObj<typeof Icon>;
 export const StarFragment: Story = {
   args: {
     date: new Date(),
-    theme: "animalCrossing",
   },
   parameters: {
     backgrounds: {
@@ -26,7 +25,11 @@ export const StarFragment: Story = {
 export const Character: Story = {
   args: {
     icon: { character: "💩", imagePath: null, text: null },
-    theme: "notebook",
+  },
+  parameters: {
+    backgrounds: {
+      default: "notebook",
+    },
   },
 };
 
@@ -37,6 +40,10 @@ export const Image: Story = {
       imagePath: "/images/animal-crossing/characters/rover.png",
       text: "rover",
     },
-    theme: "animalCrossing",
+  },
+  parameters: {
+    backgrounds: {
+      default: "animal crossing",
+    },
   },
 };

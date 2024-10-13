@@ -16,6 +16,9 @@ const imageIcon = cva({
         maxHeight: "3rem",
         filter: "drop-shadow({shadows.text})",
       },
+      book: {},
+      home: {},
+      notebook: {},
       zelda: {
         maxHeight: "1.5rem",
       },
@@ -38,10 +41,14 @@ const emojiIcon = cva({
       admin: {
         fontSize: "2rem",
       },
+      animalCrossing: {},
+      book: {},
+      home: {},
       notebook: {
         marginRight: "0.5rem",
         fontSize: "1.5rem",
       },
+      zelda: {},
     },
   },
 });

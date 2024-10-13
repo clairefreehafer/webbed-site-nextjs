@@ -31,7 +31,7 @@ export default function ZeldaLayout({ children }: Props) {
       <PageBorder position="top" />
       <SiteContainer>
         <Header>
-          <Navigation theme="zelda" />
+          <Navigation />
           <h1 className={title}>claire freehafer</h1>
         </Header>
         <main className={main}>{children}</main>

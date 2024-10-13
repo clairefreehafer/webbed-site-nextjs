@@ -27,8 +27,8 @@ export default function PhotographyLayout({
     >
       <SiteContainer>
         <Header>
-          <Nav theme="notebook" />
-          <Title theme="notebook" />
+          <Nav />
+          <Title />
         </Header>
         <main className={main}>{children}</main>
       </SiteContainer>

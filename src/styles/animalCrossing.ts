@@ -14,8 +14,7 @@ import {
 // JS variables, so we need all of the utility classes to be generated.
 export const grass = cva({
   base: {
-    // top: SiteContainer padding + svg height + header gap + nav height + SiteContainer gap
-    bgPosition: `left calc(50% - 128px) top calc(1rem + 70px + 1rem + 4rem + 1rem)`,
+    bgPosition: `right calc(((100vw - 1000px) / 2) + 2rem) top calc(1rem + 1rem + 100px + 1rem)`,
   },
   variants: {
     grassDateRange: {

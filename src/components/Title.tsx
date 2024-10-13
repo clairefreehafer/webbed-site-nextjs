@@ -2,6 +2,7 @@
 
 import { RecipeVariant, cva } from "@panda/css";
 import { displayName } from "@utils/album";
+import { useTheme } from "@utils/styling";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ElementType } from "react";
@@ -20,20 +21,24 @@ const container = cva({
         fontFamily: "pressStart2P",
         p: "1rem",
       },
+      animalCrossing: {},
       book: {
         fontFamily: "times new roman",
       },
+      home: {},
       notebook: {
         // https://codepen.io/mp/pen/kBEeKw
         // (another option: https://codepen.io/tmrDevelops/pen/NPXodB)
         borderColor: "white",
         borderRadius: "95% 4% 92% 5% / 4% 95% 6% 95%",
         borderWidth: "3px 4px 3px 5px",
+        fontFamily: "loveYaLikeASister",
         color: "white",
         my: "1rem",
         p: "1rem",
         width: "auto",
       },
+      zelda: {},
     },
   },
 });
@@ -71,16 +76,19 @@ const title = cva({
           content: "'▼'",
         },
       },
+      animalCrossing: {},
       book: {
         _before: {
           content: "'❦'",
         },
       },
+      home: {},
       notebook: {
         _before: {
           content: "'▽'",
         },
       },
+      zelda: {},
     },
   },
   compoundVariants: [
@@ -116,10 +124,9 @@ const title = cva({
 
 type TitleRecipe = RecipeVariant<typeof title>;
 
-type Props = Pick<TitleRecipe, "theme">;
-
 // TODO: desktop version horizontal, mobile vertical
-export default function Title({ theme }: Props) {
+export default function Title() {
+  const theme = useTheme();
   let TitleTag: ElementType = "h1";
 
   const pathname = usePathname().split("/");

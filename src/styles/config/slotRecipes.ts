@@ -40,11 +40,9 @@ export const linkSlotRecipe = defineSlotRecipe({
       animalCrossing: {
         link: {
           // TODO: pick better colors, maybe grass colors?
-          color: "brown",
-          textDecorationStyle: "wavy",
-          textDecorationThickness: "1.75px",
-          textDecorationColor: "black",
-          textShadow: "text",
+          color: "black",
+          textDecorationStyle: "solid",
+          textDecorationThickness: "2px",
           _hover: {
             color: "black",
             textShadow: "text",

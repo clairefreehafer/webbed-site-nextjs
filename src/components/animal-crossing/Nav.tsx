@@ -5,6 +5,7 @@ import { defaultNavLinks } from "@components/Nav/config";
 import StyledLink from "@components/Link";
 import { Prisma } from "@prisma/client";
 import DisplayIcon from "@components/Icon/Icon";
+import { findManyIcons } from "@utils/prisma/icon";
 
 const navLinks = [
   {
@@ -80,7 +81,7 @@ const activeLink = css({
 
 type Props = {
   navLinks?: typeof defaultNavLinks;
-  icons: Prisma.PromiseReturnType<typeof getAnimalCrossingNavIcons>;
+  icons: Prisma.PromiseReturnType<typeof findManyIcons>;
 };
 
 export default function AnimalCrossingNav({ icons }: Props) {
