@@ -101,16 +101,16 @@ model Recipe {
 
 model Ingredient {
   id       Int      @id @default(autoincrement())
-  quantity Int
+  quantity String
   unit     String
   recipes  Recipe[]
-  food     Food     @relation("ingredients", fields: [foodId], references: [id])
-  foodId   Int
+  food     Food     @relation("ingredients", fields: [foodName], references: [name])
+  foodName String
 }
 
 model Food {
   id          Int          @id @default(autoincrement())
-  name        String
+  name        String       @unique
   category    String?
   ingredients Ingredient[] @relation("ingredients")
 }

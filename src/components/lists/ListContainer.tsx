@@ -2,6 +2,7 @@ import { ListItem, Prisma } from "@prisma/client";
 import { getList } from "@utils/prisma/list";
 import WebsiteListItem from "./WebsiteListItem";
 import { WebsiteListObject } from "types/lists";
+import { Fragment } from "react";
 
 function renderListItem({ type, id, data }: ListItem) {
   if (type === "website") {
@@ -29,7 +30,7 @@ export default function ListContainer({
       <p>{description}</p>
       <ul>
         {items.map((listItem, idx) => (
-          <li key={idx}>{renderListItem(listItem)}</li>
+          <Fragment key={idx}>{renderListItem(listItem)}</Fragment>
         ))}
       </ul>
     </>

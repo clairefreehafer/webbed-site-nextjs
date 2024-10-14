@@ -1,20 +1,19 @@
 import Label from "./Label";
 import { adminInput } from "@panda/recipes";
 
-type Props = {
+type Props = React.InputHTMLAttributes<HTMLTextAreaElement> & {
   name: string;
   label: string;
-  defaultValue?: string;
 };
 
-export default function Textarea({ name, label, defaultValue }: Props) {
+export default function Textarea({ name, label, ...textareaProps }: Props) {
   return (
     <>
       <Label htmlFor={name}>{label}</Label>
       <textarea
+        {...textareaProps}
         name={name}
         id={name}
-        defaultValue={defaultValue}
         className={adminInput({ type: "textarea" })}
       />
     </>

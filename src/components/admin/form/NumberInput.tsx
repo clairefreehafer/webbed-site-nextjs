@@ -7,22 +7,21 @@ const container = css({
   pr: "2rem",
 });
 
-type Props = {
+type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   label: string;
   name: string;
-  defaultValue?: number;
 };
 
-export default function NumberInput({ label, name, defaultValue }: Props) {
+export default function NumberInput({ label, name, ...inputProps }: Props) {
   return (
     <>
       <div className={container}>
         <input
+          {...inputProps}
           type="number"
           name={name}
           id={name}
           className={adminInput({ type: "number" })}
-          defaultValue={defaultValue}
         />
       </div>
       <Label htmlFor={name} align="left">

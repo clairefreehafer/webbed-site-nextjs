@@ -20,13 +20,13 @@ const message = css({
   width: "100%",
 });
 
-export default function SubmitButton({ children }: { children: ReactNode }) {
+export default function SubmitButton({ text = "submit" }: { text: ReactNode }) {
   const { pending, data } = useFormStatus();
 
   return (
     <>
       <button type="submit" disabled={pending} className={button}>
-        {children}
+        {text}
       </button>
       {data?.get("message") && (
         <p className={message}>{data?.get("message") as string}</p>

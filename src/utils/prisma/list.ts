@@ -16,6 +16,8 @@ export const getAdminLists = cache(async (): Promise<AdminTableListItem> => {
     },
   });
 
+  if (!lists) return [];
+
   return lists.map((list) => {
     return {
       id: list.id,
@@ -49,6 +51,15 @@ export const getList = cache(async (name: List["name"]) => {
     },
   });
 });
+
+export const findUniqueList = cache(
+  async (args: Prisma.ListFindUniqueOrThrowArgs) =>
+    prismaWrapper(prisma.list.findUniqueOrThrow)(args)
+);
+
+export const findManyLists = cache(async (args: Prisma.ListFindManyArgs) =>
+  prismaWrapper(prisma.list.findMany)(args)
+);
 
 export const createList = (args: Prisma.ListCreateArgs) =>
   prismaWrapper(prisma.list.create)(args);

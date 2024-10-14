@@ -43,12 +43,12 @@ export default function Photography() {
       </p>
 
       <h3 className={title}>
-        <Link href="/photography/albums">albums</Link>
+        <StyledLink href="/photography/albums">albums</StyledLink>
       </h3>
       <p className={text}>photos grouped by location, most recent first.</p>
 
       <h3 className={title}>
-        <Link href="/photography/collections">collections</Link>
+        <StyledLink href="/photography/collections">collections</StyledLink>
       </h3>
       <p className={text}>photos grouped by concept, subject, etc.</p>
 
@@ -59,7 +59,7 @@ export default function Photography() {
       </p>
 
       <h3 className={title}>
-        <Link href="/photography/technical">technical</Link>
+        <StyledLink href="/photography/technical">technical</StyledLink>
       </h3>
       <p className={text}>grouped by camera.</p>
 

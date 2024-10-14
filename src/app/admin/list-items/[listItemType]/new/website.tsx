@@ -11,7 +11,12 @@ export default function NewWebsiteForm({
   url,
 }: Partial<WebsiteListObject>) {
   return (
-    <AdminForm initialState={initialState} action={addListItem}>
+    <AdminForm
+      submitButtonText="+ add website"
+      initialState={initialState}
+      action={addListItem}
+    >
+      <input type="hidden" name="type" value="website" readOnly />
       <SectionHeader>~~~ 💻 ~~~</SectionHeader>
       <TextInput label="title" name="title" defaultValue={title} />
       <TextInput label="url" name="url" defaultValue={url} />

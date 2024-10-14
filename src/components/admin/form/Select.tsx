@@ -2,27 +2,24 @@ import { ChangeEventHandler, ForwardedRef, forwardRef } from "react";
 import Label from "./Label";
 import { adminInput } from "@panda/recipes";
 
-type Props = {
+type Props = React.InputHTMLAttributes<HTMLSelectElement> & {
   label?: string;
   name: string;
-  options: string[] | readonly string[];
-  defaultValue?: string;
-  onChange?: ChangeEventHandler<HTMLSelectElement>;
+  options: (string | null)[] | readonly (string | null)[];
 };
 
 const Select = forwardRef<HTMLSelectElement, Props>(function Select(
-  { label, name, options, defaultValue, onChange },
+  { label, name, options, ...selectProps },
   ref
 ) {
   return (
     <>
       {label && <Label htmlFor={name}>{label}</Label>}
       <select
+        {...selectProps}
         id={name}
         name={name}
-        defaultValue={defaultValue}
         className={adminInput({ type: "select" })}
-        onChange={onChange}
         ref={ref}
       >
         {options.map((option) => (

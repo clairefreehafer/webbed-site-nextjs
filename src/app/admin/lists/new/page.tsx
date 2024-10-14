@@ -8,10 +8,13 @@ const initialState: ListFormState = {};
 
 export default function Page() {
   return (
-    <AdminForm initialState={initialState} action={addList}>
+    <AdminForm
+      submitButtonText="create list"
+      initialState={initialState}
+      action={addList}
+    >
       <TextInput label="name" name="name" />
       <Textarea label="description" name="description" />
-      <SubmitButton>create list</SubmitButton>
     </AdminForm>
   );
 }

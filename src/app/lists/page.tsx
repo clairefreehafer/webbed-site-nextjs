@@ -1,10 +1,20 @@
 import { slugName } from "@utils/album";
 import { css } from "@panda/css";
 import StyledLink from "@components/Link";
-import { getLists } from "@utils/prisma/list";
+import { findManyLists } from "@utils/prisma/list";
 
 export default async function Page() {
-  const lists = await getLists();
+  const lists = await findManyLists({
+    select: {
+      id: true,
+      name: true,
+    },
+    orderBy: {
+      name: "asc",
+    },
+  });
+
+  if (!lists) return <>no lists :(</>;
 
   return (
     <>
@@ -14,10 +24,10 @@ export default async function Page() {
           listStyle: "disc inside",
         })}
       >
-        {lists.map((listItem, idx) => (
-          <li key={idx}>
-            <StyledLink href={`/lists/${slugName(listItem.name)}`}>
-              {listItem.name}
+        {lists.map((list) => (
+          <li key={list.id}>
+            <StyledLink href={`/lists/${slugName(list.name)}`}>
+              {list.name}
             </StyledLink>
           </li>
         ))}

@@ -31,6 +31,8 @@ type Props = {
   align?: "left" | "right";
 };
 
+// TODO: use css toadd required * based on presence of
+// `required` prop on element (if possible)
 export default function Label({ htmlFor, children, align = "right" }: Props) {
   return (
     <label htmlFor={htmlFor} className={label({ align })}>
