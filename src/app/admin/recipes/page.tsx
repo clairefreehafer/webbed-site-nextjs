@@ -8,12 +8,11 @@ export type AdminTableListItem = {
   /** for using as a key - could replace with slug */
   id: number;
   title: string;
-  url?: string;
 }[];
 
 const tableConfig: AdminTableConfig<AdminTableListItem[number]> = {
   title: "title",
-  edit: ({ id }) => <Link href={`/admin/lists/${id}`}>✍️</Link>,
+  edit: ({ id }) => <Link href={`/admin/recipes/${id}`}>✍️</Link>,
 };
 
 export default async function Page() {
@@ -22,7 +21,6 @@ export default async function Page() {
       ingredients: true,
     },
   });
-  console.log(recipes);
 
   return (
     <>

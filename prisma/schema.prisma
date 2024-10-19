@@ -93,7 +93,7 @@ model ListItem {
 
 model Recipe {
   id           Int          @id @default(autoincrement())
-  title        String       @db.VarChar(255)
+  title        String       @unique @db.VarChar(255)
   ingredients  Ingredient[]
   instructions String[]
   url          String?      @db.VarChar

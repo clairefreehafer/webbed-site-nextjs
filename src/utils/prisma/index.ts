@@ -34,6 +34,7 @@ if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
 //   console.log("Duration: " + e.duration + "ms");
 // });
 
+/** @deprecated */
 export function prismaWrapper<Args, Result>(
   prismaFunction: (args: Args) => Result
 ) {
