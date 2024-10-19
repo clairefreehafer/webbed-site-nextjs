@@ -1,5 +1,5 @@
 import StyledLink from "@components/Link";
-import { css } from "@panda/css";
+import { css, cx } from "@panda/css";
 import Link from "next/link";
 
 // TODO: extract to components
@@ -12,6 +12,12 @@ const text = css({
   fontFamily: "pangolin",
   fontSize: "1.25rem",
   marginBottom: "paperLineSpacing",
+});
+
+const strike = css({
+  textDecoration: "line-through",
+  textDecorationStyle: "wavy",
+  textDecorationThickness: "2px",
 });
 
 export default function Photography() {
@@ -37,37 +43,43 @@ export default function Photography() {
         </StyledLink>
       </p>
 
-      <h3 className={title}>recently added</h3>
-      <p className={text}>
-        (coming soon) photos most recently added to the site.
-      </p>
-
       <h3 className={title}>
         <StyledLink href="/photography/albums">albums</StyledLink>
       </h3>
-      <p className={text}>photos grouped by location, most recent first.</p>
+      <p className={text}>
+        photos grouped by location and/or event, most recent first.
+      </p>
 
       <h3 className={title}>
         <StyledLink href="/photography/collections">collections</StyledLink>
       </h3>
       <p className={text}>photos grouped by concept, subject, etc.</p>
 
-      <h3 className={title}>curated</h3>
-      <p className={text}>
-        (coming soon) smaller groups of photos selected to be displayed
-        together.
-      </p>
-
       <h3 className={title}>
         <StyledLink href="/photography/technical">technical</StyledLink>
       </h3>
-      <p className={text}>grouped by camera.</p>
+      <p className={text}>grouped by camera, film, etc.</p>
 
-      <h3 className={title}>map</h3>
-      <p className={text}>(coming soon) view geotagged photos on a map.</p>
+      <h3 className={cx(title, strike)}>recently added</h3>
+      <p className={cx(text, strike)}>
+        photos most recently added to the site.
+      </p>
 
-      <h3 className={title}>random</h3>
-      <p className={text}>(coming soon) show a random photo</p>
+      <h3 className={cx(title, strike)}>curated</h3>
+      <p className={cx(text, strike)}>
+        smaller groups of photos selected to be displayed together.
+      </p>
+
+      <h3 className={cx(title, strike)}>map</h3>
+      <p className={cx(text, strike)}>view geotagged photos on a map.</p>
+
+      <h3 className={cx(title, strike)}>random</h3>
+      <p className={cx(text, strike)}>show a random photo</p>
+
+      <h3 className={cx(title, strike)}>chronological</h3>
+      <p className={cx(text, strike)}>
+        view ALL photos in chronological order.
+      </p>
     </>
   );
 }

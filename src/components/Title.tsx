@@ -29,6 +29,7 @@ const container = cva({
       notebook: {
         // https://codepen.io/mp/pen/kBEeKw
         // (another option: https://codepen.io/tmrDevelops/pen/NPXodB)
+        // or open props border
         borderColor: "white",
         borderRadius: "95% 4% 92% 5% / 4% 95% 6% 95%",
         borderWidth: "3px 4px 3px 5px",

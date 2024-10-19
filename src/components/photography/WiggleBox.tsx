@@ -33,6 +33,7 @@ const wiggleBox = cva({
   },
 });
 
+// TODO: try using open props borders
 export default function WiggleBox({ theme }: { theme?: ThemeName }) {
   if (theme !== "notebook") {
     return null;

@@ -1,8 +1,8 @@
 import PolaroidGrid from "@components/photography/PolaroidGrid";
-import { getPolaroidGridData } from "@utils/prisma/photo";
+import { getSmugMugGalleriesFromNode } from "@utils/smugmug";
 
 export default async function Collections() {
-  const albums = await getPolaroidGridData("collections");
+  const albums = await getSmugMugGalleriesFromNode("hwBrFB");
 
   return <PolaroidGrid albums={albums} />;
 }

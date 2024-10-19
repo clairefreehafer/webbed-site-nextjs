@@ -1,7 +1,7 @@
 import { Photo } from "@prisma/client";
 
 const API_HOST = "https://api.smugmug.com";
-const { SMUGMUG_API_KEY } = process.env;
+export const { SMUGMUG_API_KEY } = process.env;
 
 export enum SmugMugKeys {
   Collections = "hwBrFB",
@@ -11,9 +11,9 @@ export enum SmugMugKeys {
 
 export type SmugMugNodeTypes = "Album" | "Folder" | "Page";
 
-export type SmugMugEndpointType = "album" | "image";
+export type SmugMugEndpointType = "album" | "image" | "node";
 
-export type SmugMugUri = "images" | "sizedetails";
+export type SmugMugUri = "children" | "images" | "sizedetails";
 
 export type Node = {
   Uris: Record<string, any>;
@@ -44,10 +44,10 @@ export function sizePhoto(url: Photo["url"], size: SmugMugPhotoSizes) {
   return url?.replaceAll("#size#", size) || "";
 }
 
-function generateApiUrl(
+export function generateSmugMugApiUrl(
   type: SmugMugEndpointType,
   key: SmugMugKeys | string,
-  uri?: SmugMugUri,
+  uri?: SmugMugUri
 ) {
   if (uri) {
     return `${API_HOST}/api/v2/${type}/${key}!${uri}?`;
@@ -57,7 +57,7 @@ function generateApiUrl(
 
 export async function getSmugMugData(key: string) {
   try {
-    const url = generateApiUrl("image", key, "sizedetails");
+    const url = generateSmugMugApiUrl("image", key, "sizedetails");
 
     const params = new URLSearchParams({
       APIKey: SMUGMUG_API_KEY as string,
@@ -89,10 +89,10 @@ type SmugmugReturn = {
 };
 
 export async function getSmugmugPhotos(
-  albumName: string,
+  albumName: string
 ): Promise<SmugmugReturn[]> {
   try {
-    const url = generateApiUrl("album", albumKeys[albumName]);
+    const url = generateSmugMugApiUrl("album", albumKeys[albumName]);
 
     const params = new URLSearchParams({
       APIKey: SMUGMUG_API_KEY as string,
@@ -143,4 +143,63 @@ export async function getSmugmugPhotos(
     console.error(`❌ ${(error as Error).message}`);
     return [];
   }
+}
+
+export async function getSmugMugGalleriesFromNode(nodeId: string) {
+  const url = generateSmugMugApiUrl("node", nodeId, "children");
+  const params = new URLSearchParams({
+    APIKey: SMUGMUG_API_KEY as string,
+    _verbose: "",
+    count: "1000",
+    _config: JSON.stringify({
+      expand: {
+        HighlightImage: {
+          filter: ["ImageKey"],
+          filteruri: ["ImageSizeDetails"],
+          expand: {
+            ImageSizeDetails: {
+              filter: ["ImageUrlTemplate"],
+            },
+          },
+        },
+      },
+    }),
+  });
+
+  console.log(`🌐 fetching ${url + params}...`);
+
+  const res = await fetch(url + params, {
+    headers: {
+      Accept: "application/json",
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("error fetching smugmug data.");
+  }
+
+  const json = await res.json();
+  const albums = json.Response.Node;
+  const coverPhotos = json.Expansions;
+
+  const polaroidAlbums = albums.map((album, idx) => {
+    const highlightImageUri = album.Uris.HighlightImage.Uri;
+    const highlightImage = coverPhotos[highlightImageUri];
+    const highlightImageSizeUri =
+      highlightImage.Image?.Uris.ImageSizeDetails.Uri;
+    const coverPhotoUrl =
+      coverPhotos[highlightImageSizeUri]?.ImageSizeDetails.ImageUrlTemplate;
+
+    return {
+      id: idx,
+      name: album.Name,
+      coverPhoto: {
+        url: coverPhotoUrl,
+      },
+      randomCoverPhoto: null,
+      icon: null,
+    };
+  });
+
+  return polaroidAlbums;
 }
