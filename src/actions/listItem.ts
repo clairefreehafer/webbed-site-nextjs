@@ -177,7 +177,7 @@ export async function editWebsiteListItem(
 
     return {
       id,
-      ...(updatedListItem.data as WebsiteListObject),
+      ...(updatedListItem?.data as WebsiteListObject),
       message: "👍 website updated successfully.",
     };
   } catch (error) {

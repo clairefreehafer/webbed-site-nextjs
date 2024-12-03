@@ -43,7 +43,7 @@ export default function UpdateAlbumForm({
   icons,
 }: Props) {
   const [generateDateAutomatically, setGenerateDateAutomatically] = useState(
-    !!albumPhotos.length
+    !!albumPhotos?.length
   );
   const [rootSection, setRootSection] = useState(albumData.rootSection);
 
@@ -56,7 +56,7 @@ export default function UpdateAlbumForm({
     iconId,
     coverKey,
     date: date?.toISOString().slice(0, 19),
-    sectionName: section.name,
+    sectionName: section?.name,
   };
 
   return (
@@ -101,7 +101,10 @@ export default function UpdateAlbumForm({
       <HideSection when={rootSection !== "photography"}>
         <SectionHeader>~~~ photography ~~~</SectionHeader>
 
-        <SelectCoverPhoto defaultValue={coverKey} albumPhotos={albumPhotos} />
+        <SelectCoverPhoto
+          defaultValue={coverKey ?? null}
+          albumPhotos={albumPhotos}
+        />
       </HideSection>
 
       <HideSection when={rootSection !== "zelda"}>

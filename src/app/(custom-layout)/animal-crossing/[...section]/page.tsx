@@ -9,7 +9,7 @@ import { getAllDescendants } from "@utils/prisma/section";
 export async function generateStaticParams() {
   // TODO: extract
   const descendantSections = await getAllDescendants("animal-crossing");
-  const albums = await getAlbumsInSections(descendantSections);
+  const albums = (await getAlbumsInSections(descendantSections)) || [];
 
   const params = [];
 
@@ -33,7 +33,7 @@ export default async function Page({
   const albumName = displayName(params.section[params.section.length - 1]);
   const photos = await getAlbumPhotos(albumName);
 
-  if (!photos.length) {
+  if (!photos?.length) {
     return "❌ no photos";
   }
 

@@ -12,7 +12,7 @@ import { getSmugmugPhotos } from "@utils/smugmug";
 export async function generateStaticParams() {
   // TODO: extract
   const descendantSections = await getAllDescendants("photography");
-  const albums = await getAlbumsInSections(descendantSections);
+  const albums = (await getAlbumsInSections(descendantSections)) ?? [];
 
   const params = [];
 
@@ -34,15 +34,15 @@ export default async function Page({
   params: { section: string[] };
 }) {
   const albumName = displayName(
-    decodeURIComponent(params.section[params.section.length - 1]),
+    decodeURIComponent(params.section[params.section.length - 1])
   );
   const album = await getPhotographyAlbumPhotos(albumName);
 
-  let photos = album.photos;
+  let photos = album?.photos;
 
-  if (album.type === AlbumTypes.Tag) {
+  if (album?.type === AlbumTypes.Tag) {
     photos = await getPhotosWithTag(albumName);
-  } else if (album.type === AlbumTypes.Smugmug) {
+  } else if (album?.type === AlbumTypes.Smugmug) {
     photos = await getSmugmugPhotos(albumName);
   }
 

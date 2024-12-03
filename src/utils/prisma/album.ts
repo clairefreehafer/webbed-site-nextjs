@@ -4,33 +4,34 @@ import { Album, Prisma } from "@prisma/client";
 import { getAncestorSections, getRootSection } from "@utils/section";
 import { IconListAlbum } from "@components/IconList";
 
-export const getAdminAlbums = cache(async () =>
-  prismaWrapper(prisma.album.findMany)({
-    select: {
-      id: true,
-      name: true,
-      sectionName: true,
-      date: true,
-      type: true,
-      coverPhoto: {
-        select: {
-          url: true,
-          altText: true,
+export const getAdminAlbums = cache(
+  async () =>
+    prismaWrapper(prisma.album.findMany)({
+      select: {
+        id: true,
+        name: true,
+        sectionName: true,
+        date: true,
+        type: true,
+        coverPhoto: {
+          select: {
+            url: true,
+            altText: true,
+          },
+        },
+        icon: {
+          select: {
+            character: true,
+            imagePath: true,
+            text: true,
+          },
+        },
+        _count: {
+          select: { photos: true },
         },
       },
-      icon: {
-        select: {
-          character: true,
-          imagePath: true,
-          text: true,
-        },
-      },
-      _count: {
-        select: { photos: true },
-      },
-    },
-    orderBy: { date: { sort: "desc", nulls: "first" } },
-  }),
+      orderBy: { date: { sort: "desc", nulls: "first" } },
+    }) ?? []
 );
 
 export const getAlbumData = cache(async (name: Album["name"]) => {
@@ -75,7 +76,7 @@ export const getAlbumList = cache(async (sectionName: Album["sectionName"]) =>
       sectionName: true,
       icon: true,
     },
-  }),
+  })
 );
 
 export const getPhotographyAlbumPhotos = cache(async (name: Album["name"]) =>
@@ -90,7 +91,7 @@ export const getPhotographyAlbumPhotos = cache(async (name: Album["name"]) =>
         },
       },
     },
-  }),
+  })
 );
 
 export const getAlbumSection = cache(async (name: Album["name"]) => {
@@ -140,7 +141,7 @@ export const getIconListAlbums = cache(
     }
 
     return result;
-  },
+  }
 );
 
 export const getAlbumsInSections = cache(async (sections: string[]) =>
@@ -148,14 +149,14 @@ export const getAlbumsInSections = cache(async (sections: string[]) =>
     where: {
       sectionName: { in: sections },
     },
-  }),
+  })
 );
 
 export const getAlbumNames = cache(async () =>
   prismaWrapper(prisma.album.findMany)({
     select: { name: true },
     orderBy: { name: "asc" },
-  }),
+  })
 );
 
 export const createAlbum = async (args: Prisma.AlbumCreateArgs) =>

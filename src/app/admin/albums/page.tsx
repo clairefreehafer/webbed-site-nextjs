@@ -41,8 +41,8 @@ export default async function AdminReadAlbumPage() {
       <p>
         <Link href="/admin/albums/new">add album</Link>
       </p>
-      <AdminTable data={albums} config={tableConfig} />
-      <p>total: {albums.length}</p>
+      {/* <AdminTable data={albums} config={tableConfig} /> */}
+      {/* <p>total: {albums.length}</p> */}
     </>
   );
 }

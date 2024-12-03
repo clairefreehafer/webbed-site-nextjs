@@ -7,14 +7,14 @@ import { getPhotosWithTag } from "@utils/prisma/tag";
 
 export default async function Page({ params }: { params: { album: string } }) {
   const albumData = await getAlbumData(
-    displayName(decodeURIComponent(params.album)),
+    displayName(decodeURIComponent(params.album))
   );
   const sections = await getSectionsForHierarchy();
   const icons = await getIcons();
   let albumPhotos = albumData.photos;
 
   if (albumData.type === "tag") {
-    albumPhotos = await getPhotosWithTag(albumData.name);
+    albumPhotos = await getPhotosWithTag(albumData?.name ?? "");
   }
 
   return (

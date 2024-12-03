@@ -44,7 +44,7 @@ export default function AdminForm<T extends { message?: string }>({
   return (
     <form action={formAction} className={form}>
       {children}
-      <SubmitButton text={submitButtonText} />
+      <SubmitButton>{submitButtonText}</SubmitButton>
       {state?.message && <p className={message}>{state.message}</p>}
     </form>
   );
