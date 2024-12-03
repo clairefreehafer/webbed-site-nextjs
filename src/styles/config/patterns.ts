@@ -93,7 +93,7 @@ const siteContainer = definePattern({
   },
   defaultValues: {
     // TODO: token
-    maxWidth: 750,
+    maxWidth: 1000,
   },
   transform(props) {
     return {

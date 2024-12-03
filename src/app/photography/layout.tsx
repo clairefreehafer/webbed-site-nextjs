@@ -25,7 +25,7 @@ export default function PhotographyLayout({
       data-panda-theme="notebook"
       className={css(fullScreen, { bg: "black", color: "white" })}
     >
-      <SiteContainer>
+      <SiteContainer maxWidth={750}>
         <Header>
           <Nav />
           <Title />
