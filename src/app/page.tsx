@@ -24,6 +24,32 @@ export default function Home() {
             p: "1rem",
           })}
         >
+          <p
+            className={css({
+              textAlign: "center",
+              maxWidth: 500,
+              marginBottom: "1rem",
+            })}
+          >
+            as of <strong>november 2024</strong>, i am taking a hiatus from
+            updating this site! please check out the sequel on{" "}
+            <a
+              href="https://clairefreehafer.neocities.org"
+              target="_blank"
+              className={css({ textDecoration: "underline" })}
+            >
+              neocities
+            </a>{" "}
+            or{" "}
+            <a
+              href="https://github.com/clairefreehafer/webbed-site-hugo"
+              target="blank"
+              className={css({ textDecoration: "underline" })}
+            >
+              github
+            </a>
+            .
+          </p>
           <HomeHeading element="h1">claire freehafer</HomeHeading>
           <main
             className={css({
