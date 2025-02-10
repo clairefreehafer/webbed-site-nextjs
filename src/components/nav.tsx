@@ -2,11 +2,13 @@
 import { usePathname } from "next/navigation";
 
 function getActiveNavLink(currentUrl: string, pageUrl: string) {
-  // do root separate because "/" matches all URLs
-  if (pageUrl === "/" && currentUrl === "/") {
+  const currentSection = currentUrl.split("/")[1];
+
+  if (pageUrl === "/" && !currentSection) {
     return "active";
   }
-  if (currentUrl.includes(pageUrl) && pageUrl !== "/") {
+
+  if (currentSection === pageUrl.replace("/", "")) {
     return "active";
   }
   return "";
