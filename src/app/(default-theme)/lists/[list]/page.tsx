@@ -1,3 +1,4 @@
+import Tags from "@/components/tags";
 import { getLists } from "@/utils";
 
 export const dynamicParams = false;
@@ -28,10 +29,14 @@ export default async function Page({
 }: {
   params: Promise<{ list: string }>;
 }) {
-  const { default: List, title } =
-    (await getLists()).find(
-      async (listData) => (await params).list === listData.slug
-    ) ?? {};
+  const slug = (await params).list;
+  const lists = await getLists();
+  const currentList = lists.find((list) => slug === list.slug);
+
+  if (!currentList) {
+    return `Could not find list ${slug}`;
+  }
+  const { default: List, title, tags } = currentList;
 
   return (
     <>
@@ -39,6 +44,7 @@ export default async function Page({
       <section className="content">
         <List />
       </section>
+      <Tags tags={tags} linkPrefix="/lists/tags/" />
     </>
   );
 }
