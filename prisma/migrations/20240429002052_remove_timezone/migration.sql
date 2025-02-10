@@ -1,5 +1,0 @@
--- AlterTable
-ALTER TABLE "Album" ALTER COLUMN "date" SET DATA TYPE TIMESTAMP(6);
-
--- AlterTable
-ALTER TABLE "Photo" ALTER COLUMN "captureDate" SET DATA TYPE TIMESTAMP(6);
