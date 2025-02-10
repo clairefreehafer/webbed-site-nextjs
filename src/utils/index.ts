@@ -1,9 +1,9 @@
 import fs from "fs";
 import path from "path";
-import { ListPage, MarkdownPage, RecipePage } from "./types";
+import { ListPage, RecipePage } from "./types";
 
 export async function getLists(): Promise<ListPage[]> {
-  const listData: any[] = [];
+  const listData: ListPage[] = [];
   const lists = fs
     .readdirSync(path.join(process.cwd(), "src", "lists"))
     .filter((list) => !list.startsWith("_"));
@@ -16,7 +16,7 @@ export async function getLists(): Promise<ListPage[]> {
 }
 
 export async function getRecipes(): Promise<RecipePage[]> {
-  const pages: MarkdownPage[] = [];
+  const pages: RecipePage[] = [];
   const files = fs
     .readdirSync(path.join(process.cwd(), "src", "recipes"), {
       recursive: true,
@@ -25,13 +25,24 @@ export async function getRecipes(): Promise<RecipePage[]> {
     .filter((list) => !list.name.startsWith("_"));
 
   for (const file of files) {
-    const recipeType = file.parentPath.includes("meals") ? "meal" : "cocktail";
+    const recipeType =
+      file.parentPath.includes("meals") || file.name === "meals"
+        ? "meal"
+        : "cocktail";
     if (file.name.includes(".")) {
       const listPage = await import(`@/recipes/${recipeType}s/${file.name}`);
       pages.push({
         ...listPage,
         type: recipeType,
         slug: file.name.split(".")[0],
+      });
+    } else {
+      pages.push({
+        type: recipeType,
+        title: `${recipeType} recipes`,
+        default: null,
+        slug: "",
+        ingredients: [],
       });
     }
   }

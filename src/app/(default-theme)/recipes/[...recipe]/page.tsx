@@ -38,9 +38,27 @@ export default async function Page({
   const currentRecipe = recipes.find((recipe) => slug === recipe.slug);
 
   if (!currentRecipe) {
-    return `Could not find ${recipeType} recipe ${slug}`;
+    return (
+      <>
+        <h3>{recipeType}</h3>
+        <section className="content">
+          <ul>
+            {recipes
+              .filter((recipe) => recipeType.includes(recipe.type))
+              .map((recipe) => (
+                <li key={recipe.title}>
+                  <a href={`/recipes/${recipeType}/${recipe.slug}`}>
+                    {recipe.title}
+                  </a>
+                </li>
+              ))}
+          </ul>
+        </section>
+      </>
+    );
   }
-  const { default: List, title } = currentRecipe;
+
+  const { default: List, title, ingredients } = currentRecipe;
 
   return (
     <>
@@ -48,7 +66,7 @@ export default async function Page({
       <section className="content">
         <List />
       </section>
-      {/* <Tags tags={tags} linkPrefix="/lists/tags/" /> */}
+      <Tags tags={ingredients} linkPrefix="/recipes/ingredients/" />
     </>
   );
 }
