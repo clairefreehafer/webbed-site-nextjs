@@ -1,0 +1,115 @@
+@use "variables";
+
+  /*****************/
+ /***** FONTS *****/
+/*****************/
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url('/fonts/atkinson-hyperlegible.woff2') format('woff2');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url('/fonts/atkinson-hyperlegible-bold.woff2') format('woff2');
+  font-weight: 700;
+}
+
+@mixin sans-serif() {
+  font-family: "Atkinson Hyperlegible", system-ui, ui-sans-serif, sans-serif;
+}
+
+@mixin serif() {
+  font-family: "Georgia", ui-serif, serif;
+}
+
+@mixin monospace() {
+  font-family: ui-monospace, monospace;
+}
+
+  /*******************/
+ /***** HEADNGS *****/
+/*******************/
+h1, h2, h3, h4, h5, h6 {
+  @include serif();
+  color: white;
+  font-weight: normal;
+  text-transform: lowercase;
+  text-shadow: black 1px 0 5px;
+
+  & a {
+    text-decoration-color: yellow;
+    text-decoration-thickness: 3px;
+
+    &:hover {
+      text-shadow: none;
+    }
+  }
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+h4 {
+  font-size: 1.25rem;
+}
+
+  /*****************/
+ /***** LINKS *****/
+/*****************/
+a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration-color: yellow;
+  text-decoration-thickness: 2px;
+
+  // &.active {
+  //   font-weight: bold;
+  //   text-decoration: none;
+  //   letter-spacing: 0.05rem;
+  //   font-size: 1.1rem;
+  // }
+
+  &:hover, &:focus {
+    background-color: yellow;
+    color: black;
+    text-decoration: none;
+  }
+
+    @media screen and (max-width: variables.$max-site-width) {
+    text-decoration-thickness: 1px;
+  }
+}
+
+  /*****************/
+ /***** LISTS *****/
+/*****************/
+ol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  line-height: 1.5;
+}
+
+ul {
+  line-height: 1.5;
+}
+
+  /****************/
+ /***** TEXT *****/
+/****************/
+em {
+  @include serif();
+}
+
+#recipe strong {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px dotted yellow;
+  padding: 0.2rem;
+  font-weight: normal;
+}
