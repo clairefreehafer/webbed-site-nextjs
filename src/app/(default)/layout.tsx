@@ -1,3 +1,4 @@
+import Nav from "@/components/nav";
 import "@/sass/default/style.scss";
 import Link from "next/link";
 
@@ -10,17 +11,6 @@ function getBuildDate() {
   return `${yyyy}/${mm}/${dd}`;
 }
 
-function getActiveNavLink(currentUrl, pageUrl) {
-  // do root separate because "/" matches all URLs
-  if (pageUrl === "/" && currentUrl === "/") {
-    return "active";
-  }
-  if (currentUrl.includes(pageUrl) && pageUrl !== "/") {
-    return "active";
-  }
-  return "";
-}
-
 export default function Layout({ children }: React.PropsWithChildren) {
   return (
     <>
@@ -31,7 +21,9 @@ export default function Layout({ children }: React.PropsWithChildren) {
       <div className="container">
         <header className="header">
           <h1>claire freehafer</h1>
-          <nav>nav</nav>
+          <nav>
+            <Nav />
+          </nav>
         </header>
 
         <main>{children}</main>
