@@ -4,8 +4,7 @@
 
 html {
   @include mixins.rainbow-border(5px);
-  @include text.sans-serif();
-  background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
   color: rgba(255, 255, 255, 0.85);
   min-height: 100vh;
   padding: 1rem;
@@ -36,6 +35,7 @@ html {
 }
 
 .container {
+  @include text.sans-serif();
   background-color: rgba(255, 255, 255, 0.1);
   border: 10px solid rgba(255, 255, 255, 0.8);
   box-shadow: inset 0px 0px 5px 1px black;
