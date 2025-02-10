@@ -2,10 +2,10 @@ import { getLists } from "@/utils";
 
 export const dynamicParams = false;
 
-export function generateStaticParams() {
-  const lists = getLists();
+export async function generateStaticParams() {
+  const lists = await getLists();
   return lists.map((list) => ({
-    list,
+    list: list.slug,
   }));
 }
 
@@ -14,7 +14,10 @@ export async function generateMetadata({
 }: {
   params: Promise<{ list: string }>;
 }) {
-  const { title } = await import(`@/lists/${(await params).list}.mdx`);
+  const { title } =
+    (await getLists()).find(
+      async (listData) => (await params).list === listData.slug
+    ) ?? {};
   return {
     title: `${title} – claire freehafer`,
   };
@@ -25,8 +28,10 @@ export default async function Page({
 }: {
   params: Promise<{ list: string }>;
 }) {
-  const list = (await params).list;
-  const { default: List, title } = await import(`@/lists/${list}.mdx`);
+  const { default: List, title } =
+    (await getLists()).find(
+      async (listData) => (await params).list === listData.slug
+    ) ?? {};
 
   return (
     <>
