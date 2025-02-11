@@ -1,6 +1,4 @@
-import { generateTags, getLists, slugify } from "@/utils";
-
-const lists = getLists();
+import { generateTags, slugify } from "@/utils";
 
 export default async function Page() {
   const tags = await generateTags();

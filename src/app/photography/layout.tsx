@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import Menu from "@/components/photography/menu";
 import "@/sass/photography/style.scss";
+import Link from "next/link";
 
 export default function Layout({ children }: React.PropsWithChildren) {
   const pathname = usePathname();
@@ -26,9 +27,9 @@ export default function Layout({ children }: React.PropsWithChildren) {
             navigate
           </button>
         )}
-        <a href="/" className="home">
+        <Link href="/" className="home">
           return home
-        </a>
+        </Link>
       </header>
 
       <Menu menuOpen={menuOpen} />

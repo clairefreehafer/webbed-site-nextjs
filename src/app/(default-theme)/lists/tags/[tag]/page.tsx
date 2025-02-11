@@ -1,4 +1,4 @@
-import { generateTags, getLists } from "@/utils";
+import { generateTags } from "@/utils";
 
 export const dynamicParams = false;
 
