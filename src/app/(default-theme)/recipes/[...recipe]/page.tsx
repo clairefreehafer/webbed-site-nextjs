@@ -38,13 +38,16 @@ export default async function Page({
   const currentRecipe = recipes.find((recipe) => slug === recipe.slug);
 
   if (!currentRecipe) {
+    console.log(recipeType);
     return (
       <>
         <h3>{recipeType}</h3>
         <section className="content">
           <ul>
             {recipes
-              .filter((recipe) => recipeType.includes(recipe.type))
+              .filter(
+                (recipe) => recipe.slug && recipeType.includes(recipe.type)
+              )
               .map((recipe) => (
                 <li key={recipe.title}>
                   <a href={`/recipes/${recipeType}/${recipe.slug}`}>
@@ -58,11 +61,20 @@ export default async function Page({
     );
   }
 
-  const { default: List, title, ingredients } = currentRecipe;
+  const { default: List, title, ingredients, sourceUrl } = currentRecipe;
 
   return (
     <>
       <h3>{title}</h3>
+      {sourceUrl && (
+        <p className="recipe-source">
+          [{" "}
+          <a href={sourceUrl} target="_blank">
+            source
+          </a>{" "}
+          ]
+        </p>
+      )}
       <section className="content">
         <List />
       </section>

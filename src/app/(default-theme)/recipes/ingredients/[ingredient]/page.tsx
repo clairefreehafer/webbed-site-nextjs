@@ -1,11 +1,11 @@
-import { generateIngredients } from "@/utils";
+import { deslugify, generateIngredients, slugify } from "@/utils";
 
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const ingredients = await generateIngredients();
   return Object.keys(ingredients).map((ingredient) => ({
-    ingredient,
+    ingredient: slugify(ingredient),
   }));
 }
 
@@ -16,15 +16,21 @@ export default async function Page({
 }) {
   const ingredients = await generateIngredients();
   const ingredient = (await params).ingredient;
+  console.log(ingredient);
   return (
-    <section className="content">
-      <ul>
-        {ingredients[ingredient].map((recipe) => (
-          <li key={recipe.title}>
-            <a href={`/recipes/${recipe.type}/${recipe}`}>{recipe.title}</a>
-          </li>
-        ))}
-      </ul>
-    </section>
+    <>
+      <h3>recipes with {deslugify(ingredient)}</h3>
+      <section className="content">
+        <ul>
+          {ingredients[deslugify(ingredient)].map((recipe) => (
+            <li key={recipe.title}>
+              <a href={`/recipes/${recipe.type}s/${recipe.slug}`}>
+                {recipe.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </>
   );
 }
