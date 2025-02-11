@@ -4,6 +4,8 @@ import remarkGfm from "remark-gfm";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // generate a static export in `out` folder.
+  output: "export",
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
 };
 
