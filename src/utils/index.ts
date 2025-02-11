@@ -15,6 +15,25 @@ export async function getLists(): Promise<ListPage[]> {
   return listData;
 }
 
+export async function generateTags() {
+  const tags: Record<string, ListPage[]> = {};
+  const lists = await getLists();
+
+  for (const list of lists) {
+    if (list.tags) {
+      for (const tag of list.tags) {
+        if (tags[tag]) {
+          tags[tag].push(list);
+        } else {
+          tags[tag] = [list];
+        }
+      }
+    }
+  }
+
+  return tags;
+}
+
 export async function getRecipes(): Promise<RecipePage[]> {
   const pages: RecipePage[] = [];
   const files = fs
@@ -50,23 +69,23 @@ export async function getRecipes(): Promise<RecipePage[]> {
   return pages;
 }
 
-export async function generateTags() {
-  const tags: Record<string, any[]> = {};
-  const lists = await getLists();
+export async function generateIngredients() {
+  const ingredients: Record<string, RecipePage[]> = {};
+  const recipes = await getRecipes();
 
-  for (const list of lists) {
-    if (list.tags) {
-      for (const tag of list.tags) {
-        if (tags[tag]) {
-          tags[tag].push(list);
+  for (const recipe of recipes) {
+    if (recipe.ingredients) {
+      for (const ingredient of recipe.ingredients) {
+        if (ingredients[ingredient]) {
+          ingredients[ingredient].push(recipe);
         } else {
-          tags[tag] = [list];
+          ingredients[ingredient] = [recipe];
         }
       }
     }
   }
 
-  return tags;
+  return ingredients;
 }
 
 export function slugify(string: string): string {
