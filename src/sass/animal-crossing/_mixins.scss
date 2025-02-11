@@ -1,0 +1,8 @@
+@use "variables";
+
+@mixin text-background {
+  backdrop-filter: blur(3px);
+  background-color: variables.$ui_background_color;
+  border-radius: variables.$ui_border_radius;
+  box-shadow: variables.$ui_box_shadow;
+}

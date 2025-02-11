@@ -1,0 +1,25 @@
+@use "base";
+@use "nav";
+@use "nookphone";
+@use "text";
+
+.home-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 7rem;
+}
+
+img.planner {
+  filter: drop-shadow(5px 5px 10px #222);
+  max-height: min(50vw, 50vh);
+  width: auto;
+  height: auto;
+  transform: rotate(5deg);
+  transition: all .3s ease-in-out;
+
+  &:hover {
+    transform: rotate(0deg) scale(1.1);
+    filter: drop-shadow(10px 10px 20px #222);
+  }
+}

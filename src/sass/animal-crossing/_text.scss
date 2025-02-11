@@ -1,0 +1,47 @@
+@use "variables";
+
+@font-face {
+  font-family: "Seurat";
+  src: url("/fonts/seurat.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fink Heavy";
+  src: url("/fonts/fink-heavy.woff2") format("woff2");
+}
+
+a {
+  color: rgb(87, 72, 66);
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.svg-title {
+  font-family: "Fink Heavy", "Georgia", sans-serif;
+  font-size: 3rem;
+  width: 350px;
+  height: variables.$svg-height;
+  fill: rgba(231, 197, 73, 1);
+}
+
+.svg-background {
+  fill: rgba(231, 197, 73, 1);
+  stroke: rgba(145, 107, 51, 1);
+  stroke-width: 15px;
+  stroke-linejoin: round;
+  paint-order: stroke;
+}
+
+.svg-background-shadow {
+  fill: black;
+  stroke: black;
+  stroke-width: 15px;
+  stroke-linejoin: round;
+  paint-order: stroke;
+}
+
+.svg-emboss {
+  fill: rgba(231, 197, 73, 0.5);
+}

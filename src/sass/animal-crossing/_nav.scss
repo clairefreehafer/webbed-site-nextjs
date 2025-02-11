@@ -1,0 +1,69 @@
+@use "variables";
+@use "mixins";
+
+nav {
+  @include mixins.text-background;
+  padding: 1.5rem 0.5rem;
+  margin-top: -0.5rem;
+
+  @media screen and (max-width: variables.$menu-breakpoint) {
+    padding: 1.5rem;
+  }
+
+  ul {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+
+    @media screen and (max-width: variables.$menu-breakpoint) {
+      align-items: flex-start;
+      flex-direction: column;
+      padding-left: 3rem;
+    }
+
+    li {
+      align-items: center;
+      display: flex;
+      gap: 0.5rem;
+    }
+  }
+}
+
+.desktop-menu {
+  display: flex;
+  justify-content: center;
+
+  @media screen and (max-width: variables.$menu-breakpoint) {
+    display: none;
+  }
+}
+
+details {
+  & > summary {
+    background-image: url('/images/animal-crossing/icons/closed-letter.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    list-style: none;
+    height: 3rem;
+    padding-left: 3.5rem;
+    text-align: center;
+  }
+
+  &[open] > summary {
+    background-image: url('/images/animal-crossing/icons/open-letter.png');
+    margin-bottom: 0.5rem;
+  }
+
+  @media screen and (min-width: variables.$menu-breakpoint) {
+    display: none;
+  }
+}
+
+.icon {
+  max-height: 3rem;
+  max-width: 3rem;
+}

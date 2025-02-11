@@ -1,0 +1,102 @@
+@use "variables";
+
+.nookphone {
+  background-color: #f7f3e7;
+  border-radius: 6.5rem;
+  box-shadow: 0 0 2rem 0rem rgba(0, 0, 0, 0.5);
+  font-family: "Seurat";
+  width: 352px;
+  height: 526px;
+
+  .row {
+    color: #e0daca;
+    display: flex;
+    padding: 34px 64px 0;
+    justify-content: space-between;
+    align-items: center
+  }
+
+  .symbols {
+    // https://codepen.io/sosuke/pen/Pjoqqp for #e0daca
+    filter:
+      brightness(0)
+      saturate(100%)
+      invert(95%)
+      sepia(11%)
+      saturate(259%)
+      hue-rotate(4deg)
+      brightness(91%)
+      contrast(94%);
+    height: 100%;
+    width: auto;
+
+    &.signal {
+      height: 18px;
+      width: 54px;
+    }
+
+    &.location {
+      height: 24px;
+      width: 24px;
+    }
+  }
+
+  .link-title {
+    color: rgb(116, 105, 87);
+    text-align: center;
+    padding-top: 34px;
+    font-size: 24px;
+  }
+
+  .apps {
+    // padding: 30px 40px 0;
+    padding-top: 30px;
+    // height: 292px;
+    gap: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .app {
+    height: 82px;
+    width: 82px;
+    border-radius: 1.5rem;
+
+    &.camera {
+      background-color: rgb(185, 122, 243);
+    }
+
+    &.nook-miles {
+      background-color: rgb(138, 156, 241);
+    }
+
+    &.critterpedia {
+      background-color: rgb(247, 203, 101);
+    }
+
+    &.diy {
+      background-color: rgb(227, 147, 102);
+    }
+
+    &.nook-shopping {
+      background-color: rgb(235, 222, 84);
+    }
+
+    &.terraform {
+      background-color: rgb(153, 129, 89);
+    }
+
+    &.patterns {
+      background-color: rgb(249, 167, 178);
+    }
+
+    &.map {
+      background-color: rgb(129, 215, 188);
+    }
+
+    &.chat {
+      background-color: rgb(209, 220, 75);
+    }
+  }
+}

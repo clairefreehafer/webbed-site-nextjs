@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 function getActiveNavLink(currentUrl: string, pageUrl: string) {
@@ -14,7 +15,13 @@ function getActiveNavLink(currentUrl: string, pageUrl: string) {
   return "";
 }
 
-const ROOT_LINKS = [
+type LinkProps = {
+  title: string;
+  path: string;
+  icon?: string;
+};
+
+const ROOT_LINKS: LinkProps[] = [
   {
     title: "home",
     path: "/",
@@ -37,9 +44,17 @@ export default function Nav({ links = ROOT_LINKS }) {
   const pathname = usePathname();
   return (
     <ul>
-      {links.map(({ path, title }) => (
+      {links.map(({ path, title, icon }) => (
         <li className={getActiveNavLink(pathname, path)} key={title}>
-          {/* <img webc:if="page.data.linkIcon?.[slugify($data.theme)]" :src="`/images/${slugify($data.theme)}/icons/${page.data.linkIcon[slugify($data.theme)]}.png`" alt="" class="icon"> */}
+          {icon ? (
+            <Image
+              src={`/images/${icon}.png`}
+              alt=""
+              className="icon"
+              height={48}
+              width={48}
+            />
+          ) : null}
           <a href={path}>{title}</a>
         </li>
       ))}
