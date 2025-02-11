@@ -1,0 +1,14 @@
+$max-site-width: 750px;
+$nav-min-width: 575px;
+
+$border-width: 5%;
+$puzzle-border-color: rgb(143, 150, 158);
+
+$photo-z-index: 0;
+
+$ui-z-index: $photo-z-index + 2;
+$inset-shadow-zindex: $photo-z-index + 1;
+// $photo-z-index: 0;
+$inset-shadow-helper-zindex: $photo-z-index - 1;
+$texture-z-index: $photo-z-index - 2;
+$border-z-index: $photo-z-index - 3;

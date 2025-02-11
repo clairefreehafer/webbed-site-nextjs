@@ -21,7 +21,7 @@ type LinkProps = {
   icon?: string;
 };
 
-const ROOT_LINKS: LinkProps[] = [
+export const ROOT_LINKS: LinkProps[] = [
   {
     title: "home",
     path: "/",
@@ -40,7 +40,7 @@ const ROOT_LINKS: LinkProps[] = [
   },
 ];
 
-export default function Nav({ links = ROOT_LINKS }) {
+export default function Nav({ links = ROOT_LINKS }: { links?: LinkProps[] }) {
   const pathname = usePathname();
   return (
     <ul>

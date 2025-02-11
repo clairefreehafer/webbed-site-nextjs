@@ -1,0 +1,142 @@
+@use "variables";
+@use "puzzle";
+
+$border-width: 20px;
+$puzzle-line-color: darkblue;
+$puzzle-line-width: 1.5rem;
+$circle-diameter: $puzzle-line-width * 2;
+
+@mixin link {
+  & a {
+    color: white;
+    font-family: Georgia, serif;
+    font-variant: small-caps;
+    font-size: 1.25rem;
+    text-shadow: white 0px 0 10px;
+    text-transform: capitalize;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.nav-border {
+  @include puzzle.puzzle-screen($border-width, variables.$puzzle-border-color, blue);
+
+  & .puzzle-background {
+    margin: $border-width 0;
+  }
+
+  & .inner-shadow {
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: variables.$nav-min-width) {
+    @include puzzle.puzzle-screen(calc($border-width / 2), variables.$puzzle-border-color, blue);
+
+    & .puzzle-background {
+      margin: calc($border-width / 2) 0;
+    }
+  }
+}
+
+nav {
+  @include link;
+  margin-top: 1rem;
+  width: 100%;
+
+  ul {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding: calc($border-width * 2);
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: $border-width;
+    // padding-block: 0;
+  }
+
+  .nav-link {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1rem;
+    transform: translateX(calc(50% - ($puzzle-line-width / 2)));
+
+  }
+}
+
+.nav-mobile {
+  height: 100%;
+  width: 100%;
+
+  @media screen and (min-width: variables.$nav-min-width) {
+    display: none;
+  }
+}
+
+.nav-puzzle {
+  height: calc(100% - 2 * $border-width);
+  width: calc(100% - 2 * $border-width);
+  display: flex;
+  padding: 1rem;
+  width: 100%;
+
+  & .section {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    padding-bottom: calc($puzzle-line-width / 2);
+  }
+
+  & .elbow {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  & .half-circle {
+    align-self: flex-end;
+    background-color: $puzzle-line-color;
+    border-radius: 10rem 10rem 0 0;
+    width: $puzzle-line-width;
+    height: calc($puzzle-line-width / 2);
+  }
+
+  & .circle {
+    align-self: flex-end;
+    background-color: $puzzle-line-color;
+    border-radius: 100%;
+    height: $circle-diameter;
+    width: $circle-diameter;
+  }
+
+  & .horizontal {
+    align-self: flex-end;
+    background-color: $puzzle-line-color;
+    flex-grow: 2;
+    height: $puzzle-line-width;
+    margin-left: -5px;
+  }
+
+  & .vertical {
+    align-self: flex-start;
+    background-color: $puzzle-line-color;
+    width: $puzzle-line-width;
+    height: 3.25rem;
+    border-radius: 10rem 10rem 0 0;
+
+    &:nth-last-of-type(2) {
+      border-bottom-right-radius: 5rem;
+    }
+  }
+
+  .opacity-0 {
+    opacity: 0;
+  }
+
+  @media screen and (max-width: variables.$nav-min-width) {
+    display: none;
+  }
+}
