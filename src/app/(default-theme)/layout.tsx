@@ -60,7 +60,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
               neocities
             </a>{" "}
             | source code on{" "}
-            <a href="https://github.com/clairefreehafer/webbed-site-11ty">
+            <a href="https://github.com/clairefreehafer/webbed-site-nextjs">
               github
             </a>
           </p>
