@@ -56,8 +56,8 @@ export default function Layout({ children }: React.PropsWithChildren) {
               next.js
             </a>{" "}
             | hosted on{" "}
-            <a href="https://vercel.com" target="_blank">
-              vercel
+            <a href="https://neocities.org" target="_blank">
+              neocities
             </a>{" "}
             | source code on{" "}
             <a href="https://github.com/clairefreehafer/webbed-site-11ty">
