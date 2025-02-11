@@ -1,0 +1,85 @@
+@use "variables";
+@use "nav";
+
+html {
+  // https://davegh.com/
+  background-image: url("/images/notebook/stone-ivy.jpg"),
+    url("/images/notebook/stone.jpg");
+  background-position: top left, min(100vw, 1000px) left;
+  background-repeat: repeat-x, repeat;
+  background-size: cover, cover;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-love-ya-like-a-sister);
+  font-weight: normal;
+}
+
+h1.name {
+  @include variables.text-outline(1px, 2px, black);
+  font-size: 3rem;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: normal;
+  line-height: calc(variables.$paper-line-height + 1px);
+}
+
+p {
+  font-family: var(--font-pangolin);
+  font-size: 1.25rem;
+  line-height: calc(variables.$paper-line-height + 1px);
+  margin-bottom: calc(variables.$paper-line-height + 1px);
+}
+
+a {
+  color: white;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.container {
+  align-items: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 750px;
+  padding: 1rem;
+}
+
+.paper {
+  background: linear-gradient(
+      to right,
+      transparent variables.$red-line-padding,
+      variables.$paper-red-line variables.$red-line-padding
+        calc(variables.$red-line-padding + 1px),
+      transparent variables.$red-line-padding
+    ),
+    linear-gradient(to bottom, white 0 4rem, transparent 4rem),
+    repeating-linear-gradient(
+      to bottom,
+      white 0 variables.$paper-line-height,
+      variables.$paper-blue-line variables.$paper-line-height
+        calc(variables.$paper-line-height + 1px),
+      white calc(variables.$paper-line-height + 1px)
+    );
+  border-radius: 3rem;
+  box-shadow: inset 0 0 0.25rem 0.1rem rgba(0, 0, 0, 0.3),
+    0 0 1.5rem 0.1rem rgba(0, 0, 0, 0.3), 0 0 2rem rgba(0, 0, 0, 0.3);
+  color: black;
+  line-height: calc(variables.$paper-line-height + 1px);
+  margin-top: 2rem;
+  padding: 51px 1rem variables.$paper-line-height
+    calc(variables.$red-line-padding + 0.5rem);
+  width: 100%;
+}

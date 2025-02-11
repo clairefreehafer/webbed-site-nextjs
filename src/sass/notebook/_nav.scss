@@ -1,0 +1,103 @@
+@use "sass:list";
+@use "variables";
+
+@keyframes wiggle-box {
+  0%,
+  16.6666666667% {
+    opacity: 1;
+  }
+  16.7%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@mixin wiggle-box($n) {
+  $rotate: random(2) - 1;
+
+  border-color: white;
+  border-width: 4px 3px 5px 3px;
+  border-width: 2px;
+  border-radius: list.nth(variables.$wiggle-boxes, $n);
+  border-style: solid;
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  transform: rotate(#{$rotate}deg);
+  width: 100%;
+}
+
+@mixin wiggle-box-animation($n) {
+  $duration: 750ms;
+
+  animation: $duration wiggle-box infinite;
+  animation-delay: calc((($n - 1) * $duration) / 6);
+}
+
+.nav-list {
+  @include variables.text-outline(1px, 2px, black);
+
+  display: flex;
+  flex-wrap: wrap;
+  font-family: var(--font-cutive-mono);
+  font-size: 1.25rem;
+  justify-content: center;
+  gap: 1rem;
+  list-style: none;
+}
+
+.nav-list_item {
+  position: relative;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem;
+
+  @media screen and (min-width: variables.$max-site-width) {
+    padding: 1rem;
+
+    &:hover a {
+      text-decoration: none;
+    }
+
+    &:hover .wiggle-box-1 {
+      @include wiggle-box-animation((1));
+    }
+    &:hover .wiggle-box-2 {
+      @include wiggle-box-animation((2));
+    }
+    &:hover .wiggle-box-3 {
+      @include wiggle-box-animation((3));
+    }
+    &:hover .wiggle-box-4 {
+      @include wiggle-box-animation((4));
+    }
+    &:hover .wiggle-box-5 {
+      @include wiggle-box-animation((5));
+    }
+    &:hover .wiggle-box-6 {
+      @include wiggle-box-animation((6));
+    }
+  }
+}
+
+.wiggle-box-1 {
+  @include wiggle-box(1);
+}
+.wiggle-box-2 {
+  @include wiggle-box(2);
+}
+.wiggle-box-3 {
+  @include wiggle-box(3);
+}
+.wiggle-box-4 {
+  @include wiggle-box(4);
+}
+.wiggle-box-5 {
+  @include wiggle-box(5);
+}
+.wiggle-box-6 {
+  @include wiggle-box(6);
+}
