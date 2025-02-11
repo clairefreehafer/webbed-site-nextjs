@@ -1,0 +1,38 @@
+@use "variables";
+
+html {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: flex;
+  min-height: 100vh;
+  padding: 0.5rem;
+}
+
+body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+
+  @media screen and (max-width: variables.$max-site-width) {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+section.content {
+  align-items: center;
+  display: flex;
+  flex: 2;
+  justify-content: center;
+}
+
+.nav-open {
+  section.content {
+    display: none;
+  }
+}

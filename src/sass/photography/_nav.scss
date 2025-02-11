@@ -1,0 +1,40 @@
+nav {
+  align-items: center;
+  display: none;
+  flex: 2;
+  justify-content: center;
+
+  & ul {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+    font-weight: 200;
+    gap: 1rem;
+    list-style-type: none;
+    padding: 0;
+  }
+}
+
+li > s {
+  color: lightgrey;
+  text-decoration-thickness: 3px;
+}
+
+button.navigate {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.nav-open {
+  nav {
+    display: flex;
+  }
+}

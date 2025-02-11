@@ -1,0 +1,11 @@
+h1 {
+  font-weight: 300;
+}
+
+a {
+  color: black;
+
+  &:hover {
+    text-decoration: none;
+  }
+}

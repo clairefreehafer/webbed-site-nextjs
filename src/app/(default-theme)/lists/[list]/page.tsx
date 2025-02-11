@@ -1,4 +1,4 @@
-import Tags from "@/components/tags";
+import Tags from "@/components/default/tags";
 import { getLists } from "@/utils";
 
 export const dynamicParams = false;
