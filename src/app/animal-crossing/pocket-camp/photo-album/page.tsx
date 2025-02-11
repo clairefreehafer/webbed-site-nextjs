@@ -1,3 +1,3 @@
 export default function Page() {
-  return "hi";
+  return <h2>🚧</h2>;
 }
