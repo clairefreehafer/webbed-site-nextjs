@@ -6,6 +6,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // generate a static export in `out` folder.
   output: "export",
+  // cannot use optimized images with static export
+  images: { unoptimized: true },
+
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
 };
 

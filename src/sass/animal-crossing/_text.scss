@@ -1,15 +1,5 @@
 @use "variables";
 
-@font-face {
-  font-family: "Seurat";
-  src: url("/fonts/seurat.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Fink Heavy";
-  src: url("/fonts/fink-heavy.woff2") format("woff2");
-}
-
 a {
   color: rgb(87, 72, 66);
 
@@ -19,7 +9,7 @@ a {
 }
 
 .svg-title {
-  font-family: "Fink Heavy", "Georgia", sans-serif;
+  font-family: var(--font-fink-heavy);
   font-size: 3rem;
   width: 350px;
   height: variables.$svg-height;
