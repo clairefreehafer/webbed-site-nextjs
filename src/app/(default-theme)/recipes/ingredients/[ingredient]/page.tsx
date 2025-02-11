@@ -20,7 +20,7 @@ export default async function Page({
     <section className="content">
       <ul>
         {ingredients[ingredient].map((recipe) => (
-          <li key={recipe}>
+          <li key={recipe.title}>
             <a href={`/recipes/${recipe.type}/${recipe}`}>{recipe.title}</a>
           </li>
         ))}
