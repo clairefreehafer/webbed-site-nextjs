@@ -121,6 +121,16 @@ section.content {
   }
 }
 
+details {
+  &[open] > summary {
+    font-weight: bold;
+  }
+
+  & > p {
+    padding-left: 1rem;
+  }
+}
+
 p.recipe-source {
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.8);
