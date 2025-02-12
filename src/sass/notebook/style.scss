@@ -1,15 +1,6 @@
 @use "variables";
 @use "nav";
 
-html {
-  // https://davegh.com/
-  background-image: url("/images/notebook/stone-ivy.jpg"),
-    url("/images/notebook/stone.jpg");
-  background-position: top left, min(100vw, 1000px) left;
-  background-repeat: repeat-x, repeat;
-  background-size: cover, cover;
-}
-
 h1,
 h2,
 h3,
