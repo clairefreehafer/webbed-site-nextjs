@@ -53,7 +53,11 @@ export default async function Page({
         <section className="content">
           <ul>
             {recipePages
-              .filter((recipe) => recipe.path.includes(slug))
+              .filter(
+                (recipe) =>
+                  recipe.path.includes(slug) &&
+                  recipe.title !== currentPage.title
+              )
               .map((recipe) => (
                 <li key={recipe.title}>
                   <a href={`/recipes/${recipe.path.join("/")}`}>
