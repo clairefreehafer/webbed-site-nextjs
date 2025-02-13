@@ -6,7 +6,7 @@ export const dynamicParams = false;
 export async function generateStaticParams() {
   const pages = await getRecipes();
   return pages.map((page) => ({
-    recipe: [`${page.type}s`, page.slug],
+    recipe: page.path,
   }));
 }
 
@@ -33,6 +33,8 @@ export default async function Page({
 }: {
   params: Promise<{ recipe: string }>;
 }) {
+  return JSON.stringify((await params).recipe);
+
   const [recipeType, slug] = (await params).recipe;
   const recipes = await getRecipes();
   const currentRecipe = recipes.find((recipe) => slug === recipe.slug);

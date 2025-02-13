@@ -44,23 +44,34 @@ export async function getRecipes(): Promise<RecipePage[]> {
     .filter((list) => !list.name.startsWith("_"));
 
   for (const file of files) {
-    const recipeType =
-      file.parentPath.includes("meals") || file.name === "meals"
-        ? "meal"
-        : "cocktail";
-    if (file.name.includes(".")) {
-      const listPage = await import(`@/recipes/${recipeType}s/${file.name}`);
+    const isRecipe = !file.isDirectory();
+    const fileNameSplit = file.parentPath.split("/");
+    const path = [];
+
+    let currentIndex = fileNameSplit.length - 1;
+    let currentDirectory = fileNameSplit[currentIndex];
+    // generate path heirarchy
+    while (currentDirectory !== "recipes" && currentIndex > -1) {
+      path.unshift(currentDirectory);
+      currentIndex--;
+      currentDirectory = fileNameSplit[currentIndex];
+    }
+
+    if (isRecipe) {
+      // add page slug for full `params` array
+      path.push(file.name.split(".")[0]);
+      const page = await import(`@/recipes/${path.join("/")}.mdx`);
       pages.push({
-        ...listPage,
-        type: recipeType,
-        slug: file.name.split(".")[0],
+        ...page,
+        path,
       });
     } else {
+      const directoryName = file.name;
+      path.push(directoryName);
       pages.push({
-        type: recipeType,
-        title: `${recipeType} recipes`,
+        title: `${directoryName} recipes`,
         default: null,
-        slug: "",
+        path,
         ingredients: [],
       });
     }
