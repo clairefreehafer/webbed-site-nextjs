@@ -2,6 +2,12 @@ import fs from "fs";
 import path from "path";
 import { ListPage, RecipePage } from "./types";
 
+export function areArraysEqual(arr1: any[], arr2: any[]) {
+  return (
+    arr1.length === arr2.length && arr1.every((val, idx) => val === arr2[idx])
+  );
+}
+
 export async function getLists(): Promise<ListPage[]> {
   const listData: ListPage[] = [];
   const lists = fs

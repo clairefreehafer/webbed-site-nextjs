@@ -1,5 +1,5 @@
 import Tags from "@/components/default/tags";
-import { getRecipePages } from "@/utils";
+import { areArraysEqual, getRecipePages } from "@/utils";
 
 export const dynamicParams = false;
 
@@ -17,13 +17,13 @@ export async function generateMetadata({
 }) {
   const metadata = { title: "claire freehafer" };
 
-  // const recipe = (await params).recipe;
-  // const pages = await getRecipes();
-  // const currentPage = pages.find((page) => page.slug === recipe[1]);
+  const recipe = (await params).recipe;
+  const pages = await getRecipePages();
+  const currentPage = pages.find((page) => areArraysEqual(page.path, recipe));
 
-  // if (currentPage) {
-  //   metadata.title = `${currentPage.title} – claire freehafer`;
-  // }
+  if (currentPage) {
+    metadata.title = `${currentPage.title} – claire freehafer`;
+  }
 
   return metadata;
 }
@@ -36,10 +36,8 @@ export default async function Page({
   const recipePages = await getRecipePages();
   const recipeParam = (await params).recipe;
   const slug = recipeParam[recipeParam.length - 1];
-  const currentPage = recipePages.find(
-    (page) =>
-      page.path.length === recipeParam.length &&
-      page.path.every((val, idx) => val === recipeParam[idx])
+  const currentPage = recipePages.find((page) =>
+    areArraysEqual(page.path, recipeParam)
   );
 
   if (!currentPage) {
