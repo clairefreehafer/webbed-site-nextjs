@@ -8,6 +8,7 @@ type MarkdownPage = {
 export type RecipePage = MarkdownPage & {
   ingredients: string[];
   sourceUrl?: string;
+  isCategory?: boolean;
 };
 
 export type ListPage = MarkdownPage & {

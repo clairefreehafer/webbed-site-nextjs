@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { ListPage, RecipePage } from "./types";
 
-export function areArraysEqual(arr1: any[], arr2: any[]) {
+export function areArraysEqual(arr1: string[], arr2: string[]) {
   return (
     arr1.length === arr2.length && arr1.every((val, idx) => val === arr2[idx])
   );
@@ -79,6 +79,7 @@ export async function getRecipePages(): Promise<RecipePage[]> {
         default: null,
         path,
         ingredients: [],
+        isCategory: true,
       });
     }
   }

@@ -4,7 +4,7 @@ import { Fragment } from "react";
 
 export default async function Meals() {
   const recipes = await getRecipePages();
-  const mealPages: any = {};
+  const mealPages: Record<string, RecipePage[]> = {};
   const uncategorizedPages = [];
 
   for (const recipe of recipes) {

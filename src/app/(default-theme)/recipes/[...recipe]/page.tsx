@@ -29,6 +29,7 @@ export async function generateMetadata({
   return metadata;
 }
 
+// eslint-disable-next-line
 const SECTION_PAGES: Record<string, any> = {
   meals: Meals,
 };
