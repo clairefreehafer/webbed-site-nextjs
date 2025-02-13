@@ -1,5 +1,6 @@
 import Tags from "@/components/default/tags";
 import { areArraysEqual, getRecipePages } from "@/utils";
+import Meals from "./meals";
 
 export const dynamicParams = false;
 
@@ -28,6 +29,10 @@ export async function generateMetadata({
   return metadata;
 }
 
+const SECTION_PAGES: Record<string, any> = {
+  meals: Meals,
+};
+
 export default async function Page({
   params,
 }: {
@@ -44,7 +49,13 @@ export default async function Page({
     throw new Error(`couldn't generate page ${recipeParam.join("/")}`);
   }
 
-  if (!currentPage.default) {
+  const { default: Page, title } = currentPage;
+
+  if (!Page) {
+    const SectionPage = SECTION_PAGES[title];
+    if (SectionPage) {
+      return <SectionPage />;
+    }
     return (
       <>
         <h3>{currentPage.title}</h3>
@@ -69,7 +80,7 @@ export default async function Page({
     );
   }
 
-  const { default: List, title, ingredients, sourceUrl } = currentPage;
+  const { ingredients, sourceUrl } = currentPage;
 
   return (
     <>
@@ -84,7 +95,7 @@ export default async function Page({
         </p>
       )}
       <section className="content">
-        <List />
+        <Page />
       </section>
       <Tags tags={ingredients} linkPrefix="/recipes/ingredients/" />
     </>

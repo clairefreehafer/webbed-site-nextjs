@@ -9,7 +9,7 @@ export default function Tags({
   linkPrefix: string;
   tags?: string[];
 }) {
-  if (!tags) {
+  if (!tags || tags.length === 0) {
     return null;
   }
 
