@@ -36,8 +36,10 @@ export default async function Page({
   const recipePages = await getRecipePages();
   const recipeParam = (await params).recipe;
   const slug = recipeParam[recipeParam.length - 1];
-  const currentPage = recipePages.find((page) =>
-    page.path.every((val, idx) => val === recipeParam[idx])
+  const currentPage = recipePages.find(
+    (page) =>
+      page.path.length === recipeParam.length &&
+      page.path.every((val, idx) => val === recipeParam[idx])
   );
 
   if (!currentPage) {
@@ -65,15 +67,7 @@ export default async function Page({
     );
   }
 
-  return <>{JSON.stringify((await params).recipe)}</>;
-
-  // const [recipeType, slug] = (await params).recipe;
-
-  if (!currentRecipe) {
-    console.log(recipeType);
-  }
-
-  const { default: List, title, ingredients, sourceUrl } = currentRecipe;
+  const { default: List, title, ingredients, sourceUrl } = currentPage;
 
   return (
     <>

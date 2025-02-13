@@ -34,7 +34,7 @@ export async function generateTags() {
   return tags;
 }
 
-export async function getRecipes(): Promise<RecipePage[]> {
+export async function getRecipePages(): Promise<RecipePage[]> {
   const pages: RecipePage[] = [];
   const files = fs
     .readdirSync(path.join(process.cwd(), "src", "recipes"), {
@@ -69,7 +69,7 @@ export async function getRecipes(): Promise<RecipePage[]> {
       const directoryName = file.name;
       path.push(directoryName);
       pages.push({
-        title: `${directoryName} recipes`,
+        title: directoryName,
         default: null,
         path,
         ingredients: [],
@@ -82,7 +82,7 @@ export async function getRecipes(): Promise<RecipePage[]> {
 
 export async function generateIngredients() {
   const ingredients: Record<string, RecipePage[]> = {};
-  const recipes = await getRecipes();
+  const recipes = await getRecipePages();
 
   for (const recipe of recipes) {
     if (recipe.ingredients) {
