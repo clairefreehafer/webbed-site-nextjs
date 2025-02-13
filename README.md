@@ -15,7 +15,7 @@ additional credits, mostly for code snippets, can be found throughout the code a
 
 - [v0](https://github.com/clairefreehafer/webbed-site) — vanilla JS, CSS, & HTML (_shelved_)
 - [v1](https://github.com/clairefreehafer/webbed-site-jekyll) — jekyll (_shelved_)
-- [v2.0](https://github.com/clairefreehafer/webbed-site-nextjs) — next.js (_shelved_)
-  - **v2.1** — next.js but simpler (_in development_) &larr; YOU ARE HERE
-- [v3](https://github.com/clairefreehafer/webbed-site-hugo) — hugo ([LIVE](https://clairefreehafer.neocities.org))
-- [v4](https://github.com/clairefreehafer/webbed-site-11ty) — 11ty (_in development_)
+- [v2.0](https://github.com/clairefreehafer/webbed-site-nextjs/tree/v2) — next.js (_shelved_)
+  - **v2.1** — next.js but simpler ([LIVE](https://clairefreehafer.neocities.org)) &larr; YOU ARE HERE
+- [v3](https://github.com/clairefreehafer/webbed-site-hugo) — hugo (_shelved-)
+- [v4](https://github.com/clairefreehafer/webbed-site-11ty) — 11ty (_shelvrd_)
