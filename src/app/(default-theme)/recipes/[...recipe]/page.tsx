@@ -1,10 +1,10 @@
 import Tags from "@/components/default/tags";
-import { getRecipes } from "@/utils";
+import { getRecipePages } from "@/utils";
 
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  const pages = await getRecipes();
+  const pages = await getRecipePages();
   return pages.map((page) => ({
     recipe: page.path,
   }));
@@ -17,13 +17,13 @@ export async function generateMetadata({
 }) {
   const metadata = { title: "claire freehafer" };
 
-  const recipe = (await params).recipe;
-  const pages = await getRecipes();
-  const currentPage = pages.find((page) => page.slug === recipe[1]);
+  // const recipe = (await params).recipe;
+  // const pages = await getRecipes();
+  // const currentPage = pages.find((page) => page.slug === recipe[1]);
 
-  if (currentPage) {
-    metadata.title = `${currentPage.title} – claire freehafer`;
-  }
+  // if (currentPage) {
+  //   metadata.title = `${currentPage.title} – claire freehafer`;
+  // }
 
   return metadata;
 }
@@ -31,28 +31,30 @@ export async function generateMetadata({
 export default async function Page({
   params,
 }: {
-  params: Promise<{ recipe: string }>;
+  params: Promise<{ recipe: string[] }>;
 }) {
-  return JSON.stringify((await params).recipe);
+  const recipePages = await getRecipePages();
+  const recipeParam = (await params).recipe;
+  const slug = recipeParam[recipeParam.length - 1];
+  const currentPage = recipePages.find((page) =>
+    page.path.every((val, idx) => val === recipeParam[idx])
+  );
 
-  const [recipeType, slug] = (await params).recipe;
-  const recipes = await getRecipes();
-  const currentRecipe = recipes.find((recipe) => slug === recipe.slug);
+  if (!currentPage) {
+    throw new Error(`couldn't generate page ${recipeParam.join("/")}`);
+  }
 
-  if (!currentRecipe) {
-    console.log(recipeType);
+  if (!currentPage.default) {
     return (
       <>
-        <h3>{recipeType}</h3>
+        <h3>{currentPage.title}</h3>
         <section className="content">
           <ul>
-            {recipes
-              .filter(
-                (recipe) => recipe.slug && recipeType.includes(recipe.type)
-              )
+            {recipePages
+              .filter((recipe) => recipe.path.includes(slug))
               .map((recipe) => (
                 <li key={recipe.title}>
-                  <a href={`/recipes/${recipeType}/${recipe.slug}`}>
+                  <a href={`/recipes/${recipe.path.join("/")}`}>
                     {recipe.title}
                   </a>
                 </li>
@@ -61,6 +63,14 @@ export default async function Page({
         </section>
       </>
     );
+  }
+
+  return <>{JSON.stringify((await params).recipe)}</>;
+
+  // const [recipeType, slug] = (await params).recipe;
+
+  if (!currentRecipe) {
+    console.log(recipeType);
   }
 
   const { default: List, title, ingredients, sourceUrl } = currentRecipe;
