@@ -27,7 +27,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/(default-theme)/art/page.mdx"
   ],
   "exclude": ["node_modules"]
 }
