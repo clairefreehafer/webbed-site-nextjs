@@ -76,9 +76,9 @@ export async function generateIngredients() {
 }
 
 export function slugify(string: string): string {
-  return string.replace(" ", "-");
+  return string.replaceAll(" ", "-");
 }
 
 export function deslugify(string: string): string {
-  return string.replace("-", " ");
+  return string.replaceAll("-", " ");
 }

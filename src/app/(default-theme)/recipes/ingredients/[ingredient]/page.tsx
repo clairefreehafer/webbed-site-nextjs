@@ -1,4 +1,5 @@
 import { deslugify, generateIngredients, slugify } from "@/utils";
+import Link from "next/link";
 
 export const dynamicParams = false;
 
@@ -28,9 +29,7 @@ export default async function Page({
         <ul>
           {ingredients[deslugify(ingredient)].map((recipe) => (
             <li key={recipe.title}>
-              <a href={`/recipes/${recipe.type}s/${recipe.slug}`}>
-                {recipe.title}
-              </a>
+              <Link href={`/recipes/${recipe.path}`}>{recipe.title}</Link>
             </li>
           ))}
         </ul>
