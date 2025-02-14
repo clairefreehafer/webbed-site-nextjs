@@ -13,4 +13,5 @@ export type RecipePage = MarkdownPage & {
 
 export type ListPage = MarkdownPage & {
   tags?: string[];
+  slug: string;
 };

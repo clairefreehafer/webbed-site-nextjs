@@ -1,10 +1,10 @@
 import Tags from "@/components/default/tags";
-import { getLists } from "@/utils";
+import { getListPages } from "@/utils/lists";
 
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  const lists = await getLists();
+  const lists = await getListPages();
   return lists.map((list) => ({
     list: list.slug,
   }));
@@ -16,7 +16,7 @@ export async function generateMetadata({
   params: Promise<{ list: string }>;
 }) {
   const { title } =
-    (await getLists()).find(
+    (await getListPages()).find(
       async (listData) => (await params).list === listData.slug
     ) ?? {};
   return {
@@ -30,7 +30,7 @@ export default async function Page({
   params: Promise<{ list: string }>;
 }) {
   const slug = (await params).list;
-  const lists = await getLists();
+  const lists = await getListPages();
   const currentList = lists.find((list) => slug === list.slug);
 
   if (!currentList) {

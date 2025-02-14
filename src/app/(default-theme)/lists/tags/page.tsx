@@ -1,10 +1,11 @@
-import { generateTags, slugify } from "@/utils";
+import { slugify } from "@/utils";
+import { generateTags } from "@/utils/lists";
 
 export default async function Page() {
   const tags = await generateTags();
   return (
     <>
-      <h3>tags</h3>
+      <h3>list tags</h3>
       <section className="content">
         <ul>
           {Object.keys(tags)

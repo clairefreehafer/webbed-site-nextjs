@@ -1,7 +1,7 @@
-import { getLists } from "@/utils";
+import { getListPages } from "@/utils/lists";
 
 export default async function Page() {
-  const lists = await getLists();
+  const lists = await getListPages();
   return (
     <section className="content">
       <p>

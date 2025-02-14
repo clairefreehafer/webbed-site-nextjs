@@ -1,4 +1,6 @@
-import { deslugify, generateTags, slugify } from "@/utils";
+import { deslugify, slugify } from "@/utils";
+import { generateTags } from "@/utils/lists";
+import Link from "next/link";
 
 export const dynamicParams = false;
 
@@ -18,15 +20,18 @@ export default async function Page({
   const tag = (await params).tag;
   return (
     <>
-      <h4>{deslugify(tag)}</h4>
+      <h4>lists with {deslugify(tag)}</h4>
       <section className="content">
         <ul>
           {tags[deslugify(tag)].map((list) => (
             <li key={list.title}>
-              <a href={`/lists/${list.slug}`}>{list.title}</a>
+              <Link href={`/lists/${list.slug}`}>{list.title}</Link>
             </li>
           ))}
         </ul>
+        <p>
+          <Link href="/lists/tags">more tags</Link>
+        </p>
       </section>
     </>
   );
