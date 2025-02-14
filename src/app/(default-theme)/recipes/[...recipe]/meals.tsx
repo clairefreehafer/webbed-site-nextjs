@@ -1,5 +1,6 @@
-import { getRecipePages } from "@/utils";
+import { deslugify, getRecipePages } from "@/utils";
 import { RecipePage } from "@/utils/types";
+import Link from "next/link";
 import { Fragment } from "react";
 
 export default async function Meals() {
@@ -32,11 +33,13 @@ export default async function Meals() {
       <section className="content">
         {Object.keys(mealPages).map((category) => (
           <Fragment key={category}>
-            <h4>{category}</h4>
+            <h4>{deslugify(category)}</h4>
             <ul>
               {mealPages[category].map((page: RecipePage) => (
                 <li key={page.title}>
-                  <a href={`/recipes/${page.path.join("/")}`}>{page.title}</a>
+                  <Link href={`/recipes/${page.path.join("/")}`}>
+                    {page.title}
+                  </Link>
                 </li>
               ))}
             </ul>

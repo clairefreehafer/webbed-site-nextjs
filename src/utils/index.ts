@@ -57,6 +57,7 @@ export async function getRecipePages(): Promise<RecipePage[]> {
     let currentIndex = fileNameSplit.length - 1;
     let currentDirectory = fileNameSplit[currentIndex];
     // generate path heirarchy
+    // TODO use .split or whatever instead
     while (currentDirectory !== "recipes" && currentIndex > -1) {
       path.unshift(currentDirectory);
       currentIndex--;

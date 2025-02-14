@@ -1,6 +1,7 @@
 import Tags from "@/components/default/tags";
 import { areArraysEqual, getRecipePages } from "@/utils";
 import Meals from "./meals";
+import Link from "next/link";
 
 export const dynamicParams = false;
 
@@ -70,9 +71,9 @@ export default async function Page({
               )
               .map((recipe) => (
                 <li key={recipe.title}>
-                  <a href={`/recipes/${recipe.path.join("/")}`}>
+                  <Link href={`/recipes/${recipe.path.join("/")}`}>
                     {recipe.title}
-                  </a>
+                  </Link>
                 </li>
               ))}
           </ul>
@@ -89,9 +90,9 @@ export default async function Page({
       {sourceUrl && (
         <p className="recipe-source">
           [{" "}
-          <a href={sourceUrl} target="_blank">
+          <Link href={sourceUrl} target="_blank">
             source
-          </a>{" "}
+          </Link>{" "}
           ]
         </p>
       )}
