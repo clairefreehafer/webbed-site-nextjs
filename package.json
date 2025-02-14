@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint --fix",
+    "prepare": "husky"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
@@ -23,8 +24,9 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.1.6",
+    "eslint": "^9.20.1",
+    "eslint-config-next": "^15.1.6",
+    "husky": "^9.1.7",
     "sass": "^1.84.0",
     "typescript": "^5"
   }
