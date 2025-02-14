@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { ListPage, RecipePage } from "./types";
+import { RecipePage } from "./types";
 
 export function areArraysEqual(arr1: string[], arr2: string[]) {
   return (
