@@ -16,7 +16,7 @@ export default async function Page({
   params: Promise<{ ingredient: string }>;
 }) {
   const ingredients = await generateIngredients();
-  let ingredient = (await params).ingredient;
+  const ingredient = (await params).ingredient;
 
   return (
     <>
