@@ -17,11 +17,7 @@ export default async function Page({
 }) {
   const ingredients = await generateIngredients();
   let ingredient = (await params).ingredient;
-  // next.js automatically encodes the ñ in jalapeño in the param.
-  // TODO: less hacky impelementation
-  if (ingredient.includes("%C3%B1")) {
-    ingredient = ingredient.replace("%C3%B1", "ñ");
-  }
+
   return (
     <>
       <h3>recipes with {deslugify(ingredient)}</h3>

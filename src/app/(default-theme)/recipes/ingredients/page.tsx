@@ -1,4 +1,4 @@
-import { generateIngredients } from "@/utils";
+import { generateIngredients, slugify } from "@/utils";
 
 export default async function Page() {
   const ingredients = await generateIngredients();
@@ -11,7 +11,9 @@ export default async function Page() {
             .sort()
             .map((ingredient) => (
               <li key={ingredient}>
-                <a href={`/recipes/ingredients/${ingredient}`}>{ingredient}</a>
+                <a href={`/recipes/ingredients/${slugify(ingredient)}`}>
+                  {ingredient}
+                </a>
               </li>
             ))}
         </ul>
