@@ -25,7 +25,9 @@ export default async function Page({
         <ul>
           {ingredients[deslugify(ingredient)].map((recipe) => (
             <li key={recipe.title}>
-              <Link href={`/recipes/${recipe.path}`}>{recipe.title}</Link>
+              <Link href={`/recipes/${recipe.path.join("/")}`}>
+                {recipe.title}
+              </Link>
             </li>
           ))}
         </ul>
