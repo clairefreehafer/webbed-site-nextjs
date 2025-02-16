@@ -12,18 +12,22 @@ function getBuildDate() {
   return `${yyyy}/${mm}/${dd}`;
 }
 
-const atkinsonHyperlegible = localFont({
-  variable: "--font-atkinson-hyperlegible",
+// https://www.brailleinstitute.org/freefont/
+const atkinsonHyperlegibleNext = localFont({
+  variable: "--font-atkinson-hyperlegible-next",
   src: [
     {
-      path: "../../../public/fonts/default/atkinson-hyperlegible.woff2",
-      weight: "400",
-      style: "normal",
+      path: "../../../public/fonts/default/atkinson-hyperlegible-next.woff2",
     },
+  ],
+  fallback: ["system-ui", "sans-serif"],
+});
+
+const atkinsonHyperlegibleMono = localFont({
+  variable: "--font-atkinson-hyperlegible-mono",
+  src: [
     {
-      path: "../../../public/fonts/default/atkinson-hyperlegible-bold.woff2",
-      weight: "700",
-      style: "normal",
+      path: "../../../public/fonts/default/atkinson-hyperlegible-mono.woff2",
     },
   ],
   fallback: ["system-ui", "sans-serif"],
@@ -36,7 +40,9 @@ export default function Layout({ children }: React.PropsWithChildren) {
       <div id="stars2"></div>
       <div id="stars3"></div>
 
-      <div className={`container ${atkinsonHyperlegible.variable}`}>
+      <div
+        className={`container ${atkinsonHyperlegibleNext.variable} ${atkinsonHyperlegibleMono.variable}`}
+      >
         <header className="header">
           <h1>claire freehafer</h1>
           <nav>

@@ -25,6 +25,18 @@ const cutiveMono = localFont({
   fallback: ["monospace"],
 });
 
+// https://nationalparktypeface.com/
+const nationalPark = localFont({
+  variable: "--font-national-park",
+  src: [
+    {
+      path: "../../../public/fonts/notebook/national-park.woff2",
+      style: "normal",
+    },
+  ],
+  fallback: ["monospace"],
+});
+
 const pangolin = localFont({
   variable: "--font-pangolin",
   src: [
@@ -59,7 +71,7 @@ const NAV_LINKS = [
 export default function Layout({ children }: React.PropsWithChildren) {
   return (
     <div
-      className={`container ${loveYaLikeASister.variable} ${cutiveMono.variable} ${pangolin.variable}`}
+      className={`container ${loveYaLikeASister.variable} ${cutiveMono.variable} ${pangolin.variable} ${nationalPark.variable}`}
     >
       <h1 className="name">claire freehafer</h1>
       <nav>

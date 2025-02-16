@@ -1,7 +1,14 @@
 @use "variables";
 @use "nav";
 
-h1,
+h1 {
+  font-family: var(--font-national-park);
+  font-weight: normal;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font-weight: 200;
+}
+
 h2,
 h3,
 h4,

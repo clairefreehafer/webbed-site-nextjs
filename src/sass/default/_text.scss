@@ -4,8 +4,7 @@
 /***** FONTS *****/
 /*****************/
 @mixin sans-serif() {
-  font-family: var(--font-atkinson-hyperlegible), system-ui, ui-sans-serif,
-    sans-serif;
+  font-family: var(--font-atkinson-hyperlegible-next);
 }
 
 @mixin serif() {
@@ -13,7 +12,7 @@
 }
 
 @mixin monospace() {
-  font-family: ui-monospace, monospace;
+  font-family: var(--font-atkinson-hyperlegible-mono);
 }
 
 /*******************/
