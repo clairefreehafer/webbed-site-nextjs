@@ -8,7 +8,7 @@
 }
 
 @mixin serif() {
-  font-family: "Georgia", ui-serif, serif;
+  font-family: var(--font-garamond);
 }
 
 @mixin monospace() {
@@ -98,7 +98,9 @@ ul {
 /***** TEXT *****/
 /****************/
 em {
-  @include serif();
+  // not working for some reason
+  // @include serif();
+  font-family: Georgia, serif;
 }
 
 #recipe strong {

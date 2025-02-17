@@ -33,6 +33,22 @@ const atkinsonHyperlegibleMono = localFont({
   fallback: ["system-ui", "sans-serif"],
 });
 
+// https://fonts.google.com/specimen/EB+Garamond
+const garamond = localFont({
+  variable: "--font-garamond",
+  src: [
+    {
+      path: "../../../public/fonts/default/garamond.woff2",
+      style: "normal",
+    },
+    {
+      path: "../../../public/fonts/default/garamond-italic.woff2",
+      style: "italic",
+    },
+  ],
+  fallback: ["Georgia", "serif"],
+});
+
 export default function Layout({ children }: React.PropsWithChildren) {
   return (
     <>
@@ -41,7 +57,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
       <div id="stars3"></div>
 
       <div
-        className={`container ${atkinsonHyperlegibleNext.variable} ${atkinsonHyperlegibleMono.variable}`}
+        className={`container ${atkinsonHyperlegibleNext.variable} ${atkinsonHyperlegibleMono.variable} ${garamond.variable}`}
       >
         <header className="header">
           <h1>claire freehafer</h1>
