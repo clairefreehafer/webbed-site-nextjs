@@ -15,12 +15,17 @@ export async function generateMetadata({
 }: {
   params: Promise<{ list: string }>;
 }) {
-  const { title } =
-    (await getListPages()).find(
-      async (listData) => (await params).list === listData.slug
-    ) ?? {};
+  const listSlug = (await params).list;
+  const lists = await getListPages();
+  const currentList = lists.find((list) => listSlug === list.slug);
+
+  if (!currentList) {
+    return {
+      title: "lists — claire freehafer",
+    };
+  }
   return {
-    title: `${title} – claire freehafer`,
+    title: `${currentList.title} — claire freehafer`,
   };
 }
 
