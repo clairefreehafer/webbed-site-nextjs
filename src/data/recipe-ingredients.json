@@ -1,0 +1,118 @@
+[
+  {
+    "name": "food",
+    "items": [
+      {
+        "name": "carbs",
+        "items": [
+          "bread",
+          "farro",
+          "flatbread",
+          "gnocchi",
+          "pasta",
+          "rice",
+          "risotto",
+          "tortilla"
+        ]
+      },
+      {
+        "name": "protein",
+        "items": ["black bean", "chicken", "chickpea", "egg", "tuna"]
+      },
+      {
+        "name": "vegetables",
+        "items": [
+          "arugula",
+          "asparagus",
+          "avocado",
+          "broccoli rabe",
+          "butternut squash",
+          "cabbage",
+          "carrot",
+          "corn",
+          "cucumber",
+          "green bean",
+          "jalapeño",
+          "kale",
+          "mushroom",
+          "onion",
+          "pepper",
+          "potato",
+          "radish",
+          "scallion",
+          "shallot",
+          "spring mix",
+          "sweet potato",
+          "tomato",
+          "yellow squash",
+          "zucchini"
+        ]
+      },
+      {
+        "name": "fruit",
+        "items": ["apple", "cranberry", "lemon", "pineapple"]
+      },
+      {
+        "name": "cheese",
+        "items": [
+          "cheddar",
+          "cream cheese",
+          "monterey jack",
+          "mozzarella",
+          "parmesan",
+          "ricotta"
+        ]
+      },
+      {
+        "name": "herbs",
+        "items": ["basil", "chive", "cilantro", "parsley"]
+      },
+      {
+        "name": "spices",
+        "items": ["chili flake"]
+      },
+      {
+        "name": "flavor",
+        "items": [
+          "bbq sauce",
+          "gochujang",
+          "kimchi",
+          "miso",
+          "pesto",
+          "sriracha",
+          "tahini",
+          "truffle oil"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "drink",
+    "items": [
+      {
+        "name": "liquor",
+        "items": [
+          "bourbon",
+          "cognac",
+          "gin",
+          "mezcal",
+          "tequila",
+          "rum",
+          "vodka"
+        ]
+      },
+      {
+        "name": "liqueur",
+        "items": ["ancho reyes", "campari", "orange liqueur"]
+      },
+      {
+        "name": "wine",
+        "items": ["madeira wine", "vermouth"]
+      },
+      {
+        "name": "bitters",
+        "items": ["angostura bitters", "chocolate bitters", "orange bitters"]
+      }
+    ]
+  }
+]
