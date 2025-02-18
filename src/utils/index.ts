@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { RecipePage } from "./types";
+import { cache } from "react";
 
 export function areArraysEqual(arr1: string[], arr2: string[]) {
   return (
@@ -8,7 +9,7 @@ export function areArraysEqual(arr1: string[], arr2: string[]) {
   );
 }
 
-export async function getRecipePages(): Promise<RecipePage[]> {
+export const getRecipePages = cache(async (): Promise<RecipePage[]> => {
   const pages: RecipePage[] = [];
   const files = fs
     .readdirSync(path.join(process.cwd(), "src", "recipes"), {
@@ -54,7 +55,7 @@ export async function getRecipePages(): Promise<RecipePage[]> {
   }
 
   return pages;
-}
+});
 
 export async function generateIngredients() {
   const ingredients: Record<string, RecipePage[]> = {};

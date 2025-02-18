@@ -1,7 +1,7 @@
-import Tags from "@/components/default/tags";
 import { areArraysEqual, getRecipePages } from "@/utils";
 import Meals from "./meals";
 import Link from "next/link";
+import Recipe from "./recipe";
 
 export const dynamicParams = false;
 
@@ -82,24 +82,5 @@ export default async function Page({
     );
   }
 
-  const { ingredients, sourceUrl } = currentPage;
-
-  return (
-    <>
-      <h3>{title}</h3>
-      {sourceUrl && (
-        <p className="recipe-source">
-          [{" "}
-          <Link href={sourceUrl} target="_blank">
-            source
-          </Link>{" "}
-          ]
-        </p>
-      )}
-      <section className="content">
-        <Page />
-      </section>
-      <Tags tags={ingredients} linkPrefix="/recipes/ingredients/" />
-    </>
-  );
+  return <Recipe recipe={currentPage} />;
 }
