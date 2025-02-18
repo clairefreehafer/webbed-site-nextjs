@@ -146,9 +146,9 @@ section.tags {
   }
 
   ul {
+    @include text.monospace();
     display: flex;
     flex-wrap: wrap;
-    font-family: ui-monospace, monospace;
     font-size: 0.875rem;
     list-style: none;
     padding: 0;

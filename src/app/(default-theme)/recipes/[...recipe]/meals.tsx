@@ -31,7 +31,10 @@ export default async function Meals() {
       <h3>meal recipes</h3>
       <section className="content">
         {Object.keys(mealPages).map((category) => (
-          <div key={category}>
+          <div
+            key={category}
+            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
+          >
             <h4>{deslugify(category)}</h4>
             <ul>
               {mealPages[category].map((page: RecipePage) => (

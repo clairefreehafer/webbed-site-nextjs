@@ -1,3 +1,4 @@
+@use "mixins";
 @use "text";
 
 .last-made {
@@ -16,4 +17,17 @@ p.recipe-source {
   @include text.monospace();
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.8);
+}
+
+.content {
+  & h4 {
+    @include mixins.dotted-underline(2px);
+    padding-bottom: 0.25rem;
+  }
+  & strong {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px dotted yellow;
+    padding: 0.2rem;
+    font-weight: normal;
+  }
 }

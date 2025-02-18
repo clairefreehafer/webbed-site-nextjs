@@ -1,3 +1,18 @@
+/*
+ * SECTION.........APP
+ * ~~~~~~~         ~~~
+ * RESIDENTS.......BEST FRIENDS
+ * VISITORS........PASSPORT
+ * EVENTS..........CALL RESIDENT
+ * DREAMS..........ISLAND LIFE 101
+ * LANDSCAPES......ISLAND DESIGNER
+ * INTERIORS.......HAPPY HOME NETWORK
+ * MISCELLANEOUS...NOOK MILES
+ * RANDOM..........MAP
+ * NEW.............NOOK SHOPPING
+ * ALL.............CAMERA
+ */
+
 export default function NookPhone() {
   const time = new Date().toLocaleTimeString([], {
     hour: "numeric",

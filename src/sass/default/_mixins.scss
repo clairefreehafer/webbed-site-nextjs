@@ -3,7 +3,17 @@
 @use "variables";
 
 @mixin rainbow-border($border-width) {
-  border-image: linear-gradient(135deg, red, orange, yellow, green, blue, indigo, violet) 10;
+  border-image: linear-gradient(
+      135deg,
+      red,
+      orange,
+      yellow,
+      green,
+      blue,
+      indigo,
+      violet
+    )
+    10;
   border-width: $border-width;
   border-style: solid;
 }
@@ -11,16 +21,16 @@
 // https://codepen.io/sarazond/pen/LYGbwj
 // n is number of stars required
 @function multiple-box-shadow($n) {
-  $value: '#{math.random(2000)}px #{math.random(2000)}px #FFF';
+  $value: "#{math.random(2000)}px #{math.random(2000)}px #FFF";
   @for $i from 2 through $n {
-    $value: '#{$value} , #{math.random(2000)}px #{math.random(2000)}px #FFF';
+    $value: "#{$value} , #{math.random(2000)}px #{math.random(2000)}px #FFF";
   }
 
   @return string.unquote($value);
 }
 
 @keyframes animStar {
-  from	{
+  from {
     transform: translateY(0px);
   }
   to {
@@ -51,7 +61,7 @@
   }
 }
 
-@mixin dotted-underline($size, $width: fit-content) {
+@mixin dotted-underline($size, $width: auto) {
   border-bottom: $size dotted yellow;
   width: $width;
 }
