@@ -2,8 +2,8 @@
 import { useEffect, useState } from "react";
 
 // https://dev.to/madsstoumann/showing-time-ago-in-a-social-feed-using-intlrelativetimeformat-5ceo
-function displayTimeAgo(date: Date) {
-  let value;
+function displayTimeAgo(date: Date): string {
+  let value: string;
   const diff = (new Date().getTime() - date.getTime()) / 1000;
   const minutes = Math.floor(diff / 60);
   const hours = Math.floor(minutes / 60);
@@ -16,16 +16,11 @@ function displayTimeAgo(date: Date) {
     value = rtf.format(0 - years, "year");
   } else if (months > 0) {
     value = rtf.format(0 - months, "month");
+  } else if (days > 6) {
+    value = rtf.format(0 - Math.round(days / 7), "week");
   } else {
     value = rtf.format(0 - days, "day");
   }
-  // else if (hours > 0) {
-  //   value = rtf.format(0 - hours, "hour");
-  // } else if (minutes > 0) {
-  //   value = rtf.format(0 - minutes, "minute");
-  // } else {
-  //   value = rtf.format(0 - diff, "second");
-  // }
   return value;
 }
 
