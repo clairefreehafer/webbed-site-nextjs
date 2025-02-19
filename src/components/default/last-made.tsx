@@ -1,5 +1,8 @@
+"use client";
+import { useEffect, useState } from "react";
+
 // https://dev.to/madsstoumann/showing-time-ago-in-a-social-feed-using-intlrelativetimeformat-5ceo
-function timeAgo(date: Date) {
+function displayTimeAgo(date: Date) {
   let value;
   const diff = (new Date().getTime() - date.getTime()) / 1000;
   const minutes = Math.floor(diff / 60);
@@ -27,12 +30,20 @@ function timeAgo(date: Date) {
 }
 
 export default function LastMade({ lastMade }: { lastMade?: Date }) {
+  const [timeAgo, setTimeAgo] = useState("");
+
+  useEffect(() => {
+    if (lastMade && !timeAgo) {
+      setTimeAgo(displayTimeAgo(lastMade));
+    }
+  }, [lastMade, timeAgo, displayTimeAgo]);
+
   if (!lastMade) {
     return null;
   }
   return (
     <span className="last-made" title="last made">
-      {timeAgo(lastMade)}
+      {timeAgo}
     </span>
   );
 }

@@ -1,3 +1,6 @@
+"use client";
+import { useEffect, useState } from "react";
+
 /*
  * SECTION.........APP
  * ~~~~~~~         ~~~
@@ -14,10 +17,19 @@
  */
 
 export default function NookPhone() {
-  const time = new Date().toLocaleTimeString([], {
-    hour: "numeric",
-    minute: "2-digit",
-  });
+  const [time, setTime] = useState("");
+
+  useEffect(() => {
+    if (!time) {
+      setTime(
+        new Date().toLocaleTimeString([], {
+          hour: "numeric",
+          minute: "2-digit",
+        })
+      );
+    }
+  }, [time]);
+
   return (
     <div className="nookphone">
       <div className="row">
