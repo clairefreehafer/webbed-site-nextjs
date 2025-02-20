@@ -20,11 +20,12 @@ p.recipe-source {
 }
 
 .content {
-  & h4 {
+  h4 {
     @include mixins.dotted-underline(2px);
     padding-bottom: 0.25rem;
   }
-  & strong {
+
+  strong {
     background-color: rgba(255, 255, 255, 0.1);
     border: 1px dotted yellow;
     padding: 0.2rem;
