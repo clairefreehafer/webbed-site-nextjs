@@ -2,7 +2,9 @@
 import { useEffect, useState } from "react";
 
 // https://dev.to/madsstoumann/showing-time-ago-in-a-social-feed-using-intlrelativetimeformat-5ceo
-function displayTimeAgo(date: Date): string {
+function displayTimeAgo(dateString: string): string {
+  const date = new Date(dateString);
+
   let value: string;
   const diff = (new Date().getTime() - date.getTime()) / 1000;
   const minutes = Math.floor(diff / 60);
@@ -24,7 +26,7 @@ function displayTimeAgo(date: Date): string {
   return value;
 }
 
-export default function LastMade({ lastMade }: { lastMade?: Date }) {
+export default function LastMade({ lastMade }: { lastMade?: string }) {
   const [timeAgo, setTimeAgo] = useState("");
 
   useEffect(() => {
