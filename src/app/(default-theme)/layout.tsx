@@ -51,44 +51,46 @@ const garamond = localFont({
 
 export default function Layout({ children }: React.PropsWithChildren) {
   return (
-    <>
-      <div id="stars1"></div>
-      <div id="stars2"></div>
-      <div id="stars3"></div>
+    <html>
+      <body>
+        <div id="stars1"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
 
-      <div
-        className={`container ${atkinsonHyperlegibleNext.variable} ${atkinsonHyperlegibleMono.variable} ${garamond.variable}`}
-      >
-        <header className="header">
-          <h1>claire freehafer</h1>
-          <nav>
-            <Nav />
-          </nav>
-        </header>
+        <div
+          className={`container ${atkinsonHyperlegibleNext.variable} ${atkinsonHyperlegibleMono.variable} ${garamond.variable}`}
+        >
+          <header className="header">
+            <h1>claire freehafer</h1>
+            <nav>
+              <Nav />
+            </nav>
+          </header>
 
-        <main>{children}</main>
+          <main>{children}</main>
 
-        <footer className="footer">
-          <p>
-            <Link href="/sitemap">site map</Link>
-          </p>
-          <p>
-            made with{" "}
-            <a href="https://nextjs.org" target="_blank">
-              next.js
-            </a>{" "}
-            | hosted on{" "}
-            <a href="https://neocities.org" target="_blank">
-              neocities
-            </a>{" "}
-            | source code on{" "}
-            <a href="https://github.com/clairefreehafer/webbed-site-nextjs">
-              github
-            </a>
-          </p>
-          <p>last updated {getBuildDate()}</p>
-        </footer>
-      </div>
-    </>
+          <footer className="footer">
+            <p>
+              <Link href="/sitemap">site map</Link>
+            </p>
+            <p>
+              made with{" "}
+              <a href="https://nextjs.org" target="_blank">
+                next.js
+              </a>{" "}
+              | hosted on{" "}
+              <a href="https://neocities.org" target="_blank">
+                neocities
+              </a>{" "}
+              | source code on{" "}
+              <a href="https://github.com/clairefreehafer/webbed-site-nextjs">
+                github
+              </a>
+            </p>
+            <p>last updated {getBuildDate()}</p>
+          </footer>
+        </div>
+      </body>
+    </html>
   );
 }

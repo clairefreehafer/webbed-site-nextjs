@@ -3,16 +3,18 @@ import "@/sass/the-witness/style.scss";
 
 export default function Layout({ children }: React.PropsWithChildren) {
   return (
-    <>
-      <div className="background"></div>
+    <html>
+      <body>
+        <div className="background"></div>
 
-      <div className="container">
-        <header>
-          <h1>Claire Freehafer</h1>
-        </header>
-        <Navigation />
-        <main>{children}</main>
-      </div>
-    </>
+        <div className="container">
+          <header>
+            <h1>Claire Freehafer</h1>
+          </header>
+          <Navigation />
+          <main>{children}</main>
+        </div>
+      </body>
+    </html>
   );
 }

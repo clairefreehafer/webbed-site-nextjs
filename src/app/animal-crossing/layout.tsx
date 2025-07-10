@@ -70,22 +70,26 @@ export default function Layout({ children }: React.PropsWithChildren) {
   }, []);
 
   return (
-    <div className={`container ${finkHeavy.variable} ${seurat.variable}`}>
-      <Logo />
-      <div className="sand" ref={sandRef}>
-        <nav>
-          <details>
-            <summary>navigation</summary>
-            <Nav links={NAV_LINKS} />
-          </details>
+    <html>
+      <body>
+        <div className={`container ${finkHeavy.variable} ${seurat.variable}`}>
+          <Logo />
+          <div className="sand" ref={sandRef}>
+            <nav>
+              <details>
+                <summary>navigation</summary>
+                <Nav links={NAV_LINKS} />
+              </details>
 
-          <div className="desktop-menu">
-            <Nav links={NAV_LINKS} />
+              <div className="desktop-menu">
+                <Nav links={NAV_LINKS} />
+              </div>
+            </nav>
+
+            <main>{children}</main>
           </div>
-        </nav>
-
-        <main>{children}</main>
-      </div>
-    </div>
+        </div>
+      </body>
+    </html>
   );
 }
