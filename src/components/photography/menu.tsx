@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Menu({ menuOpen }: { menuOpen: boolean }) {
   return (
     <nav
@@ -7,11 +9,11 @@ export default function Menu({ menuOpen }: { menuOpen: boolean }) {
     >
       <ul>
         <li>
-          <s>today</s>
+          <Link href="/photography/today">today</Link>
         </li>
         <li>recently added</li>
         <li>
-          <a href="/photography/albums">albums</a>
+          <Link href="/photography/albums">albums</Link>
         </li>
         <li>
           <s>chronological</s>
