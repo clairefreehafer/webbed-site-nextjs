@@ -1,5 +1,3 @@
-"use client";
-
 import Logo from "@/components/animal-crossing/logo";
 import Nav from "@/components/nav";
 import "@/sass/animal-crossing/style.scss";
@@ -8,7 +6,6 @@ import {
   getGrassDateRange,
 } from "@/utils/animal-crossing";
 import localFont from "next/font/local";
-import { useEffect, useRef } from "react";
 
 const finkHeavy = localFont({
   variable: "--font-fink-heavy",
@@ -58,23 +55,20 @@ const NAV_LINKS = [
 ];
 
 export default function Layout({ children }: React.PropsWithChildren) {
-  const sandRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const grassDateRange = getGrassDateRange();
-    const html = document.getElementsByTagName("html")[0];
-    html.style.backgroundColor = GRASS_BACKGROUND_COLORS[grassDateRange];
-    html.style.backgroundImage = `url("/images/animal-crossing/grass/square_${grassDateRange}.png")`;
-    if (sandRef.current) {
-      sandRef.current.style.backgroundImage = `url("/images/animal-crossing/sand/square_${grassDateRange}.png")`;
-    }
-  }, []);
-
+  const grassDateRange = getGrassDateRange();
+  const bodyStyles = {
+    backgroundColor: GRASS_BACKGROUND_COLORS[grassDateRange],
+    backgroundImage: `url("/images/animal-crossing/grass/square_${grassDateRange}.png")`,
+  };
+  const sandStyles = {
+    backgroundImage: `url("/images/animal-crossing/sand/square_${grassDateRange}.png")`,
+  };
   return (
     <html>
-      <body>
+      <body style={bodyStyles}>
         <div className={`container ${finkHeavy.variable} ${seurat.variable}`}>
           <Logo />
-          <div className="sand" ref={sandRef}>
+          <div className="sand" style={sandStyles}>
             <nav>
               <details>
                 <summary>navigation</summary>
