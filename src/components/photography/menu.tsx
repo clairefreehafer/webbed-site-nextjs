@@ -11,7 +11,9 @@ export default function Menu({ menuOpen }: { menuOpen: boolean }) {
         <li>
           <Link href="/photography/today">today</Link>
         </li>
-        <li>recently added</li>
+        <li>
+          <Link href="/photography/recently-added">recently added</Link>
+        </li>
         <li>
           <Link href="/photography/albums">albums</Link>
         </li>
