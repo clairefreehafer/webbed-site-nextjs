@@ -9,16 +9,16 @@ export default function Menu({ menuOpen }: { menuOpen: boolean }) {
     >
       <ul>
         <li>
-          <Link href="/photography/today">today</Link>
+          <Link href="today">today</Link>
         </li>
         <li>
-          <Link href="/photography/recently-added">recently added</Link>
+          <Link href="recently-added">recently added</Link>
         </li>
         <li>
-          <Link href="/photography/albums">albums</Link>
+          <Link href="albums">albums</Link>
         </li>
         <li>
-          <s>chronological</s>
+          <Link href="chronological">chronological</Link>
         </li>
         <li>collections</li>
         <li>
@@ -29,7 +29,7 @@ export default function Menu({ menuOpen }: { menuOpen: boolean }) {
           <s>map</s>
         </li>
         <li>
-          <s>random</s>
+          <Link href="random">random</Link>
         </li>
       </ul>
     </nav>

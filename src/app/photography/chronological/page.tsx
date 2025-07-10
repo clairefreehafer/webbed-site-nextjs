@@ -3,15 +3,14 @@ import {
   PiwigoMethod,
   fetchPiwigo,
 } from "@/utils/photography/piwigo";
-import { redirect } from "next/navigation";
 
 export default async function Page() {
   if (!process.env.PIWIGO_HOST) {
-    redirect("https://clairefreehafer.smugmug.com/Photography/Recent-Uploads");
+    return "sorry, this page currently only exists locally.";
   }
   const params = {
     per_page: "100",
-    order: "date_available",
+    order: "date_creation",
     cat_id: CateogoryId.Photography,
     recursive: "true",
   };
@@ -20,5 +19,6 @@ export default async function Page() {
     params
   );
 
-  return `${images.length} image(s) found.`;
+  // TODO: pagination
+  return `${images.length} image(s) found`;
 }

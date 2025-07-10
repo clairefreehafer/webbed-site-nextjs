@@ -1,6 +1,6 @@
 type MarkdownPage = {
   /** page content; cannot get element/component typing to cooperate */
-  default: any; // eslint-disable-line
+  default: any;  
   title: string;
   path: string[];
 };
