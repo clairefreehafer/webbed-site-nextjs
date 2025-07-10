@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+// TODO: parallel routing?
 export default function Menu({ menuOpen }: { menuOpen: boolean }) {
   return (
     <nav
@@ -20,11 +21,15 @@ export default function Menu({ menuOpen }: { menuOpen: boolean }) {
         <li>
           <Link href="chronological">chronological</Link>
         </li>
-        <li>collections</li>
+        <li>
+          <Link href="collections">collections</Link>
+        </li>
         <li>
           <s>curated</s>
         </li>
-        <li>technical</li>
+        <li>
+          <Link href="technical">technical</Link>
+        </li>
         <li>
           <s>map</s>
         </li>

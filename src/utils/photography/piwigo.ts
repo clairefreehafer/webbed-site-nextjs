@@ -1,4 +1,4 @@
-export const PIWIGO_WEB_URL = `${process.env.PIWIGO_HOST}/piwigo/ws.php?`;
+const PIWIGO_WEB_URL = `${process.env.PIWIGO_HOST}/piwigo/ws.php?`;
 
 export enum PiwigoMethod {
   CategoriesGetImages = "pwg.categories.getImages",
@@ -6,11 +6,18 @@ export enum PiwigoMethod {
   TagsGetImages = "pwg.tags.getImages",
 }
 
-export enum CateogoryId {
+export enum CategoryId {
+  Albums = "7",
+  Collections = "9",
   Photography = "2",
-  Explore = "7",
+  Technical = "11",
   Today = "14",
 }
+
+export type Category = {
+  id: number;
+  name: string;
+};
 
 export async function fetchPiwigo(
   method: PiwigoMethod,

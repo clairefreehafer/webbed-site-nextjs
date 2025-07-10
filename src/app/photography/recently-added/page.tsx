@@ -1,5 +1,5 @@
 import {
-  CateogoryId,
+  CategoryId,
   PiwigoMethod,
   fetchPiwigo,
 } from "@/utils/photography/piwigo";
@@ -12,7 +12,7 @@ export default async function Page() {
   const params = {
     per_page: "100",
     order: "date_available",
-    cat_id: CateogoryId.Photography,
+    cat_id: CategoryId.Photography,
     recursive: "true",
   };
   const { images } = await fetchPiwigo(
