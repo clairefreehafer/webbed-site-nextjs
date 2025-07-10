@@ -3,6 +3,7 @@ import {
   PiwigoMethod,
   fetchPiwigo,
 } from "@/utils/photography/piwigo";
+import Image from "next/image";
 
 export default async function Page() {
   if (!process.env.PIWIGO_HOST) {
@@ -19,6 +20,11 @@ export default async function Page() {
     params
   );
 
-  // TODO: pagination
-  return `${images.length} image(s) found`;
+  const { element_url, height, width } = images[0];
+
+  return (
+    <div className="grid">
+      <Image src={element_url} height={height} width={width} alt="" />
+    </div>
+  );
 }

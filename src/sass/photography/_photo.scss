@@ -1,0 +1,19 @@
+@use "sass:math";
+
+@mixin grid($columns, $gap) {
+  $columnWidth: calc((100% / $columns) - ($gap / $columns));
+  display: grid;
+  grid-template-columns: repeat($columns, $columnWidth);
+  gap: $gap;
+}
+
+section.photos {
+}
+
+.grid {
+  @include grid(2, 1rem);
+  margin: 3rem;
+}
+
+img.photo {
+}
