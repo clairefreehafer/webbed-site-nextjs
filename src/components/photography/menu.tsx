@@ -10,31 +10,31 @@ export default function Menu({ menuOpen }: { menuOpen: boolean }) {
     >
       <ul>
         <li>
-          <Link href="today">today</Link>
+          <Link href="/photography/today">today</Link>
         </li>
         <li>
-          <Link href="recently-added">recently added</Link>
+          <Link href="/photography/recently-added">recently added</Link>
         </li>
         <li>
-          <Link href="albums">albums</Link>
+          <Link href="/photography/albums">albums</Link>
         </li>
         <li>
-          <Link href="chronological">chronological</Link>
+          <Link href="/photography/chronological">chronological</Link>
         </li>
         <li>
-          <Link href="collections">collections</Link>
+          <Link href="/photography/collections">collections</Link>
         </li>
         <li>
           <s>curated</s>
         </li>
         <li>
-          <Link href="technical">technical</Link>
+          <Link href="/photography/technical">technical</Link>
         </li>
         <li>
           <s>map</s>
         </li>
         <li>
-          <Link href="random">random</Link>
+          <Link href="/photography/random">random</Link>
         </li>
       </ul>
     </nav>
