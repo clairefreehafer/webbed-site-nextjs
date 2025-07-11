@@ -28,6 +28,7 @@ export async function fetchPiwigo(
     method,
     ...params,
   });
+  console.log(` 🔗 GET ${PIWIGO_WEB_URL + searchParams}`);
   const response = await fetch(PIWIGO_WEB_URL + searchParams);
   const responseJson = await response.json();
   return responseJson.result;
