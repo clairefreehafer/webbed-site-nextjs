@@ -23,13 +23,18 @@ export async function fetchPiwigo(
   method: PiwigoMethod,
   params: Record<string, string>
 ): Promise<Record<string, any>> {
-  const searchParams = new URLSearchParams({
-    format: "json",
-    method,
-    ...params,
-  });
-  console.log(` 🔗 GET ${PIWIGO_WEB_URL + searchParams}`);
-  const response = await fetch(PIWIGO_WEB_URL + searchParams);
-  const responseJson = await response.json();
-  return responseJson.result;
+  try {
+    const searchParams = new URLSearchParams({
+      format: "json",
+      method,
+      ...params,
+    });
+    console.log(` 🔗 GET ${PIWIGO_WEB_URL + searchParams}`);
+    const response = await fetch(PIWIGO_WEB_URL + searchParams);
+    const responseJson = await response.json();
+    return responseJson.result;
+  } catch (error) {
+    console.error(`❌ problem fetching from piwigo: ${error}`);
+    return {};
+  }
 }

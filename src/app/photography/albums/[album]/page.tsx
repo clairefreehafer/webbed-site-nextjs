@@ -37,7 +37,6 @@ export async function generateStaticParams() {
       });
     }
   }
-  // console.log(categories);
   return staticParams;
 }
 
