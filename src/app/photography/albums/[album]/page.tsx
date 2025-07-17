@@ -1,43 +1,17 @@
-import { slugify } from "@/utils";
-import {
-  CategoryId,
-  PiwigoMethod,
-  fetchPiwigo,
-} from "@/utils/photography/piwigo";
-import albumIds from "./albumIds.json";
-import { writeFile } from "fs/promises";
+import { deslugify, slugify } from "@/utils";
+import { getAlbum, getAlbums } from "@/utils/photography/digikam";
+import Image from "next/image";
+import fs from "fs";
+import sharp from "sharp";
 
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  const piwigoParams = {
-    cat_id: CategoryId.Albums,
-  };
-  const { categories } = await fetchPiwigo(
-    PiwigoMethod.CategoriesGetList,
-    piwigoParams
-  );
-  const staticParams = [];
+  const albums = getAlbums();
 
-  for (const category of categories) {
-    if (category.id.toString() !== CategoryId.Albums) {
-      const albumSlug = slugify(category.name) as keyof typeof albumIds;
-
-      if (!albumIds[albumSlug]) {
-        console.log(`📝 adding cat_id for ${category.name}`);
-        albumIds[albumSlug] = category.id.toString();
-        await writeFile(
-          `${process.cwd()}/src/app/photography/albums/[album]/albumIds.json`,
-          JSON.stringify(albumIds)
-        );
-      }
-
-      staticParams.push({
-        album: albumSlug,
-      });
-    }
-  }
-  return staticParams;
+  return albums.map((album) => ({
+    album: slugify(album.relativePath.slice(1)),
+  }));
 }
 
 export default async function Page({
@@ -45,13 +19,33 @@ export default async function Page({
 }: {
   params: Promise<{ album: string }>;
 }) {
-  const albumSlug = (await params).album as keyof typeof albumIds;
-  const piwigoParams = {
-    cat_id: albumIds[albumSlug],
-  };
-  const { images } = await fetchPiwigo(
-    PiwigoMethod.CategoriesGetImages,
-    piwigoParams
+  const albumSlug = (await params).album;
+  const images = getAlbum(deslugify(albumSlug));
+
+  console.log(images[0]);
+
+  return (
+    <div className="grid">
+      {images.map(async (image) => {
+        if (!image.path) {
+          console.log(`😢 no path for ${image.name}.`);
+          return null;
+        }
+        const buffer = fs.readFileSync(image.path);
+        const base64 = (await sharp(buffer).webp().toBuffer()).toString(
+          "base64"
+        );
+        return (
+          <Image
+            key={image.id}
+            src={`data:image/webp;base64,${base64}`}
+            height={image.height}
+            width={image.width}
+            alt=""
+            className="photo"
+          />
+        );
+      })}
+    </div>
   );
-  return images.length;
 }

@@ -1,3 +1,4 @@
+@use "variables";
 @use "sass:math";
 
 @mixin grid($columns, $gap) {
@@ -5,6 +6,9 @@
   display: grid;
   grid-template-columns: repeat($columns, $columnWidth);
   gap: $gap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
 section.photos {
@@ -13,7 +17,17 @@ section.photos {
 .grid {
   @include grid(2, 1rem);
   margin: 3rem;
+
+  @media screen and (max-width: 650px) {
+    @include grid(1, 1rem);
+    margin: 1rem;
+  }
 }
 
 img.photo {
+  max-height: 100%;
+  height: auto;
+  width: auto;
+  max-width: 100%;
+  margin: auto;
 }
