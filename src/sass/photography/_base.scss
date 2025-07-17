@@ -17,6 +17,8 @@ header {
   align-items: center;
   display: flex;
   justify-content: space-between;
+  // TODO: wavy line? https://css-generators.com/wavy-shapes/
+  border-bottom: 1px dotted black;
 
   @media screen and (max-width: variables.$max-site-width) {
     flex-direction: column;

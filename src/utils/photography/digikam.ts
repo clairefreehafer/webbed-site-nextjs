@@ -24,7 +24,57 @@ if (!digikam) {
   });
 }
 
-const rootAlbumEqualsEdited = "Albums.albumRoot = 3";
+const onlyEditedPhotos = "Albums.albumRoot = 3";
+const oldestImagesFirst = "ORDER BY ImageInformation.creationDate ASC";
+
+export interface DigikamImage {
+  /** YYYY-MM-DDTHH:MM:SS.SSS */
+  creationDate: string;
+  height: number;
+  id: number;
+  name: string;
+  path: string;
+  width: number;
+}
+
+export const getTodaysImages = (
+  month: string,
+  day: string
+): Record<string, DigikamImage[]> => {
+  // group by year
+  const images = digikam
+    .prepare<[], DigikamImage>(
+      `
+        SELECT
+          *
+        FROM
+          Albums
+            INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
+            INNER JOIN Images ON Images.album = Albums.id
+            LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
+            LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
+            LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
+        WHERE
+          ${onlyEditedPhotos} AND
+          ImageInformation.creationDate LIKE '%${month}-${day}%'
+        ${oldestImagesFirst}
+      `
+    )
+    .all();
+  console.log(`📷 ${images.length} images found for ${month}/${day}.`);
+  const imagesByYear: Record<string, DigikamImage[]> = {};
+
+  for (const image of images) {
+    const year = image.creationDate.slice(0, 4);
+    if (imagesByYear[year]) {
+      imagesByYear[year].push(image);
+    } else {
+      imagesByYear[year] = [image];
+    }
+  }
+
+  return imagesByYear;
+};
 
 export const getChronologicalImages = () => {
   return digikam
@@ -38,9 +88,10 @@ export const getChronologicalImages = () => {
             LEFT JOIN Albums ON Images.album = Albums.id
             LEFT JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
             INNER JOIN thumbs.FilePaths ON Images.id = thumbs.FilePaths.thumbId
-          WHERE ${rootAlbumEqualsEdited}
-          ORDER BY
-            ImageInformation.creationDate DESC
+            LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
+            LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
+          WHERE ${onlyEditedPhotos}
+          ${oldestImagesFirst}
           LIMIT 100
       `
     )
@@ -61,22 +112,13 @@ export const getAlbums = cache((): Album[] => {
         FROM
           Albums
             INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
-        WHERE ${rootAlbumEqualsEdited}
+        WHERE ${onlyEditedPhotos}
         ORDER BY
 	        Albums.date DESC
       `
     )
     .all();
 });
-
-interface Images {
-  creationDate: string;
-  height: number;
-  id: number;
-  name: string;
-  path: string;
-  width: number;
-}
 
 export const getAlbum = (relativePath: string): Images[] => {
   console.log("[getAlbum]", relativePath);
@@ -87,16 +129,15 @@ export const getAlbum = (relativePath: string): Images[] => {
         *
       FROM
         Albums
-        INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
-        INNER JOIN Images ON Images.album = Albums.id
-        LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
-        LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
-        LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
+          INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
+          INNER JOIN Images ON Images.album = Albums.id
+          LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
+          LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
+          LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
       WHERE
         Albums.relativePath LIKE '%${relativePath}%' AND
-        ${rootAlbumEqualsEdited}
-      ORDER BY
-        Albums.date DESC
+        ${onlyEditedPhotos}
+      ${oldestImagesFirst}
       `
     )
     .all();
