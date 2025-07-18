@@ -1,13 +1,7 @@
 import ImageGrid from "@/components/photography/image-grid";
 import { deslugify, slugify } from "@/utils";
 import { getTagImages } from "@/utils/photography/digikam";
-
-export const TAGS = [
-  "black and white",
-  "fisheye",
-  // birds
-  // long exposure
-] as const;
+import TAGS from "./tags";
 
 export async function generateStaticParams() {
   return TAGS.map((tag) => ({ collection: slugify(tag) }));

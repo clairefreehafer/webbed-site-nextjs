@@ -1,0 +1,5 @@
+#!/bin/sh
+npm run build
+neocities push out
+
+exit 1

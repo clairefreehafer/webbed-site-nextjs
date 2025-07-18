@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { TAGS } from "./[collection]/page";
 import { slugify } from "@/utils";
+import TAGS from "./[collection]/tags";
 
 export default async function Page() {
   return (
