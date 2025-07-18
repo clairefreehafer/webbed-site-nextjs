@@ -1,26 +1,32 @@
-import BetterSqlite3 from "better-sqlite3";
+import Database from "better-sqlite3";
 import { cache } from "react";
+import { slugify } from "..";
 
-let digikam: BetterSqlite3.Database | undefined = undefined;
-
-if (!digikam) {
-  digikam = new BetterSqlite3(`${process.cwd()}/digikam4.db`, {
-    readonly: true,
-    fileMustExist: true,
-    // verbose: console.log,
-  });
-  console.log("👉 connected to digikam database.");
-
-  digikam
-    .prepare(
-      `ATTACH DATABASE '${process.cwd()}/thumbnails-digikam.db' AS thumbs`
-    )
-    .run();
-  console.log("👉 attached thumbnail database.");
-}
+const digikam = new Database(`${process.cwd()}/digikam4.db`, {
+  readonly: true,
+  fileMustExist: true,
+  // verbose: console.log,
+});
+digikam
+  .prepare(`ATTACH DATABASE '${process.cwd()}/thumbnails-digikam.db' AS thumbs`)
+  .run();
 
 const onlyEditedPhotos = "Albums.albumRoot = 4";
 const oldestImagesFirst = "ORDER BY Images.name ASC";
+
+interface DigikamAlbum {
+  relativePath: string;
+  caption: string;
+}
+
+interface AlbumCaptionJson {
+  displayName?: string;
+}
+
+type Album = Omit<DigikamAlbum, "caption"> &
+  AlbumCaptionJson & {
+    slug: string;
+  };
 
 export interface DigikamImage {
   /** YYYY-MM-DDTHH:MM:SS.SSS */
@@ -31,6 +37,46 @@ export interface DigikamImage {
   path: string;
   width: number;
 }
+
+export const getAlbums = cache((): Album[] => {
+  const albums = digikam
+    .prepare<[], DigikamAlbum>(
+      `
+        SELECT
+          *
+        FROM
+          Albums
+            INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
+        WHERE ${onlyEditedPhotos}
+        ORDER BY
+	        Albums.date DESC
+      `
+    )
+    .all();
+  console.log(`📁 [getAlbums] ${albums.length} albums found.`);
+  return albums.map((album) => {
+    const transformedAlbum: Album = {
+      ...album,
+      slug: slugify(album.relativePath.slice(1)),
+    };
+    try {
+      let captionJson: AlbumCaptionJson = {};
+      if (album.caption) {
+        captionJson = JSON.parse(album.caption);
+      }
+      return {
+        ...transformedAlbum,
+        ...captionJson,
+      };
+    } catch (error) {
+      console.log(
+        `❌ problem generating album data for ${album.relativePath}:`,
+        (error as Error).message
+      );
+    }
+    return transformedAlbum;
+  });
+});
 
 export const getTodaysImages = (
   month: string,
@@ -71,51 +117,6 @@ export const getTodaysImages = (
 
   return imagesByYear;
 };
-
-export const getChronologicalImages = () => {
-  return digikam
-    .prepare(
-      `
-        SELECT
-          *
-        FROM
-          Images
-            INNER JOIN ImageInformation ON Images.id = ImageInformation.imageid
-            LEFT JOIN Albums ON Images.album = Albums.id
-            LEFT JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
-            INNER JOIN thumbs.FilePaths ON Images.id = thumbs.FilePaths.thumbId
-            LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
-            LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
-          WHERE ${onlyEditedPhotos}
-          ${oldestImagesFirst}
-          LIMIT 100
-      `
-    )
-    .all();
-};
-
-interface Album {
-  relativePath: string;
-}
-
-export const getAlbums = cache((): Album[] => {
-  const albums = digikam
-    .prepare<[], Album>(
-      `
-        SELECT
-          *
-        FROM
-          Albums
-            INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
-        WHERE ${onlyEditedPhotos}
-        ORDER BY
-	        Albums.date DESC
-      `
-    )
-    .all();
-  console.log(`📷 [getAlbums] ${albums.length} albums found.`);
-  return albums;
-});
 
 export const getAlbumImages = (relativePath: string): DigikamImage[] => {
   const images = digikam

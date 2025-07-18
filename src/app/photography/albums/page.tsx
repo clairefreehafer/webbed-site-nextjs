@@ -8,16 +8,12 @@ export default async function Page() {
   return (
     <ul>
       {albums.map((album) => {
-        const albumName = album.relativePath.slice(1);
+        const albumName = album.displayName ?? album.relativePath.slice(1);
         // TODO: filter in SQL
         if (!albumName) return null;
         return (
           <li key={album.relativePath}>
-            <Link
-              href={`/photography/albums/${slugify(
-                album.relativePath.slice(1)
-              )}`}
-            >
+            <Link href={`/photography/albums/${slugify(album.slug)}`}>
               {albumName}
             </Link>
           </li>

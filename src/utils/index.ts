@@ -77,9 +77,9 @@ export async function generateIngredients() {
 }
 
 export function slugify(string: string): string {
-  return encodeURIComponent(string.replaceAll(" ", "-"));
+  return string.replaceAll(" ", "-");
 }
 
 export function deslugify(string: string): string {
-  return decodeURIComponent(string.replaceAll("-", " "));
+  return string.replaceAll("-", " ");
 }

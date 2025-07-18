@@ -1,13 +1,16 @@
-import { deslugify, slugify } from "@/utils";
 import { getAlbumImages, getAlbums } from "@/utils/photography/digikam";
 import ImageGrid from "@/components/photography/image-grid";
+import { deslugify } from "@/utils";
 
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  return getAlbums().map((album) => ({
-    album: slugify(album.relativePath.slice(1)),
-  }));
+  return getAlbums().map((album) => {
+    console.log(`├ generating /albums/${album.slug}`);
+    return {
+      album: album.slug,
+    };
+  });
 }
 
 export default async function Page({
