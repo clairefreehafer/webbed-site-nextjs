@@ -1,6 +1,8 @@
 # my website
 
-here lies the source code for v2.1 of my website, aka the [next.js](https://nextjs.org) (simplified) edition.
+here lies the source code for v2.1 of my website, aka the [next.js](https://nextjs.org) (simplified\*) edition.
+
+\*"simplified" because i am not building my own database and implementing an interface for it!
 
 ## credits
 

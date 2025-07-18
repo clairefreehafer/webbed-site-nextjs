@@ -2,6 +2,6 @@
 branch="$(git rev-parse --abbrev-ref HEAD)"
 if [ "$branch" = "main" ]; then
   rm -rf out
-	npm run build
+  npm run build
   neocities push out
 fi
