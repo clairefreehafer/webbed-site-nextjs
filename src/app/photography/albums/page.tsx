@@ -1,27 +1,21 @@
-import {
-  Category,
-  CategoryId,
-  PiwigoMethod,
-  fetchPiwigo,
-} from "@/utils/photography/piwigo";
-import { redirect } from "next/navigation";
+import { getAlbums } from "@/utils/photography/digikam";
+import Link from "next/link";
 
 export default async function Page() {
-  if (!process.env.PIWIGO_HOST) {
-    redirect("https://clairefreehafer.smugmug.com/Photography/Albums");
-  }
-  const params = {
-    method: PiwigoMethod.CategoriesGetList,
-    cat_id: CategoryId.Albums,
-    public: "true",
-  };
-  const { categories } = await fetchPiwigo(
-    PiwigoMethod.CategoriesGetList,
-    params
-  );
+  const albums = getAlbums();
 
-  return categories.map((category: Category) => {
-    if (category.id.toString() === CategoryId.Albums) return null;
-    return category.name;
-  });
+  return (
+    <ul>
+      {albums.map((album) => {
+        const albumName = album.displayName ?? album.relativePath.slice(1);
+        // TODO: filter in SQL
+        if (!albumName) return null;
+        return (
+          <li key={album.relativePath}>
+            <Link href={`/photography/albums/${album.slug}`}>{albumName}</Link>
+          </li>
+        );
+      })}
+    </ul>
+  );
 }

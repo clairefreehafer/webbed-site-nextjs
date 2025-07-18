@@ -1,27 +1,15 @@
-import {
-  Category,
-  CategoryId,
-  PiwigoMethod,
-  fetchPiwigo,
-} from "@/utils/photography/piwigo";
-import { redirect } from "next/navigation";
+import Link from "next/link";
+import { slugify } from "@/utils";
+import TAGS from "./[collection]/tags";
 
 export default async function Page() {
-  if (!process.env.PIWIGO_HOST) {
-    redirect("https://clairefreehafer.smugmug.com/Photography/Collections");
-  }
-  const params = {
-    method: PiwigoMethod.CategoriesGetList,
-    cat_id: CategoryId.Collections,
-    public: "true",
-  };
-  const { categories } = await fetchPiwigo(
-    PiwigoMethod.CategoriesGetList,
-    params
+  return (
+    <ul>
+      {TAGS.map((tag) => (
+        <li key={tag}>
+          <Link href={`/photography/collections/${slugify(tag)}`}>{tag}</Link>
+        </li>
+      ))}
+    </ul>
   );
-
-  return categories.map((category: Category) => {
-    if (category.id.toString() === CategoryId.Collections) return null;
-    return category.name;
-  });
 }

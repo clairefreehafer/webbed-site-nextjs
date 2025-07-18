@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Menu from "@/components/photography/menu";
 import "@/sass/global.scss";
 import "@/sass/photography/style.scss";
@@ -11,6 +11,12 @@ export default function Layout({ children }: React.PropsWithChildren) {
   const pathname = usePathname();
   const isPhotographyHome = pathname === "/photography";
   const [menuOpen, setMenuOpen] = useState(isPhotographyHome);
+
+  useEffect(() => {
+    if (pathname !== "/photography") {
+      setMenuOpen(false);
+    }
+  }, [pathname]);
 
   return (
     <html>
