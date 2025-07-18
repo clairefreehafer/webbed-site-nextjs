@@ -7,7 +7,7 @@ if (!digikam) {
   digikam = new BetterSqlite3(`${process.cwd()}/digikam4.db`, {
     readonly: true,
     fileMustExist: true,
-    verbose: console.log,
+    // verbose: console.log,
   });
   console.log("👉 connected to digikam database.");
 
@@ -17,15 +17,10 @@ if (!digikam) {
     )
     .run();
   console.log("👉 attached thumbnail database.");
-
-  process.on("exit", () => {
-    digikam?.close();
-    console.log("👉 disconnected from digikam database.");
-  });
 }
 
-const onlyEditedPhotos = "Albums.albumRoot = 3";
-const oldestImagesFirst = "ORDER BY ImageInformation.creationDate ASC";
+const onlyEditedPhotos = "Albums.albumRoot = 4";
+const oldestImagesFirst = "ORDER BY Images.name ASC";
 
 export interface DigikamImage {
   /** YYYY-MM-DDTHH:MM:SS.SSS */
@@ -41,7 +36,6 @@ export const getTodaysImages = (
   month: string,
   day: string
 ): Record<string, DigikamImage[]> => {
-  // group by year
   const images = digikam
     .prepare<[], DigikamImage>(
       `
@@ -61,7 +55,9 @@ export const getTodaysImages = (
       `
     )
     .all();
-  console.log(`📷 ${images.length} images found for ${month}/${day}.`);
+  console.log(
+    `📷 [getTodaysImages] ${images.length} images found for ${month}/${day}.`
+  );
   const imagesByYear: Record<string, DigikamImage[]> = {};
 
   for (const image of images) {
@@ -103,8 +99,7 @@ interface Album {
 }
 
 export const getAlbums = cache((): Album[] => {
-  console.log("[getAlbums]");
-  return digikam
+  const albums = digikam
     .prepare<[], Album>(
       `
         SELECT
@@ -118,12 +113,13 @@ export const getAlbums = cache((): Album[] => {
       `
     )
     .all();
+  console.log(`📷 [getAlbums] ${albums.length} albums found.`);
+  return albums;
 });
 
-export const getAlbum = (relativePath: string): Images[] => {
-  console.log("[getAlbum]", relativePath);
-  return digikam
-    .prepare<[], Images>(
+export const getAlbumImages = (relativePath: string): DigikamImage[] => {
+  const images = digikam
+    .prepare<[], DigikamImage>(
       `
       SELECT
         *
@@ -141,4 +137,55 @@ export const getAlbum = (relativePath: string): Images[] => {
       `
     )
     .all();
+  console.log(
+    `📷 [getAlbumImages] ${images.length} images found in "${relativePath}"`
+  );
+  return images;
+};
+
+export const getChildTags = (tag: string): string[] => {
+  const tagObjects = digikam
+    .prepare<[], { name: string }>(
+      `
+        SELECT
+          t2.name
+        FROM
+          Tags t1
+          INNER JOIN TagsTree ON t1.id = TagsTree.pid
+          LEFT JOIN Tags t2 ON TagsTree.id = t2.id
+        WHERE
+          t1.name = '${tag}'
+          AND t2.pid =(SELECT id FROM Tags WHERE Tags.name = '${tag}')
+    `
+    )
+    .all();
+
+  return tagObjects.map((obj) => obj.name);
+};
+
+export const getTagImages = (tag: string): DigikamImage[] => {
+  const images = digikam
+    .prepare<[], DigikamImage>(
+      `
+        SELECT
+          *
+        FROM
+          Images
+            LEFT JOIN ImageTags ON ImageTags.imageid = Images.id
+            LEFT JOIN Tags ON ImageTags.tagid = Tags.id
+            LEFT JOIN Albums ON Images.album = Albums.id
+            LEFT JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
+            LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
+            LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
+            LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
+        WHERE
+          Tags.name = '${tag}' AND
+          Albums.albumRoot = 4
+        `
+    )
+    .all();
+  console.log(
+    `📷 [getTagImages] ${images.length} images found tagged "${tag}".`
+  );
+  return images;
 };

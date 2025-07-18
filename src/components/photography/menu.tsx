@@ -2,7 +2,6 @@ import Link from "next/link";
 
 // TODO: parallel routing?
 export default function Menu({ menuOpen }: { menuOpen: boolean }) {
-  const hasPiwigo = !process.env.PIWIGO_HOST;
   return (
     <nav
       style={{
@@ -14,46 +13,22 @@ export default function Menu({ menuOpen }: { menuOpen: boolean }) {
           <Link href="/photography/today">today</Link>
         </li>
         <li>
-          <Link
-            href={
-              hasPiwigo
-                ? "/photography/recently-added"
-                : "https://clairefreehafer.smugmug.com/Photography/Recent-Uploads"
-            }
-          >
-            recently added
-          </Link>
+          <s>recently added</s>
         </li>
         <li>
-          <Link
-            href={
-              hasPiwigo
-                ? "/photography/albums"
-                : "https://clairefreehafer.smugmug.com/Photography/Albums"
-            }
-          >
-            albums
-          </Link>
+          <Link href="/photography/albums">albums</Link>
         </li>
         <li>
-          <Link href="/photography/chronological">chronological</Link>
+          <s>chronological</s>
         </li>
         <li>
-          <Link
-            href={
-              hasPiwigo
-                ? "/photography/collections"
-                : "https://clairefreehafer.smugmug.com/Photography/Collections"
-            }
-          >
-            collections
-          </Link>
+          <Link href="/photography/collections">collections</Link>
         </li>
         <li>
           <s>curated</s>
         </li>
         <li>
-          <Link href="/photography/technical">technical</Link>
+          <s>technical</s>
         </li>
         <li>
           <s>map</s>

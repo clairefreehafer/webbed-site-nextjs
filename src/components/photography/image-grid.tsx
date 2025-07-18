@@ -4,14 +4,20 @@ import fs from "fs";
 import sharp from "sharp";
 
 export default function ImageGrid({ images }: { images: DigikamImage[] }) {
+  if (images.length === 0) {
+    return "no images :(";
+  }
   return (
     <div className="grid">
       {images.map(async (image) => {
         try {
           const buffer = fs.readFileSync(image.path);
-          const base64 = (await sharp(buffer).webp().toBuffer()).toString(
-            "base64"
-          );
+          const base64 = (
+            await sharp(buffer, { animated: true })
+              .resize(1000)
+              .webp()
+              .toBuffer()
+          ).toString("base64");
           return (
             <Image
               key={image.id}
