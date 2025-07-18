@@ -70,7 +70,7 @@ export const getAlbums = cache((): Album[] => {
       };
     } catch (error) {
       console.log(
-        `❌ problem generating album data for ${album.relativePath}:`,
+        `❌ [getAlbums] problem generating album data for ${album.relativePath}:`,
         (error as Error).message
       );
     }
@@ -142,26 +142,6 @@ export const getAlbumImages = (relativePath: string): DigikamImage[] => {
     `📷 [getAlbumImages] ${images.length} images found in "${relativePath}"`
   );
   return images;
-};
-
-export const getChildTags = (tag: string): string[] => {
-  const tagObjects = digikam
-    .prepare<[], { name: string }>(
-      `
-        SELECT
-          t2.name
-        FROM
-          Tags t1
-          INNER JOIN TagsTree ON t1.id = TagsTree.pid
-          LEFT JOIN Tags t2 ON TagsTree.id = t2.id
-        WHERE
-          t1.name = '${tag}'
-          AND t2.pid =(SELECT id FROM Tags WHERE Tags.name = '${tag}')
-    `
-    )
-    .all();
-
-  return tagObjects.map((obj) => obj.name);
 };
 
 export const getTagImages = (tag: string): DigikamImage[] => {

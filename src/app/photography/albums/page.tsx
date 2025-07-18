@@ -1,4 +1,3 @@
-import { slugify } from "@/utils";
 import { getAlbums } from "@/utils/photography/digikam";
 import Link from "next/link";
 
@@ -13,9 +12,7 @@ export default async function Page() {
         if (!albumName) return null;
         return (
           <li key={album.relativePath}>
-            <Link href={`/photography/albums/${slugify(album.slug)}`}>
-              {albumName}
-            </Link>
+            <Link href={`/photography/albums/${album.slug}`}>{albumName}</Link>
           </li>
         );
       })}
