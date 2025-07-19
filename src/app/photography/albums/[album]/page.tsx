@@ -1,6 +1,6 @@
 import { getAlbumImages, getAlbums } from "@/utils/photography/digikam";
-import ImageGrid from "@/components/photography/image-grid";
 import { deslugify } from "@/utils";
+import Slideshow from "@/components/slideshow";
 
 export const dynamicParams = false;
 
@@ -19,6 +19,6 @@ export default async function Page({
   params: Promise<{ album: string }>;
 }) {
   const albumSlug = (await params).album;
-  const images = getAlbumImages(deslugify(albumSlug));
-  return <ImageGrid images={images} />;
+  const images = await getAlbumImages(deslugify(albumSlug));
+  return <Slideshow images={images} backHref={`/albums/${albumSlug}`} />;
 }

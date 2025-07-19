@@ -1,0 +1,100 @@
+// photo borders
+$border-width: 2%;
+
+$photo-z-index: 0;
+
+$ui-z-index: $photo-z-index + 2;
+$inset-shadow-zindex: $photo-z-index + 1;
+// $photo-z-index: 0;
+$texture-z-index: $photo-z-index - 1;
+$border-z-index: $photo-z-index - 2;
+
+// screen width minus horizontal margins
+$container-width: calc(100vw - 2rem);
+// horizontal distance of UI edges from edge of slideshow container
+$ui-position-x: 0;
+// vertical distance of UI edges from edge of slideshow container
+$ui-position-y: 1rem;
+
+.container {
+  max-width: $container-width;
+  height: 100%;
+  position: relative;
+  // overflow-x: scroll;
+}
+
+.back {
+  top: $ui-position-y;
+  left: $ui-position-x;
+  position: absolute;
+  z-index: $ui-z-index;
+}
+
+.slide-info {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  // padding: 0.5rem 1rem;
+  position: absolute;
+  right: $ui-position-x;
+  text-align: right;
+  top: $ui-position-y;
+  z-index: $ui-z-index;
+
+  & > details[open] > summary {
+    margin-bottom: 0.5rem;
+  }
+}
+
+main {
+  height: 100%;
+  width: 100%;
+}
+
+.slides {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-auto-columns: $container-width;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(auto-fill, $container-width);
+  padding: 0;
+  gap: 0 1rem;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  overflow-x: scroll;
+}
+
+.slide {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  position: relative;
+}
+
+.snap-point {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  scroll-snap-align: center;
+  top: 0;
+}
+
+.image {
+  // box-shadow: 0 0 1.5rem 0.1rem rgba(0, 0, 0, 0.3);
+  max-height: 100%;
+  height: auto;
+  width: auto;
+  max-width: 100%;
+  margin: auto;
+}
+
+.slide-navigation {
+  position: absolute;
+  bottom: $ui-position-y;
+  right: 50%;
+  transform: translateX(50%);
+  z-index: $ui-z-index;
+}

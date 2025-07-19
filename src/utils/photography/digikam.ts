@@ -1,6 +1,6 @@
 import Database from "better-sqlite3";
 import { cache } from "react";
-import { slugify } from "..";
+import { getImageSrc, slugify } from "..";
 
 const digikam = new Database(`${process.cwd()}/digikam4.db`, {
   readonly: true,
@@ -14,21 +14,25 @@ digikam
 const onlyEditedPhotos = "Albums.albumRoot = 4";
 const oldestImagesFirst = "ORDER BY Images.name ASC";
 
+/** fields returned from querying the digikam db. */
 interface DigikamAlbum {
   relativePath: string;
   caption: string;
 }
 
+/** custom JSON format for extra info stored in the caption field. */
 interface AlbumCaptionJson {
   displayName?: string;
 }
 
+/** transformed album data for use on the site. */
 type Album = Omit<DigikamAlbum, "caption"> &
   AlbumCaptionJson & {
     slug: string;
   };
 
-export interface DigikamImage {
+/** fields returned from querying the digikam db. */
+interface DigikamImage {
   /** YYYY-MM-DDTHH:MM:SS.SSS */
   creationDate: string;
   height: number;
@@ -38,18 +42,36 @@ export interface DigikamImage {
   width: number;
 }
 
+/** transformed image data for use on the site. */
+export interface Image {
+  /** YYYY-MM-DDTHH:MM:SS.SSS */
+  dateTaken: DigikamImage["creationDate"];
+  filename: DigikamImage["name"];
+  height: DigikamImage["height"];
+  src: string;
+  width: DigikamImage["width"];
+}
+
+async function transformDigikamImage(digikamImage: DigikamImage) {
+  const src = await getImageSrc(digikamImage.path);
+  return {
+    dateTaken: digikamImage.creationDate,
+    filename: digikamImage.name,
+    height: digikamImage.height,
+    src,
+    width: digikamImage.width,
+  };
+}
+
 export const getAlbums = cache((): Album[] => {
   const albums = digikam
     .prepare<[], DigikamAlbum>(
       `
-        SELECT
-          *
-        FROM
-          Albums
-            INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
+        SELECT *
+        FROM Albums
+          INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
         WHERE ${onlyEditedPhotos}
-        ORDER BY
-	        Albums.date DESC
+        ORDER BY Albums.date DESC
       `
     )
     .all();
@@ -85,18 +107,15 @@ export const getTodaysImages = (
   const images = digikam
     .prepare<[], DigikamImage>(
       `
-        SELECT
-          *
-        FROM
-          Albums
-            INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
-            INNER JOIN Images ON Images.album = Albums.id
-            LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
-            LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
-            LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
-        WHERE
-          ${onlyEditedPhotos} AND
-          ImageInformation.creationDate LIKE '%${month}-${day}%'
+        SELECT *
+        FROM Albums
+          INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
+          INNER JOIN Images ON Images.album = Albums.id
+          LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
+          LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
+          LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
+        WHERE ${onlyEditedPhotos}
+          AND ImageInformation.creationDate LIKE '%${month}-${day}%'
         ${oldestImagesFirst}
       `
     )
@@ -118,29 +137,33 @@ export const getTodaysImages = (
   return imagesByYear;
 };
 
-export const getAlbumImages = (relativePath: string): DigikamImage[] => {
-  const images = digikam
+export const getAlbumImages = async (
+  relativePath: string
+): Promise<Image[]> => {
+  const digikamImages = digikam
     .prepare<[], DigikamImage>(
       `
-      SELECT
-        *
-      FROM
-        Albums
+        SELECT *
+        FROM Albums
           INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
           INNER JOIN Images ON Images.album = Albums.id
           LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
           LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
           LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
-      WHERE
-        Albums.relativePath LIKE '%${relativePath}%' AND
-        ${onlyEditedPhotos}
-      ${oldestImagesFirst}
+        WHERE Albums.relativePath LIKE '%${relativePath}%'
+          AND ${onlyEditedPhotos}
+        ${oldestImagesFirst}
       `
     )
     .all();
   console.log(
-    `📷 [getAlbumImages] ${images.length} images found in "${relativePath}"`
+    `📷 [getAlbumImages] ${digikamImages.length} images found in "${relativePath}"`
   );
+  const images: Image[] = [];
+  for (const image of digikamImages) {
+    const transformedImage = await transformDigikamImage(image);
+    images.push(transformedImage);
+  }
   return images;
 };
 

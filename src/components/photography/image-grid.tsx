@@ -1,41 +1,22 @@
-import { DigikamImage } from "@/utils/photography/digikam";
-import Image from "next/image";
-import fs from "fs";
-import sharp from "sharp";
+import { Image } from "@/utils/photography/digikam";
+import NextImage from "next/image";
 
-export default function ImageGrid({ images }: { images: DigikamImage[] }) {
+export default function ImageGrid({ images }: { images: Image[] }) {
   if (images.length === 0) {
     return "no images :(";
   }
   return (
     <div className="grid">
-      {images.map(async (image) => {
-        try {
-          const buffer = fs.readFileSync(image.path);
-          const base64 = (
-            await sharp(buffer, { animated: true })
-              .resize(1000)
-              .webp()
-              .toBuffer()
-          ).toString("base64");
-          return (
-            <Image
-              key={image.id}
-              src={`data:image/webp;base64,${base64}`}
-              height={image.height}
-              width={image.width}
-              alt=""
-              className="photo"
-            />
-          );
-        } catch (error) {
-          console.log(
-            "❌ [ImageGrid] problem loading image:",
-            (error as Error).message
-          );
-          return null;
-        }
-      })}
+      {images.map((image) => (
+        <NextImage
+          key={image.filename}
+          src={image.src}
+          height={image.height}
+          width={image.width}
+          alt=""
+          className="photo"
+        />
+      ))}
     </div>
   );
 }

@@ -4,6 +4,7 @@ import Link from "next/link";
 export default function Menu({ menuOpen }: { menuOpen: boolean }) {
   return (
     <nav
+      className="nav"
       style={{
         display: menuOpen ? "flex" : "none",
       }}

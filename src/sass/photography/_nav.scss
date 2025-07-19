@@ -1,4 +1,4 @@
-nav {
+.nav {
   align-items: center;
   display: none;
   flex: 2;
@@ -34,7 +34,7 @@ button.navigate {
 }
 
 .nav-open {
-  nav {
+  .nav {
     display: flex;
   }
 }
