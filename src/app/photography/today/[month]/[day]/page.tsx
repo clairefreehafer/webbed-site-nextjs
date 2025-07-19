@@ -42,7 +42,7 @@ export default async function Page({
   params: Promise<{ month: string; day: string }>;
 }) {
   const { month, day } = await params;
-  const imagesByYear = getTodaysImages(month, day);
+  const imagesByYear = await getTodaysImages(month, day);
   return (
     <div
       style={{

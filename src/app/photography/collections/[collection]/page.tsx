@@ -13,6 +13,6 @@ export default async function Page({
   params: Promise<{ collection: string }>;
 }) {
   const collection = deslugify((await params).collection);
-  const images = getTagImages(collection);
+  const images = await getTagImages(collection);
   return <ImageGrid images={images} />;
 }

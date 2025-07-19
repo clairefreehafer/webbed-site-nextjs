@@ -100,11 +100,11 @@ export const getAlbums = cache((): Album[] => {
   });
 });
 
-export const getTodaysImages = (
+export const getTodaysImages = async (
   month: string,
   day: string
-): Record<string, DigikamImage[]> => {
-  const images = digikam
+): Promise<Record<string, Image[]>> => {
+  const digikamImages = digikam
     .prepare<[], DigikamImage>(
       `
         SELECT *
@@ -121,16 +121,17 @@ export const getTodaysImages = (
     )
     .all();
   console.log(
-    `📷 [getTodaysImages] ${images.length} images found for ${month}/${day}.`
+    `📷 [getTodaysImages] ${digikamImages.length} images found for ${month}/${day}.`
   );
-  const imagesByYear: Record<string, DigikamImage[]> = {};
+  const imagesByYear: Record<string, Image[]> = {};
 
-  for (const image of images) {
+  for (const image of digikamImages) {
     const year = image.creationDate.slice(0, 4);
+    const transformedImage = await transformDigikamImage(image);
     if (imagesByYear[year]) {
-      imagesByYear[year].push(image);
+      imagesByYear[year].push(transformedImage);
     } else {
-      imagesByYear[year] = [image];
+      imagesByYear[year] = [transformedImage];
     }
   }
 
@@ -167,29 +168,31 @@ export const getAlbumImages = async (
   return images;
 };
 
-export const getTagImages = (tag: string): DigikamImage[] => {
-  const images = digikam
+export const getTagImages = async (tag: string): Promise<Image[]> => {
+  const digikamImages = digikam
     .prepare<[], DigikamImage>(
       `
-        SELECT
-          *
-        FROM
-          Images
-            LEFT JOIN ImageTags ON ImageTags.imageid = Images.id
-            LEFT JOIN Tags ON ImageTags.tagid = Tags.id
-            LEFT JOIN Albums ON Images.album = Albums.id
-            LEFT JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
-            LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
-            LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
-            LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
-        WHERE
-          Tags.name = '${tag}' AND
-          Albums.albumRoot = 4
+        SELECT *
+        FROM Images
+          LEFT JOIN ImageTags ON ImageTags.imageid = Images.id
+          LEFT JOIN Tags ON ImageTags.tagid = Tags.id
+          LEFT JOIN Albums ON Images.album = Albums.id
+          LEFT JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
+          LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
+          LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
+          LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
+        WHERE Tags.name = '${tag}'
+          AND Albums.albumRoot = 4
         `
     )
     .all();
   console.log(
-    `📷 [getTagImages] ${images.length} images found tagged "${tag}".`
+    `📷 [getTagImages] ${digikamImages.length} images found tagged "${tag}".`
   );
+  const images: Image[] = [];
+  for (const image of digikamImages) {
+    const transformedImage = await transformDigikamImage(image);
+    images.push(transformedImage);
+  }
   return images;
 };
