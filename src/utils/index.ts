@@ -2,7 +2,6 @@ import fs from "fs";
 import path from "path";
 import { RecipePage } from "./types";
 import { cache } from "react";
-import sharp from "sharp";
 
 export function areArraysEqual(arr1: string[], arr2: string[]) {
   return (
@@ -83,20 +82,4 @@ export function slugify(string: string): string {
 
 export function deslugify(string: string): string {
   return string.replaceAll("-", " ");
-}
-
-export async function getImageSrc(path: string) {
-  try {
-    const buffer = fs.readFileSync(path);
-    const base64 = (
-      await sharp(buffer, { animated: true }).resize(1000).webp().toBuffer()
-    ).toString("base64");
-    return `data:image/webp;base64,${base64}`;
-  } catch (error) {
-    console.log(
-      "❌ [getImageSrc] problem loading image:",
-      (error as Error).message
-    );
-    return "";
-  }
 }

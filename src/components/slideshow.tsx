@@ -1,6 +1,6 @@
 "use client";
 
-import { Image } from "@/utils/photography/digikam";
+import { Image } from "@/utils/digikam";
 import { useEffect, useRef, useState } from "react";
 import "@/sass/slideshow.scss";
 import Link from "next/link";

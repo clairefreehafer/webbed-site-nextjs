@@ -1,4 +1,4 @@
-import { getTodaysImages } from "@/utils/photography/digikam";
+import { getTodaysImages } from "@/utils/digikam";
 import ImageGrid from "@/components/photography/image-grid";
 
 const months: Record<
