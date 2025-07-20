@@ -83,8 +83,12 @@ async function transformDigikamImage(
     // transform image
     const buffer = fs.readFileSync(digikamImage.path);
     const base64 = (
-      await sharp(buffer, { animated: true }).resize(resize).webp().toBuffer()
+      await sharp(buffer, { animated: true })
+        .resize(resize)
+        .webp({ quality: 100 })
+        .toBuffer()
     ).toString("base64");
+    // TODO: experiment with using files instead of base64
     transformedImage.src = `data:image/webp;base64,${base64}`;
 
     // check for custom metadata
