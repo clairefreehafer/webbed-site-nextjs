@@ -1,2 +1,2 @@
-cp ~/Pictures/digiKam/digikam4.db .
-cp ~/Pictures/digiKam/thumbnails-digikam.db .
+cp ~/Pictures/digiKam/digikam4.db ./.local
+cp ~/Pictures/digiKam/thumbnails-digikam.db ./.local
