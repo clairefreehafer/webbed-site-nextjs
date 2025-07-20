@@ -1,4 +1,5 @@
 #!/bin/sh
 rm -rf out
 npm run build
+neocities delete _next
 neocities push out
