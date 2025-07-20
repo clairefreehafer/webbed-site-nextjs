@@ -20,7 +20,7 @@ export default async function Layout({ children }: React.PropsWithChildren) {
           `${process.cwd()}/.local/${verticalBannerFilePath}/${fileName}.jpg`
         );
         await sharp(backgroundImageBuffer)
-          .blur({ sigma: 10 })
+          .blur({ sigma: 20 })
           .webp()
           .toFile(
             `${process.cwd()}/public/${verticalBannerFilePath}/${fileName}.webp`
