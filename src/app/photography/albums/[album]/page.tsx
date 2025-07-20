@@ -1,4 +1,4 @@
-import { getAlbumImages, getAlbums } from "@/utils/photography/digikam";
+import { getAlbumImages, getAlbums } from "@/utils/digikam";
 import { deslugify } from "@/utils";
 import Slideshow from "@/components/slideshow";
 

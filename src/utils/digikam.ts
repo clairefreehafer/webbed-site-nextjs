@@ -1,6 +1,8 @@
 import Database from "better-sqlite3";
 import { cache } from "react";
-import { getImageSrc, slugify } from "..";
+import { slugify } from ".";
+import fs from "fs";
+import sharp from "sharp";
 
 const digikam = new Database(`${process.cwd()}/digikam4.db`, {
   readonly: true,
@@ -11,6 +13,7 @@ digikam
   .prepare(`ATTACH DATABASE '${process.cwd()}/thumbnails-digikam.db' AS thumbs`)
   .run();
 
+const newestAlbumsFirst = "Albums.date DESC";
 const oldestImagesFirst = "Images.name ASC";
 const websiteRootAlbumId = 4;
 
@@ -27,7 +30,7 @@ interface AlbumCaptionJson {
   border?: string;
 }
 
-/** custom JSON format for extra info stored in the image caption field. */
+/** custom JSON format for extra info stored in the image caption/comment field. */
 interface ImageCaptionJson {
   // the witness
   puzzleColor?: string;
@@ -64,17 +67,25 @@ export interface Image {
 }
 
 async function transformDigikamImage(
-  digikamImage: DigikamImage
+  digikamImage: DigikamImage,
+  resize = 1000
 ): Promise<Image> {
-  const src = await getImageSrc(digikamImage.path);
   const transformedImage: Image = {
     dateTaken: digikamImage.creationDate,
     filename: digikamImage.name,
     height: digikamImage.height,
-    src,
+    src: "",
     width: digikamImage.width,
   };
   try {
+    // transform image
+    const buffer = fs.readFileSync(digikamImage.path);
+    const base64 = (
+      await sharp(buffer, { animated: true }).resize(resize).webp().toBuffer()
+    ).toString("base64");
+    transformedImage.src = `data:image/webp;base64,${base64}`;
+
+    // check for custom metadata
     if (digikamImage.comment) {
       const parsedCaption = JSON.parse(digikamImage.comment);
       return {
@@ -83,6 +94,7 @@ async function transformDigikamImage(
       };
     }
   } catch (error) {
+    // fail gracefully if there is an issue
     console.log(
       `❌ [transformDigikamImage] issue transforming image data for ${
         digikamImage.path
@@ -94,7 +106,10 @@ async function transformDigikamImage(
 
 export const getAlbums = cache((collection = "photography"): Album[] => {
   const albums = digikam
-    .prepare<[{ collection: string; albumRootId: number }], DigikamAlbum>(
+    .prepare<
+      { collection: string; albumRootId: number; albumSort: string },
+      DigikamAlbum
+    >(
       `
         SELECT *
         FROM Albums
@@ -103,10 +118,14 @@ export const getAlbums = cache((collection = "photography"): Album[] => {
           AND Albums.collection = $collection
           AND Albums.relativePath NOT LIKE '%/\\_%' ESCAPE '\\'
 			    AND Albums.relativePath != '/'
-        ORDER BY Albums.date DESC
+        ORDER BY $albumSort
       `
     )
-    .all({ collection, albumRootId: websiteRootAlbumId });
+    .all({
+      collection,
+      albumRootId: websiteRootAlbumId,
+      albumSort: newestAlbumsFirst,
+    });
   console.log(`📁 [getAlbums] ${albums.length} albums found.`);
   return albums.map((album) => {
     const transformedAlbum: Album = {
@@ -133,7 +152,8 @@ export const getAlbums = cache((collection = "photography"): Album[] => {
 });
 
 export const getAlbumImages = async (
-  relativePath: string
+  relativePath: string,
+  resize = 1000
 ): Promise<Image[]> => {
   const digikamImages = digikam
     .prepare<{ albumRootId: number; imageSort: string }, DigikamImage>(
@@ -160,7 +180,7 @@ export const getAlbumImages = async (
   );
   const images: Image[] = [];
   for (const image of digikamImages) {
-    const transformedImage = await transformDigikamImage(image);
+    const transformedImage = await transformDigikamImage(image, resize);
     images.push(transformedImage);
   }
   return images;
@@ -172,7 +192,7 @@ export const getTodaysImages = async (
 ): Promise<Record<string, Image[]>> => {
   const digikamImages = digikam
     .prepare<
-      [{ likeString: string; albumRootId: number; imageSort: string }],
+      { likeString: string; albumRootId: number; imageSort: string },
       DigikamImage
     >(
       `
