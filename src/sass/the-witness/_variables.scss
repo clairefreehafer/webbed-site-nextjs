@@ -12,3 +12,6 @@ $inset-shadow-zindex: $photo-z-index + 1;
 $inset-shadow-helper-zindex: $photo-z-index - 1;
 $texture-z-index: $photo-z-index - 2;
 $border-z-index: $photo-z-index - 3;
+
+$vertical-banner-height: 7050px;
+$vertical-banner-width: 2250px;

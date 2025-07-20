@@ -1,12 +1,49 @@
+@use "sass:string";
 @use "puzzle";
 @use "variables";
 
 html {
-  background-color: black;
+  background-color: rgb(131, 181, 217);
+}
+
+/*
+  x: displayed image height
+
+  $banner-height     x
+  -------------- = -----
+  $banner-width    100vw
+
+  x = calc((100vw * $banner-height) / $banner-width);
+*/
+
+@function background-images($number-of-images: 3) {
+  $value: "";
+  @for $i from 0 through $number-of-images - 1 {
+    $fileName: "#{$i + 1}";
+    @if $i <= 10 {
+      $fileName: "0#{$i + 1}";
+    }
+
+    $top-position: calc(
+      $i *
+        (
+          (100vw * variables.$vertical-banner-height) /
+            variables.$vertical-banner-width
+        )
+    );
+
+    @if ($i == 0) {
+      $value: "url('/images/the-witness/vertical-banners/#{$fileName}.webp') top #{$top-position} left no-repeat";
+    } @else {
+      $value: "#{$value}, url('/images/the-witness/vertical-banners/#{$fileName}.webp') top #{$top-position} left no-repeat";
+    }
+  }
+
+  @return string.unquote($value);
 }
 
 body {
-  background-image: url("/images/the-witness/vertical-banners/VerticalBanners_High01.webp");
+  background: background-images();
   background-size: contain;
 }
 

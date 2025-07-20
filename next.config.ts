@@ -1,5 +1,6 @@
 import createMDX from "@next/mdx";
 import remarkGfm from "remark-gfm";
+import type { SourceSpan } from "sass";
 
 import type { NextConfig } from "next";
 
@@ -10,6 +11,18 @@ const nextConfig: NextConfig = {
   images: { unoptimized: true },
 
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
+  sassOptions: {
+    logger: {
+      warn: function (message: string, options: { span: SourceSpan }) {
+        const file = options.span.url?.toString().split("sass")[1] ?? "";
+        console.log(`[${file}] ${message}`);
+      },
+      debug: function (message: string, options: { span: SourceSpan }) {
+        const file = options.span.url?.toString().split("sass")[1] ?? "";
+        console.log(`[${file}] ${message}`);
+      },
+    },
+  },
 };
 
 const withMDX = createMDX({

@@ -3,20 +3,35 @@ import Navigation from "@/components/the-witness/nav";
 import "@/sass/the-witness/style.scss";
 import sharp from "sharp";
 
-const BACKGROUND_FILE_PATH =
-  "images/the-witness/vertical-banners/VerticalBanners_High01";
+const BACKGROUND_FILE_PATH = "images/the-witness/vertical-banners";
+const BACKGROUND_FILES = ["01", "02", "03"] as const;
 
 export default async function Layout({ children }: React.PropsWithChildren) {
-  if (!fs.existsSync(`${process.cwd()}/public/${BACKGROUND_FILE_PATH}.webp`)) {
-    // transformed file does not exist, so create it
-    console.log(`🖼️ transforming background image...`);
-    const backgroundImageBuffer = fs.readFileSync(
-      `${process.cwd()}/.local/${BACKGROUND_FILE_PATH}.jpg`
-    );
-    await sharp(backgroundImageBuffer)
-      .blur({ sigma: 10 })
-      .webp()
-      .toFile(`${process.cwd()}/public/${BACKGROUND_FILE_PATH}.webp`);
+  for (const backgroundFile of BACKGROUND_FILES) {
+    if (
+      !fs.existsSync(
+        `${process.cwd()}/public/${BACKGROUND_FILE_PATH}/${backgroundFile}.webp`
+      )
+    ) {
+      // transformed file does not exist, so create it
+      console.log(`🖼️ transforming background image...`);
+      try {
+        const backgroundImageBuffer = fs.readFileSync(
+          `${process.cwd()}/.local/${BACKGROUND_FILE_PATH}/${backgroundFile}.jpg`
+        );
+        await sharp(backgroundImageBuffer)
+          .blur({ sigma: 10 })
+          .webp()
+          .toFile(
+            `${process.cwd()}/public/${BACKGROUND_FILE_PATH}/${backgroundFile}.webp`
+          );
+      } catch (error) {
+        console.log(
+          `❌ problem transforming background image:`,
+          (error as Error).message
+        );
+      }
+    }
   }
 
   return (
