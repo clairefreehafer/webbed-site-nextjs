@@ -11,8 +11,8 @@ digikam
   .prepare(`ATTACH DATABASE '${process.cwd()}/thumbnails-digikam.db' AS thumbs`)
   .run();
 
-const onlyEditedPhotos = "Albums.albumRoot = 4";
-const oldestImagesFirst = "ORDER BY Images.name ASC";
+const oldestImagesFirst = "Images.name ASC";
+const websiteRootAlbumId = 4;
 
 /** fields returned from querying the digikam db. */
 interface DigikamAlbum {
@@ -20,9 +20,17 @@ interface DigikamAlbum {
   caption: string;
 }
 
-/** custom JSON format for extra info stored in the caption field. */
+/** custom JSON format for extra info stored in the album caption field. */
 interface AlbumCaptionJson {
   displayName?: string;
+  altText?: string;
+  border?: string;
+}
+
+/** custom JSON format for extra info stored in the image caption field. */
+interface ImageCaptionJson {
+  // the witness
+  puzzleColor?: string;
 }
 
 /** transformed album data for use on the site. */
@@ -33,6 +41,8 @@ type Album = Omit<DigikamAlbum, "caption"> &
 
 /** fields returned from querying the digikam db. */
 interface DigikamImage {
+  /** where image caption is stored. */
+  comment: string | null;
   /** YYYY-MM-DDTHH:MM:SS.SSS */
   creationDate: string;
   height: number;
@@ -50,31 +60,53 @@ export interface Image {
   height: DigikamImage["height"];
   src: string;
   width: DigikamImage["width"];
+  puzzleColor?: ImageCaptionJson["puzzleColor"];
 }
 
-async function transformDigikamImage(digikamImage: DigikamImage) {
+async function transformDigikamImage(
+  digikamImage: DigikamImage
+): Promise<Image> {
   const src = await getImageSrc(digikamImage.path);
-  return {
+  const transformedImage: Image = {
     dateTaken: digikamImage.creationDate,
     filename: digikamImage.name,
     height: digikamImage.height,
     src,
     width: digikamImage.width,
   };
+  try {
+    if (digikamImage.comment) {
+      const parsedCaption = JSON.parse(digikamImage.comment);
+      return {
+        ...transformedImage,
+        ...parsedCaption,
+      };
+    }
+  } catch (error) {
+    console.log(
+      `❌ [transformDigikamImage] issue transforming image data for ${
+        digikamImage.path
+      }: ${(error as Error).message}`
+    );
+  }
+  return transformedImage;
 }
 
-export const getAlbums = cache((): Album[] => {
+export const getAlbums = cache((collection = "photography"): Album[] => {
   const albums = digikam
-    .prepare<[], DigikamAlbum>(
+    .prepare<[{ collection: string; albumRootId: number }], DigikamAlbum>(
       `
         SELECT *
         FROM Albums
           INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
-        WHERE ${onlyEditedPhotos}
+        WHERE Albums.albumRoot = $albumRootId
+          AND Albums.collection = $collection
+          AND Albums.relativePath NOT LIKE '%/\\_%' ESCAPE '\\'
+			    AND Albums.relativePath != '/'
         ORDER BY Albums.date DESC
       `
     )
-    .all();
+    .all({ collection, albumRootId: websiteRootAlbumId });
   console.log(`📁 [getAlbums] ${albums.length} albums found.`);
   return albums.map((album) => {
     const transformedAlbum: Album = {
@@ -100,12 +132,49 @@ export const getAlbums = cache((): Album[] => {
   });
 });
 
+export const getAlbumImages = async (
+  relativePath: string
+): Promise<Image[]> => {
+  const digikamImages = digikam
+    .prepare<{ albumRootId: number; imageSort: string }, DigikamImage>(
+      `
+        SELECT *
+        FROM Albums
+          INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
+          INNER JOIN Images ON Images.album = Albums.id
+          LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
+          LEFT JOIN ImageComments on Images.id = ImageComments.imageId
+          LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
+          LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
+        WHERE Albums.relativePath LIKE '%${relativePath}%'
+          AND Albums.albumRoot = $albumRootId
+          ORDER BY $imageSort
+      `
+    )
+    .all({
+      albumRootId: websiteRootAlbumId,
+      imageSort: oldestImagesFirst,
+    });
+  console.log(
+    `📷 [getAlbumImages] ${digikamImages.length} images found in "${relativePath}"`
+  );
+  const images: Image[] = [];
+  for (const image of digikamImages) {
+    const transformedImage = await transformDigikamImage(image);
+    images.push(transformedImage);
+  }
+  return images;
+};
+
 export const getTodaysImages = async (
   month: string,
   day: string
 ): Promise<Record<string, Image[]>> => {
   const digikamImages = digikam
-    .prepare<[], DigikamImage>(
+    .prepare<
+      [{ likeString: string; albumRootId: number; imageSort: string }],
+      DigikamImage
+    >(
       `
         SELECT *
         FROM Albums
@@ -114,12 +183,17 @@ export const getTodaysImages = async (
           LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
           LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
           LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
-        WHERE ${onlyEditedPhotos}
-          AND ImageInformation.creationDate LIKE '%${month}-${day}%'
-        ${oldestImagesFirst}
+        WHERE Albums.albumRoot = $albumRootId
+          AND ImageInformation.creationDate LIKE $likeString
+          AND Albums.collection = 'photography'
+        ORDER BY $imageSort
       `
     )
-    .all();
+    .all({
+      likeString: `%${month}-${day}%`,
+      albumRootId: websiteRootAlbumId,
+      imageSort: oldestImagesFirst,
+    });
   console.log(
     `📷 [getTodaysImages] ${digikamImages.length} images found for ${month}/${day}.`
   );
@@ -138,39 +212,9 @@ export const getTodaysImages = async (
   return imagesByYear;
 };
 
-export const getAlbumImages = async (
-  relativePath: string
-): Promise<Image[]> => {
-  const digikamImages = digikam
-    .prepare<[], DigikamImage>(
-      `
-        SELECT *
-        FROM Albums
-          INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
-          INNER JOIN Images ON Images.album = Albums.id
-          LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
-          LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
-          LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
-        WHERE Albums.relativePath LIKE '%${relativePath}%'
-          AND ${onlyEditedPhotos}
-        ${oldestImagesFirst}
-      `
-    )
-    .all();
-  console.log(
-    `📷 [getAlbumImages] ${digikamImages.length} images found in "${relativePath}"`
-  );
-  const images: Image[] = [];
-  for (const image of digikamImages) {
-    const transformedImage = await transformDigikamImage(image);
-    images.push(transformedImage);
-  }
-  return images;
-};
-
 export const getTagImages = async (tag: string): Promise<Image[]> => {
   const digikamImages = digikam
-    .prepare<[], DigikamImage>(
+    .prepare<[{ tag: string; albumRootId: number }], DigikamImage>(
       `
         SELECT *
         FROM Images
@@ -181,11 +225,11 @@ export const getTagImages = async (tag: string): Promise<Image[]> => {
           LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
           LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
           LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
-        WHERE Tags.name = '${tag}'
-          AND Albums.albumRoot = 4
+        WHERE Tags.name = $tag
+          AND Albums.albumRoot = $albumRootId
         `
     )
-    .all();
+    .all({ tag, albumRootId: websiteRootAlbumId });
   console.log(
     `📷 [getTagImages] ${digikamImages.length} images found tagged "${tag}".`
   );
