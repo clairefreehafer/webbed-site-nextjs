@@ -4,13 +4,15 @@ import { slugify } from ".";
 import fs from "fs";
 import sharp from "sharp";
 
-const digikam = new Database(`${process.cwd()}/digikam4.db`, {
+const digikam = new Database(`${process.cwd()}/.local/digikam4.db`, {
   readonly: true,
   fileMustExist: true,
   // verbose: console.log,
 });
 digikam
-  .prepare(`ATTACH DATABASE '${process.cwd()}/thumbnails-digikam.db' AS thumbs`)
+  .prepare(
+    `ATTACH DATABASE '${process.cwd()}/.local/thumbnails-digikam.db' AS thumbs`
+  )
   .run();
 
 const newestAlbumsFirst = "Albums.date DESC";
