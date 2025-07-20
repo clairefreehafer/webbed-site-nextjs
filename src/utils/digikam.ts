@@ -107,7 +107,7 @@ async function transformDigikamImage(
     }
 
     // check for custom metadata
-    if (digikamImage.comment) {
+    if (digikamImage.comment?.startsWith("{")) {
       const parsedCaption = JSON.parse(digikamImage.comment);
       transformedImage = {
         ...transformedImage,
@@ -235,9 +235,11 @@ export const getTodaysImages = async (
       albumRootId: websiteRootAlbumId,
       imageSort: oldestImagesFirst,
     });
-  console.log(
-    `📷 [getTodaysImages] ${digikamImages.length} images found for ${month}/${day}.`
-  );
+  if (digikamImages.length > 0) {
+    console.log(
+      `📷 [getTodaysImages] ${digikamImages.length} images found for ${month}/${day}.`
+    );
+  }
   const imagesByYear: Record<string, Image[]> = {};
 
   for (const image of digikamImages) {
