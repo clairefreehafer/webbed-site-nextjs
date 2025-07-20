@@ -1,29 +1,29 @@
 import fs from "fs";
-import Navigation from "@/components/the-witness/nav";
-import "@/sass/the-witness/style.scss";
 import sharp from "sharp";
-
-const BACKGROUND_FILE_PATH = "images/the-witness/vertical-banners";
-const BACKGROUND_FILES = ["01", "02", "03"] as const;
+import Navigation from "@/components/the-witness/nav";
+import variables from "@/sass/the-witness/export.module.scss";
+import "@/sass/the-witness/style.scss";
 
 export default async function Layout({ children }: React.PropsWithChildren) {
-  for (const backgroundFile of BACKGROUND_FILES) {
+  const { numberOfVerticalBanners, verticalBannerFilePath } = variables;
+  for (let i = 1; i <= parseInt(numberOfVerticalBanners); i++) {
+    const fileName = i < 10 ? `0${i}` : `${i}`;
     if (
       !fs.existsSync(
-        `${process.cwd()}/public/${BACKGROUND_FILE_PATH}/${backgroundFile}.webp`
+        `${process.cwd()}/public/${verticalBannerFilePath}/${fileName}.webp`
       )
     ) {
       // transformed file does not exist, so create it
       console.log(`🖼️ transforming background image...`);
       try {
         const backgroundImageBuffer = fs.readFileSync(
-          `${process.cwd()}/.local/${BACKGROUND_FILE_PATH}/${backgroundFile}.jpg`
+          `${process.cwd()}/.local/${verticalBannerFilePath}/${fileName}.jpg`
         );
         await sharp(backgroundImageBuffer)
           .blur({ sigma: 10 })
           .webp()
           .toFile(
-            `${process.cwd()}/public/${BACKGROUND_FILE_PATH}/${backgroundFile}.webp`
+            `${process.cwd()}/public/${verticalBannerFilePath}/${fileName}.webp`
           );
       } catch (error) {
         console.log(
