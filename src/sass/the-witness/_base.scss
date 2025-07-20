@@ -16,7 +16,7 @@ html {
   x = calc((100vw * $banner-height) / $banner-width);
 */
 
-@function background-images($number-of-images: 3) {
+@function background-images($number-of-images) {
   $value: "";
   @for $i from 0 through $number-of-images - 1 {
     $fileName: "#{$i + 1}";
@@ -33,9 +33,9 @@ html {
     );
 
     @if ($i == 0) {
-      $value: "url('/images/the-witness/vertical-banners/#{$fileName}.webp') top #{$top-position} left no-repeat";
+      $value: "url('/#{variables.$vertical-banner-file-path}/#{$fileName}.webp') top #{$top-position} left no-repeat";
     } @else {
-      $value: "#{$value}, url('/images/the-witness/vertical-banners/#{$fileName}.webp') top #{$top-position} left no-repeat";
+      $value: "#{$value}, url('/#{variables.$vertical-banner-file-path}/#{$fileName}.webp') top #{$top-position} left no-repeat";
     }
   }
 
@@ -43,7 +43,7 @@ html {
 }
 
 body {
-  background: background-images();
+  background: background-images(variables.$number-of-vertical-banners);
   background-size: contain;
 }
 
