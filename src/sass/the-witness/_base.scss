@@ -18,9 +18,10 @@ html {
 
 @function background-images($number-of-images) {
   $value: "";
+
   @for $i from 0 through $number-of-images - 1 {
     $fileName: "#{$i + 1}";
-    @if $i <= 10 {
+    @if $i < 9 {
       $fileName: "0#{$i + 1}";
     }
 
