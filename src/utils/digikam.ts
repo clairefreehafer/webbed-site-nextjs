@@ -30,12 +30,12 @@ interface DigikamAlbum {
 /** custom JSON format for extra info stored in the album caption field. */
 interface AlbumCaptionJson {
   displayName?: string;
-  altText?: string;
-  border?: string;
 }
 
 /** custom JSON format for extra info stored in the image caption/comment field. */
-interface ImageCaptionJson {
+interface ImageCommentJson {
+  altText?: string;
+  border?: string;
   // the witness
   puzzleColor?: string;
 }
@@ -67,7 +67,7 @@ export interface Image {
   height: DigikamImage["height"];
   src: string;
   width: DigikamImage["width"];
-  puzzleColor?: ImageCaptionJson["puzzleColor"];
+  puzzleColor?: ImageCommentJson["puzzleColor"];
   palette?: Palette;
 }
 
