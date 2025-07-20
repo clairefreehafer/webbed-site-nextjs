@@ -7,7 +7,10 @@ export default function PuzzleBorder({ image }: { image: Image }) {
       <div className="photo-border">
         <div
           className="puzzle-background"
-          style={{ backgroundColor: image.puzzleColor }}
+          style={{
+            backgroundColor:
+              image.puzzleColor ?? image.palette?.Muted?.hex ?? "black",
+          }}
         >
           <NextImage
             src={image.src}

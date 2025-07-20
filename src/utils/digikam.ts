@@ -3,6 +3,8 @@ import { cache } from "react";
 import { slugify } from ".";
 import fs from "fs";
 import sharp from "sharp";
+import { Vibrant } from "node-vibrant/node";
+import { type Palette } from "@vibrant/color";
 
 const digikam = new Database(`${process.cwd()}/.local/digikam4.db`, {
   readonly: true,
@@ -66,13 +68,19 @@ export interface Image {
   src: string;
   width: DigikamImage["width"];
   puzzleColor?: ImageCaptionJson["puzzleColor"];
+  palette?: Palette;
+}
+
+interface ImageOptions {
+  resize?: number;
+  generatePalette?: boolean;
 }
 
 async function transformDigikamImage(
   digikamImage: DigikamImage,
-  resize = 1000
+  options: ImageOptions = { resize: 1000, generatePalette: false }
 ): Promise<Image> {
-  const transformedImage: Image = {
+  let transformedImage: Image = {
     dateTaken: digikamImage.creationDate,
     filename: digikamImage.name,
     height: digikamImage.height,
@@ -84,17 +92,24 @@ async function transformDigikamImage(
     const buffer = fs.readFileSync(digikamImage.path);
     const base64 = (
       await sharp(buffer, { animated: true })
-        .resize(resize)
+        .resize(options.resize)
         .webp({ quality: 100 })
         .toBuffer()
     ).toString("base64");
-    // TODO: experiment with using files instead of base64
     transformedImage.src = `data:image/webp;base64,${base64}`;
+
+    if (options.generatePalette) {
+      const palette = await Vibrant.from(buffer).getPalette();
+      transformedImage = {
+        ...transformedImage,
+        palette,
+      };
+    }
 
     // check for custom metadata
     if (digikamImage.comment) {
       const parsedCaption = JSON.parse(digikamImage.comment);
-      return {
+      transformedImage = {
         ...transformedImage,
         ...parsedCaption,
       };
@@ -159,7 +174,7 @@ export const getAlbums = cache((collection = "photography"): Album[] => {
 
 export const getAlbumImages = async (
   relativePath: string,
-  resize = 1000
+  options: ImageOptions = { resize: 1000, generatePalette: false }
 ): Promise<Image[]> => {
   const digikamImages = digikam
     .prepare<{ albumRootId: number; imageSort: string }, DigikamImage>(
@@ -186,7 +201,7 @@ export const getAlbumImages = async (
   );
   const images: Image[] = [];
   for (const image of digikamImages) {
-    const transformedImage = await transformDigikamImage(image, resize);
+    const transformedImage = await transformDigikamImage(image, options);
     images.push(transformedImage);
   }
   return images;
