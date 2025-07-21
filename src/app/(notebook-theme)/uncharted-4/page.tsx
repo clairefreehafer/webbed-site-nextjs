@@ -3,7 +3,7 @@ import { getAlbumImages } from "@/utils/digikam";
 import Image from "next/image";
 
 export default async function Page() {
-  const images = await getAlbumImages("uncharted 4");
+  const images = await getAlbumImages("uncharted 4", { resize: 582 });
 
   return (
     <div className="image-grid">
