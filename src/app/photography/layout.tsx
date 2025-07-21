@@ -1,46 +1,25 @@
 "use client";
-
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import Menu from "@/components/photography/menu";
 import "@/sass/global.scss";
 import "@/sass/photography/style.scss";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Layout({ children }: React.PropsWithChildren) {
   const pathname = usePathname();
-  const isPhotographyHome = pathname === "/photography";
-  const [menuOpen, setMenuOpen] = useState(isPhotographyHome);
-
-  useEffect(() => {
-    if (pathname !== "/photography") {
-      setMenuOpen(false);
-    }
-  }, [pathname]);
+  const splitPathname = pathname.split("/");
+  const backHref = pathname.includes("today")
+    ? "/photography"
+    : `/${splitPathname.slice(1, splitPathname.length - 1).join("/")}`;
 
   return (
     <html>
       <body>
         <header>
-          <h1>claire freehafer</h1>
-          {!isPhotographyHome && (
-            <button
-              type="button"
-              className="navigate"
-              id="nav-button"
-              onClick={() => {
-                setMenuOpen((prevState) => !prevState);
-              }}
-            >
-              navigate
-            </button>
-          )}
-          <Link href="/" className="home">
-            return home
+          <Link href={backHref} className="home">
+            &larr; back to {backHref}
           </Link>
+          <h1>claire freehafer</h1>
         </header>
-
-        <Menu menuOpen={menuOpen} />
 
         <section className="content">{children}</section>
       </body>

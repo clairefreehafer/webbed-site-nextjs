@@ -41,4 +41,4 @@ yarn-error.log*
 next-env.d.ts
 
 # folder for files i only need locally
-.local
+local
