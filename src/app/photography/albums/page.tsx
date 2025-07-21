@@ -1,5 +1,7 @@
+import LinkList, {
+  PhotographyPageLink,
+} from "@/components/photography/link-list";
 import { getAlbums } from "@/utils/digikam";
-import Link from "next/link";
 
 export function generateMetadata() {
   return { title: "albums — claire freehafer" };
@@ -7,19 +9,10 @@ export function generateMetadata() {
 
 export default async function Page() {
   const albums = getAlbums();
+  const links: PhotographyPageLink[] = albums.map((album) => ({
+    display: album.displayName ?? album.relativePath.slice(1),
+    href: `/albums/${album.slug}`,
+  }));
 
-  return (
-    <ul>
-      {albums.map((album) => {
-        const albumName = album.displayName ?? album.relativePath.slice(1);
-        // TODO: filter in SQL
-        if (!albumName) return null;
-        return (
-          <li key={album.relativePath}>
-            <Link href={`/photography/albums/${album.slug}`}>{albumName}</Link>
-          </li>
-        );
-      })}
-    </ul>
-  );
+  return <LinkList title="albums" links={links} />;
 }
