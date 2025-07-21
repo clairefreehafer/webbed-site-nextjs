@@ -13,6 +13,15 @@ export async function generateStaticParams() {
   });
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ album: string }>;
+}) {
+  const albumSlug = (await params).album;
+  return { title: `${deslugify(albumSlug)} — claire freehafer` };
+}
+
 export default async function Page({
   params,
 }: {
@@ -20,5 +29,5 @@ export default async function Page({
 }) {
   const albumSlug = (await params).album;
   const images = await getAlbumImages(deslugify(albumSlug));
-  return <Slideshow images={images} backHref={`/albums/${albumSlug}`} />;
+  return <Slideshow images={images} />;
 }

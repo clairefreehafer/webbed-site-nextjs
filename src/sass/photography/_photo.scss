@@ -11,21 +11,18 @@
   align-items: center;
 }
 
-section.photos {
-}
-
 .grid {
   @include grid(2, 1rem);
-  margin: 3rem;
+  padding: 1rem 3rem 3rem;
 
   @media screen and (max-width: 650px) {
     @include grid(1, 1rem);
-    margin: 1rem;
+    padding: 1rem;
   }
 }
 
 img.photo {
-  max-height: 100%;
+  max-height: 90vh;
   height: auto;
   width: auto;
   max-width: 100%;

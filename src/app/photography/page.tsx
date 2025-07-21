@@ -1,5 +1,9 @@
 import Link from "next/link";
 
+export function generateMetadata() {
+  return { title: "photography — claire freehafer" };
+}
+
 export default async function Page() {
   return (
     <div
