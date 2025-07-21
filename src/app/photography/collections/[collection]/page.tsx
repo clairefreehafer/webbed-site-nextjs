@@ -1,6 +1,6 @@
 import ImageGrid from "@/components/photography/image-grid";
 import { deslugify, slugify } from "@/utils";
-import { getTagImages } from "@/utils/photography/digikam";
+import { getTagImages } from "@/utils/digikam";
 import TAGS from "./tags";
 
 export async function generateStaticParams() {

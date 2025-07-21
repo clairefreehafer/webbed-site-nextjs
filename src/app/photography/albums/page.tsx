@@ -1,4 +1,4 @@
-import { getAlbums } from "@/utils/photography/digikam";
+import { getAlbums } from "@/utils/digikam";
 import Link from "next/link";
 
 export default async function Page() {

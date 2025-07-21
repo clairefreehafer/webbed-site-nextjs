@@ -1,3 +1,5 @@
+@use "sass:string";
+
 $max-site-width: 750px;
 $nav-min-width: 575px;
 
@@ -12,3 +14,10 @@ $inset-shadow-zindex: $photo-z-index + 1;
 $inset-shadow-helper-zindex: $photo-z-index - 1;
 $texture-z-index: $photo-z-index - 2;
 $border-z-index: $photo-z-index - 3;
+
+$number-of-vertical-banners: 14;
+$vertical-banner-file-path: string.unquote(
+  "images/the-witness/vertical-banners"
+);
+$vertical-banner-height: 7050px;
+$vertical-banner-width: 2250px;

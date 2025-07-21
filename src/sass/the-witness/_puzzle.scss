@@ -1,9 +1,9 @@
 @use "variables";
 
-@mixin puzzle-screen($border-width, $border-color, $background-color: white) {
+@mixin puzzle-screen($border-width, $border-color, $background-color: black) {
   background: $border-color;
   box-shadow: inset 0 0 0.25rem 0.1rem rgba(0, 0, 0, 0.3),
-              0 0 1.5rem 0.1rem rgba(0, 0, 0, 0.3);
+    0 0 1.5rem 0.1rem rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   position: relative;
   display: flex;
@@ -24,15 +24,23 @@
     width: calc(100% - 2 * $border-width);
     display: flex;
     align-items: center;
+    background-color: $background-color;
   }
 
-  .photo {
-    width: 100%;
+  .image {
+    max-height: 100%;
+    height: auto;
+    width: auto;
+    max-width: 100%;
+    margin: auto;
   }
 }
 
 .photo-border {
-  @include puzzle-screen(variables.$border-width, variables.$puzzle-border-color);
+  @include puzzle-screen(
+    variables.$border-width,
+    variables.$puzzle-border-color
+  );
   aspect-ratio: 1/1;
   max-height: 100vh;
 }
