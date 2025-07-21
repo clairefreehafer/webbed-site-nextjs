@@ -4,5 +4,5 @@ html {
     url("/images/notebook/stone.jpg");
   background-position: top left, min(100vw, 1000px) left;
   background-repeat: repeat-x, repeat;
-  background-size: cover, cover;
+  background-size: contain, contain;
 }
