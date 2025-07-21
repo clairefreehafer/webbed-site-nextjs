@@ -1,0 +1,97 @@
+@use "mixins";
+
+body {
+  background-color: black;
+  background: url("/images/zelda/pad-background.jpg") repeat;
+  color: #76b6ff;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-size: 100%, 100%;
+  font-family: "Helvetica", "Arial", sans-serif;
+}
+
+a,
+a:visited {
+  color: white;
+}
+
+a:hover {
+  color: #76b6ff;
+}
+
+header {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+h1 {
+  font-family: var(--hylia-serif), Georgia, serif;
+  font-weight: 100;
+  font-size: 2rem;
+  text-transform: capitalize;
+}
+
+h2 {
+  font-family: var(--hylia-serif), Georgia, serif;
+  text-transform: capitalize;
+  font-weight: normal;
+  margin-bottom: 0.5rem;
+}
+
+.border-top {
+  @include mixins.white-to-blue;
+  @include mixins.border;
+  top: 0;
+  transform: rotate(180deg);
+}
+
+.border-bottom {
+  @include mixins.white-to-blue;
+  @include mixins.border;
+  bottom: 0;
+}
+
+.container {
+  max-width: 750px;
+  margin: auto;
+  padding: 1rem;
+}
+
+nav {
+  @include mixins.text-background;
+  padding: 1rem 2rem;
+  text-align: center;
+  height: 4rem;
+  // width: 100%;
+
+  & > ul {
+    align-items: center;
+    display: flex;
+    list-style: none;
+    padding: 0;
+    gap: 1rem;
+
+    a {
+      @include mixins.sheikah_underline;
+      color: white;
+      margin: 0 0.5rem;
+      padding: 0.5rem 0;
+    }
+  }
+}
+
+.content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.splitter {
+  @include mixins.white-to-blue;
+  width: 100vw;
+  z-index: -1;
+  height: 100%;
+}
