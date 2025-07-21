@@ -4,10 +4,26 @@ h3 {
   font-weight: 300;
 }
 
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.75rem;
+}
+
 a {
   color: black;
 
   &:hover {
     text-decoration: none;
+    background: linear-gradient(
+      0deg,
+      white 0%,
+      white 33%,
+      yellow 33%,
+      yellow 66%,
+      white 66%,
+      white 100%
+    );
   }
 }
