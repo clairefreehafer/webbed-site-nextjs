@@ -1,10 +1,29 @@
+@use "variables";
+
 $border-width: 1rem;
+$border-width-mobile: 0.5rem;
+
+.image-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem;
+
+  @media screen and (max-width: variables.$max-site-width) {
+    padding: 0;
+    margin-left: calc((variables.$red-line-padding - 0.5rem) * -1);
+  }
+}
 
 .image-border {
   background-color: white;
   box-shadow: 0 0 1rem 0.1rem rgba(0, 0, 0, 0.3);
-  padding: $border-width;
   position: relative;
+  padding: $border-width;
+
+  @media screen and (max-width: variables.$max-site-width) {
+    padding: $border-width-mobile;
+  }
 }
 
 .image {
@@ -28,6 +47,10 @@ $border-width: 1rem;
   top: 0;
   left: 0;
   padding: $border-width;
+
+  @media screen and (max-width: variables.$max-site-width) {
+    padding: $border-width-mobile;
+  }
 }
 
 .image-inset-shadow {
@@ -37,4 +60,9 @@ $border-width: 1rem;
   height: 100%;
   max-width: calc(100% - 2 * $border-width);
   max-height: calc(100% - 2 * $border-width);
+
+  @media screen and (max-width: variables.$max-site-width) {
+    max-width: calc(100% - 2 * $border-width-mobile);
+    max-height: calc(100% - 2 * $border-width-mobile);
+  }
 }
