@@ -1,6 +1,10 @@
 import { getAlbums } from "@/utils/digikam";
 import Link from "next/link";
 
+export function generateMetadata() {
+  return { title: "albums — claire freehafer" };
+}
+
 export default async function Page() {
   const albums = getAlbums();
 

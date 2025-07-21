@@ -7,6 +7,15 @@ export async function generateStaticParams() {
   return TAGS.map((tag) => ({ collection: slugify(tag) }));
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ collection: string }>;
+}) {
+  const collectionSlug = (await params).collection;
+  return { title: `${deslugify(collectionSlug)} — claire freehafer` };
+}
+
 export default async function Page({
   params,
 }: {

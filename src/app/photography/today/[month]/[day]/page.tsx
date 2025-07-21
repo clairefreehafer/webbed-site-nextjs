@@ -36,6 +36,15 @@ export async function generateStaticParams() {
   return pages;
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ month: string; day: string }>;
+}) {
+  const { month, day } = await params;
+  return { title: `${day} ${months[month].display} — claire freehafer` };
+}
+
 export default async function Page({
   params,
 }: {

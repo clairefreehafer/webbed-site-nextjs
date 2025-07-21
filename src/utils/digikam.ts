@@ -9,7 +9,7 @@ import { type Palette } from "@vibrant/color";
 const digikam = new Database(`${process.cwd()}/local/digikam4.db`, {
   readonly: true,
   fileMustExist: true,
-  verbose: console.log,
+  // verbose: console.log,
 });
 digikam
   .prepare(

@@ -2,6 +2,10 @@ import Link from "next/link";
 import { slugify } from "@/utils";
 import TAGS from "./[collection]/tags";
 
+export function generateMetadata() {
+  return { title: "collections — claire freehafer" };
+}
+
 export default async function Page() {
   return (
     <ul>
