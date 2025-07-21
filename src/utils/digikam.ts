@@ -6,14 +6,14 @@ import sharp from "sharp";
 import { Vibrant } from "node-vibrant/node";
 import { type Palette } from "@vibrant/color";
 
-const digikam = new Database(`${process.cwd()}/.local/digikam4.db`, {
+const digikam = new Database(`${process.cwd()}/local/digikam4.db`, {
   readonly: true,
   fileMustExist: true,
-  // verbose: console.log,
+  verbose: console.log,
 });
 digikam
   .prepare(
-    `ATTACH DATABASE '${process.cwd()}/.local/thumbnails-digikam.db' AS thumbs`
+    `ATTACH DATABASE '${process.cwd()}/local/thumbnails-digikam.db' AS thumbs`
   )
   .run();
 
@@ -147,7 +147,9 @@ export const getAlbums = cache((collection = "photography"): Album[] => {
       albumRootId: websiteRootAlbumId,
       albumSort: newestAlbumsFirst,
     });
-  console.log(`📁 [getAlbums] ${albums.length} albums found.`);
+  console.log(
+    `📁 [getAlbums] ${albums.length} albums found in "${collection}".`
+  );
   return albums.map((album) => {
     const transformedAlbum: Album = {
       ...album,
