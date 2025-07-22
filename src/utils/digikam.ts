@@ -17,7 +17,6 @@ digikam
   )
   .run();
 
-const newestAlbumsFirst = "Albums.date DESC";
 const oldestImagesFirst = "Images.name ASC";
 const websiteRootAlbumId = 4;
 
@@ -52,10 +51,13 @@ interface DigikamImage {
   comment: string | null;
   /** YYYY-MM-DDTHH:MM:SS.SSS */
   creationDate: string;
+  // Albums.collection
+  collection: string;
   height: number;
-  id: number;
   name: string;
   path: string;
+  // Albums.relativePath
+  relativePath: string;
   width: number;
 }
 
@@ -80,24 +82,40 @@ async function transformDigikamImage(
   digikamImage: DigikamImage,
   options: ImageOptions = { resize: 1000, generatePalette: false }
 ): Promise<Image> {
+  const nameWithoutExtension = digikamImage.name.split(".")[0];
   let transformedImage: Image = {
     dateTaken: digikamImage.creationDate,
-    filename: digikamImage.name,
+    filename: nameWithoutExtension,
     height: digikamImage.height,
-    src: "",
+    src: `/out/${digikamImage.collection}${digikamImage.relativePath}/${nameWithoutExtension}.webp`,
     width: digikamImage.width,
   };
   try {
-    // transform image
+    const outputPath = `${process.cwd()}/public${transformedImage.src}`;
+    const outputPathSplit = outputPath.split("/");
+    const outputDirectory = outputPathSplit
+      .slice(0, outputPathSplit.length - 1)
+      .join("/");
     const buffer = fs.readFileSync(digikamImage.path);
-    const base64 = (
+
+    // only transform image if it doesn't already exist.
+    if (!fs.existsSync(outputPath)) {
+      // create output directories if needed
+      if (!fs.existsSync(outputDirectory)) {
+        console.log(
+          `📝 [transformDigikamImage] creating directory ${outputDirectory}...`
+        );
+        fs.mkdirSync(outputDirectory, { recursive: true });
+      }
+      console.log(`📝 [transformDigikamImage] creating image ${outputPath}...`);
+      // transform image
       await sharp(buffer, { animated: true })
         .resize(options.resize)
         .webp({ quality: 100 })
-        .toBuffer()
-    ).toString("base64");
-    transformedImage.src = `data:image/webp;base64,${base64}`;
+        .toFile(outputPath);
+    }
 
+    // optionally generate a color palette from the image.
     if (options.generatePalette) {
       const palette = await Vibrant.from(buffer).getPalette();
       transformedImage = {
@@ -128,24 +146,28 @@ async function transformDigikamImage(
 export const getAlbums = cache((collection = "photography"): Album[] => {
   const albums = digikam
     .prepare<
-      { collection: string; albumRootId: number; albumSort: string },
+      {
+        collection: string;
+        albumRootId: number;
+      },
       DigikamAlbum
     >(
       `
-        SELECT *
+        SELECT
+          Albums.relativePath,
+          Albums.caption
         FROM Albums
           INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
         WHERE Albums.albumRoot = $albumRootId
           AND Albums.collection = $collection
           AND Albums.relativePath NOT LIKE '%/\\_%' ESCAPE '\\'
 			    AND Albums.relativePath != '/'
-        ORDER BY $albumSort
+        ORDER BY Albums.date DESC
       `
     )
     .all({
       collection,
       albumRootId: websiteRootAlbumId,
-      albumSort: newestAlbumsFirst,
     });
   console.log(
     `📁 [getAlbums] ${albums.length} albums found in "${collection}".`
@@ -178,10 +200,19 @@ export const getAlbumImages = async (
   relativePath: string,
   options: ImageOptions = { resize: 1000, generatePalette: false }
 ): Promise<Image[]> => {
+  console.log(relativePath);
   const digikamImages = digikam
     .prepare<{ albumRootId: number; imageSort: string }, DigikamImage>(
       `
-        SELECT *
+        SELECT
+          Images.name,
+          ImageInformation.creationDate,
+          ImageComments.comment,
+          Albums.collection,
+          ImageInformation.height,
+          ImageInformation.width,
+          thumbs.FilePaths.path,
+          Albums.relativePath
         FROM Albums
           INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
           INNER JOIN Images ON Images.album = Albums.id
@@ -219,11 +250,20 @@ export const getTodaysImages = async (
       DigikamImage
     >(
       `
-        SELECT *
+        SELECT
+          Images.name,
+          ImageInformation.creationDate,
+          ImageComments.comment,
+          Albums.collection,
+          ImageInformation.height,
+          ImageInformation.width,
+          thumbs.FilePaths.path,
+          Albums.relativePath
         FROM Albums
           INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
           INNER JOIN Images ON Images.album = Albums.id
           LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
+          LEFT JOIN ImageComments on Images.id = ImageComments.imageId
           LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
           LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
         WHERE Albums.albumRoot = $albumRootId
@@ -261,13 +301,22 @@ export const getTagImages = async (tag: string): Promise<Image[]> => {
   const digikamImages = digikam
     .prepare<[{ tag: string; albumRootId: number }], DigikamImage>(
       `
-        SELECT *
+        SELECT
+          Images.name,
+          ImageInformation.creationDate,
+          ImageComments.comment,
+          Albums.collection,
+          ImageInformation.height,
+          ImageInformation.width,
+          thumbs.FilePaths.path,
+          Albums.relativePath
         FROM Images
           LEFT JOIN ImageTags ON ImageTags.imageid = Images.id
           LEFT JOIN Tags ON ImageTags.tagid = Tags.id
           LEFT JOIN Albums ON Images.album = Albums.id
           LEFT JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
           LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
+          LEFT JOIN ImageComments on Images.id = ImageComments.imageId
           LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
           LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
         WHERE Tags.name = $tag

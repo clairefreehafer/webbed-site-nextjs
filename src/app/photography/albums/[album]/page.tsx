@@ -28,6 +28,6 @@ export default async function Page({
   params: Promise<{ album: string }>;
 }) {
   const albumSlug = (await params).album;
-  const images = await getAlbumImages(deslugify(albumSlug));
+  const images = await getAlbumImages(albumSlug);
   return <Slideshow images={images} />;
 }

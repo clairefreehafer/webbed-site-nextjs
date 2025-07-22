@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --fix",
-    "prepare": "husky"
+    "prepare": "husky",
+    "sync-db": "bash copy-db.sh"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
@@ -15,6 +16,7 @@
     "@next/mdx": "^15.1.6",
     "@types/mdx": "^2.0.13",
     "better-sqlite3": "^12.2.0",
+    "fast-glob": "^3.3.3",
     "next": "^15.3.5",
     "node-vibrant": "^4.0.3",
     "react": "^19.0.0",

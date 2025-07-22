@@ -1,6 +1,7 @@
 import LinkList, {
   PhotographyPageLink,
 } from "@/components/photography/link-list";
+import { deslugify } from "@/utils";
 import { getAlbums } from "@/utils/digikam";
 
 export function generateMetadata() {
@@ -10,7 +11,7 @@ export function generateMetadata() {
 export default async function Page() {
   const albums = getAlbums();
   const links: PhotographyPageLink[] = albums.map((album) => ({
-    display: album.displayName ?? album.relativePath.slice(1),
+    display: album.displayName ?? deslugify(album.relativePath.slice(1)),
     href: `/albums/${album.slug}`,
   }));
 
