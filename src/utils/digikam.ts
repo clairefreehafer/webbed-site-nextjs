@@ -52,10 +52,14 @@ interface DigikamImage {
   comment: string | null;
   /** YYYY-MM-DDTHH:MM:SS.SSS */
   creationDate: string;
+  // Albums.collection
+  collection: string;
   height: number;
   id: number;
   name: string;
   path: string;
+  // Albums.relativePath
+  relativePath: string;
   width: number;
 }
 
@@ -80,14 +84,33 @@ async function transformDigikamImage(
   digikamImage: DigikamImage,
   options: ImageOptions = { resize: 1000, generatePalette: false }
 ): Promise<Image> {
+  console.log(digikamImage.path);
   let transformedImage: Image = {
     dateTaken: digikamImage.creationDate,
     filename: digikamImage.name,
     height: digikamImage.height,
-    src: "",
+    src: `/images/${digikamImage.collection}${digikamImage.relativePath}/${digikamImage.name}.webp`,
     width: digikamImage.width,
   };
+  if (
+    digikamImage.path !==
+    "/Volumes/Freehafer 2/My Stuff/Website/grand-canyon/2024-03-09_14-00-05.jpg"
+  ) {
+    return transformedImage;
+  }
   try {
+    if (!fs.existsSync(`${process.cwd()}/public${transformedImage.src}`)) {
+      // transform image
+      const buffer = fs.readFileSync(digikamImage.path);
+      await sharp(buffer, { animated: true })
+        .resize(options.resize)
+        .webp({ quality: 100 })
+        .toFile(`${process.cwd()}/public${transformedImage.src}`);
+      return transformedImage;
+    } else {
+      console.log("$$$ IMAGE EXISTS");
+      return transformedImage;
+    }
     // transform image
     const buffer = fs.readFileSync(digikamImage.path);
     const base64 = (
@@ -95,7 +118,9 @@ async function transformDigikamImage(
         .resize(options.resize)
         .webp({ quality: 100 })
         .toBuffer()
-    ).toString("base64");
+    )
+      // .toFile()
+      .toString("base64");
     transformedImage.src = `data:image/webp;base64,${base64}`;
 
     if (options.generatePalette) {
@@ -178,6 +203,7 @@ export const getAlbumImages = async (
   relativePath: string,
   options: ImageOptions = { resize: 1000, generatePalette: false }
 ): Promise<Image[]> => {
+  console.log(relativePath);
   const digikamImages = digikam
     .prepare<{ albumRootId: number; imageSort: string }, DigikamImage>(
       `
