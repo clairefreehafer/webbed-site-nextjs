@@ -16,6 +16,7 @@
     "@next/mdx": "^15.1.6",
     "@types/mdx": "^2.0.13",
     "better-sqlite3": "^12.2.0",
+    "fast-glob": "^3.3.3",
     "next": "^15.3.5",
     "node-vibrant": "^4.0.3",
     "react": "^19.0.0",

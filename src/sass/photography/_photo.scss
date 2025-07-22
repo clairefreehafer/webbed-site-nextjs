@@ -28,3 +28,13 @@ img.photo {
   max-width: 100%;
   margin: auto;
 }
+
+.single-image {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  & > img {
+    padding: 0.5rem 1rem 1rem;
+  }
+}
