@@ -263,6 +263,7 @@ export const getTodaysImages = async (
           INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
           INNER JOIN Images ON Images.album = Albums.id
           LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
+          LEFT JOIN ImageComments on Images.id = ImageComments.imageId
           LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
           LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
         WHERE Albums.albumRoot = $albumRootId
