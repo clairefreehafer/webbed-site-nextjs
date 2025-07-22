@@ -250,7 +250,15 @@ export const getTodaysImages = async (
       DigikamImage
     >(
       `
-        SELECT *
+        SELECT
+          Images.name,
+          ImageInformation.creationDate,
+          ImageComments.comment,
+          Albums.collection,
+          ImageInformation.height,
+          ImageInformation.width,
+          thumbs.FilePaths.path,
+          Albums.relativePath
         FROM Albums
           INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
           INNER JOIN Images ON Images.album = Albums.id
@@ -292,13 +300,22 @@ export const getTagImages = async (tag: string): Promise<Image[]> => {
   const digikamImages = digikam
     .prepare<[{ tag: string; albumRootId: number }], DigikamImage>(
       `
-        SELECT *
+        SELECT
+          Images.name,
+          ImageInformation.creationDate,
+          ImageComments.comment,
+          Albums.collection,
+          ImageInformation.height,
+          ImageInformation.width,
+          thumbs.FilePaths.path,
+          Albums.relativePath
         FROM Images
           LEFT JOIN ImageTags ON ImageTags.imageid = Images.id
           LEFT JOIN Tags ON ImageTags.tagid = Tags.id
           LEFT JOIN Albums ON Images.album = Albums.id
           LEFT JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
           LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
+          LEFT JOIN ImageComments on Images.id = ImageComments.imageId
           LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
           LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
         WHERE Tags.name = $tag

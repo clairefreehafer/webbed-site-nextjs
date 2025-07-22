@@ -42,7 +42,9 @@ export async function generateMetadata({
   params: Promise<{ month: string; day: string }>;
 }) {
   const { month, day } = await params;
-  return { title: `${day} ${months[month].display} — claire freehafer` };
+  return {
+    title: `photos taken on ${months[month].display} ${day} — claire freehafer`,
+  };
 }
 
 export default async function Page({
