@@ -1,0 +1,27 @@
+{
+  "birchtree": {
+    "coordinates": [-73.8526225, 43.0336861],
+    "markerColor": "cadetblue",
+    "name": "birchtree"
+  },
+  "camden": {
+    "coordinates": [-69.065552, 44.210265],
+    "markerColor": "powderblue",
+    "name": "camden, maine"
+  },
+  "hudson": {
+    "coordinates": [-73.790959, 42.2528649],
+    "markerColor": "goldenrod",
+    "name": "hudson, new york"
+  },
+  "newport": {
+    "coordinates": [-71.3137707, 41.4899827],
+    "markerColor": "peachpuff",
+    "name": "newport, rhode island"
+  },
+  "owls head": {
+    "coordinates": [],
+    "markerColor": "",
+    "name": "owls head, maine"
+  }
+}

@@ -5,6 +5,8 @@ import fs from "fs";
 import sharp from "sharp";
 import { Vibrant } from "node-vibrant/node";
 import { type Palette } from "@vibrant/color";
+import { GeoJson } from "./types";
+import locations from "@/data/locations.json";
 
 const digikam = new Database(`${process.cwd()}/local/digikam4.db`, {
   readonly: true,
@@ -354,35 +356,48 @@ export interface MapData {
   lat: number;
 }
 
-export const getMapData = async () => {
-  const digikamAlbums = digikam
-    .prepare<[], DigikamAlbum>(
+export const getMapData = (): GeoJson => {
+  const locationTags = digikam
+    .prepare<[], { tagName: keyof typeof locations; numberOfImages: number }>(
       `
         SELECT
-          Albums.relativePath,
-          Albums.caption,
+          Tags.name as tagName,
           COUNT(*) AS numberOfImages
         FROM Albums
           INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
           LEFT JOIN Images ON Images.album = Albums.id
+          LEFT JOIN ImageTags ON ImageTags.imageid = Images.id
+          LEFT JOIN Tags ON Tags.id = ImageTags.tagid
         WHERE Albums.albumRoot = 4
-          AND (Albums.caption LIKE '%lat%lng%' OR Albums.caption LIKE '%lng%lat%')
-        GROUP BY Images.album
+          AND Tags.pid = 188
+        GROUP BY Tags.id
       `
     )
     .all();
-  console.log(
-    `🗺️ [getMapData] found ${digikamAlbums.length} geotagged albums.`
-  );
+  console.log(`🗺️ [getMapData] found ${locationTags.length} location tags.`);
 
-  const albums: MapData[] = [];
-  for (const album of digikamAlbums) {
-    const caption = JSON.parse(album.caption);
-    albums.push({
-      markerColor: caption.markerColor,
-      lng: caption.lng,
-      lat: caption.lat,
+  const mapData: GeoJson = {
+    type: "FeatureCollection",
+    features: [],
+  };
+  for (const tag of locationTags) {
+    const tagConfig = locations[tag.tagName];
+    if (!tagConfig) {
+      console.log(`❌ [getMapData] no tag config for "${tag.tagName}"`);
+      break;
+    }
+    mapData.features.push({
+      type: "Feature",
+      geometry: {
+        type: "Point",
+        coordinates: tagConfig.coordinates as [number, number],
+      },
+      properties: {
+        name: tagConfig.name,
+        markerColor: tagConfig.markerColor,
+        numberOfPhotos: tag.numberOfImages,
+      },
     });
   }
-  return albums;
+  return mapData;
 };
