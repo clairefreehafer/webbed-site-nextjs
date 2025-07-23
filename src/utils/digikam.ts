@@ -396,6 +396,7 @@ export const getMapData = (): GeoJson => {
         name: tagConfig.name,
         markerColor: tagConfig.markerColor,
         numberOfPhotos: tag.numberOfImages,
+        slug: slugify(tagConfig.name),
       },
     });
   }
