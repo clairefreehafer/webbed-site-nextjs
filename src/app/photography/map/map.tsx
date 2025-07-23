@@ -3,6 +3,7 @@ import maplibregl, { LngLatBoundsLike, Marker, Popup } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useEffect, useRef } from "react";
 import { GeoJson } from "@/utils/types";
+import { StyleSwitcher } from "./style-switcher";
 
 const BOUNDS_BUFFER = 5;
 
@@ -37,7 +38,7 @@ export default function Map({ mapData }: { mapData: GeoJson }) {
           .setLngLat(feature.geometry.coordinates)
           .setPopup(
             new Popup().setHTML(
-              `<p>${feature.properties.name}</p><p>${feature.properties.numberOfPhotos} photos</p>`
+              `<p>${feature.properties.name}</p><p><a href="/photography/map/${feature.properties.slug}">${feature.properties.numberOfPhotos} photos</a></p>`
             )
           );
         markers.push(marker);
@@ -61,6 +62,20 @@ export default function Map({ mapData }: { mapData: GeoJson }) {
         for (const marker of markers) {
           marker.addTo(map);
         }
+
+        map.addControl(
+          new StyleSwitcher([
+            {
+              name: "toner",
+              url: "https://tiles.stadiamaps.com/styles/stamen_toner.json",
+            },
+            {
+              name: "watercolor",
+              url: "https://tiles.stadiamaps.com/styles/stamen_watercolor.json",
+            },
+          ]),
+          "top-left"
+        );
       });
     }
   });

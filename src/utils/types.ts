@@ -30,6 +30,7 @@ export type GeoJson = {
       name: string;
       numberOfPhotos: number;
       markerColor: React.CSSProperties["color"];
+      slug: string;
     };
   }[];
 };
