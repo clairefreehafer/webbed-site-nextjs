@@ -51,11 +51,8 @@ export default function Map({ mapData }: { mapData: GeoJson }) {
 
       const map = new maplibregl.Map({
         container: mapRef.current,
-        // style: "https://tiles.stadiamaps.com/styles/stamen_watercolor.json",
         style: "https://tiles.stadiamaps.com/styles/stamen_toner.json",
-        // center: [0, 0],
-        // zoom: 1,
-        maxZoom: 16, // required if using watercolor style
+        maxZoom: 16,
         bounds,
       });
       map.on("load", () => {
