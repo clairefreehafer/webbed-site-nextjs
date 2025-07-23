@@ -1,14 +1,12 @@
 "use client";
-
-import { Image, MapData } from "@/utils/digikam";
-import maplibregl, { LngLatBoundsLike, Marker, Popup } from "maplibre-gl";
+import maplibregl, { Marker, Popup } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useEffect, useRef } from "react";
-import locations from "./locations.geojson";
+import { GeoJson } from "@/utils/types";
 
 const BOUNDS_BUFFER = 18;
 
-export default function Map({ images }: { images: MapData[] }) {
+export default function Map({ mapData }: { mapData: GeoJson }) {
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -55,15 +53,15 @@ export default function Map({ images }: { images: MapData[] }) {
         // bounds,
       });
       map.on("load", () => {
-        for (const location of locations.features) {
+        for (const feature of mapData.features) {
           const marker = new Marker({
-            color: location.properties.markerColor,
+            color: feature.properties.markerColor,
             draggable: false,
           })
-            .setLngLat(location.geometry.coordinates)
+            .setLngLat(feature.geometry.coordinates)
             .setPopup(
               new Popup().setHTML(
-                `<p>${location.properties.name}</p><p>${location.properties.numberOfPhotos} photos</p>`
+                `<p>${feature.properties.name}</p><p>${feature.properties.numberOfPhotos} photos</p>`
               )
             );
           marker.addTo(map);

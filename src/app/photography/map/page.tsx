@@ -5,7 +5,7 @@ export function generateMetadata() {
   return { title: "photo map — claire freehafer " };
 }
 
-export default async function Page() {
-  const images = await getMapData();
-  return <Map images={images} />;
+export default function Page() {
+  const mapData = getMapData();
+  return <Map mapData={mapData} />;
 }
