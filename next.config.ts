@@ -23,6 +23,14 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.geojson$/,
+      use: ["json-loader"],
+    });
+
+    return config;
+  },
 };
 
 const withMDX = createMDX({
