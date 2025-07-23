@@ -42,5 +42,12 @@ section.content {
     background-color: white;
     border: 3px outset black;
     padding: 0.5rem;
+
+    &:hover {
+      // overwriting maplibre
+      background-color: black !important;
+      color: white;
+      border: 3px inset white;
+    }
   }
 }

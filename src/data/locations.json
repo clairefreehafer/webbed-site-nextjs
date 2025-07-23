@@ -23,5 +23,10 @@
     "coordinates": [-69.0571014, 44.0823473],
     "markerColor": "",
     "name": "owls head, maine"
+  },
+  "tromso": {
+    "coordinates": [18.9558585, 69.6516345],
+    "markerColor": "",
+    "name": "tromsø, norway"
   }
 }

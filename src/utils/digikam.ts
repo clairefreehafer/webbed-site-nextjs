@@ -31,9 +31,6 @@ interface DigikamAlbum {
 /** custom JSON format for extra info stored in the album caption field. */
 interface AlbumCaptionJson {
   displayName?: string;
-  lat?: number;
-  lng?: number;
-  markerColor?: string;
 }
 
 /** custom JSON format for extra info stored in the image caption/comment field. */
@@ -350,12 +347,6 @@ export const getTagImages = async (tag: string): Promise<Image[]> => {
   return images;
 };
 
-export interface MapData {
-  markerColor: string;
-  lng: number;
-  lat: number;
-}
-
 export const getMapData = (): GeoJson => {
   const locationTags = digikam
     .prepare<[], { tagName: keyof typeof locations; numberOfImages: number }>(
@@ -396,7 +387,7 @@ export const getMapData = (): GeoJson => {
         name: tagConfig.name,
         markerColor: tagConfig.markerColor,
         numberOfPhotos: tag.numberOfImages,
-        slug: slugify(tagConfig.name),
+        slug: slugify(tag.tagName),
       },
     });
   }
