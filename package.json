@@ -17,6 +17,7 @@
     "@types/mdx": "^2.0.13",
     "better-sqlite3": "^12.2.0",
     "fast-glob": "^3.3.3",
+    "maplibre-gl": "^5.6.1",
     "next": "^15.3.5",
     "node-vibrant": "^4.0.3",
     "react": "^19.0.0",
@@ -35,6 +36,7 @@
     "eslint": "^9.20.1",
     "eslint-config-next": "^15.1.6",
     "husky": "^9.1.7",
+    "json-loader": "^0.5.7",
     "sass": "^1.84.0",
     "typescript": "^5"
   }

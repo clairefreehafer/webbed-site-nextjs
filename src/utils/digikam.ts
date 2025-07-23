@@ -29,6 +29,9 @@ interface DigikamAlbum {
 /** custom JSON format for extra info stored in the album caption field. */
 interface AlbumCaptionJson {
   displayName?: string;
+  lat?: number;
+  lng?: number;
+  markerColor: string;
 }
 
 /** custom JSON format for extra info stored in the image caption/comment field. */
@@ -59,6 +62,8 @@ interface DigikamImage {
   // Albums.relativePath
   relativePath: string;
   width: number;
+  latitudeNumber: number | null;
+  longitudeNumber: number | null;
 }
 
 /** transformed image data for use on the site. */
@@ -71,6 +76,8 @@ export interface Image {
   width: DigikamImage["width"];
   puzzleColor?: ImageCommentJson["puzzleColor"];
   palette?: Palette;
+  longitudeNumber?: number;
+  latitudeNumber?: number;
 }
 
 interface ImageOptions {
@@ -89,6 +96,12 @@ async function transformDigikamImage(
     height: digikamImage.height,
     src: `/out/${digikamImage.collection}${digikamImage.relativePath}/${nameWithoutExtension}.webp`,
     width: digikamImage.width,
+    ...(digikamImage.latitudeNumber && {
+      latitudeNumber: digikamImage.latitudeNumber,
+    }),
+    ...(digikamImage.longitudeNumber && {
+      longitudeNumber: digikamImage.longitudeNumber,
+    }),
   };
   try {
     const outputPath = `${process.cwd()}/public${transformedImage.src}`;
@@ -333,4 +346,43 @@ export const getTagImages = async (tag: string): Promise<Image[]> => {
     images.push(transformedImage);
   }
   return images;
+};
+
+export interface MapData {
+  markerColor: string;
+  lng: number;
+  lat: number;
+}
+
+export const getMapData = async () => {
+  const digikamAlbums = digikam
+    .prepare<[], DigikamAlbum>(
+      `
+        SELECT
+          Albums.relativePath,
+          Albums.caption,
+          COUNT(*) AS numberOfImages
+        FROM Albums
+          INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
+          LEFT JOIN Images ON Images.album = Albums.id
+        WHERE Albums.albumRoot = 4
+          AND (Albums.caption LIKE '%lat%lng%' OR Albums.caption LIKE '%lng%lat%')
+        GROUP BY Images.album
+      `
+    )
+    .all();
+  console.log(
+    `🗺️ [getMapData] found ${digikamAlbums.length} geotagged albums.`
+  );
+
+  const albums: MapData[] = [];
+  for (const album of digikamAlbums) {
+    const caption = JSON.parse(album.caption);
+    albums.push({
+      markerColor: caption.markerColor,
+      lng: caption.lng,
+      lat: caption.lat,
+    });
+  }
+  return albums;
 };
