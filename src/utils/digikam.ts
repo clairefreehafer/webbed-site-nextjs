@@ -33,7 +33,7 @@ interface AlbumCaptionJson {
   displayName?: string;
   lat?: number;
   lng?: number;
-  markerColor: string;
+  markerColor?: string;
 }
 
 /** custom JSON format for extra info stored in the image caption/comment field. */
