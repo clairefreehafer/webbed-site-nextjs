@@ -1,10 +1,12 @@
 import ImageGrid from "@/components/photography/image-grid";
 import { deslugify, slugify } from "@/utils";
 import { getTagImages } from "@/utils/digikam";
-import TAGS from "./tags";
+import collections from "@/data/collections.json";
 
 export async function generateStaticParams() {
-  return TAGS.map((tag) => ({ collection: slugify(tag) }));
+  return Object.keys(collections).map((collection) => ({
+    collection: slugify(collection),
+  }));
 }
 
 export async function generateMetadata({

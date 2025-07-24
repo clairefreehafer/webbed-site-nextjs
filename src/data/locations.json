@@ -1,4 +1,14 @@
 {
+  "adirondacks": {
+    "coordinates": [-74.3333, 44],
+    "markerColor": "forestgreen",
+    "name": "the adirondacks"
+  },
+  "arecibo": {
+    "coordinates": [-66.753333, 18.346667],
+    "markerColor": "forestgreen",
+    "name": "arecibo observatory"
+  },
   "birchtree": {
     "coordinates": [-73.8526225, 43.0336861],
     "markerColor": "cadetblue",
@@ -14,6 +24,11 @@
     "markerColor": "goldenrod",
     "name": "hudson, new york"
   },
+  "mariaville lake": {
+    "coordinates": [-74.131111, 42.826667],
+    "markerColor": "orangered",
+    "name": "mariaville lake"
+  },
   "newport": {
     "coordinates": [-71.3137707, 41.4899827],
     "markerColor": "peachpuff",
@@ -23,6 +38,21 @@
     "coordinates": [-69.0571014, 44.0823473],
     "markerColor": "",
     "name": "owls head, maine"
+  },
+  "phoenix": {
+    "coordinates": [-112.074141, 33.4484367],
+    "markerColor": "sandybrown",
+    "name": "phoenix, arizona"
+  },
+  "rutland": {
+    "coordinates": [-72.9817311, 43.6057574],
+    "markerColor": "",
+    "name": "rutland, vermont"
+  },
+  "smola": {
+    "coordinates": [8.029167, 63.401944],
+    "markerColor": "",
+    "name": "smøla, norway"
   },
   "tromso": {
     "coordinates": [18.9558585, 69.6516345],

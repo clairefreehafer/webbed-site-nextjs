@@ -24,6 +24,7 @@ const links: PhotographyPageLink[] = [
   },
   {
     display: "map",
+    href: "/map",
   },
   {
     display: "random",

@@ -20,6 +20,13 @@ export async function generateMetadata({ params }: Params) {
   };
 }
 
+// usehttps://www.openstreetmap.org or https://overpass-turbo.eu/# with query:
+// ```
+//   node["name"="${name}"];
+//   out;
+// ```
+// for getting locations.json coordinates
+
 export default async function Page({ params }: Params) {
   const { location } = await params;
   const images = await getTagImages(deslugify(location));
