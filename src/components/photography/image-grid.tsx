@@ -6,7 +6,7 @@ export default function ImageGrid({
   background,
 }: {
   images: Image[];
-  background: React.CSSProperties["background"];
+  background?: React.CSSProperties["background"];
 }) {
   if (images.length === 0) {
     return "no images :(";
