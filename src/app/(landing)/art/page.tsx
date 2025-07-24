@@ -39,7 +39,7 @@ const videoGameLinks: ScribbleButtonProps[] = [
   },
 ];
 
-export default function Home() {
+export default function Page() {
   return (
     <section className="content">
       <h1>art!</h1>
