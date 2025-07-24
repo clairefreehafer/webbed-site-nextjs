@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint --fix",
     "prepare": "husky",
+    "deploy": "npm run build && neocities push out",
     "sync-db": "bash copy-db.sh"
   },
   "dependencies": {

@@ -1,5 +1,6 @@
 @use "../default/mixins";
-@use "../default/variables";
+
+$max-site-width: 750px;
 
 html {
   @include mixins.rainbow-border(5px);
@@ -16,7 +17,7 @@ body {
   justify-content: center;
   height: 100%;
   width: 100%;
-  max-width: 750px;
+  max-width: $max-site-width;
 }
 
 a,
@@ -39,7 +40,7 @@ a:hover {
   gap: 1rem;
   justify-content: center;
   padding: 1rem;
-  max-width: 750px;
+  max-width: $max-site-width;
   width: 100%;
 }
 
@@ -47,7 +48,7 @@ a:hover {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  max-width: 750px;
+  max-width: $max-site-width;
   width: 100%;
 
   @media screen and (max-width: 400px) {

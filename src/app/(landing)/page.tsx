@@ -38,7 +38,7 @@ const externalLinks: ScribbleButtonProps[] = [
   },
 ];
 
-export default function Home() {
+export default function Page() {
   return (
     <section className="content">
       <h1>🗣️ claire freehafer 💥</h1>

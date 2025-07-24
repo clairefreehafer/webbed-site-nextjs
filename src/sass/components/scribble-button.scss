@@ -1,3 +1,6 @@
+$medium-width: 600px;
+$small-width: 400px;
+
 .scribble-button {
   aspect-ratio: 88/31;
   border: 5px outset black;
@@ -35,7 +38,7 @@
   white-space: nowrap;
   width: 100%;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: $medium-width) {
     font-size: 4rem;
   }
 }
@@ -48,11 +51,11 @@
   mix-blend-mode: difference;
   text-align: center;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: $medium-width) {
     font-size: 1.5rem;
   }
 
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: $small-width) {
     font-size: 2rem;
   }
 }

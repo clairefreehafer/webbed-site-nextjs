@@ -1,15 +1,3 @@
-{
-  /* <section className="content">
-
-- 🍱 [meals](/recipes/meals)
-- 🍸 [cocktails](/recipes/cocktails)
-- 🛒 [ingredients](/recipes/ingredients)
-
-
-
-</section> */
-}
-
 import ScribbleButton, {
   ScribbleButtonProps,
 } from "@/components/default/scribble-button";
@@ -33,7 +21,7 @@ const links: ScribbleButtonProps[] = [
   },
 ];
 
-export default function Home() {
+export default function Page() {
   return (
     <section className="content">
       <h1>recipes!</h1>
