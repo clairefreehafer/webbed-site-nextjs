@@ -4,12 +4,11 @@ import LinkList, {
   PhotographyPageLink,
 } from "@/components/photography/link-list";
 import { CollectionConfig } from "@/utils/types";
+import { Metadata } from "next";
 
 const collections: CollectionConfig = collectionsJson;
 
-export function generateMetadata() {
-  return { title: "collections — claire freehafer" };
-}
+export const metadata: Metadata = { title: "collections — claire freehafer" };
 
 export default async function Page() {
   const links: PhotographyPageLink[] = Object.keys(collections).map(
