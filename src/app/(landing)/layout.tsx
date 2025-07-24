@@ -36,6 +36,9 @@ export default function Layout({ children }: React.PropsWithChildren) {
       <body
         className={`${atkinsonHyperlegibleNext.variable} ${caveat.variable} ${redactedScript.variable}`}
       >
+        <div id="stars1" className="stars"></div>
+        <div id="stars2" className="stars"></div>
+        <div id="stars3" className="stars"></div>
         {children}
       </body>
     </html>
