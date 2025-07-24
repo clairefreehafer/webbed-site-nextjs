@@ -5,19 +5,20 @@ import fs from "fs";
 import sharp from "sharp";
 import { Vibrant } from "node-vibrant/node";
 import { type Palette } from "@vibrant/color";
+import { GeoJson } from "./types";
+import locations from "@/data/locations.json";
 
-const digikam = new Database(`${process.cwd()}/.local/digikam4.db`, {
+const digikam = new Database(`${process.cwd()}/local/digikam4.db`, {
   readonly: true,
   fileMustExist: true,
   // verbose: console.log,
 });
 digikam
   .prepare(
-    `ATTACH DATABASE '${process.cwd()}/.local/thumbnails-digikam.db' AS thumbs`
+    `ATTACH DATABASE '${process.cwd()}/local/thumbnails-digikam.db' AS thumbs`
   )
   .run();
 
-const newestAlbumsFirst = "Albums.date DESC";
 const oldestImagesFirst = "Images.name ASC";
 const websiteRootAlbumId = 4;
 
@@ -35,9 +36,8 @@ interface AlbumCaptionJson {
 /** custom JSON format for extra info stored in the image caption/comment field. */
 interface ImageCommentJson {
   altText?: string;
-  border?: string;
-  // the witness
-  puzzleColor?: string;
+  border?: React.CSSProperties["border"];
+  background?: React.CSSProperties["background"];
 }
 
 /** transformed album data for use on the site. */
@@ -52,22 +52,24 @@ interface DigikamImage {
   comment: string | null;
   /** YYYY-MM-DDTHH:MM:SS.SSS */
   creationDate: string;
+  // Albums.collection
+  collection: string;
   height: number;
-  id: number;
   name: string;
   path: string;
+  // Albums.relativePath
+  relativePath: string;
   width: number;
 }
 
 /** transformed image data for use on the site. */
-export interface Image {
+export interface Image extends ImageCommentJson {
   /** YYYY-MM-DDTHH:MM:SS.SSS */
   dateTaken: DigikamImage["creationDate"];
   filename: DigikamImage["name"];
   height: DigikamImage["height"];
-  src: string;
   width: DigikamImage["width"];
-  puzzleColor?: ImageCommentJson["puzzleColor"];
+  src: string;
   palette?: Palette;
 }
 
@@ -80,24 +82,40 @@ async function transformDigikamImage(
   digikamImage: DigikamImage,
   options: ImageOptions = { resize: 1000, generatePalette: false }
 ): Promise<Image> {
+  const nameWithoutExtension = digikamImage.name.split(".")[0];
   let transformedImage: Image = {
     dateTaken: digikamImage.creationDate,
-    filename: digikamImage.name,
+    filename: nameWithoutExtension,
     height: digikamImage.height,
-    src: "",
+    src: `/out/${digikamImage.collection}${digikamImage.relativePath}/${nameWithoutExtension}.webp`,
     width: digikamImage.width,
   };
   try {
-    // transform image
+    const outputPath = `${process.cwd()}/public${transformedImage.src}`;
+    const outputPathSplit = outputPath.split("/");
+    const outputDirectory = outputPathSplit
+      .slice(0, outputPathSplit.length - 1)
+      .join("/");
     const buffer = fs.readFileSync(digikamImage.path);
-    const base64 = (
+
+    // only transform image if it doesn't already exist.
+    if (!fs.existsSync(outputPath)) {
+      // create output directories if needed
+      if (!fs.existsSync(outputDirectory)) {
+        console.log(
+          `📝 [transformDigikamImage] creating directory ${outputDirectory}...`
+        );
+        fs.mkdirSync(outputDirectory, { recursive: true });
+      }
+      console.log(`📝 [transformDigikamImage] creating image ${outputPath}...`);
+      // transform image
       await sharp(buffer, { animated: true })
         .resize(options.resize)
         .webp({ quality: 100 })
-        .toBuffer()
-    ).toString("base64");
-    transformedImage.src = `data:image/webp;base64,${base64}`;
+        .toFile(outputPath);
+    }
 
+    // optionally generate a color palette from the image.
     if (options.generatePalette) {
       const palette = await Vibrant.from(buffer).getPalette();
       transformedImage = {
@@ -109,6 +127,7 @@ async function transformDigikamImage(
     // check for custom metadata
     if (digikamImage.comment?.startsWith("{")) {
       const parsedCaption = JSON.parse(digikamImage.comment);
+
       transformedImage = {
         ...transformedImage,
         ...parsedCaption,
@@ -128,26 +147,32 @@ async function transformDigikamImage(
 export const getAlbums = cache((collection = "photography"): Album[] => {
   const albums = digikam
     .prepare<
-      { collection: string; albumRootId: number; albumSort: string },
+      {
+        collection: string;
+        albumRootId: number;
+      },
       DigikamAlbum
     >(
       `
-        SELECT *
+        SELECT
+          Albums.relativePath,
+          Albums.caption
         FROM Albums
           INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
         WHERE Albums.albumRoot = $albumRootId
           AND Albums.collection = $collection
           AND Albums.relativePath NOT LIKE '%/\\_%' ESCAPE '\\'
 			    AND Albums.relativePath != '/'
-        ORDER BY $albumSort
+        ORDER BY Albums.date DESC
       `
     )
     .all({
       collection,
       albumRootId: websiteRootAlbumId,
-      albumSort: newestAlbumsFirst,
     });
-  console.log(`📁 [getAlbums] ${albums.length} albums found.`);
+  console.log(
+    `📁 [getAlbums] ${albums.length} albums found in "${collection}".`
+  );
   return albums.map((album) => {
     const transformedAlbum: Album = {
       ...album,
@@ -177,9 +202,17 @@ export const getAlbumImages = async (
   options: ImageOptions = { resize: 1000, generatePalette: false }
 ): Promise<Image[]> => {
   const digikamImages = digikam
-    .prepare<{ albumRootId: number; imageSort: string }, DigikamImage>(
+    .prepare<{ albumRootId: number; relativePath: string }, DigikamImage>(
       `
-        SELECT *
+        SELECT
+          Images.name,
+          ImageInformation.creationDate,
+          ImageComments.comment,
+          Albums.collection,
+          ImageInformation.height,
+          ImageInformation.width,
+          thumbs.FilePaths.path,
+          Albums.relativePath
         FROM Albums
           INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
           INNER JOIN Images ON Images.album = Albums.id
@@ -187,14 +220,14 @@ export const getAlbumImages = async (
           LEFT JOIN ImageComments on Images.id = ImageComments.imageId
           LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
           LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
-        WHERE Albums.relativePath LIKE '%${relativePath}%'
+        WHERE Albums.relativePath == $relativePath
           AND Albums.albumRoot = $albumRootId
-          ORDER BY $imageSort
+          ORDER BY Images.name ASC
       `
     )
     .all({
       albumRootId: websiteRootAlbumId,
-      imageSort: oldestImagesFirst,
+      relativePath: `/${relativePath}`,
     });
   console.log(
     `📷 [getAlbumImages] ${digikamImages.length} images found in "${relativePath}"`
@@ -217,11 +250,20 @@ export const getTodaysImages = async (
       DigikamImage
     >(
       `
-        SELECT *
+        SELECT
+          Images.name,
+          ImageInformation.creationDate,
+          ImageComments.comment,
+          Albums.collection,
+          ImageInformation.height,
+          ImageInformation.width,
+          thumbs.FilePaths.path,
+          Albums.relativePath
         FROM Albums
           INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
           INNER JOIN Images ON Images.album = Albums.id
           LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
+          LEFT JOIN ImageComments on Images.id = ImageComments.imageId
           LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
           LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
         WHERE Albums.albumRoot = $albumRootId
@@ -259,13 +301,22 @@ export const getTagImages = async (tag: string): Promise<Image[]> => {
   const digikamImages = digikam
     .prepare<[{ tag: string; albumRootId: number }], DigikamImage>(
       `
-        SELECT *
+        SELECT
+          Images.name,
+          ImageInformation.creationDate,
+          ImageComments.comment,
+          Albums.collection,
+          ImageInformation.height,
+          ImageInformation.width,
+          thumbs.FilePaths.path,
+          Albums.relativePath
         FROM Images
           LEFT JOIN ImageTags ON ImageTags.imageid = Images.id
           LEFT JOIN Tags ON ImageTags.tagid = Tags.id
           LEFT JOIN Albums ON Images.album = Albums.id
           LEFT JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
           LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
+          LEFT JOIN ImageComments on Images.id = ImageComments.imageId
           LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
           LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
         WHERE Tags.name = $tag
@@ -282,4 +333,51 @@ export const getTagImages = async (tag: string): Promise<Image[]> => {
     images.push(transformedImage);
   }
   return images;
+};
+
+export const getMapData = (): GeoJson => {
+  const locationTags = digikam
+    .prepare<[], { tagName: keyof typeof locations; numberOfImages: number }>(
+      `
+        SELECT
+          Tags.name as tagName,
+          COUNT(*) AS numberOfImages
+        FROM Albums
+          INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
+          LEFT JOIN Images ON Images.album = Albums.id
+          LEFT JOIN ImageTags ON ImageTags.imageid = Images.id
+          LEFT JOIN Tags ON Tags.id = ImageTags.tagid
+        WHERE Albums.albumRoot = 4
+          AND Tags.pid = 188
+        GROUP BY Tags.id
+      `
+    )
+    .all();
+  console.log(`🗺️ [getMapData] found ${locationTags.length} location tags.`);
+
+  const mapData: GeoJson = {
+    type: "FeatureCollection",
+    features: [],
+  };
+  for (const tag of locationTags) {
+    const tagConfig = locations[tag.tagName];
+    if (!tagConfig) {
+      console.log(`❌ [getMapData] no tag config for "${tag.tagName}"`);
+      break;
+    }
+    mapData.features.push({
+      type: "Feature",
+      geometry: {
+        type: "Point",
+        coordinates: tagConfig.coordinates as [number, number],
+      },
+      properties: {
+        name: tagConfig.name,
+        markerColor: tagConfig.markerColor,
+        numberOfPhotos: tag.numberOfImages,
+        slug: slugify(tag.tagName),
+      },
+    });
+  }
+  return mapData;
 };

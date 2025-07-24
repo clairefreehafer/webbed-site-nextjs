@@ -1,0 +1,12 @@
+{
+  "black and white": {
+    "displayName": "black & white"
+  },
+  "cat": {
+    "displayName": "cats"
+  },
+  "fisheye": {
+    "displayName": "fisheye",
+    "background": "black"
+  }
+}

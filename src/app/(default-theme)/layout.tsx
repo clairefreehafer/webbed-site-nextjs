@@ -2,6 +2,7 @@ import Link from "next/link";
 import localFont from "next/font/local";
 import Nav from "@/components/nav";
 import "@/sass/default/style.scss";
+import Stars from "@/components/stars";
 
 function getBuildDate() {
   const today = new Date();
@@ -53,9 +54,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
   return (
     <html>
       <body>
-        <div id="stars1"></div>
-        <div id="stars2"></div>
-        <div id="stars3"></div>
+        <Stars />
 
         <div
           className={`container ${atkinsonHyperlegibleNext.variable} ${atkinsonHyperlegibleMono.variable} ${garamond.variable}`}

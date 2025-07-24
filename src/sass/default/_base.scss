@@ -16,29 +16,12 @@ html {
   }
 }
 
-#stars1 {
-  @media screen and (min-width: variables.$max-site-width) {
-    @include mixins.stars(1px, mixins.multiple-box-shadow(700), 50s);
-  }
-}
-
-#stars2 {
-  @media screen and (min-width: variables.$max-site-width) {
-    @include mixins.stars(2px, mixins.multiple-box-shadow(200), 100s);
-  }
-}
-
-#stars3 {
-  @media screen and (min-width: variables.$max-site-width) {
-    @include mixins.stars(3px, mixins.multiple-box-shadow(100), 150s);
-  }
-}
-
 .container {
   @include text.sans-serif();
   background-color: rgba(255, 255, 255, 0.1);
   border: 10px solid rgba(255, 255, 255, 0.8);
   box-shadow: inset 0px 0px 5px 1px black;
+  font-weight: 300;
   max-width: variables.$max-site-width;
   margin: 2rem auto;
   padding: 1rem 1.5rem;

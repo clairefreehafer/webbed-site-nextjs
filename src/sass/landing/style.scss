@@ -1,0 +1,64 @@
+@use "../default/mixins";
+
+$max-site-width: 750px;
+
+html {
+  @include mixins.rainbow-border(5px);
+  background-color: black;
+  min-height: 100vh;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  max-width: $max-site-width;
+}
+
+a,
+a:visited {
+  color: white;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.content {
+  font-family: var(--font-atkinson-hyperlegible-next);
+  align-items: center;
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-weight: 300;
+  gap: 1rem;
+  justify-content: center;
+  padding: 1rem;
+  max-width: $max-site-width;
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: $max-site-width;
+  width: 100%;
+
+  @media screen and (max-width: 400px) {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  a,
+  a:hover,
+  a:visited {
+    color: white;
+    text-decoration: none;
+  }
+}

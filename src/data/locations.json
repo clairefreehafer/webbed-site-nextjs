@@ -1,0 +1,77 @@
+{
+  "adirondacks": {
+    "coordinates": [-74.3333, 44],
+    "markerColor": "forestgreen",
+    "name": "the adirondacks"
+  },
+  "arecibo": {
+    "coordinates": [-66.753333, 18.346667],
+    "markerColor": "forestgreen",
+    "name": "arecibo observatory"
+  },
+  "ballston spa": {
+    "coordinates": [-73.8511, 43.0072],
+    "markerColor": "rebeccapurple",
+    "name": "ballston spa, new york"
+  },
+  "birchtree": {
+    "coordinates": [-73.8526225, 43.0336861],
+    "markerColor": "cadetblue",
+    "name": "birchtree"
+  },
+  "camden": {
+    "coordinates": [-69.065552, 44.210265],
+    "markerColor": "powderblue",
+    "name": "camden, maine"
+  },
+  "flatbush": {
+    "coordinates": [-73.9625, 40.6615],
+    "markerColor": "gold",
+    "name": "flatbush"
+  },
+  "hudson": {
+    "coordinates": [-73.790959, 42.2528649],
+    "markerColor": "goldenrod",
+    "name": "hudson, new york"
+  },
+  "mariaville lake": {
+    "coordinates": [-74.131111, 42.826667],
+    "markerColor": "orangered",
+    "name": "mariaville lake"
+  },
+  "newport": {
+    "coordinates": [-71.3137707, 41.4899827],
+    "markerColor": "peachpuff",
+    "name": "newport, rhode island"
+  },
+  "owls head": {
+    "coordinates": [-69.0571014, 44.0823473],
+    "markerColor": "",
+    "name": "owls head, maine"
+  },
+  "phoenix": {
+    "coordinates": [-112.074141, 33.4484367],
+    "markerColor": "sandybrown",
+    "name": "phoenix, arizona"
+  },
+  "prospect park": {
+    "coordinates": [-73.97035, 40.66143],
+    "markerColor": "",
+    "name": "prospect park, brooklyn"
+  },
+  "rutland": {
+    "coordinates": [-72.9817311, 43.6057574],
+    "markerColor": "",
+    "name": "rutland, vermont"
+  },
+  "smola": {
+    "coordinates": [8.029167, 63.401944],
+    "markerColor": "",
+    "name": "smøla, norway"
+  },
+  "tromso": {
+    "coordinates": [18.9558585, 69.6516345],
+    "markerColor": "",
+    "name": "tromsø, norway"
+  }
+}

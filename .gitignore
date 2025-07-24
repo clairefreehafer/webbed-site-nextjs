@@ -41,4 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 # folder for files i only need locally
-.local
+/local/
+
+# transformed images we don't want to store remotely
+/public/out/

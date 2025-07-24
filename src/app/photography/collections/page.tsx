@@ -1,15 +1,21 @@
-import Link from "next/link";
 import { slugify } from "@/utils";
-import TAGS from "./[collection]/tags";
+import collectionsJson from "@/data/collections.json";
+import LinkList, {
+  PhotographyPageLink,
+} from "@/components/photography/link-list";
+import { CollectionConfig } from "@/utils/types";
+import { Metadata } from "next";
+
+const collections: CollectionConfig = collectionsJson;
+
+export const metadata: Metadata = { title: "collections — claire freehafer" };
 
 export default async function Page() {
-  return (
-    <ul>
-      {TAGS.map((tag) => (
-        <li key={tag}>
-          <Link href={`/photography/collections/${slugify(tag)}`}>{tag}</Link>
-        </li>
-      ))}
-    </ul>
+  const links: PhotographyPageLink[] = Object.keys(collections).map(
+    (collection) => ({
+      display: collections[collection].displayName,
+      href: `/collections/${slugify(collection)}`,
+    })
   );
+  return <LinkList title="collections" links={links} />;
 }
