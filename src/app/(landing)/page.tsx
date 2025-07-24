@@ -1,6 +1,11 @@
 import ScribbleButton, {
   ScribbleButtonProps,
 } from "@/components/default/scribble-button";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "claire freehafer",
+};
 
 const links: ScribbleButtonProps[] = [
   {
