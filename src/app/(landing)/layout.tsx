@@ -1,5 +1,7 @@
 import localFont from "next/font/local";
 import { Caveat, Redacted_Script } from "next/font/google";
+import "@/sass/global.scss";
+import "@/sass/landing/style.scss";
 
 const caveat = Caveat({
   display: "swap",

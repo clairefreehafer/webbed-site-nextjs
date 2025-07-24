@@ -1,8 +1,6 @@
 import ScribbleButton, {
   ScribbleButtonProps,
 } from "@/components/default/scribble-button";
-import "@/sass/global.scss";
-import "@/sass/landing/style.scss";
 
 const links: ScribbleButtonProps[] = [
   {
@@ -43,16 +41,16 @@ const externalLinks: ScribbleButtonProps[] = [
 export default function Home() {
   return (
     <section className="content">
-      <h1>claire freehafer</h1>
+      <h1>🗣️ claire freehafer 💥</h1>
 
-      <h2>check out my shit!</h2>
+      <h2>👇🏻 check out my shit! 💩</h2>
       <div className="grid">
         {links.map((link) => (
           <ScribbleButton {...link} key={link.href} />
         ))}
       </div>
 
-      <h2>external links</h2>
+      <h2>👋🏻 external links 🔗</h2>
       <div className="grid">
         {externalLinks.map((link) => (
           <ScribbleButton {...link} key={link.href} />
