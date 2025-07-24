@@ -1,10 +1,9 @@
 import LinkList, {
   PhotographyPageLink,
 } from "@/components/photography/link-list";
+import { Metadata } from "next";
 
-export function generateMetadata() {
-  return { title: "photography — claire freehafer" };
-}
+export const metadata: Metadata = { title: "photography — claire freehafer" };
 
 const links: PhotographyPageLink[] = [
   {

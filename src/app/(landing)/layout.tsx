@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import { Caveat, Redacted_Script } from "next/font/google";
 import "@/sass/global.scss";
 import "@/sass/landing/style.scss";
+import Stars from "@/components/stars";
 
 const caveat = Caveat({
   display: "swap",
@@ -36,9 +37,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
       <body
         className={`${atkinsonHyperlegibleNext.variable} ${caveat.variable} ${redactedScript.variable}`}
       >
-        <div id="stars1" className="stars"></div>
-        <div id="stars2" className="stars"></div>
-        <div id="stars3" className="stars"></div>
+        <Stars />
         {children}
       </body>
     </html>

@@ -18,49 +18,6 @@
   border-style: solid;
 }
 
-// https://codepen.io/sarazond/pen/LYGbwj
-// n is number of stars required
-@function multiple-box-shadow($n) {
-  $value: "#{math.random(2000)}px #{math.random(2000)}px #FFF";
-  @for $i from 2 through $n {
-    $value: "#{$value} , #{math.random(2000)}px #{math.random(2000)}px #FFF";
-  }
-
-  @return string.unquote($value);
-}
-
-@keyframes animStar {
-  from {
-    transform: translateY(0px);
-  }
-  to {
-    transform: translateY(-2000px);
-  }
-}
-
-@mixin stars($size, $shadow-fn, $speed) {
-  width: $size;
-  height: $size;
-  background: transparent;
-  box-shadow: $shadow-fn;
-  animation: animStar $speed linear infinite;
-  overflow: hidden;
-
-  @media screen and (prefers-reduced-motion: none) {
-    animation: unset;
-  }
-
-  &:after {
-    content: " ";
-    position: absolute;
-    top: 2000px;
-    width: $size;
-    height: $size;
-    background: transparent;
-    box-shadow: $shadow-fn;
-  }
-}
-
 @mixin dotted-underline($size, $width: auto) {
   border-bottom: $size dotted yellow;
   width: $width;
