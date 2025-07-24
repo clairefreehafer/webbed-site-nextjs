@@ -1,4 +1,5 @@
 @use "../default/mixins";
+@use "../default/variables";
 
 html {
   @include mixins.rainbow-border(5px);
@@ -16,6 +17,30 @@ body {
   height: 100%;
   width: 100%;
   max-width: 750px;
+}
+
+.stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#stars1 {
+  @media screen and (min-width: variables.$max-site-width) {
+    @include mixins.stars(1px, mixins.multiple-box-shadow(700), 50s);
+  }
+}
+
+#stars2 {
+  @media screen and (min-width: variables.$max-site-width) {
+    @include mixins.stars(2px, mixins.multiple-box-shadow(200), 100s);
+  }
+}
+
+#stars3 {
+  @media screen and (min-width: variables.$max-site-width) {
+    @include mixins.stars(3px, mixins.multiple-box-shadow(100), 150s);
+  }
 }
 
 a,
