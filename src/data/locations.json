@@ -9,6 +9,11 @@
     "markerColor": "forestgreen",
     "name": "arecibo observatory"
   },
+  "ballston spa": {
+    "coordinates": [-73.8511, 43.0072],
+    "markerColor": "rebeccapurple",
+    "name": "ballston spa, new york"
+  },
   "birchtree": {
     "coordinates": [-73.8526225, 43.0336861],
     "markerColor": "cadetblue",
@@ -18,6 +23,11 @@
     "coordinates": [-69.065552, 44.210265],
     "markerColor": "powderblue",
     "name": "camden, maine"
+  },
+  "flatbush": {
+    "coordinates": [-73.9625, 40.6615],
+    "markerColor": "gold",
+    "name": "flatbush"
   },
   "hudson": {
     "coordinates": [-73.790959, 42.2528649],
@@ -43,6 +53,11 @@
     "coordinates": [-112.074141, 33.4484367],
     "markerColor": "sandybrown",
     "name": "phoenix, arizona"
+  },
+  "prospect park": {
+    "coordinates": [-73.97035, 40.66143],
+    "markerColor": "",
+    "name": "prospect park, brooklyn"
   },
   "rutland": {
     "coordinates": [-72.9817311, 43.6057574],

@@ -201,9 +201,8 @@ export const getAlbumImages = async (
   relativePath: string,
   options: ImageOptions = { resize: 1000, generatePalette: false }
 ): Promise<Image[]> => {
-  console.log(relativePath);
   const digikamImages = digikam
-    .prepare<{ albumRootId: number; imageSort: string }, DigikamImage>(
+    .prepare<{ albumRootId: number; relativePath: string }, DigikamImage>(
       `
         SELECT
           Images.name,
@@ -221,14 +220,14 @@ export const getAlbumImages = async (
           LEFT JOIN ImageComments on Images.id = ImageComments.imageId
           LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
           LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
-        WHERE Albums.relativePath LIKE '%${relativePath}%'
+        WHERE Albums.relativePath == $relativePath
           AND Albums.albumRoot = $albumRootId
-          ORDER BY $imageSort
+          ORDER BY Images.name ASC
       `
     )
     .all({
       albumRootId: websiteRootAlbumId,
-      imageSort: oldestImagesFirst,
+      relativePath: `/${relativePath}`,
     });
   console.log(
     `📷 [getAlbumImages] ${digikamImages.length} images found in "${relativePath}"`

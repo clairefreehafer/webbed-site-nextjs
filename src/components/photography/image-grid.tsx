@@ -1,12 +1,18 @@
 import { Image } from "@/utils/digikam";
 import NextImage from "next/image";
 
-export default function ImageGrid({ images }: { images: Image[] }) {
+export default function ImageGrid({
+  images,
+  background,
+}: {
+  images: Image[];
+  background: React.CSSProperties["background"];
+}) {
   if (images.length === 0) {
     return "no images :(";
   }
   return (
-    <div className="grid">
+    <div className="grid" style={background ? { background } : {}}>
       {images.map((image) => (
         <NextImage
           key={image.filename}

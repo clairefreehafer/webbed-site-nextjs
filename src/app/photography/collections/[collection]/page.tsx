@@ -1,7 +1,10 @@
 import ImageGrid from "@/components/photography/image-grid";
 import { deslugify, slugify } from "@/utils";
 import { getTagImages } from "@/utils/digikam";
-import collections from "@/data/collections.json";
+import collectionsJson from "@/data/collections.json";
+import { CollectionConfig } from "@/utils/types";
+
+const collections: CollectionConfig = collectionsJson;
 
 export async function generateStaticParams() {
   return Object.keys(collections).map((collection) => ({
@@ -25,5 +28,6 @@ export default async function Page({
 }) {
   const collection = deslugify((await params).collection);
   const images = await getTagImages(collection);
-  return <ImageGrid images={images} />;
+  const { background } = collections[collection];
+  return <ImageGrid images={images} background={background} />;
 }
