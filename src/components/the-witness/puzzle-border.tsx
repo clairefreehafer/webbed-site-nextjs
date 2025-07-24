@@ -8,8 +8,8 @@ export default function PuzzleBorder({ image }: { image: Image }) {
         <div
           className="puzzle-background"
           style={{
-            backgroundColor:
-              image.puzzleColor ?? image.palette?.Muted?.hex ?? "black",
+            background:
+              image.background ?? image.palette?.Muted?.hex ?? "black",
           }}
         >
           <NextImage

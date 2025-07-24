@@ -10,7 +10,7 @@ $texture-z-index: $photo-z-index - 1;
 $border-z-index: $photo-z-index - 2;
 
 // screen width minus horizontal margins
-$container-width: calc(100vw - 2rem);
+$container-width: calc(100vw);
 // horizontal distance of UI edges from edge of slideshow container
 $ui-position-x: 0;
 // vertical distance of UI edges from edge of slideshow container
@@ -50,7 +50,7 @@ main {
   grid-auto-columns: $container-width;
   grid-auto-flow: column;
   grid-template-columns: repeat(auto-fill, $container-width);
-  padding: 0 1rem;
+  padding: 0;
   gap: 0 1rem;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
@@ -63,6 +63,7 @@ main {
   justify-content: center;
   list-style-type: none;
   position: relative;
+  padding: 0 1rem;
 }
 
 .snap-point {

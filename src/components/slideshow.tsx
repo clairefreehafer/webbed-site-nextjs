@@ -10,7 +10,12 @@ export default function Slideshow({ images }: SlideshowProps) {
   return (
     <ol className="slides">
       {images.map((image, idx) => (
-        <li className="slide" key={image.filename} id={`${idx + 1}`}>
+        <li
+          className="slide"
+          key={image.filename}
+          id={`${idx + 1}`}
+          style={image.background ? { background: image.background } : {}}
+        >
           <div className="snap-point" />
           <NextImage
             src={image.src}
@@ -19,6 +24,7 @@ export default function Slideshow({ images }: SlideshowProps) {
             className="image"
             height={image.height}
             width={image.width}
+            style={image.border ? { border: image.border } : {}}
           />
         </li>
       ))}

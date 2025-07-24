@@ -36,9 +36,8 @@ interface AlbumCaptionJson {
 /** custom JSON format for extra info stored in the image caption/comment field. */
 interface ImageCommentJson {
   altText?: string;
-  border?: string;
-  // the witness
-  puzzleColor?: string;
+  border?: React.CSSProperties["border"];
+  background?: React.CSSProperties["background"];
 }
 
 /** transformed album data for use on the site. */
@@ -61,22 +60,17 @@ interface DigikamImage {
   // Albums.relativePath
   relativePath: string;
   width: number;
-  latitudeNumber: number | null;
-  longitudeNumber: number | null;
 }
 
 /** transformed image data for use on the site. */
-export interface Image {
+export interface Image extends ImageCommentJson {
   /** YYYY-MM-DDTHH:MM:SS.SSS */
   dateTaken: DigikamImage["creationDate"];
   filename: DigikamImage["name"];
   height: DigikamImage["height"];
-  src: string;
   width: DigikamImage["width"];
-  puzzleColor?: ImageCommentJson["puzzleColor"];
+  src: string;
   palette?: Palette;
-  longitudeNumber?: number;
-  latitudeNumber?: number;
 }
 
 interface ImageOptions {
@@ -95,12 +89,6 @@ async function transformDigikamImage(
     height: digikamImage.height,
     src: `/out/${digikamImage.collection}${digikamImage.relativePath}/${nameWithoutExtension}.webp`,
     width: digikamImage.width,
-    ...(digikamImage.latitudeNumber && {
-      latitudeNumber: digikamImage.latitudeNumber,
-    }),
-    ...(digikamImage.longitudeNumber && {
-      longitudeNumber: digikamImage.longitudeNumber,
-    }),
   };
   try {
     const outputPath = `${process.cwd()}/public${transformedImage.src}`;
@@ -139,6 +127,7 @@ async function transformDigikamImage(
     // check for custom metadata
     if (digikamImage.comment?.startsWith("{")) {
       const parsedCaption = JSON.parse(digikamImage.comment);
+
       transformedImage = {
         ...transformedImage,
         ...parsedCaption,
