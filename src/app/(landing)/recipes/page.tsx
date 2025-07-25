@@ -29,9 +29,13 @@ export default function Page() {
         99% of these are not my own; source is included with each recipe. the
         versions on here may be slightly edited for my own taste or clarity.
       </p>
-      <div className="grid">
+      <div className="link-container">
         {links.map((link) => (
-          <ScribbleButton {...link} key={link.href} />
+          <ScribbleButton
+            {...link}
+            className={`links-${links.length}`}
+            key={link.href}
+          />
         ))}
       </div>
       <p>

@@ -11,10 +11,11 @@ export default function ScribbleButton({
   text,
   scribbleText,
   href,
-}: ScribbleButtonProps) {
+  className,
+}: ScribbleButtonProps & { className: string }) {
   if (href.startsWith("http")) {
     return (
-      <a href={href} className="scribble-button">
+      <a href={href} className={`scribble-button ${className}`} target="_blank">
         <div className="scribble-highlight" aria-hidden>
           {scribbleText ?? text}
         </div>
@@ -23,7 +24,7 @@ export default function ScribbleButton({
     );
   }
   return (
-    <Link href={href} className="scribble-button">
+    <Link href={href} className={`scribble-button ${className}`}>
       <div className="scribble-highlight" aria-hidden>
         {scribbleText ?? text}
       </div>

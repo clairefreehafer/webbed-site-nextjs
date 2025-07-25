@@ -10,6 +10,29 @@ $small-width: 400px;
   position: relative;
   padding: 0.5rem 1rem;
   overflow: hidden;
+  text-wrap: nowrap;
+
+  // 3 accross
+  @media screen and (min-width: 750px) {
+    &.links-4 {
+      &:nth-last-child(-n + 1) {
+        grid-column: span 3;
+        width: calc((100% - 2rem) / 3);
+        margin: 0 auto;
+      }
+    }
+  }
+
+  // 2 accross
+  @media screen and (max-width: 750px) and (min-width: $small-width) {
+    &.links-3 {
+      &:nth-last-child(-n + 1) {
+        grid-column: span 2;
+        width: calc((100% - 1rem) / 2);
+        margin: 0 auto;
+      }
+    }
+  }
 
   &:hover {
     border: 5px inset black;
@@ -20,6 +43,10 @@ $small-width: 400px;
     & .scribble-highlight {
       clip-path: rect(auto auto auto auto);
     }
+  }
+
+  @media (hover: none) {
+    aspect-ratio: unset;
   }
 }
 
@@ -41,6 +68,10 @@ $small-width: 400px;
   @media screen and (max-width: $medium-width) {
     font-size: 4rem;
   }
+
+  @media (hover: none) {
+    display: none;
+  }
 }
 
 .scribble-text {
@@ -57,5 +88,11 @@ $small-width: 400px;
 
   @media screen and (max-width: $small-width) {
     font-size: 2rem;
+  }
+
+  @media (hover: none) {
+    font-family: var(--font-atkinson-hyperlegible-mono);
+    font-size: 1.5rem;
+    font-weight: 300;
   }
 }

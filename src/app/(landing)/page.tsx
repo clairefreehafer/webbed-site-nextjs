@@ -27,6 +27,11 @@ const links: ScribbleButtonProps[] = [
 
 const externalLinks: ScribbleButtonProps[] = [
   {
+    text: "bookwyrm",
+    href: "https://bookwyrm.social/user/loam",
+    scribbleText: "bwym",
+  },
+  {
     text: "github",
     href: "https://www.github.com/clairefreehafer",
     scribbleText: "git",
@@ -36,11 +41,6 @@ const externalLinks: ScribbleButtonProps[] = [
     href: "https://www.linkedin.com/in/clairefreehafer",
     scribbleText: "lkin",
   },
-  {
-    text: "bookwyrm",
-    href: "/lists",
-    scribbleText: "bwym",
-  },
 ];
 
 export default function Page() {
@@ -49,16 +49,24 @@ export default function Page() {
       <h1>🗣️ claire freehafer 💥</h1>
 
       <h2>👇🏻 check out my shit! 💩</h2>
-      <div className="grid">
+      <div className="link-container">
         {links.map((link) => (
-          <ScribbleButton {...link} key={link.href} />
+          <ScribbleButton
+            {...link}
+            className={`links-${links.length}`}
+            key={link.href}
+          />
         ))}
       </div>
 
       <h2>👋🏻 external links 🔗</h2>
-      <div className="grid">
+      <div className="link-container">
         {externalLinks.map((link) => (
-          <ScribbleButton {...link} key={link.href} />
+          <ScribbleButton
+            {...link}
+            className={`links-${externalLinks.length}`}
+            key={link.href}
+          />
         ))}
       </div>
     </section>

@@ -31,11 +31,21 @@ const atkinsonHyperlegibleNext = localFont({
   fallback: ["system-ui", "sans-serif"],
 });
 
+const atkinsonHyperlegibleMono = localFont({
+  variable: "--font-atkinson-hyperlegible-mono",
+  src: [
+    {
+      path: "../../../public/fonts/default/atkinson-hyperlegible-mono.woff2",
+    },
+  ],
+  fallback: ["system-ui", "sans-serif"],
+});
+
 export default function Layout({ children }: React.PropsWithChildren) {
   return (
     <html>
       <body
-        className={`${atkinsonHyperlegibleNext.variable} ${caveat.variable} ${redactedScript.variable}`}
+        className={`${atkinsonHyperlegibleNext.variable} ${caveat.variable} ${redactedScript.variable} ${atkinsonHyperlegibleMono.variable}`}
       >
         <Stars />
         {children}
