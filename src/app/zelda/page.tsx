@@ -4,8 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Page() {
-  const botwAlbums = getAlbums("breath of the wild");
-  // const botwAlbums = getAlbums("breath of the wild");
+  const botwAlbums = getAlbums("breath-of-the-wild");
   return (
     <>
       <Image
@@ -16,6 +15,7 @@ export default function Page() {
         height={120}
       />
       <h2>tears of the kingdom</h2>
+      <p>coming soon</p>
       <Image
         src="/images/zelda/pad-line-2.png"
         className="splitter"

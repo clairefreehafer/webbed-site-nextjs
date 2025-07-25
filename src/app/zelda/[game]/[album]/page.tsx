@@ -1,18 +1,17 @@
-import { slugify } from "@/utils";
-import { getAlbums } from "@/utils/digikam";
+import Slideshow from "@/components/slideshow";
+import { getAlbumImages, getAlbums } from "@/utils/digikam";
 
-const GAMES = ["breath of the wild", "tears of the kingdom"] as const;
+const GAMES = ["breath-of-the-wild", "tears-of-the kingdom"] as const;
 
 export async function generateStaticParams() {
   const pages = [];
 
   for (const game of GAMES) {
     const albums = getAlbums(game);
-    const slugifiedGame = slugify(game);
 
     for (const album of albums) {
-      console.log(`├ generating /zelda/${slugifiedGame}/${album.slug}`);
-      pages.push({ game: slugifiedGame, album: album.slug });
+      console.log(`⚔️ generating /zelda/${game}/${album.slug}`);
+      pages.push({ game, album: album.slug });
     }
   }
 
@@ -24,6 +23,8 @@ export default async function Page({
 }: {
   params: Promise<{ game: (typeof GAMES)[number]; album: string }>;
 }) {
-  const { game, album } = await params;
-  return game + album;
+  const { album } = await params;
+  const images = await getAlbumImages(album);
+
+  return <Slideshow images={images} />;
 }

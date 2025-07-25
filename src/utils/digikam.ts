@@ -148,7 +148,7 @@ export const getAlbums = cache((collection = "photography"): Album[] => {
   const albums = digikam
     .prepare<
       {
-        collection: string;
+        collectionLikeString: string;
         albumRootId: number;
       },
       DigikamAlbum
@@ -160,14 +160,14 @@ export const getAlbums = cache((collection = "photography"): Album[] => {
         FROM Albums
           INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
         WHERE Albums.albumRoot = $albumRootId
-          AND Albums.collection = $collection
+          AND Albums.collection LIKE $collectionLikeString
           AND Albums.relativePath NOT LIKE '%/\\_%' ESCAPE '\\'
 			    AND Albums.relativePath != '/'
         ORDER BY Albums.date DESC
       `
     )
     .all({
-      collection,
+      collectionLikeString: `%${collection}%`,
       albumRootId: websiteRootAlbumId,
     });
   console.log(

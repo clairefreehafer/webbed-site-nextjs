@@ -27,16 +27,14 @@ export default function Layout({ children }: React.PropsWithChildren) {
         />
         <img src="/images/zelda/pad-frame.png" className="border-top" />
 
-        <div className="container">
-          <header>
-            <h1>claire freehafer</h1>
-            <nav>
-              <Nav />
-            </nav>
-          </header>
+        <header>
+          <h1>claire freehafer</h1>
+          <nav>
+            <Nav />
+          </nav>
+        </header>
 
-          <main className="content">{children}</main>
-        </div>
+        <main className="content">{children}</main>
 
         <img
           src="/images/zelda/pad-frame-glow.png"
