@@ -1,4 +1,5 @@
 @use "../default/mixins";
+@use "../components/scribble-button.scss";
 
 $max-site-width: 750px;
 
@@ -44,14 +45,18 @@ a:hover {
   width: 100%;
 }
 
-.grid {
+.link-container {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   max-width: $max-site-width;
   width: 100%;
 
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: $max-site-width) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media screen and (max-width: scribble-button.$small-width) {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 
