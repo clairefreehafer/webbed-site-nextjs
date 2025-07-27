@@ -13,7 +13,7 @@ body {
   min-height: 100vh;
   box-sizing: border-box;
   background-size: 100%, 100%;
-  font-family: "Helvetica", "Arial", sans-serif;
+  font-family: var(--fot-rodin-pro-db);
   display: flex;
   flex: 1 1;
   flex-direction: column;
@@ -22,10 +22,19 @@ body {
 a,
 a:visited {
   color: white;
+  text-decoration: none;
 }
 
 a:hover {
   color: #76b6ff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  padding: 0;
 }
 
 header {
@@ -37,17 +46,29 @@ header {
 }
 
 h1 {
-  font-family: var(--hylia-serif), Georgia, serif;
   font-weight: 100;
   font-size: 2rem;
   text-transform: capitalize;
+
+  &.hylia-serif {
+    font-family: var(--hylia-serif), Georgia, serif;
+  }
+  &.hylian {
+    font-family: var(--hylian-regular), Georgia, serif;
+  }
+  &.sheikah {
+    font-family: var(--sheikah), Georgia, serif;
+  }
+  &.sheikah-bold {
+    font-family: var(--sheikah), Georgia, serif;
+    font-weight: bold;
+  }
 }
 
 h2 {
   font-family: var(--hylia-serif), Georgia, serif;
   text-transform: capitalize;
   font-weight: normal;
-  margin-bottom: 0.5rem;
 }
 
 .border-top {
@@ -78,10 +99,11 @@ nav {
     gap: 1rem;
 
     a {
-      @include mixins.sheikah_underline;
+      @include mixins.sheikah_underline(0.5rem);
       color: white;
       margin: 0 0.5rem;
       padding: 0.5rem 0;
+      text-decoration: none;
     }
   }
 }
@@ -92,9 +114,37 @@ nav {
   max-width: 100vw;
 }
 
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .splitter {
   @include mixins.white-to-blue;
-  width: 100vw;
-  z-index: -1;
-  height: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.game-links {
+  align-self: stretch;
+  display: flex;
+  justify-content: space-around;
+
+  a {
+    color: white;
+    margin-bottom: 0;
+    text-decoration: none;
+
+    &:hover {
+      color: #76b6ff;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+  }
 }

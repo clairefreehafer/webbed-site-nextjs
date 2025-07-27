@@ -17,12 +17,12 @@
   }
 }
 
-@mixin sheikah-underline {
+@mixin sheikah-underline($padding-bottom) {
   background-image: url("/images/zelda/pad-text.png");
   background-position: bottom center;
-  background-repeat: no-repeat;
+  background-repeat: repeat-x;
   background-size: auto 25%;
-  padding-bottom: 0.5rem;
+  padding-bottom: $padding-bottom;
   text-decoration: none;
 }
 
