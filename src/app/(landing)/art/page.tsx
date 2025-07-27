@@ -39,6 +39,14 @@ const videoGameLinks: ScribbleButtonProps[] = [
   },
 ];
 
+const digitalArtLinks: ScribbleButtonProps[] = [
+  {
+    text: "glitch",
+    href: "/glitch",
+    scribbleText: "glt",
+  },
+];
+
 export default function Page() {
   return (
     <section className="content">
@@ -67,7 +75,11 @@ export default function Page() {
       </div>
 
       <h2>💻 digital art 💿</h2>
-      <p>coming soon!</p>
+      <div className="grid">
+        {digitalArtLinks.map((link) => (
+          <ScribbleButton {...link} key={link.href} />
+        ))}
+      </div>
 
       <p>
         ⬅️ <Link href="/">return home</Link> 🏠
