@@ -29,5 +29,5 @@ export default async function Page({
   const collection = deslugify((await params).collection);
   const images = await getTagImages(collection);
   const { background } = collections[collection];
-  return <ImageGrid images={images} background={background} />;
+  return <ImageGrid images={images} background={background} maxCols={3} />;
 }

@@ -9,7 +9,7 @@ export default function ImageGrid({
 }: {
   images: Image[];
   background?: React.CSSProperties["background"];
-  maxCols?: number;
+  maxCols?: 1 | 2 | 3;
 }) {
   if (images.length === 0) {
     return "no images :(";
