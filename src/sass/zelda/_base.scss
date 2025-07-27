@@ -21,7 +21,7 @@ body {
 
 a,
 a:visited {
-  color: white;
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
 }
 
@@ -35,14 +35,6 @@ h3,
 h4,
 h5 {
   padding: 0;
-}
-
-header {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 1rem;
 }
 
 h1 {
@@ -84,30 +76,6 @@ h2 {
   bottom: 0;
 }
 
-nav {
-  @include mixins.text-background;
-  padding: 1rem 2rem;
-  text-align: center;
-  height: 4rem;
-  // width: 100%;
-
-  & > ul {
-    align-items: center;
-    display: flex;
-    list-style: none;
-    padding: 0;
-    gap: 1rem;
-
-    a {
-      @include mixins.sheikah_underline(0.5rem);
-      color: white;
-      margin: 0 0.5rem;
-      padding: 0.5rem 0;
-      text-decoration: none;
-    }
-  }
-}
-
 .content {
   flex: 2;
   display: flex;
@@ -131,16 +99,6 @@ nav {
   align-self: stretch;
   display: flex;
   justify-content: space-around;
-
-  a {
-    color: white;
-    margin-bottom: 0;
-    text-decoration: none;
-
-    &:hover {
-      color: #76b6ff;
-    }
-  }
 
   @media screen and (max-width: 500px) {
     flex-direction: column;
