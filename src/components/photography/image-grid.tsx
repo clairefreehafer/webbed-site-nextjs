@@ -1,18 +1,24 @@
 import { Image } from "@/utils/digikam";
 import NextImage from "next/image";
+import "@/sass/components/image-grid.scss";
 
 export default function ImageGrid({
   images,
   background,
+  maxCols = 2,
 }: {
   images: Image[];
   background?: React.CSSProperties["background"];
+  maxCols?: 1 | 2 | 3;
 }) {
   if (images.length === 0) {
     return "no images :(";
   }
   return (
-    <div className="grid" style={background ? { background } : {}}>
+    <div
+      className={`image-grid max-cols-${maxCols}`}
+      style={background ? { background } : {}}
+    >
       {images.map((image) => (
         <NextImage
           key={image.filename}
@@ -20,7 +26,6 @@ export default function ImageGrid({
           height={image.height}
           width={image.width}
           alt=""
-          className="photo"
         />
       ))}
     </div>
