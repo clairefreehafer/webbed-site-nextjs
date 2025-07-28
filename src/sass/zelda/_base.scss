@@ -76,6 +76,16 @@ h2 {
   bottom: 0;
 }
 
+header {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 2rem 1rem 1rem;
+  gap: 1rem;
+  text-align: center;
+}
+
 .content {
   flex: 2;
   display: flex;

@@ -1,7 +1,8 @@
 import "@/sass/zelda/style.scss";
 import "@/sass/global.scss";
 import localFont from "next/font/local";
-import Header from "@/components/zelda/header";
+import Name from "@/components/zelda/name";
+import Nav from "@/components/zelda/nav";
 
 export function generateMetadata() {
   return { title: "zelda — claire freehafer" };
@@ -66,7 +67,10 @@ export default function Layout({ children }: React.PropsWithChildren) {
         />
         <img src="/images/zelda/pad-frame.png" className="border-top" />
 
-        <Header />
+        <header>
+          <Name />
+          <Nav />
+        </header>
 
         <main className="content">{children}</main>
 

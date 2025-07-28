@@ -89,6 +89,7 @@ $small-width: 400px;
   &:hover,
   &:focus,
   &.active {
+    background-color: unset;
     text-decoration: none;
 
     & .scribble-highlight {
