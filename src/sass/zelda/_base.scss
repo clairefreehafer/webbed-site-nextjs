@@ -2,15 +2,15 @@
 
 html {
   display: flex;
-  height: 100vh;
-  max-height: 100vh;
+  height: 100svh;
+  max-height: 100svh;
 }
 
 body {
   background-color: black;
   background: url("/images/zelda/pad-background.jpg") repeat;
   color: #76b6ff;
-  min-height: 100vh;
+  min-height: 100svh;
   box-sizing: border-box;
   background-size: 100%, 100%;
   font-family: var(--fot-rodin-pro-db);
