@@ -1,8 +1,11 @@
-@mixin grid($columns, $gap) {
-  $columnWidth: calc((100% / $columns) - ($gap / $columns));
+@mixin grid($columns, $rowGap, $colGap: false) {
+  @if $colGap == false {
+    $colGap: $rowGap;
+  }
+  $columnWidth: calc((100% / $columns) - ($colGap / $columns));
   display: grid;
   grid-template-columns: repeat($columns, $columnWidth);
-  gap: $gap;
+  gap: $rowGap $colGap;
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -37,7 +40,7 @@
     padding: 1rem 3rem 3rem;
 
     @media screen and (max-width: 650px) {
-      @include grid(1, 1rem);
+      @include grid(1, 5rem, 0px);
       padding: 1rem;
     }
   }

@@ -34,6 +34,11 @@
     "markerColor": "goldenrod",
     "name": "hudson, new york"
   },
+  "jacob riis": {
+    "coordinates": [-73.876153, 40.564175],
+    "markerColor": "",
+    "name": "jacob riis beach"
+  },
   "mariaville lake": {
     "coordinates": [-74.131111, 42.826667],
     "markerColor": "orangered",

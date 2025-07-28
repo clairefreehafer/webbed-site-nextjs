@@ -2,6 +2,7 @@ import "@/sass/global.scss";
 import "@/sass/terminal/style.scss";
 import localFont from "next/font/local";
 import { Press_Start_2P } from "next/font/google";
+import Nav from "@/components/terminal/nav";
 
 /** 8-bit */
 const pressStart2P = Press_Start_2P({
@@ -32,6 +33,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
         <div className="container">
           <header>
             <h1>claire freehafer</h1>
+            <Nav />
           </header>
           {children}
         </div>

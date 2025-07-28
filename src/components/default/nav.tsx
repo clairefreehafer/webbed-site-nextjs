@@ -1,6 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 import ScribbleLink, { ScribbleLinkProps } from "./scribble-link";
+import { getActiveNavLink } from "@/utils/client";
 
 const ROOT_LINKS: ScribbleLinkProps[] = [
   {
@@ -24,19 +25,6 @@ const ROOT_LINKS: ScribbleLinkProps[] = [
     scribbleText: "ls",
   },
 ] as const;
-
-function getActiveNavLink(currentUrl: string, pageUrl: string) {
-  const currentSection = currentUrl.split("/")[1];
-
-  if (pageUrl === "/" && !currentSection) {
-    return "active";
-  }
-
-  if (currentSection === pageUrl.replace("/", "")) {
-    return "active";
-  }
-  return "";
-}
 
 export default function Nav() {
   const pathname = usePathname();
