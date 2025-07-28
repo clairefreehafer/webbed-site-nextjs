@@ -3,8 +3,6 @@ import Meals from "./meals";
 import Link from "next/link";
 import Recipe from "./recipe";
 
-export const dynamicParams = false;
-
 export async function generateStaticParams() {
   const pages = await getRecipePages();
   return pages.map((page) => ({
@@ -30,7 +28,6 @@ export async function generateMetadata({
   return metadata;
 }
 
- 
 const SECTION_PAGES: Record<string, any> = {
   meals: Meals,
 };

@@ -1,7 +1,7 @@
 import { deslugify, generateIngredients, slugify } from "@/utils";
 import Link from "next/link";
 
-export const dynamicParams = false;
+type Params = Promise<{ ingredient: string }>;
 
 export async function generateStaticParams() {
   const ingredients = await generateIngredients();
@@ -10,11 +10,14 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ ingredient: string }>;
-}) {
+export async function generateMetadata({ params }: { params: Params }) {
+  const ingredient = (await params).ingredient;
+  return {
+    title: `recipes with ${deslugify(ingredient)} — claire freehafer`,
+  };
+}
+
+export default async function Page({ params }: { params: Params }) {
   const ingredients = await generateIngredients();
   const ingredient = (await params).ingredient;
 

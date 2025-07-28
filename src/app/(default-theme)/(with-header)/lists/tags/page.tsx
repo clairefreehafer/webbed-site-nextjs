@@ -1,5 +1,10 @@
 import { slugify } from "@/utils";
 import { generateTags } from "@/utils/lists";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "list tags — claire freehafer",
+};
 
 export default async function Page() {
   const tags = await generateTags();

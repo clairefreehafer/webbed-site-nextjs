@@ -1,4 +1,9 @@
 import { getListPages } from "@/utils/lists";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "lists — claire freehafer",
+};
 
 export default async function Page() {
   const lists = await getListPages();

@@ -1,5 +1,5 @@
 import Logo from "@/components/animal-crossing/logo";
-import Nav from "@/components/nav";
+import Nav from "@/components/animal-crossing/nav";
 import "@/sass/animal-crossing/style.scss";
 import {
   GRASS_BACKGROUND_COLORS,
@@ -31,29 +31,6 @@ const seurat = localFont({
   fallback: ["system-ui", "sans-serif"],
 });
 
-const NAV_LINKS = [
-  {
-    title: "home",
-    path: "/",
-    icon: "animal-crossing/icons/hhn",
-  },
-  {
-    title: "art",
-    path: "/art",
-    icon: "animal-crossing/icons/camera",
-  },
-  {
-    title: "recipes",
-    path: "/recipes",
-    icon: "animal-crossing/icons/recipes",
-  },
-  {
-    title: "lists",
-    path: "/lists",
-    icon: "animal-crossing/icons/lists",
-  },
-];
-
 export default function Layout({ children }: React.PropsWithChildren) {
   const grassDateRange = getGrassDateRange();
   const bodyStyles = {
@@ -72,11 +49,11 @@ export default function Layout({ children }: React.PropsWithChildren) {
             <nav>
               <details>
                 <summary>navigation</summary>
-                <Nav links={NAV_LINKS} />
+                <Nav />
               </details>
 
               <div className="desktop-menu">
-                <Nav links={NAV_LINKS} />
+                <Nav />
               </div>
             </nav>
 

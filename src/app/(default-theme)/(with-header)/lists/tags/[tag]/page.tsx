@@ -2,8 +2,6 @@ import { deslugify, slugify } from "@/utils";
 import { generateTags } from "@/utils/lists";
 import Link from "next/link";
 
-export const dynamicParams = false;
-
 export async function generateStaticParams() {
   const tags = await generateTags();
   return Object.keys(tags).map((tag) => ({

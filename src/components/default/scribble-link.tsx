@@ -1,21 +1,26 @@
 import Link from "next/link";
-import "@/sass/components/scribble-button.scss";
+import "@/sass/default/scribble-button.scss";
 
-export type ScribbleButtonProps = {
+export type ScribbleLinkProps = {
   text: string;
   scribbleText?: string;
   href: string;
 };
 
-export default function ScribbleButton({
+export default function ScribbleLink({
+  href,
   text,
   scribbleText,
-  href,
   className,
-}: ScribbleButtonProps & { className: string }) {
+}: ScribbleLinkProps & { className?: string }) {
   if (href.startsWith("http")) {
     return (
-      <a href={href} className={`scribble-button ${className}`} target="_blank">
+      <a
+        href={href}
+        className={`scribble-link ${className}`}
+        target="_blank"
+        key={href}
+      >
         <div className="scribble-highlight" aria-hidden>
           {scribbleText ?? text}
         </div>
@@ -24,7 +29,7 @@ export default function ScribbleButton({
     );
   }
   return (
-    <Link href={href} className={`scribble-button ${className}`}>
+    <Link href={href} className={`scribble-link ${className}`} key={href}>
       <div className="scribble-highlight" aria-hidden>
         {scribbleText ?? text}
       </div>

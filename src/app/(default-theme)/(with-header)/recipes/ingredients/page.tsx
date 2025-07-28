@@ -1,4 +1,9 @@
 import { generateIngredients, slugify } from "@/utils";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "recipe ingredients — claire freehafer",
+};
 
 export default async function Page() {
   const ingredients = await generateIngredients();

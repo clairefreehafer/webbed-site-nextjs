@@ -1,0 +1,149 @@
+@use "variables";
+
+$medium-width: 600px;
+$small-width: 400px;
+
+// wrapper for when the links are displayed in a grid
+.scribble-button-container {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: variables.$max-site-width;
+  width: 100%;
+
+  // 2 buttons per row
+  @media screen and (max-width: variables.$max-site-width) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  // 1 button per row
+  @media screen and (max-width: $small-width) {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  // scribble links that should look like buttons
+  & > .scribble-link {
+    aspect-ratio: 88/31;
+    padding: 0.5rem;
+
+    // 3 accross
+    @media screen and (min-width: 750px) {
+      // center the last button when there's 4
+      &.links-4 {
+        &:nth-last-child(-n + 1) {
+          grid-column: span 3;
+          width: calc((100% - 2rem) / 3);
+          margin: 0 auto;
+        }
+      }
+
+      // center single button
+      &.links-1 {
+        grid-column: span 3;
+        width: calc((100% - 1rem) / 3);
+        margin: 0 auto;
+      }
+    }
+
+    // 2 accross
+    @media screen and (max-width: variables.$max-site-width) and (min-width: $small-width) {
+      // center the last button when there's 3
+      &.links-3 {
+        &:nth-last-child(-n + 1) {
+          grid-column: span 2;
+          width: calc((100% - 1rem) / 2);
+          margin: 0 auto;
+        }
+      }
+
+      // cebter single button
+      &.links-1 {
+        grid-column: span 2;
+        width: calc((100% - 1rem) / 2);
+        margin: 0 auto;
+      }
+    }
+
+    // button behavior on mobile devices
+    @media (hover: none) {
+      aspect-ratio: unset;
+      border: 5px outset black;
+
+      &:focus {
+        border: 5px inset black;
+        background-color: yellow;
+      }
+    }
+  }
+}
+
+.scribble-link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  text-wrap: nowrap;
+  text-decoration-thickness: 2px;
+
+  &:hover,
+  &:focus,
+  &.active {
+    text-decoration: none;
+
+    & .scribble-highlight {
+      clip-path: rect(auto auto auto auto);
+    }
+
+    @media (hover: none) {
+      background-color: yellow;
+    }
+  }
+}
+
+.scribble-highlight {
+  font-family: var(--font-redacted-script);
+  font-weight: 700;
+  font-size: 4.5rem;
+  clip-path: rect(auto 0 auto 0);
+  color: yellow;
+  left: 0;
+  position: absolute;
+  overflow: hidden;
+  text-align: center;
+  text-shadow: 1px 1px 1px yellow, -1px -1px 2px yellow;
+  transition: clip-path 500ms;
+  white-space: nowrap;
+  width: 100%;
+
+  @media screen and (max-width: $medium-width) {
+    font-size: 4rem;
+  }
+
+  @media (hover: none) {
+    display: none;
+  }
+}
+
+.scribble-text {
+  color: white;
+  font-weight: bold;
+  font-family: var(--font-caveat);
+  font-size: 2rem;
+  mix-blend-mode: difference;
+  text-align: center;
+
+  @media screen and (max-width: $medium-width) {
+    font-size: 1.5rem;
+  }
+
+  @media screen and (max-width: $small-width) {
+    font-size: 2rem;
+  }
+
+  @media (hover: none) {
+    font-family: var(--font-atkinson-hyperlegible-mono);
+    font-size: 1rem;
+    font-weight: 300;
+  }
+}
