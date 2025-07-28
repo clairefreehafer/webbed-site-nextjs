@@ -1,0 +1,118 @@
+@use "mixins";
+
+html {
+  display: flex;
+  height: 100vh;
+  max-height: 100vh;
+}
+
+body {
+  background-color: black;
+  background: url("/images/zelda/pad-background.jpg") repeat;
+  color: #76b6ff;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-size: 100%, 100%;
+  font-family: var(--fot-rodin-pro-db);
+  display: flex;
+  flex: 1 1;
+  flex-direction: column;
+}
+
+a,
+a:visited {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+}
+
+a:hover {
+  color: #76b6ff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  padding: 0;
+}
+
+h1 {
+  font-weight: 100;
+  font-size: 2rem;
+  text-transform: capitalize;
+
+  &.hylia-serif {
+    font-family: var(--hylia-serif), Georgia, serif;
+  }
+  &.hylian {
+    font-family: var(--hylian-regular), Georgia, serif;
+  }
+  &.sheikah {
+    font-family: var(--sheikah), Georgia, serif;
+  }
+  &.sheikah-bold {
+    font-family: var(--sheikah), Georgia, serif;
+    font-weight: bold;
+  }
+}
+
+h2 {
+  font-family: var(--hylia-serif), Georgia, serif;
+  text-transform: capitalize;
+  font-weight: normal;
+}
+
+.border-top {
+  @include mixins.white-to-blue;
+  @include mixins.border;
+  top: 0;
+  transform: rotate(180deg);
+}
+
+.border-bottom {
+  @include mixins.white-to-blue;
+  @include mixins.border;
+  bottom: 0;
+}
+
+header {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 2rem 1rem 1rem;
+  gap: 1rem;
+  text-align: center;
+}
+
+.content {
+  flex: 2;
+  display: flex;
+  max-width: 100vw;
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.splitter {
+  @include mixins.white-to-blue;
+  max-width: 100%;
+  height: auto;
+}
+
+.game-links {
+  align-self: stretch;
+  display: flex;
+  justify-content: space-around;
+
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+  }
+}

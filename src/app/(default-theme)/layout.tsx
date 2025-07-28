@@ -1,17 +1,8 @@
-import Link from "next/link";
 import localFont from "next/font/local";
-import Nav from "@/components/nav";
-import "@/sass/default/style.scss";
 import Stars from "@/components/stars";
-
-function getBuildDate() {
-  const today = new Date();
-  const dd = String(today.getDate()).padStart(2, "0");
-  const mm = String(today.getMonth() + 1).padStart(2, "0");
-  const yyyy = today.getFullYear();
-
-  return `${yyyy}/${mm}/${dd}`;
-}
+import { Caveat, Redacted_Script } from "next/font/google";
+import "@/sass/global.scss";
+import "@/sass/default/style.scss";
 
 // https://www.brailleinstitute.org/freefont/
 const atkinsonHyperlegibleNext = localFont({
@@ -50,45 +41,31 @@ const garamond = localFont({
   fallback: ["Georgia", "serif"],
 });
 
+const caveat = Caveat({
+  display: "swap",
+  preload: true,
+  subsets: ["latin"],
+  variable: "--font-caveat",
+  weight: ["400", "500", "600", "700"],
+});
+
+const redactedScript = Redacted_Script({
+  display: "swap",
+  preload: true,
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
+  variable: "--font-redacted-script",
+});
+
 export default function Layout({ children }: React.PropsWithChildren) {
   return (
-    <html>
+    <html
+      className={`${atkinsonHyperlegibleNext.variable} ${atkinsonHyperlegibleMono.variable} ${garamond.variable} ${caveat.variable} ${redactedScript.variable}`}
+    >
       <body>
         <Stars />
 
-        <div
-          className={`container ${atkinsonHyperlegibleNext.variable} ${atkinsonHyperlegibleMono.variable} ${garamond.variable}`}
-        >
-          <header className="header">
-            <h1>claire freehafer</h1>
-            <nav>
-              <Nav />
-            </nav>
-          </header>
-
-          <main>{children}</main>
-
-          <footer className="footer">
-            <p>
-              <Link href="/sitemap">site map</Link>
-            </p>
-            <p>
-              made with{" "}
-              <a href="https://nextjs.org" target="_blank">
-                next.js
-              </a>{" "}
-              | hosted on{" "}
-              <a href="https://neocities.org" target="_blank">
-                neocities
-              </a>{" "}
-              | source code on{" "}
-              <a href="https://github.com/clairefreehafer/webbed-site-nextjs">
-                github
-              </a>
-            </p>
-            <p>last updated {getBuildDate()}</p>
-          </footer>
-        </div>
+        {children}
       </body>
     </html>
   );

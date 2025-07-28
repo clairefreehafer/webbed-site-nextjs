@@ -1,4 +1,4 @@
-import "@/sass/components/stars.scss";
+import "@/sass/default/stars.scss";
 
 export default function Stars() {
   return (
