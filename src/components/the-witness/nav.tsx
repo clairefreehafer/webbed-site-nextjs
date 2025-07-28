@@ -1,6 +1,6 @@
 "use client";
 
-import Nav, { ROOT_LINKS } from "../nav";
+import { ROOT_LINKS } from "@/utils/constants";
 
 export default function Navigation() {
   return (
@@ -23,7 +23,13 @@ export default function Navigation() {
             <div className="circle opacity-0"></div>
           </div>
           <div className="nav-mobile">
-            <Nav />
+            <ul>
+              {ROOT_LINKS.map(({ path, title }) => (
+                <li key={title}>
+                  <a href={path}>{title}</a>
+                </li>
+              ))}
+            </ul>
           </div>
           <div className="inner-shadow"></div>
         </div>
