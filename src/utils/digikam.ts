@@ -48,8 +48,6 @@ type Album = Omit<DigikamAlbum, "caption"> &
 
 /** fields returned from querying the digikam db. */
 interface DigikamImage {
-  /** where image caption is stored. */
-  comment: string | null;
   /** YYYY-MM-DDTHH:MM:SS.SSS */
   creationDate: string;
   // Albums.collection
@@ -60,6 +58,8 @@ interface DigikamImage {
   // Albums.relativePath
   relativePath: string;
   width: number;
+  title: string | null;
+  caption: string | null;
 }
 
 /** transformed image data for use on the site. */
@@ -71,6 +71,7 @@ export interface Image extends ImageCommentJson {
   width: DigikamImage["width"];
   src: string;
   palette?: Palette;
+  title: DigikamImage["title"];
 }
 
 interface ImageOptions {
@@ -89,6 +90,7 @@ async function transformDigikamImage(
     height: digikamImage.height,
     src: `/out/${digikamImage.collection}${digikamImage.relativePath}/${nameWithoutExtension}.webp`,
     width: digikamImage.width,
+    title: digikamImage.title,
   };
   try {
     const outputPath = `${process.cwd()}/public${transformedImage.src}`;
@@ -125,8 +127,8 @@ async function transformDigikamImage(
     }
 
     // check for custom metadata
-    if (digikamImage.comment?.startsWith("{")) {
-      const parsedCaption = JSON.parse(digikamImage.comment);
+    if (digikamImage.caption?.startsWith("{")) {
+      const parsedCaption = JSON.parse(digikamImage.caption);
 
       transformedImage = {
         ...transformedImage,
@@ -204,25 +206,36 @@ export const getAlbumImages = async (
   const digikamImages = digikam
     .prepare<{ albumRootId: number; relativePath: string }, DigikamImage>(
       `
+        WITH ImageTitle as (
+          SELECT * FROM ImageComments
+          WHERE ImageComments.type == 3
+        ),
+        ImageCaption as (
+          SELECT * FROM ImageComments
+          WHERE ImageComments.type == 1
+        )
         SELECT
           Images.name,
           ImageInformation.creationDate,
-          ImageComments.comment,
           Albums.collection,
           ImageInformation.height,
           ImageInformation.width,
           thumbs.FilePaths.path,
-          Albums.relativePath
+          Albums.relativePath,
+          ImageTitle.comment as title,
+          ImageCaption.comment as caption
         FROM Albums
           INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
           INNER JOIN Images ON Images.album = Albums.id
           LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
-          LEFT JOIN ImageComments on Images.id = ImageComments.imageId
+          LEFT JOIN ImageTitle ON Images.id = ImageTitle.imageId
+          LEFT JOIN ImageCaption ON Images.id = ImageCaption.imageId
           LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
           LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
         WHERE Albums.relativePath == $relativePath
           AND Albums.albumRoot = $albumRootId
-          ORDER BY Images.name ASC
+        GROUP BY Images.id
+            ORDER BY Images.name ASC
       `
     )
     .all({
@@ -301,15 +314,24 @@ export const getTagImages = async (tag: string): Promise<Image[]> => {
   const digikamImages = digikam
     .prepare<[{ tag: string; albumRootId: number }], DigikamImage>(
       `
+        WITH ImageTitle as (
+          SELECT * FROM ImageComments
+          WHERE ImageComments.type == 3
+        ),
+        ImageCaption as (
+          SELECT * FROM ImageComments
+          WHERE ImageComments.type == 1
+        )
         SELECT
           Images.name,
           ImageInformation.creationDate,
-          ImageComments.comment,
           Albums.collection,
           ImageInformation.height,
           ImageInformation.width,
           thumbs.FilePaths.path,
-          Albums.relativePath
+          Albums.relativePath,
+          ImageTitle.comment as title,
+          ImageCaption.comment as caption
         FROM Images
           LEFT JOIN ImageTags ON ImageTags.imageid = Images.id
           LEFT JOIN Tags ON ImageTags.tagid = Tags.id
@@ -319,6 +341,8 @@ export const getTagImages = async (tag: string): Promise<Image[]> => {
           LEFT JOIN ImageComments on Images.id = ImageComments.imageId
           LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
           LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
+          LEFT JOIN ImageTitle ON Images.id = ImageTitle.imageId
+          LEFT JOIN ImageCaption ON Images.id = ImageCaption.imageId
         WHERE Tags.name = $tag
           AND Albums.albumRoot = $albumRootId
         `

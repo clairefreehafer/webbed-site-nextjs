@@ -26,6 +26,7 @@ export default function Slideshow({ images }: SlideshowProps) {
             width={image.width}
             style={image.border ? { border: image.border } : {}}
           />
+          {image.title && <p className="image-title">{image.title}</p>}
         </li>
       ))}
     </ol>

@@ -5,8 +5,14 @@
   "cat": {
     "displayName": "cats"
   },
+  "dog": {
+    "displayName": "dogs"
+  },
   "fisheye": {
     "displayName": "fisheye",
     "background": "black"
+  },
+  "human": {
+    "displayName": "humans"
   }
 }

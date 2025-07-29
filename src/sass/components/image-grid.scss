@@ -12,6 +12,8 @@
 }
 
 .image-grid {
+  list-style-type: none;
+
   &.max-cols-3 {
     @include grid(3, 2rem);
     padding: 1rem 3rem 3rem;
@@ -52,4 +54,16 @@
     max-width: 100%;
     margin: auto;
   }
+}
+
+.image-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.image-title {
+  font-weight: 300;
+  font-size: 1.25rem;
 }

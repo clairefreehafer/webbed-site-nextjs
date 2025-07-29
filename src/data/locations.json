@@ -54,6 +54,11 @@
     "markerColor": "",
     "name": "owls head, maine"
   },
+  "paihia": {
+    "coordinates": [174.09142, -35.28154],
+    "markerColor": "",
+    "name": "paihia, aotearoa"
+  },
   "phoenix": {
     "coordinates": [-112.074141, 33.4484367],
     "markerColor": "sandybrown",
@@ -63,6 +68,11 @@
     "coordinates": [-73.97035, 40.66143],
     "markerColor": "",
     "name": "prospect park, brooklyn"
+  },
+  "rehoboth": {
+    "coordinates": [-75.08361, 38.71645],
+    "markerColor": "",
+    "name": "rehoboth beach, delware"
   },
   "rutland": {
     "coordinates": [-72.9817311, 43.6057574],
