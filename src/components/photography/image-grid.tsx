@@ -26,6 +26,7 @@ export default function ImageGrid({
             height={image.height}
             width={image.width}
             alt=""
+            className="image-grid-image"
           />
           {image.title && <p className="image-title">{image.title}</p>}
         </li>

@@ -5,6 +5,7 @@ import LinkList, {
 } from "@/components/photography/link-list";
 import { CollectionConfig } from "@/utils/types";
 import { Metadata } from "next";
+import Link from "next/link";
 
 const collections: CollectionConfig = collectionsJson;
 
@@ -17,5 +18,14 @@ export default async function Page() {
       href: `/collections/${slugify(collection)}`,
     })
   );
-  return <LinkList title="collections" links={links} />;
+  return (
+    <>
+      <div className="breadcrumbs">
+        <Link href="/photography">photography</Link>
+        <span>/</span>
+        <h2>collections</h2>
+      </div>
+      <LinkList title="collections" links={links} />
+    </>
+  );
 }
