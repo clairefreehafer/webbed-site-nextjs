@@ -1,10 +1,9 @@
 import { Album } from "@/utils/digikam";
 import NextImage from "next/image";
-import "@/sass/components/image-grid.scss";
 import Link from "next/link";
 import { deslugify } from "@/utils";
 
-export default function ImageGridLinks({
+export default function AlbumGrid({
   albums,
   maxCols = 2,
   aspectRatio = "4/3",
@@ -14,9 +13,9 @@ export default function ImageGridLinks({
   aspectRatio?: "1/1" | "4/3" | "16/9";
 }) {
   return (
-    <ul className={`image-grid max-cols-${maxCols}`}>
+    <ul className={`grid max-cols-${maxCols}`}>
       {albums.map((album) => (
-        <li key={album.slug} className="image-cell">
+        <li key={album.slug} className="cell">
           <Link href={`/photography/albums/${album.slug}`}>
             {
               <NextImage
@@ -27,7 +26,7 @@ export default function ImageGridLinks({
                 height={album.coverPhoto?.height ?? 500}
                 width={album.coverPhoto?.width ?? 375}
                 alt=""
-                className="image-grid-links-image"
+                className="album-grid-image"
                 style={{
                   aspectRatio,
                   objectPosition: album.coverPhoto?.position,

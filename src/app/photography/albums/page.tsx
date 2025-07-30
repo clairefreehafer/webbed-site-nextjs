@@ -1,4 +1,4 @@
-import ImageGridLinks from "@/components/photography/image-grid-links";
+import AlbumGrid from "@/components/photography/album-grid";
 import { getAlbums } from "@/utils/digikam";
 import Link from "next/link";
 
@@ -18,10 +18,10 @@ export default async function Page() {
         >
           photography
         </Link>
-        <span style={{ marginBottom: "5px" }}>/</span>
+        <span>/</span>
         <h2>albums</h2>
       </div>
-      <ImageGridLinks albums={albums} maxCols={3} />
+      <AlbumGrid albums={albums} maxCols={3} />
     </>
   );
 }
