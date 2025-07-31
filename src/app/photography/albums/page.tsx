@@ -12,12 +12,7 @@ export default async function Page() {
   return (
     <>
       <div className="breadcrumbs">
-        <Link
-          href="/photography"
-          style={{ marginBottom: "5px", fontWeight: 300 }}
-        >
-          photography
-        </Link>
+        <Link href="/photography">photography</Link>
         <span>/</span>
         <h2>albums</h2>
       </div>

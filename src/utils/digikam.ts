@@ -322,7 +322,16 @@ export const getTodaysImages = async (
   const digikamImages = digikam
     .prepare<
       { likeString: string; albumRootId: number; imageSort: string },
-      DigikamImage
+      {
+        name: string;
+        creationDate: string;
+        comment: string | null;
+        collection: string;
+        height: number;
+        width: number;
+        path: string;
+        relativePath: string;
+      }
     >(
       `
         SELECT
@@ -333,7 +342,7 @@ export const getTodaysImages = async (
           ImageInformation.height,
           ImageInformation.width,
           thumbs.FilePaths.path,
-          Albums.relativePath
+          trim(Albums.relativePath, '/') AS albumSlug
         FROM Albums
           INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
           INNER JOIN Images ON Images.album = Albums.id
@@ -392,7 +401,7 @@ export const getTagImages = async (tag: string): Promise<Image[]> => {
           ImageInformation.height,
           ImageInformation.width,
           thumbs.FilePaths.path,
-          Albums.relativePath,
+          trim(Albums.relativePath, '/') AS albumSlug,
           ImageTitle.comment as title,
           ImageCaption.comment as caption
         FROM Images
