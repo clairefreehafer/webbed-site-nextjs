@@ -1,11 +1,10 @@
-import Logo from "@/components/animal-crossing/logo";
-import Nav from "@/components/animal-crossing/nav";
-import "@/sass/animal-crossing/style.scss";
 import {
   GRASS_BACKGROUND_COLORS,
   getGrassDateRange,
 } from "@/utils/animal-crossing";
 import localFont from "next/font/local";
+import "@/sass/global.scss";
+import "@/sass/animal-crossing/style.scss";
 
 const finkHeavy = localFont({
   variable: "--font-fink-heavy",
@@ -37,29 +36,13 @@ export default function Layout({ children }: React.PropsWithChildren) {
     backgroundColor: GRASS_BACKGROUND_COLORS[grassDateRange],
     backgroundImage: `url("/images/animal-crossing/grass/square_${grassDateRange}.png")`,
   };
-  const sandStyles = {
-    backgroundImage: `url("/images/animal-crossing/sand/square_${grassDateRange}.png")`,
-  };
   return (
     <html>
-      <body style={bodyStyles}>
-        <div className={`container ${finkHeavy.variable} ${seurat.variable}`}>
-          <Logo />
-          <div className="sand" style={sandStyles}>
-            <nav>
-              <details>
-                <summary>navigation</summary>
-                <Nav />
-              </details>
-
-              <div className="desktop-menu">
-                <Nav />
-              </div>
-            </nav>
-
-            <main>{children}</main>
-          </div>
-        </div>
+      <body
+        className={`${finkHeavy.variable} ${seurat.variable}`}
+        style={bodyStyles}
+      >
+        {children}
       </body>
     </html>
   );
