@@ -35,7 +35,7 @@ export default async function Page() {
   return (
     <>
       <h2>photography</h2>
-      <LinkList title="photography" links={links} />
+      <LinkList links={links} />
     </>
   );
 }
