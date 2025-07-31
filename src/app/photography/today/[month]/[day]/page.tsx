@@ -1,5 +1,5 @@
 import { getTodaysImages } from "@/utils/digikam";
-import ImageGrid from "@/components/photography/image-grid";
+import ImageGrid from "@/components/image-grid";
 import Link from "next/link";
 import React from "react";
 

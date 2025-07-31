@@ -1,4 +1,4 @@
-import ImageGrid from "@/components/photography/image-grid";
+import ImageGrid from "@/components/image-grid";
 import { getAlbumImages } from "@/utils/digikam";
 import { Metadata } from "next";
 

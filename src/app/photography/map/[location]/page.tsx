@@ -1,4 +1,4 @@
-import ImageGrid from "@/components/photography/image-grid";
+import ImageGrid from "@/components/image-grid";
 import locations from "@/data/locations.json";
 import { deslugify, slugify } from "@/utils";
 import { getTagImages } from "@/utils/digikam";
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Params) {
   };
 }
 
-// usehttps://www.openstreetmap.org or https://overpass-turbo.eu/# with query:
+// use https://www.openstreetmap.org or https://overpass-turbo.eu/# with query:
 // ```
 //   node["name"="${name}"];
 //   out;

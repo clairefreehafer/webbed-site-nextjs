@@ -1,4 +1,4 @@
-import ImageGrid from "@/components/photography/image-grid";
+import ImageGrid from "@/components/image-grid";
 import { deslugify, slugify } from "@/utils";
 import { getTagImages } from "@/utils/digikam";
 import collectionsJson from "@/data/collections.json";
