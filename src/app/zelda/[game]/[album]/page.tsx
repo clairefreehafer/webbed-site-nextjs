@@ -7,7 +7,7 @@ export async function generateStaticParams() {
   const pages = [];
 
   for (const game of GAMES) {
-    const albums = getAlbums(game);
+    const albums = await getAlbums(game);
 
     for (const album of albums) {
       console.log(`⚔️ generating /zelda/${game}/${album.slug}`);

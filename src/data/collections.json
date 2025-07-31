@@ -3,7 +3,12 @@
     "displayName": "black & white"
   },
   "cat": {
-    "displayName": "cats"
+    "displayName": "cats",
+    "coverPhotoId": 51997,
+    "coverPhotoPosition": "bottom"
+  },
+  "dog": {
+    "displayName": "dogs"
   },
   "dog": {
     "displayName": "dogs"

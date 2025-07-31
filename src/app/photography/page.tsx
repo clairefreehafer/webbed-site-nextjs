@@ -32,5 +32,10 @@ const links: PhotographyPageLink[] = [
 ];
 
 export default async function Page() {
-  return <LinkList title="photography" links={links} />;
+  return (
+    <>
+      <h2>photography</h2>
+      <LinkList links={links} />
+    </>
+  );
 }

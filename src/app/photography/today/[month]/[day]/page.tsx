@@ -1,5 +1,7 @@
 import { getTodaysImages } from "@/utils/digikam";
 import ImageGrid from "@/components/photography/image-grid";
+import Link from "next/link";
+import React from "react";
 
 const months: Record<
   string,
@@ -55,25 +57,31 @@ export default async function Page({
   const { month, day } = await params;
   const imagesByYear = await getTodaysImages(month, day);
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        minHeight: "100%",
-      }}
-    >
-      <h2>
-        {day} {months[month].display}
-      </h2>
+    <>
+      <div className="breadcrumbs">
+        <Link href="/photography">photography</Link>
+        <span>/</span>
+        <h2>
+          {months[month].display} {day}
+        </h2>
+      </div>
       {Object.keys(imagesByYear).length === 0
         ? "no images :("
         : Object.keys(imagesByYear).map((year) => (
-            <>
-              <h3>{year}</h3>
+            <React.Fragment key={year}>
+              <h3
+                style={{
+                  fontSize: "1.5rem",
+                  textDecorationLine: "underline overline",
+                  textDecorationStyle: "wavy",
+                  marginTop: "1rem",
+                }}
+              >
+                {year}
+              </h3>
               <ImageGrid images={imagesByYear[year]} />
-            </>
+            </React.Fragment>
           ))}
-    </div>
+    </>
   );
 }

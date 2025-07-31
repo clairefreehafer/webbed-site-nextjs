@@ -1,11 +1,13 @@
 import { getAlbumImages, getAlbums } from "@/utils/digikam";
 import { deslugify } from "@/utils";
 import Slideshow from "@/components/slideshow";
+import Link from "next/link";
 
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  return getAlbums().map((album) => {
+  const albums = await getAlbums();
+  return albums.map((album) => {
     console.log(`├ generating /albums/${album.slug}`);
     return {
       album: album.slug,
@@ -29,5 +31,16 @@ export default async function Page({
 }) {
   const albumSlug = (await params).album;
   const images = await getAlbumImages(albumSlug);
-  return <Slideshow images={images} />;
+  return (
+    <>
+      <div className="breadcrumbs">
+        <Link href="/photography">photography</Link>
+        <span>/</span>
+        <Link href="/photography/albums">albums</Link>
+        <span>/</span>
+        <h2>{deslugify(albumSlug)}</h2>
+      </div>
+      <Slideshow images={images} />
+    </>
+  );
 }
