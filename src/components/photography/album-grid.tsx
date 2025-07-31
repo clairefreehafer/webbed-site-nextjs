@@ -5,10 +5,12 @@ import { deslugify } from "@/utils";
 
 export default function AlbumGrid({
   albums,
-  maxCols = 2,
+  linkPrefix,
+  maxCols = 3,
   aspectRatio = "4/3",
 }: {
   albums: Album[];
+  linkPrefix: string;
   maxCols?: 1 | 2 | 3;
   aspectRatio?: "1/1" | "4/3" | "16/9";
 }) {
@@ -16,7 +18,7 @@ export default function AlbumGrid({
     <ul className={`grid max-cols-${maxCols}`}>
       {albums.map((album) => (
         <li key={album.slug} className="cell">
-          <Link href={`/photography/albums/${album.slug}`}>
+          <Link href={`/photography/${linkPrefix}/${album.slug}`}>
             {
               <NextImage
                 // tv-static image from: https://giphy.com/gifs/vhs-static-blank-3o6vXRxrhj7Ov94Gbu

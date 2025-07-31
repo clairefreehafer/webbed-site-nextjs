@@ -385,6 +385,7 @@ export const getTagImages = async (tag: string): Promise<Image[]> => {
           WHERE ImageComments.type == 1
         )
         SELECT
+          Images.id,
           Images.name,
           ImageInformation.creationDate,
           Albums.collection,
@@ -466,4 +467,50 @@ export const getMapData = (): GeoJson => {
     });
   }
   return mapData;
+};
+
+export const getCollectionCoverPhoto = async (
+  imageId: number
+): Promise<Image | void> => {
+  const image = digikam
+    .prepare<
+      { imageId: number },
+      {
+        name: string;
+        collection: string;
+        height: number;
+        width: number;
+        path: string;
+        albumSlug: string;
+      }
+    >(
+      `
+      SELECT
+        Images.name,
+        Albums.collection,
+        ImageInformation.height,
+        ImageInformation.width,
+        thumbs.FilePaths.path,
+        trim(Albums.relativePath, '/') AS albumSlug
+      FROM Albums
+        INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
+        INNER JOIN Images ON Images.album = Albums.id
+        LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
+        LEFT JOIN ImageComments on Images.id = ImageComments.imageId
+        LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
+        LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
+      WHERE Albums.albumRoot = 4
+        AND Images.id = $imageId
+    `
+    )
+    .get({
+      imageId,
+    });
+
+  if (!image) {
+    console.log(`❌ no collection cover photo found with ID ${imageId}`);
+    return undefined;
+  }
+  const transformedImage = await transformDigikamImage(image);
+  return transformedImage;
 };

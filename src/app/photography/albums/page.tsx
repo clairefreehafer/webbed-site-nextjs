@@ -21,7 +21,7 @@ export default async function Page() {
         <span>/</span>
         <h2>albums</h2>
       </div>
-      <AlbumGrid albums={albums} maxCols={3} />
+      <AlbumGrid albums={albums} linkPrefix="albums" />
     </>
   );
 }
