@@ -47,6 +47,7 @@ export type Album = {
 
 /** fields returned from querying the digikam db. */
 interface DigikamImage {
+  id: number;
   /** YYYY-MM-DDTHH:MM:SS.SSS */
   creationDate?: string;
   // Albums.collection
@@ -63,6 +64,7 @@ interface DigikamImage {
 
 /** transformed image data for use on the site. */
 export interface Image extends ImageCommentJson {
+  id: number;
   /** YYYY-MM-DDTHH:MM:SS.SSS */
   dateTaken?: DigikamImage["creationDate"];
   filename: DigikamImage["name"];
@@ -84,6 +86,7 @@ async function transformDigikamImage(
 ): Promise<Image> {
   const nameWithoutExtension = digikamImage.name.split(".")[0];
   let transformedImage: Image = {
+    id: digikamImage.id,
     filename: nameWithoutExtension,
     height: digikamImage.height,
     src: `/out/${digikamImage.collection}/${digikamImage.albumSlug}/${nameWithoutExtension}.webp`,
@@ -172,6 +175,7 @@ export const getAlbums = cache(
           coverPhotoHeight: number | null;
           coverPhotoWidth: number | null;
           coverPhotoFilename: string | null;
+          coverPhotoId: number | null;
         }
       >(
         `
@@ -183,7 +187,8 @@ export const getAlbums = cache(
             Thumbs.FilePaths.path AS coverPhotoPath,
             ImageInformation.height AS coverPhotoHeight,
             ImageInformation.width AS coverPhotoWidth,
-            Images.name AS coverPhotoFilename
+            Images.name AS coverPhotoFilename,
+            Images.id AS coverPhotoId
           FROM Albums
             INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
             LEFT JOIN Images ON Images.id = Albums.icon
@@ -220,6 +225,7 @@ export const getAlbums = cache(
             albumSlug: album.slug,
             collection: album.collection,
             path: album.coverPhotoPath,
+            id: album.coverPhotoId!,
             name: album.coverPhotoFilename!,
             height: album.coverPhotoHeight!,
             width: album.coverPhotoWidth!,
@@ -257,6 +263,7 @@ export const getAlbumImages = async (
     .prepare<
       { albumRootId: number; relativePath: string },
       {
+        id: number;
         name: string;
         creationDate: string;
         collection: string;
@@ -278,6 +285,7 @@ export const getAlbumImages = async (
           WHERE ImageComments.type == 1
         )
         SELECT
+          Images.id,
           Images.name,
           ImageInformation.creationDate,
           Albums.collection,
@@ -324,6 +332,7 @@ export const getTodaysImages = async (
     .prepare<
       { likeString: string; albumRootId: number; imageSort: string },
       {
+        id: number;
         name: string;
         creationDate: string;
         comment: string | null;
@@ -336,6 +345,7 @@ export const getTodaysImages = async (
     >(
       `
         SELECT
+          Images.id,
           Images.name,
           ImageInformation.creationDate,
           ImageComments.comment,
@@ -384,7 +394,21 @@ export const getTodaysImages = async (
 
 export const getTagImages = async (tag: string): Promise<Image[]> => {
   const digikamImages = digikam
-    .prepare<[{ tag: string; albumRootId: number }], DigikamImage>(
+    .prepare<
+      [{ tag: string; albumRootId: number }],
+      {
+        id: number;
+        name: string;
+        creationDate: string;
+        collection: string;
+        height: number;
+        width: number;
+        path: string;
+        albumSlug: string;
+        title: string | null;
+        caption: string | null;
+      }
+    >(
       `
         WITH ImageTitle as (
           SELECT * FROM ImageComments
@@ -521,6 +545,9 @@ export const getCollectionCoverPhoto = async (
     console.log(`❌ no collection cover photo found with ID ${imageId}`);
     return undefined;
   }
-  const transformedImage = await transformDigikamImage(image);
+  const transformedImage = await transformDigikamImage({
+    ...image,
+    id: imageId,
+  });
   return transformedImage;
 };

@@ -5,29 +5,29 @@
   @if $colGap == false {
     $colGap: $rowGap;
   }
-  $columnWidth: calc((100% / $columns) - ($colGap / $columns));
+  $columnWidth: calc(((100% - ($colGap * ($columns - 1))) / $columns));
   display: grid;
   grid-template-columns: repeat($columns, $columnWidth);
   gap: $rowGap $colGap;
   width: 100%;
-  justify-content: center;
-  align-items: center;
 }
 
 .grid {
   list-style-type: none;
+  overflow: scroll;
+  flex: 2;
+  max-height: 100%;
 
   &.max-cols-3 {
     @include grid(3, 2rem);
-    padding: 1rem 3rem 3rem;
+    padding: 2rem;
 
     @media screen and (max-width: 1000px) {
       @include grid(2, 2rem);
-      padding: 1rem 2rem 2rem;
     }
 
     @media screen and (max-width: 650px) {
-      @include grid(1, 1rem);
+      @include grid(1, 2rem);
       padding: 1rem;
     }
   }
@@ -55,7 +55,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
 
   & a {
     display: flex;
@@ -87,7 +86,6 @@
 }
 
 .image-grid-image {
-  max-height: 90svh;
   height: auto;
   width: auto;
   max-width: 100%;

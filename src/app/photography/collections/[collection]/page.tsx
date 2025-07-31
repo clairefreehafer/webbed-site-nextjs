@@ -22,8 +22,9 @@ export async function generateMetadata({
 }: {
   params: Promise<{ collection: string }>;
 }) {
-  const collectionSlug = (await params).collection;
-  return { title: `${deslugify(collectionSlug)} — claire freehafer` };
+  const collection = deslugify((await params).collection);
+  const { displayName } = collections[collection];
+  return { title: `${displayName ?? collection} — claire freehafer` };
 }
 
 export default async function Page({
