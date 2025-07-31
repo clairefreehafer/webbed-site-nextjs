@@ -4,6 +4,7 @@ import Slideshow from "@/components/slideshow";
 import Link from "next/link";
 import { AnimalCrossingTags } from "@/utils/types";
 import animalCrossingTagsJson from "@/data/animal-crossing-tags.json";
+import { Grass } from "@/utils/animal-crossing/grass";
 
 const animalCrossingTags: AnimalCrossingTags = animalCrossingTagsJson;
 
@@ -47,6 +48,7 @@ export default async function Page({
   }
   return (
     <>
+      <Grass shape="triangle" />
       <div className="breadcrumbs-container">
         <div className="breadcrumbs">
           <Link href="/animal-crossing">animal crossing</Link>

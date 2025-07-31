@@ -1,6 +1,7 @@
 import Logo from "@/components/animal-crossing/logo";
 import Nav from "@/components/animal-crossing/nav";
 import { getGrassDateRange } from "@/utils/animal-crossing";
+import { Grass } from "@/utils/animal-crossing/grass";
 
 export default function Layout({ children }: React.PropsWithChildren) {
   const grassDateRange = getGrassDateRange();
@@ -9,6 +10,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
   };
   return (
     <div className="container">
+      <Grass />
       <Logo />
       <div className="sand" style={sandStyles}>
         <nav>

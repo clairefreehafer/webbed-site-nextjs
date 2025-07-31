@@ -5,6 +5,7 @@ import {
 import localFont from "next/font/local";
 import "@/sass/global.scss";
 import "@/sass/animal-crossing/style.scss";
+import { GrassContextProvider } from "@/utils/animal-crossing/grass";
 
 const finkHeavy = localFont({
   variable: "--font-fink-heavy",
@@ -42,7 +43,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
         className={`${finkHeavy.variable} ${seurat.variable}`}
         style={bodyStyles}
       >
-        {children}
+        <GrassContextProvider>{children}</GrassContextProvider>
       </body>
     </html>
   );

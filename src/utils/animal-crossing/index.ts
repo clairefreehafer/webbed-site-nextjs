@@ -11,6 +11,8 @@ export const GRASS_BACKGROUND_COLORS = {
   "1129-1209": "rgb(99, 81, 82)",
 };
 
+export type GrassShape = "circle" | "square" | "triangle";
+
 export function getGrassDateRange(date = new Date()) {
   const month = date.getMonth() + 1;
   const day = date.getDate();
@@ -70,7 +72,6 @@ const astrologyDateRanges = {
 } as const;
 
 export function getAstrologyDateRange(date = new Date()) {
-  console.log(date);
   const month = date.getMonth() + 1;
   const day = date.getDate();
 
