@@ -283,7 +283,7 @@ export const getAlbumImages = async (
           ImageInformation.height,
           ImageInformation.width,
           thumbs.FilePaths.path,
-          trim(Albums.relativePath, '/') AS slug,
+          trim(Albums.relativePath, '/') AS albumSlug,
           ImageTitle.comment as title,
           ImageCaption.comment as caption
         FROM Albums
@@ -330,7 +330,7 @@ export const getTodaysImages = async (
         height: number;
         width: number;
         path: string;
-        relativePath: string;
+        albumSlug: string;
       }
     >(
       `
