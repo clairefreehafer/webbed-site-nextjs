@@ -1,16 +1,29 @@
-import { getAlbumImages, getAlbums } from "@/utils/digikam";
+import { getAlbumImages, getAlbums, getTagImages } from "@/utils/digikam";
 import { deslugify } from "@/utils";
 import Slideshow from "@/components/slideshow";
 import Link from "next/link";
+import { AnimalCrossingTags } from "@/utils/types";
+import animalCrossingTagsJson from "@/data/animal-crossing-tags.json";
+
+const animalCrossingTags: AnimalCrossingTags = animalCrossingTagsJson;
 
 export async function generateStaticParams() {
+  const params = [];
+
   const albums = await getAlbums("animal-crossing/new-horizons");
-  return albums.map((album) => {
+  for (const album of albums) {
     console.log(`├ generating /animal-crossing/new-horizons/${album.slug}`);
-    return {
-      album: album.slug,
-    };
-  });
+    params.push({ album: album.slug });
+  }
+
+  for (const category of Object.keys(animalCrossingTags)) {
+    for (const character of animalCrossingTags[category]) {
+      console.log(`├ generating /animal-crossing/new-horizons/${character}`);
+      params.push({ album: character });
+    }
+  }
+
+  return params;
 }
 
 export async function generateMetadata({
@@ -28,7 +41,10 @@ export default async function Page({
   params: Promise<{ album: string }>;
 }) {
   const albumSlug = (await params).album;
-  const images = await getAlbumImages(albumSlug);
+  let images = await getAlbumImages(albumSlug);
+  if (images.length === 0) {
+    images = await getTagImages(albumSlug);
+  }
   return (
     <>
       <div className="breadcrumbs-container">

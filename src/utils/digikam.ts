@@ -42,6 +42,7 @@ type CoverPhoto = Pick<Image, "height" | "src" | "width"> & {
 export type Album = {
   displayName?: AlbumCaptionJson["displayName"];
   slug: string;
+  date: string;
   coverPhoto?: CoverPhoto;
 };
 
@@ -171,6 +172,7 @@ export const getAlbums = cache(
           slug: string;
           collection: string;
           caption: string | null;
+          date: string;
           coverPhotoPath: string | null;
           coverPhotoHeight: number | null;
           coverPhotoWidth: number | null;
@@ -183,6 +185,7 @@ export const getAlbums = cache(
             trim(Albums.relativePath, '/') AS slug,
             Albums.collection,
             Albums.caption,
+            Albums.date,
             -- cover photo
             Thumbs.FilePaths.path AS coverPhotoPath,
             ImageInformation.height AS coverPhotoHeight,
@@ -213,6 +216,7 @@ export const getAlbums = cache(
     for (const album of albums) {
       let transformedAlbum: Album = {
         slug: album.slug,
+        date: album.date,
       };
       try {
         let captionJson: AlbumCaptionJson = {};
