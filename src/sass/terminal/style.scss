@@ -23,6 +23,16 @@ body {
   }
 }
 
+a {
+  color: white;
+  font-family: var(--font-atkinson-hyperlegible-mono);
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+}
+
 .container {
   align-items: center;
   display: flex;

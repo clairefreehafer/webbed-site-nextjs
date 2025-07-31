@@ -1,24 +1,19 @@
-"use client";
+import Nav from "@/components/photography/nav";
 import "@/sass/global.scss";
 import "@/sass/photography/style.scss";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "photography — claire freehafer",
+};
 
 export default function Layout({ children }: React.PropsWithChildren) {
-  const pathname = usePathname();
-  const splitPathname = pathname.split("/");
-  const backHref = pathname.includes("today")
-    ? "/photography"
-    : `/${splitPathname.slice(1, splitPathname.length - 1).join("/")}`;
-
   return (
     <html>
       <body>
         <header>
-          <Link href={backHref} className="home">
-            &larr; back to {backHref}
-          </Link>
           <h1>claire freehafer</h1>
+          <Nav />
         </header>
 
         <section className="content">{children}</section>

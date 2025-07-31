@@ -55,10 +55,12 @@ $ui-position-y: 1rem;
 .slide {
   align-items: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   list-style-type: none;
   position: relative;
   padding: 0 1rem;
+  gap: 1rem;
 }
 
 .snap-point {
@@ -71,10 +73,14 @@ $ui-position-y: 1rem;
 }
 
 .image {
-  // box-shadow: 0 0 1.5rem 0.1rem rgba(0, 0, 0, 0.3);
-  max-height: 90svh;
+  max-height: 85svh;
   height: auto;
   width: auto;
   max-width: 100%;
-  margin: auto;
+  margin: 0 auto;
+}
+
+.image-title {
+  font-size: 1.5rem;
+  font-weight: 200;
 }

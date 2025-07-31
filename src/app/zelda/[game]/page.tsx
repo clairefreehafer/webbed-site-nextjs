@@ -14,7 +14,7 @@ export default async function Page({
   params: Promise<{ game: string }>;
 }) {
   const { game } = await params;
-  const botwAlbums = getAlbums(game);
+  const botwAlbums = await getAlbums(game);
 
   return (
     <div className="container">

@@ -74,6 +74,8 @@ export default function Map({ mapData }: { mapData: GeoJson }) {
           "top-left"
         );
       });
+    } else {
+      console.error(`❌ problem initializing map`);
     }
   });
 

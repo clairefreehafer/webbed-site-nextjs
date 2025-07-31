@@ -1,6 +1,5 @@
 import { Image } from "@/utils/digikam";
 import NextImage from "next/image";
-import "@/sass/components/image-grid.scss";
 
 export default function ImageGrid({
   images,
@@ -15,19 +14,22 @@ export default function ImageGrid({
     return "no images :(";
   }
   return (
-    <div
-      className={`image-grid max-cols-${maxCols}`}
+    <ul
+      className={`grid max-cols-${maxCols}`}
       style={background ? { background } : {}}
     >
       {images.map((image) => (
-        <NextImage
-          key={image.filename}
-          src={image.src}
-          height={image.height}
-          width={image.width}
-          alt=""
-        />
+        <li key={image.filename} className="cell">
+          <NextImage
+            src={image.src}
+            height={image.height}
+            width={image.width}
+            alt=""
+            className="image-grid-image"
+          />
+          {image.title && <p className="image-title">{image.title}</p>}
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }

@@ -1,4 +1,5 @@
 "use client";
+import { getActiveNavLink } from "@/utils/client";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
@@ -24,19 +25,6 @@ const NAV_LINKS = [
     icon: "animal-crossing/icons/lists",
   },
 ];
-
-function getActiveNavLink(currentUrl: string, pageUrl: string) {
-  const currentSection = currentUrl.split("/")[1];
-
-  if (pageUrl === "/" && !currentSection) {
-    return "active";
-  }
-
-  if (currentSection === pageUrl.replace("/", "")) {
-    return "active";
-  }
-  return "";
-}
 
 export default function Nav() {
   const pathname = usePathname();

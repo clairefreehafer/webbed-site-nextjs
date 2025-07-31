@@ -40,5 +40,7 @@ export type CollectionConfig = Record<
   {
     displayName: string;
     background?: React.CSSProperties["background"];
+    coverPhotoId?: number;
+    coverPhotoPosition?: string;
   }
 >;
