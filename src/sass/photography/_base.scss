@@ -38,12 +38,13 @@ section.content {
 
 .breadcrumbs {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 0.5rem;
+  margin: 0 1rem 1rem;
 
   & > a,
   & > span {
-    margin-bottom: 5px;
+    margin-top: 10px;
     font-weight: 300;
   }
 }

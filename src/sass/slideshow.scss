@@ -16,6 +16,7 @@ $ui-position-x: 0;
 // vertical distance of UI edges from edge of slideshow container
 $ui-position-y: 1rem;
 
+// needed?
 .container {
   max-width: 100vw;
   max-height: 100vw;
@@ -45,7 +46,7 @@ $ui-position-y: 1rem;
   grid-auto-columns: $container-width;
   grid-auto-flow: column;
   grid-template-columns: repeat(auto-fill, $container-width);
-  padding: 0;
+  padding: 0 0 1rem;
   gap: 0 1rem;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
@@ -59,8 +60,7 @@ $ui-position-y: 1rem;
   justify-content: center;
   list-style-type: none;
   position: relative;
-  padding: 0 1rem;
-  gap: 1rem;
+  margin: 0 1rem;
 }
 
 .snap-point {
@@ -73,11 +73,12 @@ $ui-position-y: 1rem;
 }
 
 .image {
-  max-height: 85svh;
-  height: auto;
-  width: auto;
-  max-width: 100%;
+  height: 100%;
+  width: 100%;
   margin: 0 auto;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
 }
 
 .image-title {
