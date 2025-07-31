@@ -79,5 +79,5 @@ export default function Map({ mapData }: { mapData: GeoJson }) {
     }
   });
 
-  return <div ref={mapRef} style={{ height: "100%" }} />;
+  return <div ref={mapRef} style={{ height: "100%", width: "100%" }} />;
 }
