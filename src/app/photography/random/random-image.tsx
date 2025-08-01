@@ -1,15 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function RandomImage({ allImages }: { allImages: string[] }) {
   const [imagePath, setImagePath] = useState<string>();
 
+  const getRandomImage = useCallback(() => {
+    return allImages[Math.floor(Math.random() * allImages.length)];
+  }, [allImages]);
+
   useEffect(() => {
     if (!imagePath) {
-      const randomImage =
-        allImages[Math.floor(Math.random() * allImages.length)];
+      const randomImage = getRandomImage();
       setImagePath(randomImage);
     }
   }, []);
@@ -18,9 +21,18 @@ export default function RandomImage({ allImages }: { allImages: string[] }) {
     return null;
   }
 
+  function handleClick() {
+    setImagePath(getRandomImage());
+  }
+
   return (
-    <div className="single-image">
-      <Image src={imagePath} alt="" fill objectFit="contain" />
-    </div>
+    <>
+      <button type="button" onClick={handleClick}>
+        refresh
+      </button>
+      <div className="single-image">
+        <Image src={imagePath} alt="" fill objectFit="contain" />
+      </div>
+    </>
   );
 }
