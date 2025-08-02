@@ -6,11 +6,7 @@ export type PhotographyPageLink = {
   display: string;
 };
 
-export default async function LinkList({
-  links,
-}: {
-  links: PhotographyPageLink[];
-}) {
+export default function LinkList({ links }: { links: PhotographyPageLink[] }) {
   return (
     <ul className="link-list">
       {links.map((link) => (
