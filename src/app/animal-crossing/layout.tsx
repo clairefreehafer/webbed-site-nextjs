@@ -42,6 +42,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
       <body
         className={`${finkHeavy.variable} ${seurat.variable}`}
         style={bodyStyles}
+        data-theme="animal-crossing"
       >
         <GrassContextProvider>{children}</GrassContextProvider>
       </body>

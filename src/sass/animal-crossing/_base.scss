@@ -88,3 +88,14 @@ main {
     font-size: 1rem;
   }
 }
+
+.image {
+  filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.8));
+}
+
+body[data-theme="animal-crossing"] .image-title {
+  @include mixins.text-background;
+  font-family: var(--font-seurat);
+  font-size: 1rem;
+  padding: 1rem;
+}

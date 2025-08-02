@@ -50,7 +50,7 @@ export type Album = {
 interface DigikamImage {
   id: number;
   /** YYYY-MM-DDTHH:MM:SS.SSS */
-  creationDate?: string;
+  creationDate: string;
   // Albums.collection
   collection: string;
   height?: number;
@@ -67,7 +67,7 @@ interface DigikamImage {
 export interface Image extends ImageCommentJson {
   id: number;
   /** YYYY-MM-DDTHH:MM:SS.SSS */
-  dateTaken?: DigikamImage["creationDate"];
+  dateTaken: DigikamImage["creationDate"];
   filename: DigikamImage["name"];
   height: DigikamImage["height"];
   width: DigikamImage["width"];
@@ -326,6 +326,26 @@ export const getAlbumImages = async (
     images.push(transformedImage);
   }
   return images;
+};
+
+export const getAlbumDate = (albumSlug: string) => {
+  const result = digikam
+    .prepare<
+      { relativePath: string },
+      {
+        date: string;
+      }
+    >(
+      `
+      SELECT Albums.date
+      FROM Albums
+      WHERE Albums.relativePath = $relativePath
+    `
+    )
+    .get({
+      relativePath: `/${albumSlug}`,
+    });
+  return result?.date;
 };
 
 export const getTodaysImages = async (
