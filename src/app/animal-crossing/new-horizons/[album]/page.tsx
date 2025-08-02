@@ -51,7 +51,10 @@ export default async function Page({
   let date = getAlbumDate(albumSlug);
   if (images.length === 0) {
     // if no images in the album, it's probably a tag
-    images = await getTagImages(deslugify(albumSlug));
+    images = await getTagImages(
+      deslugify(albumSlug),
+      "animal-crossing/new-horizons"
+    );
   }
   if (!date) {
     // if no album date (cuz tag), use the date of the first image

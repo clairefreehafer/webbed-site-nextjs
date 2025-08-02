@@ -418,10 +418,13 @@ export const getTodaysImages = async (
   return imagesByYear;
 };
 
-export const getTagImages = async (tag: string): Promise<Image[]> => {
+export const getTagImages = async (
+  tag: string,
+  collection = "photography"
+): Promise<Image[]> => {
   const digikamImages = digikam
     .prepare<
-      [{ tag: string; albumRootId: number }],
+      [{ tag: string; albumRootId: number; collection: string }],
       {
         id: number;
         name: string;
@@ -468,9 +471,10 @@ export const getTagImages = async (tag: string): Promise<Image[]> => {
           LEFT JOIN ImageCaption ON Images.id = ImageCaption.imageId
         WHERE Tags.name = $tag
           AND Albums.albumRoot = $albumRootId
+          AND Albums.collection LIKE $collection
         `
     )
-    .all({ tag, albumRootId: websiteRootAlbumId });
+    .all({ tag, albumRootId: websiteRootAlbumId, collection });
   console.log(
     `📷 [getTagImages] ${digikamImages.length} images found tagged "${tag}".`
   );
