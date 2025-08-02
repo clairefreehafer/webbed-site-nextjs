@@ -24,7 +24,9 @@ export async function generateStaticParams() {
 
   for (const category of Object.keys(animalCrossingTags)) {
     for (const character of animalCrossingTags[category]) {
-      console.log(`├ generating /animal-crossing/new-horizons/${character}`);
+      console.log(
+        `├ generating /animal-crossing/new-horizons/${slugify(character)}`
+      );
       params.push({ album: slugify(character) });
     }
   }
@@ -60,7 +62,6 @@ export default async function Page({
     // if no album date (cuz tag), use the date of the first image
     date = images[0].dateTaken;
   }
-  console.log(date);
   return (
     <>
       <Grass shape="triangle" date={new Date(date)} />
