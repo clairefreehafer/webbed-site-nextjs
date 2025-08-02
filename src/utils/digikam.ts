@@ -42,7 +42,7 @@ type CoverPhoto = Pick<Image, "height" | "src" | "width"> & {
 export type Album = {
   displayName?: AlbumCaptionJson["displayName"];
   slug: string;
-  date: string;
+  date?: string;
   coverPhoto?: CoverPhoto;
 };
 
@@ -93,6 +93,7 @@ async function transformDigikamImage(
     src: `/out/${digikamImage.collection}/${digikamImage.albumSlug}/${nameWithoutExtension}.webp`,
     width: digikamImage.width,
     title: digikamImage.title,
+    dateTaken: digikamImage.creationDate,
   };
   try {
     const outputPath = `${process.cwd()}/public${transformedImage.src}`;
@@ -229,6 +230,7 @@ export const getAlbums = cache(
             albumSlug: album.slug,
             collection: album.collection,
             path: album.coverPhotoPath,
+            creationDate: "",
             id: album.coverPhotoId!,
             name: album.coverPhotoFilename!,
             height: album.coverPhotoHeight!,
@@ -571,6 +573,7 @@ export const getCollectionCoverPhoto = async (
   }
   const transformedImage = await transformDigikamImage({
     ...image,
+    creationDate: "",
     id: imageId,
   });
   return transformedImage;

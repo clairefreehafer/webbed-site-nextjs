@@ -42,7 +42,9 @@ export default async function Page() {
           >
             <Image
               src={`/images/animal-crossing/icons/star_fragment_${
-                getAstrologyDateRange(new Date(album.date)).dateRange
+                getAstrologyDateRange(
+                  album.date ? new Date(album.date) : undefined
+                ).dateRange
               }.png`}
               alt=""
               height={128}
