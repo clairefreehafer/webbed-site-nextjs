@@ -1,5 +1,5 @@
 {
-  "black and white": {
+  "black & white": {
     "displayName": "black & white"
   },
   "cat": {
@@ -10,14 +10,17 @@
   "dog": {
     "displayName": "dogs"
   },
-  "dog": {
-    "displayName": "dogs"
-  },
   "fisheye": {
     "displayName": "fisheye",
     "background": "black"
   },
   "human": {
     "displayName": "humans"
+  },
+  "moon": {
+    "displayName": "la lune",
+    "background": "black",
+    "coverPhotoId": 50848,
+    "coverPhotoPosition": "center 30%"
   }
 }

@@ -14,7 +14,6 @@ export default function Slideshow({ images }: SlideshowProps) {
           <div
             className="image"
             style={{ backgroundImage: `url('${image.src}')` }}
-            role="img"
           />
           {image.title && <p className="image-title">{image.title}</p>}
         </li>

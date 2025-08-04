@@ -14,6 +14,7 @@ a {
   width: 350px;
   height: variables.$svg-height;
   fill: rgba(231, 197, 73, 1);
+  flex-shrink: 0;
 }
 
 .svg-background {

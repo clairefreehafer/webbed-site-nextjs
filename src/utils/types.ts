@@ -44,3 +44,5 @@ export type CollectionConfig = Record<
     coverPhotoPosition?: string;
   }
 >;
+
+export type AnimalCrossingTags = Record<string, string[]>;
