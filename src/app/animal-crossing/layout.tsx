@@ -7,23 +7,11 @@ import "@/sass/global.scss";
 import "@/sass/animal-crossing/style.scss";
 import { GrassContextProvider } from "@/utils/animal-crossing/grass";
 
-const finkHeavy = localFont({
-  variable: "--font-fink-heavy",
-  src: [
-    {
-      path: "../../../public/fonts/animal-crossing/fink-heavy.woff2",
-      weight: "400",
-      style: "normal",
-    },
-  ],
-  fallback: ["Georgia", "serif"],
-});
-
 const seurat = localFont({
   variable: "--font-seurat",
   src: [
     {
-      path: "../../../public/fonts/animal-crossing/seurat.woff2",
+      path: "../../fonts/animal-crossing/seurat.woff2",
       weight: "400",
       style: "normal",
     },
@@ -40,8 +28,9 @@ export default function Layout({ children }: React.PropsWithChildren) {
   return (
     <html>
       <body
-        className={`${finkHeavy.variable} ${seurat.variable}`}
+        className={seurat.variable}
         style={bodyStyles}
+        data-theme="animal-crossing"
       >
         <GrassContextProvider>{children}</GrassContextProvider>
       </body>

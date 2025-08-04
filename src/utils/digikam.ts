@@ -42,7 +42,7 @@ type CoverPhoto = Pick<Image, "height" | "src" | "width"> & {
 export type Album = {
   displayName?: AlbumCaptionJson["displayName"];
   slug: string;
-  date: string;
+  date?: string;
   coverPhoto?: CoverPhoto;
 };
 
@@ -50,7 +50,7 @@ export type Album = {
 interface DigikamImage {
   id: number;
   /** YYYY-MM-DDTHH:MM:SS.SSS */
-  creationDate?: string;
+  creationDate: string;
   // Albums.collection
   collection: string;
   height?: number;
@@ -67,7 +67,7 @@ interface DigikamImage {
 export interface Image extends ImageCommentJson {
   id: number;
   /** YYYY-MM-DDTHH:MM:SS.SSS */
-  dateTaken?: DigikamImage["creationDate"];
+  dateTaken: DigikamImage["creationDate"];
   filename: DigikamImage["name"];
   height: DigikamImage["height"];
   width: DigikamImage["width"];
@@ -93,6 +93,7 @@ async function transformDigikamImage(
     src: `/out/${digikamImage.collection}/${digikamImage.albumSlug}/${nameWithoutExtension}.webp`,
     width: digikamImage.width,
     title: digikamImage.title,
+    dateTaken: digikamImage.creationDate,
   };
   try {
     const outputPath = `${process.cwd()}/public${transformedImage.src}`;
@@ -229,6 +230,7 @@ export const getAlbums = cache(
             albumSlug: album.slug,
             collection: album.collection,
             path: album.coverPhotoPath,
+            creationDate: "",
             id: album.coverPhotoId!,
             name: album.coverPhotoFilename!,
             height: album.coverPhotoHeight!,
@@ -328,6 +330,26 @@ export const getAlbumImages = async (
   return images;
 };
 
+export const getAlbumDate = (albumSlug: string) => {
+  const result = digikam
+    .prepare<
+      { relativePath: string },
+      {
+        date: string;
+      }
+    >(
+      `
+      SELECT Albums.date
+      FROM Albums
+      WHERE Albums.relativePath = $relativePath
+    `
+    )
+    .get({
+      relativePath: `/${albumSlug}`,
+    });
+  return result?.date;
+};
+
 export const getTodaysImages = async (
   month: string,
   day: string
@@ -396,10 +418,13 @@ export const getTodaysImages = async (
   return imagesByYear;
 };
 
-export const getTagImages = async (tag: string): Promise<Image[]> => {
+export const getTagImages = async (
+  tag: string,
+  collection = "photography"
+): Promise<Image[]> => {
   const digikamImages = digikam
     .prepare<
-      [{ tag: string; albumRootId: number }],
+      [{ tag: string; albumRootId: number; collection: string }],
       {
         id: number;
         name: string;
@@ -446,9 +471,10 @@ export const getTagImages = async (tag: string): Promise<Image[]> => {
           LEFT JOIN ImageCaption ON Images.id = ImageCaption.imageId
         WHERE Tags.name = $tag
           AND Albums.albumRoot = $albumRootId
+          AND Albums.collection LIKE $collection
         `
     )
-    .all({ tag, albumRootId: websiteRootAlbumId });
+    .all({ tag, albumRootId: websiteRootAlbumId, collection });
   console.log(
     `📷 [getTagImages] ${digikamImages.length} images found tagged "${tag}".`
   );
@@ -551,6 +577,7 @@ export const getCollectionCoverPhoto = async (
   }
   const transformedImage = await transformDigikamImage({
     ...image,
+    creationDate: "",
     id: imageId,
   });
   return transformedImage;

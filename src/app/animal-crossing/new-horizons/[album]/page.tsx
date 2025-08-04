@@ -1,5 +1,10 @@
-import { getAlbumImages, getAlbums, getTagImages } from "@/utils/digikam";
-import { deslugify } from "@/utils";
+import {
+  getAlbumDate,
+  getAlbumImages,
+  getAlbums,
+  getTagImages,
+} from "@/utils/digikam";
+import { deslugify, slugify } from "@/utils";
 import Slideshow from "@/components/slideshow";
 import Link from "next/link";
 import { AnimalCrossingTags } from "@/utils/types";
@@ -19,8 +24,10 @@ export async function generateStaticParams() {
 
   for (const category of Object.keys(animalCrossingTags)) {
     for (const character of animalCrossingTags[category]) {
-      console.log(`├ generating /animal-crossing/new-horizons/${character}`);
-      params.push({ album: character });
+      console.log(
+        `├ generating /animal-crossing/new-horizons/${slugify(character)}`
+      );
+      params.push({ album: slugify(character) });
     }
   }
 
@@ -43,12 +50,21 @@ export default async function Page({
 }) {
   const albumSlug = (await params).album;
   let images = await getAlbumImages(albumSlug);
+  let date = getAlbumDate(albumSlug);
   if (images.length === 0) {
-    images = await getTagImages(albumSlug);
+    // if no images in the album, it's probably a tag
+    images = await getTagImages(
+      deslugify(albumSlug),
+      "animal-crossing/new-horizons"
+    );
+  }
+  if (!date) {
+    // if no album date (cuz tag), use the date of the first image
+    date = images[0].dateTaken;
   }
   return (
     <>
-      <Grass shape="triangle" />
+      <Grass shape="triangle" date={new Date(date)} />
       <div className="breadcrumbs-container">
         <div className="breadcrumbs">
           <Link href="/animal-crossing">animal crossing</Link>
