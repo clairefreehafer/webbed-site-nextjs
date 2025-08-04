@@ -49,10 +49,10 @@ export default async function Page({
   params: Promise<{ album: string }>;
 }) {
   const albumSlug = (await params).album;
-  let images = await getAlbumImages(albumSlug);
+  let images = await getAlbumImages(albumSlug, "animal-crossing/new-horizons");
   let date = getAlbumDate(albumSlug);
   if (images.length === 0) {
-    // if no images in the album, it's probably a tag
+    // if no images in the album, check the tag.
     images = await getTagImages(
       deslugify(albumSlug),
       "animal-crossing/new-horizons"

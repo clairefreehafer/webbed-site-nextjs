@@ -263,11 +263,16 @@ export const getAlbums = cache(
 
 export const getAlbumImages = async (
   relativePath: string,
+  collection = "photography",
   options: ImageOptions = { resize: 1000, generatePalette: false }
 ): Promise<Image[]> => {
   const digikamImages = digikam
     .prepare<
-      { albumRootId: number; relativePath: string },
+      {
+        albumRootId: number;
+        relativePath: string;
+        collectionLikeString: string;
+      },
       {
         id: number;
         name: string;
@@ -311,6 +316,7 @@ export const getAlbumImages = async (
           LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
         WHERE Albums.relativePath == $relativePath
           AND Albums.albumRoot = $albumRootId
+          AND Albums.collection LIKE $collectionLikeString
         GROUP BY Images.id
             ORDER BY Images.name ASC
       `
@@ -318,9 +324,10 @@ export const getAlbumImages = async (
     .all({
       albumRootId: websiteRootAlbumId,
       relativePath: `/${relativePath}`,
+      collectionLikeString: `%${collection}%`,
     });
   console.log(
-    `📷 [getAlbumImages] ${digikamImages.length} images found in "${relativePath}"`
+    `📷 [getAlbumImages] ${digikamImages.length} images found in "${collection}/${relativePath}"`
   );
   const images: Image[] = [];
   for (const image of digikamImages) {
@@ -476,7 +483,7 @@ export const getTagImages = async (
     )
     .all({ tag, albumRootId: websiteRootAlbumId, collection });
   console.log(
-    `📷 [getTagImages] ${digikamImages.length} images found tagged "${tag}".`
+    `📷 [getTagImages] ${digikamImages.length} ${collection} images found tagged "${tag}".`
   );
   const images: Image[] = [];
   for (const image of digikamImages) {
