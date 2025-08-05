@@ -33,6 +33,8 @@ interface ImageCommentJson {
   altText?: string;
   border?: React.CSSProperties["border"];
   background?: React.CSSProperties["background"];
+  // animal crossing
+  showDate?: boolean;
 }
 
 type CoverPhoto = Pick<Image, "height" | "src" | "width"> & {
@@ -53,7 +55,7 @@ interface DigikamImage {
   creationDate: string;
   // Albums.collection
   collection: string;
-  height?: number;
+  height: number;
   name: string;
   path: string;
   // Albums.relativePath
@@ -263,11 +265,16 @@ export const getAlbums = cache(
 
 export const getAlbumImages = async (
   relativePath: string,
+  collection = "photography",
   options: ImageOptions = { resize: 1000, generatePalette: false }
 ): Promise<Image[]> => {
   const digikamImages = digikam
     .prepare<
-      { albumRootId: number; relativePath: string },
+      {
+        albumRootId: number;
+        relativePath: string;
+        collectionLikeString: string;
+      },
       {
         id: number;
         name: string;
@@ -311,16 +318,18 @@ export const getAlbumImages = async (
           LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
         WHERE Albums.relativePath == $relativePath
           AND Albums.albumRoot = $albumRootId
+          AND Albums.collection LIKE $collectionLikeString
         GROUP BY Images.id
-            ORDER BY Images.name ASC
+        ORDER BY Images.name ASC
       `
     )
     .all({
       albumRootId: websiteRootAlbumId,
       relativePath: `/${relativePath}`,
+      collectionLikeString: `%${collection}%`,
     });
   console.log(
-    `📷 [getAlbumImages] ${digikamImages.length} images found in "${relativePath}"`
+    `📷 [getAlbumImages] ${digikamImages.length} images found in "${collection}/${relativePath}"`
   );
   const images: Image[] = [];
   for (const image of digikamImages) {
@@ -472,11 +481,12 @@ export const getTagImages = async (
         WHERE Tags.name = $tag
           AND Albums.albumRoot = $albumRootId
           AND Albums.collection LIKE $collection
-        `
+          GROUP BY Images.id
+      `
     )
     .all({ tag, albumRootId: websiteRootAlbumId, collection });
   console.log(
-    `📷 [getTagImages] ${digikamImages.length} images found tagged "${tag}".`
+    `📷 [getTagImages] ${digikamImages.length} ${collection} images found tagged "${tag}".`
   );
   const images: Image[] = [];
   for (const image of digikamImages) {
