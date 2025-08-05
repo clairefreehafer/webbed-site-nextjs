@@ -1,6 +1,7 @@
+import { Metadata } from "next";
+
 import PuzzleBorder from "@/components/the-witness/puzzle-border";
 import { getAlbumImages } from "@/utils/digikam";
-import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "the witness — claire freehafer",

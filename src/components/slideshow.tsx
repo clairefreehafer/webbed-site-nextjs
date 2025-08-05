@@ -1,4 +1,5 @@
 import "@/sass/components/slideshow.scss";
+
 import NextImage from "next/image";
 
 function formatDate(date: Date) {
