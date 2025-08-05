@@ -1,8 +1,7 @@
 import createMDX from "@next/mdx";
+import type { NextConfig } from "next";
 import remarkGfm from "remark-gfm";
 import type { SourceSpan } from "sass";
-
-import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   // generate a static export in `out` folder.
