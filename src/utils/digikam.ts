@@ -320,7 +320,7 @@ export const getAlbumImages = async (
           AND Albums.albumRoot = $albumRootId
           AND Albums.collection LIKE $collectionLikeString
         GROUP BY Images.id
-            ORDER BY Images.name ASC
+        ORDER BY Images.name ASC
       `
     )
     .all({
@@ -481,7 +481,8 @@ export const getTagImages = async (
         WHERE Tags.name = $tag
           AND Albums.albumRoot = $albumRootId
           AND Albums.collection LIKE $collection
-        `
+          GROUP BY Images.id
+      `
     )
     .all({ tag, albumRootId: websiteRootAlbumId, collection });
   console.log(
