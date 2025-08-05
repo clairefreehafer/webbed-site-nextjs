@@ -1,5 +1,6 @@
-import { Image } from "@/utils/digikam";
 import NextImage from "next/image";
+
+import { Image } from "@/utils/digikam";
 
 export default function PuzzleBorder({ image }: { image: Image }) {
   return (

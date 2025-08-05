@@ -1,5 +1,6 @@
-import Link from "next/link";
 import "@/sass/default/scribble-button.scss";
+
+import Link from "next/link";
 
 export type ScribbleLinkProps = {
   text: string;

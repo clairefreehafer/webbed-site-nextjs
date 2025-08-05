@@ -1,6 +1,7 @@
+import { Metadata } from "next";
+
 import { slugify } from "@/utils";
 import { generateTags } from "@/utils/lists";
-import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "list tags — claire freehafer",

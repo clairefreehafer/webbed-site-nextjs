@@ -1,9 +1,10 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import LinkList, {
   PhotographyPageLink,
 } from "@/components/photography/link-list";
-import { useEffect, useState } from "react";
 
 export default function Menu() {
   const [links, setLinks] = useState<PhotographyPageLink[]>();
@@ -39,7 +40,7 @@ export default function Menu() {
         },
       ]);
     }
-  }, []);
+  }, [links]);
 
   if (!links) {
     return null;

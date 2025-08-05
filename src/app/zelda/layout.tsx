@@ -1,6 +1,8 @@
 import "@/sass/zelda/style.scss";
 import "@/sass/global.scss";
+
 import localFont from "next/font/local";
+
 import Name from "@/components/zelda/name";
 import Nav from "@/components/zelda/nav";
 

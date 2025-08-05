@@ -1,12 +1,13 @@
-import NookPhone from "@/components/animal-crossing/nookphone";
-import { deslugify, slugify } from "@/utils";
-import { getAstrologyDateRange } from "@/utils/animal-crossing";
-import { getAlbums } from "@/utils/digikam";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import animalCrossingTagsJson from "@/data/animal-crossing-tags.json";
 import { Fragment } from "react";
+
+import NookPhone from "@/components/animal-crossing/nookphone";
+import animalCrossingTagsJson from "@/data/animal-crossing-tags.json";
+import { deslugify, slugify } from "@/utils";
+import { getAstrologyDateRange } from "@/utils/animal-crossing";
+import { getAlbums } from "@/utils/digikam";
 import { AnimalCrossingTags } from "@/utils/types";
 
 const animalCrossingTags: AnimalCrossingTags = animalCrossingTagsJson;

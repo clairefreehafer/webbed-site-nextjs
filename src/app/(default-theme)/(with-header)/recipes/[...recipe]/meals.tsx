@@ -1,7 +1,8 @@
+import Link from "next/link";
+
 import LastMade from "@/components/default/last-made";
 import { deslugify, getRecipePages } from "@/utils";
 import { RecipePage } from "@/utils/types";
-import Link from "next/link";
 
 export default async function Meals() {
   const recipes = await getRecipePages();

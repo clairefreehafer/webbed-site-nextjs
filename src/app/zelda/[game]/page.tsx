@@ -1,8 +1,9 @@
+import Image from "next/image";
+import Link from "next/link";
+
 import SheikahUnderline from "@/components/zelda/sheikah-underline";
 import { deslugify } from "@/utils";
 import { getAlbums } from "@/utils/digikam";
-import Image from "next/image";
-import Link from "next/link";
 
 export async function generateStaticParams() {
   return [{ game: "breath-of-the-wild" }, { game: "tears-of-the-kingdom" }];

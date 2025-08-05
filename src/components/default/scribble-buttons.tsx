@@ -1,4 +1,5 @@
 import "@/sass/default/scribble-button.scss";
+
 import ScribbleLink, { ScribbleLinkProps } from "./scribble-link";
 
 export default function ScribbleButtons({

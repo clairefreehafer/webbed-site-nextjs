@@ -1,5 +1,6 @@
-import { getListPages } from "@/utils/lists";
 import { Metadata } from "next";
+
+import { getListPages } from "@/utils/lists";
 
 export const metadata: Metadata = {
   title: "lists — claire freehafer",

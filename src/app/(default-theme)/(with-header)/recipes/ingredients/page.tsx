@@ -1,5 +1,6 @@
-import { generateIngredients, slugify } from "@/utils";
 import { Metadata } from "next";
+
+import { generateIngredients, slugify } from "@/utils";
 
 export const metadata: Metadata = {
   title: "recipe ingredients — claire freehafer",

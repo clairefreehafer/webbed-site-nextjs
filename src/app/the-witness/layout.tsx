@@ -1,8 +1,10 @@
+import "@/sass/the-witness/style.scss";
+
 import fs from "fs";
 import sharp from "sharp";
+
 import Navigation from "@/components/the-witness/nav";
 import variables from "@/sass/the-witness/export.module.scss";
-import "@/sass/the-witness/style.scss";
 
 export default async function Layout({ children }: React.PropsWithChildren) {
   const { numberOfVerticalBanners, verticalBannerFilePath } = variables;

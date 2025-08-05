@@ -1,8 +1,10 @@
-import localFont from "next/font/local";
-import Stars from "@/components/stars";
-import { Caveat, Redacted_Script } from "next/font/google";
 import "@/sass/global.scss";
 import "@/sass/default/style.scss";
+
+import { Caveat, Redacted_Script } from "next/font/google";
+import localFont from "next/font/local";
+
+import Stars from "@/components/stars";
 
 // https://www.brailleinstitute.org/freefont/
 const atkinsonHyperlegibleNext = localFont({

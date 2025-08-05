@@ -1,7 +1,8 @@
 import fs from "fs";
 import path from "path";
-import { RecipePage } from "./types";
 import { cache } from "react";
+
+import { RecipePage } from "./types";
 
 export function areArraysEqual(arr1: string[], arr2: string[]) {
   return (

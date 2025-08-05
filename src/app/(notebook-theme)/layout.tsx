@@ -1,4 +1,5 @@
 import "@/sass/notebook/style.scss";
+
 import localFont from "next/font/local";
 
 const loveYaLikeASister = localFont({

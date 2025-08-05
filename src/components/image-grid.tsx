@@ -1,6 +1,8 @@
-import { Image } from "@/utils/digikam";
-import NextImage from "next/image";
 import "@/sass/components/grids.scss";
+
+import NextImage from "next/image";
+
+import { Image } from "@/utils/digikam";
 
 export default function ImageGrid({
   images,

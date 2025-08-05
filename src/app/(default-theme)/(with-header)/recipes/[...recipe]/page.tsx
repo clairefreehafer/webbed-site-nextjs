@@ -1,6 +1,8 @@
-import { areArraysEqual, getRecipePages } from "@/utils";
-import Meals from "./meals";
 import Link from "next/link";
+
+import { areArraysEqual, getRecipePages } from "@/utils";
+
+import Meals from "./meals";
 import Recipe from "./recipe";
 
 export async function generateStaticParams() {

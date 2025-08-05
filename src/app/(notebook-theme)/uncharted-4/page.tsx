@@ -1,9 +1,10 @@
-import ImageBorder from "@/components/notebook/image-border";
-import { getAlbumImages } from "@/utils/digikam";
 import Image from "next/image";
 
+import ImageBorder from "@/components/notebook/image-border";
+import { getAlbumImages } from "@/utils/digikam";
+
 export default async function Page() {
-  const images = await getAlbumImages("uncharted-4", { resize: 582 });
+  const images = await getAlbumImages("uncharted-4", "video-games", { resize: 582 });
 
   return (
     <div className="image-grid">

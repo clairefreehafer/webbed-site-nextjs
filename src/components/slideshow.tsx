@@ -1,5 +1,6 @@
-import { Image } from "@/utils/digikam";
 import "@/sass/components/slideshow.scss";
+
+import { Image } from "@/utils/digikam";
 
 type SlideshowProps = {
   images: Image[];

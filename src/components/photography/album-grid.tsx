@@ -1,8 +1,10 @@
-import { Album } from "@/utils/digikam";
+import "@/sass/components/grids.scss";
+
 import NextImage from "next/image";
 import Link from "next/link";
+
 import { deslugify } from "@/utils";
-import "@/sass/components/grids.scss";
+import { Album } from "@/utils/digikam";
 
 export default function AlbumGrid({
   albums,

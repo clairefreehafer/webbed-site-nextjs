@@ -1,6 +1,7 @@
+import Link from "next/link";
+
 import AlbumGrid from "@/components/photography/album-grid";
 import { getAlbums } from "@/utils/digikam";
-import Link from "next/link";
 
 export function generateMetadata() {
   return { title: "albums — claire freehafer" };

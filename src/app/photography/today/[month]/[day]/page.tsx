@@ -1,7 +1,8 @@
-import { getTodaysImages } from "@/utils/digikam";
-import ImageGrid from "@/components/image-grid";
 import Link from "next/link";
 import React from "react";
+
+import ImageGrid from "@/components/image-grid";
+import { getTodaysImages } from "@/utils/digikam";
 
 const months: Record<
   string,

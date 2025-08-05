@@ -1,6 +1,7 @@
+import Link from "next/link";
+
 import Tags from "@/components/default/tags";
 import { RecipePage } from "@/utils/types";
-import Link from "next/link";
 
 export default function Recipe({ recipe }: { recipe: RecipePage }) {
   const { title, sourceUrl, ingredients, default: Page } = recipe;

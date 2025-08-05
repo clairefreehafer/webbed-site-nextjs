@@ -1,7 +1,9 @@
-import { getMapData } from "@/utils/digikam";
-import Map from "./map";
 import { Metadata } from "next";
 import Link from "next/link";
+
+import { getMapData } from "@/utils/digikam";
+
+import Map from "./map";
 
 export const metadata: Metadata = { title: "photo map — claire freehafer " };
 

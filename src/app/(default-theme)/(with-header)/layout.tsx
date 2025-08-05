@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import Nav from "@/components/default/nav";
 
 function getBuildDate() {

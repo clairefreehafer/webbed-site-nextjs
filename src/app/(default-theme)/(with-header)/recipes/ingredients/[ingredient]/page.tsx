@@ -1,5 +1,6 @@
-import { deslugify, generateIngredients, slugify } from "@/utils";
 import Link from "next/link";
+
+import { deslugify, generateIngredients, slugify } from "@/utils";
 
 type Params = Promise<{ ingredient: string }>;
 

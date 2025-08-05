@@ -1,8 +1,11 @@
 "use client";
-import maplibregl, { LngLatBoundsLike, Marker, Popup } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
+
+import maplibregl, { LngLatBoundsLike, Marker, Popup } from "maplibre-gl";
 import { useEffect, useRef } from "react";
+
 import { GeoJson } from "@/utils/types";
+
 import { StyleSwitcher } from "./style-switcher";
 
 const BOUNDS_BUFFER = 5;
@@ -77,7 +80,7 @@ export default function Map({ mapData }: { mapData: GeoJson }) {
     } else {
       console.error(`❌ problem initializing map`);
     }
-  });
+  }, [mapData.features]);
 
   return <div ref={mapRef} style={{ height: "100%", width: "100%" }} />;
 }

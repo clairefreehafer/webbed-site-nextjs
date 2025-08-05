@@ -1,9 +1,10 @@
+import Link from "next/link";
+
 import ImageGrid from "@/components/image-grid";
+import collectionsJson from "@/data/collections.json";
 import { deslugify, slugify } from "@/utils";
 import { getTagImages } from "@/utils/digikam";
-import collectionsJson from "@/data/collections.json";
 import { CollectionConfig } from "@/utils/types";
-import Link from "next/link";
 
 const collections: CollectionConfig = collectionsJson;
 

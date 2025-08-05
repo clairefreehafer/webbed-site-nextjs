@@ -1,12 +1,14 @@
-import Database from "better-sqlite3";
-import { cache } from "react";
-import { slugify } from ".";
-import fs from "fs";
-import sharp from "sharp";
-import { Vibrant } from "node-vibrant/node";
 import { type Palette } from "@vibrant/color";
-import { GeoJson } from "./types";
+import Database from "better-sqlite3";
+import fs from "fs";
+import { Vibrant } from "node-vibrant/node";
+import { cache } from "react";
+import sharp from "sharp";
+
 import locations from "@/data/locations.json";
+
+import { slugify } from ".";
+import { GeoJson } from "./types";
 
 const digikam = new Database(`${process.cwd()}/local/digikam4.db`, {
   readonly: true,

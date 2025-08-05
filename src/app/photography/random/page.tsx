@@ -1,7 +1,8 @@
 import fg from "fast-glob";
-import RandomImage from "./random-image";
 import { Metadata } from "next";
 import Link from "next/link";
+
+import RandomImage from "./random-image";
 
 export const metadata: Metadata = {
   title: "a random photo — claire freehafer",

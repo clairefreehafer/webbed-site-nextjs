@@ -1,7 +1,8 @@
 "use client";
-import { getActiveNavLink } from "@/utils/client";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+
+import { getActiveNavLink } from "@/utils/client";
 
 const NAV_LINKS = [
   {

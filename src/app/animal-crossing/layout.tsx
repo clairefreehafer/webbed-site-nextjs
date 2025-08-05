@@ -1,10 +1,12 @@
-import {
-  GRASS_BACKGROUND_COLORS,
-  getGrassDateRange,
-} from "@/utils/animal-crossing";
-import localFont from "next/font/local";
 import "@/sass/global.scss";
 import "@/sass/animal-crossing/style.scss";
+
+import localFont from "next/font/local";
+
+import {
+  getGrassDateRange,
+  GRASS_BACKGROUND_COLORS,
+} from "@/utils/animal-crossing";
 import { GrassContextProvider } from "@/utils/animal-crossing/grass";
 
 const seurat = localFont({

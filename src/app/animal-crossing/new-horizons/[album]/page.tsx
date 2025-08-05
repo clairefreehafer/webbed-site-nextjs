@@ -1,15 +1,16 @@
+import Link from "next/link";
+
+import Slideshow from "@/components/slideshow";
+import animalCrossingTagsJson from "@/data/animal-crossing-tags.json";
+import { deslugify, slugify } from "@/utils";
+import { Grass } from "@/utils/animal-crossing/grass";
 import {
   getAlbumDate,
   getAlbumImages,
   getAlbums,
   getTagImages,
 } from "@/utils/digikam";
-import { deslugify, slugify } from "@/utils";
-import Slideshow from "@/components/slideshow";
-import Link from "next/link";
 import { AnimalCrossingTags } from "@/utils/types";
-import animalCrossingTagsJson from "@/data/animal-crossing-tags.json";
-import { Grass } from "@/utils/animal-crossing/grass";
 
 const animalCrossingTags: AnimalCrossingTags = animalCrossingTagsJson;
 

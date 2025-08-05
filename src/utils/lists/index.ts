@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+
 import { ListPage } from "../types";
 
 export async function getListPages(): Promise<ListPage[]> {

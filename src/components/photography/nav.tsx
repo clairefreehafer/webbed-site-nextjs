@@ -1,6 +1,8 @@
-import { ROOT_LINKS } from "@/utils/constants";
-import Link from "next/link";
 import "@/sass/photography/nav.scss";
+
+import Link from "next/link";
+
+import { ROOT_LINKS } from "@/utils/constants";
 
 export default function Nav() {
   return (

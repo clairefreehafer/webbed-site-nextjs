@@ -1,8 +1,9 @@
+import localFont from "next/font/local";
+
 import Logo from "@/components/animal-crossing/logo";
 import Nav from "@/components/animal-crossing/nav";
 import { getGrassDateRange } from "@/utils/animal-crossing";
 import { Grass } from "@/utils/animal-crossing/grass";
-import localFont from "next/font/local";
 
 const finkHeavy = localFont({
   variable: "--font-fink-heavy",

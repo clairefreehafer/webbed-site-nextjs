@@ -1,7 +1,9 @@
 "use client";
 import { usePathname } from "next/navigation";
-import ScribbleLink, { ScribbleLinkProps } from "./scribble-link";
+
 import { getActiveNavLink } from "@/utils/client";
+
+import ScribbleLink, { ScribbleLinkProps } from "./scribble-link";
 
 const ROOT_LINKS: ScribbleLinkProps[] = [
   {

@@ -1,7 +1,9 @@
-import Nav from "@/components/photography/nav";
 import "@/sass/global.scss";
 import "@/sass/photography/style.scss";
+
 import { Metadata } from "next";
+
+import Nav from "@/components/photography/nav";
 
 export const metadata: Metadata = {
   title: "photography — claire freehafer",

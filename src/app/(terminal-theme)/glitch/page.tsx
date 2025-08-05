@@ -1,6 +1,7 @@
+import { Metadata } from "next";
+
 import ImageGrid from "@/components/image-grid";
 import { getAlbumImages } from "@/utils/digikam";
-import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "glitch art — claire freehafer",

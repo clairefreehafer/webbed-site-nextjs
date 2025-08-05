@@ -1,7 +1,9 @@
 import "@/sass/global.scss";
 import "@/sass/terminal/style.scss";
-import localFont from "next/font/local";
+
 import { Press_Start_2P } from "next/font/google";
+import localFont from "next/font/local";
+
 import Nav from "@/components/terminal/nav";
 
 /** 8-bit */

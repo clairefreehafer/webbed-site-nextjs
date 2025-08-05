@@ -1,4 +1,5 @@
 import "@/sass/notebook/uncharted-4.scss";
+
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

@@ -1,10 +1,11 @@
-import { slugify } from "@/utils";
-import collectionsJson from "@/data/collections.json";
-import { CollectionConfig } from "@/utils/types";
 import { Metadata } from "next";
 import Link from "next/link";
+
 import AlbumGrid from "@/components/photography/album-grid";
+import collectionsJson from "@/data/collections.json";
+import { slugify } from "@/utils";
 import { Album, getCollectionCoverPhoto } from "@/utils/digikam";
+import { CollectionConfig } from "@/utils/types";
 
 const collections: CollectionConfig = collectionsJson;
 

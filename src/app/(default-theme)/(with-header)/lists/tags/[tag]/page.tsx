@@ -1,6 +1,7 @@
+import Link from "next/link";
+
 import { deslugify, slugify } from "@/utils";
 import { generateTags } from "@/utils/lists";
-import Link from "next/link";
 
 export async function generateStaticParams() {
   const tags = await generateTags();

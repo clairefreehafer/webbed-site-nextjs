@@ -1,7 +1,10 @@
-import { ROOT_LINKS } from "@/utils/constants";
-import SheikahUnderline from "./sheikah-underline";
-import Link from "next/link";
 import "@/sass/zelda/nav.scss";
+
+import Link from "next/link";
+
+import { ROOT_LINKS } from "@/utils/constants";
+
+import SheikahUnderline from "./sheikah-underline";
 
 export default function Nav() {
   return (

@@ -1,6 +1,7 @@
-import SheikahUnderline from "@/components/zelda/sheikah-underline";
 import Image from "next/image";
 import Link from "next/link";
+
+import SheikahUnderline from "@/components/zelda/sheikah-underline";
 
 export default function Page() {
   return (

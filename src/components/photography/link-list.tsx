@@ -1,5 +1,6 @@
-import Link from "next/link";
 import "@/sass/photography/link-list.scss";
+
+import Link from "next/link";
 
 export type PhotographyPageLink = {
   href?: string;

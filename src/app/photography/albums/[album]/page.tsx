@@ -1,7 +1,8 @@
-import { getAlbumImages, getAlbums } from "@/utils/digikam";
-import { deslugify } from "@/utils";
-import Slideshow from "@/components/slideshow";
 import Link from "next/link";
+
+import Slideshow from "@/components/slideshow";
+import { deslugify } from "@/utils";
+import { getAlbumImages, getAlbums } from "@/utils/digikam";
 
 export const dynamicParams = false;
 
