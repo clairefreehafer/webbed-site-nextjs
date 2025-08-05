@@ -35,6 +35,8 @@ interface ImageCommentJson {
   altText?: string;
   border?: React.CSSProperties["border"];
   background?: React.CSSProperties["background"];
+  // animal crossing
+  showDate?: boolean;
 }
 
 type CoverPhoto = Pick<Image, "height" | "src" | "width"> & {
@@ -55,7 +57,7 @@ interface DigikamImage {
   creationDate: string;
   // Albums.collection
   collection: string;
-  height?: number;
+  height: number;
   name: string;
   path: string;
   // Albums.relativePath
@@ -320,7 +322,7 @@ export const getAlbumImages = async (
           AND Albums.albumRoot = $albumRootId
           AND Albums.collection LIKE $collectionLikeString
         GROUP BY Images.id
-            ORDER BY Images.name ASC
+        ORDER BY Images.name ASC
       `
     )
     .all({
@@ -481,7 +483,8 @@ export const getTagImages = async (
         WHERE Tags.name = $tag
           AND Albums.albumRoot = $albumRootId
           AND Albums.collection LIKE $collection
-        `
+          GROUP BY Images.id
+      `
     )
     .all({ tag, albumRootId: websiteRootAlbumId, collection });
   console.log(
