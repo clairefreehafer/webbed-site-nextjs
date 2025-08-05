@@ -33,6 +33,8 @@ interface ImageCommentJson {
   altText?: string;
   border?: React.CSSProperties["border"];
   background?: React.CSSProperties["background"];
+  // animal crossing
+  showDate?: boolean;
 }
 
 type CoverPhoto = Pick<Image, "height" | "src" | "width"> & {
@@ -53,7 +55,7 @@ interface DigikamImage {
   creationDate: string;
   // Albums.collection
   collection: string;
-  height?: number;
+  height: number;
   name: string;
   path: string;
   // Albums.relativePath

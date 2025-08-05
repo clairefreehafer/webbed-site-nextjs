@@ -19,6 +19,19 @@ const seurat = localFont({
   fallback: ["system-ui", "sans-serif"],
 });
 
+// https://www.dafont.com/ds-digital.font
+const digitalDisplay = localFont({
+  variable: "--font-digial-display",
+  src: [
+    {
+      path: "../../fonts/animal-crossing/digital-display.woff2",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  fallback: ["monospace"],
+});
+
 export default function Layout({ children }: React.PropsWithChildren) {
   const grassDateRange = getGrassDateRange();
   const bodyStyles = {
@@ -28,7 +41,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
   return (
     <html>
       <body
-        className={seurat.variable}
+        className={`${seurat.variable} ${digitalDisplay.variable}`}
         style={bodyStyles}
         data-theme="animal-crossing"
       >
