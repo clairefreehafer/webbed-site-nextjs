@@ -104,9 +104,6 @@ main {
 }
 
 .image {
-  align-items: center;
-  display: flex;
-  position: relative;
   filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.8));
 }
 
@@ -116,6 +113,7 @@ body[data-theme="animal-crossing"] {
     font-family: var(--font-seurat);
     font-size: 1rem;
     padding: 1rem;
+    margin-top: 1rem;
   }
 
   .photo-date {
@@ -124,12 +122,9 @@ body[data-theme="animal-crossing"] {
     font-family: var(--font-digial-display);
     font-size: min(6vh, 4vw);
     opacity: 0.9;
-    right: 0;
     text-shadow: 0 0 3px orange, 0 0 5px orangered, 0 0 10px orangered;
     align-items: flex-end;
     justify-content: flex-end;
     padding: 3.5%;
-    position: absolute;
-    width: 100%;
   }
 }

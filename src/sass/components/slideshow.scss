@@ -57,21 +57,33 @@ $ui-position-y: 1rem;
   top: 0;
 }
 
+.swipe-to-view {
+  display: none;
+}
+.scroll-to-view {
+  display: block;
+}
+
+@media (hover: none) {
+  .swipe-to-view {
+    display: block;
+  }
+  .scroll-to-view {
+    display: none;
+  }
+}
+
 .image {
   height: 100%;
   width: 100%;
   margin: 0 auto;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center center;
+  align-items: center;
+  display: flex;
+  position: relative;
+  justify-content: center;
 }
 
 .image-title {
   font-size: 1.5rem;
   font-weight: 200;
-}
-
-// for animal crossing only
-.photo-date {
-  display: none;
 }
