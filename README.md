@@ -11,6 +11,7 @@ here lies the source code for v2.1 of my website, aka the [next.js](https://next
 - animal crossing icons from [the spriter's resource](https://www.spriters-resource.com/)
 - texture backgrounds by [David Gurrea](https://davegh.com/)
 - various zelda fonts from [here](https://zeldauniverse.net/media/fonts/).
+- tears of the kingdom SVG UI icons by [riso](https://www.figma.com/community/file/1255259745702285104/totk-svg-ui-icon-kit)
 
 additional credits, mostly for code snippets, can be found throughout the code as well.
 

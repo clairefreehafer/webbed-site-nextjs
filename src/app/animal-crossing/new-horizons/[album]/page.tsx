@@ -17,7 +17,7 @@ const animalCrossingTags: AnimalCrossingTags = animalCrossingTagsJson;
 export async function generateStaticParams() {
   const params = [];
 
-  const albums = await getAlbums("animal-crossing/new-horizons");
+  const albums = await getAlbums("new-horizons");
   for (const album of albums) {
     console.log(`├ generating /animal-crossing/new-horizons/${album.slug}`);
     params.push({ album: album.slug });
@@ -50,14 +50,11 @@ export default async function Page({
   params: Promise<{ album: string }>;
 }) {
   const albumSlug = (await params).album;
-  let images = await getAlbumImages(albumSlug, "animal-crossing/new-horizons");
+  let images = await getAlbumImages(albumSlug, "new-horizons");
   let date = getAlbumDate(albumSlug);
   if (images.length === 0) {
     // if no images in the album, check the tag.
-    images = await getTagImages(
-      deslugify(albumSlug),
-      "animal-crossing/new-horizons"
-    );
+    images = await getTagImages(deslugify(albumSlug), "new-horizons");
   }
   if (!date) {
     // if no album date (cuz tag), use the date of the first image

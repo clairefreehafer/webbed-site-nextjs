@@ -116,3 +116,14 @@ header {
     gap: 3rem;
   }
 }
+
+.album-links {
+  list-style-type: none;
+  padding: 0;
+}
+
+.album-link {
+  background-repeat: no-repeat;
+  background-size: 1.5rem;
+  padding-left: 2.5rem;
+}
