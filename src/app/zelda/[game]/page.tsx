@@ -6,7 +6,10 @@ import { deslugify } from "@/utils";
 import { getAlbums } from "@/utils/digikam";
 
 export async function generateStaticParams() {
-  return [{ game: "breath-of-the-wild" }, { game: "tears-of-the-kingdom" }];
+  const games = await getAlbums("zelda");
+  return games.map((game) => ({
+    game: game.slug,
+  }));
 }
 
 export default async function Page({
@@ -27,15 +30,21 @@ export default async function Page({
         height={120}
       />
       <h2>{deslugify(game)}</h2>
-      <ul>
+      <ul className="album-links">
         {botwAlbums.map((album) => (
-          <li key={album.slug}>
+          <li
+            key={album.slug}
+            className="album-link"
+            style={{
+              backgroundImage: `url("/images/zelda/icons/${album.icon}.svg")`,
+            }}
+          >
             <SheikahUnderline
               text={album.displayName ?? deslugify(album.slug)}
               textSize="0.6rem"
               gap="0.1rem"
             >
-              <Link href={`/zelda/breath-of-the-wild/${album.slug}`}>
+              <Link href={`/zelda/${game}/${album.slug}`}>
                 {album.displayName ?? deslugify(album.slug)}
               </Link>
             </SheikahUnderline>

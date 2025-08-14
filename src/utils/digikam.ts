@@ -28,6 +28,7 @@ const websiteRootAlbumId = 4;
 interface AlbumCaptionJson {
   displayName?: string;
   coverPhotoPosition?: string;
+  icon?: string;
 }
 
 /** custom JSON format for extra info stored in the image caption/comment field. */
@@ -45,8 +46,9 @@ type CoverPhoto = Pick<Image, "height" | "src" | "width"> & {
 /** transformed album data for use on the site. */
 export type Album = {
   displayName?: AlbumCaptionJson["displayName"];
-  slug: string;
   date?: string;
+  icon?: AlbumCaptionJson["icon"];
+  slug: string;
   coverPhoto?: CoverPhoto;
 };
 
@@ -119,7 +121,7 @@ async function transformDigikamImage(
       console.log(`📝 [transformDigikamImage] creating image ${outputPath}...`);
       // transform image
       await sharp(buffer, { animated: true })
-        .resize(options.resize)
+        .resize({ width: options.resize, withoutEnlargement: true })
         .webp({ quality: 100 })
         .toFile(outputPath);
     }
@@ -224,10 +226,18 @@ export const getAlbums = cache(
         date: album.date,
       };
       try {
+        // if the album is nested, extract the leaf folder name
+        // to set as the actual slug
+        const splitAlbumSlug = album.slug.split('/');
+        if (album.slug.split('/').length > 1) {
+          transformedAlbum.slug = splitAlbumSlug[splitAlbumSlug.length - 1];
+        }
+        // parse any additional album metadata from the caption
         let captionJson: AlbumCaptionJson = {};
         if (album.caption) {
           captionJson = JSON.parse(album.caption);
         }
+        // add cover photo info if set
         let coverPhoto;
         if (album.coverPhotoPath) {
           const transformedCoverPhoto = await transformDigikamImage({
@@ -274,7 +284,7 @@ export const getAlbumImages = async (
     .prepare<
       {
         albumRootId: number;
-        relativePath: string;
+        relativePathLike: string;
         collectionLikeString: string;
       },
       {
@@ -318,7 +328,7 @@ export const getAlbumImages = async (
           LEFT JOIN ImageCaption ON Images.id = ImageCaption.imageId
           LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
           LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
-        WHERE Albums.relativePath == $relativePath
+        WHERE Albums.relativePath LIKE $relativePathLike
           AND Albums.albumRoot = $albumRootId
           AND Albums.collection LIKE $collectionLikeString
         GROUP BY Images.id
@@ -327,7 +337,7 @@ export const getAlbumImages = async (
     )
     .all({
       albumRootId: websiteRootAlbumId,
-      relativePath: `/${relativePath}`,
+      relativePathLike: `%${relativePath}%`,
       collectionLikeString: `%${collection}%`,
     });
   console.log(

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const albums = await getAlbums("animal-crossing/new-horizons");
+  const albums = await getAlbums("new-horizons");
   return (
     <>
       <div className="breadcrumbs">
