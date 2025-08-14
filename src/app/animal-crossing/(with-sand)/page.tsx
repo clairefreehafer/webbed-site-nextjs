@@ -1,14 +1,19 @@
 import Link from "next/link";
 
-export default function Page() {
+import { deslugify } from "@/utils";
+import { getAlbums } from "@/utils/digikam";
+
+export default async function Page() {
+  const games = await getAlbums("animal-crossing");
   return (
     <ul>
-      <li>
-        <Link href="/animal-crossing/pocket-camp">pocket camp</Link>
-      </li>
-      <li>
-        <Link href="/animal-crossing/new-horizons">new horizons</Link>
-      </li>
+      {games.map((game) => (
+        <li key={game.slug}>
+          <Link href={`/animal-crossing/${game.slug}`}>
+            {deslugify(game.slug)}
+          </Link>
+        </li>
+      ))}
     </ul>
   );
 }
