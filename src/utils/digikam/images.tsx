@@ -137,7 +137,7 @@ export const getAlbumImages = async (
 ): Promise<Image[]> => {
   const digikamImages = digikam
     .prepare<
-      { relativePath: string; collectionLikeString: string },
+      { relativePathLikeString: string; collectionLikeString: string },
       DigikamImage
     >(
       `
@@ -168,7 +168,7 @@ export const getAlbumImages = async (
           LEFT JOIN ImageCaption ON Images.id = ImageCaption.imageId
           LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
           LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
-        WHERE Albums.relativePath == $relativePath
+        WHERE Albums.relativePath LIKE $relativePathLikeString
           AND Albums.albumRoot = 4
           AND Albums.collection LIKE $collectionLikeString
         GROUP BY Images.id
@@ -176,7 +176,7 @@ export const getAlbumImages = async (
       `
     )
     .all({
-      relativePath: `/${relativePath}`,
+      relativePathLikeString: `%${relativePath}%`,
       collectionLikeString: `%${collection}%`,
     });
   console.log(
