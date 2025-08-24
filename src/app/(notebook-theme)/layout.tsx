@@ -1,54 +1,11 @@
 import "@/sass/notebook/style.scss";
 
-import localFont from "next/font/local";
-
-const loveYaLikeASister = localFont({
-  variable: "--font-love-ya-like-a-sister",
-  src: [
-    {
-      path: "../../../public/fonts/notebook/love-ya-like-a-sister.woff2",
-      weight: "400",
-      style: "normal",
-    },
-  ],
-  fallback: ["serif"],
-});
-
-const cutiveMono = localFont({
-  variable: "--font-cutive-mono",
-  src: [
-    {
-      path: "../../../public/fonts/notebook/cutive-mono.woff2",
-      weight: "400",
-      style: "normal",
-    },
-  ],
-  fallback: ["monospace"],
-});
-
-// https://nationalparktypeface.com/
-const nationalPark = localFont({
-  variable: "--font-national-park",
-  src: [
-    {
-      path: "../../../public/fonts/notebook/national-park.woff2",
-      style: "normal",
-    },
-  ],
-  fallback: ["monospace"],
-});
-
-const pangolin = localFont({
-  variable: "--font-pangolin",
-  src: [
-    {
-      path: "../../../public/fonts/notebook/pangolin.woff2",
-      weight: "400",
-      style: "normal",
-    },
-  ],
-  fallback: ["system-ui", "sans-serif"],
-});
+import {
+  cutiveMono,
+  loveYaLikeASister,
+  nationalPark,
+  pangolin,
+} from "@/fonts/notebook";
 
 const NAV_LINKS = [
   {

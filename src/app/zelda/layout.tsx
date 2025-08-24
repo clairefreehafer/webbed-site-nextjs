@@ -1,61 +1,13 @@
 import "@/sass/zelda/style.scss";
 import "@/sass/global.scss";
 
-import localFont from "next/font/local";
-
 import Name from "@/components/zelda/name";
 import Nav from "@/components/zelda/nav";
+import { fotRodin, hylian, hyliaSerif, sheikah } from "@/fonts/zelda";
 
 export function generateMetadata() {
   return { title: "zelda — claire freehafer" };
 }
-
-const hyliaSerif = localFont({
-  variable: "--hylia-serif",
-  src: [
-    {
-      path: "../../../public/fonts/zelda/hylia-serif-regular.woff2",
-    },
-  ],
-  fallback: ["Georgia", "serif"],
-});
-
-const hylian = localFont({
-  variable: "--hylian-regular",
-  src: [
-    {
-      path: "../../../public/fonts/zelda/hylian-regular.woff2",
-    },
-  ],
-  fallback: ["Helvetica", "Arial", "sans-serif"],
-});
-
-const sheikah = localFont({
-  variable: "--sheikah",
-  src: [
-    {
-      path: "../../../public/fonts/zelda/sheikah.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../../../public/fonts/zelda/sheikah-bold.woff2",
-      weight: "700",
-      style: "normal",
-    },
-  ],
-  fallback: ["Helvetica", "Arial", "sans-serif"],
-});
-
-const fotRodin = localFont({
-  variable: "--fot-rodin-pro-db",
-  src: [
-    {
-      path: "../../../public/fonts/zelda/fot-rodin-pro-db.woff2",
-    },
-  ],
-  fallback: ["Helvetica", "Arial", "sans-serif"],
-});
 
 export default function Layout({ children }: React.PropsWithChildren) {
   return (

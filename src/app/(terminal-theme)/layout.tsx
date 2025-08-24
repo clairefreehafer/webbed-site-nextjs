@@ -1,36 +1,14 @@
 import "@/sass/global.scss";
 import "@/sass/terminal/style.scss";
 
-import { Press_Start_2P } from "next/font/google";
-import localFont from "next/font/local";
-
 import Nav from "@/components/terminal/nav";
-
-/** 8-bit */
-const pressStart2P = Press_Start_2P({
-  display: "swap",
-  preload: true,
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-press-start-2p",
-});
-
-// https://www.brailleinstitute.org/freefont/
-const atkinsonHyperlegibleMono = localFont({
-  variable: "--font-atkinson-hyperlegible-mono",
-  src: [
-    {
-      path: "../../../public/fonts/default/atkinson-hyperlegible-mono.woff2",
-    },
-  ],
-  fallback: ["system-ui", "sans-serif"],
-});
+import { atkinsonHyperlegibleMono, pressStart2p } from "@/fonts/terminal";
 
 export default function Layout({ children }: React.PropsWithChildren) {
   return (
     <html>
       <body
-        className={`${pressStart2P.variable} ${atkinsonHyperlegibleMono.variable}`}
+        className={`${pressStart2p.variable} ${atkinsonHyperlegibleMono.variable}`}
       >
         <div className="container">
           <header>
