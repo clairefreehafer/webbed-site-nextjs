@@ -22,7 +22,7 @@ $small-width: 400px;
   }
 
   // scribble links that should look like buttons
-  & > .scribble-link {
+  & .scribble-link {
     aspect-ratio: 88/31;
     padding: 0.5rem;
 
@@ -56,7 +56,7 @@ $small-width: 400px;
         }
       }
 
-      // cebter single button
+      // center single button
       &.links-1 {
         grid-column: span 2;
         width: calc((100% - 1rem) / 2);
@@ -74,6 +74,18 @@ $small-width: 400px;
         background-color: yellow;
       }
     }
+  }
+
+  & .scribble-button {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  & .emoji {
+    font-size: 2rem;
+    text-align: center;
+    text-shadow: 0 0 10px black;
   }
 }
 
@@ -94,6 +106,10 @@ $small-width: 400px;
 
     & .scribble-highlight {
       clip-path: rect(auto auto auto auto);
+    }
+
+    & .scribble-text.background {
+      text-decoration: none;
     }
 
     @media (hover: none) {
@@ -133,6 +149,16 @@ $small-width: 400px;
   font-size: 2rem;
   mix-blend-mode: difference;
   text-align: center;
+
+  &.background {
+    position: absolute;
+    mix-blend-mode: unset;
+    color: black;
+    left: 50%;
+    transform: translateX(-50%);
+    text-decoration: underline solid 2px black;
+    text-underline-offset: 1px;
+  }
 
   @media screen and (max-width: $medium-width) {
     font-size: 1.5rem;

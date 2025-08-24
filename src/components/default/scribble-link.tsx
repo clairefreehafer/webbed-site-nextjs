@@ -22,6 +22,9 @@ export default function ScribbleLink({
         target="_blank"
         key={href}
       >
+        <span className="scribble-text background" aria-hidden>
+          {text}
+        </span>
         <div className="scribble-highlight" aria-hidden>
           {scribbleText ?? text}
         </div>
@@ -31,6 +34,9 @@ export default function ScribbleLink({
   }
   return (
     <Link href={href} className={`scribble-link ${className}`} key={href}>
+      <span className="scribble-text background" aria-hidden>
+        {text}
+      </span>
       <div className="scribble-highlight" aria-hidden>
         {scribbleText ?? text}
       </div>
