@@ -4,7 +4,7 @@ import PuzzleBorder from "@/components/the-witness/puzzle-border";
 import { getAlbumImages } from "@/utils/digikam";
 
 export const metadata: Metadata = {
-  title: "the witness — claire freehafer",
+  title: "the witness",
 };
 
 export default async function Page() {

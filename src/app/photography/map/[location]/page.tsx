@@ -16,7 +16,7 @@ type Params = {
 export async function generateMetadata({ params }: Params) {
   const location = deslugify((await params).location) as keyof typeof locations;
   return {
-    title: `${locations[location].name} — claire freehafer`,
+    title: locations[location].name,
   };
 }
 

@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { areArraysEqual, getRecipePages } from "@/utils";
+import { areArraysEqual, getRecipePages, noRobots } from "@/utils";
 
 import Meals from "./meals";
 import Recipe from "./recipe";
@@ -17,17 +17,18 @@ export async function generateMetadata({
 }: {
   params: Promise<{ recipe: string[] }>;
 }) {
-  const metadata = { title: "claire freehafer" };
-
   const recipe = (await params).recipe;
   const pages = await getRecipePages();
   const currentPage = pages.find((page) => areArraysEqual(page.path, recipe));
 
   if (currentPage) {
-    metadata.title = `${currentPage.title} – claire freehafer`;
+    return {
+      title: currentPage.title,
+      robots: noRobots,
+    };
   }
 
-  return metadata;
+  return { robots: noRobots };
 }
 
 const SECTION_PAGES: Record<string, any> = {

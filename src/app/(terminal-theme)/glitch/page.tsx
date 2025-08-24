@@ -4,7 +4,7 @@ import ImageGrid from "@/components/image-grid";
 import { getAlbumImages } from "@/utils/digikam";
 
 export const metadata: Metadata = {
-  title: "glitch art — claire freehafer",
+  title: "glitch art",
 };
 
 export default async function Page() {

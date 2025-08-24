@@ -9,7 +9,7 @@ import { CollectionConfig } from "@/utils/types";
 
 const collections: CollectionConfig = collectionsJson;
 
-export const metadata: Metadata = { title: "collections — claire freehafer" };
+export const metadata: Metadata = { title: "collections" };
 
 export default async function Page() {
   const albums: Album[] = [];

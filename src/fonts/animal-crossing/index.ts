@@ -1,15 +1,15 @@
 import localFont from "next/font/local";
 
-export const seurat = localFont({
-  variable: "--font-seurat",
+export const finkHeavy = localFont({
+  variable: "--font-fink-heavy",
   src: [
     {
-      path: "../../fonts/animal-crossing/seurat.woff2",
+      path: "./fink-heavy.woff2",
       weight: "400",
       style: "normal",
     },
   ],
-  fallback: ["system-ui", "sans-serif"],
+  fallback: ["Georgia", "serif"],
 });
 
 // https://www.dafont.com/ds-digital.font
@@ -23,4 +23,16 @@ export const digitalDisplay = localFont({
     },
   ],
   fallback: ["monospace"],
+});
+
+export const seurat = localFont({
+  variable: "--font-seurat",
+  src: [
+    {
+      path: "../../fonts/animal-crossing/seurat.woff2",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  fallback: ["system-ui", "sans-serif"],
 });

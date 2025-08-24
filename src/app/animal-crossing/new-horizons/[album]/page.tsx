@@ -41,7 +41,7 @@ export async function generateMetadata({
   params: Promise<{ album: string }>;
 }) {
   const albumSlug = (await params).album;
-  return { title: `${deslugify(albumSlug)} — claire freehafer` };
+  return { title: deslugify(albumSlug) };
 }
 
 export default async function Page({

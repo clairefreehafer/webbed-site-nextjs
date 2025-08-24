@@ -84,3 +84,14 @@ export function slugify(string: string): string {
 export function deslugify(string: string): string {
   return string.replaceAll("-and-", " & ").replaceAll("-", " ");
 }
+
+export const noRobots = {
+  index: false,
+  follow: false,
+  nocache: true,
+  googleBot: {
+    index: false,
+    follow: false,
+    noimageindex: true,
+  },
+};

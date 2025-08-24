@@ -1,6 +1,8 @@
 import "@/sass/global.scss";
 import "@/sass/default/style.scss";
 
+import type { Metadata } from "next";
+
 import Stars from "@/components/stars";
 import {
   atkinsonHyperlegibleMono,
@@ -9,6 +11,13 @@ import {
   garamond,
   redactedScript,
 } from "@/fonts/default";
+
+export const metadata: Metadata = {
+  title: {
+    default: "claire freehafer",
+    template: "%s — claire freehafer",
+  },
+};
 
 export default function Layout({ children }: React.PropsWithChildren) {
   return (

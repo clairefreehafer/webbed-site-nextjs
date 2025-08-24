@@ -5,7 +5,7 @@ import Link from "next/link";
 import RandomImage from "./random-image";
 
 export const metadata: Metadata = {
-  title: "a random photo — claire freehafer",
+  title: "a random photo",
 };
 
 export default async function Page() {

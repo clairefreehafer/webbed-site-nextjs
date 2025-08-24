@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { deslugify, generateIngredients, slugify } from "@/utils";
+import { deslugify, generateIngredients, noRobots, slugify } from "@/utils";
 
 type Params = Promise<{ ingredient: string }>;
 
@@ -14,7 +14,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Params }) {
   const ingredient = (await params).ingredient;
   return {
-    title: `recipes with ${deslugify(ingredient)} — claire freehafer`,
+    title: `recipes with ${deslugify(ingredient)}`,
+    robots: noRobots,
   };
 }
 

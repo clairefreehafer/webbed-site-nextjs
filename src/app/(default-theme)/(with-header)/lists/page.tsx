@@ -1,9 +1,11 @@
 import { Metadata } from "next";
 
+import { noRobots } from "@/utils";
 import { getListPages } from "@/utils/lists";
 
 export const metadata: Metadata = {
-  title: "lists — claire freehafer",
+  title: "lists",
+  robots: noRobots,
 };
 
 export default async function Page() {

@@ -1,4 +1,5 @@
 import Tags from "@/components/default/tags";
+import { noRobots } from "@/utils";
 import { getListPages } from "@/utils/lists";
 
 export const dynamicParams = false;
@@ -21,11 +22,13 @@ export async function generateMetadata({
 
   if (!currentList) {
     return {
-      title: "lists — claire freehafer",
+      title: "lists",
+      robots: noRobots,
     };
   }
   return {
-    title: `${currentList.title} — claire freehafer`,
+    title: currentList.title,
+    robots: noRobots,
   };
 }
 

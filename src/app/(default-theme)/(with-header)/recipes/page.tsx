@@ -1,8 +1,11 @@
 import { Metadata } from "next";
 import Link from "next/link";
 
+import { noRobots } from "@/utils";
+
 export const metadata: Metadata = {
-  title: "recipes — claire freehafer",
+  title: "recipes",
+  robots: noRobots,
 };
 
 export default function Page() {

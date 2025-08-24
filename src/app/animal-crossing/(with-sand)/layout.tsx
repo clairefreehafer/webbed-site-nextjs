@@ -1,21 +1,8 @@
-import localFont from "next/font/local";
-
 import Logo from "@/components/animal-crossing/logo";
 import Nav from "@/components/animal-crossing/nav";
+import { finkHeavy } from "@/fonts/animal-crossing";
 import { getGrassDateRange } from "@/utils/animal-crossing";
 import { Grass } from "@/utils/animal-crossing/grass";
-
-const finkHeavy = localFont({
-  variable: "--font-fink-heavy",
-  src: [
-    {
-      path: "../../../fonts/animal-crossing/fink-heavy.woff2",
-      weight: "400",
-      style: "normal",
-    },
-  ],
-  fallback: ["Georgia", "serif"],
-});
 
 export default function Layout({ children }: React.PropsWithChildren) {
   const grassDateRange = getGrassDateRange();

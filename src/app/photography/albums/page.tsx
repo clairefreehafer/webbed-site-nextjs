@@ -4,7 +4,7 @@ import AlbumGrid from "@/components/photography/album-grid";
 import { getAlbums } from "@/utils/digikam";
 
 export function generateMetadata() {
-  return { title: "albums — claire freehafer" };
+  return { title: "albums" };
 }
 
 export default async function Page() {

@@ -25,7 +25,7 @@ export async function generateMetadata({
 }) {
   const collection = deslugify((await params).collection);
   const { displayName } = collections[collection];
-  return { title: `${displayName ?? collection} — claire freehafer` };
+  return { title: displayName ?? collection };
 }
 
 export default async function Page({

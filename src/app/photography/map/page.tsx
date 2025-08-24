@@ -5,7 +5,7 @@ import { getMapData } from "@/utils/digikam";
 
 import Map from "./map";
 
-export const metadata: Metadata = { title: "photo map — claire freehafer " };
+export const metadata: Metadata = { title: "photo map" };
 
 export default function Page() {
   const mapData = getMapData();

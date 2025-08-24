@@ -6,7 +6,7 @@ import Nav from "@/components/zelda/nav";
 import { fotRodin, hylian, hyliaSerif, sheikah } from "@/fonts/zelda";
 
 export function generateMetadata() {
-  return { title: "zelda — claire freehafer" };
+  return { title: "zelda" };
 }
 
 export default function Layout({ children }: React.PropsWithChildren) {

@@ -46,7 +46,7 @@ export async function generateMetadata({
 }) {
   const { month, day } = await params;
   return {
-    title: `photos taken on ${months[month].display} ${day} — claire freehafer`,
+    title: `photos taken on ${months[month].display} ${day}`,
   };
 }
 

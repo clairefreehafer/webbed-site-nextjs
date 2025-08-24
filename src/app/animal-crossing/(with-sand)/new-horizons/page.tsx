@@ -13,7 +13,7 @@ import { AnimalCrossingTags } from "@/utils/types";
 const animalCrossingTags: AnimalCrossingTags = animalCrossingTagsJson;
 
 export const metadata: Metadata = {
-  title: "animal crossing new horizons — claire freehafer",
+  title: "animal crossing new horizons",
 };
 
 export default async function Page() {

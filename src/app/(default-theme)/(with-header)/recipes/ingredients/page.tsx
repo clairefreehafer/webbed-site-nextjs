@@ -1,9 +1,10 @@
 import { Metadata } from "next";
 
-import { generateIngredients, slugify } from "@/utils";
+import { generateIngredients, noRobots, slugify } from "@/utils";
 
 export const metadata: Metadata = {
-  title: "recipe ingredients — claire freehafer",
+  title: "recipe ingredients",
+  robots: noRobots,
 };
 
 export default async function Page() {
