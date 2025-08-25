@@ -31,4 +31,23 @@ p.recipe-source {
     padding: 0.2rem;
     font-weight: normal;
   }
+
+  ol {
+    padding-left: 3rem;
+
+    .list-item-wrapper {
+      position: relative;
+    }
+
+    input[type="checkbox"] {
+      position: absolute;
+      top: 0.25rem;
+      left: -3rem;
+
+      &:checked + li {
+        text-decoration: line-through 2px black solid;
+        opacity: 0.5;
+      }
+    }
+  }
 }

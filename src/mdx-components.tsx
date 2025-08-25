@@ -9,6 +9,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       }
       return <Link {...props} />;
     },
+    input: (props) => {
+      if (props.type === "checkbox") {
+        return <input {...props} disabled={false} />;
+      }
+      return <input {...props} />;
+    },
     ...components,
   };
 }
