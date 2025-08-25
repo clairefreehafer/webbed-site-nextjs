@@ -3,69 +3,112 @@
     "name": "food",
     "items": [
       {
-        "name": "carbs",
+        "name": "carbs 🍞 🥖 🫓 🍚",
         "items": [
           "bread",
           "farro",
           "flatbread",
           "gnocchi",
+          "grits",
           "pasta",
+          "quinoa",
+          "ravioli",
           "rice",
           "risotto",
           "tortilla"
         ]
       },
       {
-        "name": "protein",
-        "items": ["black bean", "chicken", "chickpea", "egg", "tuna"]
+        "name": "protein 🥓 🥚 🥩 🍗 🍖",
+        "items": [
+          "black bean",
+          "chicken",
+          "chickpea",
+          "egg",
+          "ground beef",
+          "pulled pork",
+          "shrimp",
+          "tuna"
+        ]
       },
       {
-        "name": "vegetables",
+        "name": "vegetables 🥑 🌽 🥒 🫛 🌶️ 🫑 🍅",
         "items": [
-          "arugula",
           "asparagus",
           "avocado",
-          "broccoli rabe",
           "butternut squash",
-          "cabbage",
-          "carrot",
+          "cauliflower",
           "corn",
           "cucumber",
           "green bean",
           "jalapeño",
-          "kale",
           "mushroom",
-          "onion",
           "pepper",
-          "potato",
-          "radish",
-          "scallion",
-          "shallot",
-          "spring mix",
-          "sweet potato",
+          "poblano",
+          "snow pea",
           "tomato",
           "yellow squash",
           "zucchini"
         ]
       },
       {
-        "name": "fruit",
-        "items": ["apple", "cranberry", "lemon", "pineapple"]
+        "name": "alliums 🧄 🧅",
+        "items": [
+          "chive",
+          "leek",
+          "onion",
+          "red onion",
+          "scallion",
+          "shallot",
+          "sweet onion",
+          "yellow onion"
+        ]
       },
       {
-        "name": "cheese",
+        "name": "leafy greens 🥬",
+        "items": [
+          "cabbage",
+          "arugula",
+          "broccoli rabe",
+          "collard greens",
+          "kale",
+          "spinach",
+          "spring mix"
+        ]
+      },
+      {
+        "name": "root vegetables 🥕 🫚 🥔 🍠",
+        "items": [
+          "beet",
+          "carrot",
+          "ginger",
+          "potato",
+          "radish",
+          "sweet potato"
+        ]
+      },
+      {
+        "name": "fruit",
+        "items": ["apple", "cranberry", "lemon", "lime", "pear", "pineapple"]
+      },
+      {
+        "name": "cheese 🧀",
         "items": [
           "cheddar",
           "cream cheese",
+          "feta",
+          "goat cheese",
+          "gouda",
           "monterey jack",
           "mozzarella",
           "parmesan",
+          "pepper jack",
           "ricotta"
         ]
       },
       {
         "name": "herbs",
-        "items": ["basil", "chive", "cilantro", "parsley"]
+        "items": ["basil", "cilantro", "parsley", "thyme"]
       },
       {
         "name": "spices",
@@ -75,13 +118,19 @@
         "name": "flavor",
         "items": [
           "bbq sauce",
+          "dijon mustard",
           "gochujang",
+          "guacamole",
+          "hoisin sauce",
+          "honey",
           "kimchi",
           "miso",
           "pesto",
+          "soy sauce",
           "sriracha",
           "tahini",
-          "truffle oil"
+          "truffle oil",
+          "white wine vinegar"
         ]
       }
     ]
@@ -90,7 +139,7 @@
     "name": "drink",
     "items": [
       {
-        "name": "liquor",
+        "name": "liquor 🥃",
         "items": [
           "bourbon",
           "cognac",
@@ -106,12 +155,17 @@
         "items": ["ancho reyes", "campari", "orange liqueur"]
       },
       {
-        "name": "wine",
-        "items": ["madeira wine", "vermouth"]
+        "name": "wine 🍷",
+        "items": ["madeira wine", "sweet vermouth", "vermouth"]
       },
       {
         "name": "bitters",
-        "items": ["angostura bitters", "chocolate bitters", "orange bitters"]
+        "items": [
+          "angostura bitters",
+          "chocolate bitters",
+          "mole bitters",
+          "orange bitters"
+        ]
       }
     ]
   }
