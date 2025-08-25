@@ -1,16 +1,15 @@
+import { MDXComponents } from "mdx/types";
 import Link from "next/link";
-import { Fragment } from "react";
+import { JSX } from "react";
 
 import Tags from "@/components/default/tags";
 import { RecipePage } from "@/utils/types";
 
-const components = {
-  ol: ({ children, ...props }) => {
+const components: MDXComponents = {
+  ol: ({ children, ...props }: { children: JSX.Element[] }) => {
     return (
       <ol {...props}>
         {children.map((child, idx) => {
-          console.log("~~~~~~~~~~~~~~~~~~~~~~");
-          console.log(child);
           if (typeof child !== "string") {
             return (
               <div className="list-item-wrapper" key={idx}>
