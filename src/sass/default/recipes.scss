@@ -34,9 +34,34 @@ p.recipe-source {
 
   ol {
     padding-left: 3rem;
+    list-style: none;
+    counter-reset: item;
 
     .list-item-wrapper {
       position: relative;
+      counter-increment: item;
+
+      &::before {
+        @include text.monospace();
+        content: counter(item);
+        background: yellow;
+        border-radius: 100%;
+        color: black;
+        width: 1.5rem;
+        height: 1.5rem;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: -1.75rem;
+        font-weight: 500;
+      }
+
+      &:has(input:checked)::before {
+        background-color: white;
+        opacity: 0.5;
+      }
     }
 
     input[type="checkbox"] {

@@ -29,13 +29,13 @@ $small-width: 400px;
     // 3 accross
     @media screen and (min-width: 750px) {
       // center the last button when there's 4
-      &.links-4 {
-        &:nth-last-child(-n + 1) {
-          grid-column: span 3;
-          width: calc((100% - 2rem) / 3);
-          margin: 0 auto;
-        }
-      }
+      // &.links-4 {
+      //   &:nth-last-child(-n + 1) {
+      //     grid-column: span 3;
+      //     width: calc((100% - 2rem) / 3);
+      //     margin: 0 auto;
+      //   }
+      // }
 
       // center single button
       &.links-1 {
@@ -80,6 +80,17 @@ $small-width: 400px;
     display: flex;
     flex-direction: column;
     position: relative;
+
+    @media screen and (min-width: 750px) {
+      // center the last button when there's 4
+      &.links-4 {
+        &:nth-last-child(-n + 1) {
+          grid-column: span 3;
+          width: calc((100% - 2rem) / 3);
+          margin: 0 auto;
+        }
+      }
+    }
   }
 
   & .emoji {

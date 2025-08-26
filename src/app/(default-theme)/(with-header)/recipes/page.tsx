@@ -22,6 +22,12 @@ const buttons = [
     emoji: "🍸",
   },
   {
+    href: "/recipes/baking",
+    text: "baking",
+    scribbleText: "bkg",
+    emoji: "🍰",
+  },
+  {
     href: "/recipes/ingredients",
     text: "ingredients",
     scribbleText: "ints",

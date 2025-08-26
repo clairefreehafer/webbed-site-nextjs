@@ -9,13 +9,13 @@ const components: MDXComponents = {
   ol: ({ children, ...props }: { children: JSX.Element[] }) => {
     return (
       <ol {...props}>
-        {children.map((child, idx) => {
+        {children.map((child) => {
           if (typeof child !== "string") {
             return (
-              <div className="list-item-wrapper" key={idx}>
+              <label className="list-item-wrapper" key={crypto.randomUUID()}>
                 <input type="checkbox" />
                 {child}
-              </div>
+              </label>
             );
           }
         })}

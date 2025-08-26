@@ -10,7 +10,7 @@ export default function ScribbleButtons({ buttons }: { buttons: Button[] }) {
   return (
     <div className="scribble-button-container">
       {buttons.map((button) => (
-        <div key={button.href} className="scribble-button">
+        <div key={button.href} className={`scribble-button ${className}`}>
           {button.emoji && <span className="emoji">{button.emoji}</span>}
           <ScribbleLink {...button} className={className} key={button.href} />
         </div>

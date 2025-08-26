@@ -59,6 +59,9 @@ export default async function Page() {
         {uncategorizedIngredients.length > 0 && (
           <>
             <h4>uncategorized</h4>
+            <p>
+              (ones i haven&apos;t gotten around to assigning categories yet)
+            </p>
             <ul>
               {uncategorizedIngredients.map((ingredient) => (
                 <li key={ingredient}>
