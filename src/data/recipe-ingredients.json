@@ -6,6 +6,7 @@
         "name": "carbs 🍞 🥖 🫓 🍚",
         "items": [
           "bread",
+          "couscous",
           "farro",
           "flatbread",
           "gnocchi",
@@ -41,7 +42,7 @@
           "corn",
           "cucumber",
           "green bean",
-          "jalapeño",
+          "jalapeno",
           "mushroom",
           "pepper",
           "poblano",
@@ -90,7 +91,15 @@
       },
       {
         "name": "fruit",
-        "items": ["apple", "cranberry", "lemon", "lime", "pear", "pineapple"]
+        "items": [
+          "apple",
+          "cranberry",
+          "lemon",
+          "lime",
+          "pear",
+          "pineapple",
+          "strawberry"
+        ]
       },
       {
         "name": "cheese 🧀",
@@ -146,6 +155,7 @@
           "cognac",
           "gin",
           "mezcal",
+          "overproof rum",
           "tequila",
           "rum",
           "vodka"
@@ -153,7 +163,13 @@
       },
       {
         "name": "liqueur",
-        "items": ["ancho reyes", "campari", "orange liqueur"]
+        "items": [
+          "ancho reyes",
+          "campari",
+          "coffee liqueur",
+          "macadamia nut liqueur",
+          "orange liqueur"
+        ]
       },
       {
         "name": "wine 🍷",

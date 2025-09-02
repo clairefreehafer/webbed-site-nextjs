@@ -33,15 +33,19 @@ export default async function Page() {
                 display: "flex",
                 flexWrap: "wrap",
                 gap: "0 1.5rem",
-                // listStyle: "none",
-                // padding: 0,
               }}
             >
               {item.items.map((ingredient) => (
                 <li key={ingredient}>
-                  <Link href={`/recipes/ingredients/${slugify(ingredient)}`}>
+                  <Link
+                    href={`/recipes/ingredients/${slugify(ingredient)}`}
+                    title={ingredients[ingredient].length.toString()}
+                  >
                     {ingredient}
                   </Link>
+                  <span className="last-made">
+                    {ingredients[ingredient]?.length}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -65,7 +69,10 @@ export default async function Page() {
             <ul>
               {uncategorizedIngredients.map((ingredient) => (
                 <li key={ingredient}>
-                  <Link href={`/recipes/ingredients/${slugify(ingredient)}`}>
+                  <Link
+                    href={`/recipes/ingredients/${slugify(ingredient)}`}
+                    title="test"
+                  >
                     {ingredient}
                   </Link>
                 </li>

@@ -121,10 +121,15 @@ $small-width: 400px;
 
     & .scribble-text.background {
       text-decoration: none;
+      color: black;
     }
 
     @media (hover: none) {
       background-color: yellow;
+
+      & .scribble-text {
+        color: black;
+      }
     }
   }
 }

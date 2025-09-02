@@ -12,14 +12,15 @@ export function areArraysEqual(arr1: string[], arr2: string[]) {
 
 export const getRecipePages = cache(async (): Promise<RecipePage[]> => {
   const pages: RecipePage[] = [];
-  const files = fs
-    .readdirSync(path.join(process.cwd(), "src", "recipes"), {
-      recursive: true,
-      withFileTypes: true,
-    })
-    .filter((list) => !list.name.startsWith("_"));
+  const files = fs.readdirSync(path.join(process.cwd(), "src", "recipes"), {
+    recursive: true,
+    withFileTypes: true,
+  });
 
   for (const file of files) {
+    if (file.name.startsWith("_")) {
+      continue;
+    }
     const isRecipe = !file.isDirectory();
     const fileNameSplit = file.parentPath.split("/");
     const path = [];
