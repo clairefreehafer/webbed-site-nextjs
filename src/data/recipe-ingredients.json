@@ -22,6 +22,7 @@
       {
         "name": "protein 🥓 🥚 🥩 🍗 🍖",
         "items": [
+          "bacon",
           "black bean",
           "chicken",
           "chickpea",
@@ -39,6 +40,7 @@
           "avocado",
           "butternut squash",
           "cauliflower",
+          "celery",
           "corn",
           "cucumber",
           "green bean",
@@ -94,6 +96,7 @@
         "items": [
           "apple",
           "cranberry",
+          "grapefruit",
           "lemon",
           "lime",
           "pear",
@@ -109,11 +112,24 @@
           "feta",
           "goat cheese",
           "gouda",
+          "grilling cheese",
+          "gruyere",
           "monterey jack",
           "mozzarella",
           "parmesan",
           "pepper jack",
           "ricotta"
+        ]
+      },
+      {
+        "name": "sauces",
+        "items": [
+          "bbq sauce",
+          "guacamole",
+          "hoisin sauce",
+          "marinara",
+          "pesto",
+          "worcestershire sauce"
         ]
       },
       {
@@ -127,15 +143,14 @@
       {
         "name": "flavor",
         "items": [
-          "bbq sauce",
+          "balsamic vinegar",
           "dijon mustard",
           "gochujang",
-          "guacamole",
-          "hoisin sauce",
           "honey",
           "kimchi",
+          "matcha",
+          "maple syrup",
           "miso",
-          "pesto",
           "soy sauce",
           "sriracha",
           "tahini",
@@ -151,29 +166,42 @@
       {
         "name": "liquor 🥃",
         "items": [
+          "absinthe",
+          "arrack",
           "bourbon",
+          "brandy",
           "cognac",
           "gin",
           "mezcal",
           "overproof rum",
           "tequila",
           "rum",
+          "scotch",
           "vodka"
         ]
       },
       {
         "name": "liqueur",
         "items": [
+          "amaro",
           "ancho reyes",
           "campari",
           "coffee liqueur",
+          "drambuie",
+          "jagermeister",
           "macadamia nut liqueur",
           "orange liqueur"
         ]
       },
       {
         "name": "wine 🍷",
-        "items": ["madeira wine", "sweet vermouth", "vermouth"]
+        "items": [
+          "dry vermouth",
+          "madeira wine",
+          "port",
+          "prosecco",
+          "sweet vermouth"
+        ]
       },
       {
         "name": "bitters",
