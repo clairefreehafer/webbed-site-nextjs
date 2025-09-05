@@ -16,7 +16,12 @@ export default async function Page() {
   return (
     <>
       <h2>firewatch</h2>
-      <p>photos from my first playthrough.</p>
+      <p>
+        photos from my first playthrough, taken with the diegetic disposable
+        camera. i hope in future playthroughs to take better advantage of this
+        feature. currently there has been no post-processing done to these, but
+        one day i may feel so inspired. :)
+      </p>
       <div className="image-grid">
         {images.map((image) => (
           <ImageBorder key={image.filename}>

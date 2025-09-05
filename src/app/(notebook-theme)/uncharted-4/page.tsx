@@ -16,6 +16,11 @@ export default async function Page() {
   return (
     <>
       <h2>uncharted 4</h2>
+      <p>
+        photos from my first playthrough, taken with the in-game camera feature.
+        some are purely edited using the in-game tools, others have had further
+        post-processing done outside of the game.
+      </p>
       <div className="image-grid">
         {images.map((image) => (
           <ImageBorder key={image.filename}>
