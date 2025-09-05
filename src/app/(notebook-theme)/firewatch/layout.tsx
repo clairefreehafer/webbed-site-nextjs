@@ -1,12 +1,11 @@
-import "@/sass/notebook/uncharted-4.scss";
+import "@/sass/notebook/firewatch.scss";
 
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "uncharted 4",
+  title: "firewatch",
 };
 
 export default function Layout({ children }: React.PropsWithChildren) {
-  // TODO: background transformation
   return children;
 }
