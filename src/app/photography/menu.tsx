@@ -27,9 +27,9 @@ export default function Menu() {
           display: "collections",
           href: "/collections",
         },
-        {
-          display: "curated",
-        },
+        // {
+        //   display: "curated",
+        // },
         {
           display: "map",
           href: "/map",

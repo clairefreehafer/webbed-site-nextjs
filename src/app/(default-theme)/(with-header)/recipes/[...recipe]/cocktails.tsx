@@ -4,18 +4,18 @@ import LastMade from "@/components/default/last-made";
 import { deslugify, getRecipePages } from "@/utils";
 import { RecipePage } from "@/utils/types";
 
-// TODO: combine with cocktails.tsx
-export default async function Meals() {
+// TODO: combine with meals.tsx
+export default async function Cocktails() {
   const recipes = await getRecipePages();
   const mealPages: Record<string, RecipePage[]> = {};
   const uncategorizedPages = [];
 
   for (const recipe of recipes) {
-    if (recipe.path.includes("meals")) {
+    if (recipe.path.includes("cocktails")) {
       const category = recipe.path[recipe.path.length - 2];
       if (recipe.isCategory) {
         // meals section, do not include
-      } else if (category === "meals") {
+      } else if (category === "cocktails") {
         // uncategorized
         uncategorizedPages.push(recipe);
       } else if (mealPages[category]) {
@@ -30,7 +30,7 @@ export default async function Meals() {
 
   return (
     <>
-      <h3>meal recipes</h3>
+      <h3>cocktail recipes</h3>
       <section className="content">
         {Object.keys(mealPages).map((category) => (
           <div

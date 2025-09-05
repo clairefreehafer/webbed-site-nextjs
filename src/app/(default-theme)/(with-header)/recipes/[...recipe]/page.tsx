@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { areArraysEqual, getRecipePages, noRobots } from "@/utils";
 
+import Cocktails from "./cocktails";
 import Meals from "./meals";
 import Recipe from "./recipe";
 
@@ -33,6 +34,7 @@ export async function generateMetadata({
 
 const SECTION_PAGES: Record<string, any> = {
   meals: Meals,
+  cocktails: Cocktails,
 };
 
 export default async function Page({
