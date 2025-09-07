@@ -1,8 +1,5 @@
-import Tags from "@/components/default/tags";
 import { noRobots } from "@/utils";
 import { getListPages } from "@/utils/lists";
-
-export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const lists = await getListPages();
@@ -44,15 +41,14 @@ export default async function Page({
   if (!currentList) {
     return `Could not find list ${slug}`;
   }
-  const { default: List, title, tags } = currentList;
+  const { default: List, title } = currentList;
 
   return (
     <>
       <h3>{title}</h3>
-      <section className="content">
+      <section className="content list">
         <List />
       </section>
-      <Tags tags={tags} linkPrefix="/lists/tags/" />
     </>
   );
 }

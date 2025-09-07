@@ -1,0 +1,24 @@
+.content.list {
+  ul {
+    line-height: 2rem;
+
+    a {
+      font-size: 1.2rem;
+      text-underline-offset: 3px;
+    }
+
+    ul {
+      font-size: 1.05rem;
+      list-style-type: "↳";
+
+      li {
+        padding-left: 0.5rem;
+
+        &::marker {
+          color: yellow;
+          text-shadow: black 1px 0 5px;
+        }
+      }
+    }
+  }
+}
