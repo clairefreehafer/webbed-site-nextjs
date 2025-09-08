@@ -188,6 +188,7 @@
           "campari",
           "coffee liqueur",
           "drambuie",
+          "green chartreuse",
           "jagermeister",
           "macadamia nut liqueur",
           "orange liqueur"
@@ -196,6 +197,7 @@
       {
         "name": "wine 🍷",
         "items": [
+          "cocchi americano",
           "dry vermouth",
           "madeira wine",
           "port",
