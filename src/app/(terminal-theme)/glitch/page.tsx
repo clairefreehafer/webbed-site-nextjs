@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const images = await getAlbumImages("glitch");
+  const images = await getAlbumImages("glitch", "digital-art");
   return (
     <>
       <h2>glitch art</h2>
