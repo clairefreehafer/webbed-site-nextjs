@@ -33,6 +33,9 @@ export default function Page() {
           <Link href="/animal-crossing">animal crossing</Link>
         </li>
         <li>
+          <Link href="/bioshock">bioshock</Link>
+        </li>
+        <li>
           <Link href="/firewatch">firewatch</Link>
         </li>
         <li>

@@ -1,11 +1,20 @@
 import "@/sass/notebook/style.scss";
 
+import { Metadata } from "next";
+
 import {
   cutiveMono,
   loveYaLikeASister,
   nationalPark,
   pangolin,
 } from "@/fonts/notebook";
+
+export const metadata: Metadata = {
+  title: {
+    default: "claire freehafer",
+    template: "%s — claire freehafer",
+  },
+};
 
 const NAV_LINKS = [
   {
