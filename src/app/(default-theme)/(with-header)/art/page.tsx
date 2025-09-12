@@ -39,6 +39,9 @@ export default function Page() {
           <Link href="/firewatch">firewatch</Link>
         </li>
         <li>
+          <Link href="/grand-theft-auto-v">grand theft auto V</Link>
+        </li>
+        <li>
           <Link href="/the-witness">the witness</Link>
         </li>
         <li>
