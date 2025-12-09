@@ -16,6 +16,12 @@ const buttons = [
     emoji: "🍱",
   },
   {
+    href: "/recipes/sauces",
+    text: "sauces",
+    scribbleText: "sa",
+    emoji: "🫙",
+  },
+  {
     href: "/recipes/cocktails",
     text: "cocktails",
     scribbleText: "cks",
