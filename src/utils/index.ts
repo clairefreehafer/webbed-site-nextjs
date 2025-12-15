@@ -4,72 +4,93 @@ import { cache } from "react";
 
 import { RecipePage } from "./types";
 
-export function areArraysEqual(arr1: string[], arr2: string[]) {
-  return (
-    arr1.length === arr2.length && arr1.every((val, idx) => val === arr2[idx])
-  );
-}
-
-export const getRecipePages = cache(async (): Promise<RecipePage[]> => {
-  const pages: RecipePage[] = [];
-  const files = fs.readdirSync(path.join(process.cwd(), "src", "recipes"), {
-    recursive: true,
-    withFileTypes: true,
-  });
-
-  for (const file of files) {
-    if (file.name.startsWith("_")) {
-      continue;
-    }
-    const isRecipe = !file.isDirectory();
-    const fileNameSplit = file.parentPath.split("/");
-    const path = [];
-
-    let currentIndex = fileNameSplit.length - 1;
-    let currentDirectory = fileNameSplit[currentIndex];
-    // generate path heirarchy
-    // TODO use .split or whatever instead
-    while (currentDirectory !== "recipes" && currentIndex > -1) {
-      path.unshift(currentDirectory);
-      currentIndex--;
-      currentDirectory = fileNameSplit[currentIndex];
-    }
-
-    if (isRecipe) {
-      // add page slug for full `params` array
-      path.push(file.name.split(".")[0]);
-      const page = await import(`@/recipes/${path.join("/")}.mdx`);
-      pages.push({
-        ...page,
-        path,
-      });
-    } else {
-      const directoryName = file.name;
-      path.push(directoryName);
-      pages.push({
-        title: directoryName,
-        default: null,
-        path,
-        ingredients: [],
-        isCategory: true,
-      });
-    }
-  }
-
-  return pages;
+export const getRecipeCategories = cache((): string[] => {
+  return fs.readdirSync(path.join(process.cwd(), "src", "recipes"));
 });
+
+type CategoryRecipes = {
+  uncategorized: RecipePage[];
+  [subcategory: string]: RecipePage[];
+};
+
+export const getCategoryRecipes = cache(
+  async (
+    category: string,
+    uncategorized?: boolean
+  ): Promise<CategoryRecipes> => {
+    const categoryRecipes: Omit<CategoryRecipes, "uncategorized"> = {};
+    const uncategorizedRecipes: RecipePage[] = [];
+
+    const files = fs.readdirSync(
+      path.join(process.cwd(), "src", "recipes", category),
+      {
+        recursive: true,
+        withFileTypes: true,
+      }
+    );
+
+    for (const file of files) {
+      // ignore any files that start with an underscore - they are drafts.
+      if (file.name.startsWith("_")) {
+        continue;
+      }
+      // if file is a directory, it is a subdirectory and should be set as a
+      // key on the result object (but only if we are not requesting a flat array).
+      const isSubcategory = file.isDirectory();
+      if (isSubcategory && !uncategorized) {
+        categoryRecipes[file.name] = [];
+      } else if (!isSubcategory) {
+        // check if the parent directory for a recipe is the root category or a subcategory.
+        const recipeParentSplit = file.parentPath.split("/");
+        const recipeParent = recipeParentSplit[recipeParentSplit.length - 1];
+        const hasSubcategory = recipeParent !== category;
+
+        const page = await import(
+          `@/recipes/${
+            hasSubcategory ? `${category}/${recipeParent}` : `${category}`
+          }/${file.name}`
+        );
+
+        if (!page) {
+          throw new Error(
+            `[getCategoryRecipes] could not import recipe file ${file.name}`
+          );
+        }
+
+        const recipe: RecipePage = {
+          path: file.name.split(".")[0],
+          category,
+          ...page,
+        };
+        if (uncategorized || recipeParent === category) {
+          // if the recipe does not have a subcategory, OR we want a flat array
+          // of all recipes, push it into our uncategorized array.
+          uncategorizedRecipes.push(recipe);
+        } else {
+          categoryRecipes[recipeParent].push(recipe);
+        }
+      }
+    }
+
+    return { ...categoryRecipes, uncategorized: uncategorizedRecipes };
+  }
+);
 
 export async function generateIngredients() {
   const ingredients: Record<string, RecipePage[]> = {};
-  const recipes = await getRecipePages();
+  const categories = getRecipeCategories();
 
-  for (const recipe of recipes) {
-    if (recipe.ingredients) {
-      for (const ingredient of recipe.ingredients) {
-        if (ingredients[ingredient]) {
-          ingredients[ingredient].push(recipe);
-        } else {
-          ingredients[ingredient] = [recipe];
+  for (const category of categories) {
+    const categoryRecipes = await getCategoryRecipes(category, true);
+
+    for (const recipe of categoryRecipes.uncategorized) {
+      if (recipe.ingredients) {
+        for (const ingredient of recipe.ingredients) {
+          if (ingredients[ingredient]) {
+            ingredients[ingredient].push(recipe);
+          } else {
+            ingredients[ingredient] = [recipe];
+          }
         }
       }
     }
