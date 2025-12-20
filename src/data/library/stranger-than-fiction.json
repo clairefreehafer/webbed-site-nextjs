@@ -1,0 +1,37 @@
+{
+  "slug": "stranger-than-fiction",
+  "title": "stranger than fiction",
+  "description": "incredible true stories",
+  "items": [
+    {
+      "type": "book",
+      "olid": "OL29525283M",
+      "title": "All Thirteen: The Incredible Cave Rescue of the Thai Boys' Soccer Team",
+      "author": "Christina Soontornvat",
+      "link": "https://openlibrary.org//books/OL29525283M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL29525283M-M.jpg",
+      "numberOfPages": 288,
+      "coverColor": "#c4842f"
+    },
+    {
+      "type": "book",
+      "olid": "OL8632551M",
+      "author": "Janet Malcolm",
+      "title": "The Journalist and the Murderer",
+      "link": "https://openlibrary.org/books/OL8632551M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL8632551M-M.jpg",
+      "coverColor": "#bf5a3b",
+      "numberOfPages": 163
+    },
+    {
+      "type": "book",
+      "olid": "OL27408515M",
+      "author": "Michael Finkel",
+      "title": "The Stranger in the Woods: The Extraordinary Story of the Last True Hermit",
+      "link": "https://openlibrary.org/books/OL27408515M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL27408515M-M.jpg",
+      "coverColor": "#818134",
+      "numberOfPages": 222
+    }
+  ]
+}

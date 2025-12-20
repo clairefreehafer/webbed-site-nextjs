@@ -1,0 +1,16 @@
+{
+  "slug": "americana",
+  "title": "americana",
+  "items": [
+    {
+      "type": "book",
+      "olid": "OL27912554M",
+      "author": "Daniel Immerwahr",
+      "title": "How to Hide an Empire",
+      "link": "https://openlibrary.org/books/OL27912554M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL27912554M-M.jpg",
+      "coverColor": "#c47c6c",
+      "numberOfPages": 516
+    }
+  ]
+}

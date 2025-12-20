@@ -26,6 +26,11 @@ const ROOT_LINKS: ScribbleLinkProps[] = [
     text: "lists",
     scribbleText: "ls",
   },
+  {
+    href: "/library",
+    text: "library",
+    scribbleText: "lir",
+  },
 ] as const;
 
 export default function Nav() {

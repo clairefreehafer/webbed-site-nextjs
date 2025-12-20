@@ -1,0 +1,16 @@
+{
+  "slug": "fiction",
+  "title": "fiction",
+  "items": [
+    {
+      "type": "book",
+      "olid": "OL35099312M",
+      "author": "Gabrielle Zevin",
+      "title": "Tomorrow, and Tomorrow, and Tomorrow",
+      "link": "https://openlibrary.org/books/OL35099312M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL35099312M-M.jpg",
+      "coverColor": "#cfcc24",
+      "numberOfPages": 401
+    }
+  ]
+}

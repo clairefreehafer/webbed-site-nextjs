@@ -1,0 +1,30 @@
+{
+  "slug": "houses",
+  "title": "houses",
+  "items": [
+    {
+      "type": "book",
+      "olid": "OL42742M",
+      "title": "House of Leaves",
+      "author": "Mark Z. Danielewski",
+      "link": "https://openlibrary.org/books/OL42742M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL42742M-M.jpg",
+      "numberOfPages": 736,
+      "coverColor": "#bbaf43"
+    },
+    {
+      "type": "book",
+      "olid": "OL38815640M",
+      "title": "Model Home",
+      "link": "https://openlibrary.org/books/OL51114957M/Model_Home",
+      "coverImage": "https://covers.openlibrary.org/b/id/14857835-L.jpg",
+      "author": "Rivers Solomon",
+      "coverColor": "#2cdc54",
+      "numberOfPages": 304
+    },
+    {
+      "type": "film",
+      "title": "Hausu"
+    }
+  ]
+}

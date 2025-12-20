@@ -1,4 +1,5 @@
 import fs from "fs";
+import os from "os";
 import path from "path";
 import { cache } from "react";
 
@@ -117,3 +118,27 @@ export const noRobots = {
     noimageindex: true,
   },
 };
+
+export function setEnvValue(key: string, value: string) {
+  // read file from hdd & split if from a linebreak to a array
+  const envVars = fs
+    .readFileSync(path.join(process.cwd(), ".env"), "utf8")
+    .split(os.EOL);
+
+  const existingVar = envVars.find((line) => {
+    return line.match(new RegExp(key));
+  });
+
+  if (!existingVar) {
+    throw new Error(`could not find exisiting env var to overwrite: ${key}`);
+  }
+
+  // find the env we want based on the key
+  const target = envVars.indexOf(existingVar);
+
+  // replace the key/value with the new value
+  envVars.splice(target, 1, `${key}=${value}`);
+
+  // write everything back to the file system
+  fs.writeFileSync("./.env", envVars.join(os.EOL));
+}

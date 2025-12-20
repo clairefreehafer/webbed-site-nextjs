@@ -17,6 +17,11 @@ const links: ScribbleLinkProps[] = [
     href: "/lists",
     scribbleText: "lt",
   },
+  {
+    text: "library",
+    href: "library",
+    scribbleText: "lib",
+  },
 ];
 
 const externalLinks: ScribbleLinkProps[] = [

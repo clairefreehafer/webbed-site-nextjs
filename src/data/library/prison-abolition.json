@@ -1,0 +1,18 @@
+{
+  "slug": "prison-abolition",
+  "title": "prison abolition",
+  "items": {
+    "fiction": [
+      {
+        "type": "book",
+        "olid": "OL38446434M",
+        "author": "Nana Kwame Adjei-Brenyah",
+        "title": "Chain-Gang All-Stars",
+        "link": "https://openlibrary.org/books/OL38446434M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL38446434M-M.jpg",
+        "coverColor": "#dcb404",
+        "numberOfPages": 384
+      }
+    ]
+  }
+}
