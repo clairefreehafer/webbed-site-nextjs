@@ -1,0 +1,49 @@
+{
+  "title": "climate dystopia",
+  "items": {
+    "silo": [
+      {
+        "type": "book",
+        "olid": "OL25443357M",
+        "author": "Hugh Howey",
+        "title": "Wool",
+        "link": "https://openlibrary.org/books/OL25443357M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL25443357M-M.jpg",
+        "coverColor": "#df1716",
+        "numberOfPages": 508
+      },
+      {
+        "type": "book",
+        "olid": "OL28296670M",
+        "author": "Hugh Howey",
+        "title": "Shift",
+        "link": "https://openlibrary.org/books/OL28296670M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL28296670M-M.jpg",
+        "coverColor": "#4687b5",
+        "numberOfPages": 576
+      },
+      {
+        "type": "book",
+        "olid": "OL26227924M",
+        "author": "Hugh Howey",
+        "title": "Dust",
+        "link": "https://openlibrary.org/books/OL26227924M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL26227924M-M.jpg",
+        "coverColor": "#b49406",
+        "numberOfPages": 464
+      }
+    ],
+    "standalone": [
+      {
+        "type": "book",
+        "olid": "OL57439282M",
+        "title": "All the Water in the World",
+        "author": "Eiren Caffall",
+        "link": "https://openlibrary.org/books/OL57439282M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL57439282M-M.jpg",
+        "coverColor": "#1c82aa",
+        "numberOfPages": 304
+      }
+    ]
+  }
+}

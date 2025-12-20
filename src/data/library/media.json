@@ -1,0 +1,15 @@
+{
+  "title": "media",
+  "items": [
+    {
+      "type": "book",
+      "olid": "OL32298737M",
+      "title": "True Story What Reality TV Says About Us",
+      "link": "https://openlibrary.org/books/OL32298737M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL32298737M-M.jpg",
+      "coverColor": "#247ca4",
+      "numberOfPages": 352,
+      "author": "Danielle J. Lindemann PhD"
+    }
+  ]
+}

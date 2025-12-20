@@ -1,0 +1,36 @@
+{
+  "slug": "black-fiction",
+  "title": "Black fiction",
+  "items": [
+    {
+      "type": "book",
+      "olid": "OL38446434M",
+      "author": "Nana Kwame Adjei-Brenyah",
+      "title": "Chain-Gang All-Stars",
+      "link": "https://openlibrary.org/books/OL38446434M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL38446434M-M.jpg",
+      "coverColor": "#dcb404",
+      "numberOfPages": 384
+    },
+    {
+      "type": "book",
+      "olid": "OL29386921M",
+      "author": "Nana Kwame Adjei-Brenyah",
+      "title": "Friday Black",
+      "link": "https://openlibrary.org/books/OL29386921M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL29386921M-M.jpg",
+      "coverColor": "#c69131",
+      "numberOfPages": 208
+    },
+    {
+      "type": "book",
+      "olid": "OL29105429M",
+      "author": "Tade Thompson",
+      "title": "Making Wolf",
+      "link": "https://openlibrary.org/books/OL29105429M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL29105429M-M.jpg",
+      "coverColor": "#dc8444",
+      "numberOfPages": 278
+    }
+  ]
+}

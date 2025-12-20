@@ -1,0 +1,25 @@
+{
+  "title": "tech",
+  "items": [
+    {
+      "type": "book",
+      "olid": "OL35097599M",
+      "author": "Kaitlyn Tiffany",
+      "title": "Everything I Need I Get from You: How Fangirls Created the Internet As We Know It",
+      "link": "https://openlibrary.org/books/OL35097599M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL35097599M-M.jpg",
+      "coverColor": "#cca444",
+      "numberOfPages": 304
+    },
+    {
+      "type": "book",
+      "olid": "OL51106108M",
+      "author": "Ben Collier",
+      "title": "Tor: From the Dark Web to the Future of Privacy",
+      "link": "https://openlibrary.org/books/OL51106108M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL51106108M-M.jpg",
+      "coverColor": "#3fbfbf",
+      "numberOfPages": 242
+    }
+  ]
+}
