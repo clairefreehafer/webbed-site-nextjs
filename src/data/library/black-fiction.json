@@ -1,7 +1,16 @@
 {
-  "slug": "black-fiction",
   "title": "Black fiction",
   "items": [
+    {
+      "type": "book",
+      "olid": "OL32945201M",
+      "title": "Black Boy Joy: 17 Stories Celebrating Black Boyhood",
+      "link": "https://openlibrary.org/books/OL32945201M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL32945201M-M.jpg",
+      "coverColor": "#d5a659",
+      "numberOfPages": 320,
+      "author": "Kwame Mbalia"
+    },
     {
       "type": "book",
       "olid": "OL38446434M",
@@ -31,6 +40,16 @@
       "coverImage": "https://covers.openlibrary.org/b/olid/OL29105429M-M.jpg",
       "coverColor": "#dc8444",
       "numberOfPages": 278
+    },
+    {
+      "type": "book",
+      "olid": "OL23999187M",
+      "title": "The Bluest Eye",
+      "link": "https://openlibrary.org/books/OL23999187M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL23999187M-M.jpg",
+      "coverColor": "#da403b",
+      "numberOfPages": 215,
+      "author": "Toni Morrison"
     }
   ]
 }

@@ -1,0 +1,45 @@
+{
+  "title": "biology & ecology",
+  "items": [
+    {
+      "type": "book",
+      "olid": "OL32937539M",
+      "title": "Cat Sense: How the New Feline Science Can Make You a Better Friend to Your Pet",
+      "link": "https://openlibrary.org/books/OL32937539M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL32937539M-M.jpg",
+      "coverColor": "#145e89",
+      "numberOfPages": 336,
+      "author": "John Bradshaw"
+    },
+    {
+      "type": "book",
+      "olid": "OL8344943M",
+      "title": "Gathering Moss",
+      "link": "https://openlibrary.org/books/OL8344943M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL8344943M-M.jpg",
+      "coverColor": "#b4c84c",
+      "numberOfPages": 168,
+      "author": "Robin Wall Kimmerer"
+    },
+    {
+      "type": "book",
+      "olid": "OL50722642M",
+      "title": "Sharks Don't Sink: Adventures of a Rogue Shark Scientist",
+      "link": "https://openlibrary.org/books/OL50722642M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL50722642M-M.jpg",
+      "coverColor": "linear-gradient(51.46533137887129deg, red, orange, yellow, green, blue, indigo, violet)",
+      "author": "Jasmin Graham",
+      "numberOfPages": 224
+    },
+    {
+      "type": "book",
+      "olid": "OL27427901M",
+      "title": "The Sound of a Wild Snail Eating",
+      "link": "https://openlibrary.org/books/OL27427901M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL27427901M-M.jpg",
+      "coverColor": "#ab6445",
+      "numberOfPages": 208,
+      "author": "Elisabeth Tova Bailey"
+    }
+  ]
+}

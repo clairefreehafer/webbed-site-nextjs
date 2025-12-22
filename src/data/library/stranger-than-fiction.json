@@ -1,17 +1,28 @@
 {
-  "slug": "stranger-than-fiction",
   "title": "stranger than fiction",
   "description": "incredible true stories",
   "items": [
     {
       "type": "book",
       "olid": "OL29525283M",
-      "title": "All Thirteen: The Incredible Cave Rescue of the Thai Boys' Soccer Team",
+      "title": "All Thirteen",
+      "subtitle": "The Incredible Cave Rescue of the Thai Boys' Soccer Team",
       "author": "Christina Soontornvat",
       "link": "https://openlibrary.org//books/OL29525283M",
       "coverImage": "https://covers.openlibrary.org/b/olid/OL29525283M-M.jpg",
       "numberOfPages": 288,
       "coverColor": "#c4842f"
+    },
+    {
+      "type": "book",
+      "olid": "OL60902377M",
+      "title": "Memory Palace",
+      "subtitle": "True Short Stories of the Past",
+      "link": "https://openlibrary.org/books/OL60902377M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL60902377M-M.jpg",
+      "coverColor": "linear-gradient(218.73177946926396deg, red, orange, yellow, green, blue, indigo, violet)",
+      "numberOfPages": 336,
+      "author": "Nate DiMeo"
     },
     {
       "type": "book",
@@ -27,11 +38,22 @@
       "type": "book",
       "olid": "OL27408515M",
       "author": "Michael Finkel",
-      "title": "The Stranger in the Woods: The Extraordinary Story of the Last True Hermit",
+      "title": "The Stranger in the Woods",
+      "subtitle": "The Extraordinary Story of the Last True Hermit",
       "link": "https://openlibrary.org/books/OL27408515M",
       "coverImage": "https://covers.openlibrary.org/b/olid/OL27408515M-M.jpg",
       "coverColor": "#818134",
       "numberOfPages": 222
+    },
+    {
+      "type": "book",
+      "olid": "OL26139311M",
+      "numberOfPages": 227,
+      "title": "When I Fell from the Sky",
+      "link": "https://openlibrary.org/works/OL26139311M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL26139311M-M.jpg",
+      "author": "Juliane Koepcke",
+      "coverColor": "#b47c3c"
     }
   ]
 }

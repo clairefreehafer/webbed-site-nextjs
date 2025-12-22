@@ -71,8 +71,14 @@ async function updateShelvedBook(bookJson: ShelvedBook): Promise<boolean> {
         bookJson.coverImage = `https://covers.openlibrary.org/b/olid/${bookJson.olid}-M.jpg`;
         break;
       case "title":
-        // TODO: figure out what title/subtitle/full title combination to use
-        bookJson.title = openLibraryData.full_title ?? openLibraryData.title;
+        if (openLibraryData.title && openLibraryData.subtitle) {
+          bookJson.title = openLibraryData.title;
+          bookJson.subtitle = openLibraryData.subtitle;
+        } else if (openLibraryData.full_title) {
+          bookJson.title = openLibraryData.full_title;
+        } else {
+          bookJson.title = openLibraryData.title;
+        }
         break;
       case "link":
         bookJson.link = `${OPEN_LIBRARY_URL_BASE}${openLibraryData.key}`;
@@ -83,7 +89,11 @@ async function updateShelvedBook(bookJson: ShelvedBook): Promise<boolean> {
             bookJson.coverImage ??
               `https://covers.openlibrary.org/b/olid/${bookJson.olid}-M.jpg`
           ).getPalette();
-          bookJson.coverColor = palette.Vibrant?.hex;
+          bookJson.coverColor =
+            palette.Vibrant?.hex ??
+            `linear-gradient(${
+              Math.random() * 360
+            }deg, red, orange, yellow, green, blue, indigo, violet)`;
         } catch (e) {
           console.warn(
             `📕 [updateShelvedBook] could not generate palette: ${e}`
@@ -91,12 +101,32 @@ async function updateShelvedBook(bookJson: ShelvedBook): Promise<boolean> {
         }
         break;
       case "numberOfPages":
-        bookJson.numberOfPages = openLibraryData.number_of_pages;
+        if (openLibraryData.number_of_pages) {
+          bookJson.numberOfPages = openLibraryData.number_of_pages;
+        } else {
+          console.warn(
+            `📕 [updateShelvedBook] could not get number of pages: ${bookJson.title}`
+          );
+        }
         break;
       case "author":
-        const authorKey = openLibraryData.authors[0].key.split("/")[2];
-        const authorData = await getAuthorData(authorKey);
-        bookJson.author = authorData.name;
+        const author = openLibraryData.authors?.[0];
+        let authorKey = "";
+        if (author) {
+          if ("key" in author) {
+            authorKey = author.key.split("/")[2];
+          } else if ("author" in author) {
+            authorKey = author.author.key.split("/")[2];
+          }
+        }
+        if (authorKey) {
+          const authorData = await getAuthorData(authorKey);
+          bookJson.author = authorData.name;
+        } else {
+          console.warn(
+            `📕 [updateShelvedBook] could not get author: ${bookJson.title}`
+          );
+        }
         break;
       default:
         console.warn(
@@ -267,6 +297,22 @@ export const updateShelvesJson = cache(async () => {
     if (jsonUpdated) {
       const shelfToWrite: Partial<Shelf> = { ...shelf };
       delete shelfToWrite.slug;
+
+      // sort shelves alphabetically by title
+      if (Array.isArray(shelfToWrite.items)) {
+        shelfToWrite.items.sort(
+          (a, b) => a.title?.localeCompare(b.title ?? "") ?? 0
+        );
+      } else {
+        for (const section in shelf.items) {
+          // don't sort series.
+          if (section === "standalone") {
+            shelfToWrite.items?.[section].sort(
+              (a, b) => a.title?.localeCompare(b.title ?? "") ?? 0
+            );
+          }
+        }
+      }
 
       writeFileSync(
         `${process.cwd()}/src/data/library/${shelf.slug}.json`,
