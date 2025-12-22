@@ -32,6 +32,16 @@ p.recipe-source {
     font-weight: normal;
   }
 
+  ul ul {
+    list-style-type: "\1f52a";
+
+    & > li {
+      padding-left: 0.5rem;
+      font-size: 0.75rem;
+      @include text.monospace();
+    }
+  }
+
   ol {
     padding-left: 3rem;
     list-style: none;
