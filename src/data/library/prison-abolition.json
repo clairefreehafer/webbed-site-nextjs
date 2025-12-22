@@ -1,7 +1,19 @@
 {
-  "slug": "prison-abolition",
   "title": "prison abolition",
   "items": {
+    "non-fiction": [
+      {
+        "type": "book",
+        "olid": "OL24988720M",
+        "title": "Captive Genders",
+        "subtitle": "Trans Embodiment and the Prison Industrial Complex",
+        "author": "Nat Smith & Eric A. Stanley",
+        "link": "https://openlibrary.org/books/OL24988720M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL24988720M-M.jpg",
+        "coverColor": "#2a5e76",
+        "numberOfPages": 365
+      }
+    ],
     "fiction": [
       {
         "type": "book",

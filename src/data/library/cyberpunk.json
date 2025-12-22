@@ -33,6 +33,38 @@
         "numberOfPages": 265
       }
     ],
+    "the-centenal-cycle": [
+      {
+        "type": "book",
+        "olid": "OL26854483M",
+        "title": "Infomocracy",
+        "link": "https://openlibrary.org/books/OL26854483M",
+        "coverColor": "#1485c7",
+        "numberOfPages": 400,
+        "author": "Malka Older",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL26854483M-M.jpg"
+      },
+      {
+        "type": "book",
+        "olid": "OL30592465M",
+        "title": "Null States",
+        "link": "https://openlibrary.org/books/OL30592465M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL30592465M-M.jpg",
+        "numberOfPages": 448,
+        "author": "Malka Older",
+        "coverColor": "linear-gradient(210.72287823260942deg, red, orange, yellow, green, blue, indigo, violet)"
+      },
+      {
+        "type": "book",
+        "olid": "OL26965563M",
+        "title": "State Tectonics",
+        "link": "https://openlibrary.org/books/OL26965563M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL26965563M-M.jpg",
+        "numberOfPages": 428,
+        "author": "Malka Older",
+        "coverColor": "linear-gradient(27.77918028464822deg, red, orange, yellow, green, blue, indigo, violet)"
+      }
+    ],
     "standalone": [
       {
         "type": "book",
@@ -43,6 +75,16 @@
         "coverImage": "https://covers.openlibrary.org/b/olid/OL7525648M-M.jpg",
         "coverColor": "#fcb414",
         "numberOfPages": 195
+      },
+      {
+        "type": "book",
+        "olid": "OL5478305M",
+        "title": "We",
+        "link": "https://openlibrary.org/books/OL5478305M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL5478305M-M.jpg",
+        "coverColor": "#e6702f",
+        "numberOfPages": 204,
+        "author": "Yevgeny Zamyatin"
       }
     ]
   }

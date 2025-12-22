@@ -1,5 +1,5 @@
 {
-  "title": "climate dystopia",
+  "title": "post-apocalyptic",
   "items": {
     "silo": [
       {
@@ -43,6 +43,26 @@
         "coverImage": "https://covers.openlibrary.org/b/olid/OL57439282M-M.jpg",
         "coverColor": "#1c82aa",
         "numberOfPages": 304
+      },
+      {
+        "type": "book",
+        "olid": "OL26359465M",
+        "title": "Borne",
+        "author": "Jeff VanderMeer",
+        "link": "https://openlibrary.org/books/OL26359465M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL26359465M-M.jpg",
+        "coverColor": "#d27030",
+        "numberOfPages": 323
+      },
+      {
+        "type": "book",
+        "olid": "OL27964135M",
+        "title": "Station Eleven",
+        "link": "https://openlibrary.org/books/OL27964135M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL27964135M-M.jpg",
+        "coverColor": "#ad7a43",
+        "numberOfPages": 352,
+        "author": "Emily St. John Mandel"
       }
     ]
   }

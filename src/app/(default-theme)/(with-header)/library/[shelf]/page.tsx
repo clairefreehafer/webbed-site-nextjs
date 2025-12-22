@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+
 import Book from "@/components/library/book";
 import Dvd from "@/components/library/dvd";
 import Vhs from "@/components/library/vhs";
@@ -34,13 +36,25 @@ export async function generateStaticParams(): Promise<Params[]> {
   }));
 }
 
-export async function generateMetadata() {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>;
+}): Promise<Metadata> {
   const shelvesJson = await getShelves();
+  const { shelf } = await params;
+  const shelfData = shelvesJson.find((shelfJson) => shelfJson.slug === shelf);
 
-  return Object.keys(shelvesJson).map((shelf) => ({
-    title: `${deslugify(shelf)} shelf`,
-    noRobots,
-  }));
+  if (!shelfData) {
+    return {
+      title: "library",
+      robots: noRobots,
+    };
+  }
+  return {
+    title: `${shelfData.title} shelf`,
+    robots: noRobots,
+  };
 }
 
 export default async function Page({ params }: { params: Promise<Params> }) {

@@ -1,0 +1,38 @@
+{
+  "title": "psych",
+  "items": [
+    {
+      "type": "book",
+      "olid": "OL34663797M",
+      "title": "Gender Mosaic",
+      "subtitle": "Beyond the Myth of the Male and Female Brain",
+      "link": "https://openlibrary.org/books/OL34663797M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL34663797M-M.jpg",
+      "coverColor": "#fbec05",
+      "author": "Daphna Joel & Luba Vikhanski",
+      "numberOfPages": 160
+    },
+    {
+      "type": "book",
+      "olid": "OL27344994M",
+      "title": "Mind Fixers",
+      "subtitle": "Psychiatry's Troubled Search for the Biology of Mental Illness",
+      "link": "https://openlibrary.org/books/OL27344994M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL27344994M-M.jpg",
+      "coverColor": "#7f7f7f",
+      "numberOfPages": 384,
+      "author": "Anne Harrington"
+    },
+    {
+      "type": "book",
+      "olid": "OL23631586M",
+      "title": "Stuff",
+      "subtitle": "Compulsive Hoarding and the Meaning of Things",
+      "link": "https://openlibrary.org/books/OL23631586M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL23631586M-M.jpg",
+      "coverColor": "#e7100e",
+      "author": "Randy O. Frost",
+      "numberOfPages": 290
+    }
+  ]
+}

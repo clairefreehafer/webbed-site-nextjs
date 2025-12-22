@@ -1,6 +1,13 @@
+import { Metadata } from "next";
 import Link from "next/link";
 
+import { noRobots } from "@/utils";
 import { getShelves } from "@/utils/library";
+
+export const metadata: Metadata = {
+  title: "library",
+  robots: noRobots,
+};
 
 export default async function Page() {
   const shelvesJson = await getShelves();

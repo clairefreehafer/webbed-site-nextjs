@@ -1,0 +1,58 @@
+{
+  "title": "disability",
+  "items": [
+    {
+      "type": "book",
+      "olid": "OL2528572M",
+      "title": "A Burst of Light",
+      "link": "https://openlibrary.org/books/OL2528572M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL2528572M-M.jpg",
+      "coverColor": "#04d4d4",
+      "numberOfPages": 134,
+      "author": "Audre Lorde"
+    },
+    {
+      "type": "book",
+      "olid": "OL26976977M",
+      "title": "Care Work",
+      "subtitle": "Dreaming Disability Justice",
+      "link": "https://openlibrary.org/books/OL26976977M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL26976977M-M.jpg",
+      "coverColor": "#bb722e",
+      "numberOfPages": 263,
+      "author": "Leah Lakshmi Piepzna-Samarasinha"
+    },
+    {
+      "type": "book",
+      "olid": "OL39466707M",
+      "numberOfPages": 304,
+      "title": "Leg",
+      "subtitle": "The Story of a Limb and the Boy Who Grew from It",
+      "link": "https://openlibrary.org/books/OL39466707M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL39466707M-M.jpg",
+      "coverColor": "#f21c8c",
+      "author": "Greg Marshall"
+    },
+    {
+      "type": "book",
+      "olid": "OL40222556M",
+      "title": "The Future Is Disabled",
+      "subtitle": "Prophecies, Love Notes and Mourning Songs",
+      "author": "Leah Lakshmi Piepzna-Samarasinha",
+      "link": "https://openlibrary.org/books/OL40222556M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL40222556M-M.jpg",
+      "coverColor": "#d7345e",
+      "numberOfPages": 272
+    },
+    {
+      "type": "book",
+      "olid": "OL27427901M",
+      "title": "The Sound of a Wild Snail Eating",
+      "link": "https://openlibrary.org/books/OL27427901M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL27427901M-M.jpg",
+      "coverColor": "#ab6445",
+      "numberOfPages": 208,
+      "author": "Elisabeth Tova Bailey"
+    }
+  ]
+}

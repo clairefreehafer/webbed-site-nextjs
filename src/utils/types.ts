@@ -51,6 +51,7 @@ export type ShelvedBook = {
   type: "book";
   olid?: string;
   title?: string;
+  subtitle?: string;
   link?: string;
   coverImage?: string;
   coverColor?: string;

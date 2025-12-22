@@ -3,9 +3,65 @@
   "items": [
     {
       "type": "book",
+      "olid": "OL57522512M",
+      "title": "Against Platforms",
+      "subtitle": "Surviving Digital Utopia",
+      "link": "https://openlibrary.org/books/OL57522512M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL57522512M-M.jpg",
+      "coverColor": "linear-gradient(177.74623668147484deg, red, orange, yellow, green, blue, indigo, violet)",
+      "numberOfPages": 256,
+      "author": "Mike Pepi"
+    },
+    {
+      "type": "book",
+      "olid": "OL29457980M",
+      "title": "Bit Tyrants",
+      "subtitle": "The Political Economy of Silicon Valley",
+      "link": "https://openlibrary.org/books/OL29457980M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL29457980M-M.jpg",
+      "coverColor": "#cc3434",
+      "numberOfPages": 214,
+      "author": "Rob Larson"
+    },
+    {
+      "type": "book",
+      "olid": "OL38771140M",
+      "title": "Circle of the Snake",
+      "subtitle": "Nostalgia and Utopia in the Age of Big Tech",
+      "link": "https://openlibrary.org/books/OL38771140M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL38771140M-M.jpg",
+      "coverColor": "linear-gradient(113.1847618288138deg, red, orange, yellow, green, blue, indigo, violet)",
+      "author": "Grafton Tanner",
+      "numberOfPages": 176
+    },
+    {
+      "type": "book",
+      "olid": "OL50724935M",
+      "title": "Code Dependent",
+      "subtitle": "Living in the Shadow of AI",
+      "link": "https://openlibrary.org/books/OL50724935M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL50724935M-M.jpg",
+      "coverColor": "#349cb4",
+      "author": "Madhumita Murgia",
+      "numberOfPages": 320
+    },
+    {
+      "type": "book",
+      "olid": "OL50729847M",
+      "title": "Drive",
+      "subtitle": "Scraping by in Uber's America, One Ride at a Time",
+      "link": "https://openlibrary.org/books/OL50729847M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL50729847M-M.jpg",
+      "coverColor": "linear-gradient(216.84126455646725deg, red, orange, yellow, green, blue, indigo, violet)",
+      "author": "Jonathan Rigsby",
+      "numberOfPages": 208
+    },
+    {
+      "type": "book",
       "olid": "OL35097599M",
+      "title": "Everything I Need I Get from You",
+      "subtitle": "How Fangirls Created the Internet As We Know It",
       "author": "Kaitlyn Tiffany",
-      "title": "Everything I Need I Get from You: How Fangirls Created the Internet As We Know It",
       "link": "https://openlibrary.org/books/OL35097599M",
       "coverImage": "https://covers.openlibrary.org/b/olid/OL35097599M-M.jpg",
       "coverColor": "#cca444",
@@ -13,13 +69,69 @@
     },
     {
       "type": "book",
+      "olid": "OL57433840M",
+      "title": "Mood Machine",
+      "subtitle": "The Rise of Spotify and the Costs of the Perfect Playlist",
+      "author": "Liz Pelly",
+      "link": "https://openlibrary.org/books/OL57433840M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL57433840M-M.jpg",
+      "coverColor": "#e62029",
+      "numberOfPages": 288
+    },
+    {
+      "type": "book",
+      "olid": "OL28375323M",
+      "title": "Psychopolitics",
+      "subtitle": "Neoliberalism and New Technologies of Power",
+      "author": "Byung-Chul Han",
+      "link": "https://openlibrary.org/books/OL28375323M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL28375323M-M.jpg",
+      "coverColor": "#84fc04",
+      "numberOfPages": 96
+    },
+    {
+      "type": "book",
+      "olid": "OL57523002M",
+      "title": "Stream Big",
+      "subtitle": "The Triumphs and Turmoils of Twitch and the Stars Behind the Screen",
+      "link": "https://openlibrary.org/books/OL57523002M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL57523002M-M.jpg",
+      "coverColor": "linear-gradient(217.0623909267773deg, red, orange, yellow, green, blue, indigo, violet)",
+      "numberOfPages": 288,
+      "author": "Nathan Grayson"
+    },
+    {
+      "type": "book",
+      "olid": "OL51583947M",
+      "title": "The Mechanic and the Luddite",
+      "subtitle": "A Ruthless Criticism of Technology and Capitalism",
+      "link": "https://openlibrary.org/books/OL51583947M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL51583947M-M.jpg",
+      "coverColor": "#ec442c",
+      "author": "Jathan Sadowski",
+      "numberOfPages": 233
+    },
+    {
+      "type": "book",
       "olid": "OL51106108M",
       "author": "Ben Collier",
-      "title": "Tor: From the Dark Web to the Future of Privacy",
+      "title": "Tor",
+      "subtitle": "From the Dark Web to the Future of Privacy",
       "link": "https://openlibrary.org/books/OL51106108M",
       "coverImage": "https://covers.openlibrary.org/b/olid/OL51106108M-M.jpg",
       "coverColor": "#3fbfbf",
       "numberOfPages": 242
+    },
+    {
+      "type": "book",
+      "olid": "OL46479244M",
+      "numberOfPages": 288,
+      "title": "Your Face Belongs to Us",
+      "subtitle": "A Secretive Startup's Quest to End Privacy As We Know It",
+      "link": "https://openlibrary.org/books/OL46479244M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL46479244M-M.jpg",
+      "coverColor": "#f039d9",
+      "author": "Kashmir Hill"
     }
   ]
 }

@@ -5,13 +5,13 @@
     "children-of-time": [
       {
         "type": "book",
-        "olid": "OL28225222M",
+        "olid": "OL38410196M",
         "author": "Adrian Tchaikovsky",
-        "title": "Children of Time",
-        "link": "https://openlibrary.org/books/OL28225222M",
-        "coverImage": "https://covers.openlibrary.org/b/olid/OL28225222M-M.jpg",
-        "coverColor": "#9bc53b",
-        "numberOfPages": 608
+        "title": "Children of Memory",
+        "link": "https://openlibrary.org/books/OL38410196M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL38410196M-M.jpg",
+        "coverColor": "#dca60f",
+        "numberOfPages": 503
       },
       {
         "type": "book",
@@ -25,25 +25,25 @@
       },
       {
         "type": "book",
-        "olid": "OL38410196M",
+        "olid": "OL28225222M",
         "author": "Adrian Tchaikovsky",
-        "title": "Children of Memory",
-        "link": "https://openlibrary.org/books/OL38410196M",
-        "coverImage": "https://covers.openlibrary.org/b/olid/OL38410196M-M.jpg",
-        "coverColor": "#dca60f",
-        "numberOfPages": 503
+        "title": "Children of Time",
+        "link": "https://openlibrary.org/books/OL28225222M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL28225222M-M.jpg",
+        "coverColor": "#9bc53b",
+        "numberOfPages": 608
       }
     ],
     "the-hainish-cycle": [
       {
         "type": "book",
-        "olid": "OL5209555M",
-        "author": "Ursula K. LeGuin",
-        "title": "The Word for World is Forest",
-        "link": "https://openlibrary.org/books/OL5209555M",
-        "coverImage": "https://covers.openlibrary.org/b/olid/OL5209555M-M.jpg",
-        "coverColor": "#c8c040",
-        "numberOfPages": 189
+        "olid": "OL23242517M",
+        "title": "The Left Hand of Darkness",
+        "link": "https://openlibrary.org/books/OL23242517M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL23242517M-M.jpg",
+        "coverColor": "#1581a0",
+        "numberOfPages": 304,
+        "author": "Ursula K. Le Guin"
       },
       {
         "type": "book",
@@ -54,19 +54,19 @@
         "coverImage": "https://covers.openlibrary.org/b/olid/OL57759338M-M.jpg",
         "coverColor": "#4e8cac",
         "numberOfPages": 336
+      },
+      {
+        "type": "book",
+        "olid": "OL5209555M",
+        "author": "Ursula K. LeGuin",
+        "title": "The Word for World is Forest",
+        "link": "https://openlibrary.org/books/OL5209555M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL5209555M-M.jpg",
+        "coverColor": "#c8c040",
+        "numberOfPages": 189
       }
     ],
     "the-investigations-of-mossa-and-pleiti": [
-      {
-        "type": "book",
-        "olid": "OL38122492M",
-        "author": "Malka Older",
-        "title": "The Mimicking of Known Successes",
-        "link": "https://openlibrary.org/books/OL38122492M",
-        "coverImage": "https://covers.openlibrary.org/b/olid/OL38122492M-M.jpg",
-        "coverColor": "#ea9c44",
-        "numberOfPages": 176
-      },
       {
         "type": "book",
         "olid": "OL50619038M",
@@ -76,6 +76,16 @@
         "coverImage": "https://covers.openlibrary.org/b/olid/OL50619038M-M.jpg",
         "coverColor": "#419ca7",
         "numberOfPages": 224
+      },
+      {
+        "type": "book",
+        "olid": "OL38122492M",
+        "author": "Malka Older",
+        "title": "The Mimicking of Known Successes",
+        "link": "https://openlibrary.org/books/OL38122492M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL38122492M-M.jpg",
+        "coverColor": "#ea9c44",
+        "numberOfPages": 176
       }
     ],
     "the-imperial-radch": [
@@ -91,6 +101,16 @@
       },
       {
         "type": "book",
+        "olid": "OL27194297M",
+        "author": "Anne Leckie",
+        "title": "Ancillary Mercy",
+        "link": "https://openlibrary.org/books/OL27194297M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL27194297M-M.jpg",
+        "coverColor": "#b18332",
+        "numberOfPages": 359
+      },
+      {
+        "type": "book",
         "olid": "OL42794794M",
         "author": "Anne Leckie",
         "title": "Ancillary Sword",
@@ -101,13 +121,13 @@
       },
       {
         "type": "book",
-        "olid": "OL27194297M",
+        "olid": "OL50646857M",
         "author": "Anne Leckie",
-        "title": "Ancillary Mercy",
-        "link": "https://openlibrary.org/books/OL27194297M",
-        "coverImage": "https://covers.openlibrary.org/b/olid/OL27194297M-M.jpg",
-        "coverColor": "#b18332",
-        "numberOfPages": 359
+        "title": "Lake of Souls: the Collected Short Fiction",
+        "link": "https://openlibrary.org/books/OL50646857M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL50646857M-M.jpg",
+        "coverColor": "#f4c248",
+        "numberOfPages": 416
       },
       {
         "type": "book",
@@ -128,16 +148,6 @@
         "coverImage": "https://covers.openlibrary.org/b/olid/OL42730380M-M.jpg",
         "coverColor": "#e31c24",
         "numberOfPages": 432
-      },
-      {
-        "type": "book",
-        "olid": "OL50646857M",
-        "author": "Anne Leckie",
-        "title": "Lake of Souls: the Collected Short Fiction",
-        "link": "https://openlibrary.org/books/OL50646857M",
-        "coverImage": "https://covers.openlibrary.org/b/olid/OL50646857M-M.jpg",
-        "coverColor": "#f4c248",
-        "numberOfPages": 416
       }
     ],
     "the-murderbot-diaries": [
@@ -163,16 +173,6 @@
       },
       {
         "type": "book",
-        "olid": "OL26966631M",
-        "author": "Martha Wells",
-        "title": "Rogue Protocol",
-        "link": "https://openlibrary.org/books/OL26966631M",
-        "coverImage": "https://covers.openlibrary.org/b/olid/OL26966631M-M.jpg",
-        "coverColor": "#71808d",
-        "numberOfPages": 158
-      },
-      {
-        "type": "book",
         "olid": "OL26976340M",
         "author": "Martha Wells",
         "title": "Exit Strategy",
@@ -180,6 +180,16 @@
         "coverImage": "https://covers.openlibrary.org/b/olid/OL26976340M-M.jpg",
         "coverColor": "#c3b33c",
         "numberOfPages": 172
+      },
+      {
+        "type": "book",
+        "olid": "OL28166035M",
+        "author": "Martha Wells",
+        "title": "Fugitive Telemetry",
+        "link": "https://openlibrary.org/books/OL28166035M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL28166035M-M.jpg",
+        "coverColor": "#ba9344",
+        "numberOfPages": 176
       },
       {
         "type": "book",
@@ -203,13 +213,13 @@
       },
       {
         "type": "book",
-        "olid": "OL28166035M",
+        "olid": "OL26966631M",
         "author": "Martha Wells",
-        "title": "Fugitive Telemetry",
-        "link": "https://openlibrary.org/books/OL28166035M",
-        "coverImage": "https://covers.openlibrary.org/b/olid/OL28166035M-M.jpg",
-        "coverColor": "#ba9344",
-        "numberOfPages": 176
+        "title": "Rogue Protocol",
+        "link": "https://openlibrary.org/books/OL26966631M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL26966631M-M.jpg",
+        "coverColor": "#71808d",
+        "numberOfPages": 158
       },
       {
         "type": "book",
@@ -225,6 +235,16 @@
     "standalone": [
       {
         "type": "book",
+        "olid": "OL28343055M",
+        "title": "An Unkindness of Ghosts",
+        "link": "https://openlibrary.org/books/OL28343055M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL28343055M-M.jpg",
+        "coverColor": "#508cae",
+        "numberOfPages": 282,
+        "author": "Rivers Solomon"
+      },
+      {
+        "type": "book",
         "olid": "OL33283665M",
         "author": "Tade Thompson",
         "title": "Far from the Light of Heaven",
@@ -232,6 +252,26 @@
         "coverImage": "https://covers.openlibrary.org/b/olid/OL33283665M-M.jpg",
         "coverColor": "#4077b7",
         "numberOfPages": 384
+      },
+      {
+        "type": "book",
+        "olid": "OL48755644M",
+        "title": "Inversion",
+        "link": "https://openlibrary.org/books/OL48755644M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL48755644M-M.jpg",
+        "coverColor": "#0d8bbf",
+        "author": "Aric McBay",
+        "numberOfPages": 240
+      },
+      {
+        "type": "book",
+        "olid": "OL32997935M",
+        "title": "Sea of Tranquility",
+        "link": "https://openlibrary.org/books/OL32997935M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL32997935M-M.jpg",
+        "coverColor": "#317788",
+        "numberOfPages": 272,
+        "author": "Emily St. John Mandel"
       },
       {
         "type": "book",
@@ -252,6 +292,16 @@
         "coverImage": "https://covers.openlibrary.org/b/olid/OL35547833M-M.jpg",
         "coverColor": "#fbb904",
         "numberOfPages": 135
+      },
+      {
+        "type": "book",
+        "olid": "OL27901088M",
+        "title": "This Is How You Lose the Time War",
+        "author": "Amal El-Mohtar & Max Gladstone",
+        "link": "https://openlibrary.org/books/OL27901088M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL27901088M-M.jpg",
+        "coverColor": "#d84d4a",
+        "numberOfPages": 208
       },
       {
         "type": "book",

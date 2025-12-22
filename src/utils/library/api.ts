@@ -4,13 +4,13 @@ export const OPEN_LIBRARY_URL_BASE = "https://openlibrary.org";
 const TVDB_URL_BASE = "https://api4.thetvdb.com/v4";
 
 type OLBookResponse = {
-  authors: { key: string }[];
+  authors?: { key: string }[] | { author: { key: string } }[];
   covers: number[];
-  full_title: string;
+  full_title?: string;
   key: string;
-  number_of_pages: number;
-  subtitle: string;
-  title: string;
+  number_of_pages?: number;
+  subtitle?: string;
+  title?: string;
 };
 
 export const getBookData = async (olid: string): Promise<OLBookResponse> => {
