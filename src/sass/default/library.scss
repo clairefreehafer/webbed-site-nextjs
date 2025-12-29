@@ -1,0 +1,202 @@
+@use "mixins";
+
+$rotate_hover: -30deg;
+
+.shelves {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.shelf-title {
+  text-align: center;
+}
+
+.section-title {
+  @include mixins.dotted-underline(2px);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.shelf {
+  align-items: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  row-gap: 1rem;
+}
+
+.shelf-description {
+  text-align: center;
+}
+
+.item-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: min-content;
+}
+
+.item-title {
+  align-items: center;
+  display: flex;
+  font-size: 0.95rem;
+  text-align: center;
+  padding: 0 0.25rem;
+}
+
+.item-subtitle {
+  align-items: center;
+  display: flex;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.book-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 600px;
+  padding: 0.75rem;
+
+  &:hover,
+  &:focus {
+    background-color: transparent;
+  }
+}
+
+@mixin book(
+  $width: 150,
+  $height: 225,
+  $thickness: var(--thickness),
+  $border_radius: 2px,
+  $page_offset: var(--pages-offset)
+) {
+  width: $width * 1px;
+  height: $height * 1px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  transition: 1s ease;
+
+  & > .cover-text {
+    position: absolute;
+    background: var(--cover-color);
+    width: $width * 1px;
+    height: $height * 1px;
+    transform: translateZ(calc($thickness / 2 * 1px));
+    border-radius: 0 $border_radius $border_radius 0;
+    text-shadow: -1px -1px 5px #000, 1px -1px 5px #000, -1px 1px 5px #000,
+      1px 1px 5px #000;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 200;
+    padding: 0.25rem;
+    overflow: hidden;
+    line-height: 1.5rem;
+    color: white;
+
+    &:hover {
+      color: white;
+    }
+  }
+
+  // cover image
+  & > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $width * 1px;
+    height: $height * 1px;
+    transform: translateZ(calc($thickness / 2 * 1px));
+    border-radius: 0 $border_radius $border_radius 0;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  // pages/side
+  &::before {
+    position: absolute;
+    content: " ";
+    left: 0;
+    top: calc($page_offset * 1px);
+    width: calc(($thickness * 1px) - 2px);
+    height: calc($height * 1px - 2 * $page_offset * 1px);
+    transform: translateX(calc(($width - $thickness / 2 - $page_offset) * 1px))
+      rotateY(90deg);
+    background: linear-gradient(
+      90deg,
+      #fff 0%,
+      #f9f9f9 5%,
+      #fff 10%,
+      #f9f9f9 15%,
+      #fff 20%,
+      #f9f9f9 25%,
+      #fff 30%,
+      #f9f9f9 35%,
+      #fff 40%,
+      #f9f9f9 45%,
+      #fff 50%,
+      #f9f9f9 55%,
+      #fff 60%,
+      #f9f9f9 65%,
+      #fff 70%,
+      #f9f9f9 75%,
+      #fff 80%,
+      #f9f9f9 85%,
+      #fff 90%,
+      #f9f9f9 95%,
+      #fff 100%
+    );
+  }
+
+  // back cover
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: " ";
+    width: $width * 1px;
+    height: $height * 1px;
+    transform: translateZ(calc($thickness / 2 * -1px));
+    background: var(--cover-color);
+    border-radius: 0 $border_radius $border_radius 0;
+    box-shadow: -10px 0 50px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  &:hover {
+    transform: rotateY($rotate_hover);
+  }
+}
+
+.book {
+  @include book();
+}
+
+.dvd {
+  @include book(169, 225, 10, 10px, 5);
+
+  & > :first-child,
+  &::after {
+    border-radius: 10px;
+  }
+}
+
+.vhs {
+  @include book(150, 225, 50, 0px, 0);
+
+  &::before {
+    background: radial-gradient(
+        circle at bottom,
+        rgb(35, 35, 35) 0%,
+        rgb(35, 35, 35) 7%,
+        black 8%,
+        transparent 8%,
+        transparent 100%
+      ),
+      var(--cover-color);
+  }
+}

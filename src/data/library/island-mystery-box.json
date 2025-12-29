@@ -1,0 +1,35 @@
+{
+  "slug": "island-mystery-box",
+  "title": "island mystery box",
+  "items": [
+    {
+      "type": "tv",
+      "tvdbId": "73739",
+      "title": "Lost",
+      "link": "https://www.thetvdb.com/series/lost",
+      "coverImage": "https://artworks.thetvdb.com/banners/posters/73739-11.jpg",
+      "coverColor": "#1d565c"
+    },
+    {
+      "type": "video-game",
+      "title": "Myst",
+      "link": "https://www.igdb.com/games/myst",
+      "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1y96.webp",
+      "coverColor": "#c1e2e5"
+    },
+    {
+      "type": "video-game",
+      "title": "Riven",
+      "link": "https://www.igdb.com/games/riven-the-sequel-to-myst",
+      "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2jlf.webp",
+      "coverColor": "#dcb39c"
+    },
+    {
+      "type": "video-game",
+      "title": "The Witness",
+      "link": "https://www.igdb.com/games/the-witness",
+      "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co3hih.webp",
+      "coverColor": "#7ebcde"
+    }
+  ]
+}

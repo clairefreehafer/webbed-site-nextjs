@@ -1,22 +1,3 @@
-type MarkdownPage = {
-  /** page content; cannot get element/component typing to cooperate */
-  default: any;
-  title: string;
-  path: string;
-};
-
-export type RecipePage = MarkdownPage & {
-  category: string;
-  ingredients: string[];
-  sourceUrl?: string;
-  lastMade?: string;
-};
-
-export type ListPage = MarkdownPage & {
-  tags?: string[];
-  slug: string;
-};
-
 export type GeoJson = {
   type: "FeatureCollection";
   features: {
@@ -44,5 +25,3 @@ export type CollectionConfig = Record<
     coverPhotoPosition?: string;
   }
 >;
-
-export type AnimalCrossingTags = Record<string, string[]>;

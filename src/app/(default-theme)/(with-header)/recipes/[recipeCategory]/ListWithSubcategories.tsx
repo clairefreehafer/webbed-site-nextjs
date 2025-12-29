@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 import LastMade from "@/components/default/last-made";
+import { RecipePage } from "@/types/markdown";
 import { deslugify } from "@/utils";
-import { RecipePage } from "@/utils/types";
 
 type Props = {
   category: string;

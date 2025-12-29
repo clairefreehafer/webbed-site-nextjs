@@ -1,0 +1,62 @@
+{
+  "title": "subtle sci fi",
+  "description": "stories that at first glance appear as if they take place in our own world.",
+  "items": [
+    {
+      "type": "book",
+      "olid": "OL26803728M",
+      "author": "Michael Swanwick",
+      "title": "Bones of the Earth",
+      "link": "https://openlibrary.org/books/OL26803728M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL26803728M-M.jpg",
+      "coverColor": "#e65c2c",
+      "numberOfPages": 400
+    },
+    {
+      "type": "tv",
+      "tvdbId": "337302",
+      "title": "Counterpart",
+      "link": "https://www.thetvdb.com/series/counterpart",
+      "coverImage": "https://artworks.thetvdb.com/banners/posters/337302-4.jpg",
+      "coverColor": "#784428"
+    },
+    {
+      "type": "tv",
+      "tvdbId": "82066",
+      "title": "Fringe",
+      "link": "https://www.thetvdb.com/series/fringe",
+      "coverImage": "https://artworks.thetvdb.com/banners/posters/82066-1.jpg",
+      "coverColor": "#5e4c23"
+    },
+    {
+      "type": "book",
+      "olid": "OL29539396M",
+      "author": "Kazuo Ishiguro",
+      "title": "Klara and the Sun",
+      "link": "https://openlibrary.org/books/OL29539396M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL29539396M-M.jpg",
+      "coverColor": "#e34c2c",
+      "numberOfPages": 320
+    },
+    {
+      "type": "book",
+      "olid": "OL16198255M",
+      "author": "Kazuo Ishiguro",
+      "title": "Never Let Me Go",
+      "link": "https://openlibrary.org/books/OL16198255M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL16198255M-M.jpg",
+      "coverColor": "#bd9438",
+      "numberOfPages": 288
+    },
+    {
+      "type": "book",
+      "olid": "OL24056143M",
+      "title": "The City & The City",
+      "author": "China Miéville",
+      "link": "https://openlibrary.org/books/OL24056143M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL24056143M-M.jpg",
+      "coverColor": "#507abf",
+      "numberOfPages": 312
+    }
+  ]
+}

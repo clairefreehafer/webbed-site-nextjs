@@ -1,32 +1,10 @@
 "use client";
 import { usePathname } from "next/navigation";
 
+import { ROOT_LINKS } from "@/types/nav";
 import { getActiveNavLink } from "@/utils/client";
 
-import ScribbleLink, { ScribbleLinkProps } from "./scribble-link";
-
-const ROOT_LINKS: ScribbleLinkProps[] = [
-  {
-    href: "/",
-    text: "home",
-    scribbleText: "hm",
-  },
-  {
-    href: "/art",
-    text: "art",
-    scribbleText: "r",
-  },
-  {
-    href: "/recipes",
-    text: "recipes",
-    scribbleText: "rp",
-  },
-  {
-    href: "/lists",
-    text: "lists",
-    scribbleText: "ls",
-  },
-] as const;
+import ScribbleLink from "./scribble-link";
 
 export default function Nav() {
   const pathname = usePathname();

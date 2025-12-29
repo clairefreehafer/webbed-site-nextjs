@@ -1,0 +1,308 @@
+{
+  "title": "other worlds",
+  "description": "stories of humanity living beyond earth.",
+  "items": {
+    "children-of-time": [
+      {
+        "type": "book",
+        "olid": "OL28225222M",
+        "author": "Adrian Tchaikovsky",
+        "title": "Children of Time",
+        "link": "https://openlibrary.org/books/OL28225222M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL28225222M-M.jpg",
+        "coverColor": "#9bc53b",
+        "numberOfPages": 608
+      },
+      {
+        "type": "book",
+        "olid": "OL28213970M",
+        "author": "Adrian Tchaikovsky",
+        "title": "Children of Ruin",
+        "link": "https://openlibrary.org/books/OL28213970M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL28213970M-M.jpg",
+        "coverColor": "#cf2729",
+        "numberOfPages": 576
+      },
+      {
+        "type": "book",
+        "olid": "OL38410196M",
+        "author": "Adrian Tchaikovsky",
+        "title": "Children of Memory",
+        "link": "https://openlibrary.org/books/OL38410196M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL38410196M-M.jpg",
+        "coverColor": "#dca60f",
+        "numberOfPages": 503
+      }
+    ],
+    "the-hainish-cycle": [
+      {
+        "type": "book",
+        "author": "Ursula K. LeGuin",
+        "olid": "OL57759338M",
+        "title": "Five Ways to Forgiveness",
+        "link": "https://openlibrary.org/books/OL57759338M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL57759338M-M.jpg",
+        "coverColor": "#4e8cac",
+        "numberOfPages": 336
+      },
+      {
+        "type": "book",
+        "olid": "OL5209555M",
+        "author": "Ursula K. LeGuin",
+        "title": "The Word for World is Forest",
+        "link": "https://openlibrary.org/books/OL5209555M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL5209555M-M.jpg",
+        "coverColor": "#c8c040",
+        "numberOfPages": 189
+      }
+    ],
+    "the-investigations-of-mossa-and-pleiti": [
+      {
+        "type": "book",
+        "olid": "OL50619038M",
+        "author": "Malka Older",
+        "title": "Imposition of Unnecessary Obstacles",
+        "link": "https://openlibrary.org/books/OL50619038M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL50619038M-M.jpg",
+        "coverColor": "#419ca7",
+        "numberOfPages": 224
+      },
+      {
+        "type": "book",
+        "olid": "OL38122492M",
+        "author": "Malka Older",
+        "title": "The Mimicking of Known Successes",
+        "link": "https://openlibrary.org/books/OL38122492M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL38122492M-M.jpg",
+        "coverColor": "#ea9c44",
+        "numberOfPages": 176
+      }
+    ],
+    "the-imperial-radch": [
+      {
+        "type": "book",
+        "olid": "OL27524289M",
+        "author": "Anne Leckie",
+        "title": "Ancillary Justice",
+        "link": "https://openlibrary.org/books/OL27524289M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL27524289M-M.jpg",
+        "coverColor": "#2a84bc",
+        "numberOfPages": 558
+      },
+      {
+        "type": "book",
+        "olid": "OL27194297M",
+        "author": "Anne Leckie",
+        "title": "Ancillary Mercy",
+        "link": "https://openlibrary.org/books/OL27194297M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL27194297M-M.jpg",
+        "coverColor": "#b18332",
+        "numberOfPages": 359
+      },
+      {
+        "type": "book",
+        "olid": "OL42794794M",
+        "author": "Anne Leckie",
+        "title": "Ancillary Sword",
+        "link": "https://openlibrary.org/books/OL42794794M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL42794794M-M.jpg",
+        "coverColor": "#fccc04",
+        "numberOfPages": 400
+      },
+      {
+        "type": "book",
+        "olid": "OL50646857M",
+        "author": "Anne Leckie",
+        "title": "Lake of Souls: the Collected Short Fiction",
+        "link": "https://openlibrary.org/books/OL50646857M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL50646857M-M.jpg",
+        "coverColor": "#f4c248",
+        "numberOfPages": 416
+      },
+      {
+        "type": "book",
+        "olid": "OL28343377M",
+        "author": "Anne Leckie",
+        "title": "Provenance",
+        "link": "https://openlibrary.org/books/OL28343377M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL28343377M-M.jpg",
+        "coverColor": "#a43c29",
+        "numberOfPages": 448
+      },
+      {
+        "type": "book",
+        "olid": "OL42730380M",
+        "author": "Anne Leckie",
+        "title": "Translation State",
+        "link": "https://openlibrary.org/books/OL42730380M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL42730380M-M.jpg",
+        "coverColor": "#e31c24",
+        "numberOfPages": 432
+      }
+    ],
+    "the-murderbot-diaries": [
+      {
+        "type": "book",
+        "olid": "OL28191560M",
+        "author": "Martha Wells",
+        "title": "All Systems Red",
+        "link": "https://openlibrary.org/books/OL28191560M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL28191560M-M.jpg",
+        "coverColor": "#ad7151",
+        "numberOfPages": 176
+      },
+      {
+        "type": "book",
+        "olid": "OL26960367M",
+        "author": "Martha Wells",
+        "title": "Artificial Condition",
+        "link": "https://openlibrary.org/books/OL26960367M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL26960367M-M.jpg",
+        "coverColor": "#c98a53",
+        "numberOfPages": 158
+      },
+      {
+        "type": "book",
+        "olid": "OL26976340M",
+        "author": "Martha Wells",
+        "title": "Exit Strategy",
+        "link": "https://openlibrary.org/books/OL26976340M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL26976340M-M.jpg",
+        "coverColor": "#c3b33c",
+        "numberOfPages": 172
+      },
+      {
+        "type": "book",
+        "olid": "OL28166035M",
+        "author": "Martha Wells",
+        "title": "Fugitive Telemetry",
+        "link": "https://openlibrary.org/books/OL28166035M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL28166035M-M.jpg",
+        "coverColor": "#ba9344",
+        "numberOfPages": 176
+      },
+      {
+        "type": "book",
+        "olid": "OL32243259M",
+        "author": "Martha Wells",
+        "title": "Home",
+        "link": "https://openlibrary.org/books/OL32243259M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL32243259M-M.jpg",
+        "coverColor": "#e3c414",
+        "numberOfPages": 100
+      },
+      {
+        "type": "book",
+        "olid": "OL28044727M",
+        "author": "Martha Wells",
+        "title": "Network Effect",
+        "link": "https://openlibrary.org/books/OL28044727M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL28044727M-M.jpg",
+        "coverColor": "#9c842c",
+        "numberOfPages": 350
+      },
+      {
+        "type": "book",
+        "olid": "OL26966631M",
+        "author": "Martha Wells",
+        "title": "Rogue Protocol",
+        "link": "https://openlibrary.org/books/OL26966631M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL26966631M-M.jpg",
+        "coverColor": "#71808d",
+        "numberOfPages": 158
+      },
+      {
+        "type": "book",
+        "olid": "OL45311812M",
+        "author": "Martha Wells",
+        "title": "System Collapse",
+        "link": "https://openlibrary.org/books/OL45311812M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL45311812M-M.jpg",
+        "coverColor": "#a77757",
+        "numberOfPages": 160
+      }
+    ],
+    "standalone": [
+      {
+        "type": "book",
+        "olid": "OL28343055M",
+        "title": "An Unkindness of Ghosts",
+        "link": "https://openlibrary.org/books/OL28343055M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL28343055M-M.jpg",
+        "coverColor": "#508cae",
+        "numberOfPages": 282,
+        "author": "Rivers Solomon"
+      },
+      {
+        "type": "book",
+        "olid": "OL33283665M",
+        "author": "Tade Thompson",
+        "title": "Far from the Light of Heaven",
+        "link": "https://openlibrary.org/books/OL33283665M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL33283665M-M.jpg",
+        "coverColor": "#4077b7",
+        "numberOfPages": 384
+      },
+      {
+        "type": "book",
+        "olid": "OL48755644M",
+        "title": "Inversion",
+        "link": "https://openlibrary.org/books/OL48755644M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL48755644M-M.jpg",
+        "coverColor": "#0d8bbf",
+        "author": "Aric McBay",
+        "numberOfPages": 240
+      },
+      {
+        "type": "book",
+        "olid": "OL32997935M",
+        "title": "Sea of Tranquility",
+        "link": "https://openlibrary.org/books/OL32997935M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL32997935M-M.jpg",
+        "coverColor": "#317788",
+        "numberOfPages": 272,
+        "author": "Emily St. John Mandel"
+      },
+      {
+        "type": "book",
+        "olid": "OL15157986M",
+        "title": "Stations of the Tide",
+        "author": "Michael Swanwick",
+        "link": "https://openlibrary.org/books/OL15157986M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL15157986M-M.jpg",
+        "coverColor": "#cba627",
+        "numberOfPages": 252
+      },
+      {
+        "type": "book",
+        "olid": "OL35547833M",
+        "author": "Olga Ravn",
+        "title": "The Employees: A workplace novel of the 22nd century",
+        "link": "https://openlibrary.org/books/OL35547833M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL35547833M-M.jpg",
+        "coverColor": "#fbb904",
+        "numberOfPages": 135
+      },
+      {
+        "type": "book",
+        "olid": "OL27901088M",
+        "title": "This Is How You Lose the Time War",
+        "author": "Amal El-Mohtar & Max Gladstone",
+        "link": "https://openlibrary.org/books/OL27901088M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL27901088M-M.jpg",
+        "coverColor": "#d84d4a",
+        "numberOfPages": 208
+      },
+      {
+        "type": "book",
+        "olid": "OL7527118M",
+        "title": "Vacuum Flowers",
+        "author": "Michael Swanwick",
+        "link": "https://openlibrary.org/books/OL7527118M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL7527118M-M.jpg",
+        "coverColor": "#be7d1b",
+        "numberOfPages": 248
+      }
+    ]
+  }
+}

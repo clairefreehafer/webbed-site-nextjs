@@ -1,7 +1,7 @@
 import locations from "@/data/locations.json";
+import { GeoJson } from "@/types/photography";
 
 import { slugify } from "..";
-import { GeoJson } from "../types";
 import { DigikamImage, Image, transformDigikamImage } from "./images";
 import { digikam } from "./index";
 

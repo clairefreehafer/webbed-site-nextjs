@@ -1,0 +1,109 @@
+{
+  "title": "americana",
+  "description": "how did we get here?",
+  "items": {
+    "race": [
+      {
+        "type": "book",
+        "olid": "OL28207360M",
+        "title": "Dying of Whiteness",
+        "subtitle": "How the Politics of Racial Resentment Is Killing America's Heartland",
+        "link": "https://openlibrary.org/books/OL28207360M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL28207360M-M.jpg",
+        "coverColor": "#748c38",
+        "numberOfPages": 352,
+        "author": "Jonathan Michel Metzl"
+      },
+      {
+        "type": "book",
+        "olid": "OL24840076M",
+        "title": "Sister Citizen",
+        "subtitle": "Shame, Stereotypes, and Black Women in America",
+        "link": "https://openlibrary.org/books/OL24840076M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL24840076M-M.jpg",
+        "coverColor": "#4574a4",
+        "numberOfPages": 378,
+        "author": "Melissa V. Harris-Perry"
+      }
+    ],
+    "immigration": [
+      {
+        "type": "book",
+        "olid": "OL26886206M",
+        "title": "Tell Me How It Ends",
+        "subtitle": "An Essay in Forty Questions",
+        "link": "https://openlibrary.org/books/OL26886206M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL26886206M-M.jpg",
+        "coverColor": "#cc8133",
+        "numberOfPages": 119,
+        "author": "Valeria Luiselli"
+      }
+    ],
+    "the-years-of-lyndon-johnson": [
+      {
+        "type": "book",
+        "olid": "OL1967101M",
+        "title": "The Path to power",
+        "link": "https://openlibrary.org/books/OL1967101M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL1967101M-M.jpg",
+        "coverColor": "#b20406",
+        "numberOfPages": 882,
+        "author": "Robert A. Caro"
+      },
+      {
+        "type": "book",
+        "olid": "OL39471170M",
+        "title": "Means of Ascent",
+        "author": "Robert A. Caro",
+        "link": "https://openlibrary.org/books/OL39471170M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL39471170M-M.jpg",
+        "coverColor": "#e42821",
+        "numberOfPages": 506
+      },
+      {
+        "type": "book",
+        "olid": "OL24961984M",
+        "title": "Master of the Senate",
+        "link": "https://openlibrary.org/books/OL24961984M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL24961984M-M.jpg",
+        "coverColor": "#905517",
+        "numberOfPages": 1167,
+        "author": "Robert A. Caro"
+      },
+      {
+        "type": "book",
+        "olid": "OL25270398M",
+        "title": "The Passage of Power",
+        "author": "Robert A. Caro",
+        "link": "https://openlibrary.org/books/OL25270398M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL25270398M-M.jpg",
+        "coverColor": "#c56c7a",
+        "numberOfPages": 712
+      }
+    ],
+    "other": [
+      {
+        "type": "book",
+        "olid": "OL27912554M",
+        "author": "Daniel Immerwahr",
+        "title": "How to Hide an Empire",
+        "subtitle": "A History of the Greater United States",
+        "link": "https://openlibrary.org/books/OL27912554M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL27912554M-M.jpg",
+        "coverColor": "#c47c6c",
+        "numberOfPages": 516
+      },
+      {
+        "type": "book",
+        "olid": "OL51342972M",
+        "title": "Wild Faith",
+        "subtitle": "How the Christian Right Is Taking over America",
+        "link": "https://openlibrary.org/books/OL51342972M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL51342972M-M.jpg",
+        "coverColor": "#c7373d",
+        "numberOfPages": 304,
+        "author": "Talia Lavin"
+      }
+    ]
+  }
+}

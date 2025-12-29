@@ -4,10 +4,8 @@ import "@/sass/animal-crossing/style.scss";
 import { Metadata } from "next";
 
 import { digitalDisplay, seurat } from "@/fonts/animal-crossing";
-import {
-  getGrassDateRange,
-  GRASS_BACKGROUND_COLORS,
-} from "@/utils/animal-crossing";
+import { GRASS_BACKGROUND_COLORS } from "@/types/animal-crossing";
+import { getGrassDateRange } from "@/utils/animal-crossing";
 import { GrassContextProvider } from "@/utils/animal-crossing/grass";
 
 export const metadata: Metadata = {
