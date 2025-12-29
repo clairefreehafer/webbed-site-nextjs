@@ -46,7 +46,7 @@ export const Grass = ({
 
   useEffect(() => {
     setGrass({ date, shape });
-  }, [date, shape, setGrass]);
+  }, []);
 
   return null;
 };
