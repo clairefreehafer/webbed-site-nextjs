@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { ShelvedBook } from "@/utils/types";
+import { ShelvedBook } from "@/types/library";
 
 export default async function Book({ bookJson }: { bookJson: ShelvedBook }) {
   const thickness = bookJson.numberOfPages ? bookJson.numberOfPages / 10 : 30;

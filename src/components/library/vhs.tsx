@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { ShelvedFilm, ShelvedTv } from "@/utils/types";
+import { ShelvedFilm, ShelvedTv } from "@/types/library";
 
 export default async function Vhs({
   vhsJson,
