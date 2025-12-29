@@ -4,7 +4,8 @@
     {
       "type": "book",
       "olid": "OL32937539M",
-      "title": "Cat Sense: How the New Feline Science Can Make You a Better Friend to Your Pet",
+      "title": "Cat Sense",
+      "subtitle": "How the New Feline Science Can Make You a Better Friend to Your Pet",
       "link": "https://openlibrary.org/books/OL32937539M",
       "coverImage": "https://covers.openlibrary.org/b/olid/OL32937539M-M.jpg",
       "coverColor": "#145e89",
@@ -24,7 +25,8 @@
     {
       "type": "book",
       "olid": "OL50722642M",
-      "title": "Sharks Don't Sink: Adventures of a Rogue Shark Scientist",
+      "title": "Sharks Don't Sink",
+      "subtitle": "Adventures of a Rogue Shark Scientist",
       "link": "https://openlibrary.org/books/OL50722642M",
       "coverImage": "https://covers.openlibrary.org/b/olid/OL50722642M-M.jpg",
       "coverColor": "linear-gradient(51.46533137887129deg, red, orange, yellow, green, blue, indigo, violet)",
