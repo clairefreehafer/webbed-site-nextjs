@@ -3,7 +3,7 @@ import Link from "next/link";
 import { JSX } from "react";
 
 import Tags from "@/components/default/tags";
-import { RecipePage } from "@/utils/types";
+import { RecipePage } from "@/types/markdown";
 
 const components: MDXComponents = {
   ol: ({ children, ...props }: { children: JSX.Element[] }) => {

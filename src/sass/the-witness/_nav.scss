@@ -22,7 +22,11 @@ $circle-diameter: $puzzle-line-width * 2;
 }
 
 .nav-border {
-  @include puzzle.puzzle-screen($border-width, variables.$puzzle-border-color, blue);
+  @include puzzle.puzzle-screen(
+    $border-width,
+    variables.$puzzle-border-color,
+    blue
+  );
 
   & .puzzle-background {
     margin: $border-width 0;
@@ -33,7 +37,11 @@ $circle-diameter: $puzzle-line-width * 2;
   }
 
   @media screen and (max-width: variables.$nav-min-width) {
-    @include puzzle.puzzle-screen(calc($border-width / 2), variables.$puzzle-border-color, blue);
+    @include puzzle.puzzle-screen(
+      calc($border-width / 2),
+      variables.$puzzle-border-color,
+      blue
+    );
 
     & .puzzle-background {
       margin: calc($border-width / 2) 0;
@@ -55,7 +63,6 @@ nav {
     flex-wrap: wrap;
     gap: 0.5rem;
     padding: $border-width;
-    // padding-block: 0;
   }
 
   .nav-link {
@@ -63,13 +70,18 @@ nav {
     justify-content: center;
     padding-bottom: 1rem;
     transform: translateX(calc(50% - ($puzzle-line-width / 2)));
-
   }
 }
 
 .nav-mobile {
   height: 100%;
   width: 100%;
+
+  & li {
+    justify-content: center;
+    flex-grow: 2;
+    text-align: center;
+  }
 
   @media screen and (min-width: variables.$nav-min-width) {
     display: none;

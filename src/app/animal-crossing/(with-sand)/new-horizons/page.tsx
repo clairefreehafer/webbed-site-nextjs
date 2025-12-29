@@ -5,10 +5,10 @@ import { Fragment } from "react";
 
 import NookPhone from "@/components/animal-crossing/nookphone";
 import animalCrossingTagsJson from "@/data/animal-crossing-tags.json";
+import { AnimalCrossingTags } from "@/types/animal-crossing";
 import { deslugify, slugify } from "@/utils";
 import { getAstrologyDateRange } from "@/utils/animal-crossing";
 import { getAlbums } from "@/utils/digikam";
-import { AnimalCrossingTags } from "@/utils/types";
 
 const animalCrossingTags: AnimalCrossingTags = animalCrossingTagsJson;
 

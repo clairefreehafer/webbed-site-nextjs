@@ -1,0 +1,34 @@
+{
+  "slug": "new-york-city",
+  "title": "new york city",
+  "items": [
+    {
+      "type": "book",
+      "olid": "OL57439282M",
+      "title": "All the Water in the World",
+      "author": "Eiren Caffall",
+      "link": "https://openlibrary.org/books/OL57439282M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL57439282M-M.jpg",
+      "coverColor": "#1c82aa",
+      "numberOfPages": 304
+    },
+    {
+      "type": "tv",
+      "title": "Broad City",
+      "tvdbId": "275557",
+      "link": "https://www.thetvdb.com/series/broad-city",
+      "coverImage": "https://artworks.thetvdb.com/banners/posters/275557-6.jpg",
+      "coverColor": "#7c7307"
+    },
+    {
+      "type": "book",
+      "olid": "OL22552444M",
+      "author": "Eric W. Sanderson",
+      "title": "Mannahatta",
+      "link": "https://openlibrary.org/books/OL22552444M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL22552444M-M.jpg",
+      "coverColor": "#5c8634",
+      "numberOfPages": 352
+    }
+  ]
+}

@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { cache } from "react";
 
-import { ListPage } from "../types";
+import { ListPage } from "@/types/markdown";
 
 export const getListPages = cache(async (): Promise<ListPage[]> => {
   const listData: ListPage[] = [];

@@ -2,47 +2,25 @@
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
+import { ROOT_LINKS } from "@/types/nav";
 import { getActiveNavLink } from "@/utils/client";
-
-const NAV_LINKS = [
-  {
-    title: "home",
-    path: "/",
-    icon: "animal-crossing/icons/hhn",
-  },
-  {
-    title: "art",
-    path: "/art",
-    icon: "animal-crossing/icons/camera",
-  },
-  {
-    title: "recipes",
-    path: "/recipes",
-    icon: "animal-crossing/icons/recipes",
-  },
-  {
-    title: "lists",
-    path: "/lists",
-    icon: "animal-crossing/icons/lists",
-  },
-];
 
 export default function Nav() {
   const pathname = usePathname();
   return (
     <ul>
-      {NAV_LINKS.map(({ path, title, icon }) => (
-        <li className={getActiveNavLink(pathname, path)} key={title}>
-          {icon ? (
+      {ROOT_LINKS.map(({ href, text, animalCrossingIcon }) => (
+        <li className={getActiveNavLink(pathname, href)} key={text}>
+          {animalCrossingIcon ? (
             <Image
-              src={`/images/${icon}.png`}
+              src={`/images/${animalCrossingIcon}.png`}
               alt=""
               className="icon"
               height={48}
               width={48}
             />
           ) : null}
-          <a href={path}>{title}</a>
+          <a href={href}>{text}</a>
         </li>
       ))}
     </ul>

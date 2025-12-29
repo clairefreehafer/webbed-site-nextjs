@@ -1,0 +1,144 @@
+{
+  "slug": "fantasy",
+  "title": "fantasy",
+  "items": {
+    "the-celestial-kingdom-duology": [
+      {
+        "type": "book",
+        "olid": "OL34776528M",
+        "author": "Sue Lynn Tan",
+        "title": "Daughter of the Moon Goddess",
+        "link": "https://openlibrary.org/books/OL34776528M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL34776528M-M.jpg",
+        "coverColor": "#cf6c8a",
+        "numberOfPages": 512
+      },
+      {
+        "type": "book",
+        "olid": "OL42369417M",
+        "author": "Sue Lynn Tan",
+        "title": "Heart of the Sun Warrior",
+        "link": "https://openlibrary.org/books/OL42369417M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL42369417M-M.jpg",
+        "coverColor": "#f4b228",
+        "numberOfPages": 480
+      },
+      {
+        "type": "book",
+        "olid": "OL50620667M",
+        "author": "Sue Lynn Tan",
+        "title": "Tales of the Celestial Kingdom",
+        "link": "https://openlibrary.org/books/OL50620667M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL50620667M-M.jpg",
+        "coverColor": "#3cb484",
+        "numberOfPages": 176
+      }
+    ],
+    "the-rising-world": [
+      {
+        "type": "book",
+        "olid": "OL39477421M",
+        "title": "Witch King",
+        "link": "https://openlibrary.org/books/OL39477421M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL39477421M-M.jpg",
+        "coverColor": "#a57f3e",
+        "numberOfPages": 432,
+        "author": "Martha Wells"
+      },
+      {
+        "type": "book",
+        "olid": "OL57757666M",
+        "title": "Queen Demon",
+        "author": "Martha Wells",
+        "link": "https://openlibrary.org/works/OL42549454W",
+        "numberOfPages": 400,
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL57757666M-M.jpg",
+        "coverColor": "#96aa3c"
+      }
+    ],
+    "the-steerswoman-series": [
+      {
+        "type": "book",
+        "olid": "OL10685326M",
+        "author": "Rosemary Kirstein",
+        "title": "The Steerswoman",
+        "link": "https://openlibrary.org/books/OL10685326M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL10685326M-M.jpg",
+        "coverColor": "#ba6617",
+        "numberOfPages": 279
+      },
+      {
+        "type": "book",
+        "olid": "OL27396295M",
+        "author": "Rosemary Kirstein",
+        "title": "The Outskirter's Secret",
+        "link": "https://openlibrary.org/books/OL27396295M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL27396295M-M.jpg",
+        "coverColor": "#b44444",
+        "numberOfPages": 388
+      },
+      {
+        "type": "book",
+        "olid": "OL3684300M",
+        "author": "Rosemary Kirstein",
+        "title": "The Lost Steersman",
+        "link": "https://openlibrary.org/books/OL3684300M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL3684300M-M.jpg",
+        "coverColor": "#577bb1",
+        "numberOfPages": 419
+      }
+    ],
+    "standalone": [
+      {
+        "type": "book",
+        "title": "Someone You Can Build A Nest In",
+        "link": "https://openlibrary.org/books/OL50717791M/Someone_You_Can_Build_a_Nest_In",
+        "olid": "OL50717791M",
+        "coverImage": "https://covers.openlibrary.org/b/id/15137458-L.jpg",
+        "author": "John Wiswell",
+        "coverColor": "#f90704",
+        "numberOfPages": 310
+      },
+      {
+        "type": "book",
+        "olid": "OL39555862M",
+        "title": "The Adventures of Amina Al-Sirafi",
+        "link": "https://openlibrary.org/books/OL39555862M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL39555862M-M.jpg",
+        "coverColor": "#813339",
+        "numberOfPages": 492,
+        "author": "Shannon A. Chakraborty"
+      },
+      {
+        "type": "book",
+        "olid": "OL27098890M",
+        "author": "Kazuo Ishiguro",
+        "title": "The Buried Giant",
+        "link": "https://openlibrary.org/books/OL27098890M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL27098890M-M.jpg",
+        "coverColor": "#9e8b44",
+        "numberOfPages": 317
+      },
+      {
+        "type": "book",
+        "olid": "OL16812381M",
+        "author": "Michael Swanwick",
+        "title": "The Iron Dragon's Daughter",
+        "link": "https://openlibrary.org/books/OL16812381M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL16812381M-M.jpg",
+        "coverColor": "#d79029",
+        "numberOfPages": 376
+      },
+      {
+        "type": "book",
+        "olid": "OL28133832M",
+        "author": "Ann Leckie",
+        "title": "The Raven Tower",
+        "link": "https://openlibrary.org/books/OL28133832M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL28133832M-M.jpg",
+        "coverColor": "#bc9c38",
+        "numberOfPages": 432
+      }
+    ]
+  }
+}
