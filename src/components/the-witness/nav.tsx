@@ -1,6 +1,4 @@
-"use client";
-
-import { ROOT_LINKS } from "@/utils/constants";
+import { ROOT_LINKS } from "@/types/nav";
 
 export default function Navigation() {
   return (
@@ -10,9 +8,9 @@ export default function Navigation() {
           <div className="nav-puzzle">
             <div className="circle"></div>
             {ROOT_LINKS.map((link) => (
-              <div key={link.title} className="section">
+              <div key={link.text} className="section">
                 <div className="nav-link">
-                  <a href={link.path}>{link.title}</a>
+                  <a href={link.href}>{link.text}</a>
                 </div>
                 <div className="elbow">
                   <div className="horizontal"></div>
@@ -22,11 +20,12 @@ export default function Navigation() {
             ))}
             <div className="circle opacity-0"></div>
           </div>
+
           <div className="nav-mobile">
             <ul>
-              {ROOT_LINKS.map(({ path, title }) => (
-                <li key={title}>
-                  <a href={path}>{title}</a>
+              {ROOT_LINKS.map(({ href, text }) => (
+                <li key={text}>
+                  <a href={href}>{text}</a>
                 </li>
               ))}
             </ul>

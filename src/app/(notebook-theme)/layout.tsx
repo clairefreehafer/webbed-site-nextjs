@@ -8,6 +8,7 @@ import {
   nationalPark,
   pangolin,
 } from "@/fonts/notebook";
+import { ROOT_LINKS } from "@/types/nav";
 
 export const metadata: Metadata = {
   title: {
@@ -15,25 +16,6 @@ export const metadata: Metadata = {
     template: "%s — claire freehafer",
   },
 };
-
-const NAV_LINKS = [
-  {
-    title: "home",
-    path: "/",
-  },
-  {
-    title: "art",
-    path: "/art",
-  },
-  {
-    title: "recipes",
-    path: "/recipes",
-  },
-  {
-    title: "lists",
-    path: "/lists",
-  },
-];
 
 export default function Layout({ children }: React.PropsWithChildren) {
   return (
@@ -45,15 +27,15 @@ export default function Layout({ children }: React.PropsWithChildren) {
           <h1 className="name">claire freehafer</h1>
           <nav>
             <ul className="nav-list">
-              {NAV_LINKS.map((link) => (
-                <li className="nav-list_item" key={link.title}>
+              {ROOT_LINKS.map((link) => (
+                <li className="nav-list_item" key={link.text}>
                   <div className="wiggle-box-1"></div>
                   <div className="wiggle-box-2"></div>
                   <div className="wiggle-box-3"></div>
                   <div className="wiggle-box-4"></div>
                   <div className="wiggle-box-5"></div>
                   <div className="wiggle-box-6"></div>
-                  <a href={link.path}>{link.title}</a>
+                  <a href={link.href}>{link.text}</a>
                 </li>
               ))}
             </ul>
