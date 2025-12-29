@@ -29,3 +29,14 @@ export const ASTROLOGY_DATE_RANGES = {
 } as const;
 
 export type AnimalCrossingTags = Record<string, string[]>;
+
+export type ScheduleData = {
+  month: string;
+  themes: {
+    name: string;
+    campers: {
+      name: string;
+      cookie?: string;
+    }[];
+  }[];
+}[];
