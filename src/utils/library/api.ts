@@ -46,7 +46,7 @@ export const getAuthorData = async (
   return await response.json();
 };
 
-export type TvdbLoginResponse =
+type TvdbLoginResponse =
   | {
       status: "failure";
       message: string;

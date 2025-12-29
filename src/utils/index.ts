@@ -120,7 +120,7 @@ export const noRobots = {
 };
 
 export function setEnvValue(key: string, value: string) {
-  // read file from hdd & split if from a linebreak to a array
+  // read file & split if from a linebreak to a array
   const envVars = fs
     .readFileSync(path.join(process.cwd(), ".env"), "utf8")
     .split(os.EOL);
