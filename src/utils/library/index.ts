@@ -258,10 +258,15 @@ async function updateShelvedItem(shelvedItem: ShelvedItem): Promise<boolean> {
       return await updateShelvedTv(shelvedItem);
     case "video-game":
       return await updateShelvedVideoGame(shelvedItem);
+    case "film":
+      // TODO
+      return false;
     default:
       const exhaustiveCheck: never = shelvedItem;
       console.warn(
-        `❌ Unknown shelved item type: ${(exhaustiveCheck as ShelvedItem).type}`
+        `[updateShelvedItem] ❌ Unknown shelved item type: ${
+          (exhaustiveCheck as ShelvedItem).type
+        }`
       );
       return false;
   }
@@ -272,7 +277,6 @@ export const updateShelvesJson = cache(async () => {
 
   for (const shelfSlug in shelvesJson) {
     const shelf = shelvesJson[shelfSlug];
-    // console.log(shelf);
     const shelfItems = shelf.items;
     let jsonUpdated = false;
 

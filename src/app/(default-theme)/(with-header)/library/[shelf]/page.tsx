@@ -41,8 +41,7 @@ export async function generateMetadata({
 }: {
   params: Promise<Params>;
 }): Promise<Metadata> {
-  const shelvesJson = await getShelves();
-  const { shelf } = await params;
+  const [{ shelf }, shelvesJson] = await Promise.all([params, getShelves()]);
   const shelfData = shelvesJson.find((shelfJson) => shelfJson.slug === shelf);
 
   if (!shelfData) {
@@ -58,8 +57,7 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params }: { params: Promise<Params> }) {
-  const { shelf } = await params;
-  const shelvesJson = await getShelves();
+  const [{ shelf }, shelvesJson] = await Promise.all([params, getShelves()]);
   const shelfData = shelvesJson.find((data) => data.slug === shelf);
   if (!shelfData) {
     return <p>couldn&apos;t find shelf with slug {shelf}</p>;
