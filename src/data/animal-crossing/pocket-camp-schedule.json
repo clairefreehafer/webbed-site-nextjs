@@ -1,0 +1,16 @@
+[
+  {
+    "month": "december",
+    "themes": [
+      {
+        "name": "toy day",
+        "campers": [
+          {
+            "name": "erik",
+            "cookie": true
+          }
+        ]
+      }
+    ]
+  }
+]
