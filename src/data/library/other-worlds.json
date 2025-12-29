@@ -1,17 +1,17 @@
 {
-  "title": "space operas",
+  "title": "other worlds",
   "description": "stories of humanity living beyond earth.",
   "items": {
     "children-of-time": [
       {
         "type": "book",
-        "olid": "OL38410196M",
+        "olid": "OL28225222M",
         "author": "Adrian Tchaikovsky",
-        "title": "Children of Memory",
-        "link": "https://openlibrary.org/books/OL38410196M",
-        "coverImage": "https://covers.openlibrary.org/b/olid/OL38410196M-M.jpg",
-        "coverColor": "#dca60f",
-        "numberOfPages": 503
+        "title": "Children of Time",
+        "link": "https://openlibrary.org/books/OL28225222M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL28225222M-M.jpg",
+        "coverColor": "#9bc53b",
+        "numberOfPages": 608
       },
       {
         "type": "book",
@@ -25,26 +25,16 @@
       },
       {
         "type": "book",
-        "olid": "OL28225222M",
+        "olid": "OL38410196M",
         "author": "Adrian Tchaikovsky",
-        "title": "Children of Time",
-        "link": "https://openlibrary.org/books/OL28225222M",
-        "coverImage": "https://covers.openlibrary.org/b/olid/OL28225222M-M.jpg",
-        "coverColor": "#9bc53b",
-        "numberOfPages": 608
+        "title": "Children of Memory",
+        "link": "https://openlibrary.org/books/OL38410196M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL38410196M-M.jpg",
+        "coverColor": "#dca60f",
+        "numberOfPages": 503
       }
     ],
     "the-hainish-cycle": [
-      {
-        "type": "book",
-        "olid": "OL23242517M",
-        "title": "The Left Hand of Darkness",
-        "link": "https://openlibrary.org/books/OL23242517M",
-        "coverImage": "https://covers.openlibrary.org/b/olid/OL23242517M-M.jpg",
-        "coverColor": "#1581a0",
-        "numberOfPages": 304,
-        "author": "Ursula K. Le Guin"
-      },
       {
         "type": "book",
         "author": "Ursula K. LeGuin",
