@@ -4,7 +4,7 @@ export type ScheduleData = {
     name: string;
     campers: {
       name: string;
-      cookie?: boolean;
+      cookie?: string;
     }[];
   }[];
 }[];

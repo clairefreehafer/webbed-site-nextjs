@@ -1,12 +1,21 @@
 import "@/sass/global.scss";
 import "@/sass/animal-crossing/style.scss";
 
+import { Metadata } from "next";
+
 import { digitalDisplay, seurat } from "@/fonts/animal-crossing";
 import {
   getGrassDateRange,
   GRASS_BACKGROUND_COLORS,
 } from "@/utils/animal-crossing";
 import { GrassContextProvider } from "@/utils/animal-crossing/grass";
+
+export const metadata: Metadata = {
+  title: {
+    default: "animal crossing — claire freehafer",
+    template: "%s — claire freehafer",
+  },
+};
 
 export default function Layout({ children }: React.PropsWithChildren) {
   const grassDateRange = getGrassDateRange();

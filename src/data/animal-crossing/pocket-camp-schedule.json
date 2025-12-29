@@ -3,11 +3,106 @@
     "month": "december",
     "themes": [
       {
-        "name": "toy day",
+        "name": "🎁 toy day🎄 ",
         "campers": [
           {
             "name": "erik",
-            "cookie": true
+            "cookie": "erik's workshop cookie"
+          },
+          {
+            "name": "fauna",
+            "cookie": "fauna's toy day cookie"
+          },
+          {
+            "name": "timbra",
+            "cookie": "timbra's tinsel cookie"
+          },
+          {
+            "name": "bianca",
+            "cookie": "bianca's lights cookie"
+          },
+          {
+            "name": "rhonda",
+            "cookie": "rhonda's holiday cookie"
+          },
+          {
+            "name": "louie"
+          },
+          {
+            "name": "blanche"
+          },
+          {
+            "name": "canberra"
+          },
+          {
+            "name": "mac"
+          },
+          {
+            "name": "sydney"
+          }
+        ]
+      },
+      {
+        "name": "❄️ snow ☃️",
+        "campers": [
+          {
+            "name": "flurry",
+            "cookie": "flurry's powdered cookie"
+          }
+        ]
+      },
+      {
+        "name": "🍬 sweet treats 🍪",
+        "campers": [
+          {
+            "name": "tutu",
+            "cookie": "tutu's cookie-bear cookie"
+          },
+          {
+            "name": "sally",
+            "cookie": "sally's toasty cookie"
+          },
+          {
+            "name": "marcie",
+            "cookie": "marcie's sugar cookie"
+          }
+        ]
+      },
+      {
+        "name": "cozy cabin",
+        "campers": [
+          {
+            "name": "egbert",
+            "cookie": "egbert's cozy cookie"
+          },
+          {
+            "name": "kitt",
+            "cookie": "kitt's plushie cookie"
+          }
+        ]
+      },
+      {
+        "name": "?",
+        "campers": [
+          {
+            "name": "willow",
+            "cookie": "willow's winged cookie"
+          },
+          {
+            "name": "ace",
+            "cookie": "ace's sky high cookie"
+          },
+          {
+            "name": "maelle",
+            "cookie": "maelle's mall cookie"
+          },
+          {
+            "name": "roscoe",
+            "cookie": "roscoe's diner cookie"
+          },
+          {
+            "name": "julia",
+            "cookie": "julia's palace cookie"
           }
         ]
       }
