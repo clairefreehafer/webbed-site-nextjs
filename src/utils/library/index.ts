@@ -10,7 +10,8 @@ import {
   ShelvedItem,
   ShelvedTv,
   ShelvedVideoGame,
-} from "../types";
+} from "@/types/library";
+
 import {
   getAuthorData,
   getBookData,

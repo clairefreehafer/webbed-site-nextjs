@@ -1,7 +1,9 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 
-import { getGrassDateRange,GRASS_BACKGROUND_COLORS, GrassShape } from ".";
+import { GRASS_BACKGROUND_COLORS, GrassShape } from "@/types/animal-crossing";
+
+import { getGrassDateRange } from ".";
 
 type GrassState = {
   date: Date;
@@ -44,7 +46,7 @@ export const Grass = ({
 
   useEffect(() => {
     setGrass({ date, shape });
-  }, []);
+  }, [date, shape, setGrass]);
 
   return null;
 };

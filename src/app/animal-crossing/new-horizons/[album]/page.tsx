@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import Slideshow from "@/components/slideshow";
 import animalCrossingTagsJson from "@/data/animal-crossing-tags.json";
+import { AnimalCrossingTags } from "@/types/animal-crossing";
 import { deslugify, slugify } from "@/utils";
 import { Grass } from "@/utils/animal-crossing/grass";
 import {
@@ -10,7 +11,6 @@ import {
   getAlbums,
   getTagImages,
 } from "@/utils/digikam";
-import { AnimalCrossingTags } from "@/utils/types";
 
 const animalCrossingTags: AnimalCrossingTags = animalCrossingTagsJson;
 

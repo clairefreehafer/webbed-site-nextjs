@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { ShelvedVideoGame } from "@/utils/types";
+import { ShelvedVideoGame } from "@/types/library";
 
 export default async function Dvd({ dvdJson }: { dvdJson: ShelvedVideoGame }) {
   return (

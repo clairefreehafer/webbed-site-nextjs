@@ -3,7 +3,7 @@ import os from "os";
 import path from "path";
 import { cache } from "react";
 
-import { RecipePage } from "./types";
+import { RecipePage } from "@/types/markdown";
 
 export const getRecipeCategories = cache((): string[] => {
   return fs.readdirSync(path.join(process.cwd(), "src", "recipes"));

@@ -4,7 +4,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import maplibregl, { LngLatBoundsLike, Marker, Popup } from "maplibre-gl";
 import { useEffect, useRef } from "react";
 
-import { GeoJson } from "@/utils/types";
+import { GeoJson } from "@/types/photography";
 
 import { StyleSwitcher } from "./style-switcher";
 

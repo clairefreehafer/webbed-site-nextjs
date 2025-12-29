@@ -3,9 +3,9 @@ import { Metadata } from "next";
 import Book from "@/components/library/book";
 import Dvd from "@/components/library/dvd";
 import Vhs from "@/components/library/vhs";
+import { ShelvedItem } from "@/types/library";
 import { deslugify, noRobots } from "@/utils";
 import { getShelves } from "@/utils/library";
-import { ShelvedItem } from "@/utils/types";
 
 function renderItem(item: ShelvedItem) {
   switch (item.type) {
