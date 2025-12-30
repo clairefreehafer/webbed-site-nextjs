@@ -1,0 +1,34 @@
+[
+  {
+    "slug": "residents",
+    "icon": "best-friends"
+  },
+  {
+    "slug": "visitors",
+    "icon": "passport"
+  },
+  {
+    "slug": "avalar",
+    "icon": "map"
+  },
+  {
+    "slug": "events",
+    "icon": "call-resident"
+  },
+  {
+    "slug": "dreams",
+    "icon": "island-life-101"
+  },
+  {
+    "slug": "interiors",
+    "icon": "happy-home-network"
+  },
+  {
+    "slug": "online",
+    "icon": "chat-log"
+  },
+  {
+    "slug": "random",
+    "icon": "rescue-service"
+  }
+]

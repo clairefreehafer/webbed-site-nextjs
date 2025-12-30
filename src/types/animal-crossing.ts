@@ -28,6 +28,11 @@ export const ASTROLOGY_DATE_RANGES = {
   sagittarius: "1123-1221",
 } as const;
 
+export type NookphoneConfig = {
+  slug: string;
+  icon: string;
+};
+
 export type AnimalCrossingTags = Record<string, string[]>;
 
 export type ScheduleData = {

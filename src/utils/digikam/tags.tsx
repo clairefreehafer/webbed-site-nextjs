@@ -10,7 +10,7 @@ export const getTagImages = async (
   collection = "photography"
 ): Promise<Image[]> => {
   const digikamImages = digikam
-    .prepare<[{ tag: string; collection: string }], DigikamImage>(
+    .prepare<[{ tag: string; collectionLikeString: string }], DigikamImage>(
       `
         WITH ImageTitle as (
           SELECT * FROM ImageComments
@@ -44,11 +44,11 @@ export const getTagImages = async (
           LEFT JOIN ImageCaption ON Images.id = ImageCaption.imageId
         WHERE Tags.name = $tag
           AND Albums.albumRoot = 4
-          AND Albums.collection LIKE $collection
+          AND Albums.collection LIKE $collectionLikeString
           GROUP BY Images.id
       `
     )
-    .all({ tag, collection });
+    .all({ tag, collectionLikeString: `%${collection}%` });
   console.log(
     `📷 [getTagImages] ${digikamImages.length} ${collection} images found tagged "${tag}".`
   );

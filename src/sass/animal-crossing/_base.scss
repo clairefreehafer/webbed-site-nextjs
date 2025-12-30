@@ -128,3 +128,29 @@ body[data-theme="animal-crossing"] {
     padding: 3.5%;
   }
 }
+
+.single-image {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  & > img {
+    padding: 0.5rem 1rem 1rem;
+  }
+}
+
+.refresh-button {
+  @include mixins.text-background;
+  align-items: center;
+  font-family: var(--font-seurat);
+  display: flex;
+  padding: 1rem;
+  margin: auto;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}

@@ -13,20 +13,13 @@
     display: flex;
     padding: 34px 64px 0;
     justify-content: space-between;
-    align-items: center
+    align-items: center;
   }
 
   .symbols {
     // https://codepen.io/sosuke/pen/Pjoqqp for #e0daca
-    filter:
-      brightness(0)
-      saturate(100%)
-      invert(95%)
-      sepia(11%)
-      saturate(259%)
-      hue-rotate(4deg)
-      brightness(91%)
-      contrast(94%);
+    filter: brightness(0) saturate(100%) invert(95%) sepia(11%) saturate(259%)
+      hue-rotate(4deg) brightness(91%) contrast(94%);
     height: 100%;
     width: auto;
 
@@ -62,6 +55,35 @@
     height: 82px;
     width: 82px;
     border-radius: 1.5rem;
+    position: relative;
+
+    &.best-friends {
+      background-color: #f98e62;
+    }
+
+    &.passport {
+      background-color: #89c68a;
+    }
+
+    &.map {
+      background-color: rgb(129, 215, 188);
+    }
+
+    &.call-resident {
+      background-color: #95d3db;
+    }
+
+    &.island-life-101 {
+      background-color: #9183ce;
+    }
+
+    &.happy-home-network {
+      background-color: #d15d5d;
+    }
+
+    &.rescue-service {
+      background-color: #fa746b;
+    }
 
     &.camera {
       background-color: rgb(185, 122, 243);
@@ -91,11 +113,7 @@
       background-color: rgb(249, 167, 178);
     }
 
-    &.map {
-      background-color: rgb(129, 215, 188);
-    }
-
-    &.chat {
+    &.chat-log {
       background-color: rgb(209, 220, 75);
     }
   }

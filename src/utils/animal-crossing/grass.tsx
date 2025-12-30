@@ -38,11 +38,15 @@ export const GrassContextProvider = ({ children }: React.PropsWithChildren) => {
   );
 };
 
+export const useGrassContext = () => {
+  return useContext(GrassContext);
+};
+
 export const Grass = ({
   date = new Date(),
   shape = "square",
 }: Partial<GrassState>) => {
-  const { setGrass } = useContext(GrassContext);
+  const { setGrass } = useGrassContext();
 
   useEffect(() => {
     setGrass({ date, shape });

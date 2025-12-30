@@ -15,7 +15,7 @@ export default function RandomImage({ allImages }: { allImages: string[] }) {
       const randomImage = getRandomImage();
       setImagePath(randomImage);
     }
-  }, []);
+  }, [getRandomImage, imagePath]);
 
   if (!imagePath) {
     return null;

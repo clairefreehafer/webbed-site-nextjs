@@ -10,3 +10,11 @@ export function getActiveNavLink(currentUrl: string, pageUrl: string) {
   }
   return "";
 }
+
+export function slugify(string: string): string {
+  return string.replaceAll(" & ", "-and-").replaceAll(" ", "-");
+}
+
+export function deslugify(string: string): string {
+  return string.replaceAll("-and-", " & ").replaceAll("-", " ");
+}
