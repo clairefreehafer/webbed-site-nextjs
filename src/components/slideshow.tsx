@@ -4,7 +4,7 @@ import NextImage from "next/image";
 
 import { Image } from "@/utils/digikam";
 
-// import SlideshowDate from "./slideshow-date";
+import SlideshowDate from "./slideshow-date";
 
 function renderDetails(image: Image) {
   if (image.albumCollection === "tears-of-the-kingdom") {
@@ -70,6 +70,14 @@ export default function Slideshow({
               }}
               priority={idx === 0}
             />
+            {image.showDate && (
+              <SlideshowDate
+                date={image.dateTaken}
+                imageWidth={image.width}
+                imageHeight={image.height}
+                filename={image.filename}
+              />
+            )}
           </div>
           <div className="image-details-container">{renderDetails(image)}</div>
         </li>
