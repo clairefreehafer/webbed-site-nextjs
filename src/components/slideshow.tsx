@@ -9,25 +9,23 @@ import { Image } from "@/utils/digikam";
 function renderDetails(image: Image) {
   if (image.albumCollection === "tears-of-the-kingdom") {
     return (
-      <div className="image-details-container">
-        <div className="image-details">
-          {image.compendiumNumber && (
-            <p className="compendium-number" title="compendium number">
-              {image.compendiumNumber}
-            </p>
-          )}
+      <div className="image-details">
+        {image.compendiumNumber && (
+          <p className="compendium-number" title="compendium number">
+            {image.compendiumNumber}
+          </p>
+        )}
 
-          {image.icon && (
-            <NextImage
-              src={`/images/zelda/icons/${image.icon}.svg`}
-              alt=""
-              width={47}
-              height={47}
-              style={{ height: "2rem", width: "2rem" }}
-            />
-          )}
-          {image.title}
-        </div>
+        {image.icon && (
+          <NextImage
+            src={`/images/zelda/icons/${image.icon}.svg`}
+            alt=""
+            width={47}
+            height={47}
+            style={{ height: "2rem", width: "2rem" }}
+          />
+        )}
+        {image.title}
       </div>
     );
   }
@@ -61,20 +59,19 @@ export default function Slideshow({
           <div className="image" id={image.filename}>
             <NextImage
               src={image.src}
-              width={image.width}
-              height={image.height}
+              fill
               alt=""
               style={{
-                width: "auto",
-                height: "auto",
+                maxHeight: image.height,
+                maxWidth: image.width,
+                objectFit: "contain",
                 alignSelf: "center",
-                maxHeight: "100%",
-                maxWidth: "100%",
+                justifySelf: "center",
               }}
               priority={idx === 0}
             />
           </div>
-          {renderDetails(image)}
+          <div className="image-details-container">{renderDetails(image)}</div>
         </li>
       ))}
     </ol>

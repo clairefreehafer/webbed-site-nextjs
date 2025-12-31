@@ -130,7 +130,7 @@ header {
 
 .breadcrumbs-container {
   display: flex;
-  height: 5rem;
+  padding: 1rem;
 }
 
 .breadcrumbs {
@@ -142,6 +142,7 @@ header {
   gap: 0.5rem;
   margin: auto;
   flex-wrap: wrap;
+  justify-content: center;
 
   & a,
   & span {
@@ -152,11 +153,6 @@ header {
   & h2 {
     font-size: 1.5rem;
   }
-}
-
-.image-details-container {
-  height: 5rem;
-  display: flex;
 }
 
 .image-details {
