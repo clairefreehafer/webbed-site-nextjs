@@ -1,7 +1,8 @@
+import { Metadata } from "next";
 import Link from "next/link";
 
 import Slideshow from "@/components/slideshow";
-import animalCrossingTagsJson from "@/data/animal-crossing-tags.json";
+import animalCrossingTagsJson from "@/data/animal-crossing/animal-crossing-tags.json";
 import { AnimalCrossingTags } from "@/types/animal-crossing";
 import { deslugify, slugify } from "@/utils";
 import { Grass } from "@/utils/animal-crossing/grass";
@@ -11,6 +12,8 @@ import {
   getAlbums,
   getTagImages,
 } from "@/utils/digikam";
+
+type Params = { album: string };
 
 const animalCrossingTags: AnimalCrossingTags = animalCrossingTagsJson;
 
@@ -34,17 +37,13 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ album: string }>;
-}) {
+  params: Promise<Params>;
+}): Promise<Metadata> {
   const albumSlug = (await params).album;
   return { title: deslugify(albumSlug) };
 }
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ album: string }>;
-}) {
+export default async function Page({ params }: { params: Promise<Params> }) {
   const albumSlug = (await params).album;
   let images = await getAlbumImages(albumSlug, "new-horizons");
   let date = getAlbumDate(albumSlug);

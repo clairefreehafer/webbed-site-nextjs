@@ -2,8 +2,8 @@
 
 html {
   display: flex;
-  height: 100svh;
-  max-height: 100svh;
+  min-height: 100svh;
+  flex-direction: column;
 }
 
 body {
@@ -126,4 +126,52 @@ header {
   background-repeat: no-repeat;
   background-size: 1.5rem;
   padding-left: 2.5rem;
+}
+
+.breadcrumbs-container {
+  display: flex;
+  height: 5rem;
+}
+
+.breadcrumbs {
+  @include mixins.text-background;
+  align-items: center;
+  font-family: var(--font-seurat);
+  display: flex;
+  padding: 1rem;
+  gap: 0.5rem;
+  margin: auto;
+  flex-wrap: wrap;
+
+  & a,
+  & span {
+    font-size: 0.9rem;
+    flex-grow: 0;
+  }
+
+  & h2 {
+    font-size: 1.5rem;
+  }
+}
+
+.image-details-container {
+  height: 5rem;
+  display: flex;
+}
+
+.image-details {
+  @include mixins.text-background;
+  align-items: center;
+  font-family: var(--font-seurat);
+  display: flex;
+  padding: 1rem;
+  gap: 0.5rem;
+  margin: auto;
+  flex-wrap: wrap;
+  flex-grow: 0;
+
+  & .compendium-number {
+    font-family: var(--hylia-serif);
+    font-size: 1.5rem;
+  }
 }

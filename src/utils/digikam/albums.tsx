@@ -1,7 +1,7 @@
 import { cache } from "react";
 
 import { CoverPhoto, transformDigikamCoverPhoto } from "./cover-photos";
-import { digikam } from "./index";
+import { digikam, Image } from "./index";
 
 /** fields returned from querying the digikam database. */
 interface DigikamAlbum {
@@ -24,6 +24,8 @@ export interface AlbumCaptionJson {
   displayName?: string;
   coverPhotoPosition?: string;
   icon?: string;
+  /** zelda */
+  sortBy?: keyof Pick<Image, "compendiumNumber" | "title">;
 }
 
 /** transformed album data for use on the site. */

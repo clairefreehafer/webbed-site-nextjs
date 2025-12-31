@@ -1,9 +1,12 @@
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
 import SheikahUnderline from "@/components/zelda/sheikah-underline";
 import { deslugify } from "@/utils";
 import { getAlbums } from "@/utils/digikam";
+
+type Params = { game: string };
 
 export async function generateStaticParams() {
   const games = await getAlbums("zelda");
@@ -12,13 +15,18 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function Page({
+export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ game: string }>;
-}) {
+  params: Promise<Params>;
+}): Promise<Metadata> {
   const { game } = await params;
-  const botwAlbums = await getAlbums(game);
+  return { title: deslugify(game) };
+}
+
+export default async function Page({ params }: { params: Promise<Params> }) {
+  const { game } = await params;
+  const albums = await getAlbums(game);
 
   return (
     <div className="container">
@@ -31,7 +39,7 @@ export default async function Page({
       />
       <h2>{deslugify(game)}</h2>
       <ul className="album-links">
-        {botwAlbums.map((album) => (
+        {albums.map((album) => (
           <li
             key={album.slug}
             className="album-link"

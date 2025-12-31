@@ -1,19 +1,23 @@
 import "@/sass/zelda/style.scss";
 import "@/sass/global.scss";
 
-import Name from "@/components/zelda/name";
-import Nav from "@/components/zelda/nav";
+import { Metadata } from "next";
+
 import { fotRodin, hylian, hyliaSerif, sheikah } from "@/fonts/zelda";
 
-export function generateMetadata() {
-  return { title: "zelda" };
-}
+export const metadata: Metadata = {
+  title: {
+    default: "zelda — claire freehafer",
+    template: "%s — claire freehafer",
+  },
+};
 
 export default function Layout({ children }: React.PropsWithChildren) {
   return (
     <html>
       <body
         className={`${hyliaSerif.variable} ${fotRodin.variable} ${hylian.variable} ${sheikah.variable}`}
+        data-theme="zelda"
       >
         <img
           src="/images/zelda/pad-frame-glow.png"
@@ -21,12 +25,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
         />
         <img src="/images/zelda/pad-frame.png" className="border-top" />
 
-        <header>
-          <Name />
-          <Nav />
-        </header>
-
-        <main className="content">{children}</main>
+        {children}
 
         <img
           src="/images/zelda/pad-frame-glow.png"

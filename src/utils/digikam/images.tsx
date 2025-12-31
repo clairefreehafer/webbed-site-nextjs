@@ -3,7 +3,7 @@ import fs from "fs";
 import { Vibrant } from "node-vibrant/node";
 import sharp from "sharp";
 
-import { digikam } from "./index";
+import { AlbumCaptionJson, digikam } from "./index";
 
 /** fields returned from querying the digikam db. */
 export interface DigikamImage {
@@ -21,6 +21,7 @@ export interface DigikamImage {
   path: string;
   title: string | null;
   width: number;
+  albumCaption?: string;
 }
 
 /** custom JSON format for extra info stored in the image caption/comment field. */
@@ -30,6 +31,9 @@ interface ImageCaptionJson {
   background?: React.CSSProperties["background"];
   /** animal crossing */
   showDate?: boolean;
+  /** zelda */
+  compendiumNumber?: number;
+  icon?: string;
 }
 
 /** transformed image data for use on the site. */
@@ -40,9 +44,10 @@ export interface Image extends ImageCaptionJson {
   filename: DigikamImage["name"];
   height: DigikamImage["height"];
   width: DigikamImage["width"];
-  src: string;
+  src: `/out/${string}.webp`;
   palette?: Palette;
   title?: DigikamImage["title"];
+  albumCollection: DigikamImage["albumCollection"];
 }
 
 interface ImageOptions {
@@ -59,10 +64,11 @@ export async function transformDigikamImage(
     id: digikamImage.id,
     filename: nameWithoutExtension,
     height: digikamImage.height,
-    src: `/out/${digikamImage.albumCollection}/${digikamImage.albumSlug}/${nameWithoutExtension}.webp`,
+    src: `/out/${digikamImage.albumSlug}/${nameWithoutExtension}.webp`,
     width: digikamImage.width,
     title: digikamImage.title,
     dateTaken: digikamImage.creationDate,
+    albumCollection: digikamImage.albumCollection,
   };
   try {
     const outputPath = `${process.cwd()}/public${transformedImage.src}`;
@@ -154,6 +160,7 @@ export const getAlbumImages = async (
           Images.name,
           ImageInformation.creationDate,
           Albums.collection AS albumCollection,
+          Albums.caption AS albumCaption,
           ImageInformation.height,
           ImageInformation.width,
           thumbs.FilePaths.path,
@@ -183,11 +190,38 @@ export const getAlbumImages = async (
     `📷 [getAlbumImages] ${digikamImages.length} images found in "${collection}/${relativePath}"`
   );
   const images: Image[] = [];
+  let sortBy: AlbumCaptionJson["sortBy"] = undefined;
+
   for (const image of digikamImages) {
     const transformedImage = await transformDigikamImage(image, options);
     images.push(transformedImage);
+
+    // check if we should be sorting a zelda album by image compendium number.
+    if (image.albumCaption && !sortBy) {
+      const albumCaption: AlbumCaptionJson = JSON.parse(image.albumCaption);
+      sortBy = albumCaption.sortBy;
+    }
   }
-  return images;
+
+  // TODO: maybe try to move into SQL query instead? (at least for title)
+  switch (sortBy) {
+    case "compendiumNumber":
+      console.log(
+        `📷 [getAlbumImages] sorting images in "${collection}/${relativePath}" by \`${sortBy}\``
+      );
+      return images.sort(
+        (a, b) => (a.compendiumNumber ?? 0) - (b.compendiumNumber ?? 0)
+      );
+    case "title":
+      console.log(
+        `📷 [getAlbumImages] sorting images in "${collection}/${relativePath}" by \`${sortBy}\``
+      );
+      return images.sort((a, b) =>
+        (a.title ?? "").localeCompare(b.title ?? "")
+      );
+    default:
+      return images;
+  }
 };
 
 export const getTodaysImages = async (
@@ -211,7 +245,6 @@ export const getTodaysImages = async (
           ImageInformation.creationDate,
           ImageTitle.comment AS title,
           ImageCaption.comment AS caption,
-          Albums.collection AS albumCollection,
           ImageInformation.height,
           ImageInformation.width,
           thumbs.FilePaths.path,

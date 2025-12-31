@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import animalCrossingTagsJson from "@/data/animal-crossing-tags.json";
+import animalCrossingTagsJson from "@/data/animal-crossing/animal-crossing-tags.json";
 import { AnimalCrossingTags } from "@/types/animal-crossing";
 import { slugify } from "@/utils";
 

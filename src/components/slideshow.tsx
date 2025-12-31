@@ -4,7 +4,38 @@ import NextImage from "next/image";
 
 import { Image } from "@/utils/digikam";
 
-import SlideshowDate from "./slideshow-date";
+// import SlideshowDate from "./slideshow-date";
+
+function renderDetails(image: Image) {
+  if (image.albumCollection === "tears-of-the-kingdom") {
+    return (
+      <div className="image-details-container">
+        <div className="image-details">
+          {image.compendiumNumber && (
+            <p className="compendium-number" title="compendium number">
+              {image.compendiumNumber}
+            </p>
+          )}
+
+          {image.icon && (
+            <NextImage
+              src={`/images/zelda/icons/${image.icon}.svg`}
+              alt=""
+              width={47}
+              height={47}
+              style={{ height: "2rem", width: "2rem" }}
+            />
+          )}
+          {image.title}
+        </div>
+      </div>
+    );
+  }
+  if (image.title) {
+    return <p className="image-title">{image.title}</p>;
+  }
+  return null;
+}
 
 export default function Slideshow({
   images,
@@ -30,20 +61,20 @@ export default function Slideshow({
           <div className="image" id={image.filename}>
             <NextImage
               src={image.src}
-              fill
+              width={image.width}
+              height={image.height}
               alt=""
-              style={{ objectFit: "contain" }}
+              style={{
+                width: "auto",
+                height: "auto",
+                alignSelf: "center",
+                maxHeight: "100%",
+                maxWidth: "100%",
+              }}
+              priority={idx === 0}
             />
-            {image.showDate && (
-              <SlideshowDate
-                date={image.dateTaken}
-                imageWidth={image.width}
-                imageHeight={image.height}
-                filename={image.filename}
-              />
-            )}
           </div>
-          {image.title && <p className="image-title">{image.title}</p>}
+          {renderDetails(image)}
         </li>
       ))}
     </ol>

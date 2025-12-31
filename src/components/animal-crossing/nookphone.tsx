@@ -21,7 +21,7 @@ import { deslugify } from "@/utils/client";
  * ALL.............CAMERA ❓
  */
 
-// self portraits? (under residents perhaps?)
+// today?
 
 const nookphoneConfig: NookphoneConfig[] = nookphoneConfigJson;
 
