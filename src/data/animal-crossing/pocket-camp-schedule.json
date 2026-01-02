@@ -1,6 +1,6 @@
 [
   {
-    "month": "december",
+    "month": "♐️ december ♑️",
     "themes": [
       {
         "name": "🎁 toy day🎄 ",
@@ -27,9 +27,6 @@
           },
           {
             "name": "louie"
-          },
-          {
-            "name": "blanche"
           },
           {
             "name": "canberra"
@@ -106,6 +103,20 @@
           {
             "name": "julia",
             "cookie": "julia's palace cookie"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "month": "♑️ january ♒️",
+    "themes": [
+      {
+        "name": "harmonious",
+        "campers": [
+          {
+            "name": "blanche",
+            "cookie": "blanche's inn cookie"
           }
         ]
       }

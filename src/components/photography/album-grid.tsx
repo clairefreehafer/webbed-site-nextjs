@@ -6,6 +6,7 @@ import Link from "next/link";
 import { deslugify } from "@/utils";
 import { Album } from "@/utils/digikam";
 
+// show number of photos on hover?
 export default function AlbumGrid({
   albums,
   linkPrefix,
@@ -40,6 +41,7 @@ export default function AlbumGrid({
             }
             <p className="image-title">
               {album.displayName ?? deslugify(album.slug)}
+              {album.icon && <span className="album-icon"> {album.icon}</span>}
             </p>
           </Link>
         </li>

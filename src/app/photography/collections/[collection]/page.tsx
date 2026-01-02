@@ -11,7 +11,6 @@ const collections: CollectionConfig = collectionsJson;
 export async function generateStaticParams() {
   return Object.keys(collections).map((collection) => {
     const slug = slugify(collection);
-    console.log(`├ generating /collections/${slug}`);
     return {
       collection: slug,
     };
@@ -38,7 +37,7 @@ export default async function Page({
   const { background, displayName } = collections[collection];
   return (
     <>
-      <div className="breadcrumbs">
+      <div className="breadcrumbs dotted-border">
         <Link href="/photography">photography</Link>
         <span>/</span>
         <Link href="/photography/collections">collections</Link>

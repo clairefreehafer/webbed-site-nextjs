@@ -7,9 +7,9 @@ import { CollectionConfig } from "@/types/photography";
 import { slugify } from "@/utils";
 import { Album, getCollectionCoverPhoto } from "@/utils/digikam";
 
-const collections: CollectionConfig = collectionsJson;
-
 export const metadata: Metadata = { title: "collections" };
+
+const collections: CollectionConfig = collectionsJson;
 
 export default async function Page() {
   const albums: Album[] = [];
@@ -19,9 +19,10 @@ export default async function Page() {
     const mappedAlbum: Album = {
       displayName: config.displayName ?? collection,
       slug: slugify(collection),
+      icon: config.icon,
     };
-    if (config.coverPhotoId) {
-      const coverPhoto = await getCollectionCoverPhoto(config.coverPhotoId);
+    if (config.coverPhotoName) {
+      const coverPhoto = await getCollectionCoverPhoto(config.coverPhotoName);
       if (coverPhoto) {
         albums.push({
           ...mappedAlbum,

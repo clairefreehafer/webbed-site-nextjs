@@ -1,26 +1,63 @@
 {
+  "aquatic": {
+    "displayName": "aquatic fauna",
+    "icon": "🦈"
+  },
+  "architecture": {
+    "icon": "🏢"
+  },
+  "beach": {
+    "icon": "🏖️"
+  },
   "black & white": {
-    "displayName": "black & white"
+    "icon": "🔲"
   },
   "cat": {
     "displayName": "cats",
-    "coverPhotoId": 51997,
-    "coverPhotoPosition": "bottom"
+    "coverPhotoPosition": "bottom",
+    "icon": "🐈‍⬛"
   },
   "dog": {
-    "displayName": "dogs"
+    "displayName": "dogs",
+    "icon": "🐕"
   },
   "fisheye": {
-    "displayName": "fisheye",
+    "icon": "🐠",
     "background": "black"
   },
+  "flora": {
+    "icon": "🌱"
+  },
   "human": {
-    "displayName": "humans"
+    "displayName": "humans",
+    "icon": "👤"
+  },
+  "kite": {
+    "displayName": "kites",
+    "icon": "🪁"
   },
   "moon": {
     "displayName": "la lune",
+    "icon": "🌕",
     "background": "black",
-    "coverPhotoId": 50848,
     "coverPhotoPosition": "center 30%"
+  },
+  "nonplace": {
+    "displayName": "nonplaces",
+    "icon": "🛣️",
+    "coverPhotoName": "2007-04-10_11-10-49.jpg"
+  },
+  "ocean": {
+    "icon": "🌊"
+  },
+  "rock": {
+    "displayName": "rocks",
+    "icon": "🪨"
+  },
+  "sky": {
+    "icon": "☀️"
+  },
+  "typography": {
+    "icon": "🔡"
   }
 }

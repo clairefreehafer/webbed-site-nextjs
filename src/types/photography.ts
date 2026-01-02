@@ -19,9 +19,11 @@ export type GeoJson = {
 export type CollectionConfig = Record<
   string,
   {
-    displayName: string;
+    displayName?: string;
     background?: React.CSSProperties["background"];
     coverPhotoId?: number;
+    coverPhotoName?: string;
     coverPhotoPosition?: string;
+    icon?: string;
   }
 >;
