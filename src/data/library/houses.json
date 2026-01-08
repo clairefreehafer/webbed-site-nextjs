@@ -1,7 +1,17 @@
 {
-  "slug": "houses",
   "title": "houses",
   "items": [
+    {
+      "type": "video-game",
+      "title": "Blue Prince",
+      "link": "https://www.igdb.com/games/blue-prince",
+      "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co9mzd.webp",
+      "coverColor": "#68a3cd"
+    },
+    {
+      "type": "film",
+      "title": "Hausu"
+    },
     {
       "type": "book",
       "olid": "OL42742M",
@@ -21,10 +31,6 @@
       "author": "Rivers Solomon",
       "coverColor": "#2cdc54",
       "numberOfPages": 304
-    },
-    {
-      "type": "film",
-      "title": "Hausu"
     }
   ]
 }

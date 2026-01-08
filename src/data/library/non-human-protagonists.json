@@ -158,6 +158,18 @@
         "coverColor": "#a77757",
         "numberOfPages": 160
       }
+    ],
+    "standalone": [
+      {
+        "type": "book",
+        "olid": "OL29539396M",
+        "author": "Kazuo Ishiguro",
+        "title": "Klara and the Sun",
+        "link": "https://openlibrary.org/books/OL29539396M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL29539396M-M.jpg",
+        "coverColor": "#e34c2c",
+        "numberOfPages": 320
+      }
     ]
   }
 }
