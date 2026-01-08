@@ -30,11 +30,7 @@ export default function Page() {
 
       {scheduleData.map(({ month, themes }) => (
         <Fragment key={month}>
-          <h3
-            style={{ fontFamily: "var(--font-fink-heavy)", fontSize: "2rem" }}
-          >
-            {month}
-          </h3>
+          <h3>{month}</h3>
           <div
             style={{
               display: "flex",
@@ -86,6 +82,7 @@ export default function Page() {
                             height: "3rem",
                             width: "3rem",
                             position: "relative",
+                            filter: "drop-shadow(0 0 2px rgba(0, 0, 0, 0.85))",
                           }}
                         >
                           <Image

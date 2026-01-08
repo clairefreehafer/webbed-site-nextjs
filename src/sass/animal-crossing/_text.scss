@@ -1,5 +1,15 @@
 @use "variables";
 
+h3 {
+  font-family: var(--font-fink-heavy);
+  font-size: 2rem;
+}
+
+h4 {
+  font-family: var(--font-fink-heavy);
+  font-size: 1.75rem;
+}
+
 a {
   color: rgb(87, 72, 66);
 
