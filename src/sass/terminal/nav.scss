@@ -1,14 +1,18 @@
-nav {
-  margin-top: 2rem;
-}
+@use "./variables";
 
-ul {
+.nav-list {
   display: flex;
+  flex-wrap: wrap;
   font-size: 1.25rem;
-  justify-content: space-between;
+  justify-content: center;
   list-style-type: none;
   padding: 0;
   width: 100%;
+  gap: 1rem;
+
+  @media screen and (max-width: variables.$mobile-breakpoint) {
+    font-size: 1rem;
+  }
 }
 
 .triangle {

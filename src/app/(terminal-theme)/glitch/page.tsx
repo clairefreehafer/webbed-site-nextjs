@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import ImageGrid from "@/components/image-grid";
+import ImageGridWithGrouping from "@/components/image-grid-with-grouping";
 import { getAlbumImages } from "@/utils/digikam";
 
 export const metadata: Metadata = {
@@ -12,9 +12,7 @@ export default async function Page() {
   return (
     <>
       <h2>glitch art</h2>
-      <main>
-        <ImageGrid images={images} maxCols={1} />
-      </main>
+      <ImageGridWithGrouping images={images} maxCols={1} />
     </>
   );
 }

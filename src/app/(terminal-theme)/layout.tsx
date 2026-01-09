@@ -10,13 +10,11 @@ export default function Layout({ children }: React.PropsWithChildren) {
       <body
         className={`${pressStart2p.variable} ${atkinsonHyperlegibleMono.variable}`}
       >
-        <div className="container">
-          <header>
-            <h1>claire freehafer</h1>
-            <Nav />
-          </header>
-          {children}
-        </div>
+        <header>
+          <h1>claire freehafer</h1>
+          <Nav />
+        </header>
+        {children}
       </body>
     </html>
   );

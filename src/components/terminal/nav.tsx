@@ -7,7 +7,7 @@ import { ROOT_LINKS } from "@/types/nav";
 export default function Nav() {
   return (
     <nav>
-      <ul>
+      <ul className="nav-list">
         {ROOT_LINKS.map((link) => (
           <li key={link.href}>
             <span className="triangle" aria-hidden>
