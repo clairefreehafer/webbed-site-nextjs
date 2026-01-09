@@ -22,6 +22,9 @@ export interface DigikamImage {
   title: string | null;
   width: number;
   albumCaption?: string;
+  groupParent?: DigikamImage["id"];
+  /** string of IDs separated by commas. */
+  groupChildren?: string;
 }
 
 /** custom JSON format for extra info stored in the image caption/comment field. */
@@ -48,6 +51,8 @@ export interface Image extends ImageCaptionJson {
   palette?: Palette;
   title?: DigikamImage["title"];
   albumCollection: DigikamImage["albumCollection"];
+  /** either an array of children IDs or a single parent ID. */
+  grouping?: DigikamImage["id"][] | DigikamImage["id"];
 }
 
 interface ImageOptions {
@@ -95,25 +100,26 @@ export async function transformDigikamImage(
         .toFile(outputPath);
     }
     if (digikamImage.creationDate) {
-      transformedImage = {
-        ...transformedImage,
-        dateTaken: digikamImage.creationDate,
-      };
+      transformedImage.dateTaken = digikamImage.creationDate;
     }
     if (digikamImage.title) {
-      transformedImage = {
-        ...transformedImage,
-        title: digikamImage.title,
-      };
+      transformedImage.title = digikamImage.title;
+    }
+
+    const groupChildren = digikamImage.groupChildren?.split(",");
+    if (groupChildren && digikamImage.groupParent === digikamImage.id) {
+      // image is a group parent.
+      transformedImage.grouping = groupChildren.map((child) => parseInt(child));
+    }
+    if (groupChildren?.includes(digikamImage.id.toString())) {
+      // image is a group child.
+      transformedImage.grouping = digikamImage.groupParent;
     }
 
     // optionally generate a color palette from the image.
     if (options.generatePalette) {
       const palette = await Vibrant.from(buffer).getPalette();
-      transformedImage = {
-        ...transformedImage,
-        palette,
-      };
+      transformedImage.palette = palette;
     }
 
     // check for custom metadata
@@ -166,7 +172,9 @@ export const getAlbumImages = async (
           thumbs.FilePaths.path,
           trim(Albums.relativePath, '/') AS albumSlug,
           ImageTitle.comment as title,
-          ImageCaption.comment as caption
+          ImageCaption.comment as caption,
+          ImageRelations.object as groupParent,
+          group_concat(ImageRelations.subject) as groupChildren
         FROM Albums
           INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
           INNER JOIN Images ON Images.album = Albums.id
@@ -175,6 +183,7 @@ export const getAlbumImages = async (
           LEFT JOIN ImageCaption ON Images.id = ImageCaption.imageId
           LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
           LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
+          LEFT JOIN ImageRelations ON Images.id = ImageRelations.subject OR Images.id = ImageRelations.object
         WHERE Albums.relativePath LIKE $relativePathLikeString
           AND Albums.albumRoot = 4
           AND Albums.collection LIKE $collectionLikeString
@@ -196,7 +205,7 @@ export const getAlbumImages = async (
     const transformedImage = await transformDigikamImage(image, options);
     images.push(transformedImage);
 
-    // check if we should be sorting a zelda album by image compendium number.
+    // check for custom sorting.
     if (image.albumCaption && !sortBy) {
       const albumCaption: AlbumCaptionJson = JSON.parse(image.albumCaption);
       sortBy = albumCaption.sortBy;

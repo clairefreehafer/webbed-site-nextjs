@@ -16,8 +16,7 @@ $ui-position-x: 0;
 // vertical distance of UI edges from edge of slideshow container
 $ui-position-y: 1rem;
 
-// needed?
-.container {
+.slideshow-container {
   max-width: 100vw;
   max-height: 100vw;
   position: relative;

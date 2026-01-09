@@ -35,6 +35,7 @@ export type Album = {
   displayName?: AlbumCaptionJson["displayName"];
   icon?: AlbumCaptionJson["icon"];
   slug: string;
+  numberOfPhotos?: number;
 };
 
 async function transformDigikamAlbum(album: DigikamAlbum): Promise<Album> {
@@ -143,6 +144,39 @@ export const getAlbums = cache(
     return transformedAlbums;
   }
 );
+
+// could also do tags or whatever in the album description
+export const getAlbumGroups = (rootCollection: string): string[] => {
+  const albumGroups = digikam
+    .prepare<
+      {
+        collectionLikeString: string;
+      },
+      DigikamAlbum
+    >(
+      `
+          SELECT DISTINCT
+            Albums.collection
+          FROM
+            Albums
+          WHERE
+            Albums.albumRoot == 4
+            AND Albums.collection LIKE $collectionLikeString
+        `
+    )
+    .all({
+      collectionLikeString: `%${rootCollection}/%`,
+    });
+  console.log(
+    `📁 [getAlbumGroups] ${albumGroups.length} album groups found in "${rootCollection}".`
+  );
+
+  return (
+    albumGroups?.map((group) =>
+      group.collection.replace(`${rootCollection}/`, "")
+    ) ?? []
+  );
+};
 
 export const getAlbumDate = (albumSlug: string) => {
   const result = digikam

@@ -1,11 +1,10 @@
+import { Metadata } from "next";
 import Link from "next/link";
 
 import AlbumGrid from "@/components/photography/album-grid";
 import { getAlbums } from "@/utils/digikam";
 
-export function generateMetadata() {
-  return { title: "albums" };
-}
+export const metadata: Metadata = { title: "albums" };
 
 export default async function Page() {
   const albums = await getAlbums();
@@ -17,6 +16,9 @@ export default async function Page() {
         <span>/</span>
         <h2>albums</h2>
       </div>
+      <p className="page-description">
+        <Link href="/photography/albums/grouped">view grouped</Link>
+      </p>
       <AlbumGrid albums={albums} linkPrefix="albums" />
     </>
   );

@@ -1,4 +1,4 @@
-import "@/sass/components/grids.scss";
+import "@/sass/components/album-grid.scss";
 
 import NextImage from "next/image";
 import Link from "next/link";
@@ -6,7 +6,6 @@ import Link from "next/link";
 import { deslugify } from "@/utils";
 import { Album } from "@/utils/digikam";
 
-// show number of photos on hover?
 export default function AlbumGrid({
   albums,
   linkPrefix,
@@ -19,33 +18,47 @@ export default function AlbumGrid({
   aspectRatio?: "1/1" | "4/3" | "16/9";
 }) {
   return (
-    <ul className={`grid max-cols-${maxCols}`}>
-      {albums.map((album) => (
-        <li key={album.slug} className="cell">
-          <Link href={`/photography/${linkPrefix}/${album.slug}`}>
-            {
-              <NextImage
-                // tv-static image from: https://giphy.com/gifs/vhs-static-blank-3o6vXRxrhj7Ov94Gbu
-                src={
-                  album.coverPhoto?.src ?? "/images/photography/tv-static.webp"
-                }
-                height={album.coverPhoto?.height ?? 500}
-                width={album.coverPhoto?.width ?? 375}
-                alt=""
-                className="album-grid-image"
-                style={{
-                  aspectRatio,
-                  objectPosition: album.coverPhoto?.position,
-                }}
-              />
-            }
-            <p className="image-title">
-              {album.displayName ?? deslugify(album.slug)}
-              {album.icon && <span className="album-icon"> {album.icon}</span>}
-            </p>
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <div className="album-grid-container">
+      <ul className={`grid max-cols-${maxCols}`}>
+        {albums.map((album) => (
+          <li key={album.slug} className="cell">
+            <Link href={`/photography/${linkPrefix}/${album.slug}`}>
+              <div className="image-container">
+                <NextImage
+                  // tv-static image from: https://giphy.com/gifs/vhs-static-blank-3o6vXRxrhj7Ov94Gbu
+                  src={
+                    album.coverPhoto?.src ??
+                    "/images/photography/tv-static.webp"
+                  }
+                  height={album.coverPhoto?.height ?? 500}
+                  width={album.coverPhoto?.width ?? 375}
+                  alt=""
+                  className="album-grid-image"
+                  style={{
+                    aspectRatio,
+                    objectPosition: album.coverPhoto?.position,
+                  }}
+                />
+                {album.numberOfPhotos !== undefined && (
+                  <div className="image-overlay">
+                    <p>
+                      {album.numberOfPhotos === 1
+                        ? "1 photo"
+                        : `${album.numberOfPhotos} photos`}
+                    </p>
+                  </div>
+                )}
+              </div>
+              <p className="image-title">
+                {album.displayName ?? deslugify(album.slug)}
+                {album.icon && (
+                  <span className="album-icon"> {album.icon}</span>
+                )}
+              </p>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

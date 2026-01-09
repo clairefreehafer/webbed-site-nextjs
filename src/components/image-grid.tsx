@@ -1,4 +1,4 @@
-import "@/sass/components/grids.scss";
+import "@/sass/components/image-grid.scss";
 
 import NextImage from "next/image";
 
@@ -17,23 +17,25 @@ export default function ImageGrid({
     return "no images :(";
   }
   return (
-    <ul
-      className={`grid max-cols-${maxCols}`}
-      style={background ? { background } : {}}
-    >
-      {images.map((image) => (
-        <li key={image.filename} className="cell">
-          <NextImage
-            src={image.src}
-            height={image.height}
-            width={image.width}
-            alt=""
-            className="image-grid-image"
-            id={image.id.toString()}
-          />
-          {image.title && <p className="image-title">{image.title}</p>}
-        </li>
-      ))}
-    </ul>
+    <div className="image-grid-container">
+      <ul
+        className={`grid max-cols-${maxCols}`}
+        style={background ? { background } : {}}
+      >
+        {images.map((image) => (
+          <li key={image.filename} className="cell">
+            <NextImage
+              src={image.src}
+              height={image.height}
+              width={image.width}
+              alt=""
+              className="image-grid-image"
+              id={image.id.toString()}
+            />
+            {image.title && <p className="image-title">{image.title}</p>}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

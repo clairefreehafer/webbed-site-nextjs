@@ -4,7 +4,10 @@ import "@/sass/photography/style.scss";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "photography — claire freehafer",
+  title: {
+    default: "photography — claire freehafer",
+    template: "%s — claire freehafer",
+  },
 };
 
 export default function Layout({ children }: React.PropsWithChildren) {

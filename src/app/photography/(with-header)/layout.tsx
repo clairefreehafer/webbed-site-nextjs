@@ -1,10 +1,4 @@
-import { Metadata } from "next";
-
 import Nav from "@/components/photography/nav";
-
-export const metadata: Metadata = {
-  title: "photography — claire freehafer",
-};
 
 export default function Layout({ children }: React.PropsWithChildren) {
   return (
@@ -14,7 +8,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
         <Nav />
       </header>
 
-      <section className="content">{children}</section>
+      {children}
     </>
   );
 }

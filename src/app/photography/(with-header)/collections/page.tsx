@@ -5,7 +5,11 @@ import AlbumGrid from "@/components/photography/album-grid";
 import collectionsJson from "@/data/collections.json";
 import { CollectionConfig } from "@/types/photography";
 import { slugify } from "@/utils";
-import { Album, getCollectionCoverPhoto } from "@/utils/digikam";
+import {
+  Album,
+  getCollectionCoverPhoto,
+  getNumberOfTaggedImages,
+} from "@/utils/digikam";
 
 export const metadata: Metadata = { title: "collections" };
 
@@ -20,6 +24,7 @@ export default async function Page() {
       displayName: config.displayName ?? collection,
       slug: slugify(collection),
       icon: config.icon,
+      numberOfPhotos: getNumberOfTaggedImages(collection),
     };
     if (config.coverPhotoName) {
       const coverPhoto = await getCollectionCoverPhoto(config.coverPhotoName);

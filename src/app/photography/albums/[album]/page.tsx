@@ -27,6 +27,7 @@ export async function generateMetadata({
 export default async function Page({ params }: { params: Promise<Params> }) {
   const albumSlug = (await params).album;
   const images = await getAlbumImages(albumSlug);
+
   return (
     <>
       <div className="breadcrumbs dotted-border">

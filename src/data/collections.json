@@ -9,8 +9,16 @@
   "beach": {
     "icon": "🏖️"
   },
+  "bird": {
+    "displayName": "birds",
+    "icon": "🐦‍⬛"
+  },
   "black & white": {
     "icon": "🔲"
+  },
+  "boat": {
+    "displayName": "boats",
+    "icon": "⛵️"
   },
   "cat": {
     "displayName": "cats",
@@ -21,6 +29,9 @@
     "displayName": "dogs",
     "icon": "🐕"
   },
+  "fauna": {
+    "icon": "🦝"
+  },
   "fisheye": {
     "icon": "🐠",
     "background": "black"
@@ -28,13 +39,37 @@
   "flora": {
     "icon": "🌱"
   },
+  "flower": {
+    "displayName": "flowers",
+    "icon": "🌻"
+  },
+  "fog": {
+    "icon": "🌁"
+  },
+  "food": {
+    "icon": "🥪"
+  },
   "human": {
     "displayName": "humans",
     "icon": "👤"
   },
+  "insect": {
+    "displayName": "insects",
+    "icon": "🪲"
+  },
+  "gif": {
+    "displayName": "gifs"
+  },
   "kite": {
     "displayName": "kites",
     "icon": "🪁"
+  },
+  "lizard": {
+    "displayName": "lizards",
+    "icon": "🦎"
+  },
+  "long exposure": {
+    "icon": "🌃"
   },
   "moon": {
     "displayName": "la lune",
@@ -50,14 +85,25 @@
   "ocean": {
     "icon": "🌊"
   },
+  "pool": {
+    "displayName": "swimming pools",
+    "icon": "🏊"
+  },
   "rock": {
     "displayName": "rocks",
     "icon": "🪨"
+  },
+  "shadows": {
+    "icon": "🌑"
   },
   "sky": {
     "icon": "☀️"
   },
   "typography": {
     "icon": "🔡"
+  },
+  "vehicle": {
+    "displayName": "vehicles",
+    "icon": "🚗"
   }
 }

@@ -27,11 +27,24 @@ export default function RandomImage({ allImages }: { allImages: string[] }) {
 
   return (
     <>
-      <button type="button" onClick={handleClick}>
+      <button
+        type="button"
+        onClick={handleClick}
+        style={{ alignSelf: "center" }}
+      >
         refresh
       </button>
       <div className="single-image">
-        <Image src={imagePath} alt="" fill objectFit="contain" />
+        <Image
+          src={imagePath}
+          alt=""
+          fill
+          style={{
+            objectFit: "contain",
+            alignSelf: "center",
+            justifySelf: "center",
+          }}
+        />
       </div>
     </>
   );

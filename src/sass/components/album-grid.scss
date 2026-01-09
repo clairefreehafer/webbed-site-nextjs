@@ -1,0 +1,161 @@
+@mixin grid($columns, $rowGap, $colGap: false) {
+  @if $colGap == false {
+    $colGap: $rowGap;
+  }
+  $columnWidth: calc(((100% - ($colGap * ($columns - 1))) / $columns));
+  display: grid;
+  grid-template-columns: repeat($columns, $columnWidth);
+  gap: $rowGap $colGap;
+  width: 100%;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.album-grid-container {
+  flex: 2;
+  padding: 1rem;
+  overflow-y: scroll;
+  position: relative;
+}
+
+.grid {
+  list-style-type: none;
+  flex: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &.max-cols-3 {
+    @include grid(3, 2rem);
+    padding: 2rem;
+
+    @media screen and (max-width: 1000px) {
+      @include grid(2, 2rem);
+    }
+
+    @media screen and (max-width: 650px) {
+      @include grid(1, 2rem);
+      padding: 1rem;
+    }
+  }
+  &.max-cols-2 {
+    @include grid(2, 2rem);
+    padding: 1rem 3rem 3rem;
+
+    @media screen and (max-width: 650px) {
+      @include grid(1, 1rem);
+      padding: 1rem;
+    }
+  }
+  &.max-cols-1 {
+    @include grid(1, 5rem);
+    padding: 1rem 3rem 3rem;
+
+    @media screen and (max-width: 650px) {
+      @include grid(1, 5rem, 0px);
+      padding: 1rem;
+    }
+  }
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid red;
+  position: relative;
+
+  & a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+
+    &:hover {
+      & > .image-title {
+        text-decoration: none;
+        background: repeating-linear-gradient(
+          0deg,
+          white 0px,
+          white calc(0.33 * 30px),
+          yellow calc(0.33 * 30px),
+          yellow calc(0.66 * 30px),
+          white calc(0.66 * 30px),
+          white 30px
+        );
+      }
+
+      & .image-overlay {
+        opacity: 1;
+        animation-name: fade-in;
+        animation-iteration-count: 1;
+        animation-duration: 250ms;
+      }
+    }
+  }
+}
+
+.image-container {
+  position: relative;
+}
+
+.album-grid-image {
+  height: auto;
+  width: 100%;
+  margin: auto;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.image-grid-image {
+  height: auto;
+  width: auto;
+  max-width: 100%;
+  margin: auto;
+  object-fit: contain;
+}
+
+.image-title {
+  font-weight: 300;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.image-overlay {
+  display: flex;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background-color: black;
+  background-image: url("/images/photography/tv-static.webp");
+  color: white;
+  mix-blend-mode: multiply;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  font-weight: bold;
+  // text-shadow: 5px 5px 2px yellow;
+  animation-name: fade-out;
+  animation-iteration-count: 1;
+  animation-duration: 250ms;
+}
