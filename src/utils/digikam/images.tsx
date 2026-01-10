@@ -32,6 +32,7 @@ interface ImageCaptionJson {
   altText?: string;
   border?: React.CSSProperties["border"];
   background?: React.CSSProperties["background"];
+  groupType?: "hover" | "pyramid" | "square";
   /** animal crossing */
   showDate?: boolean;
   /** zelda */

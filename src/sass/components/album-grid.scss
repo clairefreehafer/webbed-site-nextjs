@@ -9,24 +9,6 @@
   width: 100%;
 }
 
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fade-out {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
 .album-grid-container {
   flex: 2;
   padding: 1rem;
@@ -74,11 +56,12 @@
   }
 }
 
+$hover-duration: 250ms;
+
 .cell {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid red;
   position: relative;
 
   & a {
@@ -103,9 +86,7 @@
 
       & .image-overlay {
         opacity: 1;
-        animation-name: fade-in;
-        animation-iteration-count: 1;
-        animation-duration: 250ms;
+        transition: opacity $hover-duration;
       }
     }
   }
@@ -123,14 +104,6 @@
   object-fit: cover;
 }
 
-.image-grid-image {
-  height: auto;
-  width: auto;
-  max-width: 100%;
-  margin: auto;
-  object-fit: contain;
-}
-
 .image-title {
   font-weight: 300;
   font-size: 1.25rem;
@@ -138,24 +111,21 @@
 }
 
 .image-overlay {
-  display: flex;
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
+  align-items: center;
   background-color: black;
   background-image: url("/images/photography/tv-static.webp");
   color: white;
-  mix-blend-mode: multiply;
-  height: 100%;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
+  display: flex;
   font-size: 3.5rem;
   font-weight: bold;
-  // text-shadow: 5px 5px 2px yellow;
-  animation-name: fade-out;
-  animation-iteration-count: 1;
-  animation-duration: 250ms;
+  height: 100%;
+  justify-content: center;
+  left: 50%;
+  mix-blend-mode: multiply;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  transition: opacity $hover-duration;
+  width: 100%;
 }

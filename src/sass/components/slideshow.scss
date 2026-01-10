@@ -65,7 +65,7 @@ $ui-position-y: 1rem;
   }
 }
 
-.image {
+.slideshow-image-container {
   align-items: center;
   display: flex;
   justify-content: center;
@@ -74,8 +74,13 @@ $ui-position-y: 1rem;
   position: relative;
 }
 
+.slideshow-image {
+  align-self: center;
+  justify-content: center;
+  object-fit: contain;
+}
+
 .image-details-container {
-  // height: 5rem;
   display: flex;
   align-items: center;
   justify-content: center;

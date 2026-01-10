@@ -38,7 +38,6 @@
   list-style-type: none;
   flex: 2;
   position: absolute;
-  // offset: 0;
   top: 0;
   left: 0;
   bottom: 0;
@@ -82,7 +81,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid red;
   position: relative;
 
   & a {

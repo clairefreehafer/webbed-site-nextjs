@@ -1,8 +1,7 @@
-import NextImage from "next/image";
-
 import { Image } from "@/utils/digikam";
 
 import ImageGroup from "../image-group";
+import ImageUrlTrigger from "../image-url-trigger";
 import SlideshowDate from "./date";
 import Details from "./details";
 
@@ -16,34 +15,37 @@ export default function Slide({
   index: number;
 }) {
   if (typeof image.grouping === "number") {
+    // don't show a slide for images that are a group child.
     return null;
   }
 
   if (Array.isArray(image.grouping)) {
     return (
-      <li className="slide" id={`${index + 1}`}>
+      <li
+        className="slide"
+        style={image.background ? { background: image.background } : {}}
+      >
         <div className="snap-point" />
 
-        <ImageGroup images={images} parentImage={image} />
+        <ImageGroup allImages={images} parentImage={image} />
       </li>
     );
   }
 
   return (
-    <li className="slide" id={`${index + 1}`}>
+    <li
+      className="slide"
+      style={image.background ? { background: image.background } : {}}
+    >
       <div className="snap-point" />
 
-      <div className="image" id={image.filename}>
-        <NextImage
-          src={image.src}
-          fill
-          alt=""
+      <div className="slideshow-image-container">
+        <ImageUrlTrigger
+          image={image}
+          className="slideshow-image"
           style={{
             maxHeight: image.height,
             maxWidth: image.width,
-            objectFit: "contain",
-            alignSelf: "center",
-            justifySelf: "center",
           }}
           priority={index === 0}
         />

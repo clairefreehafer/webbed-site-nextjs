@@ -8,6 +8,8 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <section className="content">
+      this site is built with both the desktop and mobile experience in mind,
+      but desktop is the recommended way to view it.
       <h3>📸 photography</h3>
       <p>
         the <Link href="/photography">photography section</Link> of this site is
@@ -22,7 +24,6 @@ export default function Page() {
         </a>
         .
       </p>
-
       <h3>🎮 video games</h3>
       <p>
         view virtual photography and other work inspired by and created with my
@@ -51,7 +52,6 @@ export default function Page() {
           <Link href="/zelda">zelda</Link>
         </li>
       </ul>
-
       <h3>💻 digital art</h3>
       <ul>
         <li>
