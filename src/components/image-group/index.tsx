@@ -6,6 +6,7 @@ import ImageUrlTrigger from "../image-url-trigger";
 import HoverGroup from "./hover";
 import PyramidGroup from "./pyramid";
 import SquareGroup from "./square";
+import VerticalGroup from "./vertical";
 
 export default function ImageGroup({
   allImages,
@@ -38,6 +39,14 @@ export default function ImageGroup({
     return (
       <div className="image-group-container">
         <HoverGroup baseImage={parentImage} hoverImage={hoverImage} />
+      </div>
+    );
+  }
+
+  if (parentImage.groupType === "vertical") {
+    return (
+      <div className="image-group-container">
+        <VerticalGroup parentImage={parentImage} groupImages={groupImages} />
       </div>
     );
   }

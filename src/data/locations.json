@@ -24,6 +24,11 @@
     "markerColor": "powderblue",
     "name": "camden, maine"
   },
+  "death valley": {
+    "coordinates": [-116.825833, 36.241944],
+    "markerColor": "",
+    "name": "death valley national park"
+  },
   "flatbush": {
     "coordinates": [-73.9625, 40.6615],
     "markerColor": "gold",
@@ -38,6 +43,11 @@
     "coordinates": [-73.876153, 40.564175],
     "markerColor": "",
     "name": "jacob riis beach"
+  },
+  "joshua tree": {
+    "coordinates": [-116.27, 34.1],
+    "markerColor": "",
+    "name": "joshua tree national park"
   },
   "mariaville lake": {
     "coordinates": [-74.131111, 42.826667],
@@ -88,6 +98,16 @@
     "coordinates": [8.029167, 63.401944],
     "markerColor": "",
     "name": "smøla, norway"
+  },
+  "st john": {
+    "coordinates": [-64.733333, 18.333333],
+    "markerColor": "",
+    "name": "st. john, USVI"
+  },
+  "st thomas": {
+    "coordinates": [-64.916667, 18.333333],
+    "markerColor": "",
+    "name": "st. thomas, USVI"
   },
   "tromso": {
     "coordinates": [18.9558585, 69.6516345],

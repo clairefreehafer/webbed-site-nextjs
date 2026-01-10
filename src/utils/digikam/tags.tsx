@@ -104,7 +104,7 @@ export const getMapData = (): GeoJson => {
       `
     )
     .all();
-  console.log(`🗺️ [getMapData] found ${locationTags.length} location tags.`);
+  console.log(`🗺️  [getMapData] found ${locationTags.length} location tags.`);
 
   const mapData: GeoJson = {
     type: "FeatureCollection",
@@ -113,8 +113,16 @@ export const getMapData = (): GeoJson => {
   for (const tag of locationTags) {
     const tagConfig = locations[tag.tagName];
     if (!tagConfig) {
-      console.log(`❌ [getMapData] no tag config for "${tag.tagName}"`);
-      break;
+      console.warn(`❌ [getMapData] no tag config for "${tag.tagName}"`);
+      continue;
+    }
+    if (tagConfig.coordinates.length !== 2) {
+      console.warn(`❌ [getMapData] invalid coordinates for "${tag.tagName}"`);
+      continue;
+    }
+    if (tag.numberOfImages === 0) {
+      console.warn(`❌ [getMapData] no images with tag "${tag.tagName}"`);
+      continue;
     }
     mapData.features.push({
       type: "Feature",

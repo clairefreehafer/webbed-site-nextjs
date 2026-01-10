@@ -19,12 +19,19 @@ export default async function Page() {
   const albums: Album[] = [];
 
   for (const collection of Object.keys(collections)) {
+    const numberOfPhotos = getNumberOfTaggedImages(collection);
+    if (numberOfPhotos === 0) {
+      // skip if there are no photos with that tag.
+      console.warn(`😢 no photos with tag "${collection}"`);
+      continue;
+    }
+
     const config = collections[collection];
     const mappedAlbum: Album = {
       displayName: config.displayName ?? collection,
       slug: slugify(collection),
       icon: config.icon,
-      numberOfPhotos: getNumberOfTaggedImages(collection),
+      numberOfPhotos,
     };
     if (config.coverPhotoName) {
       const coverPhoto = await getCollectionCoverPhoto(config.coverPhotoName);

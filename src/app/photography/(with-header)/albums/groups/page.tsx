@@ -7,6 +7,7 @@ import { getAlbumGroups } from "@/utils/digikam";
 export default async function Page() {
   const albumGroups = getAlbumGroups("photography");
   const links = albumGroups.map((group) => ({
+    href: `/albums/groups/${group}`,
     display: deslugify(group),
   }));
 
@@ -17,9 +18,8 @@ export default async function Page() {
         <span>/</span>
         <Link href="/photography/albums">albums</Link>
         <span>/</span>
-        <h2>grouped</h2>
+        <h2>groups</h2>
       </div>
-      <p className="page-description">🚧 in progress 🚧</p>
       <LinkList links={links} />;
     </>
   );

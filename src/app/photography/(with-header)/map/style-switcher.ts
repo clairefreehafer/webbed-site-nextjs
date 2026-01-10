@@ -25,7 +25,6 @@ export class StyleSwitcher implements IControl {
     for (const style of this.styles) {
       const button = document.createElement("button");
       button.textContent = style.name;
-      button.onclick = console.log;
 
       button.addEventListener("click", () => {
         this._map?.setStyle(style.url);

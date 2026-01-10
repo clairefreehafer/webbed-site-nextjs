@@ -40,24 +40,24 @@ export const getCollectionCoverPhoto = async (
   const image = digikam
     .prepare<{ imageName: string }, DigikamCoverPhoto>(
       `
-          SELECT
-            ImageInformation.height,
-            Images.id,
-            Images.name,
-            thumbs.FilePaths.path,
-            ImageInformation.width,
-            Albums.collection AS albumCollection,
-            trim(Albums.relativePath, '/') AS albumSlug
-          FROM Albums
-            INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
-            INNER JOIN Images ON Images.album = Albums.id
-            LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
-            LEFT JOIN ImageComments on Images.id = ImageComments.imageId
-            LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
-            LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
-          WHERE Albums.albumRoot = 4
-            AND Images.name = $imageName
-        `
+        SELECT
+          ImageInformation.height,
+          Images.id,
+          Images.name,
+          thumbs.FilePaths.path,
+          ImageInformation.width,
+          Albums.collection AS albumCollection,
+          trim(Albums.relativePath, '/') AS albumSlug
+        FROM Albums
+          INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
+          INNER JOIN Images ON Images.album = Albums.id
+          LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
+          LEFT JOIN ImageComments on Images.id = ImageComments.imageId
+          LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
+          LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
+        WHERE Albums.albumRoot = 4
+          AND Images.name = $imageName
+      `
     )
     .get({
       imageName,

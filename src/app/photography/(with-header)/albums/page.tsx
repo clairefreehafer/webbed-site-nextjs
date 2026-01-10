@@ -17,7 +17,7 @@ export default async function Page() {
         <h2>albums</h2>
       </div>
       <p className="page-description">
-        <Link href="/photography/albums/grouped">view grouped</Link>
+        <Link href="/photography/albums/groups">view groups</Link>
       </p>
       <AlbumGrid albums={albums} linkPrefix="albums" />
     </>
