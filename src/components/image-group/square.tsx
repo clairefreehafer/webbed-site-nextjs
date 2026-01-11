@@ -17,9 +17,11 @@ export default function Square({
             key={image.id}
             image={image}
             className="group-image"
+            fill
           />
         </div>
       ))}
+      {parentImage.title && <p className="image-title">{parentImage.title}</p>}
     </div>
   );
 }

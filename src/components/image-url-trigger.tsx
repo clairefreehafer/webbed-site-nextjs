@@ -16,7 +16,6 @@ export default function ImageUrlTrigger({ image, ...nextImageProps }: Props) {
     <NextImage
       {...nextImageProps}
       src={image.src}
-      fill
       alt=""
       id={image.filename}
       onClick={() => router.replace(`${pathname}#${image.filename}`)}

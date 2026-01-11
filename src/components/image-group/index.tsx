@@ -51,7 +51,7 @@ export default function ImageGroup({
     );
   }
 
-  if (parentImage.groupType === "pyramid") {
+  if (parentImage.groupType === "pyramid" || grouping.length === 2) {
     return (
       <div className="image-group-container">
         <PyramidGroup parentImage={parentImage} groupImages={groupImages} />
@@ -59,7 +59,7 @@ export default function ImageGroup({
     );
   }
 
-  if (parentImage.groupType === "square") {
+  if (parentImage.groupType === "square" || grouping.length === 3) {
     return (
       <div className="image-group-container">
         <SquareGroup parentImage={parentImage} groupImages={groupImages} />
@@ -78,7 +78,7 @@ export default function ImageGroup({
               aspectRatio: image.width / image.height,
             }}
           >
-            <ImageUrlTrigger image={image} className="group-image" />
+            <ImageUrlTrigger image={image} className="group-image" fill />
           </div>
         ))}
       </div>

@@ -25,8 +25,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
 
       <footer className="footer">
         <p>
-          <Link href="/sitemap">sitemap</Link> |{" "}
-          <Link href="/changelog">changelog</Link>
+          <Link href="/sitemap">sitemap</Link>
         </p>
         <p>
           made with{" "}

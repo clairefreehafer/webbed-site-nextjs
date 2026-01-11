@@ -13,9 +13,10 @@ export default function VerticalGroup({
     <div className="vertical-group">
       {[parentImage, ...groupImages].map((image) => (
         <div key={image.id} className="vertical-group-image-container">
-          <ImageUrlTrigger image={image} className="group-image" />
+          <ImageUrlTrigger image={image} className="group-image" fill />
         </div>
       ))}
+      {parentImage.title && <p className="image-title">{parentImage.title}</p>}
     </div>
   );
 }

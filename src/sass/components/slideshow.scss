@@ -76,7 +76,7 @@ $ui-position-y: 1rem;
 
 .slideshow-image {
   align-self: center;
-  justify-content: center;
+  justify-self: center;
   object-fit: contain;
 }
 
@@ -90,4 +90,5 @@ $ui-position-y: 1rem;
 .image-title {
   font-size: 1.5rem;
   font-weight: 200;
+  text-align: center;
 }

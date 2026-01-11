@@ -35,6 +35,9 @@ export default async function Page({
   const collection = deslugify((await params).collection);
   const images = await getTagImages(collection);
   const { background, displayName } = collections[collection];
+  const maxCols =
+    images.length === 1 || images.length === 2 ? images.length : 3;
+
   return (
     <>
       <div className="breadcrumbs dotted-border">
@@ -44,7 +47,7 @@ export default async function Page({
         <span>/</span>
         <h2>{displayName ?? collection}</h2>
       </div>
-      <ImageGrid images={images} background={background} maxCols={3} />
+      <ImageGrid images={images} background={background} maxCols={maxCols} />
     </>
   );
 }

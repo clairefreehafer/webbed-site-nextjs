@@ -21,11 +21,13 @@ export default function HoverImage({
         key={baseImage.id}
         image={baseImage}
         className="base-image"
+        fill
       />
       <ImageUrlTrigger
         key={hoverImage.id}
         image={hoverImage}
         className="hover-image"
+        fill
       />
     </div>
   );

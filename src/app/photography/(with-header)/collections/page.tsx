@@ -33,21 +33,22 @@ export default async function Page() {
       icon: config.icon,
       numberOfPhotos,
     };
-    if (config.coverPhotoName) {
-      const coverPhoto = await getCollectionCoverPhoto(config.coverPhotoName);
-      if (coverPhoto) {
-        albums.push({
-          ...mappedAlbum,
-          coverPhoto: {
-            ...coverPhoto,
-            position: config.coverPhotoPosition,
-          },
-        });
-      }
-    } else {
-      albums.push(mappedAlbum);
-    }
+    const coverPhoto = await getCollectionCoverPhoto(
+      collection,
+      config.coverPhotoName
+    );
+
+    albums.push({
+      ...mappedAlbum,
+      coverPhoto: {
+        ...coverPhoto,
+        position: config.coverPhotoPosition,
+      },
+    });
   }
+
+  const maxCols =
+    albums.length === 1 || albums.length === 2 ? albums.length : 3;
 
   return (
     <>
@@ -56,7 +57,7 @@ export default async function Page() {
         <span>/</span>
         <h2>collections</h2>
       </div>
-      <AlbumGrid linkPrefix="collections" albums={albums} />
+      <AlbumGrid linkPrefix="collections" albums={albums} maxCols={maxCols} />
     </>
   );
 }

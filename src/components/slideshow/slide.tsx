@@ -43,6 +43,7 @@ export default function Slide({
         <ImageUrlTrigger
           image={image}
           className="slideshow-image"
+          fill
           style={{
             maxHeight: image.height,
             maxWidth: image.width,

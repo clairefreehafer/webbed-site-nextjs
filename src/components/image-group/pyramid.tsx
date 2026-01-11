@@ -21,6 +21,7 @@ export default function Pyramid({
             key={image.id}
             image={image}
             className="group-image"
+            fill
           />
         </div>
       ))}
