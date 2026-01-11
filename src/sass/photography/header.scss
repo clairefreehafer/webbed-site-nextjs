@@ -1,0 +1,63 @@
+@use "./variables";
+
+#photography-header {
+  align-items: center;
+  border-bottom: 1px dotted black;
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem;
+
+  @media screen and (max-width: variables.$mobile-breakpoint) {
+    gap: 0.25rem;
+    flex-wrap: wrap;
+  }
+
+  .desktop-nav {
+    @media screen and (max-width: variables.$mobile-breakpoint) {
+      display: none;
+      flex: 1;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .mobile-nav {
+    display: none;
+    margin-bottom: 0.5rem;
+
+    @media screen and (max-width: variables.$mobile-breakpoint) {
+      display: flex;
+      flex: 2;
+      justify-content: flex-end;
+    }
+  }
+
+  /* links list */
+  ul {
+    align-items: center;
+    display: flex;
+    font-size: 1.25rem;
+    font-weight: 200;
+    gap: 1rem;
+    list-style-type: none;
+    padding: 0;
+
+    @media screen and (max-width: variables.$mobile-breakpoint) {
+      justify-content: flex-end;
+    }
+  }
+
+  /* mobile menu toggle */
+  details {
+    display: none;
+
+    @media screen and (max-width: variables.$mobile-breakpoint) {
+      display: flex;
+    }
+  }
+
+  /* disabled link */
+  s {
+    color: lightgrey;
+    text-decoration-thickness: 3px;
+  }
+}

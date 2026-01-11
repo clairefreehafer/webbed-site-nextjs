@@ -14,19 +14,6 @@ body {
   flex-direction: column;
 }
 
-header {
-  align-items: center;
-  border-bottom: 1px dotted black;
-  display: flex;
-  justify-content: space-between;
-  margin: 0.5rem;
-
-  @media screen and (max-width: variables.$max-site-width) {
-    flex-direction: column-reverse;
-    gap: 0.5rem;
-  }
-}
-
 .breadcrumbs {
   display: flex;
   align-items: flex-start;

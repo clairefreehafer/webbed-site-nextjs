@@ -66,23 +66,25 @@ export default async function Page({
           {months[month].display} {day}
         </h2>
       </div>
-      {Object.keys(imagesByYear).length === 0
-        ? "no images :("
-        : Object.keys(imagesByYear).map((year) => (
-            <React.Fragment key={year}>
-              <h3
-                style={{
-                  fontSize: "1.5rem",
-                  textDecorationLine: "underline overline",
-                  textDecorationStyle: "wavy",
-                  marginTop: "1rem",
-                }}
-              >
-                {year}
-              </h3>
-              <ImageGrid images={imagesByYear[year]} />
-            </React.Fragment>
-          ))}
+      {Object.keys(imagesByYear).length === 0 ? (
+        <p className="page-description">no images :(</p>
+      ) : (
+        Object.keys(imagesByYear).map((year) => (
+          <React.Fragment key={year}>
+            <h3
+              style={{
+                fontSize: "1.5rem",
+                textDecorationLine: "underline overline",
+                textDecorationStyle: "wavy",
+                marginTop: "1rem",
+              }}
+            >
+              {year}
+            </h3>
+            <ImageGrid images={imagesByYear[year]} />
+          </React.Fragment>
+        ))
+      )}
     </>
   );
 }
