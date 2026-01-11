@@ -1,9 +1,9 @@
 import locations from "@/data/photography/locations.json";
-import { GeoJson } from "@/types/photography";
+import { GeoJson, TagConfig } from "@/types/photography";
 
 import { slugify } from "..";
 import { DigikamImage, Image, transformDigikamImage } from "./images";
-import { digikam } from "./index";
+import { Album, digikam, getCollectionCoverPhoto } from "./index";
 
 export const getTagImages = async (
   tag: string,
@@ -139,4 +139,39 @@ export const getMapData = (): GeoJson => {
     });
   }
   return mapData;
+};
+
+export const generateTagAlbum = async (config: TagConfig): Promise<Album[]> => {
+  const albums: Album[] = [];
+
+  for (const tag of Object.keys(config)) {
+    const numberOfPhotos = getNumberOfTaggedImages(tag);
+    if (numberOfPhotos === 0) {
+      // skip if there are no photos with that tag.
+      console.warn(`😢 no photos with tag "${tag}"`);
+      continue;
+    }
+
+    const tagConfig = config[tag];
+    const mappedAlbum: Album = {
+      displayName: tagConfig.displayName ?? tag,
+      slug: slugify(tag),
+      icon: tagConfig.icon,
+      numberOfPhotos,
+    };
+    const coverPhoto = await getCollectionCoverPhoto(
+      tag,
+      tagConfig.coverPhotoName
+    );
+
+    albums.push({
+      ...mappedAlbum,
+      coverPhoto: {
+        ...coverPhoto,
+        position: tagConfig.coverPhotoPosition,
+      },
+    });
+  }
+
+  return albums;
 };

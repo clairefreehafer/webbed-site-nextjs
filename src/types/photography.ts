@@ -16,7 +16,7 @@ export type GeoJson = {
   }[];
 };
 
-export type CollectionConfig = Record<
+export type TagConfig = Record<
   string,
   {
     displayName?: string;

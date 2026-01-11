@@ -2,11 +2,11 @@ import Link from "next/link";
 
 import ImageGrid from "@/components/image-grid";
 import technicalJson from "@/data/photography/technical.json";
-import { CollectionConfig } from "@/types/photography";
+import { TagConfig } from "@/types/photography";
 import { deslugify, slugify } from "@/utils";
 import { getTagImages } from "@/utils/digikam";
 
-const technicalConfig: CollectionConfig = technicalJson;
+const technicalConfig: TagConfig = technicalJson;
 
 type Params = { album: string };
 
