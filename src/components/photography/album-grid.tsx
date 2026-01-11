@@ -18,7 +18,7 @@ export default function AlbumGrid({
   aspectRatio?: "1/1" | "4/3" | "16/9";
 }) {
   return (
-    <div className="album-grid-container">
+    <div id="album-grid">
       <ul className={`grid max-cols-${maxCols}`}>
         {albums.map((album) => (
           <li key={album.slug} className="cell">

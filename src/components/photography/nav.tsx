@@ -1,18 +1,17 @@
 "use client";
-import "@/sass/photography/header.scss";
+
+import "@/sass/photography/nav.scss";
 
 import Link from "next/link";
 import { useState } from "react";
 
 import { ROOT_LINKS } from "@/types/nav";
 
-export default function Header() {
+export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header id="photography-header">
-      <h1>claire freehafer</h1>
-
+    <>
       <details onToggle={() => setMenuOpen(!menuOpen)}>
         <summary>menu</summary>
       </details>
@@ -36,6 +35,6 @@ export default function Header() {
           ))}
         </ul>
       </nav>
-    </header>
+    </>
   );
 }

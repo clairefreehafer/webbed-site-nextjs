@@ -1,5 +1,4 @@
-import Link from "next/link";
-
+import Breadcrumbs from "@/components/photography/breadcrumbs";
 import LinkList from "@/components/photography/link-list";
 import { deslugify } from "@/utils";
 import { getAlbumGroups } from "@/utils/digikam";
@@ -13,13 +12,7 @@ export default async function Page() {
 
   return (
     <>
-      <div className="breadcrumbs">
-        <Link href="/photography">photography</Link>
-        <span>/</span>
-        <Link href="/photography/albums">albums</Link>
-        <span>/</span>
-        <h2>groups</h2>
-      </div>
+      <Breadcrumbs />
       <LinkList links={links} />;
     </>
   );

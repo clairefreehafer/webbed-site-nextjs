@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import Link from "next/link";
 
 import AlbumGrid from "@/components/photography/album-grid";
+import Breadcrumbs from "@/components/photography/breadcrumbs";
 import collectionsJson from "@/data/photography/collections.json";
 import { TagConfig } from "@/types/photography";
 import { generateTagAlbum } from "@/utils/digikam";
@@ -18,11 +18,8 @@ export default async function Page() {
 
   return (
     <>
-      <div className="breadcrumbs">
-        <Link href="/photography">photography</Link>
-        <span>/</span>
-        <h2>collections</h2>
-      </div>
+      <Breadcrumbs />
+
       <p className="page-description">photos grouped by subject matter.</p>
       <AlbumGrid linkPrefix="collections" albums={albums} maxCols={maxCols} />
     </>

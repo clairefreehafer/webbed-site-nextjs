@@ -1,6 +1,7 @@
 import fg from "fast-glob";
 import { Metadata } from "next";
-import Link from "next/link";
+
+import Breadcrumbs from "@/components/photography/breadcrumbs";
 
 import RandomImage from "./random-image";
 
@@ -12,13 +13,10 @@ export default async function Page() {
   const allImages = fg
     .sync("public/out/photography/**/*")
     .map((filePath) => filePath.slice(6));
+
   return (
     <>
-      <div className="breadcrumbs">
-        <Link href="/photography">photography</Link>
-        <span>/</span>
-        <h2>a random photo</h2>
-      </div>
+      <Breadcrumbs />
       <RandomImage allImages={allImages} />
     </>
   );

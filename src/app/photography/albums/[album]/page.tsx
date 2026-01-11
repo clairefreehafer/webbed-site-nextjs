@@ -1,5 +1,4 @@
-import Link from "next/link";
-
+import Breadcrumbs from "@/components/photography/breadcrumbs";
 import Slideshow from "@/components/slideshow";
 import { deslugify } from "@/utils";
 import { getAlbumImages, getAlbums } from "@/utils/digikam";
@@ -30,13 +29,10 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   return (
     <>
-      <div className="breadcrumbs dotted-border">
-        <Link href="/photography">photography</Link>
-        <span>/</span>
-        <Link href="/photography/albums">albums</Link>
-        <span>/</span>
-        <h2>{deslugify(albumSlug)}</h2>
-      </div>
+      <header id="photography-header">
+        <Breadcrumbs />
+        <p className="right-element">{images.length} images</p>
+      </header>
       <Slideshow images={images} />
     </>
   );

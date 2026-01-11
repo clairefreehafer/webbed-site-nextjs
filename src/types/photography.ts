@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 export type GeoJson = {
   type: "FeatureCollection";
   features: {
@@ -25,5 +27,14 @@ export type TagConfig = Record<
     coverPhotoName?: string;
     coverPhotoPosition?: string;
     icon?: string;
+  }
+>;
+
+export type LocationConfig = Record<
+  string,
+  {
+    coordinates: [number, number];
+    markerColor?: CSSProperties["color"];
+    name: string;
   }
 >;

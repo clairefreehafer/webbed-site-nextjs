@@ -1,7 +1,7 @@
-import Link from "next/link";
 import React from "react";
 
 import ImageGrid from "@/components/image-grid";
+import Breadcrumbs from "@/components/photography/breadcrumbs";
 import { getTodaysImages } from "@/utils/digikam";
 
 const months: Record<
@@ -58,14 +58,11 @@ export default async function Page({
   const { month, day } = await params;
   const imagesByYear = await getTodaysImages(month, day);
   return (
-    <>
-      <div className="breadcrumbs">
-        <Link href="/photography">photography</Link>
-        <span>/</span>
-        <h2>
-          {months[month].display} {day}
-        </h2>
-      </div>
+    <main id="photography-main">
+      <Breadcrumbs
+        pathOverride={`/photography/${months[month].display}-${day}`}
+      />
+
       {Object.keys(imagesByYear).length === 0 ? (
         <p className="page-description">no images :(</p>
       ) : (
@@ -85,6 +82,6 @@ export default async function Page({
           </React.Fragment>
         ))
       )}
-    </>
+    </main>
   );
 }

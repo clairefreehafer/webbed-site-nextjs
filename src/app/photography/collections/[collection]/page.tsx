@@ -1,6 +1,5 @@
-import Link from "next/link";
-
 import ImageGrid from "@/components/image-grid";
+import Breadcrumbs from "@/components/photography/breadcrumbs";
 import collectionsJson from "@/data/photography/collections.json";
 import { TagConfig } from "@/types/photography";
 import { deslugify, slugify } from "@/utils";
@@ -38,13 +37,13 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   return (
     <>
-      <div className="breadcrumbs dotted-border">
-        <Link href="/photography">photography</Link>
-        <span>/</span>
-        <Link href="/photography/collections">collections</Link>
-        <span>/</span>
-        <h2>{displayName ?? collection}</h2>
-      </div>
+      <header id="photography-header">
+        <Breadcrumbs
+          pathOverride={`/photography/technical/${
+            displayName ?? deslugify(collection)
+          }`}
+        />
+      </header>
       <ImageGrid images={images} background={background} maxCols={maxCols} />
     </>
   );

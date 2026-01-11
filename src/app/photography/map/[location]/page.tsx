@@ -1,7 +1,11 @@
 import ImageGrid from "@/components/image-grid";
-import locations from "@/data/photography/locations.json";
+import Breadcrumbs from "@/components/photography/breadcrumbs";
+import locationsJson from "@/data/photography/locations.json";
+import { LocationConfig } from "@/types/photography";
 import { deslugify, slugify } from "@/utils";
 import { getTagImages } from "@/utils/digikam";
+
+const locations = locationsJson as unknown as LocationConfig;
 
 type Params = { location: string };
 
@@ -17,6 +21,7 @@ export async function generateMetadata({
   params: Promise<Params>;
 }) {
   const location = deslugify((await params).location) as keyof typeof locations;
+
   return {
     title: locations[location].name,
   };
@@ -32,5 +37,18 @@ export async function generateMetadata({
 export default async function Page({ params }: { params: Promise<Params> }) {
   const { location } = await params;
   const images = await getTagImages(deslugify(location));
-  return <ImageGrid images={images} />;
+
+  return (
+    <>
+      <header id="photography-header">
+        <Breadcrumbs
+          pathOverride={`/photography/map/${
+            locations[location].name ?? deslugify(location)
+          }`}
+        />
+      </header>
+
+      <ImageGrid images={images} />
+    </>
+  );
 }

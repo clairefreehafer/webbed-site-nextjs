@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import Link from "next/link";
 
+import Breadcrumbs from "@/components/photography/breadcrumbs";
 import { getMapData } from "@/utils/digikam";
 
 import Map from "./map";
@@ -11,11 +11,7 @@ export default function Page() {
   const mapData = getMapData();
   return (
     <>
-      <div className="breadcrumbs">
-        <Link href="/photography">photography</Link>
-        <span>/</span>
-        <h2>map</h2>
-      </div>
+      <Breadcrumbs />
       <Map mapData={mapData} />
     </>
   );

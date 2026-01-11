@@ -1,17 +1,6 @@
 @use "./variables";
 
 #photography-header {
-  align-items: center;
-  border-bottom: 1px dotted black;
-  display: flex;
-  justify-content: space-between;
-  margin: 0.5rem;
-
-  @media screen and (max-width: variables.$mobile-breakpoint) {
-    gap: 0.25rem;
-    flex-wrap: wrap;
-  }
-
   .desktop-nav {
     @media screen and (max-width: variables.$mobile-breakpoint) {
       display: none;
@@ -42,6 +31,7 @@
     padding: 0;
 
     @media screen and (max-width: variables.$mobile-breakpoint) {
+      font-size: 1rem;
       justify-content: flex-end;
     }
   }

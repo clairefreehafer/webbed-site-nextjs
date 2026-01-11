@@ -50,7 +50,7 @@ export default function LastMade({ lastMade }: { lastMade?: string }) {
         setOpacity(chipOpacity);
       }
     }
-  }, [lastMade, timeAgo, displayTimeAgo, opacity]);
+  }, [lastMade, timeAgo, opacity]);
 
   if (!lastMade) {
     return null;
