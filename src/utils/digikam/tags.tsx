@@ -1,4 +1,4 @@
-import locations from "@/data/locations.json";
+import locations from "@/data/photography/locations.json";
 import { GeoJson } from "@/types/photography";
 
 import { slugify } from "..";

@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 import AlbumGrid from "@/components/photography/album-grid";
-import collectionsJson from "@/data/collections.json";
+import collectionsJson from "@/data/photography/collections.json";
 import { CollectionConfig } from "@/types/photography";
 import { slugify } from "@/utils";
 import {
@@ -57,6 +57,7 @@ export default async function Page() {
         <span>/</span>
         <h2>collections</h2>
       </div>
+      <p className="page-description">photos grouped by subject matter.</p>
       <AlbumGrid linkPrefix="collections" albums={albums} maxCols={maxCols} />
     </>
   );

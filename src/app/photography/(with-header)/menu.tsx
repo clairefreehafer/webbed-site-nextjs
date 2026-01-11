@@ -27,9 +27,10 @@ export default function Menu() {
           display: "collections",
           href: "/collections",
         },
-        // {
-        //   display: "curated",
-        // },
+        {
+          display: "technical",
+          href: "/technical",
+        },
         {
           display: "map",
           href: "/map",

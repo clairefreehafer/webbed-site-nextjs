@@ -1,20 +1,20 @@
 import Link from "next/link";
 
 import ImageGrid from "@/components/image-grid";
-import collectionsJson from "@/data/photography/collections.json";
+import technicalJson from "@/data/photography/technical.json";
 import { CollectionConfig } from "@/types/photography";
 import { deslugify, slugify } from "@/utils";
 import { getTagImages } from "@/utils/digikam";
 
-const collections: CollectionConfig = collectionsJson;
+const technicalConfig: CollectionConfig = technicalJson;
 
-type Params = { collection: string };
+type Params = { album: string };
 
 export function generateStaticParams(): Params[] {
-  return Object.keys(collections).map((collection) => {
-    const slug = slugify(collection);
+  return Object.keys(technicalConfig).map((album) => {
+    const slug = slugify(album);
     return {
-      collection: slug,
+      album: slug,
     };
   });
 }
@@ -24,15 +24,15 @@ export async function generateMetadata({
 }: {
   params: Promise<Params>;
 }) {
-  const collection = deslugify((await params).collection);
-  const { displayName } = collections[collection];
-  return { title: displayName ?? collection };
+  const album = deslugify((await params).album);
+  const { displayName } = technicalConfig[album];
+  return { title: displayName ?? album };
 }
 
 export default async function Page({ params }: { params: Promise<Params> }) {
-  const collection = deslugify((await params).collection);
-  const images = await getTagImages(collection);
-  const { background, displayName } = collections[collection];
+  const album = deslugify((await params).album);
+  const images = await getTagImages(album);
+  const { background, displayName } = technicalConfig[album];
   const maxCols =
     images.length === 1 || images.length === 2 ? images.length : 3;
 
@@ -43,7 +43,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         <span>/</span>
         <Link href="/photography/collections">collections</Link>
         <span>/</span>
-        <h2>{displayName ?? collection}</h2>
+        <h2>{displayName ?? album}</h2>
       </div>
       <ImageGrid images={images} background={background} maxCols={maxCols} />
     </>

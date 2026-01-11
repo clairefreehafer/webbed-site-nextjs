@@ -1,0 +1,18 @@
+{
+  "black & white": {
+    "icon": "🔲"
+  },
+  "fisheye": {
+    "icon": "🐠",
+    "background": "black"
+  },
+  "gif": {
+    "displayName": "gifs"
+  },
+  "hipstamatic": {
+    "icon": "📱"
+  },
+  "long exposure": {
+    "icon": "🌃"
+  }
+}

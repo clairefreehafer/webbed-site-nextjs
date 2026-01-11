@@ -13,9 +13,6 @@
     "displayName": "birds",
     "icon": "🐦‍⬛"
   },
-  "black & white": {
-    "icon": "🔲"
-  },
   "boat": {
     "displayName": "boats",
     "icon": "⛵️"
@@ -31,10 +28,6 @@
   },
   "fauna": {
     "icon": "🦝"
-  },
-  "fisheye": {
-    "icon": "🐠",
-    "background": "black"
   },
   "flora": {
     "icon": "🌱"
@@ -57,9 +50,7 @@
     "displayName": "insects",
     "icon": "🪲"
   },
-  "gif": {
-    "displayName": "gifs"
-  },
+
   "kite": {
     "displayName": "kites",
     "icon": "🪁"
@@ -67,9 +58,6 @@
   "lizard": {
     "displayName": "lizards",
     "icon": "🦎"
-  },
-  "long exposure": {
-    "icon": "🌃"
   },
   "moon": {
     "displayName": "la lune",

@@ -1,19 +1,21 @@
 import ImageGrid from "@/components/image-grid";
-import locations from "@/data/locations.json";
+import locations from "@/data/photography/locations.json";
 import { deslugify, slugify } from "@/utils";
 import { getTagImages } from "@/utils/digikam";
 
-export function generateStaticParams() {
+type Params = { location: string };
+
+export function generateStaticParams(): Params[] {
   return Object.keys(locations).map((location) => ({
     location: slugify(location),
   }));
 }
 
-type Params = {
-  params: Promise<{ location: string }>;
-};
-
-export async function generateMetadata({ params }: Params) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
   const location = deslugify((await params).location) as keyof typeof locations;
   return {
     title: locations[location].name,
@@ -27,7 +29,7 @@ export async function generateMetadata({ params }: Params) {
 // ```
 // for getting locations.json coordinates
 
-export default async function Page({ params }: Params) {
+export default async function Page({ params }: { params: Promise<Params> }) {
   const { location } = await params;
   const images = await getTagImages(deslugify(location));
   return <ImageGrid images={images} />;
