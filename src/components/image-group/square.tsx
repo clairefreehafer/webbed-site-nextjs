@@ -1,6 +1,6 @@
 import { Image } from "@/utils/digikam";
 
-import ImageUrlTrigger from "../image-url-trigger";
+import ImageWithOverlay from "../image-with-overlay";
 
 export default function Square({
   parentImage,
@@ -9,12 +9,16 @@ export default function Square({
   parentImage: Image;
   groupImages: Image[];
 }) {
+  if (groupImages.length !== 3) {
+    console.warn(`❌ square group without 4 images: ${parentImage.src}`);
+  }
+
   return (
     <div className="square-group">
       {[parentImage, ...groupImages].map((image) => (
         <div key={image.id} className="group-image-container">
-          <ImageUrlTrigger
-            key={image.id}
+          <ImageWithOverlay
+            classNamePrefix="square-group"
             image={image}
             className="group-image"
             fill

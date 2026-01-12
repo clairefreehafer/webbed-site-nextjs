@@ -1,8 +1,8 @@
 import "@/sass/images/image-group.scss";
 
-import { Image } from "@/utils/digikam";
+import { determineGroupType, Image } from "@/utils/digikam";
 
-import ImageUrlTrigger from "../image-url-trigger";
+import ImageWithOverlay from "../image-with-overlay";
 import HoverGroup from "./hover";
 import PyramidGroup from "./pyramid";
 import SquareGroup from "./square";
@@ -22,8 +22,34 @@ export default function ImageGroup({
   }
 
   const groupImages = allImages.filter((image) => grouping.includes(image.id));
+  const groupType = determineGroupType(grouping, parentImage.groupType);
 
-  if (parentImage.groupType === "hover") {
+  if (groupType === "horizontal") {
+    return (
+      <div className="image-group-container">
+        <div className="horizontal-group">
+          {[parentImage, ...groupImages].map((image) => (
+            <div
+              key={image.id}
+              className="horizontal-group-image-container"
+              style={{
+                aspectRatio: image.width / image.height,
+              }}
+            >
+              <ImageWithOverlay
+                image={image}
+                classNamePrefix="horizontal-group"
+                className="horizontal-group-image"
+                fill
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (groupType === "hover") {
     const hoverImage = groupImages.find(
       (image) =>
         !Array.isArray(image.grouping) && image.grouping === parentImage.id
@@ -43,7 +69,7 @@ export default function ImageGroup({
     );
   }
 
-  if (parentImage.groupType === "vertical") {
+  if (groupType === "vertical") {
     return (
       <div className="image-group-container">
         <VerticalGroup parentImage={parentImage} groupImages={groupImages} />
@@ -51,7 +77,7 @@ export default function ImageGroup({
     );
   }
 
-  if (parentImage.groupType === "pyramid" || grouping.length === 2) {
+  if (groupType === "pyramid") {
     return (
       <div className="image-group-container">
         <PyramidGroup parentImage={parentImage} groupImages={groupImages} />
@@ -59,7 +85,7 @@ export default function ImageGroup({
     );
   }
 
-  if (parentImage.groupType === "square" || grouping.length === 3) {
+  if (groupType === "square") {
     return (
       <div className="image-group-container">
         <SquareGroup parentImage={parentImage} groupImages={groupImages} />
@@ -67,21 +93,5 @@ export default function ImageGroup({
     );
   }
 
-  return (
-    <div className="image-group-container">
-      <div className="default-group">
-        {[parentImage, ...groupImages].map((image) => (
-          <div
-            key={image.id}
-            className="default-group-image-container"
-            style={{
-              aspectRatio: image.width / image.height,
-            }}
-          >
-            <ImageUrlTrigger image={image} className="group-image" fill />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+  return <p>could not determine group type.</p>;
 }

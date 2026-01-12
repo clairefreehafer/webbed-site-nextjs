@@ -12,7 +12,7 @@ export default function Slideshow({
   albumDescription?: string;
 }) {
   return (
-    <ol className="slides">
+    <ol id="slideshow" className="slides">
       {albumDescription && (
         <li className="slide">
           <div className="snap-point" />

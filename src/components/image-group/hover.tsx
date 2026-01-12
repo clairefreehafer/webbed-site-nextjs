@@ -1,6 +1,8 @@
+import NextImage from "next/image";
+
 import { Image } from "@/utils/digikam";
 
-import ImageUrlTrigger from "../image-url-trigger";
+import ImageWithOverlay from "../image-with-overlay";
 
 export default function HoverImage({
   baseImage,
@@ -17,15 +19,16 @@ export default function HoverImage({
         aspectRatio: baseImage.width / baseImage.height,
       }}
     >
-      <ImageUrlTrigger
-        key={baseImage.id}
+      <ImageWithOverlay
+        classNamePrefix="hover-group"
         image={baseImage}
         className="base-image"
         fill
       />
-      <ImageUrlTrigger
+      <NextImage
         key={hoverImage.id}
-        image={hoverImage}
+        src={hoverImage.src}
+        alt=""
         className="hover-image"
         fill
       />

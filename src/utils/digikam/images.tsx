@@ -3,7 +3,7 @@ import fs from "fs";
 import { Vibrant } from "node-vibrant/node";
 import sharp from "sharp";
 
-import { AlbumCaptionJson, digikam } from "./index";
+import { AlbumCaptionJson, digikam, getParentTag } from "./index";
 
 /** fields returned from querying the digikam db. */
 export interface DigikamImage {
@@ -25,6 +25,10 @@ export interface DigikamImage {
   groupParent?: DigikamImage["id"];
   /** string of IDs separated by commas. */
   groupChildren?: string;
+  /** string of comma separated values */
+  tags: string | null;
+  camera: string | null;
+  lens: string | null;
 }
 
 /** custom JSON format for extra info stored in the image caption/comment field. */
@@ -32,7 +36,7 @@ interface ImageCaptionJson {
   altText?: string;
   border?: React.CSSProperties["border"];
   background?: React.CSSProperties["background"];
-  groupType?: "hover" | "vertical" | "pyramid" | "square";
+  groupType?: "hover" | "horizontal" | "vertical" | "pyramid" | "square";
   /** animal crossing */
   showDate?: boolean;
   /** zelda */
@@ -54,12 +58,19 @@ export interface Image extends ImageCaptionJson {
   albumCollection: DigikamImage["albumCollection"];
   /** either an array of children IDs or a single parent ID. */
   grouping?: DigikamImage["id"][] | DigikamImage["id"];
+  camera?: string;
+  lens?: string;
+  location?: string;
+  collections: string[];
+  technical: string[];
 }
 
 interface ImageOptions {
   resize?: number;
   generatePalette?: boolean;
 }
+
+const tagParents = new Map();
 
 export async function transformDigikamImage(
   digikamImage: DigikamImage,
@@ -69,13 +80,16 @@ export async function transformDigikamImage(
   let transformedImage: Image = {
     id: digikamImage.id,
     filename: nameWithoutExtension,
-    height: digikamImage.height,
+    height: 0,
     src: `/out/${digikamImage.albumSlug}/${nameWithoutExtension}.webp`,
-    width: digikamImage.width,
+    width: 0,
     title: digikamImage.title,
     dateTaken: digikamImage.creationDate,
     albumCollection: digikamImage.albumCollection,
+    collections: [],
+    technical: [],
   };
+
   try {
     const outputPath = `${process.cwd()}/public${transformedImage.src}`;
     const outputPathSplit = outputPath.split("/");
@@ -94,27 +108,31 @@ export async function transformDigikamImage(
         fs.mkdirSync(outputDirectory, { recursive: true });
       }
       console.log(`📝 [transformDigikamImage] creating image ${outputPath}...`);
-      // transform image
-      await sharp(buffer, { animated: true })
-        .resize({ width: options.resize, withoutEnlargement: true })
+
+      // resize and convert to webp
+      const resizeOptions =
+        digikamImage.height > digikamImage.width
+          ? { height: options.resize }
+          : { width: options.resize };
+      const { height, width } = await sharp(buffer, { animated: true })
+        .resize({ ...resizeOptions, withoutEnlargement: true })
         .webp({ quality: 100 })
         .toFile(outputPath);
+
+      transformedImage.height = height;
+      transformedImage.width = width;
+    } else {
+      // if file does exist, get and set its resized dimensions
+      const transformedBuffer = fs.readFileSync(outputPath);
+      const { height, width } = await sharp(transformedBuffer).metadata();
+      transformedImage.height = height;
+      transformedImage.width = width;
     }
     if (digikamImage.creationDate) {
       transformedImage.dateTaken = digikamImage.creationDate;
     }
     if (digikamImage.title) {
       transformedImage.title = digikamImage.title;
-    }
-
-    const groupChildren = digikamImage.groupChildren?.split(",");
-    if (groupChildren && digikamImage.groupParent === digikamImage.id) {
-      // image is a group parent.
-      transformedImage.grouping = groupChildren.map((child) => parseInt(child));
-    }
-    if (groupChildren?.includes(digikamImage.id.toString())) {
-      // image is a group child.
-      transformedImage.grouping = digikamImage.groupParent;
     }
 
     // optionally generate a color palette from the image.
@@ -132,6 +150,56 @@ export async function transformDigikamImage(
         ...parsedCaption,
       };
     }
+
+    const groupChildren = digikamImage.groupChildren?.split(",");
+    if (groupChildren && digikamImage.groupParent === digikamImage.id) {
+      // image is a group parent. sometimes there are duplicate IDs for some reason.
+      const childrenSet = new Set(groupChildren);
+      transformedImage.grouping = Array.from(childrenSet, (id) => parseInt(id));
+
+      if (!transformedImage.groupType) {
+        transformedImage.groupType = determineGroupType(
+          transformedImage.grouping
+        );
+      }
+    }
+    if (groupChildren?.includes(digikamImage.id.toString())) {
+      // image is a group child.
+      transformedImage.grouping = digikamImage.groupParent;
+    }
+
+    // camera information
+    if (digikamImage.camera) {
+      transformedImage.camera = digikamImage.camera;
+    }
+    if (digikamImage.lens) {
+      transformedImage.lens = digikamImage.lens;
+    }
+
+    // tags
+    if (digikamImage.tags) {
+      const tagsSplit = digikamImage.tags.split(",");
+      for (const tag of tagsSplit) {
+        let parent: string | undefined;
+        if (tagParents.has(tag)) {
+          parent = tagParents.get(tag);
+        } else {
+          parent = getParentTag(tag);
+        }
+
+        switch (parent) {
+          case "location":
+            transformedImage.location = tag;
+            break;
+          case "collections":
+          case "technical":
+            transformedImage[parent].push(tag);
+            break;
+          default:
+          // no parent, ignore tag
+        }
+      }
+    }
   } catch (error) {
     // fail gracefully if there is an issue
     console.log(
@@ -140,6 +208,7 @@ export async function transformDigikamImage(
       }: ${(error as Error).message}`
     );
   }
+
   return transformedImage;
 }
 
@@ -175,7 +244,10 @@ export const getAlbumImages = async (
           ImageTitle.comment as title,
           ImageCaption.comment as caption,
           ImageRelations.object as groupParent,
-          group_concat(ImageRelations.subject) as groupChildren
+          group_concat(ImageRelations.subject) as groupChildren,
+          group_concat(Tags.name) as tags,
+          ImageMetadata.make || ' ' || ImageMetadata.model as camera,
+		      ImageMetadata.lens
         FROM Albums
           INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
           INNER JOIN Images ON Images.album = Albums.id
@@ -185,6 +257,9 @@ export const getAlbumImages = async (
           LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
           LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
           LEFT JOIN ImageRelations ON Images.id = ImageRelations.subject OR Images.id = ImageRelations.object
+          LEFT JOIN ImageTags ON Images.id = ImageTags.imageId
+          LEFT JOIN ImageMetadata ON Images.id = ImageMetadata.imageid
+		  LEFT JOIN Tags ON ImageTags.tagid = Tags.id
         WHERE Albums.relativePath LIKE $relativePathLikeString
           AND Albums.albumRoot = 4
           AND Albums.collection LIKE $collectionLikeString
@@ -295,4 +370,28 @@ export const getTodaysImages = async (
   }
 
   return imagesByYear;
+};
+
+export const determineGroupType = (
+  grouping: number[],
+  groupType?: Image["groupType"]
+): Image["groupType"] => {
+  if (groupType) {
+    return groupType;
+  }
+  switch (grouping.length) {
+    case 1:
+      // two image in group, default to side-by-side.
+      return "horizontal";
+    case 2:
+      // three images in group.
+      return "pyramid";
+    case 3:
+      // four images in group
+      return "square";
+    default:
+      throw new Error(
+        `❌ [determineGroupType] could not determine group type for group with ${grouping.length} images.`
+      );
+  }
 };

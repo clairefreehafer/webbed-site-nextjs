@@ -97,12 +97,6 @@
     object-fit: cover;
   }
 
-  .image-title {
-    font-weight: 300;
-    font-size: 1.25rem;
-    text-align: center;
-  }
-
   .image-overlay {
     align-items: center;
     background-color: black;
@@ -121,5 +115,11 @@
     transform: translateX(-50%) translateY(-50%);
     transition: opacity $hover-duration;
     width: 100%;
+  }
+
+  .album-title {
+    font-weight: 300;
+    font-size: 1.25rem;
+    text-align: center;
   }
 }

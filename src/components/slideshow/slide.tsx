@@ -1,7 +1,7 @@
 import { Image } from "@/utils/digikam";
 
 import ImageGroup from "../image-group";
-import ImageUrlTrigger from "../image-url-trigger";
+import ImageWithOverlay from "../image-with-overlay";
 import SlideshowDate from "./date";
 import Details from "./details";
 
@@ -14,11 +14,12 @@ export default function Slide({
   images: Image[];
   index: number;
 }) {
+  // don't show a slide for images that are a group child.
   if (typeof image.grouping === "number") {
-    // don't show a slide for images that are a group child.
     return null;
   }
 
+  // image is a group parent.
   if (Array.isArray(image.grouping)) {
     return (
       <li
@@ -32,6 +33,7 @@ export default function Slide({
     );
   }
 
+  // image is standalone.
   return (
     <li
       className="slide"
@@ -39,10 +41,10 @@ export default function Slide({
     >
       <div className="snap-point" />
 
-      <div className="slideshow-image-container">
-        <ImageUrlTrigger
+      <div className="single-image-container">
+        <ImageWithOverlay
           image={image}
-          className="slideshow-image"
+          classNamePrefix="single"
           fill
           style={{
             maxHeight: image.height,
@@ -50,6 +52,7 @@ export default function Slide({
           }}
           priority={index === 0}
         />
+
         {image.showDate && (
           <SlideshowDate
             date={image.dateTaken}

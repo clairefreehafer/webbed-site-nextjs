@@ -1,5 +1,6 @@
 $mobile-breakpoint: 400px;
 
+// container for ALL group types
 .image-group-container {
   display: flex;
   gap: 1rem;
@@ -11,17 +12,21 @@ $mobile-breakpoint: 400px;
 
 .group-image-container {
   position: relative;
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 .group-image {
   object-fit: contain;
+  transition: filter 1s;
 }
 
 /**********************/
 /***** TWO IMAGES *****/
 /**********************/
 
-.default-group {
+.horizontal-group {
   display: flex;
   gap: 1rem;
   width: 100%;
@@ -30,17 +35,36 @@ $mobile-breakpoint: 400px;
   @media screen and (max-width: $mobile-breakpoint) {
     flex-direction: column;
   }
-}
 
-.default-group-image-container {
-  position: relative;
-  min-width: 0;
-  min-height: 0;
+  .horizontal-group-image-container {
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 
-  @media screen and (max-width: $mobile-breakpoint) {
-    // overwrite inline aspect ratio
-    aspect-ratio: unset !important;
-    flex: 1;
+    @media screen and (max-width: $mobile-breakpoint) {
+      // overwrite inline aspect ratio
+      aspect-ratio: unset !important;
+      flex: 1;
+    }
+  }
+
+  .horizontal-group-image {
+    object-fit: contain;
+    transition: filter 1s;
+  }
+
+  .horizontal-group-image-overlay {
+    align-items: center;
+    color: white;
+    display: flex;
+    transition: opacity 1s;
+    text-shadow: 1px 1px 2px black;
+    flex-wrap: wrap;
+    padding: 0.5rem;
+    gap: 2rem;
   }
 }
 
@@ -50,13 +74,32 @@ $mobile-breakpoint: 400px;
   width: 100%;
   max-height: 100%;
   flex-direction: column;
-}
 
-.vertical-group-image-container {
-  position: relative;
-  min-width: 0;
-  min-height: 0;
-  flex: 1;
+  .vertical-group-image-container {
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+    flex: 1;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  .vertical-group-image {
+    object-fit: contain;
+    transition: filter 1s;
+  }
+
+  .vertical-group-image-overlay {
+    align-items: center;
+    color: white;
+    display: flex;
+    transition: opacity 1s;
+    text-shadow: 1px 1px 2px black;
+    flex-wrap: wrap;
+    padding: 0.5rem;
+    gap: 2rem;
+  }
 }
 
 $hover-duration: 500ms;
@@ -65,24 +108,46 @@ $hover-duration: 500ms;
   position: relative;
   min-width: 0;
   min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  &:hover {
-    & .hover-image {
-      opacity: 1;
-      transition: opacity $hover-duration;
+  @media (hover: hover) {
+    &:hover {
+      & .hover-image {
+        opacity: 1;
+        transition: opacity $hover-duration, filter 1s;
+      }
     }
   }
-}
 
-.base-image {
-  object-fit: contain;
-  transition: opacity $hover-duration * 2;
-}
+  .hover-group-image {
+    object-fit: contain;
+    transition: opacity $hover-duration * 2, filter 1s;
+  }
 
-.hover-image {
-  opacity: 0;
-  object-fit: contain;
-  transition: opacity $hover-duration;
+  .hover-image {
+    opacity: 0;
+    object-fit: contain;
+    transition: opacity $hover-duration, filter 1s;
+    pointer-events: none;
+  }
+
+  .hover-group-image-overlay {
+    align-items: center;
+    color: white;
+    display: flex;
+    transition: opacity 1s;
+    text-shadow: 1px 1px 2px black;
+    flex-wrap: wrap;
+    padding: 0.5rem;
+    gap: 2rem;
+  }
+
+  & .overlay-visible ~ .hover-image {
+    filter: blur(10px);
+    transition: opacity $hover-duration, filter 1s;
+  }
 }
 
 /************************/
@@ -96,6 +161,29 @@ $hover-duration: 500ms;
   grid-template-columns: repeat(2, minmax(min-content, 1fr));
   grid-template-rows: repeat(2, minmax(min-content, 1fr));
   max-height: 100%;
+
+  .pyramid-group-image {
+    object-fit: contain;
+    transition: filter 1s;
+  }
+
+  .pyramid-group-image-overlay {
+    align-items: center;
+    color: white;
+    display: flex;
+    transition: opacity 1s;
+    text-shadow: 1px 1px 2px black;
+    flex-wrap: wrap;
+    padding: 0.5rem;
+    gap: 2rem;
+
+    // hide on mobile since the two bottom images are so small.
+    // maybe in the future it could trigger an overlay
+    // on the whole slide or something.
+    @media screen and (max-width: $mobile-breakpoint) {
+      display: none;
+    }
+  }
 }
 
 /***********************/
@@ -109,4 +197,27 @@ $hover-duration: 500ms;
   grid-template-columns: repeat(2, minmax(min-content, 1fr));
   grid-template-rows: repeat(2, minmax(min-content, 1fr));
   max-height: 100%;
+
+  .square-group-image {
+    object-fit: contain;
+    transition: filter 1s;
+  }
+
+  .square-group-image-overlay {
+    align-items: center;
+    color: white;
+    display: flex;
+    transition: opacity 1s;
+    text-shadow: 1px 1px 2px black;
+    flex-wrap: wrap;
+    padding: 0.5rem;
+    gap: 2rem;
+
+    // hide on mobile since the images are so small.
+    // maybe in the future it could trigger an overlay
+    // on the whole slide or something.
+    @media screen and (max-width: $mobile-breakpoint) {
+      display: none;
+    }
+  }
 }

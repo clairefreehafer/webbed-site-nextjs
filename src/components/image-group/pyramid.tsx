@@ -1,6 +1,6 @@
 import { Image } from "@/utils/digikam";
 
-import ImageUrlTrigger from "../image-url-trigger";
+import ImageWithOverlay from "../image-with-overlay";
 
 export default function Pyramid({
   parentImage,
@@ -17,10 +17,9 @@ export default function Pyramid({
           className="group-image-container"
           style={index === 0 ? { gridColumn: "1 / 3" } : {}}
         >
-          <ImageUrlTrigger
-            key={image.id}
+          <ImageWithOverlay
+            classNamePrefix="pyramid-group"
             image={image}
-            className="group-image"
             fill
           />
         </div>

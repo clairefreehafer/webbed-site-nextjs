@@ -1,6 +1,6 @@
 import { Image } from "@/utils/digikam";
 
-import ImageUrlTrigger from "../image-url-trigger";
+import ImageWithOverlay from "../image-with-overlay";
 
 export default function VerticalGroup({
   parentImage,
@@ -13,7 +13,11 @@ export default function VerticalGroup({
     <div className="vertical-group">
       {[parentImage, ...groupImages].map((image) => (
         <div key={image.id} className="vertical-group-image-container">
-          <ImageUrlTrigger image={image} className="group-image" fill />
+          <ImageWithOverlay
+            image={image}
+            classNamePrefix="vertical-group"
+            fill
+          />
         </div>
       ))}
       {parentImage.title && <p className="image-title">{parentImage.title}</p>}

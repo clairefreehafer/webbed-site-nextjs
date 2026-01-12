@@ -86,6 +86,37 @@ export const getNumberOfTaggedImages = (
   return result?.numberOfImages ?? 0;
 };
 
+// unused
+export const getTagsInGroup = (group: string): string[] => {
+  const tags = digikam
+    .prepare<[{ group: string }], { tagName: string }>(
+      `
+        SELECT Tags.name as tagName
+        FROM Tags
+        INNER JOIN Tags as ParentTags on ParentTags.id = Tags.pid
+        WHERE ParentTags.name = $group
+      `
+    )
+    .all({ group });
+
+  return tags.map((tag) => tag.tagName) ?? [];
+};
+
+export const getParentTag = (tag: string): string | undefined => {
+  const parentTag = digikam
+    .prepare<[{ tag: string }], { name: string }>(
+      `
+        SELECT ParentTags.name
+        FROM Tags
+        INNER JOIN Tags as ParentTags on ParentTags.id = Tags.pid
+        WHERE Tags.name = $tag
+      `
+    )
+    .get({ tag });
+
+  return parentTag?.name;
+};
+
 export const getMapData = (): GeoJson => {
   const locationTags = digikam
     .prepare<[], { tagName: keyof typeof locations; numberOfImages: number }>(

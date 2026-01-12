@@ -49,7 +49,7 @@ export default function AlbumGrid({
                   </div>
                 )}
               </div>
-              <p className="image-title">
+              <p className="album-title">
                 {album.displayName ?? deslugify(album.slug)}
                 {album.icon && (
                   <span className="album-icon"> {album.icon}</span>
