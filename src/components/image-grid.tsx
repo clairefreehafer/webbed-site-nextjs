@@ -17,10 +17,7 @@ export default function ImageGrid({
     return "no images :(";
   }
   return (
-    <div
-      className="image-grid-container"
-      style={background ? { background } : {}}
-    >
+    <div id="image-grid-container" style={background ? { background } : {}}>
       <ul className={`grid max-cols-${maxCols}`}>
         {images.map((image, index) => (
           <li key={image.filename} className="cell">
