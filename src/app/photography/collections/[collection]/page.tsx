@@ -39,7 +39,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     <>
       <header id="photography-header">
         <Breadcrumbs
-          pathOverride={`/photography/technical/${
+          pathOverride={`/photography/collections/${
             displayName ?? deslugify(collection)
           }`}
         />
