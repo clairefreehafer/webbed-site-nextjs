@@ -2,6 +2,21 @@
   "name": "webbed-site-nextjs",
   "version": "0.1.0",
   "private": true,
+  "prettier": {
+    "overrides": [
+      {
+        "files": [
+          "./src/data/photography/collections.json",
+          "./src/data/photography/locations.json"
+        ],
+        "options": {
+          "plugins": [
+            "prettier-plugin-sort-json"
+          ]
+        }
+      }
+    ]
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -39,6 +54,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "husky": "^9.1.7",
+    "prettier-plugin-sort-json": "^4.1.1",
     "sass": "^1.84.0",
     "typescript": "^5"
   }

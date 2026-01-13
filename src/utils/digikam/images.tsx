@@ -74,7 +74,7 @@ const tagParents = new Map();
 
 export async function transformDigikamImage(
   digikamImage: DigikamImage,
-  options: ImageOptions = { resize: 1000, generatePalette: false }
+  options: ImageOptions = { resize: 1000, generatePalette: false },
 ): Promise<Image> {
   const nameWithoutExtension = digikamImage.name.split(".")[0];
   let transformedImage: Image = {
@@ -103,7 +103,7 @@ export async function transformDigikamImage(
       // create output directories if needed
       if (!fs.existsSync(outputDirectory)) {
         console.log(
-          `📝 [transformDigikamImage] creating directory ${outputDirectory}...`
+          `📝 [transformDigikamImage] creating directory ${outputDirectory}...`,
         );
         fs.mkdirSync(outputDirectory, { recursive: true });
       }
@@ -159,7 +159,7 @@ export async function transformDigikamImage(
 
       if (!transformedImage.groupType) {
         transformedImage.groupType = determineGroupType(
-          transformedImage.grouping
+          transformedImage.grouping,
         );
       }
     }
@@ -171,6 +171,10 @@ export async function transformDigikamImage(
     // camera information
     if (digikamImage.camera) {
       transformedImage.camera = digikamImage.camera;
+    } else {
+      console.warn(
+        `🚧 [transformDigikamImage] missing camera info: ${transformedImage.src}`,
+      );
     }
     if (digikamImage.lens) {
       transformedImage.lens = digikamImage.lens;
@@ -179,6 +183,7 @@ export async function transformDigikamImage(
     // tags
     if (digikamImage.tags) {
       const tagsSplit = digikamImage.tags.split(",");
+
       for (const tag of tagsSplit) {
         let parent: string | undefined;
         if (tagParents.has(tag)) {
@@ -205,7 +210,7 @@ export async function transformDigikamImage(
     console.log(
       `❌ [transformDigikamImage] issue transforming image data for ${
         digikamImage.path
-      }: ${(error as Error).message}`
+      }: ${(error as Error).message}`,
     );
   }
 
@@ -215,7 +220,7 @@ export async function transformDigikamImage(
 export const getAlbumImages = async (
   relativePath: string,
   collection = "photography",
-  options: ImageOptions = { resize: 1000, generatePalette: false }
+  options: ImageOptions = { resize: 1000, generatePalette: false },
 ): Promise<Image[]> => {
   const digikamImages = digikam
     .prepare<
@@ -259,20 +264,20 @@ export const getAlbumImages = async (
           LEFT JOIN ImageRelations ON Images.id = ImageRelations.subject OR Images.id = ImageRelations.object
           LEFT JOIN ImageTags ON Images.id = ImageTags.imageId
           LEFT JOIN ImageMetadata ON Images.id = ImageMetadata.imageid
-		  LEFT JOIN Tags ON ImageTags.tagid = Tags.id
+          LEFT JOIN Tags ON ImageTags.tagid = Tags.id
         WHERE Albums.relativePath LIKE $relativePathLikeString
           AND Albums.albumRoot = 4
           AND Albums.collection LIKE $collectionLikeString
         GROUP BY Images.id
-          ORDER BY Images.name ASC
-      `
+        ORDER BY Images.name ASC
+      `,
     )
     .all({
       relativePathLikeString: `%${relativePath}%`,
       collectionLikeString: `%${collection}%`,
     });
   console.log(
-    `📷 [getAlbumImages] ${digikamImages.length} images found in "${collection}/${relativePath}"`
+    `📷 [getAlbumImages] ${digikamImages.length} images found in "${collection}/${relativePath}"`,
   );
   const images: Image[] = [];
   let sortBy: AlbumCaptionJson["sortBy"] = undefined;
@@ -292,17 +297,17 @@ export const getAlbumImages = async (
   switch (sortBy) {
     case "compendiumNumber":
       console.log(
-        `📷 [getAlbumImages] sorting images in "${collection}/${relativePath}" by \`${sortBy}\``
+        `📷 [getAlbumImages] sorting images in "${collection}/${relativePath}" by \`${sortBy}\``,
       );
       return images.sort(
-        (a, b) => (a.compendiumNumber ?? 0) - (b.compendiumNumber ?? 0)
+        (a, b) => (a.compendiumNumber ?? 0) - (b.compendiumNumber ?? 0),
       );
     case "title":
       console.log(
-        `📷 [getAlbumImages] sorting images in "${collection}/${relativePath}" by \`${sortBy}\``
+        `📷 [getAlbumImages] sorting images in "${collection}/${relativePath}" by \`${sortBy}\``,
       );
       return images.sort((a, b) =>
-        (a.title ?? "").localeCompare(b.title ?? "")
+        (a.title ?? "").localeCompare(b.title ?? ""),
       );
     default:
       return images;
@@ -311,7 +316,7 @@ export const getAlbumImages = async (
 
 export const getTodaysImages = async (
   month: string,
-  day: string
+  day: string,
 ): Promise<Record<string, Image[]>> => {
   const digikamImages = digikam
     .prepare<{ likeString: string }, DigikamImage>(
@@ -347,14 +352,14 @@ export const getTodaysImages = async (
           AND Albums.collection = 'photography'
         -- oldest images first
         ORDER BY Images.name ASC
-      `
+      `,
     )
     .all({
       likeString: `%${month}-${day}%`,
     });
   if (digikamImages.length > 0) {
     console.log(
-      `📷 [getTodaysImages] ${digikamImages.length} images found for ${month}/${day}.`
+      `📷 [getTodaysImages] ${digikamImages.length} images found for ${month}/${day}.`,
     );
   }
   const imagesByYear: Record<string, Image[]> = {};
@@ -374,7 +379,7 @@ export const getTodaysImages = async (
 
 export const determineGroupType = (
   grouping: number[],
-  groupType?: Image["groupType"]
+  groupType?: Image["groupType"],
 ): Image["groupType"] => {
   if (groupType) {
     return groupType;
@@ -391,7 +396,7 @@ export const determineGroupType = (
       return "square";
     default:
       throw new Error(
-        `❌ [determineGroupType] could not determine group type for group with ${grouping.length} images.`
+        `❌ [determineGroupType] could not determine group type for group with ${grouping.length} images.`,
       );
   }
 };

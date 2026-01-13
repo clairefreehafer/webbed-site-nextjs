@@ -1,10 +1,12 @@
 {
-  "aquatic": {
-    "displayName": "aquatic fauna",
+  "aquatic fauna": {
     "icon": "🦈"
   },
   "architecture": {
     "icon": "🏢"
+  },
+  "art": {
+    "icon": "🖼️"
   },
   "beach": {
     "icon": "🏖️"
@@ -17,6 +19,10 @@
     "displayName": "boats",
     "icon": "⛵️"
   },
+  "cactus": {
+    "displayName": "cactuses",
+    "icon": "🌵"
+  },
   "cat": {
     "displayName": "cats",
     "coverPhotoPosition": "bottom",
@@ -28,6 +34,9 @@
   },
   "fauna": {
     "icon": "🦝"
+  },
+  "fire": {
+    "icon": "🔥"
   },
   "flora": {
     "icon": "🌱"
@@ -50,10 +59,12 @@
     "displayName": "insects",
     "icon": "🪲"
   },
-
   "kite": {
     "displayName": "kites",
     "icon": "🪁"
+  },
+  "light paint": {
+    "icon": "🔦"
   },
   "lizard": {
     "displayName": "lizards",
@@ -81,11 +92,28 @@
     "displayName": "rocks",
     "icon": "🪨"
   },
-  "shadows": {
+  "screen": {
+    "displayName": "screens",
+    "icon": "📺"
+  },
+  "shadow": {
     "icon": "🌑"
   },
   "sky": {
     "icon": "☀️"
+  },
+  "street art": {
+    "icon": "🖌️"
+  },
+  "texture": {
+    "icon": "🤚🏻"
+  },
+  "the built environment": {
+    "icon": "🏙️"
+  },
+  "tree": {
+    "displayName": "trees",
+    "icon": "🌳"
   },
   "typography": {
     "icon": "🔡"

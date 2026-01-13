@@ -6,6 +6,7 @@ import { Dispatch, SetStateAction } from "react";
 import cameraJson from "@/data/photography/cameras.json";
 import collectionsJson from "@/data/photography/collections.json";
 import locationsJson from "@/data/photography/locations.json";
+import technicalJson from "@/data/photography/technical.json";
 import { LocationConfig, TagConfig } from "@/types/photography";
 import { slugify } from "@/utils/client";
 import { Image } from "@/utils/digikam";
@@ -13,6 +14,7 @@ import { Image } from "@/utils/digikam";
 const cameras: Record<string, string> = cameraJson;
 const locations = locationsJson as unknown as LocationConfig;
 const collections: TagConfig = collectionsJson;
+const technicalConfig: TagConfig = technicalJson;
 
 export default function Overlay({
   image,
@@ -56,14 +58,31 @@ export default function Overlay({
         </div>
       )}
 
-      {image.collections.length > 0 && (
+      {(image.collections.length > 0 || image.technical.length > 0) && (
         <div>
-          <h3>collections</h3>
+          {image.collections.length > 0 && (
+            <>
+              <h3>collections</h3>
+              <ul>
+                {image.collections.map((collection) => (
+                  <li key={collection}>
+                    <Link
+                      href={`/photography/collections/${slugify(collection)}`}
+                    >
+                      {collections[collection]?.displayName ?? collection}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+
+          <h3>technical</h3>
           <ul>
-            {image.collections.map((collection) => (
-              <li key={collection}>
-                <Link href={`/photography/collections/${slugify(collection)}`}>
-                  {collections[collection]?.displayName ?? collection}
+            {image.technical.map((tech) => (
+              <li key={tech}>
+                <Link href={`/photography/technical/${slugify(tech)}`}>
+                  {technicalConfig[tech]?.displayName ?? tech}
                 </Link>
               </li>
             ))}

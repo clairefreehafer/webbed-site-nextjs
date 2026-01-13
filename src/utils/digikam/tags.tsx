@@ -1,13 +1,22 @@
+import { writeFileSync } from "fs";
+
+import collections from "@/data/photography/collections.json";
 import locations from "@/data/photography/locations.json";
+import technical from "@/data/photography/technical.json";
 import { GeoJson, TagConfig } from "@/types/photography";
 
 import { slugify } from "..";
 import { DigikamImage, Image, transformDigikamImage } from "./images";
 import { Album, digikam, getCollectionCoverPhoto } from "./index";
 
+const tagConfigs: Record<string, TagConfig> = {
+  collections,
+  technical,
+};
+
 export const getTagImages = async (
   tag: string,
-  collection = "photography"
+  collection = "photography",
 ): Promise<Image[]> => {
   const digikamImages = digikam
     .prepare<[{ tag: string; collectionLikeString: string }], DigikamImage>(
@@ -46,11 +55,11 @@ export const getTagImages = async (
           AND Albums.albumRoot = 4
           AND Albums.collection LIKE $collectionLikeString
           GROUP BY Images.id
-      `
+      `,
     )
     .all({ tag, collectionLikeString: `%${collection}%` });
   console.log(
-    `📷 [getTagImages] ${digikamImages.length} ${collection} images found tagged "${tag}".`
+    `📷 [getTagImages] ${digikamImages.length} ${collection} images found tagged "${tag}".`,
   );
   const images: Image[] = [];
   for (const image of digikamImages) {
@@ -62,7 +71,7 @@ export const getTagImages = async (
 
 export const getNumberOfTaggedImages = (
   tag: string,
-  collection = "photography"
+  collection = "photography",
 ): number => {
   const result = digikam
     .prepare<
@@ -80,13 +89,12 @@ export const getNumberOfTaggedImages = (
         WHERE Tags.name = $tag
           AND Albums.albumRoot = 4
           AND Albums.collection LIKE $collectionLikeString
-      `
+      `,
     )
     .get({ tag, collectionLikeString: `%${collection}%` });
   return result?.numberOfImages ?? 0;
 };
 
-// unused
 export const getTagsInGroup = (group: string): string[] => {
   const tags = digikam
     .prepare<[{ group: string }], { tagName: string }>(
@@ -95,7 +103,7 @@ export const getTagsInGroup = (group: string): string[] => {
         FROM Tags
         INNER JOIN Tags as ParentTags on ParentTags.id = Tags.pid
         WHERE ParentTags.name = $group
-      `
+      `,
     )
     .all({ group });
 
@@ -110,7 +118,7 @@ export const getParentTag = (tag: string): string | undefined => {
         FROM Tags
         INNER JOIN Tags as ParentTags on ParentTags.id = Tags.pid
         WHERE Tags.name = $tag
-      `
+      `,
     )
     .get({ tag });
 
@@ -132,7 +140,7 @@ export const getMapData = (): GeoJson => {
         WHERE Albums.albumRoot = 4
           AND Tags.pid = 188
         GROUP BY Tags.id
-      `
+      `,
     )
     .all();
   console.log(`🗺️  [getMapData] found ${locationTags.length} location tags.`);
@@ -143,8 +151,10 @@ export const getMapData = (): GeoJson => {
   };
   for (const tag of locationTags) {
     const tagConfig = locations[tag.tagName];
-    if (!tagConfig) {
-      console.warn(`❌ [getMapData] no tag config for "${tag.tagName}"`);
+    if (!tagConfig || !("coordinates" in tagConfig)) {
+      console.warn(
+        `❌ [getMapData] no or incomplete tag config for "${tag.tagName}"`,
+      );
       continue;
     }
     if (tagConfig.coordinates.length !== 2) {
@@ -172,10 +182,29 @@ export const getMapData = (): GeoJson => {
   return mapData;
 };
 
-export const generateTagAlbum = async (config: TagConfig): Promise<Album[]> => {
+export const generateTagAlbums = async (
+  tagGroup: "collections" | "locations" | "technical",
+): Promise<Album[]> => {
   const albums: Album[] = [];
+  const groupTags = getTagsInGroup(tagGroup);
+  const groupTagJson = tagConfigs[tagGroup];
+  if (!groupTagJson) {
+    throw new Error(
+      `[generateTagAlbums] no tag config for tag group "${tagGroup}"`,
+    );
+  }
 
-  for (const tag of Object.keys(config)) {
+  for (const tag of groupTags) {
+    let tagConfig = groupTagJson[tag];
+
+    if (!tagConfig) {
+      console.log(
+        `📝 [generateTagAlbums] adding "${tag}" to ${tagGroup}.json...`,
+      );
+      tagConfig = {};
+      groupTagJson[tag] = tagConfig;
+    }
+
     const numberOfPhotos = getNumberOfTaggedImages(tag);
     if (numberOfPhotos === 0) {
       // skip if there are no photos with that tag.
@@ -183,26 +212,31 @@ export const generateTagAlbum = async (config: TagConfig): Promise<Album[]> => {
       continue;
     }
 
-    const tagConfig = config[tag];
+    const coverPhoto = await getCollectionCoverPhoto(
+      tag,
+      tagConfig.coverPhotoName,
+    );
+
     const mappedAlbum: Album = {
       displayName: tagConfig.displayName ?? tag,
       slug: slugify(tag),
       icon: tagConfig.icon,
       numberOfPhotos,
-    };
-    const coverPhoto = await getCollectionCoverPhoto(
-      tag,
-      tagConfig.coverPhotoName
-    );
-
-    albums.push({
-      ...mappedAlbum,
       coverPhoto: {
         ...coverPhoto,
         position: tagConfig.coverPhotoPosition,
       },
-    });
+    };
+
+    albums.push(mappedAlbum);
   }
+  writeFileSync(
+    `${process.cwd()}/src/data/photography/${tagGroup}.json`,
+    JSON.stringify(groupTagJson, null, 2),
+  );
+  console.log(
+    `📝 [updateShelvesJson] updated JSON written to ${tagGroup}.json.`,
+  );
 
   return albums;
 };

@@ -8,8 +8,10 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <section className="content">
-      this site is built with both the desktop and mobile experience in mind,
-      but desktop is the recommended way to view it.
+      <p>
+        this site is built with both the desktop and mobile experience in mind,
+        but desktop is the recommended way to view it.
+      </p>
       <h3>📸 photography</h3>
       <p>
         the <Link href="/photography">photography section</Link> of this site is
