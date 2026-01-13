@@ -9,6 +9,7 @@ export const metadata: Metadata = { title: "photo map" };
 
 export default function Page() {
   const mapData = getMapData();
+
   return (
     <>
       <Breadcrumbs />

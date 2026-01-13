@@ -139,6 +139,7 @@ export const getMapData = (): GeoJson => {
           LEFT JOIN Tags ON Tags.id = ImageTags.tagid
         WHERE Albums.albumRoot = 4
           AND Tags.pid = 188
+          AND Albums.collection LIKE '%photography%'
         GROUP BY Tags.id
       `,
     )
@@ -153,7 +154,7 @@ export const getMapData = (): GeoJson => {
     const tagConfig = locations[tag.tagName];
     if (!tagConfig || !("coordinates" in tagConfig)) {
       console.warn(
-        `❌ [getMapData] no or incomplete tag config for "${tag.tagName}"`,
+        `🚧 [getMapData] no or incomplete tag config for "${tag.tagName}"`,
       );
       continue;
     }
@@ -162,7 +163,7 @@ export const getMapData = (): GeoJson => {
       continue;
     }
     if (tag.numberOfImages === 0) {
-      console.warn(`❌ [getMapData] no images with tag "${tag.tagName}"`);
+      console.warn(`🚧 [getMapData] no images with tag "${tag.tagName}"`);
       continue;
     }
     mapData.features.push({

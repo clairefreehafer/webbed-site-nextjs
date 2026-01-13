@@ -76,6 +76,9 @@
     "background": "black",
     "coverPhotoPosition": "center 30%"
   },
+  "night sky": {
+    "icon": "🌌"
+  },
   "nonplace": {
     "displayName": "nonplaces",
     "icon": "🛣️",

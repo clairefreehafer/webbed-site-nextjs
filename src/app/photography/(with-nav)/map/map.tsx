@@ -22,6 +22,10 @@ export default function Map({ mapData }: { mapData: GeoJson }) {
       let minLng = 80;
 
       for (const feature of mapData.features) {
+        if (feature.properties.numberOfPhotos === 0) {
+          continue;
+        }
+
         const [lng, lat] = feature.geometry.coordinates;
         if (lat > maxLat) {
           maxLat = lat;
@@ -41,8 +45,8 @@ export default function Map({ mapData }: { mapData: GeoJson }) {
           .setLngLat(feature.geometry.coordinates)
           .setPopup(
             new Popup().setHTML(
-              `<p>${feature.properties.name}</p><p><a href="/photography/map/${feature.properties.slug}">${feature.properties.numberOfPhotos} photos</a></p>`
-            )
+              `<p>${feature.properties.name}</p><p><a href="/photography/map/${feature.properties.slug}">${feature.properties.numberOfPhotos} photos</a></p>`,
+            ),
           );
         markers.push(marker);
       }
@@ -74,7 +78,7 @@ export default function Map({ mapData }: { mapData: GeoJson }) {
               url: "https://tiles.stadiamaps.com/styles/stamen_watercolor.json",
             },
           ]),
-          "top-left"
+          "top-left",
         );
       });
     } else {
