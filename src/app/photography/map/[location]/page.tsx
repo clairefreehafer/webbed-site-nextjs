@@ -43,7 +43,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       <header id="photography-header">
         <Breadcrumbs
           pathOverride={`/photography/map/${
-            locations[location].name ?? deslugify(location)
+            locations[location]?.name ?? deslugify(location)
           }`}
         />
       </header>

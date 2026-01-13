@@ -31,6 +31,8 @@ $mobile-breakpoint: 400px;
   gap: 1rem;
   width: 100%;
   max-height: 100%;
+  height: 100%;
+  padding: 1rem;
 
   @media screen and (max-width: $mobile-breakpoint) {
     flex-direction: column;
@@ -72,8 +74,9 @@ $mobile-breakpoint: 400px;
   display: flex;
   gap: 1rem;
   width: 100%;
-  max-height: 100%;
   flex-direction: column;
+  margin-bottom: 1rem;
+  height: 100%;
 
   .vertical-group-image-container {
     position: relative;
@@ -83,6 +86,7 @@ $mobile-breakpoint: 400px;
     align-items: center;
     display: flex;
     justify-content: center;
+    overflow: hidden;
   }
 
   .vertical-group-image {
@@ -116,20 +120,26 @@ $hover-duration: 500ms;
     &:hover {
       & .hover-image {
         opacity: 1;
-        transition: opacity $hover-duration, filter 1s;
+        transition:
+          opacity $hover-duration,
+          filter 1s;
       }
     }
   }
 
   .hover-group-image {
     object-fit: contain;
-    transition: opacity $hover-duration * 2, filter 1s;
+    transition:
+      opacity $hover-duration * 2,
+      filter 1s;
   }
 
   .hover-image {
     opacity: 0;
     object-fit: contain;
-    transition: opacity $hover-duration, filter 1s;
+    transition:
+      opacity $hover-duration,
+      filter 1s;
     pointer-events: none;
   }
 
@@ -146,7 +156,9 @@ $hover-duration: 500ms;
 
   & .overlay-visible ~ .hover-image {
     filter: blur(10px);
-    transition: opacity $hover-duration, filter 1s;
+    transition:
+      opacity $hover-duration,
+      filter 1s;
   }
 }
 

@@ -26,25 +26,23 @@ export default function ImageGroup({
 
   if (groupType === "horizontal") {
     return (
-      <div className="image-group-container">
-        <div className="horizontal-group">
-          {[parentImage, ...groupImages].map((image) => (
-            <div
-              key={image.id}
-              className="horizontal-group-image-container"
-              style={{
-                aspectRatio: image.width / image.height,
-              }}
-            >
-              <ImageWithOverlay
-                image={image}
-                classNamePrefix="horizontal-group"
-                className="horizontal-group-image"
-                fill
-              />
-            </div>
-          ))}
-        </div>
+      <div className="horizontal-group">
+        {[parentImage, ...groupImages].map((image) => (
+          <div
+            key={image.id}
+            className="horizontal-group-image-container"
+            style={{
+              aspectRatio: image.width / image.height,
+            }}
+          >
+            <ImageWithOverlay
+              image={image}
+              classNamePrefix="horizontal-group"
+              className="horizontal-group-image"
+              fill
+            />
+          </div>
+        ))}
       </div>
     );
   }
@@ -52,12 +50,12 @@ export default function ImageGroup({
   if (groupType === "hover") {
     const hoverImage = groupImages.find(
       (image) =>
-        !Array.isArray(image.grouping) && image.grouping === parentImage.id
+        !Array.isArray(image.grouping) && image.grouping === parentImage.id,
     );
 
     if (!hoverImage) {
       console.warn(
-        `❌ could not determine \`hoverImage\` for ${parentImage.src}`
+        `❌ could not determine \`hoverImage\` for ${parentImage.src}`,
       );
       return null;
     }
@@ -71,11 +69,11 @@ export default function ImageGroup({
 
   if (groupType === "vertical") {
     return (
-      <div className="image-group-container">
-        <VerticalGroup parentImage={parentImage} groupImages={groupImages} />
-      </div>
+      <VerticalGroup parentImage={parentImage} groupImages={groupImages} />
     );
   }
+
+  // return null;
 
   if (groupType === "pyramid") {
     return (

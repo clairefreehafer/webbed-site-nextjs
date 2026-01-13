@@ -171,7 +171,7 @@ export async function transformDigikamImage(
     // camera information
     if (digikamImage.camera) {
       transformedImage.camera = digikamImage.camera;
-    } else {
+    } else if (transformedImage.albumCollection === "photography") {
       console.warn(
         `🚧 [transformDigikamImage] missing camera info: ${transformedImage.src}`,
       );
