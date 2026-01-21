@@ -23,11 +23,6 @@ export default function Page() {
         <h2>schedule</h2>
       </div>
 
-      <p>
-        i&apos;m not yet 100% sure what this is for, but i felt compelled to
-        create it.
-      </p>
-
       {scheduleData.map(({ month, themes }) => (
         <Fragment key={month}>
           <h3>{month}</h3>
@@ -51,7 +46,14 @@ export default function Page() {
                 }}
               >
                 <h4>{theme.name}</h4>
-                <ul>
+                <ul
+                  style={{
+                    alignItems: "center",
+                    display: "flex",
+                    flexDirection: "column",
+                    padding: 0,
+                  }}
+                >
                   {theme.campers.map((camper) => (
                     <li
                       key={camper.name}

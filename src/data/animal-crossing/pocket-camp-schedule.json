@@ -112,11 +112,68 @@
     "month": "♑️ january ♒️",
     "themes": [
       {
-        "name": "harmonious",
+        "name": "🪭 harmonious ⛩️",
         "campers": [
           {
             "name": "blanche",
             "cookie": "blanche's inn cookie"
+          },
+          {
+            "name": "cranston",
+            "cookie": "cranston's temple cookie"
+          },
+          {
+            "name": "dobie",
+            "cookie": "dobie's hot spring cookie"
+          },
+          {
+            "name": "gladys",
+            "cookie": "gladys' camellia cookie"
+          },
+          {
+            "name": "midge",
+            "cookie": "midge's storybook cookie"
+          },
+          {
+            "name": "shino",
+            "cookie": "shino's shrine cookie"
+          },
+          {
+            "name": "pinky",
+            "cookie": "pinky's regal cookie"
+          },
+          {
+            "name": "chevre",
+            "cookie": "chevre's serene cookie"
+          },
+          {
+            "name": "cyrano"
+          }
+        ]
+      },
+      {
+        "name": "🧋 café 🍵",
+        "campers": [
+          {
+            "name": "chester",
+            "cookie": "chester's tearoom cookie"
+          },
+          {
+            "name": "greta",
+            "cookie": "greta's bistro cookie"
+          },
+          {
+            "name": "pekoe",
+            "cookie": "pekoe's boba cookie"
+          }
+        ]
+      },
+      {
+        "name": "🧶 cozy crafts 🕊️",
+        "campers": [
+          {
+            "name": "papi",
+            "cookie": "papi's winter bird cookie"
           }
         ]
       }
