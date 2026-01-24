@@ -22,7 +22,7 @@ export default async function Page() {
           <h2>new leaf</h2>
         </div>
       </div>
-      <Slideshow images={images} />
+      <Slideshow images={images} album={undefined} />
     </>
   );
 }
