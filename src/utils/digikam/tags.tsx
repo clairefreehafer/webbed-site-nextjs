@@ -223,6 +223,8 @@ export const generateTagAlbums = async (
       slug: slugify(tag),
       icon: tagConfig.icon,
       numberOfPhotos,
+      // TODO: better solution here maybe.
+      date: "",
       coverPhoto: {
         ...coverPhoto,
         position: tagConfig.coverPhotoPosition,
