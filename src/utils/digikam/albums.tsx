@@ -22,6 +22,7 @@ interface DigikamAlbum {
 /** custom JSON format for extra info stored in the album caption field. */
 export interface AlbumCaptionJson {
   displayName?: string;
+  description?: string;
   coverPhotoPosition?: string;
   icon?: string;
   /** zelda */
@@ -31,15 +32,18 @@ export interface AlbumCaptionJson {
 /** transformed album data for use on the site. */
 export type Album = {
   coverPhoto?: CoverPhoto;
-  date?: DigikamAlbum["date"];
+  date: DigikamAlbum["date"];
   displayName?: AlbumCaptionJson["displayName"];
+  description?: AlbumCaptionJson["description"];
   icon?: AlbumCaptionJson["icon"];
   slug: string;
   numberOfPhotos?: number;
 };
 
-async function transformDigikamAlbum(album: DigikamAlbum): Promise<Album> {
-  let transformedAlbum: Album = {
+async function transformDigikamAlbum(
+  album: DigikamAlbum,
+): Promise<Album | null> {
+  const transformedAlbum: Album = {
     date: album.date,
     slug: album.slug,
   };
@@ -48,7 +52,7 @@ async function transformDigikamAlbum(album: DigikamAlbum): Promise<Album> {
     // if the album is nested, extract the leaf folder name
     // to set as the actual slug
     const splitAlbumSlug = album.slug.split("/");
-    if (album.slug.split("/").length > 1) {
+    if (splitAlbumSlug.length > 1) {
       transformedAlbum.slug = splitAlbumSlug[splitAlbumSlug.length - 1];
     }
     // parse any additional album metadata from the caption
@@ -80,7 +84,7 @@ async function transformDigikamAlbum(album: DigikamAlbum): Promise<Album> {
       };
     }
 
-    transformedAlbum = {
+    return {
       ...transformedAlbum,
       ...captionJson,
       coverPhoto,
@@ -88,10 +92,9 @@ async function transformDigikamAlbum(album: DigikamAlbum): Promise<Album> {
   } catch (error) {
     console.log(
       `❌ [getAlbums] problem generating album data for ${album.slug}:`,
-      (error as Error).message
+      (error as Error).message,
     );
-  } finally {
-    return transformedAlbum;
+    return null;
   }
 }
 
@@ -127,25 +130,28 @@ export const getAlbums = cache(
             AND Albums.relativePath NOT LIKE '%/\\_%' ESCAPE '\\'
             AND Albums.relativePath != '/'
           ORDER BY Albums.date DESC
-        `
+        `,
       )
       .all({
         collectionLikeString: `%${collection}%`,
       });
     console.log(
-      `📁 [getAlbums] ${albums.length} albums found in "${collection}".`
+      `📁 [getAlbums] ${albums.length} albums found in "${collection}".`,
     );
     const transformedAlbums: Album[] = [];
     for (const album of albums) {
       const transformedAlbum = await transformDigikamAlbum(album);
-      transformedAlbums.push(transformedAlbum);
+      if (transformedAlbum) {
+        transformedAlbums.push(transformedAlbum);
+      }
     }
 
     return transformedAlbums;
-  }
+  },
 );
 
 // could also do tags or whatever in the album description
+// TODO: sort
 export const getAlbumGroups = (rootCollection: string): string[] => {
   const albumGroups = digikam
     .prepare<
@@ -155,25 +161,25 @@ export const getAlbumGroups = (rootCollection: string): string[] => {
       DigikamAlbum
     >(
       `
-          SELECT DISTINCT
-            Albums.collection
-          FROM
-            Albums
-          WHERE
-            Albums.albumRoot == 4
-            AND Albums.collection LIKE $collectionLikeString
-        `
+        SELECT DISTINCT
+          Albums.collection
+        FROM
+          Albums
+        WHERE
+          Albums.albumRoot == 4
+          AND Albums.collection LIKE $collectionLikeString
+      `,
     )
     .all({
       collectionLikeString: `%${rootCollection}/%`,
     });
   console.log(
-    `📁 [getAlbumGroups] ${albumGroups.length} album groups found in "${rootCollection}".`
+    `📁 [getAlbumGroups] ${albumGroups.length} album groups found in "${rootCollection}".`,
   );
 
   return (
     albumGroups?.map((group) =>
-      group.collection.replace(`${rootCollection}/`, "")
+      group.collection.replace(`${rootCollection}/`, ""),
     ) ?? []
   );
 };
@@ -185,7 +191,7 @@ export const getAlbumDate = (albumSlug: string) => {
         SELECT Albums.date
         FROM Albums
         WHERE Albums.relativePath = $relativePath
-      `
+      `,
     )
     .get({
       relativePath: `/${albumSlug}`,

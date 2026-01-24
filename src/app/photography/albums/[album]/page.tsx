@@ -25,7 +25,17 @@ export async function generateMetadata({
 
 export default async function Page({ params }: { params: Promise<Params> }) {
   const albumSlug = (await params).album;
-  const images = await getAlbumImages(albumSlug);
+  const [images, albums] = await Promise.all([
+    getAlbumImages(albumSlug),
+    getAlbums(),
+  ]);
+
+  const album = albums.find((a) => a.slug === albumSlug);
+
+  if (!album) {
+    console.error(`❌ missing album: ${albumSlug}`);
+    return null;
+  }
 
   return (
     <>
@@ -33,7 +43,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         <Breadcrumbs />
         <p className="right-element">{images.length} images</p>
       </header>
-      <Slideshow images={images} />
+      <Slideshow images={images} album={album} />
     </>
   );
 }

@@ -82,7 +82,7 @@ export default function Map({ mapData }: { mapData: GeoJson }) {
         );
       });
     } else {
-      console.error(`❌ problem initializing map`);
+      console.error("❌ problem initializing map");
     }
   }, [mapData.features]);
 

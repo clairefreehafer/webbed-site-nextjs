@@ -9,14 +9,14 @@ export const digikam = new Database(`${process.cwd()}/local/digikam4.db`, {
 });
 digikam
   .prepare(
-    `ATTACH DATABASE '${process.cwd()}/local/thumbnails-digikam.db' AS thumbs`
+    `ATTACH DATABASE '${process.cwd()}/local/thumbnails-digikam.db' AS thumbs`,
   )
   .run();
 
 export async function createImageFile(
   inputPath: string,
   outputSrc: string,
-  resize = 1000
+  resize = 1000,
 ) {
   try {
     const outputPath = `${process.cwd()}/public${outputSrc}`;
@@ -31,7 +31,7 @@ export async function createImageFile(
       // create output directories if needed
       if (!fs.existsSync(outputDirectory)) {
         console.log(
-          `📝 [transformDigikamImage] creating directory ${outputDirectory}...`
+          `📝 [transformDigikamImage] creating directory ${outputDirectory}...`,
         );
         fs.mkdirSync(outputDirectory, { recursive: true });
       }
@@ -47,12 +47,12 @@ export async function createImageFile(
     console.log(
       `❌ [transformDigikamImage] issue transforming image data for ${inputPath}: ${
         (error as Error).message
-      }`
+      }`,
     );
   }
 }
 
-export * from './albums';
-export * from './cover-photos';
-export * from './images';
-export * from './tags';
+export * from "./albums";
+export * from "./cover-photos";
+export * from "./images";
+export * from "./tags";

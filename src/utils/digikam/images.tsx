@@ -37,6 +37,8 @@ interface ImageCaptionJson {
   border?: React.CSSProperties["border"];
   background?: React.CSSProperties["background"];
   groupType?: "hover" | "horizontal" | "vertical" | "pyramid" | "square";
+  /** optionally show a title card before the image in a slideshow. */
+  titleCard?: string;
   /** animal crossing */
   showDate?: boolean;
   /** zelda */
@@ -77,11 +79,12 @@ export async function transformDigikamImage(
   options: ImageOptions = { resize: 1000, generatePalette: false },
 ): Promise<Image> {
   const nameWithoutExtension = digikamImage.name.split(".")[0];
+
   let transformedImage: Image = {
     id: digikamImage.id,
     filename: nameWithoutExtension,
-    height: 0,
     src: `/out/${digikamImage.albumSlug}/${nameWithoutExtension}.webp`,
+    height: 0,
     width: 0,
     title: digikamImage.title,
     dateTaken: digikamImage.creationDate,
@@ -89,6 +92,15 @@ export async function transformDigikamImage(
     collections: [],
     technical: [],
   };
+
+  // log any files that need to be renamed.
+  if (
+    !/^\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}(_\d)?$/.test(nameWithoutExtension)
+  ) {
+    console.warn(
+      `🚧 [transformDigikamImage] image needs to be renamed: ${transformedImage.src}`,
+    );
+  }
 
   try {
     const outputPath = `${process.cwd()}/public${transformedImage.src}`;
@@ -205,6 +217,14 @@ export async function transformDigikamImage(
         }
       }
     }
+    if (
+      digikamImage.name.endsWith("gif") &&
+      !transformedImage.technical.includes("gif")
+    ) {
+      console.warn(
+        `🚧 [transformDigikamImage] animated image missing "gif" tag: ${transformedImage.src}`,
+      );
+    }
   } catch (error) {
     // fail gracefully if there is an issue
     console.log(
@@ -273,7 +293,7 @@ export const getAlbumImages = async (
       `,
     )
     .all({
-      relativePathLikeString: `%${relativePath}%`,
+      relativePathLikeString: `%${relativePath}`,
       collectionLikeString: `%${collection}%`,
     });
   console.log(

@@ -1,5 +1,6 @@
 import AlbumGrid from "@/components/photography/album-grid";
 import Breadcrumbs from "@/components/photography/breadcrumbs";
+import { deslugify } from "@/utils";
 import { getAlbumGroups, getAlbums } from "@/utils/digikam";
 
 type Params = { group: string };
@@ -17,7 +18,7 @@ export async function generateMetadata({
   params: Promise<Params>;
 }) {
   const { group } = await params;
-  return { title: group };
+  return { title: deslugify(group) };
 }
 
 export default async function Page({ params }: { params: Promise<Params> }) {

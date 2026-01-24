@@ -28,6 +28,7 @@ export async function generateMetadata({
   return { title: displayName ?? album };
 }
 
+// TODO: special one for panoramas
 export default async function Page({ params }: { params: Promise<Params> }) {
   const tech = deslugify((await params).tech);
   const images = await getTagImages(tech);

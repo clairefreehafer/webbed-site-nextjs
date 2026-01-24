@@ -45,14 +45,14 @@ export default function Overlay({
           {image.camera && (
             <>
               <h3>camera</h3>
-              <p>{cameras[image.camera] ?? image.camera}</p>
+              <p>📷 {cameras[image.camera] ?? image.camera}</p>
             </>
           )}
 
           {image.lens && (
             <>
               <h3>lens</h3>
-              <p>{image.lens}</p>
+              <p>🔎 {image.lens}</p>
             </>
           )}
         </div>
@@ -77,16 +77,23 @@ export default function Overlay({
             </>
           )}
 
-          <h3>technical</h3>
-          <ul>
-            {image.technical.map((tech) => (
-              <li key={tech}>
-                <Link href={`/photography/technical/${slugify(tech)}`}>
-                  {technicalConfig[tech]?.displayName ?? tech}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          {image.technical.length > 0 && (
+            <>
+              <h3>technical</h3>
+              <ul>
+                {image.technical.map((tech) => (
+                  <li key={tech}>
+                    <Link href={`/photography/technical/${slugify(tech)}`}>
+                      {technicalConfig[tech]?.icon
+                        ? `${technicalConfig[tech].icon} `
+                        : null}
+                      {technicalConfig[tech]?.displayName ?? tech}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
         </div>
       )}
 
