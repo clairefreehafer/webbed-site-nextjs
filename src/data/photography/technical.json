@@ -1,9 +1,8 @@
 {
   "8-inch-meade-lx200": {},
-  "black & white": {
+  "black-and-white": {
     "icon": "🔲"
   },
-  "black-and-white": {},
   "ferson-16-in-newtonian-f4": {},
   "fisheye": {
     "icon": "🐠",
@@ -15,12 +14,10 @@
   "hipstamatic": {
     "icon": "📱"
   },
-  "long exposure": {
+  "long-exposure": {
     "icon": "🌃"
   },
-  "long-exposure": {},
   "panorama": {},
-  "pudding camera": {},
   "pudding-camera": {},
   "trichrome": {},
   "uji": {}

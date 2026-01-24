@@ -2,7 +2,7 @@ import ImageGrid from "@/components/image-grid";
 import Breadcrumbs from "@/components/photography/breadcrumbs";
 import technicalJson from "@/data/photography/technical.json";
 import { TagConfig } from "@/types/photography";
-import { deslugify, slugify } from "@/utils";
+import { deslugify } from "@/utils";
 import { getTagImages } from "@/utils/digikam";
 
 const technicalConfig: TagConfig = technicalJson;
@@ -10,12 +10,9 @@ const technicalConfig: TagConfig = technicalJson;
 type Params = { tech: string };
 
 export function generateStaticParams(): Params[] {
-  return Object.keys(technicalConfig).map((album) => {
-    const slug = slugify(album);
-    return {
-      tech: slug,
-    };
-  });
+  return Object.keys(technicalConfig).map((tech) => ({
+    tech,
+  }));
 }
 
 export async function generateMetadata({
@@ -23,9 +20,9 @@ export async function generateMetadata({
 }: {
   params: Promise<Params>;
 }) {
-  const album = deslugify((await params).tech);
-  const { displayName } = technicalConfig[album];
-  return { title: displayName ?? album };
+  const { tech } = await params;
+  const { displayName } = technicalConfig[tech];
+  return { title: displayName ?? deslugify(tech) };
 }
 
 // TODO: special one for panoramas
