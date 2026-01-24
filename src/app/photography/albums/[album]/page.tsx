@@ -32,11 +32,6 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   const album = albums.find((a) => a.slug === albumSlug);
 
-  if (!album) {
-    console.error(`❌ missing album: ${albumSlug}`);
-    return null;
-  }
-
   return (
     <>
       <header id="photography-header">

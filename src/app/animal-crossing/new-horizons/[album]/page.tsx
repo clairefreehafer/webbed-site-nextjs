@@ -6,12 +6,7 @@ import animalCrossingTagsJson from "@/data/animal-crossing/animal-crossing-tags.
 import { AnimalCrossingTags } from "@/types/animal-crossing";
 import { deslugify, slugify } from "@/utils";
 import { Grass } from "@/utils/animal-crossing/grass";
-import {
-  getAlbumDate,
-  getAlbumImages,
-  getAlbums,
-  getTagImages,
-} from "@/utils/digikam";
+import { getAlbumImages, getAlbums, getTagImages } from "@/utils/digikam";
 
 type Params = { album: string };
 
@@ -46,7 +41,10 @@ export async function generateMetadata({
 export default async function Page({ params }: { params: Promise<Params> }) {
   const albumSlug = (await params).album;
   let images = await getAlbumImages(albumSlug, "new-horizons");
-  let date = getAlbumDate(albumSlug);
+  const albums = await getAlbums();
+  const album = albums.find((a) => a.slug === albumSlug);
+
+  let date = album?.date;
   if (images.length === 0) {
     // if no images in the album, check the tag.
     images = await getTagImages(deslugify(albumSlug), "new-horizons");
@@ -68,7 +66,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           <h2>{deslugify(albumSlug)}</h2>
         </div>
       </div>
-      <Slideshow images={images} />
+      <Slideshow images={images} album={album} />
     </>
   );
 }
