@@ -30,7 +30,7 @@ export async function generateMetadata({
 
 // TODO: special one for panoramas
 export default async function Page({ params }: { params: Promise<Params> }) {
-  const tech = deslugify((await params).tech);
+  const { tech } = await params;
   const images = await getTagImages(tech);
   const { background, displayName } = technicalConfig[tech];
   const maxCols =
