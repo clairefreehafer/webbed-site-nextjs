@@ -13,7 +13,7 @@ export default function Slideshow({
   album,
 }: {
   images: Image[];
-  album: Album | undefined;
+  album?: Album;
 }) {
   return (
     <ol id="slideshow" className="slides">
