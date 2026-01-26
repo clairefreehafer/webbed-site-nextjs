@@ -9,7 +9,7 @@
     "markerColor": "forestgreen",
     "name": "arecibo observatory"
   },
-  "ballston spa": {
+  "ballston-spa": {
     "coordinates": [-73.8511, 43.0072],
     "markerColor": "rebeccapurple",
     "name": "ballston spa, new york"
@@ -19,47 +19,75 @@
     "markerColor": "cadetblue",
     "name": "birchtree"
   },
+  "boothbay-harbor": {
+    "coordinates": [-69.6381, 43.8519],
+    "name": "boothbay harbor, maine"
+  },
   "camden": {
     "coordinates": [-69.065552, 44.210265],
     "markerColor": "powderblue",
     "name": "camden, maine"
   },
-  "death valley": {
+  "colgate": {
+    "coordinates": [-75.536389, 42.819444],
+    "name": "colgate university"
+  },
+  "cruz-bay": {
+    "coordinates": [-64.793056, 18.333333],
+    "name": "cruz bay, st. john"
+  },
+  "death-valley": {
     "coordinates": [-116.825833, 36.241944],
     "markerColor": "",
     "name": "death valley national park"
+  },
+  "deer-isle": {
+    "coordinates": [-68.6775, 44.223889],
+    "name": "deer isle, maine"
   },
   "flatbush": {
     "coordinates": [-73.9625, 40.6615],
     "markerColor": "gold",
     "name": "flatbush"
   },
+  "grounds-for-sculpture": {
+    "coordinates": [-74.71761, 40.23569],
+    "name": "grounds for sculpture"
+  },
+  "guggenheim": {
+    "coordinates": [-73.958889, 40.783056],
+    "name": "solomon r. guggenheim museum"
+  },
   "hudson": {
     "coordinates": [-73.790959, 42.2528649],
     "markerColor": "goldenrod",
     "name": "hudson, new york"
   },
-  "jacob riis": {
+  "jacob-riis": {
     "coordinates": [-73.876153, 40.564175],
     "markerColor": "",
     "name": "jacob riis beach"
   },
-  "joshua tree": {
+  "joshua-tree": {
     "coordinates": [-116.27, 34.1],
     "markerColor": "",
     "name": "joshua tree national park"
   },
-  "mariaville lake": {
+  "mariaville-lake": {
     "coordinates": [-74.131111, 42.826667],
     "markerColor": "orangered",
     "name": "mariaville lake"
+  },
+  "montreal": {
+    "coordinates": [-73.586841, 45.503343],
+    "name": "montréal, quebec"
   },
   "newport": {
     "coordinates": [-71.3137707, 41.4899827],
     "markerColor": "peachpuff",
     "name": "newport, rhode island"
   },
-  "owls head": {
+  "owls-head": {
     "coordinates": [-69.0571014, 44.0823473],
     "markerColor": "",
     "name": "owls head, maine"
@@ -74,7 +102,7 @@
     "markerColor": "sandybrown",
     "name": "phoenix, arizona"
   },
-  "prospect park": {
+  "prospect-park": {
     "coordinates": [-73.97035, 40.66143],
     "markerColor": "",
     "name": "prospect park, brooklyn"
@@ -84,30 +112,53 @@
     "markerColor": "",
     "name": "quartzsite, arizona"
   },
+  "red-hook": {
+    "coordinates": [-64.8518117, 18.3255133],
+    "name": "red hook, st. thomas"
+  },
   "rehoboth": {
     "coordinates": [-75.08361, 38.71645],
     "markerColor": "",
     "name": "rehoboth beach, delware"
+  },
+  "rockland": {
+    "coordinates": [-69.114722, 44.109444],
+    "name": "rockland, maine"
   },
   "rutland": {
     "coordinates": [-72.9817311, 43.6057574],
     "markerColor": "",
     "name": "rutland, vermont"
   },
+  "salomon-beach": {
+    "coordinates": [-64.795, 18.338333],
+    "name": "salomon beach, st. john"
+  },
+  "saratoga-lake": {
+    "coordinates": [-73.74, 43.02],
+    "name": "saratoga lake, new york"
+  },
+  "sea-bright": {
+    "coordinates": [-73.9743, 40.3589],
+    "name": "sea bright, new jersey"
+  },
+  "sears-island": {
+    "coordinates": [-68.877532, 44.443132],
+    "name": "sears island, maine"
+  },
+  "smith-bay": {
+    "coordinates": [-64.866251, 18.341168],
+    "name": "smith bay, st. thomas"
+  },
   "smola": {
     "coordinates": [8.029167, 63.401944],
     "markerColor": "",
     "name": "smøla, norway"
   },
-  "st john": {
+  "st-john": {
     "coordinates": [-64.733333, 18.333333],
     "markerColor": "",
     "name": "st. john, USVI"
-  },
-  "st thomas": {
-    "coordinates": [-64.916667, 18.333333],
-    "markerColor": "",
-    "name": "st. thomas, USVI"
   },
   "tromso": {
     "coordinates": [18.9558585, 69.6516345],

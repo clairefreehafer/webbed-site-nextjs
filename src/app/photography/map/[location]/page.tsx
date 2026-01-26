@@ -20,7 +20,7 @@ export async function generateMetadata({
 }: {
   params: Promise<Params>;
 }) {
-  const location = deslugify((await params).location) as keyof typeof locations;
+  const { location } = await params;
 
   return {
     title: locations[location].name,
@@ -36,7 +36,7 @@ export async function generateMetadata({
 
 export default async function Page({ params }: { params: Promise<Params> }) {
   const { location } = await params;
-  const images = await getTagImages(deslugify(location));
+  const images = await getTagImages(location);
 
   return (
     <>
