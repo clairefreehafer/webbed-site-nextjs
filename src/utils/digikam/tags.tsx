@@ -1,9 +1,9 @@
 import { writeFileSync } from "fs";
 
 import collections from "@/data/photography/collections.json";
-import locations from "@/data/photography/locations.json";
+import locationsJson from "@/data/photography/locations.json";
 import technical from "@/data/photography/technical.json";
-import { GeoJson, TagConfig } from "@/types/photography";
+import { GeoJson, LocationConfig, TagConfig } from "@/types/photography";
 
 import { deslugify, slugify } from "..";
 import { DigikamImage, Image, transformDigikamImage } from "./images";
@@ -13,6 +13,8 @@ const tagConfigs: Record<string, TagConfig> = {
   collections,
   technical,
 };
+
+const locations: Record<string, LocationConfig> = locationsJson;
 
 export const getTagImages = async (
   tag: string,

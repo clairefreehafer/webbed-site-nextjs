@@ -5,7 +5,7 @@ import { LocationConfig } from "@/types/photography";
 import { deslugify, slugify } from "@/utils";
 import { getTagImages } from "@/utils/digikam";
 
-const locations = locationsJson as unknown as LocationConfig;
+const locations: Record<string, LocationConfig> = locationsJson;
 
 type Params = { location: string };
 

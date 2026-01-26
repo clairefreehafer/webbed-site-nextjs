@@ -12,7 +12,7 @@ import { slugify } from "@/utils/client";
 import { Image } from "@/utils/digikam";
 
 const cameras: Record<string, string> = cameraJson;
-const locations = locationsJson as unknown as LocationConfig;
+const locations: Record<string, LocationConfig> = locationsJson;
 const collections: TagConfig = collectionsJson;
 const technicalConfig: TagConfig = technicalJson;
 

@@ -30,11 +30,8 @@ export type TagConfig = Record<
   }
 >;
 
-export type LocationConfig = Record<
-  string,
-  {
-    coordinates: [number, number];
-    markerColor?: CSSProperties["color"];
-    name: string;
-  }
->;
+export type LocationConfig = {
+  coordinates: number[];
+  markerColor?: CSSProperties["color"];
+  name: string;
+};
