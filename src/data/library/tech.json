@@ -25,6 +25,17 @@
     },
     {
       "type": "book",
+      "olid": "OL49504279M",
+      "numberOfPages": 352,
+      "title": "Breaking Twitter",
+      "subtitle": "Elon Musk and the Most Controversial Corporate Takeover in History",
+      "link": "https://openlibrary.org/books/OL49504279M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL49504279M-M.jpg",
+      "coverColor": "linear-gradient(225.21110453592627deg, red, orange, yellow, green, blue, indigo, violet)",
+      "author": "Ben Mezrich"
+    },
+    {
+      "type": "book",
       "olid": "OL38771140M",
       "title": "Circle of the Snake",
       "subtitle": "Nostalgia and Utopia in the Age of Big Tech",
@@ -80,6 +91,17 @@
     },
     {
       "type": "book",
+      "olid": "OL48267152M",
+      "title": "Number Go Up",
+      "subtitle": "Inside Crypto's Wild Rise and Staggering Fall",
+      "link": "https://openlibrary.org/books/OL48267152M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL48267152M-M.jpg",
+      "coverColor": "#e6a225",
+      "author": "Zeke Faux",
+      "numberOfPages": 320
+    },
+    {
+      "type": "book",
       "olid": "OL28375323M",
       "title": "Psychopolitics",
       "subtitle": "Neoliberalism and New Technologies of Power",
@@ -99,6 +121,17 @@
       "coverColor": "linear-gradient(217.0623909267773deg, red, orange, yellow, green, blue, indigo, violet)",
       "numberOfPages": 288,
       "author": "Nathan Grayson"
+    },
+    {
+      "type": "book",
+      "olid": "OL48258627M",
+      "title": "The Bill Gates Problem",
+      "subtitle": "Reckoning with the Myth of the Good Billionaire",
+      "link": "https://openlibrary.org/books/OL48258627M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL48258627M-M.jpg",
+      "coverColor": "linear-gradient(300.1780705571424deg, red, orange, yellow, green, blue, indigo, violet)",
+      "author": "Tim Schwab",
+      "numberOfPages": 352
     },
     {
       "type": "book",

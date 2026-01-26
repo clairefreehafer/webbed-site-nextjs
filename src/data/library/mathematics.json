@@ -1,0 +1,16 @@
+{
+  "title": "mathematics",
+  "items": [
+    {
+      "type": "book",
+      "olid": "OL57358075M",
+      "title": "Everything Is Predictable",
+      "subtitle": "How Bayes' Remarkable Theorem Explains the World",
+      "link": "https://openlibrary.org/books/OL57358075M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL57358075M-M.jpg",
+      "coverColor": "#eb692b",
+      "numberOfPages": 384,
+      "author": "Tom Chivers"
+    }
+  ]
+}

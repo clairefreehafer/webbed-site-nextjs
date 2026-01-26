@@ -3,6 +3,16 @@
   "items": [
     {
       "type": "book",
+      "olid": "OL39711242M",
+      "title": "Camp Damascus",
+      "link": "https://openlibrary.org/books/OL39711242M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL39711242M-M.jpg",
+      "coverColor": "#cc2812",
+      "numberOfPages": 256,
+      "author": "Chuck Tingle"
+    },
+    {
+      "type": "book",
       "olid": "OL34140011M",
       "title": "Kraken Calling",
       "link": "https://openlibrary.org/books/OL34140011M",

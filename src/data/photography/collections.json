@@ -1,8 +1,7 @@
 {
-  "aquatic fauna": {
+  "aquatic-fauna": {
     "icon": "🦈"
   },
-  "aquatic-fauna": {},
   "architecture": {
     "icon": "🏢"
   },
@@ -29,7 +28,9 @@
     "coverPhotoPosition": "bottom",
     "icon": "🐈‍⬛"
   },
-  "clouds": {},
+  "clouds": {
+    "icon": "☁️"
+  },
   "dog": {
     "displayName": "dogs",
     "icon": "🐕"
@@ -65,11 +66,12 @@
     "displayName": "kites",
     "icon": "🪁"
   },
-  "lake": {},
-  "light paint": {
+  "lake": {
+    "icon": "🛶"
+  },
+  "light-paint": {
     "icon": "🔦"
   },
-  "light-paint": {},
   "lizard": {
     "displayName": "lizards",
     "icon": "🦎"
@@ -95,7 +97,9 @@
     "displayName": "swimming pools",
     "icon": "🏊"
   },
-  "rainbow": {},
+  "rainbow": {
+    "icon": "🌈"
+  },
   "riparian": {},
   "rock": {
     "displayName": "rocks",
@@ -111,19 +115,21 @@
   "sky": {
     "icon": "☀️"
   },
-  "snow": {},
-  "street art": {
+  "snow": {
+    "icon": "❄️"
+  },
+  "street-art": {
     "icon": "🖌️"
   },
-  "street-art": {},
-  "sunset": {},
+  "sunset": {
+    "icon": "🌅"
+  },
   "texture": {
     "icon": "🤚🏻"
   },
-  "the built environment": {
+  "the-built-environment": {
     "icon": "🏙️"
   },
-  "the-built-environment": {},
   "tree": {
     "displayName": "trees",
     "icon": "🌳"

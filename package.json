@@ -22,7 +22,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "npx serve@latest out",
-    "lint": "next lint --fix",
+    "lint": "npx eslint",
     "prepare": "husky",
     "deploy": "npm run build && neocities push out",
     "sync-db": "bash scripts/copy-db.sh"
@@ -40,11 +40,10 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "remark-gfm": "^4.0.1",
-    "sharp": "^0.34.3",
-    "sqlite": "^5.1.1",
-    "sqlite3": "^5.1.7"
+    "sharp": "^0.34.3"
   },
   "devDependencies": {
+    "@eslint/compat": "^1.4.1",
     "@eslint/eslintrc": "^3.3.1",
     "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^20",

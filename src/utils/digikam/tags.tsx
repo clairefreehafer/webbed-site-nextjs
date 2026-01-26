@@ -5,7 +5,7 @@ import locations from "@/data/photography/locations.json";
 import technical from "@/data/photography/technical.json";
 import { GeoJson, TagConfig } from "@/types/photography";
 
-import { slugify } from "..";
+import { deslugify, slugify } from "..";
 import { DigikamImage, Image, transformDigikamImage } from "./images";
 import { Album, digikam, getCollectionCoverPhoto } from "./index";
 
@@ -219,7 +219,7 @@ export const generateTagAlbums = async (
     );
 
     const mappedAlbum: Album = {
-      displayName: tagConfig.displayName ?? tag,
+      displayName: tagConfig.displayName ?? deslugify(tag),
       slug: slugify(tag),
       icon: tagConfig.icon,
       numberOfPhotos,

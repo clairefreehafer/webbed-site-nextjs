@@ -12,6 +12,16 @@
         "coverImage": "https://covers.openlibrary.org/b/olid/OL24988720M-M.jpg",
         "coverColor": "#2a5e76",
         "numberOfPages": 365
+      },
+      {
+        "type": "book",
+        "olid": "OL8789611M",
+        "title": "Are Prisons Obsolete?",
+        "link": "https://openlibrary.org/books/OL8789611M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL8789611M-M.jpg",
+        "coverColor": "#ad9450",
+        "numberOfPages": 128,
+        "author": "Angela Y. Davis"
       }
     ],
     "fiction": [

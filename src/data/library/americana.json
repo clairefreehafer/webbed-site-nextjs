@@ -5,6 +5,17 @@
     "race": [
       {
         "type": "book",
+        "olid": "OL8176830M",
+        "title": "Assata",
+        "subtitle": "An Autobiography (Lawrence Hill & Co.)",
+        "link": "https://openlibrary.org/books/OL8176830M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL8176830M-M.jpg",
+        "coverColor": "#b14444",
+        "numberOfPages": 274,
+        "author": "Assata Shakur"
+      },
+      {
+        "type": "book",
         "olid": "OL28207360M",
         "title": "Dying of Whiteness",
         "subtitle": "How the Politics of Racial Resentment Is Killing America's Heartland",
@@ -92,6 +103,17 @@
         "coverImage": "https://covers.openlibrary.org/b/olid/OL27912554M-M.jpg",
         "coverColor": "#c47c6c",
         "numberOfPages": 516
+      },
+      {
+        "type": "book",
+        "olid": "OL35870274M",
+        "title": "Nonprofit Neighborhoods",
+        "subtitle": "An Urban History of Inequality and the American State",
+        "link": "https://openlibrary.org/books/OL35870274M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL35870274M-M.jpg",
+        "coverColor": "linear-gradient(292.9240336619428deg, red, orange, yellow, green, blue, indigo, violet)",
+        "author": "Claire Dunning",
+        "numberOfPages": 336
       },
       {
         "type": "book",

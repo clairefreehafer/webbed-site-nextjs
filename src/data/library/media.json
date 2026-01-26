@@ -10,6 +10,17 @@
       "coverColor": "#247ca4",
       "numberOfPages": 352,
       "author": "Danielle J. Lindemann PhD"
+    },
+    {
+      "type": "book",
+      "olid": "OL48184152M",
+      "title": "You Are What You Watch",
+      "subtitle": "How Movies and TV Affect Everything",
+      "link": "https://openlibrary.org/books/OL48184152M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL48184152M-M.jpg",
+      "coverColor": "linear-gradient(347.0496302919443deg, red, orange, yellow, green, blue, indigo, violet)",
+      "author": "Walter Hickey",
+      "numberOfPages": 240
     }
   ]
 }

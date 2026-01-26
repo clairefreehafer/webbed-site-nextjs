@@ -39,7 +39,7 @@ export default function AlbumGrid({
                     objectPosition: album.coverPhoto?.position,
                   }}
                 />
-                {album.numberOfPhotos !== undefined && (
+                {/* {album.numberOfPhotos !== undefined && (
                   <div className="image-overlay">
                     <p>
                       {album.numberOfPhotos === 1
@@ -47,7 +47,7 @@ export default function AlbumGrid({
                         : `${album.numberOfPhotos} photos`}
                     </p>
                   </div>
-                )}
+                )} */}
               </div>
               <p className="album-title">
                 {album.displayName ?? deslugify(album.slug)}
