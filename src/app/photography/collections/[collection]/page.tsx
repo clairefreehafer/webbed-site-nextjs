@@ -2,7 +2,7 @@ import ImageGrid from "@/components/image-grid";
 import Breadcrumbs from "@/components/photography/breadcrumbs";
 import collectionsJson from "@/data/photography/collections.json";
 import { TagConfig } from "@/types/photography";
-import { deslugify, slugify } from "@/utils";
+import { slugify } from "@/utils";
 import { getTagImages } from "@/utils/digikam";
 
 const collections: TagConfig = collectionsJson;
@@ -23,13 +23,13 @@ export async function generateMetadata({
 }: {
   params: Promise<Params>;
 }) {
-  const collection = deslugify((await params).collection);
+  const { collection } = await params;
   const { displayName } = collections[collection];
   return { title: displayName ?? collection };
 }
 
 export default async function Page({ params }: { params: Promise<Params> }) {
-  const collection = deslugify((await params).collection);
+  const { collection } = await params;
   const images = await getTagImages(collection);
   const { background, displayName } = collections[collection];
   const maxCols =
@@ -39,9 +39,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     <>
       <header id="photography-header">
         <Breadcrumbs
-          pathOverride={`/photography/collections/${
-            displayName ?? deslugify(collection)
-          }`}
+          pathOverride={`/photography/collections/${displayName ?? collection}`}
         />
       </header>
       <ImageGrid images={images} background={background} maxCols={maxCols} />

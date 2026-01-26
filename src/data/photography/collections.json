@@ -82,7 +82,7 @@
     "background": "black",
     "coverPhotoPosition": "center 30%"
   },
-  "night sky": {
+  "night-sky": {
     "icon": "🌌"
   },
   "nonplace": {
@@ -140,5 +140,6 @@
   "vehicle": {
     "displayName": "vehicles",
     "icon": "🚗"
-  }
+  },
+  "night sky": {}
 }
