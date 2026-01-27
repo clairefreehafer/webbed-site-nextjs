@@ -169,6 +169,16 @@
         "coverImage": "https://covers.openlibrary.org/b/olid/OL29539396M-M.jpg",
         "coverColor": "#e34c2c",
         "numberOfPages": 320
+      },
+      {
+        "type": "book",
+        "olid": "OL61027645M",
+        "title": "Service Model",
+        "link": "https://openlibrary.org/books/OL61027645M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL61027645M-M.jpg",
+        "coverColor": "linear-gradient(335.1987896332302deg, red, orange, yellow, green, blue, indigo, violet)",
+        "numberOfPages": 373,
+        "author": "Adrian Tchaikovsky"
       }
     ]
   }
