@@ -125,6 +125,17 @@
         "coverColor": "#c7373d",
         "numberOfPages": 304,
         "author": "Talia Lavin"
+      },
+      {
+        "type": "book",
+        "olid": "OL48251347M",
+        "title": "Paved Paradise",
+        "subtitle": "How Parking Explains the World",
+        "link": "https://openlibrary.org/books/OL48251347M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL48251347M-M.jpg",
+        "coverColor": "#dc2c1b",
+        "author": "Henry Grabar",
+        "numberOfPages": 368
       }
     ]
   }

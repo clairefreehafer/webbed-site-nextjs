@@ -1,0 +1,43 @@
+{
+  "title": "memoirs",
+  "items": [
+    {
+      "type": "book",
+      "olid": "OL28900544M",
+      "title": "Gender Queer",
+      "subtitle": "a Memoir",
+      "link": "https://openlibrary.org/books/OL28900544M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL28900544M-M.jpg",
+      "coverColor": "#cc9c2c",
+      "numberOfPages": 240,
+      "author": "Maia Kobabe"
+    },
+    {
+      "type": "book",
+      "olid": "OL26945501M",
+      "title": "Heart berries",
+      "subtitle": "a memoir",
+      "link": "https://openlibrary.org/books/OL26945501M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL26945501M-M.jpg",
+      "coverColor": "#a02c40",
+      "numberOfPages": 142,
+      "author": "Terese Marie Mailhot"
+    },
+    {
+      "type": "book",
+      "olid": "OL38969038M",
+      "title": "Making Love with the Land",
+      "subtitle": "Essays",
+      "link": "https://openlibrary.org/books/OL38969038M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL38969038M-M.jpg",
+      "coverColor": "#84a25c",
+      "author": "Joshua Whitehead",
+      "numberOfPages": 232
+    },
+    {
+      "type": "book",
+      "title": "Uncanny Valley Girls",
+      "author": "Zefyr Lisowski"
+    }
+  ]
+}

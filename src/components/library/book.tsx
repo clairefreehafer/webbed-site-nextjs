@@ -35,7 +35,9 @@ export default async function Book({ bookJson }: { bookJson: ShelvedBook }) {
             <br />
             {bookJson.author}
           </p>
-          <Image src={bookJson.coverImage ?? ""} alt="" fill />
+          {bookJson.coverImage && (
+            <Image src={bookJson.coverImage ?? null} alt="" fill />
+          )}
         </div>
       </a>
 

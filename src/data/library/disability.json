@@ -35,6 +35,17 @@
     },
     {
       "type": "book",
+      "olid": "OL37872951M",
+      "title": "Neuroqueer Heresies",
+      "subtitle": "Notes on the Neurodiversity Paradigm, Autistic Empowerment, and Postnormal Possibilities",
+      "link": "https://openlibrary.org/books/OL37872951M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL37872951M-M.jpg",
+      "coverColor": "#56c2c3",
+      "numberOfPages": 196,
+      "author": "Nick Walker"
+    },
+    {
+      "type": "book",
       "olid": "OL40222556M",
       "title": "The Future Is Disabled",
       "subtitle": "Prophecies, Love Notes and Mourning Songs",
@@ -53,6 +64,16 @@
       "coverColor": "#ab6445",
       "numberOfPages": 208,
       "author": "Elisabeth Tova Bailey"
+    },
+    {
+      "type": "book",
+      "title": "Uncanny Valley Girls",
+      "author": "Zefyr Lisowski"
+    },
+    {
+      "type": "book",
+      "title": "Health Communism",
+      "author": "Beatrice Alder-Bolton & Artie Vierkant"
     }
   ]
 }

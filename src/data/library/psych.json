@@ -3,6 +3,17 @@
   "items": [
     {
       "type": "book",
+      "olid": "OL23962601M",
+      "title": "Anatomy of an epidemic",
+      "subtitle": "magic bullets, psychiatric drugs, and the astonishing rise of mental illness in America",
+      "link": "https://openlibrary.org/books/OL23962601M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL23962601M-M.jpg",
+      "coverColor": "#bc1c1c",
+      "numberOfPages": 404,
+      "author": "Robert Whitaker"
+    },
+    {
+      "type": "book",
       "olid": "OL34663797M",
       "title": "Gender Mosaic",
       "subtitle": "Beyond the Myth of the Male and Female Brain",
@@ -22,6 +33,17 @@
       "coverColor": "#7f7f7f",
       "numberOfPages": 384,
       "author": "Anne Harrington"
+    },
+    {
+      "type": "book",
+      "olid": "OL30037965M",
+      "title": "Nobody's Normal",
+      "subtitle": "How Culture Created the Stigma of Mental Illness",
+      "link": "https://openlibrary.org/books/OL30037965M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL30037965M-M.jpg",
+      "coverColor": "#bcc438",
+      "numberOfPages": 384,
+      "author": "Roy R. Grinker"
     },
     {
       "type": "book",

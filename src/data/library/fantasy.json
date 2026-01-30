@@ -1,5 +1,4 @@
 {
-  "slug": "fantasy",
   "title": "fantasy",
   "items": {
     "the-celestial-kingdom-duology": [
@@ -32,6 +31,68 @@
         "coverImage": "https://covers.openlibrary.org/b/olid/OL50620667M-M.jpg",
         "coverColor": "#3cb484",
         "numberOfPages": 176
+      }
+    ],
+    "the-earthsea-cycle": [
+      {
+        "type": "book",
+        "olid": "OL5613890M",
+        "title": "A Wizard of Earthsea",
+        "link": "https://openlibrary.org/books/OL5613890M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL5613890M-M.jpg",
+        "coverColor": "#d67451",
+        "numberOfPages": 205,
+        "author": "Ursula K. Le Guin"
+      },
+      {
+        "type": "book",
+        "olid": "OL32109560M",
+        "title": "The Tombs of Atuan",
+        "link": "https://openlibrary.org/books/OL32109560M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL32109560M-M.jpg",
+        "coverColor": "#54a8b4",
+        "numberOfPages": 146,
+        "author": "Ursula K. Le Guin"
+      },
+      {
+        "type": "book",
+        "olid": "OL24615174M",
+        "title": "The Farthest Shore",
+        "link": "https://openlibrary.org/books/OL24615174M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL24615174M-M.jpg",
+        "coverColor": "#8daf4f",
+        "numberOfPages": 197,
+        "author": "Ursula K. Le Guin"
+      },
+      {
+        "type": "book",
+        "olid": "OL24967473M",
+        "title": "Tehanu",
+        "link": "https://openlibrary.org/books/OL24967473M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL24967473M-M.jpg",
+        "coverColor": "#8c4c3c",
+        "numberOfPages": 281,
+        "author": "Ursula K. Le Guin"
+      },
+      {
+        "type": "book",
+        "olid": "OL3940470M",
+        "title": "Tales from Earthsea",
+        "link": "https://openlibrary.org/books/OL3940470M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL3940470M-M.jpg",
+        "coverColor": "#0580ad",
+        "numberOfPages": 296,
+        "author": "Ursula K. Le Guin"
+      },
+      {
+        "type": "book",
+        "olid": "OL3561205M",
+        "title": "The Other Wind",
+        "link": "https://openlibrary.org/books/OL3561205M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL3561205M-M.jpg",
+        "coverColor": "#f54c2e",
+        "numberOfPages": 237,
+        "author": "Ursula K. Le Guin"
       }
     ],
     "the-rising-world": [

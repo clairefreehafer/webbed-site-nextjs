@@ -34,7 +34,119 @@
         "numberOfPages": 503
       }
     ],
+    "dune": [
+      {
+        "type": "book",
+        "olid": "OL26242482M",
+        "title": "Dune",
+        "link": "https://openlibrary.org/books/OL26242482M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL26242482M-M.jpg",
+        "coverColor": "#f3a047",
+        "numberOfPages": 541,
+        "author": "Frank Herbert"
+      },
+      {
+        "type": "book",
+        "olid": "OL15048950M",
+        "title": "Dune Messiah",
+        "link": "https://openlibrary.org/books/OL15048950M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL15048950M-M.jpg",
+        "coverColor": "#44acab",
+        "author": "Frank Herbert",
+        "numberOfPages": 329
+      },
+      {
+        "type": "book",
+        "olid": "OL7878772M",
+        "title": "Children of Dune",
+        "link": "https://openlibrary.org/books/OL7878772M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL7878772M-M.jpg",
+        "coverColor": "#8e3432",
+        "numberOfPages": 432,
+        "author": "Frank Herbert"
+      },
+      {
+        "type": "book",
+        "olid": "OL7501667M",
+        "title": "God Emperor of Dune",
+        "link": "https://openlibrary.org/books/OL7501667M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL7501667M-M.jpg",
+        "coverColor": "#f5792f",
+        "numberOfPages": 423,
+        "author": "Frank Herbert"
+      },
+      {
+        "type": "book",
+        "olid": "OL15569270M",
+        "title": "Heretics of Dune",
+        "link": "https://openlibrary.org/books/OL15569270M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL15569270M-M.jpg",
+        "coverColor": "#884428",
+        "numberOfPages": 480,
+        "author": "Frank Herbert"
+      },
+      {
+        "type": "book",
+        "olid": "OL23224089M",
+        "title": "Chapterhouse, Dune",
+        "link": "https://openlibrary.org/books/OL23224089M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL23224089M-M.jpg",
+        "coverColor": "#c44c24",
+        "numberOfPages": 432,
+        "author": "Frank Herbert"
+      },
+      {
+        "type": "book",
+        "olid": "OL8054140M",
+        "title": "Hunters of Dune",
+        "link": "https://openlibrary.org/books/OL8054140M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL8054140M-M.jpg",
+        "coverColor": "#eb1d25",
+        "numberOfPages": 563,
+        "author": "Brian Herbert"
+      },
+      {
+        "type": "book",
+        "olid": "OL28372909M",
+        "title": "Sandworms of dune",
+        "link": "https://openlibrary.org/books/OL28372909M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL28372909M-M.jpg",
+        "coverColor": "#a92404",
+        "numberOfPages": 494,
+        "author": "Brian Herbert"
+      }
+    ],
     "the-hainish-cycle": [
+      {
+        "type": "book",
+        "olid": "OL22963301M",
+        "title": "Rocannon's world",
+        "link": "https://openlibrary.org/books/OL22963301M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL22963301M-M.jpg",
+        "coverColor": "#b6600c",
+        "numberOfPages": 136,
+        "author": "Ursula K. Le Guin"
+      },
+      {
+        "type": "book",
+        "olid": "OL24228603M",
+        "title": "Planet of exile",
+        "link": "https://openlibrary.org/books/OL24228603M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL24228603M-M.jpg",
+        "coverColor": "#8c2610",
+        "numberOfPages": 140,
+        "author": "Ursula K. Le Guin"
+      },
+      {
+        "type": "book",
+        "olid": "OL15080924M",
+        "title": "City of illusions",
+        "link": "https://openlibrary.org/books/OL15080924M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL15080924M-M.jpg",
+        "coverColor": "#8b4821",
+        "numberOfPages": 159,
+        "author": "Ursula K. Le Guin"
+      },
       {
         "type": "book",
         "author": "Ursula K. LeGuin",

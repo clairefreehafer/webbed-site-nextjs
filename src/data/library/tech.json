@@ -80,6 +80,17 @@
     },
     {
       "type": "book",
+      "olid": "OL47326667M",
+      "title": "Extremely Online",
+      "subtitle": "The Untold Story of Fame, Influence, and Power on the Internet",
+      "link": "https://openlibrary.org/books/OL47326667M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL47326667M-M.jpg",
+      "coverColor": "#f45c5c",
+      "numberOfPages": 352,
+      "author": "Taylor Lorenz"
+    },
+    {
+      "type": "book",
       "olid": "OL57433840M",
       "title": "Mood Machine",
       "subtitle": "The Rise of Spotify and the Costs of the Perfect Playlist",
@@ -143,6 +154,17 @@
       "coverColor": "#ec442c",
       "author": "Jathan Sadowski",
       "numberOfPages": 233
+    },
+    {
+      "type": "book",
+      "olid": "OL40130823M",
+      "title": "Tokens",
+      "subtitle": "The Future of Money",
+      "link": "https://openlibrary.org/books/OL40130823M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL40130823M-M.jpg",
+      "coverColor": "#f3b90e",
+      "author": "Rachel O'Dwyer",
+      "numberOfPages": 240
     },
     {
       "type": "book",
