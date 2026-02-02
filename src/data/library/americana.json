@@ -136,6 +136,17 @@
         "coverColor": "#dc2c1b",
         "author": "Henry Grabar",
         "numberOfPages": 368
+      },
+      {
+        "type": "book",
+        "olid": "OL24088613M",
+        "title": "Fordlandia",
+        "subtitle": "The Rise and Fall of Henry Ford's Forgotten Jungle City",
+        "link": "https://openlibrary.org/books/OL24088613M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL24088613M-M.jpg",
+        "coverColor": "#478fb4",
+        "numberOfPages": 432,
+        "author": "Greg Grandin"
       }
     ]
   }

@@ -87,6 +87,10 @@
     "markerColor": "peachpuff",
     "name": "newport, rhode island"
   },
+  "nybg": {
+    "coordinates": [-73.878333, 40.863611],
+    "name": "new york botanical garden"
+  },
   "owls-head": {
     "coordinates": [-69.0571014, 44.0823473],
     "markerColor": "",

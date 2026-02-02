@@ -197,6 +197,8 @@ export const generateTagAlbums = async (
     );
   }
 
+  let shouldUpdateJson = false;
+
   for (const tag of groupTags) {
     let tagConfig = groupTagJson[tag];
 
@@ -206,6 +208,7 @@ export const generateTagAlbums = async (
       );
       tagConfig = {};
       groupTagJson[tag] = tagConfig;
+      shouldUpdateJson = true;
     }
 
     const numberOfPhotos = getNumberOfTaggedImages(tag);
@@ -235,13 +238,16 @@ export const generateTagAlbums = async (
 
     albums.push(mappedAlbum);
   }
-  writeFileSync(
-    `${process.cwd()}/src/data/photography/${tagGroup}.json`,
-    JSON.stringify(groupTagJson, null, 2),
-  );
-  console.log(
-    `📝 [updateShelvesJson] updated JSON written to ${tagGroup}.json.`,
-  );
+
+  if (shouldUpdateJson) {
+    writeFileSync(
+      `${process.cwd()}/src/data/photography/${tagGroup}.json`,
+      JSON.stringify(groupTagJson, null, 2),
+    );
+    console.log(
+      `📝 [generateTagAlbum] updated JSON written to ${tagGroup}.json.`,
+    );
+  }
 
   return albums;
 };

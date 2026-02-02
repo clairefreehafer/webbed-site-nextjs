@@ -9,7 +9,8 @@
     "background": "black"
   },
   "gif": {
-    "displayName": "gifs"
+    "displayName": "gifs",
+    "icon": "▶️"
   },
   "hipstamatic": {
     "icon": "📱"
@@ -17,8 +18,12 @@
   "long-exposure": {
     "icon": "🌃"
   },
-  "panorama": {},
+  "panorama": {
+    "icon": "↔️"
+  },
   "pudding-camera": {},
   "trichrome": {},
-  "uji": {}
+  "uji": {
+    "icon": "📱"
+  }
 }

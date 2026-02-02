@@ -12,20 +12,11 @@ export default function Page() {
         this site is built with both the desktop and mobile experience in mind,
         but desktop is the recommended way to view it.
       </p>
-      <h3>📸 photography</h3>
-      <p>
-        the <Link href="/photography">photography section</Link> of this site is
-        functional but still a work in progress. for a more robust collection of
-        my photography, you can also checkout my{" "}
-        <a href="https://clairefreehafer.smugmug.com" target="_blank">
-          smugmug
-        </a>{" "}
-        or{" "}
-        <a href="https://flickr.com/clairefreehafer" target="_blank">
-          flickr
-        </a>
-        .
-      </p>
+      <h3>
+        📸
+        <Link href="/photography">photography</Link>
+      </h3>
+
       <h3>🎮 video games</h3>
       <p>
         view virtual photography and other work inspired by and created with my

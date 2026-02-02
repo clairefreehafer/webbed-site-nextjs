@@ -25,6 +25,17 @@
     },
     {
       "type": "book",
+      "olid": "OL29483465M",
+      "title": "Breaking Things at Work",
+      "subtitle": "The Luddites Were Right about Why You Hate Your Job",
+      "link": "https://openlibrary.org/books/OL29483465M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL29483465M-M.jpg",
+      "coverColor": "#7f7f7f",
+      "numberOfPages": 176,
+      "author": "Gavin Mueller"
+    },
+    {
+      "type": "book",
       "olid": "OL49504279M",
       "numberOfPages": 352,
       "title": "Breaking Twitter",
@@ -88,6 +99,16 @@
       "coverColor": "#f45c5c",
       "numberOfPages": 352,
       "author": "Taylor Lorenz"
+    },
+    {
+      "type": "book",
+      "olid": "OL30020101M",
+      "title": "Internet for the People",
+      "link": "https://openlibrary.org/books/OL30020101M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL30020101M-M.jpg",
+      "coverColor": "#d8515c",
+      "numberOfPages": 192,
+      "author": "Ben Tarnoff"
     },
     {
       "type": "book",

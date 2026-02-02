@@ -25,6 +25,17 @@
     },
     {
       "type": "book",
+      "olid": "OL26967828M",
+      "title": "Heavy",
+      "subtitle": "an American memoir",
+      "link": "https://openlibrary.org/books/OL26967828M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL26967828M-M.jpg",
+      "coverColor": "#8c1313",
+      "numberOfPages": 241,
+      "author": "Kiese Laymon"
+    },
+    {
+      "type": "book",
       "olid": "OL38969038M",
       "title": "Making Love with the Land",
       "subtitle": "Essays",

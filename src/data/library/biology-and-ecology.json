@@ -35,6 +35,16 @@
     },
     {
       "type": "book",
+      "olid": "OL31499159M",
+      "title": "The Book of Eels",
+      "link": "https://openlibrary.org/books/OL31499159M",
+      "coverImage": "https://covers.openlibrary.org/b/olid/OL31499159M-M.jpg",
+      "coverColor": "#baa037",
+      "numberOfPages": 320,
+      "author": "Patrik Svensson"
+    },
+    {
+      "type": "book",
       "olid": "OL27427901M",
       "title": "The Sound of a Wild Snail Eating",
       "link": "https://openlibrary.org/books/OL27427901M",
