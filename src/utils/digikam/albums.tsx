@@ -1,7 +1,13 @@
+import pc from "picocolors";
 import { cache } from "react";
+
+import albumGroupsJson from "@/data/photography/album-groups.json";
+import { AlbumGroupConfig } from "@/types/photography";
 
 import { CoverPhoto, transformDigikamCoverPhoto } from "./cover-photos";
 import { digikam, Image } from "./index";
+
+const albumGroups: Record<string, AlbumGroupConfig> = albumGroupsJson;
 
 /** fields returned from querying the digikam database. */
 interface DigikamAlbum {
@@ -25,6 +31,7 @@ export interface AlbumCaptionJson {
   description?: string;
   coverPhotoPosition?: string;
   icon?: string;
+  groups?: string[];
   /** zelda */
   sortBy?: keyof Pick<Image, "compendiumNumber" | "title">;
 }
@@ -38,6 +45,7 @@ export type Album = {
   icon?: AlbumCaptionJson["icon"];
   slug: string;
   numberOfPhotos?: number;
+  groups: string[];
 };
 
 async function transformDigikamAlbum(
@@ -46,6 +54,7 @@ async function transformDigikamAlbum(
   const transformedAlbum: Album = {
     date: album.date,
     slug: album.slug,
+    groups: [],
   };
 
   try {
@@ -59,6 +68,19 @@ async function transformDigikamAlbum(
     let captionJson: AlbumCaptionJson = {};
     if (album.caption) {
       captionJson = JSON.parse(album.caption);
+
+      if (Array.isArray(captionJson.groups)) {
+        for (const group of captionJson.groups) {
+          if (!albumGroups[group]) {
+            console.warn(
+              "🚧",
+              pc.dim("[transformDigikamAlbum]"),
+              "missing album group config:",
+              pc.yellow(group),
+            );
+          }
+        }
+      }
     }
     // add cover photo info if set
     let coverPhoto: CoverPhoto | undefined = undefined;
@@ -91,7 +113,11 @@ async function transformDigikamAlbum(
     };
   } catch (error) {
     console.log(
-      `❌ [getAlbums] problem generating album data for ${album.slug}:`,
+      "❌",
+      pc.dim("[getAlbums]"),
+      "problem generating album data for",
+      pc.red(album.slug),
+      ":",
       (error as Error).message,
     );
     return null;
@@ -135,9 +161,7 @@ export const getAlbums = cache(
       .all({
         collectionLikeString: `%${collection}%`,
       });
-    console.log(
-      `📁 [getAlbums] ${albums.length} albums found in "${collection}".`,
-    );
+
     const transformedAlbums: Album[] = [];
     for (const album of albums) {
       const transformedAlbum = await transformDigikamAlbum(album);
@@ -149,40 +173,6 @@ export const getAlbums = cache(
     return transformedAlbums;
   },
 );
-
-// could also do tags or whatever in the album description
-// TODO: sort
-export const getAlbumGroups = (rootCollection: string): string[] => {
-  const albumGroups = digikam
-    .prepare<
-      {
-        collectionLikeString: string;
-      },
-      DigikamAlbum
-    >(
-      `
-        SELECT DISTINCT
-          Albums.collection
-        FROM
-          Albums
-        WHERE
-          Albums.albumRoot == 4
-          AND Albums.collection LIKE $collectionLikeString
-      `,
-    )
-    .all({
-      collectionLikeString: `%${rootCollection}/%`,
-    });
-  console.log(
-    `📁 [getAlbumGroups] ${albumGroups.length} album groups found in "${rootCollection}".`,
-  );
-
-  return (
-    albumGroups?.map((group) =>
-      group.collection.replace(`${rootCollection}/`, ""),
-    ) ?? []
-  );
-};
 
 export const getAlbumDate = (albumSlug: string) => {
   const result = digikam

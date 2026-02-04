@@ -1,6 +1,7 @@
 import { type Palette } from "@vibrant/color";
 import fs from "fs";
 import { Vibrant } from "node-vibrant/node";
+import pc from "picocolors";
 import sharp from "sharp";
 
 import { AlbumCaptionJson, digikam, getParentTag } from "./index";
@@ -98,7 +99,10 @@ export async function transformDigikamImage(
     !/^\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}(_\d)?$/.test(nameWithoutExtension)
   ) {
     console.warn(
-      `🚧 [transformDigikamImage] image needs to be renamed: ${transformedImage.src}`,
+      "🚧",
+      pc.dim("[transformDigikamImage]"),
+      "image needs to be renamed:",
+      pc.yellow(transformedImage.src),
     );
   }
 
@@ -115,11 +119,19 @@ export async function transformDigikamImage(
       // create output directories if needed
       if (!fs.existsSync(outputDirectory)) {
         console.log(
-          `📝 [transformDigikamImage] creating directory ${outputDirectory}...`,
+          "📝",
+          pc.dim("[transformDigikamImage]"),
+          "creating directory",
+          pc.green(outputDirectory),
         );
         fs.mkdirSync(outputDirectory, { recursive: true });
       }
-      console.log(`📝 [transformDigikamImage] creating image ${outputPath}...`);
+      console.log(
+        "📝",
+        pc.dim("[transformDigikamImage]"),
+        "creating image",
+        pc.green(outputPath),
+      );
 
       // resize and convert to webp
       const resizeOptions =
@@ -185,7 +197,10 @@ export async function transformDigikamImage(
       transformedImage.camera = digikamImage.camera;
     } else if (transformedImage.albumCollection === "photography") {
       console.warn(
-        `🚧 [transformDigikamImage] missing camera info: ${transformedImage.src}`,
+        "🚧",
+        pc.dim("[transformDigikamImage]"),
+        "missing camera info:",
+        pc.yellow(transformedImage.src),
       );
     }
     if (digikamImage.lens) {
@@ -222,15 +237,20 @@ export async function transformDigikamImage(
       !transformedImage.technical.includes("gif")
     ) {
       console.warn(
-        `🚧 [transformDigikamImage] animated image missing "gif" tag: ${transformedImage.src}`,
+        "🚧",
+        pc.dim("[transformDigikamImage]"),
+        'animated image missing "gif" tag:',
+        pc.yellow(transformedImage.src),
       );
     }
   } catch (error) {
     // fail gracefully if there is an issue
-    console.log(
-      `❌ [transformDigikamImage] issue transforming image data for ${
-        digikamImage.path
-      }: ${(error as Error).message}`,
+    console.error(
+      "❌",
+      pc.dim("[transformDigikamImage]"),
+      "issue transforming image data for",
+      pc.red(digikamImage.path),
+      (error as Error).message,
     );
   }
 
@@ -270,7 +290,7 @@ export const getAlbumImages = async (
           ImageCaption.comment as caption,
           ImageRelations.object as groupParent,
           group_concat(ImageRelations.subject) as groupChildren,
-          group_concat(Tags.name) as tags,
+          group_concat(DISTINCT Tags.name) as tags,
           ImageMetadata.make || ' ' || ImageMetadata.model as camera,
 		      ImageMetadata.lens
         FROM Albums
@@ -296,9 +316,7 @@ export const getAlbumImages = async (
       relativePathLikeString: `%${relativePath}`,
       collectionLikeString: `%${collection}%`,
     });
-  console.log(
-    `📷 [getAlbumImages] ${digikamImages.length} images found in "${collection}/${relativePath}"`,
-  );
+
   const images: Image[] = [];
   let sortBy: AlbumCaptionJson["sortBy"] = undefined;
 

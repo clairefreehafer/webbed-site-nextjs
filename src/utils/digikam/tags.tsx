@@ -1,4 +1,5 @@
 import { writeFileSync } from "fs";
+import pc from "picocolors";
 
 import collections from "@/data/photography/collections.json";
 import locationsJson from "@/data/photography/locations.json";
@@ -60,9 +61,7 @@ export const getTagImages = async (
       `,
     )
     .all({ tag, collectionLikeString: `%${collection}%` });
-  console.log(
-    `📷 [getTagImages] ${digikamImages.length} ${collection} images found tagged "${tag}".`,
-  );
+
   const images: Image[] = [];
   for (const image of digikamImages) {
     const transformedImage = await transformDigikamImage(image);
@@ -146,7 +145,6 @@ export const getMapData = (): GeoJson => {
       `,
     )
     .all();
-  console.log(`🗺️  [getMapData] found ${locationTags.length} location tags.`);
 
   const mapData: GeoJson = {
     type: "FeatureCollection",
@@ -156,16 +154,29 @@ export const getMapData = (): GeoJson => {
     const tagConfig = locations[tag.tagName];
     if (!tagConfig || !("coordinates" in tagConfig)) {
       console.warn(
-        `🚧 [getMapData] no or incomplete tag config for "${tag.tagName}"`,
+        "🚧",
+        pc.dim("[getMapData]"),
+        "no or incomplete tag config for",
+        pc.yellow(tag.tagName),
       );
       continue;
     }
     if (tagConfig.coordinates.length !== 2) {
-      console.warn(`❌ [getMapData] invalid coordinates for "${tag.tagName}"`);
+      console.warn(
+        "❌",
+        pc.dim("[getMapData]"),
+        "invalid coordinates for",
+        pc.red(tag.tagName),
+      );
       continue;
     }
     if (tag.numberOfImages === 0) {
-      console.warn(`🚧 [getMapData] no images with tag "${tag.tagName}"`);
+      console.warn(
+        "🚧",
+        pc.dim("[getMapData]"),
+        "no images with tag",
+        pc.red(tag.tagName),
+      );
       continue;
     }
     mapData.features.push({
@@ -182,6 +193,71 @@ export const getMapData = (): GeoJson => {
       },
     });
   }
+  return mapData;
+};
+
+export const generateAlbumGroupMapData = (albumGroup: string): GeoJson => {
+  const mapData: GeoJson = {
+    type: "FeatureCollection",
+    features: [],
+  };
+
+  const tagsString = digikam
+    .prepare<[{ albumGroupLikeString: string }], { locationTags: string }>(
+      `
+        SELECT
+          group_concat(DISTINCT Tags.name) as locationTags
+        FROM Albums
+          LEFT JOIN Images ON Images.album = Albums.id
+          LEFT JOIN ImageTags ON ImageTags.imageid = Images.id
+          LEFT JOIN Tags ON ImageTags.tagid = Tags.id
+        WHERE Albums.albumRoot = 4
+          AND Albums.collection LIKE '%photography%'
+          AND Albums.caption LIKE $albumGroupLikeString
+          AND Tags.pid = 188
+
+      `,
+    )
+    .get({ albumGroupLikeString: `%${albumGroup}%` });
+
+  if (!tagsString || !tagsString.locationTags) {
+    console.warn(
+      "🚧",
+      pc.dim("[generateAlbumGroupMapData]"),
+      "no location tags found for group",
+      pc.yellow(albumGroup),
+    );
+    return mapData;
+  }
+
+  const locationTags = tagsString.locationTags.split(",");
+
+  for (const tag of locationTags) {
+    const tagConfig = locations[tag];
+
+    if (!tagConfig) {
+      console.warn(
+        "🚧",
+        pc.dim("[generateMapFromTags]"),
+        "missing tag config for",
+        pc.yellow(tag),
+      );
+      continue;
+    }
+
+    mapData.features.push({
+      type: "Feature",
+      geometry: {
+        type: "Point",
+        coordinates: tagConfig.coordinates as [number, number],
+      },
+      properties: {
+        name: tagConfig.name,
+        markerColor: tagConfig.markerColor,
+      },
+    });
+  }
+
   return mapData;
 };
 
@@ -234,6 +310,7 @@ export const generateTagAlbums = async (
         ...coverPhoto,
         position: tagConfig.coverPhotoPosition,
       },
+      groups: [],
     };
 
     albums.push(mappedAlbum);

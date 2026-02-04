@@ -8,3 +8,15 @@
   padding: 2rem 0;
   flex-direction: column;
 }
+
+.link-list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.link-description {
+  font-size: 1rem;
+  font-weight: 300;
+}

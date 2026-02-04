@@ -1,0 +1,13 @@
+{
+  "new-york-city": {
+    "boundsBuffer": 0.1
+  },
+  "national-park": {
+    "displayName": "national parks"
+  },
+  "state-park": {
+    "displayName": "state parks"
+  },
+  "southwest-rv-trip": {},
+  "colorado-2023": {}
+}

@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync, writeFileSync } from "fs";
 import { Vibrant } from "node-vibrant/node";
 import path from "path";
+import pc from "picocolors";
 import { cache } from "react";
 import sharp from "sharp";
 
@@ -21,7 +22,7 @@ import {
 
 export const getShelves = cache(async () => {
   const shelfFiles = readdirSync(
-    path.join(`${process.cwd()}/src/data/library`)
+    path.join(`${process.cwd()}/src/data/library`),
   );
 
   const shelves: Shelf[] = [];
@@ -40,7 +41,10 @@ export const getShelves = cache(async () => {
 async function updateShelvedBook(bookJson: ShelvedBook): Promise<boolean> {
   if (!bookJson.olid) {
     console.warn(
-      `📙 [updateShelvedBook] missing OLID:\n${JSON.stringify(bookJson)}`
+      "📙",
+      pc.dim("[updateShelvedBook]"),
+      "missing OLID:\n> ",
+      pc.yellow(JSON.stringify(bookJson)),
     );
     return false;
   }
@@ -88,7 +92,7 @@ async function updateShelvedBook(bookJson: ShelvedBook): Promise<boolean> {
         try {
           const palette = await Vibrant.from(
             bookJson.coverImage ??
-              `https://covers.openlibrary.org/b/olid/${bookJson.olid}-M.jpg`
+              `https://covers.openlibrary.org/b/olid/${bookJson.olid}-M.jpg`,
           ).getPalette();
           bookJson.coverColor =
             palette.Vibrant?.hex ??
@@ -97,7 +101,7 @@ async function updateShelvedBook(bookJson: ShelvedBook): Promise<boolean> {
             }deg, red, orange, yellow, green, blue, indigo, violet)`;
         } catch (e) {
           console.warn(
-            `📕 [updateShelvedBook] could not generate palette: ${e}`
+            `📕 [updateShelvedBook] could not generate palette: ${e}`,
           );
         }
         break;
@@ -106,7 +110,7 @@ async function updateShelvedBook(bookJson: ShelvedBook): Promise<boolean> {
           bookJson.numberOfPages = openLibraryData.number_of_pages;
         } else {
           console.warn(
-            `📕 [updateShelvedBook] could not get number of pages: ${bookJson.title}`
+            `📕 [updateShelvedBook] could not get number of pages: ${bookJson.title}`,
           );
         }
         break;
@@ -125,13 +129,13 @@ async function updateShelvedBook(bookJson: ShelvedBook): Promise<boolean> {
           bookJson.author = authorData.name;
         } else {
           console.warn(
-            `📕 [updateShelvedBook] could not get author: ${bookJson.title}`
+            `📕 [updateShelvedBook] could not get author: ${bookJson.title}`,
           );
         }
         break;
       default:
         console.warn(
-          `📕 [updateShelvedBook] unknown key to update: ${keyToUpdate}`
+          `📕 [updateShelvedBook] unknown key to update: ${keyToUpdate}`,
         );
     }
   }
@@ -179,7 +183,7 @@ async function updateShelvedTv(tvJson: ShelvedTv): Promise<boolean> {
       case "coverColor":
         try {
           const palette = await Vibrant.from(
-            tvJson.coverImage ?? data.image
+            tvJson.coverImage ?? data.image,
           ).getPalette();
           tvJson.coverColor = palette.DarkVibrant?.hex;
         } catch (e) {
@@ -188,7 +192,7 @@ async function updateShelvedTv(tvJson: ShelvedTv): Promise<boolean> {
         break;
       default:
         console.warn(
-          `❌ [updateShelvedTv] unknown key to update: ${keyToUpdate}`
+          `❌ [updateShelvedTv] unknown key to update: ${keyToUpdate}`,
         );
     }
   }
@@ -198,7 +202,7 @@ async function updateShelvedTv(tvJson: ShelvedTv): Promise<boolean> {
 
 /** Returns whether or not the JSON was updated. */
 async function updateShelvedVideoGame(
-  videoGameJson: ShelvedVideoGame
+  videoGameJson: ShelvedVideoGame,
 ): Promise<boolean> {
   const keysToCheck = ["coverColor"] satisfies (keyof ShelvedVideoGame)[];
   const keysToUpdate: (typeof keysToCheck)[number][] = [];
@@ -226,22 +230,22 @@ async function updateShelvedVideoGame(
               image = await sharp(imageBuffer).jpeg().toBuffer();
             }
             const palette = await Vibrant.from(image).getPalette();
-            console.log("palette", palette.LightVibrant?.hex);
+
             videoGameJson.coverColor = palette.LightVibrant?.hex;
           } catch (e) {
             console.warn(
-              `❌ [updateShelvedVideoGame] could not generate palette: ${e}`
+              `❌ [updateShelvedVideoGame] could not generate palette: ${e}`,
             );
           }
         } else {
           console.warn(
-            `❌ [updateShelvedVideoGame] missing cover image: ${videoGameJson.title}`
+            `❌ [updateShelvedVideoGame] missing cover image: ${videoGameJson.title}`,
           );
         }
         break;
       default:
         console.warn(
-          `❌ [updateShelvedVideoGame] unknown key to update: ${keyToUpdate}`
+          `❌ [updateShelvedVideoGame] unknown key to update: ${keyToUpdate}`,
         );
     }
   }
@@ -266,7 +270,7 @@ async function updateShelvedItem(shelvedItem: ShelvedItem): Promise<boolean> {
       console.warn(
         `[updateShelvedItem] ❌ Unknown shelved item type: ${
           (exhaustiveCheck as ShelvedItem).type
-        }`
+        }`,
       );
       return false;
   }
@@ -306,14 +310,14 @@ export const updateShelvesJson = cache(async () => {
       // sort shelves alphabetically by title
       if (Array.isArray(shelfToWrite.items)) {
         shelfToWrite.items.sort(
-          (a, b) => a.title?.localeCompare(b.title ?? "") ?? 0
+          (a, b) => a.title?.localeCompare(b.title ?? "") ?? 0,
         );
       } else {
         for (const section in shelf.items) {
           // don't sort series.
           if (section === "standalone") {
             shelfToWrite.items?.[section].sort(
-              (a, b) => a.title?.localeCompare(b.title ?? "") ?? 0
+              (a, b) => a.title?.localeCompare(b.title ?? "") ?? 0,
             );
           }
         }
@@ -321,10 +325,13 @@ export const updateShelvesJson = cache(async () => {
 
       writeFileSync(
         `${process.cwd()}/src/data/library/${shelf.slug}.json`,
-        JSON.stringify(shelfToWrite, null, 2)
+        JSON.stringify(shelfToWrite, null, 2),
       );
       console.log(
-        `📝 [updateShelvesJson] updated JSON written to ${shelf.slug}.json.`
+        "📝",
+        pc.dim("[updateShelvesJson]"),
+        "updated JSON written to",
+        pc.green(`${shelf.slug}.json`),
       );
     }
   }

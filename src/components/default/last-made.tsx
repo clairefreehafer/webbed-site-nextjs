@@ -25,7 +25,6 @@ function displayTimeAgo(dateString: string) {
   } else if (days > 6) {
     value = rtf.format(0 - Math.round(days / 7), "week");
     // 0.8-0.7
-    console.log(Math.round(days / 7) / 10);
     chipOpacity = 0.8 - (Math.round(days / 7) / 100) * 2;
   } else {
     value = rtf.format(0 - days, "day");

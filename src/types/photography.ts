@@ -11,9 +11,9 @@ export type GeoJson = {
     };
     properties: {
       name: string;
-      numberOfPhotos: number;
+      numberOfPhotos?: number;
       markerColor: React.CSSProperties["color"];
-      slug: string;
+      slug?: string;
     };
   }[];
 };
@@ -34,4 +34,9 @@ export type LocationConfig = {
   coordinates: number[];
   markerColor?: CSSProperties["color"];
   name: string;
+};
+
+export type AlbumGroupConfig = {
+  displayName?: string;
+  boundsBuffer?: number;
 };
