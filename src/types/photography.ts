@@ -33,7 +33,7 @@ export type TagConfig = Record<
 export type LocationConfig = {
   coordinates: number[];
   markerColor?: CSSProperties["color"];
-  name: string;
+  name?: string;
 };
 
 export type AlbumGroupConfig = {

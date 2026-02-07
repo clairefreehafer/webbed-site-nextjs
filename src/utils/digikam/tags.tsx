@@ -186,10 +186,10 @@ export const getMapData = (): GeoJson => {
         coordinates: tagConfig.coordinates as [number, number],
       },
       properties: {
-        name: tagConfig.name,
+        name: tagConfig.name ?? deslugify(tag.tagName),
         markerColor: tagConfig.markerColor,
         numberOfPhotos: tag.numberOfImages,
-        slug: slugify(tag.tagName),
+        slug: tag.tagName,
       },
     });
   }
