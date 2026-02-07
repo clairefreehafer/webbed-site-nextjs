@@ -1,5 +1,6 @@
 import Database from "better-sqlite3";
 import fs from "fs";
+import pc from "picocolors";
 import sharp from "sharp";
 
 export const digikam = new Database(`${process.cwd()}/local/digikam4.db`, {
@@ -31,11 +32,19 @@ export async function createImageFile(
       // create output directories if needed
       if (!fs.existsSync(outputDirectory)) {
         console.log(
-          `📝 [transformDigikamImage] creating directory ${outputDirectory}...`,
+          "📝",
+          pc.dim("[transformDigikamImage]"),
+          "creating directory",
+          pc.green(outputDirectory),
         );
         fs.mkdirSync(outputDirectory, { recursive: true });
       }
-      console.log(`📝 [transformDigikamImage] creating image ${outputPath}...`);
+      console.log(
+        "📝",
+        pc.dim("[transformDigikamImage]"),
+        "creating image",
+        pc.green(outputPath),
+      );
       // transform image
       await sharp(buffer, { animated: true })
         .resize(resize)
@@ -44,10 +53,12 @@ export async function createImageFile(
     }
   } catch (error) {
     // fail gracefully if there is an issue
-    console.log(
-      `❌ [transformDigikamImage] issue transforming image data for ${inputPath}: ${
-        (error as Error).message
-      }`,
+    console.error(
+      "❌",
+      pc.dim("[transformDigikamImage]"),
+      "issue transforming image data for",
+      pc.red(inputPath),
+      (error as Error).message,
     );
   }
 }

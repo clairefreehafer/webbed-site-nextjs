@@ -1,8 +1,15 @@
 {
+  "abel-tasmin-national-park": {
+    "coordinates": [173.05631135348918, -40.95394935823324]
+  },
   "adirondacks": {
     "coordinates": [-74.3333, 44],
     "markerColor": "forestgreen",
     "name": "the adirondacks"
+  },
+  "albert-park": {
+    "coordinates": [174.7675, -36.8507],
+    "name": "albert park, auckland, aotearoa"
   },
   "arecibo": {
     "coordinates": [-66.753333, 18.346667],
@@ -23,10 +30,24 @@
     "coordinates": [-69.6381, 43.8519],
     "name": "boothbay harbor, maine"
   },
+  "bronx-zoo": {
+    "coordinates": [-73.878333, 40.850278],
+    "name": "bronx zoo"
+  },
+  "brooklyn-navy-yard": {
+    "coordinates": [-73.973436, 40.702764]
+  },
+  "buffalo-mountain": {
+    "coordinates": [-106.1425, 39.616667]
+  },
   "camden": {
     "coordinates": [-69.065552, 44.210265],
     "markerColor": "powderblue",
     "name": "camden, maine"
+  },
+  "christchurch": {
+    "coordinates": [172.636111, -43.531111],
+    "name": "christchurch, aotearoa"
   },
   "colgate": {
     "coordinates": [-75.536389, 42.819444],
@@ -45,10 +66,33 @@
     "coordinates": [-68.6775, 44.223889],
     "name": "deer isle, maine"
   },
+  "det-kongelige-slott": {
+    "coordinates": [10.727656060949833, 59.91739499359221],
+    "name": "the roayl palace, oslo, norway"
+  },
+  "eldorado-canyon": {
+    "coordinates": [-105.292, 39.9306],
+    "name": "eldorado canyon state park"
+  },
   "flatbush": {
     "coordinates": [-73.9625, 40.6615],
     "markerColor": "gold",
     "name": "flatbush"
+  },
+  "freiburg": {
+    "coordinates": [7.85, 47.995],
+    "name": "freiburg im breisgau, germany"
+  },
+  "fromm-winery": {
+    "coordinates": [173.8478597, -41.5144283],
+    "name": "fromm winery, marlborough, aotearoa"
+  },
+  "giesen": {
+    "coordinates": [173.81895106470273, -41.48239771626505],
+    "name": "giesen cellar door, marlborough, aotearoa"
+  },
+  "grand-canyon": {
+    "coordinates": [-112.122, 36.0553]
   },
   "grounds-for-sculpture": {
     "coordinates": [-74.71761, 40.23569],
@@ -73,6 +117,24 @@
     "markerColor": "",
     "name": "joshua tree national park"
   },
+  "kaikoura": {
+    "coordinates": [173.681358, -42.400011],
+    "displayName": "kaikōura, aotearoa"
+  },
+  "kaiteriteri-beach": {
+    "coordinates": [173.018, -41.037],
+    "name": "kaiteriteri beach, aotearoa"
+  },
+  "keystone-gulch": {
+    "coordinates": [-105.3486, 40.00499]
+  },
+  "loveland-pass": {
+    "coordinates": [-105.879, 39.6636]
+  },
+  "marahau": {
+    "coordinates": [173.009, -41.0078],
+    "name": "mārahau, aotearoa"
+  },
   "mariaville-lake": {
     "coordinates": [-74.131111, 42.826667],
     "markerColor": "orangered",
@@ -82,6 +144,9 @@
     "coordinates": [-73.586841, 45.503343],
     "name": "montréal, quebec"
   },
+  "new-york-aquarium": {
+    "coordinates": [-73.9751, 40.5743]
+  },
   "newport": {
     "coordinates": [-71.3137707, 41.4899827],
     "markerColor": "peachpuff",
@@ -90,6 +155,10 @@
   "nybg": {
     "coordinates": [-73.878333, 40.863611],
     "name": "new york botanical garden"
+  },
+  "orana-wildlife-park": {
+    "coordinates": [172.4625, -43.4675],
+    "name": "orana wildlife park, christchurch, aotearoa"
   },
   "owls-head": {
     "coordinates": [-69.0571014, 44.0823473],
@@ -129,10 +198,22 @@
     "coordinates": [-69.114722, 44.109444],
     "name": "rockland, maine"
   },
+  "rocky-mountain": {
+    "coordinates": [-105.6833, 40.35],
+    "name": "rocky mountain national park"
+  },
+  "rocky-mountain-arsenal": {
+    "coordinates": [-104.842, 39.8333],
+    "name": "rocky mountain arsenal wildlife refuge"
+  },
   "rutland": {
     "coordinates": [-72.9817311, 43.6057574],
     "markerColor": "",
     "name": "rutland, vermont"
+  },
+  "saguaro": {
+    "coordinates": [-110.5, 32.25],
+    "name": "saguaro national park"
   },
   "salomon-beach": {
     "coordinates": [-64.795, 18.338333],
@@ -164,9 +245,29 @@
     "markerColor": "",
     "name": "st. john, USVI"
   },
+  "storm-king": {
+    "coordinates": [-74.0593, 41.4251],
+    "name": "storm king art center"
+  },
   "tromso": {
     "coordinates": [18.9558585, 69.6516345],
     "markerColor": "",
     "name": "tromsø, norway"
+  },
+  "waiheke-island": {
+    "coordinates": [175.1, -36.8],
+    "name": "waiheke island, aotearoa"
+  },
+  "willowbank-wildlife-reserve": {
+    "coordinates": [172.594, -43.4628],
+    "name": "willowbank wildlive reserve, christchurch, aotearoa"
+  },
+  "wow": {
+    "coordinates": [173.24, -41.2983],
+    "name": "world of wearable art & classic cars museum"
+  },
+  "zion": {
+    "coordinates": [-112.98785, 37.202619],
+    "name": "zion national park"
   }
 }

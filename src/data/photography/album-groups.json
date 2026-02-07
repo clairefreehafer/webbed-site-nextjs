@@ -2,12 +2,28 @@
   "new-york-city": {
     "boundsBuffer": 0.1
   },
+  "rehoboth": {
+    "boundsBuffer": 2
+  },
   "national-park": {
-    "displayName": "national parks"
+    "displayName": "national parks",
+    "boundsBuffer": 1
   },
   "state-park": {
     "displayName": "state parks"
   },
   "southwest-rv-trip": {},
-  "colorado-2023": {}
+  "colorado-2023": {},
+  "florida-rv-trip": {},
+  "zoos-and-aquariums": {},
+  "museum": {
+    "displayName": "museums",
+    "boundsBuffer": 10
+  },
+  "maine": {},
+  "aotearoa-2019": {
+    "boundsBuffer": 2
+  },
+  "norway-extended-study": {},
+  "colgate": {}
 }

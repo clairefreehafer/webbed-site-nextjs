@@ -1,7 +1,7 @@
 "use client";
 import "maplibre-gl/dist/maplibre-gl.css";
 
-import maplibregl, { LngLatBoundsLike, Marker } from "maplibre-gl";
+import maplibregl, { LngLatBoundsLike, Marker, Popup } from "maplibre-gl";
 import { useEffect, useRef } from "react";
 
 import { StyleSwitcher } from "@/app/photography/(with-nav)/map/style-switcher";
@@ -55,12 +55,11 @@ export default function SmallMap({
         const marker = new Marker({
           color: feature.properties.markerColor,
           draggable: false,
-        }).setLngLat(feature.geometry.coordinates);
-        // .setPopup(
-        //   new Popup().setHTML(
-        //     `<p>${feature.properties.name}</p><p><a href="/photography/map/${feature.properties.slug}">${feature.properties.numberOfPhotos} photos</a></p>`,
-        //   ),
-        // );
+        })
+          .setLngLat(feature.geometry.coordinates)
+          .setPopup(
+            new Popup().setHTML(`<p>${feature.properties.name}</p></p>`),
+          );
         markers.push(marker);
       }
 

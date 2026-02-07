@@ -77,6 +77,7 @@ async function transformDigikamAlbum(
               pc.dim("[transformDigikamAlbum]"),
               "missing album group config:",
               pc.yellow(group),
+              pc.dim(`(${transformedAlbum.slug})`),
             );
           }
         }

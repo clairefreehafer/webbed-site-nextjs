@@ -193,6 +193,11 @@ export const getMapData = (): GeoJson => {
       },
     });
   }
+  // sort by lattitude, low to high, so that markers stack pleasantly.
+  mapData.features.sort(
+    (featureA, featureB) =>
+      featureB.geometry.coordinates[1] - featureA.geometry.coordinates[1],
+  );
   return mapData;
 };
 
@@ -252,12 +257,17 @@ export const generateAlbumGroupMapData = (albumGroup: string): GeoJson => {
         coordinates: tagConfig.coordinates as [number, number],
       },
       properties: {
-        name: tagConfig.name,
+        name: tagConfig.name ?? deslugify(tag),
         markerColor: tagConfig.markerColor,
       },
     });
   }
 
+  // sort by lattitude, low to high, so that markers stack pleasantly.
+  mapData.features.sort(
+    (featureA, featureB) =>
+      featureB.geometry.coordinates[1] - featureA.geometry.coordinates[1],
+  );
   return mapData;
 };
 
