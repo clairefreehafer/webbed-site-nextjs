@@ -33,7 +33,7 @@ export async function createImageFile(
       if (!fs.existsSync(outputDirectory)) {
         console.log(
           "📝",
-          pc.dim("[transformDigikamImage]"),
+          pc.dim("[createImageFile]"),
           "creating directory",
           pc.green(outputDirectory),
         );
@@ -41,7 +41,7 @@ export async function createImageFile(
       }
       console.log(
         "📝",
-        pc.dim("[transformDigikamImage]"),
+        pc.dim("[createImageFile]"),
         "creating image",
         pc.green(outputPath),
       );
@@ -55,7 +55,7 @@ export async function createImageFile(
     // fail gracefully if there is an issue
     console.error(
       "❌",
-      pc.dim("[transformDigikamImage]"),
+      pc.dim("[createImageFile]"),
       "issue transforming image data for",
       pc.red(inputPath),
       (error as Error).message,

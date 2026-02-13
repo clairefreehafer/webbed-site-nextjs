@@ -18,17 +18,15 @@ export type GeoJson = {
   }[];
 };
 
-export type TagConfig = Record<
-  string,
-  {
-    displayName?: string;
-    background?: React.CSSProperties["background"];
-    coverPhotoId?: number;
-    coverPhotoName?: string;
-    coverPhotoPosition?: string;
-    icon?: string;
-  }
->;
+export type TagConfig = {
+  displayName?: string;
+  background?: React.CSSProperties["background"];
+  coverPhotoId?: number;
+  coverPhotoName?: string;
+  coverPhotoPosition?: string;
+  icon?: string;
+  relatedTags?: string[];
+};
 
 export type LocationConfig = {
   coordinates: number[];

@@ -1,11 +1,14 @@
+import Link from "next/link";
+import { Fragment } from "react/jsx-runtime";
+
 import ImageGrid from "@/components/image-grid";
 import Breadcrumbs from "@/components/photography/breadcrumbs";
 import collectionsJson from "@/data/photography/collections.json";
 import { TagConfig } from "@/types/photography";
-import { slugify } from "@/utils";
+import { deslugify, slugify } from "@/utils";
 import { getTagImages } from "@/utils/digikam";
 
-const collections: TagConfig = collectionsJson;
+const collections: Record<string, TagConfig> = collectionsJson;
 
 type Params = { collection: string };
 
@@ -31,7 +34,7 @@ export async function generateMetadata({
 export default async function Page({ params }: { params: Promise<Params> }) {
   const { collection } = await params;
   const images = await getTagImages(collection);
-  const { background, displayName } = collections[collection];
+  const { background, displayName, relatedTags } = collections[collection];
   const maxCols =
     images.length === 1 || images.length === 2 ? images.length : 3;
 
@@ -42,7 +45,25 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           pathOverride={`/photography/collections/${displayName ?? collection}`}
         />
       </header>
-      <ImageGrid images={images} background={background} maxCols={maxCols} />
+
+      <main id="photography-main">
+        {relatedTags && (
+          <p className="page-description">
+            see also:
+            <br />
+            {relatedTags.map((tag, idx) => (
+              <Fragment key={tag}>
+                {idx !== 0 && " | "}
+                <Link href={`/photography/collections/${tag}`}>
+                  {collections[tag].displayName ?? deslugify(tag)}
+                </Link>
+              </Fragment>
+            ))}
+          </p>
+        )}
+
+        <ImageGrid images={images} background={background} maxCols={maxCols} />
+      </main>
     </>
   );
 }

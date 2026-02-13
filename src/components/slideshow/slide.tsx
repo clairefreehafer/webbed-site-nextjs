@@ -50,7 +50,7 @@ export default function Slide({
             maxHeight: image.height,
             maxWidth: image.width,
           }}
-          priority={index === 0}
+          preload={index === 0}
         />
 
         {image.showDate && (

@@ -5,7 +5,7 @@ import { TagConfig } from "@/types/photography";
 import { deslugify } from "@/utils";
 import { getTagImages } from "@/utils/digikam";
 
-const technicalConfig: TagConfig = technicalJson;
+const technicalConfig: Record<string, TagConfig> = technicalJson;
 
 type Params = { tech: string };
 

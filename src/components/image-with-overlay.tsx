@@ -28,7 +28,7 @@ export default function ImageWithOverlay({
         src={image.src}
         alt=""
         id={image.filename}
-        className={`${classNamePrefix}-image ${
+        className={`${classNamePrefix}-image image ${
           showOverlay ? "overlay-visible" : ""
         }`}
         onClick={() => {

@@ -8,7 +8,7 @@ import { getAlbums } from "@/utils/digikam";
 export const metadata: Metadata = { title: "albums" };
 
 export default async function Page() {
-  const albums = await getAlbums();
+  const albums = await getAlbums("photography");
 
   return (
     <>

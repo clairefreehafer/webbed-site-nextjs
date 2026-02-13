@@ -1,29 +1,35 @@
 {
   "8-inch-meade-lx200": {},
   "black-and-white": {
-    "icon": "🔲"
+    "icon": "🔲",
+    "coverPhotoName": "2024-05-03_10-39-43"
   },
   "ferson-16-in-newtonian-f4": {},
   "fisheye": {
     "icon": "🐠",
-    "background": "black"
+    "background": "black",
+    "coverPhotoName": "2024-03-09_14-00-05"
   },
   "gif": {
     "displayName": "gifs",
-    "icon": "▶️"
+    "icon": "▶️",
+    "coverPhotoName": "2024-02-29_18-19-11"
   },
   "hipstamatic": {
     "icon": "📱"
   },
   "long-exposure": {
-    "icon": "🌃"
+    "icon": "🌃",
+    "coverPhotoName": "2024-02-29_19-26-15"
   },
   "panorama": {
-    "icon": "↔️"
+    "icon": "↔️",
+    "coverPhotoName": "2014-03-06_12-43-42"
   },
   "pudding-camera": {},
   "trichrome": {},
   "uji": {
-    "icon": "📱"
+    "icon": "📱",
+    "coverPhotoName": "30382412187"
   }
 }

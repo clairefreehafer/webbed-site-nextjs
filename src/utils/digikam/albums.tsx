@@ -73,8 +73,7 @@ async function transformDigikamAlbum(
         for (const group of captionJson.groups) {
           if (!albumGroups[group]) {
             console.warn(
-              "🚧",
-              pc.dim("[transformDigikamAlbum]"),
+              pc.yellow(pc.bold(">")),
               "missing album group config:",
               pc.yellow(group),
               pc.dim(`(${transformedAlbum.slug})`),
@@ -113,7 +112,7 @@ async function transformDigikamAlbum(
       coverPhoto,
     };
   } catch (error) {
-    console.log(
+    console.error(
       "❌",
       pc.dim("[getAlbums]"),
       "problem generating album data for",

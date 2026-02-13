@@ -13,8 +13,8 @@ import { Image } from "@/utils/digikam";
 
 const cameras: Record<string, string> = cameraJson;
 const locations: Record<string, LocationConfig> = locationsJson;
-const collections: TagConfig = collectionsJson;
-const technicalConfig: TagConfig = technicalJson;
+const collections: Record<string, TagConfig> = collectionsJson;
+const technicalConfig: Record<string, TagConfig> = technicalJson;
 
 export default function Overlay({
   image,

@@ -6,6 +6,52 @@ import sharp from "sharp";
 
 import { AlbumCaptionJson, digikam, getParentTag } from "./index";
 
+export const imageQueryStrings = {
+  selectDigikamImages: (extraFilter = "") => `
+    WITH ImageTitle as (
+      SELECT * FROM ImageComments
+      WHERE ImageComments.type == 3
+    ),
+    ImageCaption as (
+      SELECT * FROM ImageComments
+      WHERE ImageComments.type == 1
+    )
+    SELECT
+      Images.id,
+      Images.name,
+      ImageInformation.creationDate,
+      Albums.collection AS albumCollection,
+      Albums.caption AS albumCaption,
+      ImageInformation.height,
+      ImageInformation.width,
+      thumbs.FilePaths.path,
+      trim(Albums.relativePath, '/') AS albumSlug,
+      ImageTitle.comment as title,
+      ImageCaption.comment as caption,
+      ImageRelations.object as groupParent,
+      group_concat(ImageRelations.subject) as groupChildren,
+      group_concat(DISTINCT Tags.name) as tags,
+      ImageMetadata.make || ' ' || ImageMetadata.model as camera,
+      ImageMetadata.lens
+    FROM Albums
+      INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
+      INNER JOIN Images ON Images.album = Albums.id
+      LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
+      LEFT JOIN ImageTitle ON Images.id = ImageTitle.imageId
+      LEFT JOIN ImageCaption ON Images.id = ImageCaption.imageId
+      LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
+      LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
+      LEFT JOIN ImageRelations ON Images.id = ImageRelations.subject OR Images.id = ImageRelations.object
+      LEFT JOIN ImageTags ON Images.id = ImageTags.imageId
+      LEFT JOIN ImageMetadata ON Images.id = ImageMetadata.imageid
+      LEFT JOIN Tags ON ImageTags.tagid = Tags.id
+    WHERE Albums.albumRoot = 4
+      AND Albums.collection LIKE $collectionLikeString
+      ${extraFilter}
+    GROUP BY Images.id
+  `,
+};
+
 /** fields returned from querying the digikam db. */
 export interface DigikamImage {
   /** Albums.collection */
@@ -78,7 +124,8 @@ const tagParents = new Map();
 export async function transformDigikamImage(
   digikamImage: DigikamImage,
   options: ImageOptions = { resize: 1000, generatePalette: false },
-): Promise<Image> {
+): Promise<Image & { log: string }> {
+  let log = "";
   const nameWithoutExtension = digikamImage.name.split(".")[0];
 
   let transformedImage: Image = {
@@ -98,12 +145,7 @@ export async function transformDigikamImage(
   if (
     !/^\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}(_\d)?$/.test(nameWithoutExtension)
   ) {
-    console.warn(
-      "🚧",
-      pc.dim("[transformDigikamImage]"),
-      "image needs to be renamed:",
-      pc.yellow(transformedImage.src),
-    );
+    log += `${pc.yellow(pc.bold(">"))} image needs to be renamed: ${pc.yellow(`${digikamImage.albumSlug}/${digikamImage.name}`)}\n`;
   }
 
   try {
@@ -119,7 +161,7 @@ export async function transformDigikamImage(
       // create output directories if needed
       if (!fs.existsSync(outputDirectory)) {
         console.log(
-          "📝",
+          pc.green(pc.bold(">")),
           pc.dim("[transformDigikamImage]"),
           "creating directory",
           pc.green(outputDirectory),
@@ -127,7 +169,7 @@ export async function transformDigikamImage(
         fs.mkdirSync(outputDirectory, { recursive: true });
       }
       console.log(
-        "📝",
+        pc.green(pc.bold(">")),
         pc.dim("[transformDigikamImage]"),
         "creating image",
         pc.green(outputPath),
@@ -195,13 +237,11 @@ export async function transformDigikamImage(
     // camera information
     if (digikamImage.camera) {
       transformedImage.camera = digikamImage.camera;
-    } else if (transformedImage.albumCollection === "photography") {
-      console.warn(
-        "🚧",
-        pc.dim("[transformDigikamImage]"),
-        "missing camera info:",
-        pc.yellow(transformedImage.src),
-      );
+    } else if (
+      transformedImage.albumCollection === "photography" &&
+      !digikamImage.camera
+    ) {
+      log += `${pc.yellow(pc.bold(">"))} missing camera info: ${pc.yellow(`${digikamImage.albumSlug}/${digikamImage.name}`)}\n`;
     }
     if (digikamImage.lens) {
       transformedImage.lens = digikamImage.lens;
@@ -236,12 +276,7 @@ export async function transformDigikamImage(
       digikamImage.name.endsWith("gif") &&
       !transformedImage.technical.includes("gif")
     ) {
-      console.warn(
-        "🚧",
-        pc.dim("[transformDigikamImage]"),
-        'animated image missing "gif" tag:',
-        pc.yellow(transformedImage.src),
-      );
+      log += `${pc.yellow(pc.bold(">"))} animated image missing "gif" tag: ${pc.yellow(`${digikamImage.albumSlug}/${digikamImage.name}`)}\n`;
     }
   } catch (error) {
     // fail gracefully if there is an issue
@@ -254,7 +289,7 @@ export async function transformDigikamImage(
     );
   }
 
-  return transformedImage;
+  return { ...transformedImage, log };
 }
 
 export const getAlbumImages = async (
@@ -268,47 +303,9 @@ export const getAlbumImages = async (
       DigikamImage
     >(
       `
-        WITH ImageTitle as (
-          SELECT * FROM ImageComments
-          WHERE ImageComments.type == 3
-        ),
-        ImageCaption as (
-          SELECT * FROM ImageComments
-          WHERE ImageComments.type == 1
-        )
-        SELECT
-          Images.id,
-          Images.name,
-          ImageInformation.creationDate,
-          Albums.collection AS albumCollection,
-          Albums.caption AS albumCaption,
-          ImageInformation.height,
-          ImageInformation.width,
-          thumbs.FilePaths.path,
-          trim(Albums.relativePath, '/') AS albumSlug,
-          ImageTitle.comment as title,
-          ImageCaption.comment as caption,
-          ImageRelations.object as groupParent,
-          group_concat(ImageRelations.subject) as groupChildren,
-          group_concat(DISTINCT Tags.name) as tags,
-          ImageMetadata.make || ' ' || ImageMetadata.model as camera,
-		      ImageMetadata.lens
-        FROM Albums
-          INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
-          INNER JOIN Images ON Images.album = Albums.id
-          LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
-          LEFT JOIN ImageTitle ON Images.id = ImageTitle.imageId
-          LEFT JOIN ImageCaption ON Images.id = ImageCaption.imageId
-          LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
-          LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
-          LEFT JOIN ImageRelations ON Images.id = ImageRelations.subject OR Images.id = ImageRelations.object
-          LEFT JOIN ImageTags ON Images.id = ImageTags.imageId
-          LEFT JOIN ImageMetadata ON Images.id = ImageMetadata.imageid
-          LEFT JOIN Tags ON ImageTags.tagid = Tags.id
-        WHERE Albums.relativePath LIKE $relativePathLikeString
-          AND Albums.albumRoot = 4
-          AND Albums.collection LIKE $collectionLikeString
-        GROUP BY Images.id
+        ${imageQueryStrings.selectDigikamImages(`
+          AND Albums.relativePath LIKE $relativePathLikeString
+        `)}
         ORDER BY Images.name ASC
       `,
     )
@@ -319,10 +316,15 @@ export const getAlbumImages = async (
 
   const images: Image[] = [];
   let sortBy: AlbumCaptionJson["sortBy"] = undefined;
+  let warningLog = "";
 
   for (const image of digikamImages) {
-    const transformedImage = await transformDigikamImage(image, options);
+    const { log, ...transformedImage } = await transformDigikamImage(
+      image,
+      options,
+    );
     images.push(transformedImage);
+    warningLog += log;
 
     // check for custom sorting.
     if (image.albumCaption && !sortBy) {
@@ -331,12 +333,21 @@ export const getAlbumImages = async (
     }
   }
 
+  if (warningLog) {
+    console.group(
+      pc.dim("[getAlbumImages]"),
+      `issues found in ${collection} album "${pc.bold(relativePath)}":`,
+    );
+    console.warn(warningLog);
+  }
+
   // TODO: maybe try to move into SQL query instead? (at least for title)
   switch (sortBy) {
     case "compendiumNumber":
       console.log(
         `📷 [getAlbumImages] sorting images in "${collection}/${relativePath}" by \`${sortBy}\``,
       );
+      console.groupEnd();
       return images.sort(
         (a, b) => (a.compendiumNumber ?? 0) - (b.compendiumNumber ?? 0),
       );
@@ -344,10 +355,12 @@ export const getAlbumImages = async (
       console.log(
         `📷 [getAlbumImages] sorting images in "${collection}/${relativePath}" by \`${sortBy}\``,
       );
+      console.groupEnd();
       return images.sort((a, b) =>
         (a.title ?? "").localeCompare(b.title ?? ""),
       );
     default:
+      console.groupEnd();
       return images;
   }
 };
@@ -355,63 +368,53 @@ export const getAlbumImages = async (
 export const getTodaysImages = async (
   month: string,
   day: string,
+  collection: string,
 ): Promise<Record<string, Image[]>> => {
   const digikamImages = digikam
-    .prepare<{ likeString: string }, DigikamImage>(
+    .prepare<
+      { collectionLikeString: string; dateLikeString: string },
+      DigikamImage
+    >(
       `
-        WITH ImageTitle as (
-          SELECT * FROM ImageComments
-          WHERE ImageComments.type == 3
-        ),
-        ImageCaption as (
-          SELECT * FROM ImageComments
-          WHERE ImageComments.type == 1
-        )
-        SELECT
-          Images.id,
-          Images.name,
-          ImageInformation.creationDate,
-          ImageTitle.comment AS title,
-          ImageCaption.comment AS caption,
-          ImageInformation.height,
-          ImageInformation.width,
-          thumbs.FilePaths.path,
-          trim(Albums.relativePath, '/') AS albumSlug
-        FROM Albums
-          INNER JOIN AlbumRoots ON Albums.albumRoot = AlbumRoots.id
-          INNER JOIN Images ON Images.album = Albums.id
-          LEFT JOIN ImageInformation ON Images.id = ImageInformation.imageid
-          LEFT JOIN ImageTitle ON Images.id = ImageTitle.imageId
-          LEFT JOIN ImageCaption ON Images.id = ImageCaption.imageId
-          LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
-          LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
-        WHERE Albums.albumRoot = 4
-          AND ImageInformation.creationDate LIKE $likeString
-          AND Albums.collection = 'photography'
+        ${imageQueryStrings.selectDigikamImages(`
+          AND ImageInformation.creationDate LIKE $dateLikeString
+        `)}
         -- oldest images first
         ORDER BY Images.name ASC
       `,
     )
     .all({
-      likeString: `%${month}-${day}%`,
+      collectionLikeString: `%${collection}%`,
+      dateLikeString: `%${month}-${day}%`,
     });
   if (digikamImages.length > 0) {
-    console.log(
-      `📷 [getTodaysImages] ${digikamImages.length} images found for ${month}/${day}.`,
+    console.group(
+      pc.dim("[getTodaysImages]"),
+      pc.green(pc.bold(digikamImages.length)),
+      `images found for date ${month}/${day}`,
     );
   }
   const imagesByYear: Record<string, Image[]> = {};
+  let warningLog = "";
 
   for (const image of digikamImages) {
     const year = image.creationDate.slice(0, 4);
-    const transformedImage = await transformDigikamImage(image);
+    const { log, ...transformedImage } = await transformDigikamImage(image);
     if (imagesByYear[year]) {
       imagesByYear[year].push(transformedImage);
     } else {
       imagesByYear[year] = [transformedImage];
     }
+    warningLog += log;
   }
-
+  if (warningLog) {
+    console.groupCollapsed(
+      pc.dim("[getTodaysImages]"),
+      `issues found for ${collection} images with date ${pc.bold(`${month}/${day}`)}:`,
+    );
+    console.warn(warningLog);
+    console.groupEnd();
+  }
   return imagesByYear;
 };
 

@@ -21,7 +21,7 @@ import { deslugify } from "@/utils/client";
  * ALL.............CAMERA ❓
  */
 
-// today?
+// today? gifs?
 
 const nookphoneConfig: NookphoneConfig[] = nookphoneConfigJson;
 
@@ -37,7 +37,7 @@ export default function NookPhone() {
         new Date().toLocaleTimeString([], {
           hour: "numeric",
           minute: "2-digit",
-        })
+        }),
       );
     }
   }, [time]);
@@ -75,7 +75,6 @@ export default function NookPhone() {
             href={`/animal-crossing/new-horizons/${app.slug}`}
             className={`${app.icon} app`}
             onMouseOver={() => handleHover(deslugify(app.slug))}
-            onMouseLeave={() => handleHover(DEFAULT_TEXT)}
           >
             <Image
               src={`/images/animal-crossing/new-horizons/nookphone/${app.icon}.png`}

@@ -1,89 +1,128 @@
 {
   "aquatic-fauna": {
-    "icon": "🦈"
+    "icon": "🦈",
+    "coverPhotoName": "2009-07-22_15-51-43"
   },
   "architecture": {
-    "icon": "🏢"
+    "icon": "🏢",
+    "coverPhotoName": "2014-05-28_04-02-24"
   },
   "art": {
-    "icon": "🖼️"
+    "icon": "🖼️",
+    "coverPhotoName": "2016-07-30_16-45-58"
   },
   "beach": {
-    "icon": "🏖️"
+    "icon": "🏖️",
+    "coverPhotoName": "2009-07-24_19-51-15"
   },
   "bird": {
     "displayName": "birds",
-    "icon": "🐦‍⬛"
+    "icon": "🐦‍⬛",
+    "coverPhotoName": "2020-09-24_15-00-13"
   },
   "boat": {
     "displayName": "boats",
-    "icon": "⛵️"
+    "icon": "⛵️",
+    "coverPhotoName": "2007-07-07_18-55-29"
   },
   "cactus": {
-    "displayName": "cactuses",
-    "icon": "🌵"
+    "displayName": "cacti",
+    "icon": "🌵",
+    "coverPhotoName": "2024-05-03_10-39-47"
   },
+  "camper": {},
   "cat": {
     "displayName": "cats",
     "coverPhotoPosition": "bottom",
-    "icon": "🐈‍⬛"
+    "icon": "🐈‍⬛",
+    "coverPhotoName": "2010-08-07_21-38-44"
   },
   "clouds": {
-    "icon": "☁️"
+    "icon": "☁️",
+    "coverPhotoName": "2024-02-29_18-19-33"
   },
   "dog": {
     "displayName": "dogs",
-    "icon": "🐕"
+    "icon": "🐕",
+    "coverPhotoName": "2019-06-10_15-06-41"
   },
   "fauna": {
-    "icon": "🦝"
+    "icon": "🦝",
+    "relatedTags": [
+      "aquatic-fauna",
+      "bird",
+      "cat",
+      "dog",
+      "human",
+      "insect",
+      "lizard"
+    ],
+    "coverPhotoName": "2009-06-06_19-05-11"
   },
   "fire": {
-    "icon": "🔥"
+    "icon": "🔥",
+    "coverPhotoName": "2020-08-01_20-58-33"
   },
   "flora": {
-    "icon": "🌱"
+    "icon": "🌱",
+    "relatedTags": ["cactus", "flower", "tree"],
+    "coverPhotoName": "2025-05-10_13-02-43"
   },
   "flower": {
     "displayName": "flowers",
-    "icon": "🌻"
+    "icon": "🌻",
+    "coverPhotoName": "2009-07-23_12-58-32"
   },
   "fog": {
-    "icon": "🌁"
+    "icon": "🌁",
+    "coverPhotoName": "2007-07-10_12-00-24"
   },
   "food": {
-    "icon": "🥪"
+    "icon": "🥪",
+    "coverPhotoName": "2009-11-26_19-12-39"
+  },
+  "fungi": {
+    "icon": "🍄",
+    "coverPhotoName": "2021-07-16_16-14-42"
   },
   "human": {
     "displayName": "humans",
-    "icon": "👤"
+    "icon": "👤",
+    "coverPhotoName": "2019-06-10_21-26-05"
   },
   "insect": {
     "displayName": "insects",
-    "icon": "🪲"
+    "icon": "🪲",
+    "coverPhotoName": "2019-07-13_16-30-49"
   },
   "kite": {
     "displayName": "kites",
-    "icon": "🪁"
+    "icon": "🪁",
+    "coverPhotoName": "2009-07-19_12-28-49"
   },
   "lake": {
-    "icon": "🛶"
+    "icon": "🛶",
+    "coverPhotoName": "2011-07-17_17-40-56"
   },
   "light-paint": {
-    "icon": "🔦"
+    "icon": "🔦",
+    "coverPhotoName": "2008-10-27_20-42-28"
   },
   "lizard": {
     "displayName": "lizards",
-    "icon": "🦎"
+    "icon": "🦎",
+    "coverPhotoName": "2008-10-26_11-50-32"
   },
   "moon": {
     "displayName": "la lune",
     "icon": "🌕",
     "background": "black",
-    "coverPhotoPosition": "center 30%"
+    "coverPhotoPosition": "center 30%",
+    "coverPhotoName": "2019-06-13_18-16-34"
   },
   "night-sky": {
-    "icon": "🌌"
+    "icon": "🌌",
+    "coverPhotoName": "2010-08-14_20-49-14"
   },
   "nonplace": {
     "displayName": "nonplaces",
@@ -91,55 +130,92 @@
     "coverPhotoName": "2007-04-10_11-10-49.jpg"
   },
   "ocean": {
-    "icon": "🌊"
+    "icon": "🌊",
+    "coverPhotoName": "2007-07-07_16-01-17"
   },
   "pool": {
     "displayName": "swimming pools",
-    "icon": "🏊"
+    "icon": "🏊",
+    "coverPhotoName": "2008-10-25_14-23-03"
   },
   "rainbow": {
-    "icon": "🌈"
+    "icon": "🌈",
+    "coverPhotoName": "2019-02-24_19-12-45"
   },
-  "riparian": {},
+  "riparian": {
+    "icon": "🏞️",
+    "coverPhotoName": "2020-09-23_14-29-31"
+  },
   "rock": {
     "displayName": "rocks",
-    "icon": "🪨"
+    "icon": "🪨",
+    "coverPhotoName": "2007-07-09_14-33-48"
   },
   "screen": {
     "displayName": "screens",
     "icon": "📺"
   },
   "shadow": {
-    "icon": "🌑"
+    "icon": "🌑",
+    "coverPhotoName": "2009-06-06_17-12-29"
   },
   "sky": {
-    "icon": "☀️"
+    "icon": "☀️",
+    "coverPhotoName": "2024-02-29_19-26-15"
   },
   "snow": {
-    "icon": "❄️"
+    "icon": "❄️",
+    "coverPhotoName": "2014-05-25_05-19-37"
   },
   "street-art": {
-    "icon": "🖌️"
+    "icon": "🖌️",
+    "coverPhotoName": "2014-05-28_10-20-53"
   },
   "sunset": {
-    "icon": "🌅"
+    "icon": "🌅",
+    "coverPhotoName": "2020-07-31_20-26-42"
   },
   "texture": {
-    "icon": "🤚🏻"
+    "icon": "🤚🏻",
+    "coverPhotoName": "2020-09-23_15-16-40"
   },
   "the-built-environment": {
-    "icon": "🏙️"
+    "icon": "🏙️",
+    "coverPhotoName": "2014-05-18_09-47-08"
   },
   "tree": {
     "displayName": "trees",
-    "icon": "🌳"
+    "icon": "🌳",
+    "coverPhotoName": "2008-10-30_13-19-24"
   },
   "typography": {
-    "icon": "🔡"
+    "icon": "🔡",
+    "coverPhotoName": "2020-09-23_15-26-41"
   },
   "vehicle": {
     "displayName": "vehicles",
-    "icon": "🚗"
+    "icon": "🚗",
+    "coverPhotoName": "2008-10-27_21-05-03_1"
   },
-  "night sky": {}
+  "water": {
+    "icon": "💧",
+    "relatedTags": [
+      "beach",
+      "boat",
+      "clouds",
+      "fog",
+      "lake",
+      "ocean",
+      "pool",
+      "riparian",
+      "snow",
+      "waterfall"
+    ],
+    "coverPhotoName": "2009-07-23_12-52-22"
+  },
+  "waterfall": {
+    "displayName": "waterfalls",
+    "icon": "💦",
+    "coverPhotoName": "2014-05-25_10-02-21"
+  }
 }

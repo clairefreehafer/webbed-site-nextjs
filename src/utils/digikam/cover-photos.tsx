@@ -12,7 +12,10 @@ type DigikamCoverPhoto = {
   width: number;
 };
 
-export type CoverPhoto = Pick<Image, "height" | "id" | "src" | "width"> & {
+export type CoverPhoto = Pick<
+  Image,
+  "height" | "id" | "src" | "width" | "filename"
+> & {
   position?: AlbumCaptionJson["coverPhotoPosition"];
 };
 
@@ -25,6 +28,7 @@ export async function transformDigikamCoverPhoto({
   const nameWithoutExtension = name.split(".")[0];
   const transformedCoverPhoto: CoverPhoto = {
     ...digikamCoverPhoto,
+    filename: nameWithoutExtension,
     src: `/out/${albumSlug}/${nameWithoutExtension}.webp`,
   };
 
@@ -36,11 +40,11 @@ export async function transformDigikamCoverPhoto({
 /** get data for a the cover photo for a collection using the cover photo's filename. */
 export const getCollectionCoverPhoto = async (
   tag: string,
-  imageName?: string
+  imageName?: string,
 ): Promise<CoverPhoto> => {
   if (imageName) {
     const image = digikam
-      .prepare<{ imageName: string }, DigikamCoverPhoto>(
+      .prepare<{ imageNameLikeString: string }, DigikamCoverPhoto>(
         `
           SELECT
             ImageInformation.height,
@@ -58,18 +62,18 @@ export const getCollectionCoverPhoto = async (
             LEFT JOIN thumbs.UniqueHashes ON Images.uniqueHash = thumbs.UniqueHashes.uniqueHash
             LEFT JOIN thumbs.FilePaths ON thumbs.UniqueHashes.thumbId = thumbs.FilePaths.thumbId
           WHERE Albums.albumRoot = 4
-            AND Images.name = $imageName
-        `
+            AND Images.name LIKE $imageNameLikeString
+        `,
       )
       .get({
-        imageName,
+        imageNameLikeString: `%${imageName}%`,
       });
     if (image) {
       const transformedImage = await transformDigikamCoverPhoto(image);
       return transformedImage;
     }
     console.warn(
-      `❌ [getCollectionCoverPhoto] no collection cover photo found with name ${imageName}`
+      `❌ [getCollectionCoverPhoto] no collection cover photo found with name ${imageName}`,
     );
   }
   return (await getTagImages(tag))[0];

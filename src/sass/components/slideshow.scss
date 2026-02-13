@@ -137,3 +137,19 @@ $ui-position-y: 1rem;
     text-align: center;
   }
 }
+
+[data-theme="animal-crossing"] #slideshow {
+  .image {
+    // overrides overlay blur
+    filter: drop-shadow(0 0 0.5rem #000000d9);
+  }
+
+  // no image overlay for animal crossing images
+  .image-overlay {
+    display: none;
+  }
+
+  .image-title {
+    font-size: 1rem;
+  }
+}

@@ -25,6 +25,7 @@
     "lint": "npx eslint",
     "prepare": "husky",
     "deploy": "npm run build && neocities push out",
+    "delete-images": "neocities delete out",
     "sync-db": "bash scripts/copy-db.sh"
   },
   "dependencies": {
