@@ -2,14 +2,54 @@
 @use "nav";
 @use "nookphone";
 @use "text";
+@use "variables";
 
-.home-container {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  gap: 7rem;
+// home page list of games
+.game-list {
+  display: grid;
+  grid-template-columns: repeat(2, calc(50% - 2rem));
+  list-style: none;
+  gap: 2rem;
+
+  @media screen and (max-width: variables.$menu-breakpoint) {
+    grid-template-columns: 100%;
+  }
 }
 
+.game-list-link {
+  align-items: center;
+  display: flex;
+  filter: drop-shadow(5px 5px 10px #222);
+  flex-wrap: wrap;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+  height: 100%;
+
+  &:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(7px 7px 13px #222);
+  }
+}
+
+.wave {
+  --m: 0.5; // curvature
+  --p: calc(var(--m) * var(--size));
+  --R: calc(var(--size) * sqrt(var(--m) * var(--m) + 1) + var(--thickness)/2);
+
+  --_g:
+    #0000 calc(99% - var(--thickness)), #000 calc(101% - var(--thickness)) 99%,
+    #0000 101%;
+  mask:
+    radial-gradient(var(--R) at left 50% bottom calc(-1 * var(--p)), var(--_g))
+      calc(50% - 2 * var(--size))
+      calc(50% - var(--size) / 2 - var(--thickness) / 2) / calc(4 * var(--size))
+      calc(var(--size) + var(--thickness)) repeat-x,
+    radial-gradient(var(--R) at left 50% top calc(-1 * var(--p)), var(--_g)) 50%
+      calc(50% + var(--size) / 2 + var(--thickness) / 2) / calc(4 * var(--size))
+      calc(var(--size) + var(--thickness)) repeat-x;
+}
+
+// pocket camp planners
 img.planner {
   filter: drop-shadow(5px 5px 10px #222);
   max-height: min(50vw, 50vh);

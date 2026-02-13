@@ -1,6 +1,21 @@
-export default function Logo() {
+export default function Logo({
+  text = "claire freehafer",
+  width = 350,
+  height = 70,
+}: {
+  text?: string;
+  width?: number;
+  height?: number;
+}) {
   return (
-    <svg className="svg-title" viewBox="0 0 350 70">
+    <svg
+      className="svg-title"
+      viewBox={`0 0 ${width} ${height}`}
+      style={{
+        width,
+        height,
+      }}
+    >
       <defs>
         <filter id="emboss">
           <feConvolveMatrix
@@ -18,7 +33,7 @@ export default function Logo() {
         </filter>
       </defs>
       <text className="svg-background" x="16" y="45">
-        claire freehafer
+        {text}
       </text>
       <text
         aria-hidden
@@ -27,7 +42,7 @@ export default function Logo() {
         x="16"
         y="45"
       >
-        claire freehafer
+        {text}
       </text>
       <text
         aria-hidden
@@ -36,7 +51,7 @@ export default function Logo() {
         x="16"
         y="45"
       >
-        claire freehafer
+        {text}
       </text>
     </svg>
   );
