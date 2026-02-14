@@ -31,6 +31,7 @@
   }
 }
 
+// https://css-tricks.com/how-to-create-wavy-shapes-patterns-in-css/
 .wave {
   --m: 0.5; // curvature
   --p: calc(var(--m) * var(--size));

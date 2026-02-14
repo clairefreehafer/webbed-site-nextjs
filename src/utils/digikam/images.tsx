@@ -4,6 +4,7 @@ import { Vibrant } from "node-vibrant/node";
 import pc from "picocolors";
 import sharp from "sharp";
 
+import logger from "../logger";
 import { AlbumCaptionJson, digikam, getParentTag } from "./index";
 
 export const imageQueryStrings = {
@@ -334,33 +335,31 @@ export const getAlbumImages = async (
   }
 
   if (warningLog) {
-    console.group(
+    logger.groupCollapsed(
       pc.dim("[getAlbumImages]"),
       `issues found in ${collection} album "${pc.bold(relativePath)}":`,
     );
-    console.warn(warningLog);
+    logger.warn(warningLog);
+    logger.groupEnd();
   }
 
   // TODO: maybe try to move into SQL query instead? (at least for title)
   switch (sortBy) {
     case "compendiumNumber":
-      console.log(
+      logger.debug(
         `📷 [getAlbumImages] sorting images in "${collection}/${relativePath}" by \`${sortBy}\``,
       );
-      console.groupEnd();
       return images.sort(
         (a, b) => (a.compendiumNumber ?? 0) - (b.compendiumNumber ?? 0),
       );
     case "title":
-      console.log(
+      logger.debug(
         `📷 [getAlbumImages] sorting images in "${collection}/${relativePath}" by \`${sortBy}\``,
       );
-      console.groupEnd();
       return images.sort((a, b) =>
         (a.title ?? "").localeCompare(b.title ?? ""),
       );
     default:
-      console.groupEnd();
       return images;
   }
 };
@@ -387,13 +386,7 @@ export const getTodaysImages = async (
       collectionLikeString: `%${collection}%`,
       dateLikeString: `%${month}-${day}%`,
     });
-  if (digikamImages.length > 0) {
-    console.group(
-      pc.dim("[getTodaysImages]"),
-      pc.green(pc.bold(digikamImages.length)),
-      `images found for date ${month}/${day}`,
-    );
-  }
+
   const imagesByYear: Record<string, Image[]> = {};
   let warningLog = "";
 
@@ -408,11 +401,11 @@ export const getTodaysImages = async (
     warningLog += log;
   }
   if (warningLog) {
-    console.groupCollapsed(
+    logger.groupCollapsed(
       pc.dim("[getTodaysImages]"),
       `issues found for ${collection} images with date ${pc.bold(`${month}/${day}`)}:`,
     );
-    console.warn(warningLog);
+    logger.warn(warningLog);
     console.groupEnd();
   }
   return imagesByYear;

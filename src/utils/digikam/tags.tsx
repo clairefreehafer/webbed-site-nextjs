@@ -7,6 +7,7 @@ import technical from "@/data/photography/technical.json";
 import { GeoJson, LocationConfig, TagConfig } from "@/types/photography";
 
 import { deslugify, slugify } from "..";
+import logger from "../logger";
 import {
   DigikamImage,
   Image,
@@ -55,12 +56,12 @@ export const getTagImages = async (
     }
   }
   if (warningLog) {
-    console.groupCollapsed(
+    logger.groupCollapsed(
       pc.dim("[getTagImages]"),
       `issues found for ${collection} images tagged "${pc.bold(tag)}":`,
     );
-    console.warn(warningLog);
-    console.groupEnd();
+    logger.warn(warningLog);
+    logger.groupEnd();
   }
 
   return images;
@@ -149,7 +150,7 @@ export const getMapData = (): GeoJson => {
   for (const tag of locationTags) {
     const tagConfig = locations[tag.tagName];
     if (!tagConfig || !("coordinates" in tagConfig)) {
-      console.warn(
+      logger.warn(
         "🚧",
         pc.dim("[getMapData]"),
         "no or incomplete tag config for",
@@ -158,7 +159,7 @@ export const getMapData = (): GeoJson => {
       continue;
     }
     if (tagConfig.coordinates.length !== 2) {
-      console.warn(
+      logger.warn(
         "❌",
         pc.dim("[getMapData]"),
         "invalid coordinates for",
@@ -167,7 +168,7 @@ export const getMapData = (): GeoJson => {
       continue;
     }
     if (tag.numberOfImages === 0) {
-      console.warn(
+      logger.warn(
         "🚧",
         pc.dim("[getMapData]"),
         "no images with tag",
@@ -221,7 +222,7 @@ export const generateAlbumGroupMapData = (albumGroup: string): GeoJson => {
     .get({ albumGroupLikeString: `%${albumGroup}%` });
 
   if (!tagsString || !tagsString.locationTags) {
-    console.warn(
+    logger.warn(
       "🚧",
       pc.dim("[generateAlbumGroupMapData]"),
       "no location tags found for group",
@@ -236,7 +237,7 @@ export const generateAlbumGroupMapData = (albumGroup: string): GeoJson => {
     const tagConfig = locations[tag];
 
     if (!tagConfig) {
-      console.warn(
+      logger.warn(
         "🚧",
         pc.dim("[generateMapFromTags]"),
         "missing tag config for",
@@ -296,7 +297,7 @@ export const generateTagAlbums = async (
     const numberOfPhotos = getNumberOfTaggedImages(tag);
     if (numberOfPhotos === 0) {
       // skip if there are no photos with that tag.
-      console.warn(
+      logger.warn(
         pc.dim("[generateTagAlbum]"),
         "no photos with tag:",
         pc.yellow(tag),

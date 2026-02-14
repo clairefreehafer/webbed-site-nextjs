@@ -1,3 +1,4 @@
+import logger from "../logger";
 import { AlbumCaptionJson } from "./albums";
 import { Image } from "./images";
 import { createImageFile, digikam, getTagImages } from "./index";
@@ -72,7 +73,7 @@ export const getCollectionCoverPhoto = async (
       const transformedImage = await transformDigikamCoverPhoto(image);
       return transformedImage;
     }
-    console.warn(
+    logger.warn(
       `❌ [getCollectionCoverPhoto] no collection cover photo found with name ${imageName}`,
     );
   }

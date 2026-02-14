@@ -1,4 +1,5 @@
 import { Image } from "@/utils/digikam";
+import logger from "@/utils/logger";
 
 import ImageWithOverlay from "../image-with-overlay";
 
@@ -10,7 +11,7 @@ export default function Square({
   groupImages: Image[];
 }) {
   if (groupImages.length !== 3) {
-    console.warn(`❌ square group without 4 images: ${parentImage.src}`);
+    logger.warn(`❌ square group without 4 images: ${parentImage.src}`);
   }
 
   return (

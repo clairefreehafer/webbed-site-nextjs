@@ -13,6 +13,7 @@ import {
   ShelvedVideoGame,
 } from "@/types/library";
 
+import logger from "../logger";
 import {
   getAuthorData,
   getBookData,
@@ -40,7 +41,7 @@ export const getShelves = cache(async () => {
 /** Returns whether or not the JSON was updated. */
 async function updateShelvedBook(bookJson: ShelvedBook): Promise<boolean> {
   if (!bookJson.olid) {
-    console.warn(
+    logger.warn(
       "📙",
       pc.dim("[updateShelvedBook]"),
       "missing OLID:\n> ",
@@ -100,7 +101,7 @@ async function updateShelvedBook(bookJson: ShelvedBook): Promise<boolean> {
               Math.random() * 360
             }deg, red, orange, yellow, green, blue, indigo, violet)`;
         } catch (e) {
-          console.warn(
+          logger.warn(
             `📕 [updateShelvedBook] could not generate palette: ${e}`,
           );
         }
@@ -109,7 +110,7 @@ async function updateShelvedBook(bookJson: ShelvedBook): Promise<boolean> {
         if (openLibraryData.number_of_pages) {
           bookJson.numberOfPages = openLibraryData.number_of_pages;
         } else {
-          console.warn(
+          logger.warn(
             `📕 [updateShelvedBook] could not get number of pages: ${bookJson.title}`,
           );
         }
@@ -128,13 +129,13 @@ async function updateShelvedBook(bookJson: ShelvedBook): Promise<boolean> {
           const authorData = await getAuthorData(authorKey);
           bookJson.author = authorData.name;
         } else {
-          console.warn(
+          logger.warn(
             `📕 [updateShelvedBook] could not get author: ${bookJson.title}`,
           );
         }
         break;
       default:
-        console.warn(
+        logger.warn(
           `📕 [updateShelvedBook] unknown key to update: ${keyToUpdate}`,
         );
     }
@@ -146,7 +147,7 @@ async function updateShelvedBook(bookJson: ShelvedBook): Promise<boolean> {
 /** Returns whether or not the JSON was updated. */
 async function updateShelvedTv(tvJson: ShelvedTv): Promise<boolean> {
   if (!tvJson.tvdbId) {
-    console.warn(`❌ [updateShelvedTv] missing TVDB ID: ${tvJson.title}`);
+    logger.warn(`❌ [updateShelvedTv] missing TVDB ID: ${tvJson.title}`);
     return false;
   }
   const keysToCheck = [
@@ -187,11 +188,11 @@ async function updateShelvedTv(tvJson: ShelvedTv): Promise<boolean> {
           ).getPalette();
           tvJson.coverColor = palette.DarkVibrant?.hex;
         } catch (e) {
-          console.warn(`📕 [updateShelvedTv] could not generate palette: ${e}`);
+          logger.warn(`📕 [updateShelvedTv] could not generate palette: ${e}`);
         }
         break;
       default:
-        console.warn(
+        logger.warn(
           `❌ [updateShelvedTv] unknown key to update: ${keyToUpdate}`,
         );
     }
@@ -233,18 +234,18 @@ async function updateShelvedVideoGame(
 
             videoGameJson.coverColor = palette.LightVibrant?.hex;
           } catch (e) {
-            console.warn(
+            logger.warn(
               `❌ [updateShelvedVideoGame] could not generate palette: ${e}`,
             );
           }
         } else {
-          console.warn(
+          logger.warn(
             `❌ [updateShelvedVideoGame] missing cover image: ${videoGameJson.title}`,
           );
         }
         break;
       default:
-        console.warn(
+        logger.warn(
           `❌ [updateShelvedVideoGame] unknown key to update: ${keyToUpdate}`,
         );
     }
@@ -267,7 +268,7 @@ async function updateShelvedItem(shelvedItem: ShelvedItem): Promise<boolean> {
       return false;
     default:
       const exhaustiveCheck: never = shelvedItem;
-      console.warn(
+      logger.warn(
         `[updateShelvedItem] ❌ Unknown shelved item type: ${
           (exhaustiveCheck as ShelvedItem).type
         }`,

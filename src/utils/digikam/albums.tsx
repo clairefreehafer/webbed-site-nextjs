@@ -4,6 +4,7 @@ import { cache } from "react";
 import albumGroupsJson from "@/data/photography/album-groups.json";
 import { AlbumGroupConfig } from "@/types/photography";
 
+import logger from "../logger";
 import { CoverPhoto, transformDigikamCoverPhoto } from "./cover-photos";
 import { digikam, Image } from "./index";
 
@@ -72,7 +73,7 @@ async function transformDigikamAlbum(
       if (Array.isArray(captionJson.groups)) {
         for (const group of captionJson.groups) {
           if (!albumGroups[group]) {
-            console.warn(
+            logger.warn(
               pc.yellow(pc.bold(">")),
               "missing album group config:",
               pc.yellow(group),

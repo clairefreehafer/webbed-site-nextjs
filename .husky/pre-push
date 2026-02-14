@@ -4,3 +4,4 @@ npm run sync-db # sync the databases
 npm run build # build the site
 neocities delete _next # remove the stale _next folder from neocities
 neocities push out # upload site build
+npm run prune-neocities-files

@@ -1,6 +1,7 @@
 import "@/sass/images/image-group.scss";
 
 import { determineGroupType, Image } from "@/utils/digikam";
+import logger from "@/utils/logger";
 
 import ImageWithOverlay from "../image-with-overlay";
 import HoverGroup from "./hover";
@@ -54,7 +55,7 @@ export default function ImageGroup({
     );
 
     if (!hoverImage) {
-      console.warn(
+      logger.warn(
         `❌ could not determine \`hoverImage\` for ${parentImage.src}`,
       );
       return null;

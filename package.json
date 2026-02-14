@@ -2,6 +2,7 @@
   "name": "webbed-site-nextjs",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "prettier": {
     "overrides": [
       {
@@ -25,7 +26,7 @@
     "lint": "npx eslint",
     "prepare": "husky",
     "deploy": "npm run build && neocities push out",
-    "delete-images": "neocities delete out",
+    "prune-neocities-files": "node --env-file=.env scripts/prune-neocities-files.js",
     "sync-db": "bash scripts/copy-db.sh"
   },
   "dependencies": {
