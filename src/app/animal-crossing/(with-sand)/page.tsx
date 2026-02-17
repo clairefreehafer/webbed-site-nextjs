@@ -54,7 +54,7 @@ export default function Page() {
       </li>
 
       <li>
-        <Link href="/animal-crossing/new-;eaf" className="game-list-link">
+        <Link href="/animal-crossing/new-leaf" className="game-list-link">
           <Logo text="new" width={110} />
           <Logo text="leaf" width={150} />
         </Link>
