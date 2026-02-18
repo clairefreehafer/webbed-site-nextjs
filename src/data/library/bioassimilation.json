@@ -1,0 +1,57 @@
+{
+  "title": "bioassimilation",
+  "items": {
+    "southern reach": [
+      {
+        "type": "book",
+        "olid": "OL25841044M",
+        "title": "Annihilation",
+        "author": "Jeff VanderMeer",
+        "link": "https://openlibrary.org/books/OL25841044M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL25841044M-M.jpg",
+        "coverColor": "#c2d449",
+        "numberOfPages": 195
+      },
+      {
+        "type": "book",
+        "olid": "OL27162311M",
+        "title": "Authority",
+        "link": "https://openlibrary.org/books/OL27162311M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL27162311M-M.jpg",
+        "coverColor": "#f4ac24",
+        "numberOfPages": 341,
+        "author": "Jeff VanderMeer"
+      },
+      {
+        "type": "book",
+        "olid": "OL35346813M",
+        "title": "Acceptance",
+        "link": "https://openlibrary.org/books/OL35346813M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL35346813M-M.jpg",
+        "coverColor": "#9c3038",
+        "numberOfPages": 341,
+        "author": "Jeff VanderMeer"
+      }
+    ],
+    "standalone": [
+      {
+        "type": "book",
+        "olid": "OL50716070M",
+        "title": "Alien Clay",
+        "link": "https://openlibrary.org/books/OL50716070M",
+        "coverImage": "https://covers.openlibrary.org/b/olid/OL50716070M-M.jpg",
+        "coverColor": "#13dfef",
+        "author": "Adrian Tchaikovsky",
+        "numberOfPages": 416
+      },
+      {
+        "type": "tv",
+        "tvdbId": "421287",
+        "title": "Scavengers Reign",
+        "link": "https://www.thetvdb.com/series/scavengers-reign",
+        "coverImage": "https://artworks.thetvdb.com/banners/v4/series/421287/posters/652ab815c5246.jpg",
+        "coverColor": "#863d3b"
+      }
+    ]
+  }
+}
