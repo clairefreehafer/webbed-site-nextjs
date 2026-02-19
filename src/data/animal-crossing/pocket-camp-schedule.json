@@ -178,5 +178,97 @@
         ]
       }
     ]
+  },
+  {
+    "month": "february",
+    "themes": [
+      {
+        "name": "snowy",
+        "campers": [
+          {
+            "name": "wendy",
+            "cookie": "wendy's snowy cookie"
+          },
+          {
+            "name": "hamlet",
+            "cookie": "hamlet's chilly cookie"
+          },
+          {
+            "name": "sprinkle",
+            "cookie": "sprinkle's crystal cookie"
+          },
+          {
+            "name": "hans",
+            "cookie": "hans's snuggly cookie"
+          },
+          {
+            "name": "chabwick"
+          },
+          {
+            "name": "iggly"
+          },
+          {
+            "name": "claudia"
+          },
+          {
+            "name": "freya"
+          }
+        ]
+      },
+      {
+        "name": "sweet treats",
+        "campers": [
+          {
+            "name": "bettina",
+            "cookie": "bettina's orangette cookie"
+          },
+          {
+            "name": "kitty",
+            "cookie": "kitty's chocolate cookie"
+          },
+          {
+            "name": "poppy",
+            "cookie": "poppy's cocoa cookie"
+          },
+          {
+            "name": "ellie",
+            "cookie": "ellie's donut cookie"
+          },
+          {
+            "name": "melba",
+            "cookie": "melba's patisserie cookie"
+          },
+          {
+            "name": "cookie",
+            "cookie": "cookie's crepe shop cookie"
+          },
+          {
+            "name": "felicity",
+            "cookie": "felicity's kitty cookie"
+          }
+        ]
+      },
+      {
+        "name": "???",
+        "campers": [
+          {
+            "name": "olivia",
+            "cookie": "olivia's whimsical cookie"
+          },
+          {
+            "name": "fang",
+            "cookie": "fang's sterling cookie"
+          },
+          {
+            "name": "fuschia",
+            "cookie": "fuschia's retro cookie"
+          },
+          {
+            "name": "tasha",
+            "cookie": "tasha's hip-rose cookie"
+          }
+        ]
+      }
+    ]
   }
 ]
