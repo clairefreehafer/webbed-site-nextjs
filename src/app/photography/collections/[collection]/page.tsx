@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { Fragment } from "react/jsx-runtime";
 
-import ImageGrid from "@/components/image-grid";
 import Breadcrumbs from "@/components/photography/breadcrumbs";
+import Masonry from "@/components/photography/masonry";
 import collectionsJson from "@/data/photography/collections.json";
 import { TagConfig } from "@/types/photography";
 import { deslugify, slugify } from "@/utils";
@@ -46,7 +46,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         />
       </header>
 
-      <main id="photography-main">
+      <main style={{ padding: "1rem" }}>
         {relatedTags && (
           <p className="page-description">
             see also:
@@ -62,7 +62,11 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           </p>
         )}
 
-        <ImageGrid images={images} background={background} maxCols={maxCols} />
+        <Masonry
+          images={images}
+          background={background}
+          maxNumberOfColumns={maxCols}
+        />
       </main>
     </>
   );

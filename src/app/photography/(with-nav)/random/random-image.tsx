@@ -18,6 +18,7 @@ export default function RandomImage({ allImages }: { allImages: string[] }) {
   }, [getRandomImage, imagePath]);
 
   if (!imagePath) {
+    console.warn("could not get a random image.");
     return null;
   }
 
@@ -27,25 +28,13 @@ export default function RandomImage({ allImages }: { allImages: string[] }) {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={handleClick}
-        style={{ alignSelf: "center" }}
-      >
+      <div className="single-image">
+        <Image src={imagePath} alt="" fill />
+      </div>
+
+      <button type="button" onClick={handleClick}>
         refresh
       </button>
-      <div className="single-image">
-        <Image
-          src={imagePath}
-          alt=""
-          fill
-          style={{
-            objectFit: "contain",
-            alignSelf: "center",
-            justifySelf: "center",
-          }}
-        />
-      </div>
     </>
   );
 }

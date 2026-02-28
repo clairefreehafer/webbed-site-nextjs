@@ -1,10 +1,10 @@
 #breadcrumbs {
-  display: flex;
   align-items: flex-start;
-  justify-content: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
   align-self: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
   margin: 0 auto;
 
   & > a,

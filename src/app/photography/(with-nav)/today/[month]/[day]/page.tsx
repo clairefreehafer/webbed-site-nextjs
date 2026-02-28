@@ -1,7 +1,7 @@
-import React from "react";
+import "@/sass/photography/today.scss";
 
-import ImageGrid from "@/components/image-grid";
 import Breadcrumbs from "@/components/photography/breadcrumbs";
+import Masonry from "@/components/photography/masonry";
 import { getTodaysImages } from "@/utils/digikam";
 
 const months: Record<
@@ -57,32 +57,39 @@ export default async function Page({
 }) {
   const { month, day } = await params;
   const imagesByYear = await getTodaysImages(month, day, "photography");
+  const years = Object.keys(imagesByYear).sort(
+    (a, b) => parseInt(b) - parseInt(a),
+  );
 
   return (
-    <main id="photography-main">
-      <Breadcrumbs
-        pathOverride={`/photography/${months[month].display}-${day}`}
-      />
-
-      {Object.keys(imagesByYear).length === 0 ? (
-        <p className="page-description">no images :(</p>
-      ) : (
-        Object.keys(imagesByYear).map((year) => (
-          <React.Fragment key={year}>
-            <h3
-              style={{
-                fontSize: "1.5rem",
-                textDecorationLine: "underline overline",
-                textDecorationStyle: "wavy",
-                marginTop: "1rem",
-              }}
-            >
-              {year}
-            </h3>
-            <ImageGrid images={imagesByYear[year]} />
-          </React.Fragment>
-        ))
-      )}
-    </main>
+    <>
+      <div
+        style={{
+          background: "white",
+          padding: "0.25rem 0",
+          position: "sticky",
+          top: 0,
+          zIndex: 11,
+        }}
+      >
+        <Breadcrumbs
+          pathOverride={`/photography/${months[month].display}-${day}`}
+        />
+      </div>
+      <main id="today">
+        {years.length === 0 ? (
+          <p className="page-description">no images :(</p>
+        ) : (
+          years.map((year) => (
+            <details key={year}>
+              <summary>
+                <span>{year}</span>
+              </summary>
+              <Masonry images={imagesByYear[year]} />
+            </details>
+          ))
+        )}
+      </main>
+    </>
   );
 }

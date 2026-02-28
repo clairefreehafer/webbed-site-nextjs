@@ -35,7 +35,18 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   return (
     <>
-      <Breadcrumbs />
+      <div
+        style={{
+          backgroundColor: "white",
+          paddingBottom: "0.5rem",
+          position: "sticky",
+          top: 0,
+          zIndex: 10,
+        }}
+      >
+        <Breadcrumbs />
+      </div>
+
       <AlbumGrid albums={albumsInGroup} linkPrefix="albums" />
       {mapData.features.length > 0 && (
         <div

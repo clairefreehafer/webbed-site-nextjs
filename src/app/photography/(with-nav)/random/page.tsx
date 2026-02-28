@@ -1,3 +1,5 @@
+import "@/sass/photography/random-image.scss";
+
 import fg from "fast-glob";
 import { Metadata } from "next";
 
@@ -15,9 +17,9 @@ export default async function Page() {
     .map((filePath) => filePath.slice(6));
 
   return (
-    <>
+    <div id="random-image">
       <Breadcrumbs />
       <RandomImage allImages={allImages} />
-    </>
+    </div>
   );
 }

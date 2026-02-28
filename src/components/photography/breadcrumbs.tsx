@@ -20,7 +20,7 @@ export default function Breadcrumbs({
   let currentPath = "";
 
   return (
-    <div id="breadcrumbs" className={`${border ? "dotted-border" : ""}`}>
+    <nav id="breadcrumbs" className={`${border ? "dotted-border" : ""}`}>
       {splitPathname.map((path, index) => {
         currentPath += `/${path}`;
         if (index === splitPathname.length - 1) {
@@ -33,6 +33,6 @@ export default function Breadcrumbs({
           </Fragment>
         );
       })}
-    </div>
+    </nav>
   );
 }

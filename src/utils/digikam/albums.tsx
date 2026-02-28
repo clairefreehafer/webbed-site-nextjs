@@ -28,6 +28,7 @@ interface DigikamAlbum {
 
 /** custom JSON format for extra info stored in the album caption field. */
 export interface AlbumCaptionJson {
+  background?: string;
   displayName?: string;
   description?: string;
   coverPhotoPosition?: string;
@@ -47,6 +48,7 @@ export type Album = {
   slug: string;
   numberOfPhotos?: number;
   groups: string[];
+  background?: string;
 };
 
 async function transformDigikamAlbum(

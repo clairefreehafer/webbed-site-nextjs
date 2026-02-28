@@ -12,7 +12,17 @@ export default async function Page() {
 
   return (
     <>
-      <Breadcrumbs />
+      <div
+        style={{
+          backgroundColor: "white",
+          paddingBottom: "0.5rem",
+          position: "sticky",
+          top: 0,
+          zIndex: 10,
+        }}
+      >
+        <Breadcrumbs />
+      </div>
 
       <p className="page-description">
         <Link href="/photography/albums/groups">view groups</Link>

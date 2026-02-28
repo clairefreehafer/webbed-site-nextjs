@@ -4,6 +4,8 @@
   position: relative;
 
   & > img {
-    padding: 0.5rem 1rem 1rem;
+    align-self: center;
+    object-fit: contain;
+    justify-self: center;
   }
 }

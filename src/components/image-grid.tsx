@@ -17,9 +17,14 @@ export default function ImageGrid({
     return "no images :(";
   }
   return (
-    <div id="image-grid-container" style={background ? { background } : {}}>
+    <div
+      id="image-grid-container"
+      style={{
+        ...(background ? { background } : {}),
+      }}
+    >
       <ul className={`grid max-cols-${maxCols}`}>
-        {images.map((image, index) => (
+        {images.map((image) => (
           <li key={image.filename} className="cell">
             <NextImage
               src={image.src}
@@ -28,10 +33,6 @@ export default function ImageGrid({
               alt=""
               className="image-grid-image"
               id={image.id.toString()}
-              // add padding to last image to pad out bottom of grid
-              style={
-                index === images.length - 1 ? { paddingBottom: "1rem" } : {}
-              }
             />
             {image.title && <p className="image-title">{image.title}</p>}
           </li>

@@ -8,7 +8,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
         <Nav />
       </header>
 
-      <main id="photography-main">{children}</main>
+      {children}
     </>
   );
 }

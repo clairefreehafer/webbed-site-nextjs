@@ -1,5 +1,5 @@
-import ImageGrid from "@/components/image-grid";
 import Breadcrumbs from "@/components/photography/breadcrumbs";
+import Masonry from "@/components/photography/masonry";
 import locationsJson from "@/data/photography/locations.json";
 import { LocationConfig } from "@/types/photography";
 import { deslugify, slugify } from "@/utils";
@@ -37,6 +37,8 @@ export async function generateMetadata({
 export default async function Page({ params }: { params: Promise<Params> }) {
   const { location } = await params;
   const images = await getTagImages(location);
+  const maxCols =
+    images.length === 1 || images.length === 2 ? images.length : 3;
 
   return (
     <>
@@ -48,7 +50,9 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         />
       </header>
 
-      <ImageGrid images={images} />
+      <div style={{ padding: "1rem" }}>
+        <Masonry images={images} maxNumberOfColumns={maxCols} />
+      </div>
     </>
   );
 }

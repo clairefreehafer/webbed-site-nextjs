@@ -1,5 +1,5 @@
-import ImageGrid from "@/components/image-grid";
 import Breadcrumbs from "@/components/photography/breadcrumbs";
+import Masonry from "@/components/photography/masonry";
 import technicalJson from "@/data/photography/technical.json";
 import { TagConfig } from "@/types/photography";
 import { deslugify } from "@/utils";
@@ -42,7 +42,11 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           }`}
         />
       </header>
-      <ImageGrid images={images} background={background} maxCols={maxCols} />
+      <Masonry
+        images={images}
+        background={background}
+        maxNumberOfColumns={maxCols}
+      />
     </>
   );
 }

@@ -16,7 +16,11 @@ export default function Slideshow({
   album?: Album;
 }) {
   return (
-    <ol id="slideshow" className="slides">
+    <ol
+      id="slideshow"
+      className="slides"
+      style={{ ...(album?.background ? { background: album.background } : {}) }}
+    >
       <TitleSlide album={album} images={images} />
 
       {images.map((image, idx) => (

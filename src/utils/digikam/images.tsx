@@ -378,8 +378,8 @@ export const getTodaysImages = async (
         ${imageQueryStrings.selectDigikamImages(`
           AND ImageInformation.creationDate LIKE $dateLikeString
         `)}
-        -- oldest images first
-        ORDER BY Images.name ASC
+        -- newest images first
+        ORDER BY Images.name DESC
       `,
     )
     .all({
